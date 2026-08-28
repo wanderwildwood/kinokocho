@@ -39,7 +39,7 @@ private fun Placeholder() {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text("茸帳")
-        Text("eInk Mushroom Journal")
+        Text("Mushroom Journal")
         Text(BuildConfig.VERSION_NAME)
     }
 }

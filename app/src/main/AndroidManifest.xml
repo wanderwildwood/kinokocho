@@ -8,7 +8,7 @@
            INTERNET - only for pushing an observation to iNaturalist, on request.
 
          Location is deliberately absent. A foraging spot is sensitive, so location is
-         typed in by hand rather than read from GPS - the same choice eInk Birding made. -->
+         typed in by hand rather than read from GPS - the same choice Birding made. -->
 
     <application
         android:allowBackup="false"
