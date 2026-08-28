@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Placeholder cap-and-stipe silhouette, drawn to fill the adaptive-icon safe zone.
+     Not a design proposal - the real mark waits on a reference to work from. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M54,34c-13,0 -23,8 -23,17c0,2 1,3 3,3h40c2,0 3,-1 3,-3c0,-9 -10,-17 -23,-17z" />
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M48,57h12v14c0,3 -2,5 -6,5s-6,-2 -6,-5z" />
+</vector>

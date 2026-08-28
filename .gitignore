@@ -1,0 +1,16 @@
+*.iml
+.gradle/
+.idea/
+# Not "/build": that is anchored to the repo root and never matches app/build,
+# which is how a previous repo took on 841 build files and a 36MB APK per commit.
+build/
+local.properties
+.externalNativeBuild
+.cxx
+.kotlin
+/captures
+.DS_Store
+# The whole signing directory: keystore and its passwords both.
+/signing
+# JVM heap dumps land at the repo root when a build runs out of memory.
+*.hprof
