@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -84,6 +85,17 @@ android {
             kotlin.srcDir("src/main/kotlin")
         }
     }
+
+    // Room writes the schema of every version to this directory and it is committed.
+    // That is what makes a migration reviewable in a diff rather than discovered on a
+    // phone holding four years of somebody's notes.
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
+
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -100,5 +112,12 @@ dependencies {
 
     implementation(libs.mmd)
 
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+
     testImplementation(libs.junit)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.coroutines.test)
 }

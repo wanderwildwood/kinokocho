@@ -1,0 +1,99 @@
+package com.wanderwildwood.kinokocho.data
+
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
+import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface JournalDao {
+
+    @Insert
+    suspend fun insert(observation: Observation): Long
+
+    @Update
+    suspend fun update(observation: Observation)
+
+    @Query("DELETE FROM observations WHERE id = :observationId")
+    suspend fun deleteObservation(observationId: Long)
+
+    @Transaction
+    @Query("SELECT * FROM observations ORDER BY recorded_at DESC")
+    fun observeAll(): Flow<List<FullObservation>>
+
+    @Transaction
+    @Query("SELECT * FROM observations WHERE id = :observationId")
+    fun observeOne(observationId: Long): Flow<FullObservation?>
+
+    @Transaction
+    @Query("SELECT * FROM observations WHERE id = :observationId")
+    suspend fun findOne(observationId: Long): FullObservation?
+
+    @Transaction
+    @Query("SELECT * FROM observations WHERE uuid = :uuid")
+    suspend fun findByUuid(uuid: String): FullObservation?
+
+    /**
+     * Recording the same character value twice is not an error, it is a person tapping
+     * a row again. IGNORE makes that idempotent against the unique index rather than
+     * throwing, and leaves the original recorded_at alone - which is correct, because
+     * the first time it was noticed is the true answer.
+     */
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addCharacter(character: ObservationCharacter): Long
+
+    @Query(
+        "DELETE FROM observation_characters " +
+            "WHERE observation_id = :observationId AND character_id = :characterId " +
+            "AND value_id = :valueId"
+    )
+    suspend fun removeCharacterValue(observationId: Long, characterId: String, valueId: String)
+
+    /** For a single-valued character, replacing the answer rather than adding to it. */
+    @Query(
+        "DELETE FROM observation_characters " +
+            "WHERE observation_id = :observationId AND character_id = :characterId"
+    )
+    suspend fun clearCharacter(observationId: Long, characterId: String)
+
+    @Transaction
+    suspend fun setSingleCharacter(
+        observationId: Long,
+        characterId: String,
+        valueId: String,
+        recordedAt: Long,
+    ) {
+        clearCharacter(observationId, characterId)
+        addCharacter(ObservationCharacter(0, observationId, characterId, valueId, recordedAt))
+    }
+
+    @Query("SELECT * FROM observation_characters WHERE observation_id = :observationId")
+    suspend fun charactersOf(observationId: Long): List<ObservationCharacter>
+
+    @Insert
+    suspend fun addPhoto(photo: ObservationPhoto): Long
+
+    @Query("DELETE FROM observation_photos WHERE id = :photoId")
+    suspend fun deletePhoto(photoId: Long)
+
+    @Query("SELECT * FROM observation_photos WHERE observation_id = :observationId")
+    suspend fun photosOf(observationId: Long): List<ObservationPhoto>
+
+    /** Everything not yet pushed, oldest first, for the review-and-push screen at home. */
+    @Transaction
+    @Query("SELECT * FROM observations WHERE inat_uuid IS NULL ORDER BY recorded_at ASC")
+    suspend fun notYetPushed(): List<FullObservation>
+
+    /**
+     * Pushed but with no identification read back yet. This is the list the app asks
+     * iNaturalist about; it never asks about anything it has not published.
+     */
+    @Query("SELECT * FROM observations WHERE inat_uuid IS NOT NULL AND inat_taxon_id IS NULL")
+    suspend fun awaitingIdentification(): List<Observation>
+
+    @Query("SELECT COUNT(*) FROM observations")
+    suspend fun count(): Int
+}
