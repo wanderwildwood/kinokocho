@@ -1,0 +1,193 @@
+package com.wanderwildwood.kinokocho
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.wanderwildwood.kinokocho.data.FullObservation
+import com.wanderwildwood.kinokocho.data.JournalDatabase
+import com.wanderwildwood.kinokocho.data.Observation
+import com.wanderwildwood.kinokocho.data.ObservationCharacter
+import com.wanderwildwood.kinokocho.data.ObservationPhoto
+import com.wanderwildwood.kinokocho.key.KeyEngine
+import com.wanderwildwood.kinokocho.key.PackLoader
+import com.wanderwildwood.kinokocho.key.TaxonPack
+import com.wanderwildwood.kinokocho.schema.CharacterSchema
+import com.wanderwildwood.kinokocho.schema.SchemaLoader
+import java.util.Calendar
+import java.util.UUID
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+
+class JournalViewModel(app: Application) : AndroidViewModel(app) {
+
+    val schema: CharacterSchema = SchemaLoader.load(app.assets)
+    val pack: TaxonPack = PackLoader.load(app.assets, PACK)
+    val engine = KeyEngine(schema, pack)
+
+    private val dao = JournalDatabase.get(app).journalDao()
+
+    val entries: StateFlow<List<FullObservation>> =
+        dao.observeAll().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
+    /** The entry being written or looked at, held in memory until it is saved. */
+    private val _draft = MutableStateFlow<Draft?>(null)
+    val draft: StateFlow<Draft?> = _draft.asStateFlow()
+
+    data class Draft(
+        val observationId: Long?,
+        val uuid: String,
+        val recordedAt: Long,
+        val answers: KeyEngine.Answers,
+        val note: String = "",
+        val placeNote: String = "",
+        val photos: List<ObservationPhoto> = emptyList(),
+        /** Set when the reader has stepped back to revisit a question already answered. */
+        val revisiting: String? = null,
+    )
+
+    fun startNewEntry() {
+        val now = System.currentTimeMillis()
+        _draft.value = Draft(
+            observationId = null,
+            uuid = UUID.randomUUID().toString(),
+            recordedAt = now,
+            answers = KeyEngine.Answers(month = monthOf(now)),
+        )
+    }
+
+    fun open(observationId: Long) {
+        viewModelScope.launch {
+            val full = dao.findOne(observationId) ?: return@launch
+            _draft.value = Draft(
+                observationId = full.observation.id,
+                uuid = full.observation.uuid,
+                recordedAt = full.observation.recordedAt,
+                answers = KeyEngine.Answers(
+                    values = full.characters.groupBy { it.characterId }
+                        .mapValues { (_, rows) -> rows.map { it.valueId }.toSet() },
+                    month = monthOf(full.observation.recordedAt),
+                ),
+                note = full.observation.note,
+                placeNote = full.observation.placeNote,
+                photos = full.photos,
+            )
+        }
+    }
+
+    fun close() {
+        _draft.value = null
+    }
+
+    /** The question to put in front of the reader, or null when there is nothing left to ask. */
+    fun currentQuestion(draft: Draft): String? =
+        draft.revisiting ?: engine.nextQuestion(draft.answers)
+
+    fun answer(characterId: String, chosen: Set<String>) {
+        val d = _draft.value ?: return
+        val answers = if (chosen.isEmpty()) {
+            d.answers.copy(values = d.answers.values - characterId)
+        } else {
+            d.answers.with(characterId, chosen)
+        }
+        _draft.value = d.copy(answers = answers, revisiting = null)
+        persist()
+    }
+
+    fun skip(characterId: String) {
+        val d = _draft.value ?: return
+        _draft.value = d.copy(answers = d.answers.markNotTested(characterId), revisiting = null)
+        persist()
+    }
+
+    fun revisit(characterId: String) {
+        _draft.value = _draft.value?.copy(revisiting = characterId)
+    }
+
+    fun setNote(text: String) {
+        _draft.value = _draft.value?.copy(note = text)
+        persist()
+    }
+
+    fun setPlaceNote(text: String) {
+        _draft.value = _draft.value?.copy(placeNote = text)
+        persist()
+    }
+
+    fun addPhoto(slot: String, fileName: String) {
+        val d = _draft.value ?: return
+        val photo = ObservationPhoto(
+            observationId = d.observationId ?: 0,
+            slot = slot,
+            fileName = fileName,
+            capturedAt = System.currentTimeMillis(),
+        )
+        _draft.value = d.copy(photos = d.photos + photo)
+        persist()
+    }
+
+    /**
+     * Writes the draft down.
+     *
+     * Called after every tap rather than behind a Save button, because the phone is
+     * outdoors and the entry has to survive the battery dying mid-question. The
+     * observation's uuid is minted once and never changes, so re-saving updates the
+     * same row rather than making a second mushroom.
+     */
+    private fun persist() {
+        val d = _draft.value ?: return
+        viewModelScope.launch {
+            val now = System.currentTimeMillis()
+            val id = d.observationId ?: dao.insert(
+                Observation(
+                    uuid = d.uuid,
+                    recordedAt = d.recordedAt,
+                    updatedAt = now,
+                    note = d.note,
+                    placeNote = d.placeNote,
+                    schemaVersion = schema.version,
+                )
+            ).also { newId -> _draft.value = _draft.value?.copy(observationId = newId) }
+
+            dao.findOne(id)?.let { existing ->
+                dao.update(
+                    existing.observation.copy(
+                        note = d.note,
+                        placeNote = d.placeNote,
+                        updatedAt = now,
+                    )
+                )
+            }
+
+            // Replace the character rows wholesale. There are a few dozen at most, and
+            // reconciling them individually would be more code for no gain.
+            dao.charactersOf(id).map { it.characterId }.distinct().forEach {
+                dao.clearCharacter(id, it)
+            }
+            d.answers.values.forEach { (characterId, values) ->
+                values.forEach { value ->
+                    dao.addCharacter(ObservationCharacter(0, id, characterId, value, now))
+                }
+            }
+
+            val known = dao.photosOf(id).map { it.fileName }.toSet()
+            d.photos.filter { it.fileName !in known }.forEach {
+                dao.addPhoto(it.copy(observationId = id))
+            }
+        }
+    }
+
+    fun delete(observationId: Long) {
+        viewModelScope.launch { dao.deleteObservation(observationId) }
+    }
+
+    private fun monthOf(millis: Long): Int =
+        Calendar.getInstance().apply { timeInMillis = millis }.get(Calendar.MONTH) + 1
+
+    private companion object {
+        const val PACK = "packs/southern-appalachia-v1.json"
+    }
+}
