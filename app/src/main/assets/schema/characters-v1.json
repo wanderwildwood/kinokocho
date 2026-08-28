@@ -1,0 +1,1574 @@
+{
+  "schemaVersion": 1,
+  "note": "The global character schema. Region packs supply taxon data and may refine the characters marked regional; they never redefine these ids. Every character is answerable as a state, as unanswered (which eliminates nothing), or as not applicable (set by the engine from a controlling character, never by a person).",
+  "colours": [
+    {
+      "id": "white",
+      "label": "White",
+      "gloss": "Paper white, no tint"
+    },
+    {
+      "id": "cream",
+      "label": "Cream / off-white",
+      "gloss": "Whitish with a warm tint"
+    },
+    {
+      "id": "grey",
+      "label": "Grey",
+      "gloss": "Neutral, no warmth"
+    },
+    {
+      "id": "black",
+      "label": "Black",
+      "gloss": "Or near-black"
+    },
+    {
+      "id": "yellow",
+      "label": "Yellow",
+      "gloss": "Lemon to egg-yolk"
+    },
+    {
+      "id": "orange",
+      "label": "Orange",
+      "gloss": "Apricot to carrot"
+    },
+    {
+      "id": "pink",
+      "label": "Pink",
+      "gloss": "Including salmon"
+    },
+    {
+      "id": "red",
+      "label": "Red",
+      "gloss": "Blood to scarlet"
+    },
+    {
+      "id": "purple",
+      "label": "Purple / lilac",
+      "gloss": "Including violet"
+    },
+    {
+      "id": "blue",
+      "label": "Blue",
+      "gloss": "Any blue"
+    },
+    {
+      "id": "green",
+      "label": "Green",
+      "gloss": "Any green"
+    },
+    {
+      "id": "olive",
+      "label": "Olive",
+      "gloss": "Dull green-brown"
+    },
+    {
+      "id": "tan",
+      "label": "Tan (pale brown)",
+      "gloss": "Weak milky coffee"
+    },
+    {
+      "id": "yellow_brown",
+      "label": "Yellow-brown",
+      "gloss": "Honey, ochre, mustard-brown"
+    },
+    {
+      "id": "red_brown",
+      "label": "Red-brown",
+      "gloss": "Rust, brick, dried blood"
+    },
+    {
+      "id": "dark_brown",
+      "label": "Dark brown",
+      "gloss": "Chocolate to bark"
+    }
+  ],
+  "characters": [
+    {
+      "id": "fruitbody_type",
+      "label": "What kind of fungus is it?",
+      "hint": "The shape of the whole thing, and what is under the cap.",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 5,
+      "controlling": true,
+      "note": "MycoKey's top-level split, extended with iNaturalist field 17892 for the ascomycetes and crusts it omits.",
+      "values": [
+        {
+          "id": "gilled_stemmed",
+          "label": "Gilled, with a stem"
+        },
+        {
+          "id": "bolete",
+          "label": "Tubes underneath, soft, with a stem (bolete)"
+        },
+        {
+          "id": "polypore",
+          "label": "Pores underneath, tough or a bracket (polypore)"
+        },
+        {
+          "id": "toothed",
+          "label": "Spines or teeth underneath"
+        },
+        {
+          "id": "chanterelle_like",
+          "label": "Veins, wrinkles, or smooth underneath"
+        },
+        {
+          "id": "coral_club",
+          "label": "Club or coral shaped"
+        },
+        {
+          "id": "gasteroid",
+          "label": "Spores formed inside (puffball, earthstar, stinkhorn)"
+        },
+        {
+          "id": "cup_disc",
+          "label": "Cup or disc shaped"
+        },
+        {
+          "id": "resupinate",
+          "label": "A crust or patch on the surface"
+        },
+        {
+          "id": "jelly",
+          "label": "Jelly-like"
+        },
+        {
+          "id": "flask",
+          "label": "Flask-like, or tiny dots on wood"
+        },
+        {
+          "id": "other",
+          "label": "Something else"
+        }
+      ]
+    },
+    {
+      "id": "substrate",
+      "label": "What is it growing on?",
+      "hint": "You are standing over it, so this one is nearly always answerable.",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 5,
+      "controlling": true,
+      "note": "The intersection of iNat field 7582, the FunDiS advanced slip, and the Danish Atlas substrate groups.",
+      "values": [
+        {
+          "id": "wood",
+          "label": "Wood"
+        },
+        {
+          "id": "soil",
+          "label": "Soil or ground"
+        },
+        {
+          "id": "litter",
+          "label": "Leaf or needle litter"
+        },
+        {
+          "id": "grass",
+          "label": "Grass or lawn"
+        },
+        {
+          "id": "moss",
+          "label": "Moss"
+        },
+        {
+          "id": "dung",
+          "label": "Dung"
+        },
+        {
+          "id": "another_fungus",
+          "label": "Another fungus"
+        },
+        {
+          "id": "living_plant",
+          "label": "A living plant"
+        },
+        {
+          "id": "animal",
+          "label": "An animal or insect"
+        },
+        {
+          "id": "burnt",
+          "label": "Burnt ground"
+        },
+        {
+          "id": "stone",
+          "label": "Stone or masonry"
+        },
+        {
+          "id": "other",
+          "label": "Something else"
+        }
+      ]
+    },
+    {
+      "id": "substrate_wood",
+      "label": "What kind of wood?",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 3,
+      "values": [
+        {
+          "id": "conifer",
+          "label": "Conifer"
+        },
+        {
+          "id": "broadleaf",
+          "label": "Broadleaf"
+        },
+        {
+          "id": "living",
+          "label": "Living"
+        },
+        {
+          "id": "dead",
+          "label": "Dead"
+        },
+        {
+          "id": "bark",
+          "label": "On bark"
+        },
+        {
+          "id": "bare_wood",
+          "label": "On bare wood"
+        },
+        {
+          "id": "woodchip",
+          "label": "Woodchip or mulch"
+        },
+        {
+          "id": "buried",
+          "label": "Buried wood"
+        }
+      ]
+    },
+    {
+      "id": "growth_habit",
+      "label": "How are they arranged?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 3,
+      "note": "Arrangement, not count. FunDiS asks how many; how many has little power, how they sit together has real power.",
+      "values": [
+        {
+          "id": "single",
+          "label": "One on its own"
+        },
+        {
+          "id": "few",
+          "label": "A few, separate"
+        },
+        {
+          "id": "troop",
+          "label": "Many, scattered"
+        },
+        {
+          "id": "caespitose",
+          "label": "Clustered, bases touching"
+        },
+        {
+          "id": "fused",
+          "label": "Bases fused into one mass"
+        },
+        {
+          "id": "ring",
+          "label": "In a ring or arc"
+        },
+        {
+          "id": "tiered",
+          "label": "Tiered or shelving"
+        }
+      ]
+    },
+    {
+      "id": "stipe_presence",
+      "label": "Is there a stem?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 4,
+      "controlling": true,
+      "values": [
+        {
+          "id": "central",
+          "label": "A central stem"
+        },
+        {
+          "id": "off_centre",
+          "label": "An off-centre stem"
+        },
+        {
+          "id": "lateral",
+          "label": "A stem at the side"
+        },
+        {
+          "id": "absent_attached",
+          "label": "No stem, attached directly"
+        },
+        {
+          "id": "absent_sitting",
+          "label": "No stem, sitting on the substrate"
+        }
+      ]
+    },
+    {
+      "id": "ring",
+      "label": "Is there a ring on the stem?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 4,
+      "values": [
+        {
+          "id": "absent",
+          "label": "No ring"
+        },
+        {
+          "id": "skirt",
+          "label": "A distinct skirt or collar"
+        },
+        {
+          "id": "zone",
+          "label": "A faint ring zone or fibrous band"
+        },
+        {
+          "id": "movable",
+          "label": "A movable ring"
+        },
+        {
+          "id": "cannot_tell",
+          "label": "Cannot tell \u2014 old or damaged"
+        }
+      ]
+    },
+    {
+      "id": "stipe_base",
+      "label": "What is the base of the stem like?",
+      "hint": "Dig it out. Volvas are underground, and this is the character that separates the deadly Amanita from everything else.",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 5,
+      "note": "'Buried, not seen' exists so honest ignorance never scores as 'no volva'.",
+      "values": [
+        {
+          "id": "equal",
+          "label": "Simple, the same width down"
+        },
+        {
+          "id": "bulbous",
+          "label": "Swollen or bulbous"
+        },
+        {
+          "id": "marginate",
+          "label": "A bulb with a rim or gutter"
+        },
+        {
+          "id": "sac_volva",
+          "label": "A bag-like sac around the base"
+        },
+        {
+          "id": "volva_rings",
+          "label": "Rings or scales on a bulb"
+        },
+        {
+          "id": "rooting",
+          "label": "Rooting, tapering deep down"
+        },
+        {
+          "id": "tapering",
+          "label": "Narrowing downwards"
+        },
+        {
+          "id": "rhizomorphs",
+          "label": "With white cords or threads"
+        },
+        {
+          "id": "buried",
+          "label": "Buried \u2014 I did not get the base out"
+        }
+      ]
+    },
+    {
+      "id": "stipe_surface",
+      "label": "What is the stem surface like?",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 3,
+      "values": [
+        {
+          "id": "smooth",
+          "label": "Smooth"
+        },
+        {
+          "id": "fibrous",
+          "label": "Fibrous or streaked"
+        },
+        {
+          "id": "scaly",
+          "label": "Scaly"
+        },
+        {
+          "id": "reticulate",
+          "label": "Net-like"
+        },
+        {
+          "id": "punctate",
+          "label": "Dotted with granules"
+        },
+        {
+          "id": "powdery",
+          "label": "Powdery or mealy"
+        },
+        {
+          "id": "hairy",
+          "label": "Hairy or velvety"
+        },
+        {
+          "id": "slimy",
+          "label": "Slimy or sticky"
+        },
+        {
+          "id": "grooved",
+          "label": "Ridged or grooved"
+        }
+      ]
+    },
+    {
+      "id": "stipe_flesh",
+      "label": "What is inside the stem?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 2,
+      "values": [
+        {
+          "id": "solid",
+          "label": "Solid"
+        },
+        {
+          "id": "stuffed",
+          "label": "Stuffed with pith"
+        },
+        {
+          "id": "hollow",
+          "label": "Hollow"
+        },
+        {
+          "id": "chambered",
+          "label": "Chambered"
+        }
+      ]
+    },
+    {
+      "id": "gill_attachment",
+      "label": "How do the gills meet the stem?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 4,
+      "note": "iNaturalist field 917 verbatim - the one fungal field on the platform with a well-formed controlled list. Kept as-is for interoperability.",
+      "values": [
+        {
+          "id": "free",
+          "label": "Free \u2014 not reaching the stem"
+        },
+        {
+          "id": "adnexed",
+          "label": "Narrowly attached"
+        },
+        {
+          "id": "adnate",
+          "label": "Broadly attached"
+        },
+        {
+          "id": "notched",
+          "label": "Notched"
+        },
+        {
+          "id": "decurrent",
+          "label": "Running down the stem"
+        },
+        {
+          "id": "no_stem",
+          "label": "No stem to attach to"
+        }
+      ]
+    },
+    {
+      "id": "gill_spacing",
+      "label": "How closely are the gills packed?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 3,
+      "note": "Three states, not five. Crowded-versus-close is a judgement without a reference and more states only add noise.",
+      "values": [
+        {
+          "id": "crowded",
+          "label": "Crowded"
+        },
+        {
+          "id": "close",
+          "label": "Close"
+        },
+        {
+          "id": "distant",
+          "label": "Distant, well spaced"
+        }
+      ]
+    },
+    {
+      "id": "gill_extras",
+      "label": "Anything else about the gills?",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 2,
+      "values": [
+        {
+          "id": "lamellulae",
+          "label": "Short gills between the long ones"
+        },
+        {
+          "id": "forked",
+          "label": "Forked"
+        },
+        {
+          "id": "veined",
+          "label": "Connected by cross-veins"
+        }
+      ]
+    },
+    {
+      "id": "gill_edge",
+      "label": "What are the gill edges like?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 2,
+      "values": [
+        {
+          "id": "even",
+          "label": "Even"
+        },
+        {
+          "id": "serrate",
+          "label": "Finely toothed"
+        },
+        {
+          "id": "wavy",
+          "label": "Wavy"
+        },
+        {
+          "id": "different_colour",
+          "label": "A different colour from the face"
+        }
+      ]
+    },
+    {
+      "id": "hymenophore_colour",
+      "label": "What colour are the gills, pores or teeth?",
+      "hint": "Underside colour changes as the spores ripen. Say what you see now.",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 3,
+      "valuesFrom": "colours"
+    },
+    {
+      "id": "cap_shape",
+      "label": "What shape is the cap?",
+      "hint": "Describe a mature, spore-producing cap. Young fruit bodies are difficult to identify.",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 3,
+      "note": "MycoKey's list plus bell/umbonate/umbilicate from iNat 6649. States lie on a continuum, so neighbours are treated as partial matches.",
+      "values": [
+        {
+          "id": "egg",
+          "label": "Egg-shaped or tall"
+        },
+        {
+          "id": "conical",
+          "label": "Conical"
+        },
+        {
+          "id": "bell",
+          "label": "Bell-shaped"
+        },
+        {
+          "id": "convex",
+          "label": "Convex"
+        },
+        {
+          "id": "flat",
+          "label": "Flat"
+        },
+        {
+          "id": "depressed",
+          "label": "Depressed in the centre"
+        },
+        {
+          "id": "funnel",
+          "label": "Funnel-shaped"
+        },
+        {
+          "id": "umbonate",
+          "label": "With a central bump"
+        },
+        {
+          "id": "umbilicate",
+          "label": "With a central navel"
+        }
+      ]
+    },
+    {
+      "id": "cap_surface",
+      "label": "What is the cap surface like?",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 4,
+      "values": [
+        {
+          "id": "smooth",
+          "label": "Smooth"
+        },
+        {
+          "id": "viscid",
+          "label": "Slimy or sticky when wet"
+        },
+        {
+          "id": "dry",
+          "label": "Dry"
+        },
+        {
+          "id": "silky",
+          "label": "Silky or fibrous"
+        },
+        {
+          "id": "scaly",
+          "label": "Scaly"
+        },
+        {
+          "id": "warty",
+          "label": "Warty, with loose patches"
+        },
+        {
+          "id": "velvety",
+          "label": "Velvety"
+        },
+        {
+          "id": "hairy",
+          "label": "Hairy"
+        },
+        {
+          "id": "wrinkled",
+          "label": "Wrinkled or pitted"
+        },
+        {
+          "id": "cracked",
+          "label": "Cracked"
+        },
+        {
+          "id": "striate",
+          "label": "Grooved or lined"
+        },
+        {
+          "id": "powdery",
+          "label": "Powdery or frosted"
+        },
+        {
+          "id": "zoned",
+          "label": "Zoned in concentric bands"
+        }
+      ]
+    },
+    {
+      "id": "cap_margin",
+      "label": "What is the cap edge like?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 3,
+      "note": "Translucent-striate is high-power and consistently under-taught - it defines much of Mycena and Psathyrella.",
+      "values": [
+        {
+          "id": "inrolled",
+          "label": "Inrolled"
+        },
+        {
+          "id": "incurved",
+          "label": "Incurved"
+        },
+        {
+          "id": "straight",
+          "label": "Straight"
+        },
+        {
+          "id": "uplifted",
+          "label": "Uplifted with age"
+        },
+        {
+          "id": "wavy",
+          "label": "Wavy or lobed"
+        },
+        {
+          "id": "striate",
+          "label": "Lined"
+        },
+        {
+          "id": "translucent_striate",
+          "label": "Translucent \u2014 the gills show through"
+        },
+        {
+          "id": "appendiculate",
+          "label": "With hanging veil fragments"
+        }
+      ]
+    },
+    {
+      "id": "cap_colour",
+      "label": "What colour is the cap?",
+      "hint": "Notoriously unreliable \u2014 rain, age and sun all change it. It never eliminates on its own.",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 3,
+      "valuesFrom": "colours"
+    },
+    {
+      "id": "cap_colour_pattern",
+      "label": "How is the colour laid out?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 2,
+      "values": [
+        {
+          "id": "uniform",
+          "label": "Uniform"
+        },
+        {
+          "id": "darker_centre",
+          "label": "Darker at the centre"
+        },
+        {
+          "id": "paler_margin",
+          "label": "Paler at the margin"
+        }
+      ]
+    },
+    {
+      "id": "bruising",
+      "label": "Does it change colour when cut or handled?",
+      "hint": "Cut it and wait. 'Not tested' is a real answer and is not the same as 'no'.",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 5,
+      "controlling": true,
+      "notTested": true,
+      "values": [
+        {
+          "id": "no",
+          "label": "No change"
+        },
+        {
+          "id": "yes",
+          "label": "Yes, it changes"
+        }
+      ]
+    },
+    {
+      "id": "bruising_where",
+      "label": "Where does it change?",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 3,
+      "values": [
+        {
+          "id": "cap",
+          "label": "Cap surface"
+        },
+        {
+          "id": "hymenophore",
+          "label": "Gills or pores"
+        },
+        {
+          "id": "stipe",
+          "label": "Stem"
+        },
+        {
+          "id": "flesh",
+          "label": "Cut flesh"
+        },
+        {
+          "id": "stipe_base",
+          "label": "Stem base only"
+        }
+      ]
+    },
+    {
+      "id": "bruising_colour",
+      "label": "What colour does it turn?",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 4,
+      "valuesFrom": "colours"
+    },
+    {
+      "id": "bruising_speed",
+      "label": "How fast?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 3,
+      "values": [
+        {
+          "id": "instant",
+          "label": "Instantly"
+        },
+        {
+          "id": "minute",
+          "label": "Within a minute"
+        },
+        {
+          "id": "slow",
+          "label": "Slowly, over several minutes"
+        }
+      ]
+    },
+    {
+      "id": "latex",
+      "label": "Does it ooze anything when broken?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 5,
+      "controlling": true,
+      "notTested": true,
+      "note": "Near-decisive when present and 'none' for about 95 percent of taxa. That asymmetry is exactly what an entropy-based question picker handles and a fixed order does not.",
+      "values": [
+        {
+          "id": "none",
+          "label": "Nothing"
+        },
+        {
+          "id": "present",
+          "label": "Yes, it oozes"
+        },
+        {
+          "id": "watery",
+          "label": "Clear or watery droplets"
+        },
+        {
+          "id": "guttation",
+          "label": "Coloured droplets on the surface"
+        }
+      ]
+    },
+    {
+      "id": "latex_colour",
+      "label": "What colour is it when it first appears?",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 4,
+      "valuesFrom": "colours"
+    },
+    {
+      "id": "latex_change",
+      "label": "Does the ooze change colour?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 4,
+      "controlling": true,
+      "values": [
+        {
+          "id": "no",
+          "label": "No"
+        },
+        {
+          "id": "yes",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "latex_change_colour",
+      "label": "What does it change to?",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 3,
+      "valuesFrom": "colours"
+    },
+    {
+      "id": "flesh_consistency",
+      "label": "What is the flesh like?",
+      "hint": "Snap the stem. Brittle or fibrous is two seconds of work and separates Russula and Lactarius from almost everything else.",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 4,
+      "values": [
+        {
+          "id": "soft",
+          "label": "Soft and fleshy"
+        },
+        {
+          "id": "brittle",
+          "label": "Brittle, snaps like chalk"
+        },
+        {
+          "id": "fibrous",
+          "label": "Fibrous, tears in strands"
+        },
+        {
+          "id": "leathery",
+          "label": "Tough and leathery"
+        },
+        {
+          "id": "woody",
+          "label": "Corky or woody"
+        },
+        {
+          "id": "gelatinous",
+          "label": "Gelatinous"
+        },
+        {
+          "id": "powdery",
+          "label": "Powdery when mature"
+        }
+      ]
+    },
+    {
+      "id": "odour",
+      "label": "What does it smell of?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 4,
+      "notTested": true,
+      "note": "The single biggest value-add available. Odour is the most-recorded fungal character on iNaturalist and none of it is machine-readable, because both fields there are free text.",
+      "values": [
+        {
+          "id": "none",
+          "label": "Nothing distinctive"
+        },
+        {
+          "id": "mushroomy",
+          "label": "Mushroomy"
+        },
+        {
+          "id": "farinaceous",
+          "label": "Meal or cucumber"
+        },
+        {
+          "id": "sweet",
+          "label": "Sweet or fragrant"
+        },
+        {
+          "id": "aniseed",
+          "label": "Aniseed"
+        },
+        {
+          "id": "almond",
+          "label": "Almond or marzipan"
+        },
+        {
+          "id": "fruity",
+          "label": "Fruity"
+        },
+        {
+          "id": "garlic",
+          "label": "Garlic"
+        },
+        {
+          "id": "radish",
+          "label": "Radish"
+        },
+        {
+          "id": "potato",
+          "label": "Raw potato"
+        },
+        {
+          "id": "phenolic",
+          "label": "Phenolic or of ink"
+        },
+        {
+          "id": "chemical",
+          "label": "Chemical or bleach-like"
+        },
+        {
+          "id": "coal_tar",
+          "label": "Coal tar"
+        },
+        {
+          "id": "spicy",
+          "label": "Spicy or peppery"
+        },
+        {
+          "id": "foetid",
+          "label": "Foetid, of rot or carrion"
+        },
+        {
+          "id": "unpleasant_other",
+          "label": "Unpleasant, something else"
+        }
+      ]
+    },
+    {
+      "id": "taste",
+      "label": "What does it taste of?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 3,
+      "notTested": true,
+      "note": "Gated. Never offered while a deadly candidate remains, and 'not tested' is always the default. iNat field 15979 verbatim.",
+      "values": [
+        {
+          "id": "mild",
+          "label": "Mild"
+        },
+        {
+          "id": "bitter",
+          "label": "Bitter"
+        },
+        {
+          "id": "acrid",
+          "label": "Acrid or peppery"
+        },
+        {
+          "id": "farinaceous",
+          "label": "Mealy"
+        },
+        {
+          "id": "sweet",
+          "label": "Sweet"
+        },
+        {
+          "id": "unpleasant",
+          "label": "Unpleasant"
+        }
+      ]
+    },
+    {
+      "id": "size",
+      "label": "How big is it?",
+      "kind": "measurement",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 3,
+      "note": "Matched by interval overlap, never equality, and it down-weights rather than eliminates. Published ranges are roughly the 10th to 90th percentile of what actually grows.",
+      "values": [
+        {
+          "id": "cap_width_mm",
+          "label": "Cap width (mm)"
+        },
+        {
+          "id": "stipe_height_mm",
+          "label": "Stem height (mm)"
+        },
+        {
+          "id": "stipe_thickness_mm",
+          "label": "Stem thickness (mm)"
+        }
+      ]
+    },
+    {
+      "id": "veil_remnants",
+      "label": "Is there anything left on the cap?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 3,
+      "values": [
+        {
+          "id": "none",
+          "label": "Nothing"
+        },
+        {
+          "id": "warts",
+          "label": "Warts or patches that rub off"
+        },
+        {
+          "id": "single_patch",
+          "label": "One large patch"
+        },
+        {
+          "id": "fibrous_scales",
+          "label": "Fibrous scales"
+        },
+        {
+          "id": "peeling_skin",
+          "label": "A skin that peels"
+        }
+      ]
+    },
+    {
+      "id": "spore_print",
+      "label": "What colour is the spore print?",
+      "hint": "Taken at home overnight. 'Not taken' is different from 'unknown' and the app keeps track of which.",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "deferred",
+      "power": 5,
+      "controlling": true,
+      "notTested": true,
+      "values": [
+        {
+          "id": "pale",
+          "label": "Pale"
+        },
+        {
+          "id": "pink",
+          "label": "Pink"
+        },
+        {
+          "id": "brown",
+          "label": "Brown"
+        },
+        {
+          "id": "dark",
+          "label": "Dark"
+        },
+        {
+          "id": "green",
+          "label": "Green"
+        }
+      ]
+    },
+    {
+      "id": "spore_print_fine",
+      "label": "More precisely?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "deferred",
+      "power": 4,
+      "note": "Leacock's published classes. Tier one matches how keys actually branch; this refines it.",
+      "values": [
+        {
+          "id": "white",
+          "label": "White"
+        },
+        {
+          "id": "cream",
+          "label": "Cream or pale yellow"
+        },
+        {
+          "id": "pink_salmon",
+          "label": "Pink or salmon"
+        },
+        {
+          "id": "ochre",
+          "label": "Ochre, yellow-brown"
+        },
+        {
+          "id": "rust",
+          "label": "Rust-brown"
+        },
+        {
+          "id": "clay",
+          "label": "Clay or earth brown"
+        },
+        {
+          "id": "purple_brown",
+          "label": "Purple-brown, chocolate"
+        },
+        {
+          "id": "black",
+          "label": "Black"
+        },
+        {
+          "id": "green",
+          "label": "Green"
+        }
+      ]
+    },
+    {
+      "id": "koh",
+      "label": "KOH reaction",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "deferred",
+      "power": 2,
+      "notTested": true,
+      "note": "iNat field 5043 verbatim. Hidden behind an expert toggle, default off - but 7,269 uses says a real constituency exists.",
+      "values": [
+        {
+          "id": "no_change",
+          "label": "No change or indistinct"
+        },
+        {
+          "id": "pink",
+          "label": "Pink"
+        },
+        {
+          "id": "brown",
+          "label": "Brown"
+        },
+        {
+          "id": "yellow",
+          "label": "Yellow"
+        },
+        {
+          "id": "green",
+          "label": "Green"
+        },
+        {
+          "id": "purple",
+          "label": "Purple"
+        },
+        {
+          "id": "wine_red",
+          "label": "Wine-red"
+        },
+        {
+          "id": "bright_red",
+          "label": "Bright red"
+        },
+        {
+          "id": "black",
+          "label": "Black"
+        },
+        {
+          "id": "orange_brown",
+          "label": "Orange to brownish"
+        },
+        {
+          "id": "bleaching",
+          "label": "Bleaching"
+        }
+      ]
+    },
+    {
+      "id": "habitat",
+      "label": "What sort of place is it?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 3,
+      "regional": true,
+      "values": [
+        {
+          "id": "broadleaf_wood",
+          "label": "Broadleaf woodland"
+        },
+        {
+          "id": "conifer_wood",
+          "label": "Conifer woodland"
+        },
+        {
+          "id": "mixed_wood",
+          "label": "Mixed woodland"
+        },
+        {
+          "id": "wood_pasture",
+          "label": "Wood pasture or parkland"
+        },
+        {
+          "id": "unimproved_grass",
+          "label": "Unimproved grassland"
+        },
+        {
+          "id": "improved_grass",
+          "label": "Improved grassland or lawn"
+        },
+        {
+          "id": "heath",
+          "label": "Heath or moor"
+        },
+        {
+          "id": "wetland",
+          "label": "Bog or wetland"
+        },
+        {
+          "id": "coast",
+          "label": "Dune or coast"
+        },
+        {
+          "id": "scrub",
+          "label": "Scrub"
+        },
+        {
+          "id": "disturbed",
+          "label": "Arable or disturbed ground"
+        },
+        {
+          "id": "garden",
+          "label": "Garden"
+        },
+        {
+          "id": "urban",
+          "label": "Urban"
+        },
+        {
+          "id": "arid",
+          "label": "Desert or arid"
+        },
+        {
+          "id": "tropical",
+          "label": "Tropical forest"
+        }
+      ]
+    },
+    {
+      "id": "associated_tree",
+      "label": "What trees are nearby?",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 4,
+      "regional": true,
+      "note": "Coarse globally; the region pack supplies the genus list.",
+      "values": [
+        {
+          "id": "conifer",
+          "label": "Conifer"
+        },
+        {
+          "id": "broadleaf",
+          "label": "Broadleaf"
+        },
+        {
+          "id": "unknown",
+          "label": "Could not tell"
+        }
+      ]
+    },
+    {
+      "id": "age",
+      "label": "How old is the specimen?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 1,
+      "note": "A confidence modifier, not a character. An old specimen widens the tolerance on cap shape, gill colour and margin, and suppresses any inference from an absent veil - veils fall off. Never keyed on.",
+      "values": [
+        {
+          "id": "young",
+          "label": "Young"
+        },
+        {
+          "id": "mature",
+          "label": "Mature"
+        },
+        {
+          "id": "old",
+          "label": "Old"
+        }
+      ]
+    },
+    {
+      "id": "condition",
+      "label": "What condition is it in?",
+      "kind": "state",
+      "cardinality": "single",
+      "availability": "field",
+      "power": 1,
+      "values": [
+        {
+          "id": "fresh",
+          "label": "Fresh"
+        },
+        {
+          "id": "dry",
+          "label": "Dry"
+        },
+        {
+          "id": "rotten",
+          "label": "Rotten"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "character": "substrate_wood",
+      "requires": {
+        "character": "substrate",
+        "anyOf": [
+          "wood"
+        ]
+      }
+    },
+    {
+      "character": "ring",
+      "requires": {
+        "character": "stipe_presence",
+        "anyOf": [
+          "central",
+          "off_centre",
+          "lateral"
+        ]
+      }
+    },
+    {
+      "character": "stipe_base",
+      "requires": {
+        "character": "stipe_presence",
+        "anyOf": [
+          "central",
+          "off_centre",
+          "lateral"
+        ]
+      }
+    },
+    {
+      "character": "stipe_surface",
+      "requires": {
+        "character": "stipe_presence",
+        "anyOf": [
+          "central",
+          "off_centre",
+          "lateral"
+        ]
+      }
+    },
+    {
+      "character": "stipe_flesh",
+      "requires": {
+        "character": "stipe_presence",
+        "anyOf": [
+          "central",
+          "off_centre",
+          "lateral"
+        ]
+      }
+    },
+    {
+      "character": "gill_attachment",
+      "requires": {
+        "character": "fruitbody_type",
+        "anyOf": [
+          "gilled_stemmed"
+        ]
+      }
+    },
+    {
+      "character": "gill_spacing",
+      "requires": {
+        "character": "fruitbody_type",
+        "anyOf": [
+          "gilled_stemmed"
+        ]
+      }
+    },
+    {
+      "character": "gill_extras",
+      "requires": {
+        "character": "fruitbody_type",
+        "anyOf": [
+          "gilled_stemmed"
+        ]
+      }
+    },
+    {
+      "character": "gill_edge",
+      "requires": {
+        "character": "fruitbody_type",
+        "anyOf": [
+          "gilled_stemmed"
+        ]
+      }
+    },
+    {
+      "character": "bruising_where",
+      "requires": {
+        "character": "bruising",
+        "anyOf": [
+          "yes"
+        ]
+      }
+    },
+    {
+      "character": "bruising_colour",
+      "requires": {
+        "character": "bruising",
+        "anyOf": [
+          "yes"
+        ]
+      }
+    },
+    {
+      "character": "bruising_speed",
+      "requires": {
+        "character": "bruising",
+        "anyOf": [
+          "yes"
+        ]
+      }
+    },
+    {
+      "character": "latex_colour",
+      "requires": {
+        "character": "latex",
+        "anyOf": [
+          "present",
+          "guttation"
+        ]
+      }
+    },
+    {
+      "character": "latex_change",
+      "requires": {
+        "character": "latex",
+        "anyOf": [
+          "present",
+          "guttation"
+        ]
+      }
+    },
+    {
+      "character": "latex_change_colour",
+      "requires": {
+        "character": "latex_change",
+        "anyOf": [
+          "yes"
+        ]
+      }
+    },
+    {
+      "character": "spore_print_fine",
+      "requires": {
+        "character": "spore_print",
+        "anyOf": [
+          "pale",
+          "pink",
+          "brown",
+          "dark",
+          "green"
+        ]
+      }
+    },
+    {
+      "character": "cap_colour_pattern",
+      "requires": {
+        "character": "fruitbody_type",
+        "anyOf": [
+          "gilled_stemmed",
+          "bolete",
+          "polypore",
+          "toothed",
+          "chanterelle_like"
+        ]
+      }
+    }
+  ]
+}
