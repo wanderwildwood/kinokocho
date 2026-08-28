@@ -1,4 +1,4 @@
-# 茸帳 kinokochō — eInk Mushroom Journal
+# 茸帳 kinokochō — Mushroom Journal
 
 A mushroom field journal for the [Mudita Kompakt](https://mudita.com/products/kompakt/),
 built for its E Ink screen.

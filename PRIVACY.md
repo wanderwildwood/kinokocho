@@ -1,6 +1,6 @@
 # Privacy
 
-eInk Mushroom Journal keeps your journal on your phone. Nothing is sent anywhere unless
+Mushroom Journal keeps your journal on your phone. Nothing is sent anywhere unless
 you press the button that sends it, and that button names its destination.
 
 This file describes what is true of the code in this repository *today*. When that
@@ -22,7 +22,7 @@ received by other apps. Nothing in this repository asks for it.
 Two permissions are expected, and each will be added in the commit that first needs it:
 
 - **CAMERA** — to attach photographs to an observation. Photographs are written to the
-  app's own private storage, not to the shared Pictures folder. (eInk Birding wrote its
+  app's own private storage, not to the shared Pictures folder. (Birding wrote its
   recordings into shared `Music/` and every media scanner on the phone picked them up;
   that mistake is not being repeated.)
 - **INTERNET** — used *only* when you explicitly push an observation to iNaturalist.

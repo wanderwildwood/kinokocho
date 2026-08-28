@@ -1,5 +1,5 @@
 [versions]
-# Pinned to the same combination eInk GO and Chess+ ship with, which is known to
+# Pinned to the same combination Go and Chess+ ship with, which is known to
 # build and run on the Kompakt. Newer is not better here: MMD 1.0.2 is the design
 # system the phone's own apps use, and it constrains the Compose version.
 agp = "8.13.1"
