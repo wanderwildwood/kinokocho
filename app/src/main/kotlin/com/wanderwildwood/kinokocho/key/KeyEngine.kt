@@ -79,6 +79,8 @@ class KeyEngine(
     }
 
     private fun score(taxon: Taxon, answers: Answers): Candidate {
+        val weathered = answers.values["age"].orEmpty().contains("old") ||
+            answers.values["condition"].orEmpty().any { it == "rotten" || it == "dry" }
         var score = 0.0
         var matched = 0
         var mismatched = 0
@@ -104,6 +106,38 @@ class KeyEngine(
             if (states == null) {
                 unscored++
                 return@forEach
+            }
+            /*
+             * What a weathered specimen is allowed to rule out.
+             *
+             * [Character] has carried this instruction since the schema was written —
+             * "an old specimen widens the tolerance on cap shape, gill colour and
+             * margin, and suppresses any inference from an absent veil, because veils
+             * fall off" — and nothing implemented it. There was no way to record that a
+             * specimen was old either, so the note described behaviour that could not
+             * have happened.
+             *
+             * The dangerous half is the veil. A destroying angel a fortnight out has
+             * lost its ring to the rain, and "no ring" then mismatched every taxon that
+             * has one — which does not merely reorder the list, it takes the taxon out
+             * of the hazards, because a hazard is only carried while it has no
+             * mismatches at all. The honest observation of an old mushroom was hiding
+             * the thing the observation was for.
+             *
+             * Only in the direction that fails. Seeing a skirt on an old mushroom is
+             * still seeing a skirt; it is the absence that rots away.
+             */
+            if (weathered && characterId in TIME_WORN) {
+                val absent = real.all { it in DISAPPEARS }
+                val soft = characterId in FALLS_OFF && absent
+                if (states.none { it.value in real }) {
+                    if (soft) {
+                        unscored++
+                        return@forEach
+                    }
+                    score += WEATHERED_MISMATCH
+                    return@forEach
+                }
             }
             // A multi-select answer matches if ANY chosen state is one the taxon shows.
             // A cap can be both scaly and dry, and requiring all of them would punish an
@@ -601,6 +635,27 @@ class KeyEngine(
         // How much corroboration it takes before a row's own average is trusted to
         // stand in for what it does not say. Two.
         const val IMPUTE_DAMPING = 2.0
+
+        /**
+         * Characters an old or weathered specimen cannot be trusted on. A cap that has
+         * been rained on for a fortnight is flatter, paler and more ragged than the book
+         * says, and its gills have taken the colour of whatever fell on them.
+         */
+        val TIME_WORN = setOf(
+            "cap_shape", "cap_margin", "cap_surface", "hymenophore_colour",
+            "veil_remnants", "ring",
+        )
+
+        /** The two that fall off entirely, so their absence proves nothing. */
+        val FALLS_OFF = setOf("veil_remnants", "ring")
+
+        /** The answers that mean "there is none", which is what time produces. */
+        val DISAPPEARS = setOf("none", "absent")
+
+        // Still a penalty, because it is still evidence — a third of the usual one, and
+        // it never counts as a mismatch, so it cannot take a deadly candidate off the
+        // screen on the strength of a fortnight's weather.
+        const val WEATHERED_MISMATCH = -0.7
 
         const val SEASON_BONUS = 0.15
         const val SEASON_PENALTY = -0.15

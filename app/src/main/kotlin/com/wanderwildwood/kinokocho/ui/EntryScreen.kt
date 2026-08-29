@@ -182,8 +182,24 @@ fun EntryScreen(
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(top = 4.dp),
                     )
-                    note.notes.forEach {
-                        Text(it, style = MaterialTheme.typography.bodySmall)
+                    // Spaced, and no more than three. Galerina is now confused with
+                    // five things in the pack, and their notes ran together into one
+                    // paragraph eight sentences long under the heading that says a
+                    // mushroom in front of you might kill you. The rest are on its own
+                    // page, which is one tap away and laid out for reading.
+                    note.notes.take(3).forEach {
+                        Text(
+                            it,
+                            style = MaterialTheme.typography.bodySmall,
+                            modifier = Modifier.padding(top = 4.dp),
+                        )
+                    }
+                    if (note.notes.size > 3) {
+                        Text(
+                            "…and ${note.notes.size - 3} more, on its own page.",
+                            style = MaterialTheme.typography.bodySmall,
+                            modifier = Modifier.padding(top = 4.dp),
+                        )
                     }
                     if (note.discriminators.isNotEmpty()) {
                         // Nouns joined by commas, not questions joined by spaces. Six
@@ -332,6 +348,57 @@ fun EntryScreen(
          * Blank stays blank. Somebody who measured the cap and not the stem has said
          * something true, and filling the gap in for them would be inventing a number.
          */
+        /*
+         * And how old and how battered it is.
+         *
+         * These sit here for the same reason size does — they are facts about the
+         * specimen rather than the species, and no taxon will ever declare "age: old".
+         * Both had been in the schema from the start with no way to record them and no
+         * taxon that could match them, which made them dead weight; [KeyEngine] now
+         * reads age to decide how much a missing ring is allowed to rule out, which is
+         * what the schema said it was for all along.
+         */
+        vm.schema.characters
+            .filter { it.id == "age" || it.id == "condition" }
+            .forEach { character ->
+                item(key = character.id) {
+                    Section(character.label)
+                    val chosen = draft.answers.values[character.id].orEmpty()
+                    androidx.compose.foundation.layout.Row(
+                        Modifier.fillMaxWidth().padding(top = 4.dp),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        vm.schema.valuesOf(character).forEach { value ->
+                            val picked = value.id in chosen
+                            val pick = {
+                                vm.answer(
+                                    character.id,
+                                    if (picked) emptySet() else setOf(value.id),
+                                )
+                            }
+                            if (picked) {
+                                ButtonMMD(onClick = pick, modifier = Modifier.weight(1f)) {
+                                    Text(value.label)
+                                }
+                            } else {
+                                OutlinedButtonMMD(
+                                    onClick = pick,
+                                    modifier = Modifier.weight(1f),
+                                ) { Text(value.label) }
+                            }
+                        }
+                    }
+                    if (character.id == "age" && "old" in chosen) {
+                        Text(
+                            "A ring or a veil that is not there proves nothing on an " +
+                                "old one, so nothing will be ruled out for missing them.",
+                            style = MaterialTheme.typography.bodySmall,
+                            modifier = Modifier.padding(top = 4.dp),
+                        )
+                    }
+                }
+            }
+
         vm.schema.characters
             .filter { it.kind == Character.Kind.MEASUREMENT }
             .forEach { character ->

@@ -531,6 +531,62 @@ class KeyEngineTest {
         assertNull(engine.nextQuestion(a, considerTop = 1))
     }
 
+    // ---- an old specimen -------------------------------------------------------
+
+    @Test
+    fun `on an old specimen, a missing ring does not hide the destroying angel`() {
+        // A fortnight of rain takes the ring off. Saying so used to mismatch every taxon
+        // that has one — which does not merely reorder the list, it takes the taxon out
+        // of the hazards, because a hazard is only carried while it has no mismatches.
+        // The honest observation of an old mushroom was hiding what it was made for.
+        val seen = answers(
+            "fruitbody_type" to "gilled_stemmed",
+            "substrate" to "soil",
+            "stipe_base" to "sac_volva",
+            "hymenophore_colour" to "white",
+        ).with("ring", setOf("absent")).with("veil_remnants", setOf("none"))
+
+        val fresh = engine.rank(seen)
+        val old = engine.rank(seen.with("age", setOf("old")))
+
+        assertFalse(
+            "a fresh reading of no ring should still count against it",
+            fresh.hazards.any { it.taxon.id == "amanita_bisporigera" },
+        )
+        assertTrue(
+            "an old specimen with no ring must keep the destroying angel in view",
+            old.hazards.any { it.taxon.id == "amanita_bisporigera" },
+        )
+    }
+
+    @Test
+    fun `age only forgives what time takes away`() {
+        // Seeing a skirt on an old mushroom is still seeing a skirt. It is the absence
+        // that rots away, so a positive answer is scored exactly as it always was.
+        val base = answers("fruitbody_type" to "gilled_stemmed", "substrate" to "soil")
+        val sawARing = base.with("ring", setOf("skirt"))
+        val fresh = engine.rank(sawARing).candidates
+            .first { it.taxon.id == "agaricus_campestris" }
+        val old = engine.rank(sawARing.with("age", setOf("old"))).candidates
+            .first { it.taxon.id == "agaricus_campestris" }
+        assertEquals(fresh.matched, old.matched)
+        assertEquals(fresh.mismatched, old.mismatched)
+    }
+
+    @Test
+    fun `a weathered cap shape is softened but not forgiven`() {
+        // Widened tolerance, not a free pass: an old cap is flatter and more ragged than
+        // the book says, and that is worth something less than the book being wrong.
+        val base = answers("fruitbody_type" to "gilled_stemmed", "substrate" to "soil")
+        fun capShapeOf(a: KeyEngine.Answers, id: String) =
+            engine.rank(a).candidates.first { it.taxon.id == id }
+        val wrong = base.with("cap_shape", setOf("funnel"))
+        val fresh = capShapeOf(wrong, "amanita_bisporigera")
+        val old = capShapeOf(wrong.with("age", setOf("old")), "amanita_bisporigera")
+        assertTrue("an old cap shape should cost less", old.score > fresh.score)
+        assertEquals("but it is still not a match", 0, old.matched - fresh.matched)
+    }
+
     // ---- size ------------------------------------------------------------------
 
     @Test
