@@ -343,79 +343,83 @@ def fruitbody_type():
 
 def gill_attachment():
     """
-    A vertical section, cut so the junction is the biggest thing in the picture.
+    The junction, and almost nothing else.
 
-    The first attempt drew a whole mushroom with hanging gills, and all six states came
-    out identical: where the gill meets the stem is a few pixels, and it vanished. So
-    the drawing is zoomed to the junction, the stem is drawn wide enough to be a target,
-    and the gill that tells the story is filled solid while its neighbours are outlines.
+    Drawn twice before and wrong both times. The first attempt was a whole mushroom and
+    all six states came out identical. The second zoomed a little and worked on a
+    contact sheet at 150px — and still failed at 64, which is the size these are
+    actually drawn at. Where a gill meets a stem is a few millimetres of a mushroom; at
+    64px, on a whole mushroom, it is two pixels.
+
+    So this is a quarter view: cap flesh along the top, the stem as a band down the
+    right, one gill filling the middle. Nothing else is in the frame, because nothing
+    else is the question. The state is now a third of the picture rather than a
+    detail in it, and the six read apart at the size they are used.
+
+    This is also what the literature does. The Beaty Museum's teaching set, the NWFG
+    notes and the Wisconsin Mycological Society all illustrate this character as a
+    vertical section cropped to the gill-to-stipe junction, for the same reason: at any
+    wider framing the thing being named is too small to see. The wording each state is
+    drawn to is theirs — adnexed *diminishes* before attaching narrowly, sinuate becomes
+    *suddenly* narrower, decurrent runs down *below the level of* the gills.
+
+    ⚠ The literature separates *sinuate* from *emarginate*; NWFG has an article titled
+    "Is it adnexed, emarginate or sinuate?" because they are genuinely confusable. This
+    schema collapses them into `notched`, on purpose: a field journal that asks a
+    question three mycologists argue about will get noise back.
     """
     c = "gill_attachment"
 
-    def cap():
-        # Cap in section, its underside flat at y=38 so gills hang from a straight line.
-        return path("M6,38 Q48,10 90,38 Q48,30 6,38 Z")
-
-    def stem(top=38, bottom=90):
-        return path(f"M38,{top} L38,{bottom} M58,{top} L58,{bottom}")
-
-    def outer_gills():
-        # Neighbours, kept thin so the solid one carries the eye.
-        return path("M12,38 L12,52 M19,38 L19,53 M26,38 L26,54 "
-                    "M70,38 L70,54 M77,38 L77,53 M84,38 L84,52", width=FINE)
+    def frame():
+        # Cap above, stem to the right. The stem runs off the bottom edge: this is a
+        # corner of a mushroom, not a small mushroom.
+        return (
+            path("M0,26 Q30,6 62,20 L62,30 Q30,18 0,36 Z", width=0, fill=True),
+            path("M62,20 L62,96 M96,26 L96,96", width=STROKE),
+        )
 
     write(f"art_{c}_free",
           "Agaricus campestris",
-          "The gill stops short of the stem: a clear gap runs all the way round.",
-          cap(), outer_gills(),
-          path("M30,38 L34,38 L34,55 L30,55 Z", fill=True),
-          path("M62,38 L66,38 L66,55 L62,55 Z", fill=True),
-          stem(),
-          # The gap is the character, so it is called out with its own arrow.
-          path("M34,46 L38,46 M62,46 L58,46", width=HAIR),
-          path("M36,44 L38,46 L36,48 M60,44 L58,46 L60,48", width=HAIR))
+          "The gill stops short of the stem, leaving a clear gap all the way round it.",
+          *frame(),
+          path("M8,34 L46,28 L46,74 L8,66 Z", fill=True),
+          # The gap is the whole character, so it is measured out with an arrow.
+          path("M50,50 L58,50", width=FINE),
+          path("M55,46 L59,50 L55,54", width=FINE))
 
     write(f"art_{c}_adnexed",
           "Mycena galericulata",
-          "The gill touches the stem, but over only the top of its depth.",
-          cap(), outer_gills(),
-          path("M30,38 L38,38 L38,44 L34,55 L30,55 Z", fill=True),
-          path("M66,38 L58,38 L58,44 L62,55 L66,55 Z", fill=True),
-          stem())
+          "The gill reaches the stem, but touches over only the top of its depth.",
+          *frame(),
+          path("M8,34 L62,26 L62,40 L46,72 L8,66 Z", fill=True))
 
     write(f"art_{c}_adnate",
           "Gymnopus dryophilus",
           "The gill meets the stem squarely, over its whole depth.",
-          cap(), outer_gills(),
-          path("M30,38 L38,38 L38,55 L30,55 Z", fill=True),
-          path("M66,38 L58,38 L58,55 L66,55 Z", fill=True),
-          stem())
+          *frame(),
+          path("M8,34 L62,26 L62,76 L8,66 Z", fill=True))
 
     write(f"art_{c}_notched",
           "Tricholoma sejunctum",
           "The gill runs in deep, then is cut away sharply just before the stem.",
-          cap(), outer_gills(),
-          path("M30,38 L38,38 L38,42 L34,48 L34,57 L30,57 Z", fill=True),
-          path("M66,38 L58,38 L58,42 L62,48 L62,57 L66,57 Z", fill=True),
-          stem())
+          *frame(),
+          path("M8,34 L62,26 L62,38 L48,52 L48,84 L8,72 Z", fill=True))
 
     write(f"art_{c}_decurrent",
           "Cantharellus lateritius",
-          "The gill does not stop at the stem — it turns and runs down the outside of it.",
-          cap(), outer_gills(),
-          path("M30,38 L38,38 L38,70 L34,70 L34,52 L30,50 Z", fill=True),
-          path("M66,38 L58,38 L58,70 L62,70 L62,52 L66,50 Z", fill=True),
-          stem(bottom=90))
+          "The gill does not stop at the stem — it turns and runs down the outside.",
+          *frame(),
+          path("M8,34 L62,26 L62,96 L44,96 L44,60 L8,66 Z", fill=True))
 
     write(f"art_{c}_no_stem",
           "Pleurotus ostreatus",
           "Attached to the wood at one side, so there is no stem for a gill to meet.",
-          path("M86,14 L86,88", width=FINE),
-          path("M86,34 Q48,14 8,32 Q46,40 86,40 Z"),
-          path("M14,34 L17,50 M22,35 L25,53 M30,36 L33,55 M38,37 L41,56 "
-               "M46,38 L49,57 M54,38 L57,56 M62,39 L65,54 M70,39 L72,51",
-               width=FINE),
-          path("M78,40 L86,40 L86,52 L80,50 Z", fill=True))
+          path("M0,26 Q34,6 74,22 L74,32 Q34,20 0,36 Z", width=0, fill=True),
+          # The wood, not a stem.
+          path("M88,4 L88,92", width=STROKE),
+          path("M74,22 L88,26 L88,44 L74,40 Z", fill=True),
+          path("M10,38 L10,64 M22,36 L22,68 M34,34 L34,72 M46,31 L46,74 M58,28 L58,74 "
+               "M70,26 L70,70", width=STROKE))
 
 
 # ---------------------------------------------------------------------------
@@ -528,15 +532,19 @@ def cap_shape():
           "Expanded flat, the margin level with the centre.",
           path("M14,52 Q48,42 82,52 Q48,62 14,52 Z"), st, ground())
 
+    # The three dished shapes are told apart by how the centre goes down, so each is
+    # drawn to the glossary wording: depressed is merely lower, umbilicate is a sudden
+    # small hole, funnel is deep enough to be a funnel. Drawn any softer they are one
+    # picture three times at the size these are used.
     write(f"art_{c}_depressed", "Lactarius deliciosus",
-          "Flat, but sunk in the middle — not yet a funnel.",
-          path("M14,50 Q28,40 44,50 Q48,54 52,50 Q68,40 82,50 Q48,62 14,50 Z"),
+          "Broad and saucer-like: the middle is lower, and no more than that.",
+          path("M12,46 Q26,38 40,50 Q48,55 56,50 Q70,38 84,46 Q48,60 12,46 Z"),
           st, ground())
 
     write(f"art_{c}_funnel", "Clitocybe gibba",
-          "The whole cap slopes into the stem; the hollow reaches the flesh.",
-          path("M14,38 Q30,36 42,58 L54,58 Q66,36 82,38 Q48,68 14,38 Z"),
-          path("M44,58 L44,86 M52,58 L52,86"), ground())
+          "The whole cap slopes down into the stem — a funnel, not a dish.",
+          path("M10,28 L42,62 L54,62 L86,28 Q84,40 58,72 L38,72 Q12,40 10,28 Z"),
+          path("M42,68 L42,86 M54,68 L54,86"), ground())
 
     write(f"art_{c}_umbonate", "Amanita parcivolvata",
           "A broad cap with a distinct raised boss at the centre.",
@@ -544,8 +552,8 @@ def cap_shape():
                "Q48,64 14,56 Z"), st, ground())
 
     write(f"art_{c}_umbilicate", "Arrhenia epichysium",
-          "A small sharp navel at the centre of an otherwise flat cap.",
-          path("M14,50 Q30,38 42,46 L46,56 L50,56 L54,46 Q66,38 82,50 Q48,60 14,50 Z"),
+          "An otherwise flat cap with one sudden narrow pit, like a navel.",
+          path("M12,44 Q28,38 44,42 L45,62 L51,62 L52,42 Q68,38 84,44 Q48,56 12,44 Z"),
           st, ground())
 
 

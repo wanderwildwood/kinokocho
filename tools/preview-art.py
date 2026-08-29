@@ -22,7 +22,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DRAWABLE = os.path.join(HERE, "..", "app", "src", "main", "res", "drawable")
 OUT = os.path.join(HERE, "..", "build", "art-preview.png")
 
-CELL = 150
+# 64, not 150. The drawings are shown at about 56-64dp in the app, and a fault that is
+# invisible at 150 is often obvious at 64 — the gill-attachment set passed a 150px sheet
+# twice and was unusable on the phone both times. Pass --big for a 150px sheet when
+# judging linework rather than legibility.
+CELL = 64 if "--big" not in sys.argv else 150
 
 
 def paths_of(xml):
@@ -60,7 +64,7 @@ def svg_of(xml):
 
 
 def main():
-    wanted = sys.argv[1:]
+    wanted = [a for a in sys.argv[1:] if a != "--big"]
     files = sorted(glob.glob(os.path.join(DRAWABLE, "art_*.xml")))
     if wanted:
         files = [f for f in files
