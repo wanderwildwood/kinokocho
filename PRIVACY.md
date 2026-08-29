@@ -8,7 +8,8 @@ changes, this file changes in the same commit as the code that changed it.
 
 ## Today
 
-The app's manifest declares **no permissions** — see `app/src/main/AndroidManifest.xml`.
+The app's manifest declares **one permission**, `ACCESS_COARSE_LOCATION`, and asks for it
+only when you press the button that uses it — see `app/src/main/AndroidManifest.xml`.
 It is scaffolding with a placeholder screen. It stores nothing and reaches nothing.
 
 One permission does appear in the built APK, and it is worth naming rather than glossing:
@@ -44,9 +45,26 @@ One permission is still expected, and it will be added in the commit that first 
 - **INTERNET** — used *only* when you explicitly push an observation to iNaturalist.
   There is no background sync, no analytics, no crash reporting, and no telemetry.
 
-**Location is deliberately not a permission.** Foraging spots are sensitive. Location is
-typed in by hand, the way eInk Birding does it, so the app never reads GPS and cannot
-record where you were without you writing it down.
+## Location
+
+**Typing the place by hand is the default and asks for nothing.** That has not changed, and
+it is still the way to use this app if you would rather it knew nothing.
+
+There is now also a button that fills in roughly where you are, because writing coordinates
+out by hand on an e-ink keyboard in a wood is miserable. It asks for permission at the
+moment you press it, not at startup, and never if you do not press it.
+
+What it asks for is **`ACCESS_COARSE_LOCATION` only**. Fine location is not declared, so the
+app cannot receive a precise fix — this is a property of the manifest, not a promise about
+what the code does with a precise fix it is holding. What gets stored is rounded further, to
+two decimal places, which is a bit over a kilometre. The journal wants to know which
+hillside, not which log.
+
+It reads the position the phone already has rather than requesting a fresh one: no radio is
+spun up, and if there is nothing cached it says so instead of waiting.
+
+Nothing is uploaded. A place lives in the entry on this phone, and leaves only in a message
+you send yourself.
 
 ## iNaturalist
 

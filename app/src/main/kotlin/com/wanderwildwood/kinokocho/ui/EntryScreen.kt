@@ -281,12 +281,9 @@ fun EntryScreen(
         // this app never asks for location.
         item {
             Section("Where, and anything else")
-            var place by remember(draft.uuid) { mutableStateOf(draft.placeNote) }
-            TextFieldMMD(
-                value = place,
-                onValueChange = { place = it; vm.setPlaceNote(it) },
-                modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("The place, in your own words") },
+            PlaceField(
+                place = draft.placeNote,
+                onPlaceChange = vm::setPlaceNote,
             )
             var note by remember(draft.uuid) { mutableStateOf(draft.note) }
             TextFieldMMD(

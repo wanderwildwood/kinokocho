@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- No permissions yet. Two are planned and neither is granted here until the
-         code that needs it exists, so that PRIVACY.md is never ahead of the app:
+    <!--
+        One permission, asked for only when the button that needs it is pressed.
 
-           CAMERA   - to attach photographs to an observation.
-           INTERNET - only for pushing an observation to iNaturalist, on request.
+        COARSE, and not FINE: the app never receives a precise position rather than
+        promising to round one it is holding, and what it stores is rounded further to
+        two decimal places. A foraging patch is the thing to be careful with, and the
+        journal only wants to know which hillside.
 
-         Location is deliberately absent. A foraging spot is sensitive, so location is
-         typed in by hand rather than read from GPS - the same choice Birding made. -->
+        Typing the place by hand remains the default and needs no permission at all;
+        this is the shortcut, not the mechanism. CAMERA is still not here and does not
+        need to be - the system camera is handed a FileProvider URI instead. INTERNET
+        will arrive with iNaturalist, and not before.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="false"

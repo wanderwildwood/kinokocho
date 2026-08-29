@@ -46,7 +46,11 @@ fun AboutDialog(onDismiss: () -> Unit) {
             )
 
             Spacer(14)
-            Line("No permissions. No network. What you record stays on this phone.")
+            Line(
+                "No network, and nothing leaves this phone unless you send it. The only " +
+                    "permission asked for is a rough position, only when you press the " +
+                    "button for it, and only ever rough — never a precise fix."
+            )
 
             Spacer(14)
             Line("GNU General Public License v3")
