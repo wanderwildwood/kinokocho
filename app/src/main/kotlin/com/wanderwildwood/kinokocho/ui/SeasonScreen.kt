@@ -13,6 +13,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -20,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
+import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.key.Hazard
 import com.wanderwildwood.kinokocho.key.Prevalence
@@ -50,6 +55,11 @@ import java.util.Locale
  * is not this app saying anything is safe to eat, and the line under the heading says
  * so rather than leaving it to be inferred.
  *
+ * **And a way to look one up.** A hundred taxa now carry a page worth reading, and
+ * there was no way to reach one out of season: the app could tell you about a morel in
+ * April and had nothing to say about it in September. Typing anything searches the whole
+ * pack and forgets the month; an empty box is the calendar again.
+ *
  * Short on purpose. It was every taxon recorded in the month, which for September is
  * most of the pack — a calendar of everything is a calendar of nothing. What is left is
  * the ones a walker actually meets, except that anything lethal is here however rarely
@@ -62,10 +72,20 @@ fun SeasonScreen(
     onClose: () -> Unit,
     onOpen: (String) -> Unit = {},
 ) {
-    val inSeason = taxa.filter { it.seasonMonths.isEmpty() || month in it.seasonMonths }
+    var query by remember { mutableStateOf("") }
+    val looking = query.isNotBlank()
 
-    val worthKnowing = worthKnowing(inSeason)
-    val rest = (inSeason - worthKnowing.toSet()).sortedBy { it.scientificName }
+    val inSeason = taxa.filter { it.seasonMonths.isEmpty() || month in it.seasonMonths }
+    val found = if (!looking) emptyList() else taxa
+        .filter {
+            it.scientificName.contains(query, ignoreCase = true) ||
+                it.commonName?.contains(query, ignoreCase = true) == true
+        }
+        .sortedBy { it.scientificName }
+
+    val worthKnowing = if (looking) emptyList() else worthKnowing(inSeason)
+    val rest = if (looking) found else (inSeason - worthKnowing.toSet())
+        .sortedBy { it.scientificName }
     val monthName = DateFormatSymbols(Locale.getDefault()).months[month - 1]
 
     LazyColumn(
@@ -74,18 +94,29 @@ fun SeasonScreen(
     ) {
         item {
             Text(
-                "About in $monthName",
+                if (looking) "Looking one up" else "About in $monthName",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 12.dp),
             )
+            TextFieldMMD(
+                value = query,
+                onValueChange = { query = it },
+                modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                placeholder = { Text("Look one up, any month") },
+                singleLine = true,
+            )
             Text(
-                "${inSeason.size} of ${taxa.size} in this region pack have been recorded " +
-                    "in $monthName. Seasons are a guide and nothing more — fungi do not " +
-                    "read calendars, and an out-of-season find is worth writing down " +
-                    "precisely because it is one.",
+                if (looking) {
+                    "${found.size} of ${taxa.size} match, whatever month they are out in."
+                } else {
+                    "${inSeason.size} of ${taxa.size} in this region pack have been " +
+                        "recorded in $monthName. Seasons are a guide and nothing more — " +
+                        "fungi do not read calendars, and an out-of-season find is worth " +
+                        "writing down precisely because it is one."
+                },
                 style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(top = 4.dp, bottom = 4.dp),
+                modifier = Modifier.padding(top = 6.dp, bottom = 4.dp),
             )
         }
 
@@ -112,7 +143,7 @@ fun SeasonScreen(
         item {
             HorizontalDividerMMD(Modifier.padding(top = 10.dp))
             Text(
-                "Also about",
+                if (looking) "Found" else "Also about",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
