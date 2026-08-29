@@ -1378,6 +1378,42 @@ def interface_icons():
           path("M42,42 L43,70 M54,42 L53,70", width=FINE))
 
 
+def launcher_icon():
+    """
+    The launcher mark: a chanterelle, drawn heavier than the character art.
+
+    An adaptive icon is a 108x108 canvas of which only the middle 72x72 survives
+    whatever mask the launcher applies, and it is read at about 48dp. The character
+    drawings scaled down into that space came out spidery and splayed - recognisable
+    as line art, not recognisable as a mushroom. So this is the same subject drawn for
+    its size: a tighter vase, a heavier line, three ridges rather than five.
+    """
+    W = 7.0   # at 0.75 scale this lands near 5 units in the icon canvas
+    inner = "".join([
+        # The funnel, waisted rather than splayed, with a wavy margin.
+        # Wide flaring mouth, two shallow lobes rather than three deep ones, tapering
+        # to a narrow foot. Trumpet, not tulip: the lobes were reading as petals.
+        path("M10,30 Q26,16 40,28 Q48,20 56,28 Q70,16 86,30 "
+             "Q72,44 62,58 Q54,70 52,88 L44,88 Q42,70 34,58 Q24,44 10,30 Z",
+             width=W),
+        # Two ridges only. Three closed the gap and the middle read as a solid stem.
+        path("M36,46 Q40,64 44,84 M60,46 Q56,64 52,84", width=W - 2.5),
+    ])
+    body = (
+        '    <group android:scaleX="0.75" android:scaleY="0.75"\n'
+        '        android:translateX="18" android:translateY="18">\n'
+        + inner +
+        '    </group>\n'
+    )
+    head = HEADER.replace('android:width="96dp"', 'android:width="108dp"') \
+                 .replace('android:height="96dp"', 'android:height="108dp"') \
+                 .replace('android:viewportWidth="96"', 'android:viewportWidth="108"') \
+                 .replace('android:viewportHeight="96"', 'android:viewportHeight="108"')
+    with open(os.path.join(OUT, "ic_launcher_foreground.xml"), "w") as f:
+        f.write(head + body + FOOTER)
+    print("  launcher foreground: chanterelle, drawn for icon size")
+
+
 def emit_kotlin():
     """
     The map the app draws from, plus what each drawing is of.
@@ -1479,6 +1515,7 @@ if __name__ == "__main__":
     bruising_speed()
     launcher()
     interface_icons()
+    launcher_icon()
     emit_kotlin()
     n = len([f for f in os.listdir(OUT) if f.startswith("art_")])
     species = sorted({s for s, _ in EXEMPLARS.values() if s != "—"})
