@@ -1241,6 +1241,169 @@ def associated_tree():
           path("M48,76 L48,78", width=6))
 
 
+def habitat():
+    """
+    The place, as a few strokes of landscape.
+
+    Eighty-six of the hundred taxa record a habitat and there was not a single drawing
+    for it, so the one question that is answered by looking up rather than down fell
+    back to a list of words. These are small landscapes and not mushroom anatomy, which
+    is a change of register — so they are held together by two rules instead: everything
+    stands on the same ground line, and everything is drawn in the same thin hand as the
+    rest.
+
+    Ground lines are kept here, unlike everywhere else in this file. In these drawings
+    the ground is the answer.
+    """
+    c = "habitat"
+    GY = 76
+
+    def floor(x1=8, x2=88, y=GY):
+        return path(f"M{x1},{y} L{x2},{y}", width=FINE)
+
+    def broadleaf(cx, top, spread, trunk=GY):
+        """A round-crowned tree. Lopsided on purpose — no two are the same width."""
+        return (
+            path(f"M{cx},{trunk} L{cx},{top + spread - 2}"),
+            path(f"M{cx - spread},{top + spread} "
+                 f"Q{cx - spread + 2},{top - 3} {cx},{top} "
+                 f"Q{cx + spread + 1},{top - 1} {cx + spread - 1},{top + spread + 2} "
+                 f"Q{cx},{top + spread + 7} {cx - spread},{top + spread}"),
+        )
+
+    def conifer(cx, top, half, trunk=GY):
+        """
+        One notched outline rather than three stacked tiers.
+
+        Tiers drawn as separate strokes came out as a column of chevrons — the eye read
+        arrows, not a tree. A single silhouette with two steps down each side is the
+        shape everybody already knows, and it survives being small.
+        """
+        h = trunk - top
+        return (
+            path(f"M{cx},{trunk - 4} L{cx},{trunk}"),
+            path(
+                f"M{cx - 1},{top} "
+                f"L{cx - half * 0.45:.0f},{top + h * 0.34:.0f} "
+                f"L{cx - half * 0.30:.0f},{top + h * 0.34:.0f} "
+                f"L{cx - half * 0.75:.0f},{top + h * 0.64:.0f} "
+                f"L{cx - half * 0.58:.0f},{top + h * 0.64:.0f} "
+                f"L{cx - half:.0f},{trunk - 4} "
+                f"L{cx + half:.0f},{trunk - 3} "
+                f"L{cx + half * 0.60:.0f},{top + h * 0.64:.0f} "
+                f"L{cx + half * 0.76:.0f},{top + h * 0.64:.0f} "
+                f"L{cx + half * 0.32:.0f},{top + h * 0.34:.0f} "
+                f"L{cx + half * 0.47:.0f},{top + h * 0.34:.0f} Z"
+            ),
+        )
+
+    write(f"art_{c}_broadleaf_wood", "—", "Oak, beech, hickory: round crowns, no needles.",
+          *broadleaf(34, 22, 18), *broadleaf(68, 34, 13), floor())
+
+    write(f"art_{c}_conifer_wood", "—", "Pine, hemlock, spruce: tiered and pointed.",
+          *conifer(34, 16, 15), *conifer(66, 28, 11), floor())
+
+    write(f"art_{c}_mixed_wood", "—", "Both together, which is most of these mountains.",
+          *broadleaf(30, 28, 15), *conifer(68, 20, 13), floor())
+
+    write(f"art_{c}_wood_pasture", "—", "Big trees standing apart over open ground.",
+          *broadleaf(48, 20, 24),
+          path("M14,76 L13,68 M20,76 L22,69 M74,76 L73,68 M82,76 L84,70", width=HAIR),
+          floor())
+
+    write(f"art_{c}_unimproved_grass", "—", "Rough tussocks, uneven and left alone.",
+          path("M16,76 Q14,58 12,48 M22,76 Q23,60 26,52 M30,76 Q28,62 27,54"),
+          path("M46,76 Q44,54 42,42 M52,76 Q53,58 56,48 M60,76 Q58,62 56,52"),
+          path("M74,76 Q72,60 70,50 M80,76 Q82,62 84,54", width=FINE),
+          floor())
+
+    write(f"art_{c}_improved_grass", "—", "Mown short and level: a lawn, a verge, a pitch.",
+          path("M14,76 L14,68 M22,76 L22,67 M30,76 L30,68 M38,76 L38,67 "
+               "M46,76 L46,68 M54,76 L54,67 M62,76 L62,68 M70,76 L70,67 "
+               "M78,76 L78,68", width=FINE),
+          floor(10, 86))
+
+    write(f"art_{c}_heath", "—", "Low wiry shrubs over thin acid ground.",
+          # Low and wide, and much lower than the scrub next door: these two were two
+          # domes each and read as the same picture.
+          path("M10,76 Q14,66 26,68 Q38,64 44,76"),
+          path("M48,76 Q54,68 64,70 Q76,66 84,76"),
+          path("M18,70 L16,63 M26,68 L27,61 M34,67 L36,60 "
+               "M56,71 L55,64 M66,69 L68,62 M76,70 L78,64", width=HAIR),
+          floor())
+
+    write(f"art_{c}_wetland", "—", "Standing water, sedge and moss.",
+          path("M16,76 L16,44 M22,76 L23,50 M28,76 L27,40 M34,76 L35,48"),
+          path("M14,40 Q16,36 18,40 M25,36 Q27,32 29,36 M33,44 Q35,40 37,44", width=HAIR),
+          path("M46,70 Q58,66 70,70 Q80,73 88,70", width=FINE),
+          path("M50,78 Q62,74 74,78", width=HAIR),
+          floor(8, 44))
+
+    write(f"art_{c}_coast", "—", "Dune sand and marram, with the sea behind.",
+          # The dune is the subject and the sea is behind it, so the dune is a solid
+          # profile across the whole frame and the water is two flat lines above it.
+          path("M6,78 Q20,74 32,58 Q44,44 56,52 Q70,62 90,60"),
+          path("M40,52 Q38,38 34,30 M46,49 Q46,36 45,28 M52,51 Q54,38 56,32",
+               width=FINE),
+          path("M6,22 L90,22", width=FINE),
+          path("M12,28 L30,28 M40,30 L58,30 M66,27 L84,27", width=HAIR))
+
+    write(f"art_{c}_scrub", "—", "Bramble, hawthorn, twiggy stuff below the trees.",
+          # Taller than the heath and visibly made of sticks. Branching, not mounded.
+          path("M24,76 L24,44 M24,62 L12,48 M24,58 L38,44 M24,50 L16,38 M24,52 L34,36"),
+          path("M64,76 L64,50 M64,64 L52,52 M64,60 L78,48 M64,54 L70,42"),
+          path("M14,46 L10,40 M38,44 L42,38 M52,52 L47,47 M78,48 L83,43", width=HAIR),
+          floor())
+
+    write(f"art_{c}_disturbed", "—", "Broken ground: a track, a tip, a ploughed edge.",
+          # Two ruts running away from the reader, with the ground turned over between
+          # them. A wavy line with two blobs on it said nothing.
+          # Turned ground seen flat on, not a track in perspective. Two goes at ruts
+          # running away from the reader came out as a striped pyramid and then as a
+          # funnel: at this size a long converging pair of lines is a shape before it is
+          # a road. A broken surface with the clods sitting on it needs no depth.
+          path("M6,72 L18,66 L30,74 L44,64 L58,72 L70,63 L82,70 L90,66", width=FINE),
+          path("M20,58 Q28,50 36,58 Q28,63 20,58 Z"),
+          path("M46,54 Q56,46 64,54 Q55,60 46,54 Z"),
+          path("M68,48 Q74,43 79,48 Q73,52 68,48 Z", width=FINE),
+          path("M10,80 L26,80 M36,84 L54,84 M62,80 L80,80", width=HAIR))
+
+    write(f"art_{c}_garden", "—", "Beds, borders and the edge of a lawn.",
+          # A bed edged with boards, a row of something planted in it, and a fence
+          # behind. A box and a dome was not a garden.
+          # A bed with things planted in a row, and nothing else. The fence behind it
+          # ran its posts straight down through the plants and turned the whole thing
+          # into a table.
+          path("M10,78 L20,58 L76,58 L86,78 Z"),
+          path("M30,58 L30,42 M30,47 Q23,45 22,36 M30,49 Q37,46 38,38", width=FINE),
+          path("M48,58 L48,38 M48,44 Q41,42 40,32 M48,46 Q55,43 56,34", width=FINE),
+          path("M66,58 L66,44 M66,48 Q59,46 58,38 M66,50 Q73,47 74,40", width=FINE),
+          path("M14,70 L82,70", width=HAIR))
+
+    write(f"art_{c}_urban", "—", "Pavement, planters, the foot of a wall.",
+          path("M14,76 L14,30 L46,30 L46,76"),
+          path("M22,40 L28,40 L28,48 L22,48 Z M34,40 L40,40 L40,48 L34,48 Z",
+               width=FINE),
+          path("M22,58 L28,58 L28,66 L22,66 Z", width=FINE),
+          path("M58,76 L58,62 L80,62 L80,76", width=FINE),
+          path("M52,76 L88,76 M64,76 L64,84 M76,76 L76,84", width=HAIR),
+          floor(8, 88))
+
+    write(f"art_{c}_arid", "—", "Bare, dry, cracked ground.",
+          path("M10,74 Q30,70 48,74 Q68,78 88,72", width=FINE),
+          path("M22,74 L20,84 M40,76 L44,86 M62,76 L60,86 M78,74 L82,82", width=HAIR),
+          path("M46,68 L46,44 M46,54 Q38,50 38,40 M46,58 Q54,54 55,44"),
+          path("M40,40 L36,34 M38,40 L34,42 M55,44 L59,38 M57,44 L61,46", width=HAIR))
+
+    write(f"art_{c}_tropical", "—", "Rainforest: broad leaves and fronds.",
+          path("M30,76 Q28,50 26,34"),
+          path("M26,34 Q12,30 8,18 M26,34 Q16,42 10,42 M26,34 Q38,28 42,16 "
+               "M26,34 Q40,38 46,32", width=FINE),
+          path("M66,76 L66,54"),
+          path("M66,54 Q46,52 44,34 Q64,28 66,48 Q70,26 88,32 Q86,52 66,54 Z"),
+          floor())
+
+
 def cap_surface():
     """
     A patch of cap, always the same patch, so only the texture moves. Drawn as a
@@ -1792,7 +1955,7 @@ CHARACTERS = [
     "stipe_presence", "gill_spacing", "growth_habit", "cap_margin", "veil_remnants",
     "gill_edge", "stipe_flesh", "gill_extras", "cap_colour_pattern",
     "substrate", "latex", "bruising", "associated_tree",
-    "cap_surface", "stipe_surface", "flesh_consistency", "bruising_where",
+    "cap_surface", "stipe_surface", "flesh_consistency", "bruising_where", "habitat",
     "latex_change", "substrate_wood", "bruising_speed",
 ]
 
@@ -1819,6 +1982,7 @@ if __name__ == "__main__":
     stipe_surface()
     flesh_consistency()
     bruising_where()
+    habitat()
     latex_change()
     substrate_wood()
     bruising_speed()
