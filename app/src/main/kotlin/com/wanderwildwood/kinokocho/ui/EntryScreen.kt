@@ -186,11 +186,19 @@ fun EntryScreen(
                         Text(it, style = MaterialTheme.typography.bodySmall)
                     }
                     if (note.discriminators.isNotEmpty()) {
+                        // Nouns joined by commas, not questions joined by spaces. Six
+                        // whole questions run together read as one long paragraph of
+                        // prose — "What colour are the gills, pores or teeth? What is
+                        // the base of the stem like? Is there a ring on the stem?" —
+                        // under the heading that says a mushroom in front of you might
+                        // kill you, which is the worst place in the app to be unreadable.
                         Text(
                             "Would settle it: " + note.discriminators
-                                .mapNotNull { vm.schema.character(it)?.label }
-                                .joinToString(" "),
+                                .mapNotNull { vm.schema.character(it)?.noun?.lowercase() }
+                                .distinct()
+                                .joinToString(", "),
                             style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Bold,
                         )
                     }
                 }
@@ -356,6 +364,52 @@ fun EntryScreen(
                     }
                 }
             }
+
+        /*
+         * What it turned out to be.
+         *
+         * The answer arrives after the walk — from a forum, a friend, a book at the
+         * kitchen table — and an entry could hold everything about a mushroom except
+         * what it was. It sits above the shortlist rather than below it, because once
+         * somebody has said, the shortlist is history.
+         *
+         * Free text, and the shortlist is offered as a shortcut and not as a menu: the
+         * honest answer is often "a Russula, probably variata", or a name this pack has
+         * never heard of. Pinning it to the pack would mean the app could only be told
+         * things it already knew.
+         */
+        item {
+            Section("What it turned out to be")
+            var name by remember(draft.uuid) { mutableStateOf(draft.identifiedAs) }
+            TextFieldMMD(
+                value = name,
+                onValueChange = { name = it; vm.setIdentifiedAs(it) },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text("A name, once somebody says") },
+                singleLine = true,
+            )
+            if (name.isBlank() && draft.answers.answeredCount > 0) {
+                Text(
+                    "Or take one from the list below.",
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 4.dp),
+                )
+                ranking.candidates.take(3).forEach { c ->
+                    Text(
+                        c.taxon.scientificName,
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                name = c.taxon.scientificName
+                                vm.setIdentifiedAs(name)
+                            }
+                            .padding(top = 6.dp),
+                    )
+                }
+            }
+        }
 
         // Where it was. Typing it is the default; the button asks for coarse location
         // only, because a foraging patch is not a thing to keep at metre precision.

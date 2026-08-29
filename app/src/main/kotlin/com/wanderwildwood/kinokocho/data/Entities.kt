@@ -76,6 +76,24 @@ data class Observation(
      * rename or retire a character; without this, an entry from two years ago cannot be
      * read correctly by a later pack.
      */
+    /**
+     * What it turned out to be, once somebody said.
+     *
+     * The point of keeping a record is that the answer arrives later — from a forum, a
+     * friend, a book at the kitchen table — and until now there was nowhere to put it.
+     * An entry could hold everything about a mushroom except what it was.
+     *
+     * Free text and not a pack id, because the answer usually is: "a Russula, probably
+     * *R. variata*", "some Cortinarius", a name that is not in this pack at all. Pinning
+     * it to the pack would mean the app could only be told things it already knew.
+     *
+     * Deliberately not [INatLink.taxonName]. That field is what iNaturalist's community
+     * said, fetched back and stamped with when it was read; this is what the reader
+     * wrote down. Keeping them apart is what lets the two disagree.
+     */
+    @ColumnInfo(name = "identified_as")
+    val identifiedAs: String = "",
+
     @ColumnInfo(name = "schema_version")
     val schemaVersion: Int,
 

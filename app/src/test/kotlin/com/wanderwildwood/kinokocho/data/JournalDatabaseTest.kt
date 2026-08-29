@@ -189,4 +189,34 @@ class JournalDatabaseTest {
         assertEquals(0, dao.photosOf(mine).size)
         assertEquals(1, dao.photosOf(theirs).size)
     }
+
+    @Test
+    fun `what a find turned out to be is written down and read back`() = runTest {
+        val id = anObservation()
+        val before = dao.findOne(id)!!.observation
+        assertEquals("", before.identifiedAs)
+
+        dao.update(before.copy(identifiedAs = "Russula, probably variata"))
+        assertEquals(
+            "Russula, probably variata",
+            dao.findOne(id)!!.observation.identifiedAs,
+        )
+    }
+
+    @Test
+    fun `an identification is kept apart from what iNaturalist said`() = runTest {
+        // Two different claims that are allowed to disagree: one is what the reader
+        // wrote down, the other is what the community decided and when it was read.
+        val id = anObservation()
+        val row = dao.findOne(id)!!.observation
+        dao.update(
+            row.copy(
+                identifiedAs = "Amanita, one of the white ones",
+                inat = row.inat.copy(taxonName = "Amanita bisporigera"),
+            )
+        )
+        val back = dao.findOne(id)!!.observation
+        assertEquals("Amanita, one of the white ones", back.identifiedAs)
+        assertEquals("Amanita bisporigera", back.inat.taxonName)
+    }
 }

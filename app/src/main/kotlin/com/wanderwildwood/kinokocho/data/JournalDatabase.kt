@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [Observation::class, ObservationCharacter::class, ObservationPhoto::class],
-    version = 2,
+    version = 3,
     exportSchema = true,
 )
 abstract class JournalDatabase : RoomDatabase() {
@@ -36,6 +36,20 @@ abstract class JournalDatabase : RoomDatabase() {
             }
         }
 
+        /**
+         * v2 to v3: observations gain `identified_as`.
+         *
+         * Empty for everything already written down, which is true: nobody could record
+         * what a find turned out to be, because there was nowhere to record it.
+         */
+        val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "ALTER TABLE observations ADD COLUMN identified_as TEXT NOT NULL DEFAULT ''"
+                )
+            }
+        }
+
         @Volatile
         private var instance: JournalDatabase? = null
 
@@ -49,7 +63,7 @@ abstract class JournalDatabase : RoomDatabase() {
                 // No fallbackToDestructiveMigration, ever. This database holds notes that
                 // cannot be taken again - the mushroom is gone and the season is over. A
                 // missing migration must fail loudly in a build, not quietly wipe a journal.
-                .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                 .addCallback(object : Callback() {
                     override fun onOpen(db: SupportSQLiteDatabase) {
                         // Room declares the foreign keys but SQLite does not enforce them

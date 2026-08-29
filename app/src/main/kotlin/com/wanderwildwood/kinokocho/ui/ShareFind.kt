@@ -82,6 +82,11 @@ object ShareFind {
     ): String = buildString {
         appendLine("A mushroom, ${dateOf(draft.recordedAt)}")
         if (draft.placeNote.isNotBlank()) appendLine(draft.placeNote)
+        // What the reader has already been told it is, if anything. Whoever is being
+        // asked should know somebody has answered before them.
+        if (draft.identifiedAs.isNotBlank()) {
+            appendLine("Recorded as: ${draft.identifiedAs}")
+        }
         appendLine()
 
         appendLine("What I could see")

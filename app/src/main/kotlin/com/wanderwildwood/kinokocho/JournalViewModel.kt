@@ -48,6 +48,8 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         val answers: KeyEngine.Answers,
         val note: String = "",
         val placeNote: String = "",
+        /** What it turned out to be, once somebody said. Free text. */
+        val identifiedAs: String = "",
         val photos: List<ObservationPhoto> = emptyList(),
         /** Set when the reader has stepped back to revisit a question already answered. */
         val revisiting: String? = null,
@@ -85,6 +87,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                 ),
                 note = full.observation.note,
                 placeNote = full.observation.placeNote,
+                identifiedAs = full.observation.identifiedAs,
                 photos = full.photos,
             )
         }
@@ -172,6 +175,18 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         persist()
     }
 
+    /**
+     * Writes down what it turned out to be.
+     *
+     * The answer arrives after the walk — from a forum, a friend, a book at the kitchen
+     * table — and there was nowhere to put it. An entry could hold everything about a
+     * mushroom except what it was.
+     */
+    fun setIdentifiedAs(text: String) {
+        _draft.value = _draft.value?.copy(identifiedAs = text)
+        persist()
+    }
+
     fun addPhoto(slot: String, fileName: String) {
         val d = _draft.value ?: return
         val photo = ObservationPhoto(
@@ -203,6 +218,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                     updatedAt = now,
                     note = d.note,
                     placeNote = d.placeNote,
+                    identifiedAs = d.identifiedAs,
                     schemaVersion = schema.version,
                 )
             ).also { newId -> _draft.value = _draft.value?.copy(observationId = newId) }
@@ -212,6 +228,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                     existing.observation.copy(
                         note = d.note,
                         placeNote = d.placeNote,
+                        identifiedAs = d.identifiedAs,
                         updatedAt = now,
                     )
                 )

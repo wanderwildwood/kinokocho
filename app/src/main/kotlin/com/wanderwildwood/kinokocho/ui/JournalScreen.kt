@@ -152,8 +152,15 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(Modifier.weight(1f)) {
+            // The name leads once there is one. A journal you can read back is a list
+            // of what things were, and the date is what it falls back to.
+            val named = entry.observation.identifiedAs.takeIf { it.isNotBlank() }
             Text(
-                if (armed) "Delete this find — tap again" else dateOf(entry.observation.recordedAt),
+                when {
+                    armed -> "Delete this find — tap again"
+                    named != null -> named
+                    else -> dateOf(entry.observation.recordedAt)
+                },
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold,
             )
@@ -166,6 +173,7 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
             val place = entry.observation.placeNote.takeIf { it.isNotBlank() }
             Text(
                 listOfNotNull(
+                    named?.let { dateOf(entry.observation.recordedAt) },
                     place,
                     "$counted character${if (counted == 1) "" else "s"}",
                     entry.photos.size.takeIf { it > 0 }
