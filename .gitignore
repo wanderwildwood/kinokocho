@@ -14,3 +14,7 @@ local.properties
 /signing
 # JVM heap dumps land at the repo root when a build runs out of memory.
 *.hprof
+
+# Cut from a generated sheet by tools/cut-grid.py. Working files, looked at and then
+# either used or thrown away — not the app's art, which is generated from make-art.py.
+tools/reference/plates/

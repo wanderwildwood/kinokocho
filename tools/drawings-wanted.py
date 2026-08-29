@@ -118,9 +118,9 @@ PREVALENCE = {"common": "met on most walks", "occasional": "found regularly",
               "uncommon": "uncommon here"}
 
 
-def wrap(text, indent):
-    return textwrap.fill(text, width=72, initial_indent=indent,
-                         subsequent_indent=indent)
+def wrap(text, indent, hanging=None):
+    return textwrap.fill(text, width=78, initial_indent=indent,
+                         subsequent_indent=hanging or indent)
 
 
 def main():
@@ -288,75 +288,108 @@ def main():
 
 
 # The style, said in the terms an image generator actually responds to: what to leave
-# out, repeated, because these models add tone unless told four times not to.
+# out, said more than once, because these models add tone unless told repeatedly not to.
 PREAMBLE = (
-    "Black and white line drawing. A single thin ink line of even weight, on a plain "
-    "white background. NO colour anywhere. NO grey. NO shading, stippling, hatching, "
-    "cross-hatching or tone of any kind. NO filled or solid black areas. NO background, "
-    "no scene, no ground, no border, no frame, no text, no lettering, no label, no "
-    "caption, no signature, no watermark. Nothing but clean contour lines, as if a "
-    "field-guide plate had been reduced to its outlines."
+    "Black and white line drawing, in the manner of a botanical field guide plate. "
+    "Every drawing uses a single thin ink line of even weight on a plain white "
+    "background. NO colour anywhere. NO grey. NO shading, stippling, hatching, "
+    "cross-hatching or tone of any kind. NO filled or solid black areas. No background "
+    "scene, no ground, no shadow, no border, no frame, and NO TEXT — no lettering, no "
+    "labels, no captions, no names, no numbers, no signature, no watermark anywhere in "
+    "the image."
 )
 
-CLOSING = (
-    "Draw it slightly lopsided rather than symmetrical — a real specimen, not a diagram. "
-    "It must still read clearly when the picture is shrunk to 64 by 64 pixels, so use as "
-    "few lines as will carry the shape."
-)
+# Six at a time, and why.
+BATCH = 6
 
 
 def write_prompts(brief_path, tier1, tier2, tier3, describe_line):
     """
-    One prompt per drawing, ready to paste.
+    Prompts for grids of six, rather than thirty-two singles or one sheet of thirty-two.
 
-    A single sheet of thirty-two came back with two species drawn twice and two labels
-    that were not species at all — "Amanita margeata", "Amanita bunnescens". Asking for
-    many at once is what produces both: the model fills the grid rather than working
-    through a list, and it writes captions from memory rather than from the brief.
+    The single sheet came back with two species drawn twice and two labels that were not
+    species at all — "Amanita margeata", "Amanita bunnescens". Both are what a big grid
+    does: the model fills the cells rather than working through a list, and writes
+    captions from memory rather than from the brief. Thirty-two separate generations fix
+    that and are too much hand-work to actually happen, which makes them the wrong answer
+    however correct they are.
 
-    So: one image per prompt, and no text inside the image. If the picture carries no
-    lettering it cannot carry a wrong name, and the file name says which is which.
+    Six is the compromise, and the two rules that make it hold are: no lettering asked
+    for anywhere, so a picture cannot carry a wrong name; and a numbered list in reading
+    order, so a duplicate or an omission is visible at a glance against six known
+    species. If a batch comes back wrong it is one batch to run again, not thirty-two.
     """
     out = os.path.splitext(brief_path)[0] + "-prompts.txt"
+    every = tier1 + [t[0] for t in tier2] + [t[1] for t in tier3]
+    batches = [every[i:i + BATCH] for i in range(0, len(every), BATCH)]
+
     blocks = [
-        "MUSHROOM JOURNAL — ONE PROMPT PER DRAWING",
+        "MUSHROOM JOURNAL — IMAGE PROMPTS, SIX AT A TIME",
         RULE,
         "",
-        "Paste these one at a time. One image per prompt, never a sheet of many: a sheet",
-        "came back with two species drawn twice and two labels that were not species at",
-        "all. Save each result as the file name given above it.",
+        wrap("One prompt per batch of six. Not one sheet of thirty-two: that came back "
+             "with two species drawn twice and two labels that were not species at all. "
+             "A big grid gets filled rather than worked through, and captions get "
+             "written from memory rather than from the list.", ""),
         "",
-        "Nothing here asks for lettering, on purpose. A picture with no text in it cannot",
-        "have the wrong name written on it, and the file name carries that instead.",
+        wrap("Nothing here asks for lettering, on purpose. A picture with no text in it "
+             "cannot have the wrong name written on it — the reading order below tells "
+             "you which is which, and the file names are given for saving them.", ""),
         "",
-        "The nine that can kill are worth checking against a photograph before they go in.",
-        "An image generator will give you a plausible mushroom rather than a particular",
-        "one, and plausible is not the standard for those.",
+        wrap("Check each batch against its list of six before moving on. A repeat or a "
+             "missing one is obvious at six and invisible at thirty-two, and it is one "
+             "batch to run again rather than the lot.", ""),
+        "",
+        wrap("The ones marked CAN KILL are worth checking against a photograph before "
+             "they go into the app. An image generator gives you a plausible mushroom "
+             "rather than a particular one, and plausible is not the standard for "
+             "those.", ""),
         "",
     ]
-    n = 0
-    for taxon in tier1 + [t[0] for t in tier2] + [t[1] for t in tier3]:
-        n += 1
-        traits = describe_line(taxon)
-        common = f" ({taxon['commonName']})" if taxon.get("commonName") else ""
+
+    for n, batch in enumerate(batches, 1):
         blocks.append(THIN)
-        blocks.append(f"{n:02d}.  FILE: {taxon['id']}.png")
-        blocks.append(f"     {taxon['scientificName']}{common}")
+        blocks.append(f"BATCH {n} of {len(batches)} — {len(batch)} drawings")
         blocks.append("")
-        blocks.append(wrap(PREAMBLE, "     "))
+        blocks.append("  Save as, in reading order:")
+        for i, taxon in enumerate(batch, 1):
+            danger = ""
+            if taxon["hazard"]["severity"] == "LETHAL":
+                danger = "   [CAN KILL — check against a photograph]"
+            elif taxon["hazard"]["severity"] == "SEVERE":
+                danger = "   [serious harm — check against a photograph]"
+            blocks.append(f"    {i}. {taxon['id']}.png"
+                          f"{' ' * max(1, 34 - len(taxon['id']))}"
+                          f"{taxon['scientificName']}{danger}")
+        blocks.append("")
+        blocks.append("  ---- prompt ----")
+        blocks.append("")
+        blocks.append(wrap(PREAMBLE, "  "))
+        blocks.append("")
+        rows = 2 if len(batch) > 3 else 1
+        cols = (len(batch) + rows - 1) // rows
+        blocks.append(wrap(
+            f"Draw {len(batch)} different mushrooms in a {cols} by {rows} grid, evenly "
+            f"spaced on white, each one whole and separate from the others. They must be "
+            f"{len(batch)} DIFFERENT species — do not repeat any of them. In reading "
+            f"order, left to right and then down, they are:", "  "))
+        blocks.append("")
+        for i, taxon in enumerate(batch, 1):
+            blocks.append(wrap(f"{i}. {taxon['scientificName']}. "
+                               f"{describe_line(taxon)}", "     ", "        "))
         blocks.append("")
         blocks.append(wrap(
-            f"The subject is a single {taxon['scientificName']}, drawn as a botanical "
-            f"field-guide illustration. {traits} Show it in three-quarter view from a "
-            f"little above, so that the top of the cap and the underside are both "
-            f"visible at once. Show the base of the stem, dug up and complete, not cut "
-            f"off.", "     "))
+            "Draw every one in three-quarter view from a little above, so the top of the "
+            "cap and the underside are both visible. Show the base of the stem on each, "
+            "dug up and complete rather than cut off. Draw them slightly lopsided rather "
+            "than symmetrical — real specimens, not diagrams. Each must still read "
+            "clearly when its cell is shrunk to 64 by 64 pixels, so use as few lines as "
+            "will carry the shape.", "  "))
         blocks.append("")
-        blocks.append(wrap(CLOSING, "     "))
-        blocks.append("")
+
     with open(out, "w") as f:
         f.write("\n".join(blocks) + "\n")
-    print(f"{n} prompts -> {out}")
+    print(f"{len(every)} drawings in {len(batches)} prompts -> {out}")
 
 
 if __name__ == "__main__":
