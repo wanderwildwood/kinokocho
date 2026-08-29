@@ -27,6 +27,20 @@ data class Taxon(
     val characters: Map<String, List<ScoredState>>,
     val measurements: Map<String, IntRange> = emptyMap(),
     val seasonMonths: Set<Int> = emptySet(),
+    /**
+     * How often a walker actually meets it here. The month view needs this: a calendar
+     * that lists everything recorded in September is a calendar of eighty-six things.
+     */
+    val prevalence: Prevalence = Prevalence.UNCOMMON,
+    /**
+     * Whether people go out looking for this one.
+     *
+     * **Not an edibility field, and it must never become one.** The key never reads it
+     * and nothing in this app says a mushroom is safe to eat. It exists because a month
+     * view that can only ever warn is one nobody opens, and the destroying angel wants
+     * to be on the list somebody actually reads in September.
+     */
+    val sought: Boolean = false,
     val lookalikes: List<Lookalike> = emptyList(),
     val sources: List<String> = emptyList(),
     /**
@@ -39,6 +53,8 @@ data class Taxon(
 data class ScoredState(val value: String, val frequency: Frequency)
 
 enum class Frequency { ALWAYS, USUALLY, SOMETIMES, RARELY }
+
+enum class Prevalence { COMMON, OCCASIONAL, UNCOMMON }
 
 data class Lookalike(
     val taxon: String,
@@ -138,6 +154,13 @@ object PackLoader {
                 note = o.optString("note").ifEmpty { null },
                 characters = characters,
                 measurements = measurements,
+                prevalence = when (val p = o.optString("prevalence", "uncommon")) {
+                    "common" -> Prevalence.COMMON
+                    "occasional" -> Prevalence.OCCASIONAL
+                    "uncommon" -> Prevalence.UNCOMMON
+                    else -> error("unknown prevalence '$p' on ${o.getString("id")}")
+                },
+                sought = o.optBoolean("sought", false),
                 seasonMonths = season,
                 lookalikes = lookalikes,
                 sources = sources,

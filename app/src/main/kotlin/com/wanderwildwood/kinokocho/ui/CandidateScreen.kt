@@ -6,15 +6,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
@@ -23,6 +20,7 @@ import com.wanderwildwood.kinokocho.JournalViewModel
 import com.wanderwildwood.kinokocho.key.Frequency
 import com.wanderwildwood.kinokocho.key.Hazard
 import com.wanderwildwood.kinokocho.key.Taxon
+import com.wanderwildwood.kinokocho.schema.Character
 import java.text.DateFormatSymbols
 import java.util.Locale
 
@@ -37,6 +35,21 @@ import java.util.Locale
  * It is still not an identification. The reader is comparing a description against the
  * thing in their hand and deciding for themselves, which is what "narrows, does not
  * decide" means in practice — this screen is where the deciding gets handed over.
+ *
+ * **How it is laid out, and why it was laid out again.** The first version listed every
+ * described character as two lines of running text, each opening with the whole question
+ * the key would have asked — "What is the cap surface like?", then "Scaly". Twenty-five
+ * of those is not a description, it is a page of prose with the answers lost in it.
+ *
+ * So there are three levels now: the section, the part of the mushroom, and the row. A
+ * row is a short noun in a fixed column and the value beside it, which means the values
+ * line up and can be read straight down without reading anything else. The nouns can be
+ * short — "Shape", "Edge", "Colour" — because the heading above them says which part of
+ * the mushroom they belong to.
+ *
+ * What the reader answered is marked in place rather than gathered into a second list.
+ * A separate block of agreements is a second thing to read; a tick against the row is
+ * not.
  */
 @Composable
 fun CandidateScreen(
@@ -45,6 +58,11 @@ fun CandidateScreen(
     answers: com.wanderwildwood.kinokocho.key.KeyEngine.Answers,
     onClose: () -> Unit,
 ) {
+    val described = vm.schema.characters.filter { taxon.characters.containsKey(it.id) }
+    val answered = described.filter { answers.values[it.id].orEmpty().isNotEmpty() }
+    val agree = answered.count { agrees(vm, taxon, it, answers) }
+    val differ = answered.size - agree
+
     LazyColumn(
         Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 16.dp),
@@ -74,7 +92,7 @@ fun CandidateScreen(
                     }
                 )
                 taxon.hazard.onset?.takeIf { it.isNotBlank() && it != "—" }?.let {
-                    Text("Comes on: $it", style = MaterialTheme.typography.bodySmall)
+                    Row(it, "Comes on")
                 }
                 taxon.hazard.note?.takeIf { it.isNotBlank() }?.let {
                     Text(it, style = MaterialTheme.typography.bodySmall)
@@ -97,59 +115,45 @@ fun CandidateScreen(
          * things out that no amount of squinting at gills will.
          */
         item {
-            Section("Where and when")
-            listOf("habitat", "substrate", "substrate_wood", "associated_tree").forEach { cid ->
-                val rows = taxon.characters[cid] ?: return@forEach
-                val character = vm.schema.character(cid) ?: return@forEach
-                val ls = rows.filter { it.frequency != Frequency.RARELY }.mapNotNull { st ->
-                    vm.schema.valuesOf(character).firstOrNull { it.id == st.value }?.label
+            Section(Character.Group.WHERE.heading)
+            vm.schema.characters
+                .filter { it.group == Character.Group.WHERE }
+                .forEach { character ->
+                    val text = statesOf(vm, taxon, character) ?: return@forEach
+                    Row(text, character.noun, marked(vm, taxon, character, answers))
                 }
-                if (ls.isNotEmpty()) {
-                    Text(
-                        "${character.label} ${ls.joinToString(", ")}",
-                        style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.padding(top = 3.dp),
-                    )
-                }
-            }
             if (taxon.seasonMonths.isNotEmpty()) {
                 val names = DateFormatSymbols(Locale.getDefault()).shortMonths
-                Text(
-                    "Recorded in " + taxon.seasonMonths.sorted()
-                        .joinToString(", ") { names[it - 1] },
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(top = 3.dp),
-                )
+                Row(taxon.seasonMonths.sorted().joinToString(", ") { names[it - 1] }, "Season")
             }
             val cap = taxon.measurements["cap_width_mm"]
             val stem = taxon.measurements["stipe_height_mm"]
             if (cap != null || stem != null) {
-                Text(
+                Row(
                     listOfNotNull(
-                        cap?.let { "cap ${it.first}\u2013${it.last} mm across" },
-                        stem?.let { "stem ${it.first}\u2013${it.last} mm tall" },
-                    ).joinToString(", ").replaceFirstChar { it.uppercase() },
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(top = 3.dp),
+                        cap?.let { "cap ${it.first}–${it.last} mm" },
+                        stem?.let { "stem ${it.first}–${it.last} mm" },
+                    ).joinToString(", "),
+                    "Size",
                 )
             }
-
             // What was measured, laid against those ranges. Said as "bigger than usual"
             // rather than "wrong", because a published range is about the tenth to the
             // ninetieth percentile of what grows and a button is under all of them.
             answers.measurements.forEach { (key, mm) ->
                 val range = taxon.measurements[key] ?: return@forEach
-                val label = vm.schema.character("size")
+                val name = vm.schema.character("size")
                     ?.let { vm.schema.valuesOf(it) }
-                    ?.firstOrNull { it.id == key }?.label ?: key
-                Text(
-                    "You measured $mm mm \u2014 " + when {
-                        mm in range -> "within the usual range"
-                        mm < range.first -> "smaller than usual, which young ones often are"
-                        else -> "bigger than usual"
-                    } + " for " + label.substringBefore(" (").lowercase(),
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(top = 3.dp),
+                    ?.firstOrNull { it.id == key }?.label?.substringBefore(" (")?.lowercase()
+                    ?: key
+                Row(
+                    "$mm mm — " + when {
+                        mm in range -> "within the usual range for $name"
+                        mm < range.first ->
+                            "smaller than usual for $name, which young ones often are"
+                        else -> "bigger than usual for $name"
+                    },
+                    "Measured",
                 )
             }
         }
@@ -162,87 +166,56 @@ fun CandidateScreen(
                 taxon.lookalikes.forEach { look ->
                     val other = vm.pack.taxon(look.taxon)
                     Text(
-                        other?.commonName?.let { "${other.scientificName} \u2014 $it" }
+                        other?.commonName?.let { "${other.scientificName} — $it" }
                             ?: other?.scientificName ?: look.taxon,
                         style = MaterialTheme.typography.bodySmall,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(top = 6.dp),
+                        modifier = Modifier.padding(top = 8.dp),
                     )
                     Text(look.note, style = MaterialTheme.typography.bodySmall)
                     if (look.discriminators.isNotEmpty()) {
                         Text(
-                            "Settled by: " + look.discriminators
-                                .mapNotNull { vm.schema.character(it)?.label }
-                                .joinToString(" "),
+                            "Tells them apart: " + look.discriminators
+                                .mapNotNull { vm.schema.character(it)?.noun?.lowercase() }
+                                .joinToString(", "),
                             style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Bold,
                         )
                     }
                 }
             }
         }
 
-        /*
-         * What it is said to be, laid against what was answered.
-         *
-         * Marked where the answer agrees and where it does not, because a candidate that
-         * survived the key on nine characters and disagrees on the tenth is exactly the
-         * thing worth looking at again — and the key will not say so on its own, since a
-         * single mismatch only moves a taxon down the list rather than off it.
-         */
         item {
             Section("Does it match?")
-            val described = vm.schema.characters.filter { taxon.characters.containsKey(it.id) }
-            var agree = 0
-            var differ = 0
-            described.forEach { c ->
-                val answered = answers.values[c.id].orEmpty()
-                if (answered.isNotEmpty()) {
-                    val states = taxon.characters[c.id].orEmpty()
-                    if (answered.any { a -> states.any { it.value == a } }) agree++ else differ++
-                }
-            }
             Text(
                 when {
-                    agree == 0 && differ == 0 ->
+                    answered.isEmpty() ->
                         "You have not recorded anything this is described by yet."
-                    differ == 0 ->
-                        "Everything you recorded agrees \u2014 $agree of ${described.size} described here."
-                    else ->
-                        "$agree agree, $differ do not. A single disagreement is worth " +
-                            "looking at again: it does not remove a candidate, it only " +
-                            "moves it down."
+                    differ == 0 -> "Everything you recorded agrees."
+                    // A single disagreement does not remove a candidate, it only moves
+                    // it down, and the reader is the one who decides which it was.
+                    else -> "$agree agree, $differ do not."
                 },
                 style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(bottom = 4.dp),
             )
         }
-        val described = vm.schema.characters.filter { taxon.characters.containsKey(it.id) }
-        items(described.size) { i ->
-            val character = described[i]
-            val states = taxon.characters[character.id].orEmpty()
-            val labels = states.filter { it.frequency != Frequency.RARELY }.mapNotNull { st ->
-                vm.schema.valuesOf(character).firstOrNull { it.id == st.value }?.label
-            }
-            if (labels.isNotEmpty()) {
-                val answered = answers.values[character.id].orEmpty()
-                val agrees = answered.isNotEmpty() &&
-                    answered.any { a -> states.any { it.value == a } }
-                val disagrees = answered.isNotEmpty() && !agrees
 
-                Row(Modifier.fillMaxWidth().padding(vertical = 3.dp)) {
-                    Column(Modifier.weight(1f)) {
-                        Text(
-                            character.label,
-                            style = MaterialTheme.typography.bodySmall,
-                            fontWeight = if (disagrees) FontWeight.Bold else FontWeight.Normal,
-                        )
-                        Text(
-                            labels.joinToString(", ") +
-                                if (disagrees) "  — not what you recorded" else "",
-                            style = MaterialTheme.typography.bodySmall,
-                            fontWeight = if (agrees) FontWeight.Bold else FontWeight.Normal,
-                        )
-                    }
+        // Everything the row says, by part of the mushroom. Where and when is already
+        // above, so it is not repeated here.
+        Character.Group.entries.filter { it != Character.Group.WHERE }.forEach { group ->
+            val rows = described.filter { it.group == group }
+                .mapNotNull { c -> statesOf(vm, taxon, c)?.let { c to it } }
+            if (rows.isEmpty()) return@forEach
+            item(key = "g${group.name}") {
+                Text(
+                    group.heading,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 10.dp, bottom = 2.dp),
+                )
+                rows.forEach { (character, text) ->
+                    Row(text, character.noun, marked(vm, taxon, character, answers))
                 }
             }
         }
@@ -260,7 +233,7 @@ fun CandidateScreen(
                         "and no substitute for asking someone.",
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 4.dp),
+                    modifier = Modifier.padding(top = 6.dp),
                 )
             }
 
@@ -272,12 +245,80 @@ fun CandidateScreen(
     }
 }
 
+/** What the row says about a character, or null if it says nothing worth printing. */
+private fun statesOf(vm: JournalViewModel, taxon: Taxon, character: Character): String? {
+    val labels = taxon.characters[character.id].orEmpty()
+        .filter { it.frequency != Frequency.RARELY }
+        .mapNotNull { st ->
+            vm.schema.valuesOf(character).firstOrNull { it.id == st.value }?.label
+        }
+    return labels.takeIf { it.isNotEmpty() }?.joinToString(", ")
+}
+
+private fun agrees(
+    vm: JournalViewModel,
+    taxon: Taxon,
+    character: Character,
+    answers: com.wanderwildwood.kinokocho.key.KeyEngine.Answers,
+): Boolean {
+    val chosen = answers.values[character.id].orEmpty()
+        .filterNot { vm.schema.isUncertainValue(character.id, it) }
+    val states = taxon.characters[character.id].orEmpty()
+    return chosen.isNotEmpty() && chosen.any { a -> states.any { it.value == a } }
+}
+
+/**
+ * What the reader said about this row, if anything — shown against the row rather than
+ * collected into a list of its own, so that reading the description and checking your
+ * own answers is one pass instead of two.
+ */
+@Composable
+private fun marked(
+    vm: JournalViewModel,
+    taxon: Taxon,
+    character: Character,
+    answers: com.wanderwildwood.kinokocho.key.KeyEngine.Answers,
+): String? {
+    val chosen = answers.values[character.id].orEmpty()
+        .filterNot { vm.schema.isUncertainValue(character.id, it) }
+    if (chosen.isEmpty()) return null
+    if (agrees(vm, taxon, character, answers)) return "you recorded this"
+    val mine = chosen.mapNotNull { c ->
+        vm.schema.valuesOf(character).firstOrNull { it.id == c }?.label
+    }
+    return "you recorded " + mine.joinToString(", ").lowercase()
+}
+
+/**
+ * One row: a short noun in a fixed column, the value beside it.
+ *
+ * The fixed column is the whole point. With the label inline the values start at a
+ * different place on every line and the eye has to read the labels to find them; in a
+ * column they stack, and a person can run down the values alone.
+ */
+@Composable
+private fun Row(value: String, label: String, note: String? = null) {
+    Row(Modifier.fillMaxWidth().padding(top = 3.dp)) {
+        Text(
+            label,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier.width(96.dp).padding(end = 6.dp),
+        )
+        Column(Modifier.weight(1f)) {
+            Text(value, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
+            note?.let {
+                Text(it, style = MaterialTheme.typography.bodySmall)
+            }
+        }
+    }
+}
+
 @Composable
 private fun Section(title: String) {
-    HorizontalDividerMMD(Modifier.padding(top = 12.dp))
+    HorizontalDividerMMD(Modifier.padding(top = 14.dp))
     Text(
         title,
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.titleMedium,
         fontWeight = FontWeight.Bold,
         modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
     )

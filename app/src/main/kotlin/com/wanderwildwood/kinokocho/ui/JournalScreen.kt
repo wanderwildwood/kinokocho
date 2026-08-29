@@ -58,7 +58,7 @@ fun JournalScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    "Journal",
+                    "Mushroom Journal",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.weight(1f),

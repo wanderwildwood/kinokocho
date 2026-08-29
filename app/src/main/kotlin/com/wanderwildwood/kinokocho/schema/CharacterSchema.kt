@@ -72,6 +72,17 @@ data class Character(
     val label: String,
     /** Shown under the question. Plain language, and sometimes an instruction. */
     val hint: String? = null,
+    /**
+     * The same character as a noun, for reading rather than answering.
+     *
+     * [label] is a question because the key asks questions. On a page describing a
+     * mushroom a question is the wrong shape — twenty-five rows each opening with a
+     * whole sentence is what turned that page into prose with the answers lost in it.
+     * Under a heading of [group] the noun can be very short: "Shape", "Edge", "Colour".
+     */
+    val noun: String,
+    /** Which part of the mushroom this is about, so a description can be gathered up. */
+    val group: Group,
     val kind: Kind,
     val cardinality: Cardinality,
     val availability: Availability,
@@ -100,6 +111,24 @@ data class Character(
     val values: List<CharacterValue> = emptyList(),
 ) {
     enum class Kind { STATE, MEASUREMENT }
+
+    /**
+     * The part of the mushroom a character belongs to.
+     *
+     * Declared order is reading order, and it is the order a person looks at a mushroom
+     * in: what it is, then the cap, underneath, the stem, what is inside, what it
+     * smells of, what the print says, and last where it was standing.
+     */
+    enum class Group(val heading: String) {
+        WHOLE("The whole thing"),
+        CAP("Cap"),
+        GILLS("Underneath"),
+        STEM("Stem"),
+        FLESH("Flesh"),
+        SMELL("Smell and taste"),
+        SPORES("Spore print"),
+        WHERE("Where and when"),
+    }
     enum class Cardinality { SINGLE, MULTI }
 
     /** Whether the answer can be had while standing over the mushroom. */

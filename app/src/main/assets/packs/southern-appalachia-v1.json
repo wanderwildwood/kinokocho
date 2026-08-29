@@ -224,7 +224,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "amanita_multisquamosa",
@@ -391,7 +393,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "amanita_parcivolvata",
@@ -568,7 +572,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": false
     },
     {
       "id": "amanita_flavoconia",
@@ -724,7 +730,9 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "galerina_marginata",
@@ -950,7 +958,9 @@
         "North American Mycological Association poisoning references",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "armillaria_mellea",
@@ -1134,7 +1144,9 @@
         "North American Mycological Association poisoning references",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "omphalotus_illudens",
@@ -1340,7 +1352,9 @@
         "North American Mycological Association poisoning references",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "cantharellus_lateritius",
@@ -1541,7 +1555,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "cantharellus_cinnabarinus",
@@ -1716,7 +1732,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "hygrophoropsis_aurantiaca",
@@ -1884,7 +1902,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "chlorophyllum_molybdites",
@@ -2086,7 +2106,9 @@
         "North American Mycological Association poisoning references",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "leucoagaricus_americanus",
@@ -2292,7 +2314,9 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "gyromitra_caroliniana",
@@ -2426,7 +2450,9 @@
           ],
           "note": "A true morel is one hollow space from top to bottom and its head is pitted with ridges. This is chambered inside and folded like a brain."
         }
-      ]
+      ],
+      "prevalence": "uncommon",
+      "sought": false
     },
     {
       "id": "scleroderma_citrinum",
@@ -2565,7 +2591,9 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "lycoperdon_perlatum",
@@ -2666,7 +2694,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "laetiporus_sulphureus",
@@ -2816,7 +2846,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "laetiporus_cincinnatus",
@@ -2924,7 +2956,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "bondarzewia_berkeleyi",
@@ -3051,7 +3085,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "grifola_frondosa",
@@ -3210,7 +3246,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "meripilus_sumstinei",
@@ -3333,7 +3371,9 @@
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "GBIF occurrence data, southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "morchella_americana",
@@ -3500,7 +3540,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "morchella_angusticeps",
@@ -3658,7 +3700,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": true
     },
     {
       "id": "lactarius_indigo",
@@ -3905,7 +3949,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "lactifluus_volemus",
@@ -4147,7 +4193,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "russula_virescens",
@@ -4373,7 +4421,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "pleurocybella_porrigens",
@@ -4584,7 +4634,9 @@
         "North American Mycological Association poisoning references",
         "iNaturalist occurrence records above 5,000 ft in the southern Blue Ridge"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": false
     },
     {
       "id": "pleurotus_ostreatus",
@@ -4827,7 +4879,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "tylopilus_felleus",
@@ -5046,7 +5100,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "suillellus_subvelutipes",
@@ -5260,7 +5316,9 @@
       "sources": [
         "North American Mycological Association references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "hericium_erinaceus",
@@ -5420,7 +5478,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "hydnum_repandum",
@@ -5644,7 +5704,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "artomyces_pyxidatus",
@@ -5787,7 +5849,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "sarcoscypha_dudleyi",
@@ -5941,7 +6005,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "stereum_ostrea",
@@ -6145,7 +6211,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "trametes_versicolor",
@@ -6349,7 +6417,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "tremella_mesenterica",
@@ -6486,7 +6556,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "daldinia_childiae",
@@ -6640,7 +6712,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "coprinus_comatus",
@@ -6907,7 +6981,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "agaricus_campestris",
@@ -7207,7 +7283,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "amanita_muscaria_guessowii",
@@ -7469,7 +7547,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "amanita_jacksonii",
@@ -7708,7 +7788,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "amanita_citrina",
@@ -7894,7 +7976,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "tricholoma_sejunctum",
@@ -8107,7 +8191,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "hymenopellis_radicata",
@@ -8328,7 +8414,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "mycena_galericulata",
@@ -8591,7 +8679,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "marasmius_oreades",
@@ -8831,7 +8921,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "pholiota_squarrosa",
@@ -9076,7 +9168,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "panellus_stipticus",
@@ -9314,7 +9408,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "lentinellus_ursinus",
@@ -9520,7 +9616,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": false
     },
     {
       "id": "entoloma_abortivum",
@@ -9754,7 +9852,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "paxillus_involutus",
@@ -10021,7 +10121,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": false
     },
     {
       "id": "ganoderma_applanatum",
@@ -10231,7 +10333,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "clitocybe_gibba",
@@ -10446,7 +10550,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "hypomyces_lactifluorum",
@@ -10607,7 +10713,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "boletus_edulis",
@@ -10810,7 +10918,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "lactarius_deliciosus",
@@ -11072,7 +11182,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": true
     },
     {
       "id": "suillus_americanus",
@@ -11288,7 +11400,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "xerocomellus_chrysenteron",
@@ -11498,7 +11612,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "cortinarius_armillatus",
@@ -11703,7 +11819,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": false
     },
     {
       "id": "hygrocybe_conica",
@@ -11948,7 +12066,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "arrhenia_epichysium",
@@ -12161,7 +12281,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": false
     },
     {
       "id": "cystoderma_amianthinum",
@@ -12383,7 +12505,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "gymnopus_dryophilus",
@@ -12597,7 +12721,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "pluteus_petasatus",
@@ -12841,7 +12967,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "peziza_badia",
@@ -13001,7 +13129,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "ramaria_stricta",
@@ -13178,7 +13308,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "trametes_hirsuta",
@@ -13378,7 +13510,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "hypoxylon_fragiforme",
@@ -13546,7 +13680,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "panaeolus_papilionaceus",
@@ -13771,7 +13907,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "pholiota_highlandensis",
@@ -13988,7 +14126,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": false
     },
     {
       "id": "inocybe_rimosa",
@@ -14230,7 +14370,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "cortinarius_alboviolaceus",
@@ -14431,7 +14573,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "amanita_phalloides",
@@ -14666,7 +14810,9 @@
         "iNaturalist occurrence records for the southern Blue Ridge",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": false
     },
     {
       "id": "amanita_rubescens",
@@ -14924,7 +15070,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "amanita_vaginata",
@@ -15155,7 +15303,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "cantharellus_appalachiensis",
@@ -15387,7 +15537,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "craterellus_fallax",
@@ -15594,7 +15746,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "auricularia_americana",
@@ -15775,7 +15929,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": true
     },
     {
       "id": "cerioporus_squamosus",
@@ -15982,7 +16138,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "armillaria_tabescens",
@@ -16219,7 +16377,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "hypholoma_fasciculare",
@@ -16466,7 +16626,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "agaricus_xanthodermus",
@@ -16743,7 +16905,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "uncommon",
+      "sought": false
     },
     {
       "id": "pluteus_cervinus",
@@ -16970,7 +17134,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "common",
+      "sought": false
     },
     {
       "id": "clitocybe_nuda",
@@ -17220,7 +17386,9 @@
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     },
     {
       "id": "phallus_ravenelii",
@@ -17429,7 +17597,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": false
     },
     {
       "id": "calvatia_craniiformis",
@@ -17619,7 +17789,9 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
-      "reviewed": false
+      "reviewed": false,
+      "prevalence": "occasional",
+      "sought": true
     }
   ]
 }

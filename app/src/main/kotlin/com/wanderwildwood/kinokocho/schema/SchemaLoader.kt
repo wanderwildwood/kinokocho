@@ -28,6 +28,18 @@ object SchemaLoader {
                 id = o.getString("id"),
                 label = o.getString("label"),
                 hint = o.optString("hint").ifEmpty { null },
+                noun = o.getString("noun"),
+                group = when (val g = o.getString("group")) {
+                    "whole" -> Character.Group.WHOLE
+                    "cap" -> Character.Group.CAP
+                    "gills" -> Character.Group.GILLS
+                    "stem" -> Character.Group.STEM
+                    "flesh" -> Character.Group.FLESH
+                    "smell" -> Character.Group.SMELL
+                    "spores" -> Character.Group.SPORES
+                    "where" -> Character.Group.WHERE
+                    else -> error("unknown group '$g' on ${o.getString("id")}")
+                },
                 kind = when (val k = o.optString("kind", "state")) {
                     "state" -> Character.Kind.STATE
                     "measurement" -> Character.Kind.MEASUREMENT

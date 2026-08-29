@@ -116,6 +116,16 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             onClose = { candidate = null },
         )
 
+        // Before the journal branch, not after it. `open == null` is true on the
+        // journal, so a season branch below it could never be reached: tapping the row
+        // set the flag, the journal matched first, and the page was dead code with a
+        // link to it.
+        season -> SeasonScreen(
+            taxa = vm.pack.taxa,
+            month = thisMonth(),
+            onClose = { season = false },
+        )
+
         open == null -> JournalScreen(
             entries = kept,
             onOpen = { id -> reading = true; vm.open(id) },
@@ -130,12 +140,6 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
                     onOpen = { season = true },
                 )
             },
-        )
-
-        season -> SeasonScreen(
-            taxa = vm.pack.taxa,
-            month = thisMonth(),
-            onClose = { season = false },
         )
 
         reading && open != null -> EntryScreen(

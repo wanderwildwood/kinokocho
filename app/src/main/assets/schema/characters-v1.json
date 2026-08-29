@@ -87,6 +87,8 @@
     {
       "id": "fruitbody_type",
       "label": "What kind of fungus is it?",
+      "noun": "Kind",
+      "group": "whole",
       "hint": "The shape of the whole thing, and what is under the cap.",
       "kind": "state",
       "cardinality": "multi",
@@ -152,6 +154,8 @@
     {
       "id": "substrate",
       "label": "What is it growing on?",
+      "noun": "Growing on",
+      "group": "where",
       "hint": "You are standing over it, so this one is nearly always answerable.",
       "kind": "state",
       "cardinality": "multi",
@@ -213,6 +217,8 @@
     {
       "id": "substrate_wood",
       "label": "What kind of wood?",
+      "noun": "Wood",
+      "group": "where",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -255,6 +261,8 @@
     {
       "id": "growth_habit",
       "label": "How are they arranged?",
+      "noun": "Arrangement",
+      "group": "whole",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -294,6 +302,8 @@
     {
       "id": "stipe_presence",
       "label": "Is there a stem?",
+      "noun": "Position",
+      "group": "stem",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -325,6 +335,8 @@
     {
       "id": "ring",
       "label": "Is there a ring on the stem?",
+      "noun": "Ring",
+      "group": "stem",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -356,6 +368,8 @@
     {
       "id": "stipe_base",
       "label": "What is the base of the stem like?",
+      "noun": "Base",
+      "group": "stem",
       "hint": "Dig it out. Volvas are underground, and this is the character that separates the deadly Amanita from everything else.",
       "kind": "state",
       "cardinality": "multi",
@@ -405,6 +419,8 @@
     {
       "id": "stipe_surface",
       "label": "What is the stem surface like?",
+      "noun": "Surface",
+      "group": "stem",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -451,6 +467,8 @@
     {
       "id": "stipe_flesh",
       "label": "What is inside the stem?",
+      "noun": "Inside",
+      "group": "stem",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -477,6 +495,8 @@
     {
       "id": "gill_attachment",
       "label": "How do the gills meet the stem?",
+      "noun": "Attachment",
+      "group": "gills",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -512,6 +532,8 @@
     {
       "id": "gill_spacing",
       "label": "How closely are the gills packed?",
+      "noun": "Spacing",
+      "group": "gills",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -535,6 +557,8 @@
     {
       "id": "gill_extras",
       "label": "Anything else about the gills?",
+      "noun": "Extras",
+      "group": "gills",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -557,6 +581,8 @@
     {
       "id": "gill_edge",
       "label": "What are the gill edges like?",
+      "noun": "Edge",
+      "group": "gills",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -583,6 +609,8 @@
     {
       "id": "hymenophore_colour",
       "label": "What colour are the gills, pores or teeth?",
+      "noun": "Colour",
+      "group": "gills",
       "hint": "Underside colour changes as the spores ripen. Say what you see now.",
       "kind": "state",
       "cardinality": "multi",
@@ -593,6 +621,8 @@
     {
       "id": "cap_shape",
       "label": "What shape is the cap?",
+      "noun": "Shape",
+      "group": "cap",
       "hint": "Describe a mature, spore-producing cap. Young fruit bodies are difficult to identify.",
       "kind": "state",
       "cardinality": "multi",
@@ -641,6 +671,8 @@
     {
       "id": "cap_surface",
       "label": "What is the cap surface like?",
+      "noun": "Surface",
+      "group": "cap",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -703,6 +735,8 @@
     {
       "id": "cap_margin",
       "label": "What is the cap edge like?",
+      "noun": "Edge",
+      "group": "cap",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -746,6 +780,8 @@
     {
       "id": "cap_colour",
       "label": "What colour is the cap?",
+      "noun": "Colour",
+      "group": "cap",
       "hint": "Notoriously unreliable — rain, age and sun all change it. It never eliminates on its own.",
       "kind": "state",
       "cardinality": "multi",
@@ -756,6 +792,8 @@
     {
       "id": "cap_colour_pattern",
       "label": "How is the colour laid out?",
+      "noun": "Pattern",
+      "group": "cap",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -778,6 +816,8 @@
     {
       "id": "bruising",
       "label": "Does it change colour when cut or handled?",
+      "noun": "Bruising",
+      "group": "flesh",
       "hint": "Cut it and wait. 'Not tested' is a real answer and is not the same as 'no'.",
       "kind": "state",
       "cardinality": "single",
@@ -799,6 +839,8 @@
     {
       "id": "bruising_where",
       "label": "Where does it change?",
+      "noun": "Bruises where",
+      "group": "flesh",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -829,6 +871,8 @@
     {
       "id": "bruising_colour",
       "label": "What colour does it turn?",
+      "noun": "Bruises to",
+      "group": "flesh",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -838,6 +882,8 @@
     {
       "id": "bruising_speed",
       "label": "How fast?",
+      "noun": "Bruising speed",
+      "group": "flesh",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -860,6 +906,8 @@
     {
       "id": "latex",
       "label": "Does it ooze anything when broken?",
+      "noun": "Latex",
+      "group": "flesh",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -889,6 +937,8 @@
     {
       "id": "latex_colour",
       "label": "What colour is it when it first appears?",
+      "noun": "Latex colour",
+      "group": "flesh",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -898,6 +948,8 @@
     {
       "id": "latex_change",
       "label": "Does the ooze change colour?",
+      "noun": "Latex changes",
+      "group": "flesh",
       "kind": "state",
       "cardinality": "single",
       "availability": "field",
@@ -917,6 +969,8 @@
     {
       "id": "latex_change_colour",
       "label": "What does it change to?",
+      "noun": "Latex turns",
+      "group": "flesh",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -926,6 +980,8 @@
     {
       "id": "flesh_consistency",
       "label": "What is the flesh like?",
+      "noun": "Texture",
+      "group": "flesh",
       "hint": "Snap the stem. Brittle or fibrous is two seconds of work and separates Russula and Lactarius from almost everything else.",
       "kind": "state",
       "cardinality": "multi",
@@ -965,6 +1021,8 @@
     {
       "id": "flesh_colour",
       "label": "What colour is the flesh inside?",
+      "noun": "Colour",
+      "group": "flesh",
       "hint": "Cut it through and look at once. This is what settles an orange chanterelle-like mushroom against a jack-o'-lantern, and it takes one cut.",
       "kind": "state",
       "cardinality": "multi",
@@ -976,6 +1034,8 @@
     {
       "id": "odour",
       "label": "What does it smell of?",
+      "noun": "Smell",
+      "group": "smell",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -1052,6 +1112,8 @@
     {
       "id": "taste",
       "label": "What does it taste of?",
+      "noun": "Taste",
+      "group": "smell",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -1088,6 +1150,8 @@
     {
       "id": "size",
       "label": "How big is it?",
+      "noun": "Size",
+      "group": "whole",
       "hint": "In millimetres. A rough number is enough, and leave blank anything you did not measure.",
       "kind": "measurement",
       "cardinality": "single",
@@ -1112,6 +1176,8 @@
     {
       "id": "veil_remnants",
       "label": "Is there anything left on the cap?",
+      "noun": "Veil",
+      "group": "cap",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -1142,6 +1208,8 @@
     {
       "id": "spore_print",
       "label": "What colour is the spore print?",
+      "noun": "Spore print",
+      "group": "spores",
       "hint": "Taken at home overnight. 'Not taken' is different from 'unknown' and the app keeps track of which.",
       "kind": "state",
       "cardinality": "multi",
@@ -1175,6 +1243,8 @@
     {
       "id": "spore_print_fine",
       "label": "More precisely?",
+      "noun": "More precisely",
+      "group": "spores",
       "kind": "state",
       "cardinality": "multi",
       "availability": "deferred",
@@ -1222,6 +1292,8 @@
     {
       "id": "koh",
       "label": "KOH reaction",
+      "noun": "KOH",
+      "group": "spores",
       "kind": "state",
       "cardinality": "multi",
       "availability": "deferred",
@@ -1278,6 +1350,8 @@
     {
       "id": "habitat",
       "label": "What sort of place is it?",
+      "noun": "Place",
+      "group": "where",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -1349,6 +1423,8 @@
     {
       "id": "associated_tree",
       "label": "What trees are nearby?",
+      "noun": "Trees",
+      "group": "where",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -1374,6 +1450,8 @@
     {
       "id": "age",
       "label": "How old is the specimen?",
+      "noun": "Age",
+      "group": "whole",
       "kind": "state",
       "cardinality": "single",
       "availability": "field",
@@ -1397,6 +1475,8 @@
     {
       "id": "condition",
       "label": "What condition is it in?",
+      "noun": "Condition",
+      "group": "whole",
       "kind": "state",
       "cardinality": "single",
       "availability": "field",

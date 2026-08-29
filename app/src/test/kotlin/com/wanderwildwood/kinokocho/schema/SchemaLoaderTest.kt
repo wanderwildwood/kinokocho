@@ -144,4 +144,25 @@ class SchemaLoaderTest {
         val failure = runCatching { SchemaLoader.parse(broken) }.exceptionOrNull()
         assertNotNull("a dependency on a missing character must fail", failure)
     }
+
+    @Test
+    fun `every character has a short noun, and it really is short`() {
+        // The candidate page reads down a column of these. A label that wraps puts the
+        // values back out of line, which is the whole thing that page was fixed for.
+        schema.characters.forEach {
+            assertTrue("${it.id} has no noun", it.noun.isNotBlank())
+            assertTrue("${it.id} noun '${it.noun}' is too long", it.noun.length <= 14)
+            assertTrue("${it.id} noun is a question", !it.noun.endsWith("?"))
+        }
+    }
+
+    @Test
+    fun `nouns are unique within their group`() {
+        // The group heading is what makes "Colour" and "Edge" unambiguous, so two
+        // characters in one group may not both be called the same thing.
+        schema.characters.groupBy { it.group }.forEach { (group, characters) ->
+            val nouns = characters.map { it.noun }
+            assertEquals("$group repeats a noun: $nouns", nouns.size, nouns.toSet().size)
+        }
+    }
 }

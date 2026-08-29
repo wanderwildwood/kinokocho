@@ -1551,18 +1551,36 @@ def bruising_speed():
 
 
 def launcher():
-    # The mark on the empty journal and at the top of the season page. Same drawing as
-    # the fruitbody type, and for the same reason: it is the owner's chanterelle, so the one
-    # picture the app opens on is in the hand everything else was redrawn to match.
-    write("art_launcher_chanterelle",
-          "Cantharellus lateritius",
-          "The launcher mark: a rolled margin one side, ridges running onto the stem.",
-          path("M17,17 Q7,18 8,24 Q10,28 17,26"),
-          path("M17,17 Q34,12 52,14 Q72,12 89,20"),
-          path("M17,26 Q27,31 34,37 Q38,44 38,50 L38,83 Q39,89 46,87"),
-          path("M89,20 Q74,29 64,36 Q59,43 58,50 L58,81"),
-          path("M27,25 Q31,32 35,39 M41,20 Q43,31 44,42 M54,19 Q54,32 53,43 "
-               "M54,34 Q50,39 48,43 M69,21 Q64,31 58,39", width=FINE))
+    """
+    The app's own mark: the owner's drawing itself, not a version of it.
+
+    Everywhere the app signs its own name — the empty journal, the season row, the
+    launcher — is the traced line from his photograph, at the same scale as the launcher
+    icon and re-fitted to this 96 canvas. The fruitbody character next door is drawn
+    rather than traced, because it stands in a row of twelve others and has to be in the
+    same hand as them; this one stands alone and should be his.
+    """
+    # Derived from the launcher transform rather than typed again, so the two cannot
+    # drift: shift to the 108 canvas centre, scale the ink up to fill this one, shift
+    # back to the 96 centre.
+    sx, sy = 0.016055, -0.016712
+    tx, ty = 22.201739, 91.439579
+    k = 76.0 / 68.0
+    body = (
+        f'    <group android:scaleX="{sx * k:.6f}" android:scaleY="{sy * k:.6f}"\n'
+        f'        android:translateX="{(tx - 54) * k + 48:.6f}" '
+        f'android:translateY="{(ty - 54) * k + 48:.6f}">\n'
+        '        <path\n'
+        '            android:fillColor="#FF000000"\n'
+        f'            android:pathData="{TRACED_CHANTERELLE}" />\n'
+        '    </group>\n'
+    )
+    drawn_from("art_launcher_chanterelle",
+               "Cantharellus lateritius",
+               "The owner's own drawing, traced. The app's mark.")
+    with open(os.path.join(OUT, "art_launcher_chanterelle.xml"), "w") as f:
+        f.write(HEADER + body + FOOTER)
+    print("  launcher mark: the owner's drawing, traced")
 
 
 def interface_icons():
