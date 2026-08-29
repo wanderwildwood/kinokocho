@@ -594,17 +594,24 @@ def stipe_base():
           path("M24,66 Q48,71 72,66", width=FINE),
           ground(16, 80, 82))
 
-    # The one drawing in the app that most needs to be right. A membranous sac with a
-    # free upper limb, the stem rising cleanly out of it.
+    # The one drawing in the app that most needs to be right. A membranous bag with a
+    # free upper limb, the stem standing inside it and not fused to it.
+    #
+    # Drawn as a smooth cup before, which read as a goblet — a solid thing the stem sits
+    # in. A volva is a torn skin: the limb is thin, it stands away from the stem, and it
+    # is ragged rather than turned on a lathe. The membrane is shown by doubling the wall
+    # for the length of the free limb, and the two limbs are different heights, because a
+    # bag that tore evenly is a bag nobody has seen.
     write(f"art_{c}_sac_volva",
           "Amanita bisporigera",
           "A membranous bag with a free rim; the stem stands inside it, not fused to it.",
           top,
-          path("M36,40 L36,66 M60,40 L60,66"),
-          path("M28,56 Q22,70 24,79 Q30,86 48,86 Q66,86 72,79 Q74,70 68,56"),
-          path("M28,56 Q32,63 36,66 M68,56 Q64,63 60,66"),
-          path("M30,60 Q34,64 36,64 M66,60 Q62,64 60,64", width=HAIR),
-          ground(14, 82, 88))
+          path("M36,40 L36,72 M60,40 L60,72"),
+          path("M25,50 Q19,70 27,84 Q37,90 48,90 Q60,90 70,84 Q77,70 71,54"),
+          path("M25,50 Q30,57 33,52 Q36,60 39,56"),
+          path("M71,54 Q66,60 63,55 Q60,61 57,58"),
+          path("M30,54 Q25,70 31,83 M67,57 Q72,70 66,83", width=HAIR),
+          ground(12, 84, 90))
 
     write(f"art_{c}_volva_rings",
           "Amanita muscaria",
@@ -651,29 +658,44 @@ def stipe_base():
 # cap_shape — the standard series, each on a species that holds that shape.
 
 def cap_shape():
+    """
+    The standard series, each on a species that holds that shape.
+
+    Every one of these had the same stem: two parallel lines from y=64 to y=86, whatever
+    the cap above it was doing. On a flat cap that left a gap and the stem floated below
+    it; on a bell it ran up inside. A stem that does not meet its cap is the first thing
+    the eye finds, and it found it nine times.
+    """
     c = "cap_shape"
-    st = path("M44,64 L44,86 M52,64 L52,86")
+
+    def stem(top, bottom=88, half=4.5):
+        # Not two straight rules. A drawn stem wavers, and the wavering is what stops a
+        # page of these reading as a set of icons.
+        return path(
+            f"M{48 - half},{top} Q{47 - half},{(top + bottom) / 2} {48 - half},{bottom} "
+            f"M{48 + half},{top} Q{49 + half},{(top + bottom) / 2} {48 + half},{bottom}"
+        )
 
     write(f"art_{c}_egg", "Coprinus comatus",
           "Taller than wide, sides near-parallel, before any expansion.",
           path("M32,68 Q30,22 48,20 Q66,22 64,68"),
-          path("M44,68 L44,86 M52,68 L52,86"))
+          stem(66))
 
     write(f"art_{c}_conical", "Hygrocybe conica",
           "Straight sides meeting at a point; never flattening with age.",
-          path("M22,66 L48,18 L74,66 Q48,72 22,66 Z"), st)
+          path("M22,66 L48,18 L74,66 Q48,72 22,66 Z"), stem(70))
 
     write(f"art_{c}_bell", "Panaeolus papilionaceus",
           "Sides curve out and hang down: a bell, not a cone.",
-          path("M24,66 Q24,24 48,24 Q72,24 72,66 Q48,72 24,66 Z"), st)
+          path("M24,66 Q24,24 48,24 Q72,24 72,66 Q48,72 24,66 Z"), stem(70))
 
     write(f"art_{c}_convex", "Agaricus campestris",
           "An even dome, the margin still turned down.",
-          path("M16,58 Q16,30 48,30 Q80,30 80,58 Q48,66 16,58 Z"), st)
+          path("M16,58 Q16,30 48,30 Q80,30 80,58 Q48,66 16,58 Z"), stem(64))
 
     write(f"art_{c}_flat", "Russula virescens",
           "Expanded flat, the margin level with the centre.",
-          path("M14,52 Q48,42 82,52 Q48,62 14,52 Z"), st)
+          path("M14,52 Q48,42 82,52 Q48,62 14,52 Z"), stem(60))
 
     # The three dished shapes are told apart by how the centre goes down, so each is
     # drawn to the glossary wording: depressed is merely lower, umbilicate is a sudden
@@ -682,22 +704,22 @@ def cap_shape():
     write(f"art_{c}_depressed", "Lactarius deliciosus",
           "Broad and saucer-like: the middle is lower, and no more than that.",
           path("M12,46 Q26,38 40,50 Q48,55 56,50 Q70,38 84,46 Q48,60 12,46 Z"),
-          st)
+          stem(58))
 
     write(f"art_{c}_funnel", "Clitocybe gibba",
           "The whole cap slopes down into the stem — a funnel, not a dish.",
           path("M10,28 L42,62 L54,62 L86,28 Q84,40 58,72 L38,72 Q12,40 10,28 Z"),
-          path("M42,68 L42,86 M54,68 L54,86"))
+          stem(76, half=5.5))
 
     write(f"art_{c}_umbonate", "Amanita parcivolvata",
           "A broad cap with a distinct raised boss at the centre.",
           path("M14,56 Q28,44 40,42 Q44,28 48,26 Q52,28 56,42 Q68,44 82,56 "
-               "Q48,64 14,56 Z"), st)
+               "Q48,64 14,56 Z"), stem(62))
 
     write(f"art_{c}_umbilicate", "Arrhenia epichysium",
           "An otherwise flat cap with one sudden narrow pit, like a navel.",
           path("M12,44 Q28,38 44,42 L45,62 L51,62 L52,42 Q68,38 84,44 Q48,56 12,44 Z"),
-          st)
+          stem(64))
 
 
 # ---------------------------------------------------------------------------
@@ -730,16 +752,24 @@ def ring():
     write(f"art_{c}_movable", "Amanita jacksonii",
           "A free collar that slides on the stem rather than gripping it.",
           cap, path(st),
-          path("M30,58 Q48,50 66,58 Q48,66 30,58 Z"),
-          path("M26,52 L20,47 M70,52 L76,47", width=FINE),
-          path("M24,58 L18,58 M72,58 L78,58", width=HAIR))
+          # A second collar, faintly, further down the stem — where it has been, or
+          # where it will be. It was drawn with speed marks flying off either side, which
+          # is a cartoon idiom and reads as sparkle; this says the same thing by showing
+          # the thing in two places.
+          path("M30,54 Q48,46 66,54 Q48,62 30,54 Z"),
+          path("M33,70 Q48,64 63,70 Q48,76 33,70 Z", width=HAIR))
 
+    # A battered mushroom rather than a question mark. It was drawn as a literal "?"
+    # on the stem, which is a piece of punctuation and not a thing anybody has held: the
+    # honest picture is a cap the weather has had, with a broken band where a ring might
+    # once have been. Dashed, because the answer is that you cannot say.
     write(f"art_{c}_cannot_tell", "—",
           "Not a state of the mushroom: the specimen is too old or too damaged to say.",
-          cap, path(st),
-          path("M40,54 L34,56 M56,55 L62,58", width=HAIR),
-          path("M48,74 Q60,74 60,65 Q60,59 48,59"),
-          path("M48,84 L48,86", width=6))
+          path("M14,32 Q30,14 46,17 Q56,11 66,20 Q76,22 82,32 "
+               "Q80,37 74,37 L22,37 Q14,37 14,32 Z"),
+          path(st),
+          path("M31,54 L38,54 M43,55 L49,55 M54,54 L61,54", width=FINE),
+          path("M38,60 L36,64 M56,60 L59,64", width=HAIR))
 
 
 def stipe_presence():
@@ -904,8 +934,10 @@ def veil_remnants():
     write(f"art_{c}_single_patch", "Amanita parcivolvata",
           "One large sheet of veil left sitting on the cap.",
           body, st,
-          path("M34,34 Q48,25 64,36 Q58,49 42,47 Z"),
-          path("M42,38 Q50,36 56,40", width=HAIR))
+          # Sitting on the dome, not hovering over it. It was drawn from y=25, and the
+          # cap's own arc only reaches y=38, so the patch floated clear of the mushroom.
+          path("M33,44 Q48,35 64,45 Q57,55 40,53 Z"),
+          path("M41,47 Q49,45 55,49", width=HAIR))
     write(f"art_{c}_fibrous_scales", "Pholiota squarrosa",
           "Recurved scales that are part of the cap skin, not loose patches.",
           body, st,
