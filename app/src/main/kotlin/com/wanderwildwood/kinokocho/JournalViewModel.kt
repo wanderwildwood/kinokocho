@@ -5,12 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.wanderwildwood.kinokocho.data.FullObservation
 import com.wanderwildwood.kinokocho.data.JournalDatabase
+import com.wanderwildwood.kinokocho.data.MeasurementRow
 import com.wanderwildwood.kinokocho.data.Observation
 import com.wanderwildwood.kinokocho.data.ObservationCharacter
 import com.wanderwildwood.kinokocho.data.ObservationPhoto
 import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.key.PackLoader
 import com.wanderwildwood.kinokocho.key.TaxonPack
+import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
 import com.wanderwildwood.kinokocho.schema.SchemaLoader
 import java.util.Calendar
@@ -67,8 +69,12 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                 uuid = full.observation.uuid,
                 recordedAt = full.observation.recordedAt,
                 answers = KeyEngine.Answers(
-                    values = full.characters.groupBy { it.characterId }
+                    values = full.characters.filterNot { isMeasurement(it.characterId) }
+                        .groupBy { it.characterId }
                         .mapValues { (_, rows) -> rows.map { it.valueId }.toSet() },
+                    measurements = full.characters.filter { isMeasurement(it.characterId) }
+                        .mapNotNull { MeasurementRow.decode(it.valueId) }
+                        .toMap(),
                     month = monthOf(full.observation.recordedAt),
                 ),
                 note = full.observation.note,
@@ -121,6 +127,21 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         } else {
             d.answers.with(characterId, chosen)
         }
+        _draft.value = d.copy(answers = answers, revisiting = null)
+        persist()
+    }
+
+    /**
+     * Records a set of measurements, in millimetres, and moves the key on.
+     *
+     * Taken together rather than one at a time because they are read off one mushroom
+     * in one go, and a key that asked for the cap, then something else, then the stem
+     * would have the reader put it down and pick it up twice.
+     */
+    fun measure(millimetres: Map<String, Int?>) {
+        val d = _draft.value ?: return
+        var answers = d.answers
+        millimetres.forEach { (valueId, mm) -> answers = answers.withMeasurement(valueId, mm) }
         _draft.value = d.copy(answers = answers, revisiting = null)
         persist()
     }
@@ -201,6 +222,21 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                 }
             }
 
+            // Measurements go down the same rows, as `cap_width_mm=45`. Not a column,
+            // for the reason the character rows are not columns either: a region pack
+            // has to be able to introduce one without a database migration, and a
+            // number is no more special than a state in that respect.
+            measurementCharacters.forEach { character ->
+                val ids = schema.valuesOf(character).map { it.id }
+                d.answers.measurements.filterKeys { it in ids }.forEach { (key, mm) ->
+                    dao.addCharacter(
+                        ObservationCharacter(
+                            0, id, character.id, MeasurementRow.encode(key, mm), now,
+                        )
+                    )
+                }
+            }
+
             val known = dao.photosOf(id).map { it.fileName }.toSet()
             d.photos.filter { it.fileName !in known }.forEach {
                 dao.addPhoto(it.copy(observationId = id))
@@ -211,6 +247,12 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
     fun delete(observationId: Long) {
         viewModelScope.launch { dao.deleteObservation(observationId) }
     }
+
+    private val measurementCharacters
+        get() = schema.characters.filter { it.kind == Character.Kind.MEASUREMENT }
+
+    private fun isMeasurement(characterId: String): Boolean =
+        schema.character(characterId)?.kind == Character.Kind.MEASUREMENT
 
     private fun monthOf(millis: Long): Int =
         Calendar.getInstance().apply { timeInMillis = millis }.get(Calendar.MONTH) + 1

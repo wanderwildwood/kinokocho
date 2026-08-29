@@ -27,15 +27,27 @@ class KeyEngine(
         val values: Map<String, Set<String>> = emptyMap(),
         /** Characters they looked at and could not answer. Scored as unanswered. */
         val notTested: Set<String> = emptySet(),
+        /**
+         * Millimetres, keyed by the measurement's value id - `cap_width_mm` and the
+         * rest. Held apart from [values] because a number is not a state: it is matched
+         * against a published range by overlap, never by equality.
+         */
+        val measurements: Map<String, Int> = emptyMap(),
         val month: Int? = null,
     ) {
         fun with(characterId: String, chosen: Set<String>): Answers =
             copy(values = values + (characterId to chosen), notTested = notTested - characterId)
 
+        fun withMeasurement(valueId: String, mm: Int?): Answers = copy(
+            measurements =
+                if (mm == null) measurements - valueId else measurements + (valueId to mm),
+        )
+
         fun markNotTested(characterId: String): Answers =
             copy(values = values - characterId, notTested = notTested + characterId)
 
-        val answeredCount: Int get() = values.count { it.value.isNotEmpty() }
+        val answeredCount: Int
+            get() = values.count { it.value.isNotEmpty() } + measurements.size
     }
 
     data class Candidate(
@@ -105,6 +117,37 @@ class KeyEngine(
             }
         }
 
+        /*
+         * Size, matched by overlap with the published range.
+         *
+         * Two things make this unlike every other character. A published range is
+         * roughly the tenth to ninetieth percentile of what actually grows, so falling
+         * outside one is ordinary rather than disqualifying - a button three days from
+         * opening is under every range in the book. And the reader is estimating
+         * millimetres by eye, in a wood, probably without a ruler.
+         *
+         * So a miss is a penalty and nothing more: it never increments [mismatched].
+         * That counter is what decides whether a taxon is still shown as possible and
+         * whether a deadly one stays in view, and a guessed number must not be able to
+         * push a destroying angel off the screen.
+         */
+        answers.measurements.forEach { (key, mm) ->
+            val range = taxon.measurements[key]
+            if (range == null) {
+                unscored++
+                return@forEach
+            }
+            val slack = ((range.last - range.first) / 2).coerceAtLeast(1)
+            when {
+                mm in range -> { score += FULL_MATCH; matched++ }
+                mm >= range.first - slack && mm <= range.last + slack -> {
+                    score += PARTIAL_MATCH
+                    matched++
+                }
+                else -> score += SIZE_MISS
+            }
+        }
+
         // Season is a tiebreaker and never a filter. Fungi do not read calendars, and an
         // out-of-season find is exactly the kind of thing worth writing down.
         val month = answers.month
@@ -139,6 +182,23 @@ class KeyEngine(
             .filter { it.id !in answers.values.keys && it.id !in answers.notTested }
             .filter { schema.isApplicable(it.id, answers.values) }
             .filter { it.availability == Character.Availability.FIELD }
+            /*
+             * A measurement is never a question here.
+             *
+             * It cannot be. A state character splits the live candidates into groups
+             * and, once the field is small, into singletons - which is a gain ratio of
+             * one, the most a character can score. Ranges overlap, so a number never
+             * leaves one taxon standing and a measurement tops out around a half. It
+             * therefore loses to every state character there is, and would sit at the
+             * bottom of the queue for ever.
+             *
+             * The answer is not to weight it up until it wins. Size is not a narrowing
+             * question at all: it is something you write down about the mushroom in
+             * front of you, like the place and the photographs, and it is asked for
+             * where those are. It still scores - a three-hundred millimetre bracket
+             * should not rank a thumb-sized one first - it is just not asked here.
+             */
+            .filter { it.kind != Character.Kind.MEASUREMENT }
             .map { it to askingValue(it, live) }
             // Never ask something that cannot separate anything. Once one candidate
             // stands alone there is no next question, and the honest answer is none.
@@ -366,6 +426,10 @@ class KeyEngine(
         if (live.size < 2) return emptyList()
         return schema.characters
             .filter { it.id !in answers.values.keys }
+            // Measurements are excluded for the same reason [nextQuestion] excludes
+            // them: this is advice about which question to ask next time, and size is
+            // not a question. It is recorded on the entry screen instead.
+            .filter { it.kind != Character.Kind.MEASUREMENT }
             .filter { schema.isApplicable(it.id, answers.values) }
             // Gain ratio weighted by power, exactly as nextQuestion scores. Raw
             // information gain was used here and it put "what colour is the cap?" at
@@ -385,6 +449,11 @@ class KeyEngine(
         // Heavy, but finite. One wrong tap must cost a taxon its place at the top
         // without erasing it from the list entirely.
         const val MISMATCH = -2.0
+
+        // Lighter than a state mismatch, and it never counts as one. See the scoring
+        // of measurements above for why a wrong number must not be able to rule
+        // anything out.
+        const val SIZE_MISS = -0.8
 
         const val SEASON_BONUS = 0.15
         const val SEASON_PENALTY = -0.15

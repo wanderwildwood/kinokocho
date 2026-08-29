@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.core.content.FileProvider
 import com.wanderwildwood.kinokocho.JournalViewModel
 import com.wanderwildwood.kinokocho.key.KeyEngine
+import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
 import java.io.File
 import java.text.SimpleDateFormat
@@ -92,6 +93,22 @@ object ShareFind {
             if (labels.isNotEmpty()) {
                 appendLine("  ${character.label} ${labels.joinToString(", ")}")
             }
+        }
+
+        // Size goes with what was seen rather than in a section of its own. It is one
+        // of the first things anyone asks and it costs a line.
+        if (draft.answers.measurements.isNotEmpty()) {
+            schema.characters
+                .filter { it.kind == Character.Kind.MEASUREMENT }
+                .forEach { character ->
+                    schema.valuesOf(character).forEach { value ->
+                        draft.answers.measurements[value.id]?.let { mm ->
+                            appendLine(
+                                "  ${value.label.substringBefore(" (")} $mm mm"
+                            )
+                        }
+                    }
+                }
         }
 
         if (draft.answers.notTested.isNotEmpty()) {

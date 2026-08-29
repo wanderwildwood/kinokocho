@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.Image
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -31,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
@@ -281,8 +283,54 @@ fun EntryScreen(
             }
         }
 
-        // Where it was, typed rather than read off GPS. Foraging spots are the reason
-        // this app never asks for location.
+        /*
+         * How big it was.
+         *
+         * Not one of the questions, and deliberately. A measurement never leaves a
+         * single taxon standing - published ranges overlap far too much for that - so
+         * it loses to every state character the key could ask instead, and would sit at
+         * the bottom of the queue for ever. But it is worth writing down and worth
+         * scoring, so it is asked for here, with the place and the photographs, which
+         * are the other things you record about the mushroom rather than deduce from it.
+         *
+         * Blank stays blank. Somebody who measured the cap and not the stem has said
+         * something true, and filling the gap in for them would be inventing a number.
+         */
+        vm.schema.characters
+            .filter { it.kind == Character.Kind.MEASUREMENT }
+            .forEach { character ->
+                item(key = character.id) {
+                    Section(character.label)
+                    character.hint?.let {
+                        Text(
+                            it,
+                            style = MaterialTheme.typography.bodySmall,
+                            modifier = Modifier.padding(bottom = 4.dp),
+                        )
+                    }
+                    vm.schema.valuesOf(character).forEach { value ->
+                        var typed by remember(draft.uuid, value.id) {
+                            mutableStateOf(draft.answers.measurements[value.id]?.toString() ?: "")
+                        }
+                        TextFieldMMD(
+                            value = typed,
+                            onValueChange = { entered ->
+                                typed = entered.filter { it.isDigit() }.take(4)
+                                vm.measure(mapOf(value.id to typed.toIntOrNull()))
+                            },
+                            modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                            label = { Text(value.label) },
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.Number,
+                            ),
+                            singleLine = true,
+                        )
+                    }
+                }
+            }
+
+        // Where it was. Typing it is the default; the button asks for coarse location
+        // only, because a foraging patch is not a thing to keep at metre precision.
         item {
             Section("Where, and anything else")
             PlaceField(

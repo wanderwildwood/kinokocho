@@ -1088,6 +1088,7 @@
     {
       "id": "size",
       "label": "How big is it?",
+      "hint": "In millimetres. A rough number is enough, and leave blank anything you did not measure.",
       "kind": "measurement",
       "cardinality": "single",
       "availability": "field",

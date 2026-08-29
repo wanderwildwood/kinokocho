@@ -20,8 +20,8 @@ interface JournalDao {
     @Query("DELETE FROM observations WHERE id = :observationId")
     suspend fun deleteObservation(observationId: Long)
 
-    @Transaction
     /** The journal: what the reader chose to keep, newest first. */
+    @Transaction
     @Query("SELECT * FROM observations WHERE kept = 1 ORDER BY recorded_at DESC")
     fun observeAll(): Flow<List<FullObservation>>
 
@@ -32,6 +32,7 @@ interface JournalDao {
      * startup means resuming it rather than starting again. This is what a dead battery
      * mid-question should cost: nothing.
      */
+    @Transaction
     @Query("SELECT * FROM observations WHERE kept = 0 ORDER BY updated_at DESC LIMIT 1")
     suspend fun findUnclaimed(): FullObservation?
 

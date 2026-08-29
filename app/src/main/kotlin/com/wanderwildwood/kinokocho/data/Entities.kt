@@ -41,9 +41,9 @@ data class Observation(
     val note: String = "",
 
     /**
-     * Typed by hand. The app holds no location permission and never reads GPS, so this
-     * is whatever the person chose to write down - "the big oak below the spring", or
-     * nothing at all.
+     * Where it was, in the reader's own words - "the big oak below the spring", or
+     * nothing at all. Typing it is the default and needs no permission; the button that
+     * fills it from the phone asks for coarse location only, and rounds what it gets.
      */
     @ColumnInfo(name = "place_note")
     val placeNote: String = "",
@@ -54,11 +54,6 @@ data class Observation(
     @ColumnInfo(name = "longitude")
     val longitude: Double? = null,
 
-    /**
-     * Which vocabulary the character rows below were written against. Region packs may
-     * rename or retire a character; without this, an entry from two years ago cannot be
-     * read correctly by a later pack.
-     */
     /**
      * False until the reader says to keep it.
      *
@@ -76,6 +71,11 @@ data class Observation(
     @ColumnInfo(name = "kept", defaultValue = "0")
     val kept: Boolean = false,
 
+    /**
+     * Which vocabulary the character rows below were written against. Region packs may
+     * rename or retire a character; without this, an entry from two years ago cannot be
+     * read correctly by a later pack.
+     */
     @ColumnInfo(name = "schema_version")
     val schemaVersion: Int,
 
@@ -120,6 +120,9 @@ data class INatLink(
  *
  * A character may hold more than one value - a cap can be both scaly and viscid - so
  * uniqueness is on the triple, not on the character.
+ *
+ * Measurements ride in these rows too, folded by [MeasurementRow] into `cap_width_mm=45`,
+ * for exactly the same reason: a pack must be able to add one without a migration.
  */
 @Entity(
     tableName = "observation_characters",

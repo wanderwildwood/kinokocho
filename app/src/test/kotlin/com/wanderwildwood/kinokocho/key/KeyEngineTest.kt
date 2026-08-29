@@ -444,4 +444,76 @@ class KeyEngineTest {
         )
         assertNull(engine.nextQuestion(a, considerTop = 1))
     }
+
+    // ---- size ------------------------------------------------------------------
+
+    @Test
+    fun `a measured cap favours taxa whose published range covers it`() {
+        val ranked = engine.rank(
+            KeyEngine.Answers(measurements = mapOf("cap_width_mm" to 300))
+        ).candidates
+        assertTrue(
+            "top is ${ranked.first().taxon.id}",
+            300 in ranked.first().taxon.measurements.getValue("cap_width_mm"),
+        )
+        assertFalse(
+            "bottom is ${ranked.last().taxon.id}",
+            300 in ranked.last().taxon.measurements.getValue("cap_width_mm"),
+        )
+    }
+
+    @Test
+    fun `a size just outside the published range is not treated as a miss`() {
+        // Published ranges are roughly the tenth to the ninetieth percentile, so a cap
+        // a little under one is an ordinary mushroom, not a different species.
+        val range = pack.taxon("galerina_marginata")!!.measurements.getValue("cap_width_mm")
+        val slightlyUnder = KeyEngine.Answers(
+            measurements = mapOf("cap_width_mm" to range.first - 2)
+        )
+        val inside = KeyEngine.Answers(
+            measurements = mapOf("cap_width_mm" to (range.first + range.last) / 2)
+        )
+        fun scoreOf(a: KeyEngine.Answers) =
+            engine.rank(a).candidates.first { it.taxon.id == "galerina_marginata" }.score
+        assertTrue(scoreOf(slightlyUnder) > 0.0)
+        assertTrue(scoreOf(inside) > scoreOf(slightlyUnder))
+    }
+
+    @Test
+    fun `a wrong measurement never rules anything out`() {
+        // A number guessed by eye must not be able to remove a taxon from the list, and
+        // above all must not be able to take a deadly one off the screen: the hazard
+        // list is only shown while a candidate has no mismatches at all.
+        val a = answers(
+            "fruitbody_type" to "gilled_stemmed",
+            "substrate" to "soil",
+            "stipe_base" to "sac_volva",
+        )
+        val before = engine.rank(a)
+        val after = engine.rank(a.withMeasurement("cap_width_mm", 1))
+        assertEquals(
+            before.candidates.count { it.mismatched == 0 },
+            after.candidates.count { it.mismatched == 0 },
+        )
+        assertTrue(
+            after.hazards.map { it.taxon.id }.containsAll(before.hazards.map { it.taxon.id }),
+        )
+    }
+
+    @Test
+    fun `size is never offered as a question`() {
+        // Not an oversight. A measurement cannot leave one taxon standing, so it would
+        // lose to every state character for ever; it is recorded on the entry screen
+        // with the place and the photographs instead of pretending to be a question.
+        var a = KeyEngine.Answers()
+        val asked = mutableListOf<String>()
+        repeat(20) {
+            val q = engine.nextQuestion(a) ?: return@repeat
+            asked += q
+            val v = pack.taxa.first().characters[q]?.firstOrNull()?.value
+            a = if (v != null) a.with(q, setOf(v)) else a.markNotTested(q)
+        }
+        assertFalse("size was asked: $asked", asked.contains("size"))
+        assertFalse(engine.mostValuableMissing(KeyEngine.Answers()).any { it.first == "size" })
+    }
 }

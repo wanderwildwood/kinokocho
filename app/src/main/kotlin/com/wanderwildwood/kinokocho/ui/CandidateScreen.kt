@@ -133,6 +133,25 @@ fun CandidateScreen(
                     modifier = Modifier.padding(top = 3.dp),
                 )
             }
+
+            // What was measured, laid against those ranges. Said as "bigger than usual"
+            // rather than "wrong", because a published range is about the tenth to the
+            // ninetieth percentile of what grows and a button is under all of them.
+            answers.measurements.forEach { (key, mm) ->
+                val range = taxon.measurements[key] ?: return@forEach
+                val label = vm.schema.character("size")
+                    ?.let { vm.schema.valuesOf(it) }
+                    ?.firstOrNull { it.id == key }?.label ?: key
+                Text(
+                    "You measured $mm mm \u2014 " + when {
+                        mm in range -> "within the usual range"
+                        mm < range.first -> "smaller than usual, which young ones often are"
+                        else -> "bigger than usual"
+                    } + " for " + label.substringBefore(" (").lowercase(),
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 3.dp),
+                )
+            }
         }
 
         // High up, because this is the question a person is really asking: not "does
