@@ -1,7 +1,9 @@
 package com.wanderwildwood.kinokocho.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -137,7 +140,7 @@ fun SeasonScreen(
                     modifier = Modifier.padding(bottom = 4.dp),
                 )
             }
-            items(worthKnowing.size) { i -> TaxonLine(worthKnowing[i], onOpen) }
+            items(worthKnowing.size) { i -> TaxonLine(worthKnowing[i], onOpen, plate = true) }
         }
 
         item {
@@ -168,16 +171,41 @@ fun SeasonScreen(
  * than after; a sought-after one is marked as sought after and nothing more.
  */
 @Composable
-private fun TaxonLine(taxon: Taxon, onOpen: (String) -> Unit) {
+private fun TaxonLine(taxon: Taxon, onOpen: (String) -> Unit, plate: Boolean = false) {
     val danger = taxon.hazard.severity.alwaysShow
     // Tapping a name opens the same page a shortlist opens, with nothing laid against
     // it. Reading about a mushroom before finding one is how anybody learns which ones
     // to look at, and the page was already written.
-    Column(
+    Row(
         Modifier.fillMaxWidth()
             .clickable { onOpen(taxon.id) }
             .padding(vertical = 6.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
+        /*
+         * A thumbnail of the mushroom, where the list is short enough to want one.
+         *
+         * Only at the top of the page. Down in "also about" there are ninety names and
+         * twelve drawings between them, and a column of mostly-empty boxes is a worse
+         * list than one with no pictures at all. Up here the list is the ten worth
+         * knowing, and those are the dangerous ones and what they are confused with,
+         * which is exactly the set that has plates — recognising one on sight is the
+         * whole reason that section is at the top.
+         */
+        if (plate) {
+            val drawing = TaxonPlate.of(taxon.id)
+            Box(Modifier.size(56.dp).padding(end = 8.dp)) {
+                if (drawing != null) {
+                    Image(
+                        painter = painterResource(drawing),
+                        contentDescription = null,
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                }
+            }
+        }
+        Column(Modifier.weight(1f)) {
         Text(
             taxon.commonName?.let { "${taxon.scientificName} — $it" }
                 ?: taxon.scientificName,
@@ -202,6 +230,7 @@ private fun TaxonLine(taxon: Taxon, onOpen: (String) -> Unit) {
                 },
                 style = MaterialTheme.typography.bodySmall,
             )
+        }
         }
     }
 }
