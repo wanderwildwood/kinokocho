@@ -165,4 +165,17 @@ class SchemaLoaderTest {
             assertEquals("$group repeats a noun: $nouns", nouns.size, nouns.toSet().size)
         }
     }
+
+    @Test
+    fun `colour choices carry the gloss that tells them apart`() {
+        // Written for a screen with no colour and shown by nothing until now: "White"
+        // and "Cream / off-white" are two words a reader has to choose between with
+        // nothing to go on, and the gloss is the whole difference.
+        val capColour = schema.characters.first { it.id == "cap_colour" }
+        val values = schema.valuesOf(capColour)
+        assertEquals(schema.colours.size, values.size)
+        values.forEach {
+            assertTrue("${it.id} reaches the screen with no gloss", !it.gloss.isNullOrBlank())
+        }
+    }
 }

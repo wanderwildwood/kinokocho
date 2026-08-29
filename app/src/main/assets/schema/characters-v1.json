@@ -261,6 +261,7 @@
     {
       "id": "growth_habit",
       "label": "How are they arranged?",
+      "hint": "How they stand in relation to each other, not how many there are.",
       "noun": "Arrangement",
       "group": "whole",
       "kind": "state",
@@ -467,6 +468,7 @@
     {
       "id": "stipe_flesh",
       "label": "What is inside the stem?",
+      "hint": "Split the stem lengthways and look.",
       "noun": "Inside",
       "group": "stem",
       "kind": "state",
@@ -495,6 +497,7 @@
     {
       "id": "gill_attachment",
       "label": "How do the gills meet the stem?",
+      "hint": "Easiest on a mushroom cut in half down through the stem.",
       "noun": "Attachment",
       "group": "gills",
       "kind": "state",
@@ -532,6 +535,7 @@
     {
       "id": "gill_spacing",
       "label": "How closely are the gills packed?",
+      "hint": "Count across a centimetre near the edge rather than judging the whole.",
       "noun": "Spacing",
       "group": "gills",
       "kind": "state",
@@ -735,6 +739,7 @@
     {
       "id": "cap_margin",
       "label": "What is the cap edge like?",
+      "hint": "The outer edge of the cap, seen from the side.",
       "noun": "Edge",
       "group": "cap",
       "kind": "state",
@@ -839,6 +844,7 @@
     {
       "id": "bruising_where",
       "label": "Where does it change?",
+      "hint": "Where the colour moved, which is often only one part of it.",
       "noun": "Bruises where",
       "group": "flesh",
       "kind": "state",
@@ -906,6 +912,7 @@
     {
       "id": "latex",
       "label": "Does it ooze anything when broken?",
+      "hint": "Break a gill or nick the stem and watch the cut for a few seconds. Nothing at all is a real answer and a common one.",
       "noun": "Latex",
       "group": "flesh",
       "kind": "state",
@@ -1034,6 +1041,7 @@
     {
       "id": "odour",
       "label": "What does it smell of?",
+      "hint": "Crush a piece and smell it fresh. Names for smells are personal, so pick the nearest rather than the exact.",
       "noun": "Smell",
       "group": "smell",
       "kind": "state",
@@ -1112,6 +1120,7 @@
     {
       "id": "taste",
       "label": "What does it taste of?",
+      "hint": "A small piece on the tongue, chewed briefly and spat out — never swallowed, and never on anything that might be an Amanita. Acrid and bitter come on slowly, so wait a moment before deciding.",
       "noun": "Taste",
       "group": "smell",
       "kind": "state",
@@ -1176,6 +1185,7 @@
     {
       "id": "veil_remnants",
       "label": "Is there anything left on the cap?",
+      "hint": "What the veil left on the cap. Rain and handling take it off, so on an old one nothing there proves nothing.",
       "noun": "Veil",
       "group": "cap",
       "kind": "state",
@@ -1292,6 +1302,7 @@
     {
       "id": "koh",
       "label": "KOH reaction",
+      "hint": "A drop of potassium hydroxide solution on the cap. A bench test, not a field one — leave it blank unless you actually have the bottle.",
       "noun": "KOH",
       "group": "spores",
       "kind": "state",
@@ -1350,6 +1361,7 @@
     {
       "id": "habitat",
       "label": "What sort of place is it?",
+      "hint": "The wider place rather than what it is growing on — the wood, not the log.",
       "noun": "Place",
       "group": "where",
       "kind": "state",
@@ -1423,6 +1435,7 @@
     {
       "id": "associated_tree",
       "label": "What trees are nearby?",
+      "hint": "Within a few metres. Many fungi grow with one kind of tree and no other, so this is worth a look round.",
       "noun": "Trees",
       "group": "where",
       "kind": "state",
@@ -1450,6 +1463,7 @@
     {
       "id": "age",
       "label": "How old is the specimen?",
+      "hint": "Never keyed on. It decides how much a missing ring or veil is allowed to rule out, because those fall off.",
       "noun": "Age",
       "group": "whole",
       "kind": "state",
@@ -1475,6 +1489,7 @@
     {
       "id": "condition",
       "label": "What condition is it in?",
+      "hint": "Never keyed on. A dried or rotten specimen has lost characters rather than never had them.",
       "noun": "Condition",
       "group": "whole",
       "kind": "state",

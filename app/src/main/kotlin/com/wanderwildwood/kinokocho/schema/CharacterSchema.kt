@@ -34,7 +34,7 @@ data class CharacterSchema(
     /** The values a character offers, resolving the shared colour list. */
     fun valuesOf(character: Character): List<CharacterValue> =
         if (character.valuesFromColours) {
-            colours.map { CharacterValue(it.id, it.label) }
+            colours.map { CharacterValue(it.id, it.label, gloss = it.gloss) }
         } else {
             character.values
         }
@@ -65,6 +65,16 @@ data class CharacterValue(
     val id: String,
     val label: String,
     val uncertain: Boolean = false,
+    /**
+     * A few words saying what the term means, where the label alone will not.
+     *
+     * Carried by every colour term in the schema and shown by nothing, which made it the
+     * one piece of data in the app that was written for exactly this screen and never
+     * reached it. On a panel with no colour, "White" and "Cream / off-white" are two
+     * words a person has to choose between with nothing to go on; "paper white, no tint"
+     * against "whitish with a warm tint" is the whole difference.
+     */
+    val gloss: String? = null,
 )
 
 data class Character(

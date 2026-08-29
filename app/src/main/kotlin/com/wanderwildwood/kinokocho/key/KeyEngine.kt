@@ -253,6 +253,9 @@ class KeyEngine(
         val live = (if (noRanking) ranking.candidates else leading).map { it.taxon }
         if (live.isEmpty()) return null
 
+        val lethalInPlay = ranking.hazards.any {
+            it.taxon.hazard.severity == Hazard.Severity.LETHAL
+        }
         val settling = charactersThatSettleAHazard(ranking)
         val declared = withGatingQuestions(settling.declared, answers)
         val disagreeing = withGatingQuestions(settling.disagreeing, answers)
@@ -277,6 +280,20 @@ class KeyEngine(
              * should not rank a thumb-sized one first - it is just not asked here.
              */
             .filter { it.kind != Character.Kind.MEASUREMENT }
+            /*
+             * And never asks for a taste while something lethal is still in play.
+             *
+             * Tasting is a real field method — a small piece chewed and spat out — and
+             * the schema explains how. But an app that has just told a reader it cannot
+             * rule out a destroying angel must not, on the next screen, ask them what it
+             * tastes like. Whatever the pharmacology says about the dose, a key that
+             * invites you to put a possible Amanita in your mouth has stopped being
+             * careful, and being careful is the entire argument for this app existing.
+             *
+             * It comes back the moment the deadly ones are ruled out, which is when
+             * every guide says to use it.
+             */
+            .filterNot { it.id == "taste" && lethalInPlay }
             .map { it to askingValue(it, live) }
             // Never ask something that cannot separate anything. Once one candidate
             // stands alone there is no next question, and the honest answer is none.

@@ -124,16 +124,32 @@ fun NewEntryScreen(
             } else {
                 items(values, key = { it.id }) { value ->
                     val selected = value.id in picked
+                    // The gloss where there is one. Colour is the character with no
+                    // drawings and the most words that need explaining, and these two
+                    // facts are the same fact.
+                    val face: @Composable () -> Unit = {
+                        if (value.gloss == null) {
+                            Text(value.label)
+                        } else {
+                            Column {
+                                Text(value.label)
+                                Text(
+                                    value.gloss!!,
+                                    style = MaterialThemeTypography().bodySmall,
+                                )
+                            }
+                        }
+                    }
                     if (selected) {
                         ButtonMMD(
                             onClick = { choose(value.id) },
                             modifier = Modifier.fillMaxWidth(),
-                        ) { Text(value.label) }
+                        ) { face() }
                     } else {
                         OutlinedButtonMMD(
                             onClick = { choose(value.id) },
                             modifier = Modifier.fillMaxWidth(),
-                        ) { Text(value.label) }
+                        ) { face() }
                     }
                 }
             }

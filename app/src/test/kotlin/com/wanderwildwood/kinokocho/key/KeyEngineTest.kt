@@ -531,6 +531,43 @@ class KeyEngineTest {
         assertNull(engine.nextQuestion(a, considerTop = 1))
     }
 
+    @Test
+    fun `it never asks what a possible destroying angel tastes like`() {
+        // Tasting is a real field method and the schema explains how to do it. But an
+        // app that has just said it cannot rule out a destroying angel must not, on the
+        // next screen, ask what it tastes like.
+        var a = KeyEngine.Answers(month = 9)
+        repeat(14) {
+            val q = engine.nextQuestion(a) ?: return@repeat
+            val lethal = engine.rank(a).hazards
+                .filter { it.taxon.hazard.severity == Hazard.Severity.LETHAL }
+            assertTrue(
+                "asked for a taste while ${lethal.map { it.taxon.id }} was live",
+                q != "taste" || lethal.isEmpty(),
+            )
+            val v = pack.taxon("amanita_bisporigera")!!.characters[q]?.firstOrNull()?.value
+            a = if (v != null) a.with(q, setOf(v)) else a.markNotTested(q)
+        }
+    }
+
+    @Test
+    fun `taste comes back once nothing deadly is left`() {
+        // Held back, not removed. Every guide uses it, and it is one of the better
+        // characters once the dangerous ones are gone.
+        val a = answers(
+            "fruitbody_type" to "gilled_stemmed",
+            "substrate" to "soil",
+            "latex" to "present",
+        )
+        assertTrue(engine.rank(a).hazards.none {
+            it.taxon.hazard.severity == Hazard.Severity.LETHAL
+        })
+        assertTrue(
+            "taste should be available again",
+            engine.mostValuableMissing(a).any { it.first == "taste" },
+        )
+    }
+
     // ---- an old specimen -------------------------------------------------------
 
     @Test
