@@ -90,6 +90,79 @@ fun CandidateScreen(
         }
 
         /*
+         * Where and when, gathered up rather than left among forty other characters.
+         *
+         * "Is this the mushroom I am looking at?" is answered as much by the place as by
+         * the mushroom: the wrong wood, the wrong month or the wrong altitude rules
+         * things out that no amount of squinting at gills will.
+         */
+        item {
+            Section("Where and when")
+            listOf("habitat", "substrate", "substrate_wood", "associated_tree").forEach { cid ->
+                val rows = taxon.characters[cid] ?: return@forEach
+                val character = vm.schema.character(cid) ?: return@forEach
+                val ls = rows.filter { it.frequency != Frequency.RARELY }.mapNotNull { st ->
+                    vm.schema.valuesOf(character).firstOrNull { it.id == st.value }?.label
+                }
+                if (ls.isNotEmpty()) {
+                    Text(
+                        "${character.label} ${ls.joinToString(", ")}",
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 3.dp),
+                    )
+                }
+            }
+            if (taxon.seasonMonths.isNotEmpty()) {
+                val names = DateFormatSymbols(Locale.getDefault()).shortMonths
+                Text(
+                    "Recorded in " + taxon.seasonMonths.sorted()
+                        .joinToString(", ") { names[it - 1] },
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 3.dp),
+                )
+            }
+            val cap = taxon.measurements["cap_width_mm"]
+            val stem = taxon.measurements["stipe_height_mm"]
+            if (cap != null || stem != null) {
+                Text(
+                    listOfNotNull(
+                        cap?.let { "cap ${it.first}\u2013${it.last} mm across" },
+                        stem?.let { "stem ${it.first}\u2013${it.last} mm tall" },
+                    ).joinToString(", ").replaceFirstChar { it.uppercase() },
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 3.dp),
+                )
+            }
+        }
+
+        // High up, because this is the question a person is really asking: not "does
+        // this fit" but "what else fits, and how would I tell?"
+        if (taxon.lookalikes.isNotEmpty()) {
+            item {
+                Section("Confused with")
+                taxon.lookalikes.forEach { look ->
+                    val other = vm.pack.taxon(look.taxon)
+                    Text(
+                        other?.commonName?.let { "${other.scientificName} \u2014 $it" }
+                            ?: other?.scientificName ?: look.taxon,
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(top = 6.dp),
+                    )
+                    Text(look.note, style = MaterialTheme.typography.bodySmall)
+                    if (look.discriminators.isNotEmpty()) {
+                        Text(
+                            "Settled by: " + look.discriminators
+                                .mapNotNull { vm.schema.character(it)?.label }
+                                .joinToString(" "),
+                            style = MaterialTheme.typography.bodySmall,
+                        )
+                    }
+                }
+            }
+        }
+
+        /*
          * What it is said to be, laid against what was answered.
          *
          * Marked where the answer agrees and where it does not, because a candidate that
@@ -97,7 +170,33 @@ fun CandidateScreen(
          * thing worth looking at again — and the key will not say so on its own, since a
          * single mismatch only moves a taxon down the list rather than off it.
          */
-        item { Section("What it is said to be") }
+        item {
+            Section("Does it match?")
+            val described = vm.schema.characters.filter { taxon.characters.containsKey(it.id) }
+            var agree = 0
+            var differ = 0
+            described.forEach { c ->
+                val answered = answers.values[c.id].orEmpty()
+                if (answered.isNotEmpty()) {
+                    val states = taxon.characters[c.id].orEmpty()
+                    if (answered.any { a -> states.any { it.value == a } }) agree++ else differ++
+                }
+            }
+            Text(
+                when {
+                    agree == 0 && differ == 0 ->
+                        "You have not recorded anything this is described by yet."
+                    differ == 0 ->
+                        "Everything you recorded agrees \u2014 $agree of ${described.size} described here."
+                    else ->
+                        "$agree agree, $differ do not. A single disagreement is worth " +
+                            "looking at again: it does not remove a candidate, it only " +
+                            "moves it down."
+                },
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(bottom = 4.dp),
+            )
+        }
         val described = vm.schema.characters.filter { taxon.characters.containsKey(it.id) }
         items(described.size) { i ->
             val character = described[i]
@@ -126,53 +225,6 @@ fun CandidateScreen(
                         )
                     }
                 }
-            }
-        }
-
-        if (taxon.lookalikes.isNotEmpty()) {
-            item {
-                Section("Confused with")
-                taxon.lookalikes.forEach { look ->
-                    val other = vm.pack.taxon(look.taxon)
-                    Text(
-                        other?.scientificName ?: look.taxon,
-                        style = MaterialTheme.typography.bodySmall,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(top = 6.dp),
-                    )
-                    Text(look.note, style = MaterialTheme.typography.bodySmall)
-                    if (look.discriminators.isNotEmpty()) {
-                        Text(
-                            "Settled by: " + look.discriminators
-                                .mapNotNull { vm.schema.character(it)?.label }
-                                .joinToString(" "),
-                            style = MaterialTheme.typography.bodySmall,
-                        )
-                    }
-                }
-            }
-        }
-
-        item {
-            Section("When and how big")
-            if (taxon.seasonMonths.isNotEmpty()) {
-                val names = DateFormatSymbols(Locale.getDefault()).shortMonths
-                Text(
-                    taxon.seasonMonths.sorted().joinToString(", ") { names[it - 1] },
-                    style = MaterialTheme.typography.bodySmall,
-                )
-            }
-            taxon.measurements["cap_width_mm"]?.let {
-                Text(
-                    "Cap ${it.first}–${it.last} mm across",
-                    style = MaterialTheme.typography.bodySmall,
-                )
-            }
-            taxon.measurements["stipe_height_mm"]?.let {
-                Text(
-                    "Stem ${it.first}–${it.last} mm tall",
-                    style = MaterialTheme.typography.bodySmall,
-                )
             }
         }
 
