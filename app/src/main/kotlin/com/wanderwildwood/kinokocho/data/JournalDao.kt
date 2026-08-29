@@ -26,6 +26,17 @@ interface JournalDao {
     fun observeAll(): Flow<List<FullObservation>>
 
     /**
+     * Everything kept, once, for writing out.
+     *
+     * The flow above is what the journal watches; this is what a backup reads. A backup
+     * that subscribed to a flow would be a backup that could change under itself
+     * halfway through writing.
+     */
+    @Transaction
+    @Query("SELECT * FROM observations WHERE kept = 1 ORDER BY recorded_at ASC")
+    suspend fun allKept(): List<FullObservation>
+
+    /**
      * A find that was being keyed out when the app stopped.
      *
      * There is at most one worth caring about — the most recent — and finding it at

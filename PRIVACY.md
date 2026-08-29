@@ -91,6 +91,21 @@ now so that they are harder to quietly drop later:
 - Said plainly at the point of pressing that this is a publication, subject to
   iNaturalist's terms and whatever licence they choose there.
 
+## Keeping a copy
+
+Under the (i) there is "Keep a copy of everything", which writes the whole journal — every
+kept find and every photograph — into a zip and hands it to the share sheet. Where it goes
+from there is entirely your choice: a cable, a drive, a message to yourself. The app has no
+network permission and cannot send it anywhere itself.
+
+The file is written into the app's cache, which the system may clear whenever it likes, and
+is handed out one URI at a time through the same `FileProvider` the camera uses. Inside is
+plain JSON with the schema's own names, so the notes are readable with a text editor and no
+app at all.
+
+It only reads. Nothing in the export can alter the journal, which is the property that
+matters in a thing you reach for when something has already gone wrong.
+
 ## Sending a find to a person
 
 What the app can do today is hand a find to the share sheet: plain text and the

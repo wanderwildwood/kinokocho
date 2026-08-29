@@ -15,6 +15,7 @@ import com.wanderwildwood.kinokocho.key.TaxonPack
 import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
 import com.wanderwildwood.kinokocho.schema.SchemaLoader
+import com.wanderwildwood.kinokocho.ui.JournalExport
 import com.wanderwildwood.kinokocho.ui.photoDir
 import java.io.File
 import java.util.Calendar
@@ -326,6 +327,23 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun isMeasurement(characterId: String): Boolean =
         schema.character(characterId)?.kind == Character.Kind.MEASUREMENT
+
+    /**
+     * Writes the whole journal out, and hands back the file to be shared.
+     *
+     * On a background thread because it copies every photograph, and reported through a
+     * callback rather than a state flag because the only thing waiting on it is a share
+     * sheet. Nothing here can alter the journal — the property that matters most in a
+     * thing somebody reaches for when something has already gone wrong.
+     */
+    fun exportJournal(onReady: (java.io.File?) -> Unit) {
+        viewModelScope.launch {
+            val file = runCatching {
+                JournalExport.write(getApplication(), dao.allKept())
+            }.getOrNull()
+            onReady(file)
+        }
+    }
 
     private fun monthOf(millis: Long): Int =
         Calendar.getInstance().apply { timeInMillis = millis }.get(Calendar.MONTH) + 1

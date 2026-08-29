@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    The single directory the camera app is allowed to write into.
+    The two directories that can be handed out, one URI at a time.
 
-    Scoped as narrowly as it goes: one folder inside the app's own files, granted one
-    URI at a time for one picture. Nothing else in the app is reachable through this.
+    `observation_photos` is where the camera app writes: one folder inside the app's own
+    files, granted for one picture. `backups` is where a journal export is written before
+    it is handed to whatever the person chose to keep it in.
+
+    Scoped as narrowly as it goes. Nothing else in the app is reachable through this, and
+    in particular the database is not.
 -->
 <paths>
     <files-path name="observation_photos" path="photos/" />
+    <cache-path name="backups" path="." />
 </paths>

@@ -27,7 +27,7 @@ import com.wanderwildwood.kinokocho.BuildConfig
  * of their games, and nobody can safely assume which way a journal app went.
  */
 @Composable
-fun AboutDialog(onDismiss: () -> Unit) {
+fun AboutDialog(onDismiss: () -> Unit, onExport: () -> Unit = {}) {
     Dialog(onDismissRequest = onDismiss) {
         Column(
             Modifier
@@ -56,6 +56,30 @@ fun AboutDialog(onDismiss: () -> Unit) {
             Line("GNU General Public License v3")
             Line("Character schema and drawings — original, this project.")
             Line("Question order after Watson & Dallwitz, DELTA, 1974.")
+
+            Spacer(14)
+            /*
+             * A way to get the journal off the phone.
+             *
+             * The database says of itself that it holds notes that cannot be taken again
+             * — the mushroom is gone and the season is over — and for a long time there
+             * was no way to copy any of them anywhere. A phone is lost, dropped in a
+             * stream, or simply replaced, and a book that lives in exactly one place is
+             * a book with a date on it.
+             *
+             * Here rather than on the journal itself, because it is a thing done twice a
+             * year and the journal screen is for the finds.
+             */
+            Text(
+                "Keep a copy of everything",
+                style = MaterialTheme.typography.bodySmall,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.fillMaxWidth().clickable(onClick = onExport),
+            )
+            Line(
+                "A zip of every find and every photograph, handed to whatever you keep " +
+                    "things in. Plain JSON inside, readable without this app."
+            )
 
             Spacer(14)
             Line("github.com/wanderwildwood/kinokocho")

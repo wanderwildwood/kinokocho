@@ -1,5 +1,6 @@
 package com.wanderwildwood.kinokocho
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -24,7 +25,9 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mudita.mmd.ThemeMMD
 import com.wanderwildwood.kinokocho.key.KeyEngine
+import androidx.compose.ui.platform.LocalContext
 import com.wanderwildwood.kinokocho.ui.AboutDialog
+import com.wanderwildwood.kinokocho.ui.JournalExport
 import com.wanderwildwood.kinokocho.ui.CandidateScreen
 import com.wanderwildwood.kinokocho.ui.EntryScreen
 import com.wanderwildwood.kinokocho.ui.JournalScreen
@@ -185,7 +188,25 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
         )
     }
 
-    if (about) AboutDialog(onDismiss = { about = false })
+    if (about) {
+        val context = LocalContext.current
+        AboutDialog(
+            onDismiss = { about = false },
+            onExport = {
+                vm.exportJournal { file ->
+                    if (file != null) {
+                        context.startActivity(
+                            Intent.createChooser(
+                                JournalExport.intent(context, file),
+                                "Keep a copy of the journal",
+                            )
+                        )
+                    }
+                }
+                about = false
+            },
+        )
+    }
 
     val forPhotos = draft
     if (photographing && forPhotos != null) {
