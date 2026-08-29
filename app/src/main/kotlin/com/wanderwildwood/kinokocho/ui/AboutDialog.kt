@@ -39,9 +39,10 @@ fun AboutDialog(onDismiss: () -> Unit) {
 
             Spacer(14)
             Line(
-                "A field journal. It records what you saw and helps you ask someone who " +
-                    "can identify it. It never tells you what a mushroom is, and it has " +
-                    "no opinion about eating anything."
+                "A field journal. It records what you saw and narrows what it could " +
+                    "be — often far enough that someone more experienced can say. It " +
+                    "does not decide, it has no opinion about eating anything, and on " +
+                    "a screen with no colour it could not be the one to decide anyway."
             )
 
             Spacer(14)
