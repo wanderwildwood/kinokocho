@@ -10,10 +10,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.asImageBitmap
+import android.graphics.BitmapFactory
+import java.io.File
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
+import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.kinokocho.JournalViewModel
 import com.wanderwildwood.kinokocho.key.Hazard
 import java.text.SimpleDateFormat
@@ -175,6 +187,69 @@ fun EntryScreen(
             }
         }
 
+        // Photographs, shown rather than counted. A thumbnail is also the only way to
+        // notice that the picture of the base came out unusable before the specimen is
+        // back in the wood.
+        if (draft.photos.isNotEmpty()) {
+            item {
+                Section("Photographs")
+                val context = LocalContext.current
+                LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    items3(draft.photos.size) { i ->
+                        val photo = draft.photos[i]
+                        val file = File(photoDir(context), photo.fileName)
+                        val bitmap = remember(photo.fileName) {
+                            runCatching {
+                                BitmapFactory.decodeFile(
+                                    file.absolutePath,
+                                    // Sampled down: a phone camera JPEG decoded at full
+                                    // size to fill a 96dp box is megabytes for nothing.
+                                    BitmapFactory.Options().apply { inSampleSize = 8 },
+                                )?.asImageBitmap()
+                            }.getOrNull()
+                        }
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            if (bitmap != null) {
+                                Image(
+                                    bitmap = bitmap,
+                                    contentDescription = photo.slot,
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier.size(96.dp),
+                                )
+                            } else {
+                                Text("(missing)", style = MaterialTheme.typography.bodySmall)
+                            }
+                            Text(
+                                PhotoSlot.entries.firstOrNull { it.id == photo.slot }
+                                    ?.label ?: photo.slot,
+                                style = MaterialTheme.typography.bodySmall,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        // Where it was, typed rather than read off GPS. Foraging spots are the reason
+        // this app never asks for location.
+        item {
+            Section("Where, and anything else")
+            var place by remember(draft.uuid) { mutableStateOf(draft.placeNote) }
+            TextFieldMMD(
+                value = place,
+                onValueChange = { place = it; vm.setPlaceNote(it) },
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text("The place, in your own words") },
+            )
+            var note by remember(draft.uuid) { mutableStateOf(draft.note) }
+            TextFieldMMD(
+                value = note,
+                onValueChange = { note = it; vm.setNote(it) },
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                placeholder = { Text("Anything the questions did not cover") },
+            )
+        }
+
         item {
             Section("What you wrote down")
         }
@@ -202,6 +277,11 @@ fun EntryScreen(
 }
 
 /** The answers themselves, one line each, label and value. */
+private fun androidx.compose.foundation.lazy.LazyListScope.items3(
+    count: Int,
+    content: @Composable (Int) -> Unit,
+) = items(count) { content(it) }
+
 private fun androidx.compose.foundation.lazy.LazyListScope.items2(
     draft: JournalViewModel.Draft,
     vm: JournalViewModel,
