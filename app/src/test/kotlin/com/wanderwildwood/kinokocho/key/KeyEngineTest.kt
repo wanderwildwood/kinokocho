@@ -60,6 +60,36 @@ class KeyEngineTest {
         }
     }
 
+    @Test
+    fun `nothing dangerous is left with no confusion recorded`() {
+        // An audit found nine of them, the false chanterelle among them, while all four
+        // chanterelles also had an empty list — which is the one confusion a chanterelle
+        // hunter here actually makes. It cost two things: the page a reader checks last
+        // was blank, and the key can only pull a settling question forward when it has a
+        // hand-declared discriminator to pull.
+        val named = pack.taxa.flatMap { taxon ->
+            taxon.lookalikes.flatMap { listOf(taxon.id, it.taxon) }
+        }.toSet()
+        val orphaned = pack.taxa
+            .filter {
+                it.hazard.severity == Hazard.Severity.LETHAL ||
+                    it.hazard.severity == Hazard.Severity.SEVERE ||
+                    it.hazard.severity == Hazard.Severity.GI
+            }
+            .map { it.id }
+            .filterNot { it in named }
+        assertTrue("nothing is confused with $orphaned", orphaned.isEmpty())
+    }
+
+    @Test
+    fun `every discriminator names a character the schema has`() {
+        // A typo here is silent: the key looks the character up, gets nothing, and the
+        // settling boost quietly does not happen for that pair.
+        val ids = schema.characters.map { it.id }.toSet()
+        pack.taxa.flatMap { it.lookalikes }.flatMap { it.discriminators }.distinct()
+            .forEach { assertTrue("no such character: $it", it in ids) }
+    }
+
     // ---- ranking ---------------------------------------------------------------
 
     @Test
@@ -229,8 +259,17 @@ class KeyEngineTest {
 
     @Test
     fun `the first question is one anybody can answer`() {
-        val first = engine.nextQuestion(KeyEngine.Answers())
-        assertTrue("got $first", first == "fruitbody_type" || first == "substrate")
+        // With the month set, because the app always knows it and this test did not.
+        // A season bonus unties every score by a fraction, which used to be enough to
+        // engage the safety boost on question one and open the key with "what is the
+        // flesh like?" — a question that needs a knife and a cut mushroom.
+        (1..12).forEach { month ->
+            val first = engine.nextQuestion(KeyEngine.Answers(month = month))
+            assertTrue("in month $month it opens with $first",
+                first == "fruitbody_type" || first == "substrate")
+        }
+        val noMonth = engine.nextQuestion(KeyEngine.Answers())
+        assertTrue("got $noMonth", noMonth == "fruitbody_type" || noMonth == "substrate")
     }
 
     @Test

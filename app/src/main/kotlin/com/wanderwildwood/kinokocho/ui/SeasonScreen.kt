@@ -56,7 +56,12 @@ import java.util.Locale
  * it turns up. Dropping a death cap for being uncommon is not a trade this app makes.
  */
 @Composable
-fun SeasonScreen(taxa: List<Taxon>, month: Int, onClose: () -> Unit) {
+fun SeasonScreen(
+    taxa: List<Taxon>,
+    month: Int,
+    onClose: () -> Unit,
+    onOpen: (String) -> Unit = {},
+) {
     val inSeason = taxa.filter { it.seasonMonths.isEmpty() || month in it.seasonMonths }
 
     val worthKnowing = worthKnowing(inSeason)
@@ -101,7 +106,7 @@ fun SeasonScreen(taxa: List<Taxon>, month: Int, onClose: () -> Unit) {
                     modifier = Modifier.padding(bottom = 4.dp),
                 )
             }
-            items(worthKnowing.size) { i -> TaxonLine(worthKnowing[i]) }
+            items(worthKnowing.size) { i -> TaxonLine(worthKnowing[i], onOpen) }
         }
 
         item {
@@ -113,7 +118,7 @@ fun SeasonScreen(taxa: List<Taxon>, month: Int, onClose: () -> Unit) {
                 modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
             )
         }
-        items(rest.size) { i -> TaxonLine(rest[i]) }
+        items(rest.size) { i -> TaxonLine(rest[i], onOpen) }
 
         item {
             OutlinedButtonMMD(
@@ -132,9 +137,16 @@ fun SeasonScreen(taxa: List<Taxon>, month: Int, onClose: () -> Unit) {
  * than after; a sought-after one is marked as sought after and nothing more.
  */
 @Composable
-private fun TaxonLine(taxon: Taxon) {
+private fun TaxonLine(taxon: Taxon, onOpen: (String) -> Unit) {
     val danger = taxon.hazard.severity.alwaysShow
-    Column(Modifier.fillMaxWidth().padding(vertical = 4.dp)) {
+    // Tapping a name opens the same page a shortlist opens, with nothing laid against
+    // it. Reading about a mushroom before finding one is how anybody learns which ones
+    // to look at, and the page was already written.
+    Column(
+        Modifier.fillMaxWidth()
+            .clickable { onOpen(taxon.id) }
+            .padding(vertical = 6.dp),
+    ) {
         Text(
             taxon.commonName?.let { "${taxon.scientificName} — $it" }
                 ?: taxon.scientificName,

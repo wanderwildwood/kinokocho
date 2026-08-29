@@ -158,20 +158,40 @@ fun CandidateScreen(
             }
         }
 
-        // High up, because this is the question a person is really asking: not "does
-        // this fit" but "what else fits, and how would I tell?"
-        if (taxon.lookalikes.isNotEmpty()) {
+        /*
+         * High up, because this is the question a person is really asking: not "does
+         * this fit" but "what else fits, and how would I tell?"
+         *
+         * Both directions. Confusion is mutual and the rows are not: the jack-o'-lantern
+         * names the chanterelle, the chanterelle does not name it back, and this page
+         * used to read only a taxon's own list — so somebody keying out a chanterelle
+         * saw no lookalikes at all while the warning sat one row away, written down and
+         * unreachable. Twenty-nine pairs were half-visible that way.
+         */
+        val confusedWith = taxon.lookalikes.map { it.taxon to it } +
+            vm.pack.taxa.flatMap { other ->
+                other.lookalikes.filter { it.taxon == taxon.id }.map { other.id to it }
+            }
+        if (confusedWith.isNotEmpty()) {
             item {
                 Section("Confused with")
-                taxon.lookalikes.forEach { look ->
-                    val other = vm.pack.taxon(look.taxon)
+                confusedWith.distinctBy { it.first }.forEach { (otherId, look) ->
+                    val other = vm.pack.taxon(otherId)
                     Text(
                         other?.commonName?.let { "${other.scientificName} — $it" }
-                            ?: other?.scientificName ?: look.taxon,
+                            ?: other?.scientificName ?: otherId,
                         style = MaterialTheme.typography.bodySmall,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(top = 8.dp),
                     )
+                    other?.hazard?.severity?.takeIf { it.alwaysShow }?.let {
+                        Text(
+                            if (it == Hazard.Severity.LETHAL) "Can kill."
+                            else "Can cause serious harm.",
+                            style = MaterialTheme.typography.bodySmall,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
                     Text(look.note, style = MaterialTheme.typography.bodySmall)
                     if (look.discriminators.isNotEmpty()) {
                         Text(
@@ -187,18 +207,18 @@ fun CandidateScreen(
         }
 
         item {
-            Section("Does it match?")
-            Text(
-                when {
-                    answered.isEmpty() ->
-                        "You have not recorded anything this is described by yet."
-                    differ == 0 -> "Everything you recorded agrees."
+            // Reached from the month page there is nothing to match against, so it does
+            // not ask a question it cannot answer — it just describes the mushroom.
+            Section(if (answered.isEmpty()) "What it is like" else "Does it match?")
+            if (answered.isNotEmpty()) {
+                Text(
                     // A single disagreement does not remove a candidate, it only moves
                     // it down, and the reader is the one who decides which it was.
-                    else -> "$agree agree, $differ do not."
-                },
-                style = MaterialTheme.typography.bodySmall,
-            )
+                    if (differ == 0) "Everything you recorded agrees."
+                    else "$agree agree, $differ do not.",
+                    style = MaterialTheme.typography.bodySmall,
+                )
+            }
         }
 
         // Everything the row says, by part of the mushroom. Where and when is already

@@ -168,20 +168,26 @@ class KeyEngine(
      *
      * The window is the leading candidates rather than the whole pack, so that the
      * question suits what is actually in play. But a window is only meaningful once
-     * there is a ranking to take the head of: with nothing answered every taxon scores
+     * there is a ranking to take the head of. With nothing answered every taxon scores
      * the same and the sort falls through to scientific name, so taking twelve took the
      * twelve nearest the front of the alphabet - four Amanitas and an Armillaria - and
-     * chose the opening question of the whole key from them. Where the leaders are tied
-     * with everything behind them there are no leaders, and the measurement is over the
-     * pack entire.
+     * chose the opening question of the whole key from them. Knowing the month is not
+     * better: it moves every in-season score by the same fraction, which sorts them
+     * ahead of the rest without distinguishing any of them from each other. Until a
+     * character has been answered the measurement is over the pack entire.
      */
     fun nextQuestion(answers: Answers, considerTop: Int = 12): String? {
         val ranking = rank(answers)
         val leading = ranking.candidates.take(considerTop)
-        val tied = leading.isNotEmpty() &&
-            ranking.candidates.size > leading.size &&
-            ranking.candidates.last().score == leading.last().score
-        val live = (if (tied) ranking.candidates else leading).map { it.taxon }
+        // Nothing answered means no ranking, whatever the scores say. A season bonus
+        // gives every in-season taxon the same fraction of a point, which is enough to
+        // sort them ahead of the rest and not enough to mean anything: the head of that
+        // list is the first twelve in-season names alphabetically, and the opening
+        // question of the whole key was being measured over them.
+        val noRanking = answers.values.isEmpty() ||
+            (leading.isNotEmpty() && ranking.candidates.size > leading.size &&
+                ranking.candidates.last().score == leading.last().score)
+        val live = (if (noRanking) ranking.candidates else leading).map { it.taxon }
         if (live.isEmpty()) return null
 
         val settling = charactersThatSettleAHazard(ranking)
@@ -239,13 +245,63 @@ class KeyEngine(
         // characters that technically separate an Amanita from something and that rain
         // or a dry week will turn into the wrong answer - and reached the base of the
         // stem sixth.
-        val settle = compareBy<Pair<Character, Double>>({ it.first.power }, { it.second })
-        askable.filter { it.first.id in declared }
-            .ifEmpty { askable.filter { it.first.id in disagreeing } }
-            .maxWithOrNull(settle)
-            ?.let { return it.first.id }
+        // Count before power, tested rather than assumed. Reliability first looked
+        // like the right ordering — the tier is about telling two things apart, and a
+        // character you can apply is worth more than one you cannot — but it walked a
+        // reader holding a destroying angel past six questions without once asking
+        // about the base of the stem, and cost the whole pack a fifth of a question on
+        // average. How many deadly pairs a character settles is the better signal.
+        val settle = compareBy<Pair<Character, Double>>(
+            { declared[it.first.id] ?: 0 },
+            { it.first.power },
+            { it.second },
+        )
 
-        return askable.maxByOrNull { it.second }?.first?.id
+        // Not until something has actually been answered. Before that every deadly
+        // taxon in the pack is live, so "what would settle a hazard" is the union of
+        // every discriminator anyone ever wrote — not a hint but noise, and it was
+        // choosing the opening question of the whole key.
+        //
+        // The test for this was "are the scores still tied", and the month broke it.
+        // Knowing it is September moves every score by a fraction and unties them, so
+        // the app — which always knows the month — engaged the boost on question one
+        // and opened with "what is the flesh like?", a question that needs a knife. A
+        // season bonus is not somebody telling you something about the mushroom.
+        if (answers.values.isNotEmpty()) {
+            askable.filter { it.first.id in declared }
+                .ifEmpty { askable.filter { it.first.id in disagreeing } }
+                .maxWithOrNull(settle)
+                ?.let { return it.first.id }
+        }
+
+        return bestByGainRatio(askable, live)
+    }
+
+    /**
+     * The best question, by gain ratio among the characters that carry real information.
+     *
+     * Quinlan's own qualification on the gain ratio, and it is needed for the reason he
+     * gives: dividing by how many answers a character has over-corrects, and hands the
+     * choice to a character that splits the field in two and barely moves it. "Does it
+     * bruise?" removes one bit; "what kind of fungus is it?" removes two and a half. The
+     * ratio preferred the bruising question, and it opened the whole key with it.
+     *
+     * So the ratio only decides among characters that are at least averagely informative
+     * to begin with. Below that line a character is not competing on how cleanly it
+     * splits the field, it is competing on having had few ways to split it.
+     */
+    private fun bestByGainRatio(
+        options: List<Pair<Character, Double>>,
+        live: List<Taxon>,
+    ): String? {
+        if (options.isEmpty()) return null
+        val gains = options.associate { it.first.id to informationGain(it.first.id, live) }
+        val average = gains.values.filter { it > 0.0 }.average()
+        return options
+            .filter { (gains[it.first.id] ?: 0.0) >= average }
+            .ifEmpty { options }
+            .maxByOrNull { it.second }
+            ?.first?.id
     }
 
     /**
@@ -260,7 +316,7 @@ class KeyEngine(
      */
     private fun charactersThatSettleAHazard(ranking: Ranking): Settling {
         val hazards = ranking.hazards
-        if (hazards.isEmpty()) return Settling(emptySet(), emptySet())
+        if (hazards.isEmpty()) return Settling(emptyMap(), emptySet())
 
         val leader = ranking.candidates.firstOrNull()?.taxon
         return hazards.flatMap { hazard ->
@@ -284,10 +340,15 @@ class KeyEngine(
             }
             declared.map { it to true } + disagreeing.map { it to false }
         }.let { pairs ->
-            val declared = pairs.filter { it.second }.map { it.first }.toSet()
-            // A character named by hand is not put in the same bag as one merely
-            // inferred, even if both would settle the pair.
-            Settling(declared, pairs.map { it.first }.toSet() - declared)
+            // Counted, not collected. Sixty-one confusions across the pack name enough
+            // characters between them that the declared set is most of the schema once
+            // every deadly taxon is still live, and a tier holding most of the schema
+            // is not a tier. How many live deadly pairs a character would settle is
+            // what separates the base of the stem, which the Amanita problem turns on
+            // over and over, from a smell that settles exactly one pair.
+            val declared = pairs.filter { it.second }
+                .groupingBy { it.first }.eachCount()
+            Settling(declared, pairs.map { it.first }.toSet() - declared.keys)
         }
     }
 
@@ -304,7 +365,7 @@ class KeyEngine(
      * practically beside the point - which is how the pack getting better made the key
      * get worse.
      */
-    private data class Settling(val declared: Set<String>, val disagreeing: Set<String>)
+    private data class Settling(val declared: Map<String, Int>, val disagreeing: Set<String>)
 
     /**
      * Adds the questions standing between the reader and a character that would settle
@@ -317,21 +378,34 @@ class KeyEngine(
      * the volva question and then never asked it, because it was locked behind a door
      * nothing had a reason to open.
      */
-    private fun withGatingQuestions(settling: Set<String>, answers: Answers): Set<String> {
+    private fun withGatingQuestions(
+        settling: Map<String, Int>,
+        answers: Answers,
+    ): Map<String, Int> {
         if (settling.isEmpty()) return settling
-        val out = settling.toMutableSet()
-        val queue = ArrayDeque(settling)
+        val out = settling.toMutableMap()
+        val queue = ArrayDeque(settling.keys)
         while (queue.isNotEmpty()) {
             val id = queue.removeFirst()
             if (schema.isApplicable(id, answers.values)) continue
+            // A gate inherits the weight of what it unlocks, so the door is opened
+            // before anything less urgent is asked rather than after.
+            val weight = out[id] ?: 1
             schema.dependencies.filter { it.character == id }.forEach { dep ->
-                if (dep.requiresCharacter !in answers.values.keys && out.add(dep.requiresCharacter)) {
-                    queue.addLast(dep.requiresCharacter)
+                if (dep.requiresCharacter !in answers.values.keys) {
+                    val seen = out.put(
+                        dep.requiresCharacter,
+                        maxOf(out[dep.requiresCharacter] ?: 0, weight),
+                    )
+                    if (seen == null) queue.addLast(dep.requiresCharacter)
                 }
             }
         }
         return out
     }
+
+    private fun withGatingQuestions(settling: Set<String>, answers: Answers): Set<String> =
+        withGatingQuestions(settling.associateWith { 1 }, answers).keys
 
     private fun definiteStates(taxon: Taxon, characterId: String): Set<String> =
         taxon.characters[characterId]
@@ -475,6 +549,10 @@ class KeyEngine(
             // what they should have recorded is worse than saying nothing.
             .map { it.id to askingValue(it, live) }
             .filter { it.second > 0.0 }
+            // Not filtered to above-average gain the way [nextQuestion] is. That
+            // qualification exists to pick one question and it is wrong for a ranked
+            // list: it dropped the spore print, which is the single character this app
+            // most wants a reader to go back for.
             .sortedByDescending { it.second }
     }
 

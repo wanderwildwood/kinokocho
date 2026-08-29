@@ -732,7 +732,18 @@
       ],
       "reviewed": false,
       "prevalence": "common",
-      "sought": false
+      "sought": false,
+      "lookalikes": [
+        {
+          "taxon": "amanita_muscaria_guessowii",
+          "discriminators": [
+            "cap_colour",
+            "veil_remnants",
+            "stipe_base"
+          ],
+          "note": "Both carry yellow warts. Flavoconia is smaller with a yellow-orange cap and a ragged basal collar; the fly agaric has a bulb ringed with concentric scales."
+        }
+      ]
     },
     {
       "id": "galerina_marginata",
@@ -1146,7 +1157,27 @@
       ],
       "reviewed": false,
       "prevalence": "common",
-      "sought": true
+      "sought": true,
+      "lookalikes": [
+        {
+          "taxon": "pholiota_squarrosa",
+          "discriminators": [
+            "cap_surface",
+            "spore_print",
+            "hymenophore_colour"
+          ],
+          "note": "The shaggy scalycap is covered in coarse recurved scales on both cap and stem, and drops a brown print. The honey mushroom drops white."
+        },
+        {
+          "taxon": "cortinarius_armillatus",
+          "discriminators": [
+            "ring",
+            "spore_print",
+            "stipe_surface"
+          ],
+          "note": "The red-banded webcap has rusty bands around the stem rather than a membranous ring, a cobwebby veil when young, and a rust-brown print."
+        }
+      ]
     },
     {
       "id": "omphalotus_illudens",
@@ -1557,7 +1588,19 @@
       ],
       "reviewed": false,
       "prevalence": "common",
-      "sought": true
+      "sought": true,
+      "lookalikes": [
+        {
+          "taxon": "hygrophoropsis_aurantiaca",
+          "discriminators": [
+            "gill_extras",
+            "gill_spacing",
+            "substrate",
+            "flesh_consistency"
+          ],
+          "note": "The false chanterelle has true gills: thin, crowded, repeatedly forked, and they break away from the flesh if you push them. A chanterelle has blunt ridges that will not come off, and it comes up from soil rather than from wood or conifer litter."
+        }
+      ]
     },
     {
       "id": "cantharellus_cinnabarinus",
@@ -1734,7 +1777,28 @@
       ],
       "reviewed": false,
       "prevalence": "common",
-      "sought": true
+      "sought": true,
+      "lookalikes": [
+        {
+          "taxon": "hygrophoropsis_aurantiaca",
+          "discriminators": [
+            "gill_extras",
+            "gill_spacing",
+            "substrate",
+            "flesh_consistency"
+          ],
+          "note": "Thin crowded gills that break away, on wood or conifer litter, against blunt ridges that will not come off, from soil."
+        },
+        {
+          "taxon": "omphalotus_illudens",
+          "discriminators": [
+            "gill_attachment",
+            "growth_habit",
+            "substrate"
+          ],
+          "note": "Clustered on wood with true crowded gills, against a few together from soil with blunt ridges."
+        }
+      ]
     },
     {
       "id": "hygrophoropsis_aurantiaca",
@@ -2696,7 +2760,18 @@
       ],
       "reviewed": false,
       "prevalence": "common",
-      "sought": true
+      "sought": true,
+      "lookalikes": [
+        {
+          "taxon": "amanita_bisporigera",
+          "discriminators": [
+            "flesh_colour",
+            "flesh_consistency",
+            "stipe_base"
+          ],
+          "note": "An Amanita in its egg stage is a white ball in the soil. Cut every puffball from top to bottom before anything else: a puffball is uniform white paste throughout, an Amanita egg shows the outline of a cap, gills and stem inside."
+        }
+      ]
     },
     {
       "id": "laetiporus_sulphureus",
@@ -3240,6 +3315,15 @@
             "bruising_colour"
           ],
           "note": "Meripilus bruises DARK BROWN TO BLACK and peaks in July, three months earlier. Grifola does not bruise at all."
+        },
+        {
+          "taxon": "bondarzewia_berkeleyi",
+          "discriminators": [
+            "size",
+            "flesh_consistency",
+            "hymenophore_colour"
+          ],
+          "note": "Berkeley's polypore is much larger, with thick, tough, cream-coloured fronds and coarse pores. Hen of the woods is a mass of small grey-brown spoon-shaped caps."
         }
       ],
       "sources": [
@@ -3695,6 +3779,15 @@
             "cap_surface"
           ],
           "note": "Chambered inside rather than hollow, and folded rather than pitted."
+        },
+        {
+          "taxon": "morchella_americana",
+          "discriminators": [
+            "cap_colour",
+            "habitat",
+            "associated_tree"
+          ],
+          "note": "Both are hollow from tip to base. The black morel has dark ridges that darken further with age and comes earlier, often in mixed or burnt woodland; the yellow morel is paler with ridges no darker than its pits."
         }
       ],
       "sources": [
@@ -3945,7 +4038,16 @@
           10
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "lactarius_deliciosus",
+          "discriminators": [
+            "latex_colour",
+            "cap_colour"
+          ],
+          "note": "The indigo milkcap is blue throughout and bleeds blue latex. There is nothing else it can be confused with once it is cut."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -4417,7 +4519,17 @@
           9
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "amanita_phalloides",
+          "discriminators": [
+            "stipe_base",
+            "ring",
+            "flesh_consistency"
+          ],
+          "note": "Any green-capped, white-gilled mushroom deserves the base dug out. Russula flesh is brittle and snaps like chalk, and there is no ring and no sac."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -4874,6 +4986,35 @@
             "flesh_consistency"
           ],
           "note": "Angel wings is on conifer and is thin and pure white."
+        },
+        {
+          "taxon": "panellus_stipticus",
+          "discriminators": [
+            "size",
+            "taste",
+            "gill_spacing",
+            "stipe_presence"
+          ],
+          "note": "The bitter oyster is small — thumbnail to a few centimetres — with a tough, cinnamon cap and a fiercely bitter taste. An oyster mushroom is broad, pale and mild."
+        },
+        {
+          "taxon": "lentinellus_ursinus",
+          "discriminators": [
+            "gill_edge",
+            "taste",
+            "cap_surface"
+          ],
+          "note": "Bear lentinellus has ragged, saw-toothed gill edges and an acrid taste; the cap is hairy toward the base. An oyster's gill edges are even."
+        },
+        {
+          "taxon": "omphalotus_illudens",
+          "discriminators": [
+            "growth_habit",
+            "gill_attachment",
+            "cap_colour",
+            "stipe_presence"
+          ],
+          "note": "The jack-o'-lantern is orange throughout and grows in dense clusters with a definite stem, its gills running down it. An oyster is pale and grows shelved off the wood with little or no stem."
         }
       ],
       "sources": [
@@ -5700,7 +5841,16 @@
           11
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "cantharellus_lateritius",
+          "discriminators": [
+            "fruitbody_type",
+            "gill_attachment"
+          ],
+          "note": "Look underneath: the hedgehog has soft spines that rub off, the chanterelle has blunt ridges running down the stem."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -6001,7 +6151,17 @@
           4
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "peziza_badia",
+          "discriminators": [
+            "cap_colour",
+            "substrate",
+            "flesh_consistency"
+          ],
+          "note": "The scarlet elf cup is bright red inside and sits on wet fallen wood in late winter. The bay cup is brown, on soil, and later in the year."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -6708,7 +6868,17 @@
           12
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "hypoxylon_fragiforme",
+          "discriminators": [
+            "substrate_wood",
+            "size",
+            "flesh_consistency"
+          ],
+          "note": "Cut it: carbon balls are ringed inside in concentric silvery bands. Beech woodwart is smaller, pinkish when young, and on beech."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -7972,7 +8142,17 @@
           10
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "amanita_phalloides",
+          "discriminators": [
+            "odour",
+            "cap_colour",
+            "stipe_base"
+          ],
+          "note": "The false death cap smells strongly of raw potato and has a rimmed round bulb. The death cap has a sac-like volva and no potato smell. Do not settle this on colour."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -8187,7 +8367,17 @@
           10
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "amanita_phalloides",
+          "discriminators": [
+            "stipe_base",
+            "ring",
+            "spore_print"
+          ],
+          "note": "Both can be greenish with white gills. The death cap has a sac at the base and a skirt on the stem; the deceiving knight has neither. Dig the base out."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -8675,7 +8865,17 @@
           11
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "galerina_marginata",
+          "discriminators": [
+            "spore_print",
+            "ring",
+            "stipe_surface"
+          ],
+          "note": "Galerina has a ring or a ring zone and a rust-brown print. The common bonnet has neither ring nor coloured print. Getting this one wrong is fatal, so take the print before deciding."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -8917,7 +9117,18 @@
           10
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "inocybe_rimosa",
+          "discriminators": [
+            "spore_print",
+            "odour",
+            "cap_shape",
+            "cap_surface"
+          ],
+          "note": "Fibrecaps have a radially split, silky-fibrous cap, an umbo, a dull earthy or spermatic smell, and a dull brown print. The fairy ring champignon is smooth, smells faintly of almonds and prints white. Fibrecaps are muscarine poisonings."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -10546,7 +10757,18 @@
           10
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "paxillus_involutus",
+          "discriminators": [
+            "cap_margin",
+            "bruising",
+            "bruising_colour",
+            "spore_print"
+          ],
+          "note": "The brown roll-rim has a margin rolled tightly under, gills that bruise rust-brown to the touch and lift away from the cap, and a brown print. The common funnel does none of that."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -10913,6 +11135,26 @@
             "hymenophore_colour"
           ],
           "note": "The bitter bolete has a dark coarse net and pores that age pink, and one touch on the tongue settles it."
+        },
+        {
+          "taxon": "suillellus_subvelutipes",
+          "discriminators": [
+            "bruising",
+            "bruising_colour",
+            "hymenophore_colour",
+            "bruising_speed"
+          ],
+          "note": "The red-mouth bolete has red pore mouths and turns blue-black almost the instant it is cut. Porcini has whitish to olive pores and does not stain blue."
+        },
+        {
+          "taxon": "xerocomellus_chrysenteron",
+          "discriminators": [
+            "cap_surface",
+            "stipe_surface",
+            "size",
+            "bruising"
+          ],
+          "note": "The red cracking bolete is small, its cap cracks to show red flesh in the fissures, and it bruises blue. Porcini is heavy, uncracked and unstaining, with a netted stem."
         }
       ],
       "sources": [
@@ -11178,7 +11420,17 @@
           11
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "lactifluus_volemus",
+          "discriminators": [
+            "latex_colour",
+            "latex_change",
+            "odour"
+          ],
+          "note": "Saffron milkcap bleeds carrot-orange latex that greens where it dries. The weeping milkcap bleeds copious white latex, stains brown, and smells strongly of fish."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -11396,7 +11648,18 @@
           10
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "boletus_edulis",
+          "discriminators": [
+            "cap_surface",
+            "associated_tree",
+            "ring",
+            "size"
+          ],
+          "note": "Chicken-fat suillus is small, slimy, yellow and tied to white pine, often with a ring zone. Porcini is dry, brown and heavy."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -12717,7 +12980,17 @@
           10
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "galerina_marginata",
+          "discriminators": [
+            "spore_print",
+            "ring",
+            "substrate"
+          ],
+          "note": "Both are small, tan and on or near wood. Galerina has a ring zone and a rust-brown print; russet toughshank has no ring and a white one."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -13505,6 +13778,14 @@
             "cap_surface"
           ],
           "note": "Turkey tail is velvety and banded in colour; this is coarsely hairy and mostly grey."
+        },
+        {
+          "taxon": "stereum_ostrea",
+          "discriminators": [
+            "fruitbody_type",
+            "hymenophore_colour"
+          ],
+          "note": "Look underneath. Stereum has a smooth underside with no pores at all."
         }
       ],
       "sources": [
@@ -15065,7 +15346,18 @@
           10
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "amanita_multisquamosa",
+          "discriminators": [
+            "bruising",
+            "bruising_colour",
+            "stipe_base",
+            "cap_colour"
+          ],
+          "note": "The blusher stains dull wine-red where it is bruised or eaten by slugs, and the flesh reddens on cutting. The panther group does not redden and is dangerously more toxic."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
@@ -15532,6 +15824,16 @@
             "growth_habit"
           ],
           "note": "Cut it: a jack-o'-lantern is orange all the way through and grows in fused clumps on wood."
+        },
+        {
+          "taxon": "hygrophoropsis_aurantiaca",
+          "discriminators": [
+            "gill_extras",
+            "gill_spacing",
+            "substrate",
+            "flesh_consistency"
+          ],
+          "note": "Thin crowded gills that break away, on wood or conifer litter, against blunt ridges that will not come off, from soil."
         }
       ],
       "sources": [
@@ -15925,7 +16227,17 @@
           11
         ]
       },
-      "lookalikes": [],
+      "lookalikes": [
+        {
+          "taxon": "tremella_mesenterica",
+          "discriminators": [
+            "fruitbody_type",
+            "cap_shape",
+            "cap_colour"
+          ],
+          "note": "Witch's butter is a bright yellow, folded, brain-like blob. Wood ear is brown, ear-shaped and thinner, with a distinct upper and lower surface."
+        }
+      ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
@@ -17784,6 +18096,15 @@
             "cap_surface"
           ],
           "note": "An earthball is hard, thick-skinned and black-purple inside almost from the start. Cut every puffball open."
+        },
+        {
+          "taxon": "amanita_bisporigera",
+          "discriminators": [
+            "flesh_colour",
+            "flesh_consistency",
+            "stipe_base"
+          ],
+          "note": "Cut it in half from top to bottom. Uniform white throughout is a puffball; the silhouette of a mushroom inside it is a deadly Amanita that has not opened yet."
         }
       ],
       "sources": [

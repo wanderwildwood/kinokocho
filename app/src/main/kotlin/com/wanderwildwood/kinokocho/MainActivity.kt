@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mudita.mmd.ThemeMMD
+import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.ui.AboutDialog
 import com.wanderwildwood.kinokocho.ui.CandidateScreen
 import com.wanderwildwood.kinokocho.ui.EntryScreen
@@ -109,10 +110,13 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     val kept = entries
 
     when {
-        shown != null && open != null -> CandidateScreen(
+        // Reachable from the month page as well as from a shortlist, which is why the
+        // answers are optional: read about a mushroom before you have found one, and
+        // there is nothing to lay the description against yet.
+        shown != null -> CandidateScreen(
             vm = vm,
             taxon = shown,
-            answers = open.answers,
+            answers = open?.answers ?: KeyEngine.Answers(),
             onClose = { candidate = null },
         )
 
@@ -124,6 +128,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             taxa = vm.pack.taxa,
             month = thisMonth(),
             onClose = { season = false },
+            onOpen = { candidate = it },
         )
 
         open == null -> JournalScreen(
