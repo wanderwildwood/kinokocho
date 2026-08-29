@@ -91,6 +91,21 @@ class KeyEngineTest {
     }
 
     @Test
+    fun `every taxon says what to look for`() {
+        // Without it the section a reader looks at first is simply not there. Six rows
+        // had nothing, one of them Chlorophyllum molybdites — the commonest cause of
+        // mushroom poisoning in North America, growing on lawns. A row that says "makes
+        // people ill" and nothing about how to recognise it is not doing its one job.
+        pack.taxa.forEach {
+            assertTrue("${it.id} says nothing to look for", !it.note.isNullOrBlank())
+            assertTrue(
+                "${it.id}'s note is too short to be a description: ${it.note}",
+                (it.note?.length ?: 0) >= 60,
+            )
+        }
+    }
+
+    @Test
     fun `anything that can kill or seriously harm says what and how fast`() {
         // Galerina marginata — the one that kills people who thought they had picked
         // honey mushrooms — carried no field note and no hazard note at all. Its page

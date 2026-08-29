@@ -985,7 +985,7 @@
         "note": "NAMA lists A. mellea under alcohol-induced syndromes.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Long BLACK rhizomorphs. The ring has a pastel-yellow edge.",
+      "note": "Clustered on hardwood with long black bootlace rhizomorphs under the bark, a ring with a pastel-yellow edge, and a white spore print. The white print is what separates it from the deadly Galerina growing on the same wood.",
       "characters": {
         "fruitbody_type": [
           {
@@ -1800,7 +1800,8 @@
           ],
           "note": "Clustered on wood with true crowded gills, against a few together from soil with blunt ridges."
         }
-      ]
+      ],
+      "note": "Small and vivid pinkish-red the whole way through, ridges included. Blunt forking ridges rather than true gills, and the colour washes out in the sun while staying pink in the shade."
     },
     {
       "id": "hygrophoropsis_aurantiaca",
@@ -2174,7 +2175,8 @@
       ],
       "reviewed": false,
       "prevalence": "common",
-      "sought": false
+      "sought": false,
+      "note": "A big pale parasol on lawns and playing fields, often in rings and arcs. The gills stay white for days and then turn dull green, and the print is green — no other large parasol here does that. It is the commonest cause of mushroom poisoning in North America, and the reason is simply that it grows where people walk. Wait for the print."
     },
     {
       "id": "leucoagaricus_americanus",
@@ -2587,7 +2589,7 @@
         "severity": "GI",
         "source": "[background, unverified]"
       },
-      "note": "Very likely to be met.",
+      "note": "A hard, thick-skinned ball on the ground, ochre and coarsely scaly. Cut it: it is solid and purple-black inside almost from the start, where a puffball of the same size is uniform white paste. That cut is the whole of telling them apart.",
       "characters": {
         "fruitbody_type": [
           {
@@ -3106,7 +3108,8 @@
       ],
       "reviewed": false,
       "prevalence": "common",
-      "sought": true
+      "sought": true,
+      "note": "Overlapping sulphur shelves on standing hardwood: orange above, bright yellow pores below. Soft and damp while it is worth anything, chalky and tough within a week."
     },
     {
       "id": "laetiporus_cincinnatus",
@@ -3286,7 +3289,8 @@
       ],
       "reviewed": false,
       "prevalence": "occasional",
-      "sought": true
+      "sought": true,
+      "note": "A rosette at the foot of an oak rather than shelves up the trunk, and the pores underneath are white where the common one's are yellow."
     },
     {
       "id": "bondarzewia_berkeleyi",
@@ -3649,7 +3653,8 @@
       ],
       "reviewed": false,
       "prevalence": "common",
-      "sought": true
+      "sought": true,
+      "note": "A dense clump of small grey-brown spoon-shaped caps at the foot of an oak, on branching pale stalks with the pores running down them. It returns to the same tree year after year, which is worth writing the place down for."
     },
     {
       "id": "meripilus_sumstinei",
@@ -3844,7 +3849,8 @@
       ],
       "reviewed": false,
       "prevalence": "common",
-      "sought": false
+      "sought": false,
+      "note": "A large rosette at the base of a hardwood that goes black wherever it is handled. That staining is the identification and it happens while you watch — press the pores with a thumb and wait a minute."
     },
     {
       "id": "morchella_americana",
@@ -11856,7 +11862,7 @@
         "note": "The slime layer upsets some people; it is usually peeled off.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Slimy cap and slimy stem, always under white pine.",
+      "note": "Slimy yellow cap and slimy stem, always under white pine, with a ring zone and coarse angular pores. The slime stains fingers and, for some people, the skin that handles it.",
       "characters": {
         "fruitbody_type": [
           {
