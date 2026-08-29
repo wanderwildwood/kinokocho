@@ -90,13 +90,17 @@ object ShareFind {
         appendLine()
 
         appendLine("What I could see")
+        // Named rather than asked. Every line used to open with the whole question the
+        // key would have put — "What is the base of the stem like? A bag-like sac around
+        // the base" — which is the same prose problem the candidate page had, in a
+        // message somebody has to read on a phone before they can help.
         draft.answers.values.forEach { (characterId, chosen) ->
             val character = schema.character(characterId) ?: return@forEach
             val labels = chosen.mapNotNull { c ->
                 schema.valuesOf(character).firstOrNull { it.id == c }?.label
             }
             if (labels.isNotEmpty()) {
-                appendLine("  ${character.label} ${labels.joinToString(", ")}")
+                appendLine("  ${named(character)}: ${labels.joinToString(", ")}")
             }
         }
 
@@ -108,9 +112,7 @@ object ShareFind {
                 .forEach { character ->
                     schema.valuesOf(character).forEach { value ->
                         draft.answers.measurements[value.id]?.let { mm ->
-                            appendLine(
-                                "  ${value.label.substringBefore(" (")} $mm mm"
-                            )
+                            appendLine("  ${value.label.substringBefore(" (")}: $mm mm")
                         }
                     }
                 }
@@ -120,7 +122,7 @@ object ShareFind {
             appendLine()
             appendLine("Looked at and could not say")
             draft.answers.notTested.forEach { id ->
-                schema.character(id)?.let { appendLine("  ${it.label}") }
+                schema.character(id)?.let { appendLine("  ${named(it)}") }
             }
         }
 
@@ -129,7 +131,7 @@ object ShareFind {
             appendLine()
             appendLine("Not recorded")
             missing.forEach { (id, _) ->
-                schema.character(id)?.let { appendLine("  ${it.label}") }
+                schema.character(id)?.let { appendLine("  ${named(it)}") }
             }
         }
 
@@ -151,6 +153,21 @@ object ShareFind {
             "Recorded with Mushroom Journal, which narrows and does not decide. " +
                 "Nothing here is an identification."
         )
+    }
+
+    /**
+     * A character as a name, with the part of the mushroom it belongs to.
+     *
+     * The nouns are short because the app puts a heading above them saying which part
+     * they are about. A message has no headings, so "Colour" would appear twice meaning
+     * the cap and then the gills.
+     */
+    private fun named(character: Character): String = when (character.group) {
+        Character.Group.CAP -> "Cap ${character.noun.lowercase()}"
+        Character.Group.GILLS -> "Gill ${character.noun.lowercase()}"
+        Character.Group.STEM -> "Stem ${character.noun.lowercase()}"
+        Character.Group.FLESH -> "Flesh ${character.noun.lowercase()}"
+        else -> character.noun
     }
 
     private fun dateOf(millis: Long): String =

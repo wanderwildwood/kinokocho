@@ -616,6 +616,11 @@ class KeyEngine(
         if (live.size < 2) return emptyList()
         return schema.characters
             .filter { it.id !in answers.values.keys }
+            // Not the ones already looked at and given up on. A shared find listed the
+            // spore print under "looked at and could not say" and then again under "not
+            // recorded", and advice that tells a reader to go and record something they
+            // have just told you they tried is not advice.
+            .filter { it.id !in answers.notTested }
             // Measurements are excluded for the same reason [nextQuestion] excludes
             // them: this is advice about which question to ask next time, and size is
             // not a question. It is recorded on the entry screen instead.
