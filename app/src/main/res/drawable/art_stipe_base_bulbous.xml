@@ -7,21 +7,21 @@
     <path
         android:pathData="M36,12 L36,40 M60,12 L60,40"
         android:strokeColor="#FF000000"
-        android:strokeWidth="4.0"
+        android:strokeWidth="2.8"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
         android:pathData="M36,40 Q34,58 28,66 Q28,78 48,79 Q68,78 68,66 Q62,58 60,40"
         android:strokeColor="#FF000000"
-        android:strokeWidth="4.0"
+        android:strokeWidth="2.8"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
         android:pathData="M18,80 L78,80"
         android:strokeColor="#FF000000"
-        android:strokeWidth="2.5"
+        android:strokeWidth="1.9"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />

@@ -59,6 +59,23 @@ data class Observation(
      * rename or retire a character; without this, an entry from two years ago cannot be
      * read correctly by a later pack.
      */
+    /**
+     * False until the reader says to keep it.
+     *
+     * An observation is written to the database from the first answer, because the
+     * phone is outdoors and the battery can die mid-question. That is not the same as
+     * the reader having decided to keep it: most of what anyone keys out is a mushroom
+     * they were curious about for a minute, and a journal holding every one of those
+     * buries the finds worth going back to.
+     *
+     * So rows exist before they are claimed. The journal shows only claimed ones, and
+     * an unclaimed row found at startup is resumed rather than listed — which is
+     * exactly what should happen after a battery death: you were part-way through this
+     * one.
+     */
+    @ColumnInfo(name = "kept", defaultValue = "0")
+    val kept: Boolean = false,
+
     @ColumnInfo(name = "schema_version")
     val schemaVersion: Int,
 

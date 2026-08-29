@@ -21,8 +21,26 @@ interface JournalDao {
     suspend fun deleteObservation(observationId: Long)
 
     @Transaction
-    @Query("SELECT * FROM observations ORDER BY recorded_at DESC")
+    /** The journal: what the reader chose to keep, newest first. */
+    @Query("SELECT * FROM observations WHERE kept = 1 ORDER BY recorded_at DESC")
     fun observeAll(): Flow<List<FullObservation>>
+
+    /**
+     * A find that was being keyed out when the app stopped.
+     *
+     * There is at most one worth caring about — the most recent — and finding it at
+     * startup means resuming it rather than starting again. This is what a dead battery
+     * mid-question should cost: nothing.
+     */
+    @Query("SELECT * FROM observations WHERE kept = 0 ORDER BY updated_at DESC LIMIT 1")
+    suspend fun findUnclaimed(): FullObservation?
+
+    @Query("UPDATE observations SET kept = 1 WHERE id = :observationId")
+    suspend fun keep(observationId: Long)
+
+    /** Unclaimed rows other than the one in hand: leftovers from older crashes. */
+    @Query("DELETE FROM observations WHERE kept = 0 AND id != :except")
+    suspend fun clearOtherUnclaimed(except: Long)
 
     @Transaction
     @Query("SELECT * FROM observations WHERE id = :observationId")

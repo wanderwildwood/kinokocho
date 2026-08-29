@@ -82,6 +82,34 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         _draft.value = null
     }
 
+    /** The reader has said to keep this one. Until now it was only written down. */
+    fun keep() {
+        val id = _draft.value?.observationId ?: return
+        viewModelScope.launch {
+            dao.keep(id)
+            // Anything else still unclaimed is a leftover from a crash older than this
+            // one, and resuming two finds at once is not a thing a person can do.
+            dao.clearOtherUnclaimed(id)
+        }
+    }
+
+    /**
+     * Picks up a find that was being keyed out when the app stopped, or starts a new one.
+     *
+     * A battery dying mid-question should cost nothing, so the answers already given are
+     * waiting where they were left.
+     */
+    fun resumeOrStart() {
+        viewModelScope.launch {
+            val unclaimed = dao.findUnclaimed()
+            if (unclaimed == null) {
+                startNewEntry()
+            } else {
+                open(unclaimed.observation.id)
+            }
+        }
+    }
+
     /** The question to put in front of the reader, or null when there is nothing left to ask. */
     fun currentQuestion(draft: Draft): String? =
         draft.revisiting ?: engine.nextQuestion(draft.answers)

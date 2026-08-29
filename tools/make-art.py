@@ -32,9 +32,15 @@ OUT = os.path.join(HERE, "..", "app", "src", "main", "res", "drawable")
 KT = os.path.join(HERE, "..", "app", "src", "main", "kotlin", "com",
                   "wanderwildwood", "kinokocho", "ui", "CharacterArt.kt")
 
-STROKE = 4.0          # heavy enough to survive a slow panel and low contrast
-FINE = 2.5            # gills, tubes, cross-veins: things meant to read as many
-HAIR = 1.8            # texture that must not compete with the silhouette
+# Lighter than the first pass. These started at 4.0/2.5/1.8 on the theory that an
+# e-ink panel needs weight, and the drawings came out heavy and blunt — the owner compared
+# them to a hand-drawn reference and the difference was line weight more than anything
+# else. A pen drawing is thin and confident; thick strokes also close up small shapes,
+# which is what wrecked the launcher icon. Legibility at 64px comes from clear shapes,
+# not from fat lines.
+STROKE = 2.8          # the silhouette
+FINE = 1.9            # gills, tubes, cross-veins: things meant to read as many
+HAIR = 1.3            # texture that must not compete with the silhouette
 GROUND = 86.0
 
 # The species each drawing is taken from, and what it is doing there. Written down

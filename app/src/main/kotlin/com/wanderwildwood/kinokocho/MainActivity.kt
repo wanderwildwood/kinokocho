@@ -67,53 +67,48 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     var reading by remember { mutableStateOf(false) }
 
     /*
-     * The key is the front door, and the journal is a place you go.
+     * The journal is the front door and "Record a find" opens the key.
      *
-     * This app is an e-ink answer to Shroomify with a journal added, which is a
-     * different thing from a journal that happens to contain a key: you open it because
-     * you are holding a mushroom and want to know what it could be, not to read back
-     * last week. So it opens on the first question, and the journal is a row away.
+     * Tried the other way round for a while — straight into the first question, journal
+     * a row away — and that was the call. The journal is what the app is *for*; the
+     * key is the thing you do to fill it.
      *
-     * Answers are still written down after every tap — the phone is outdoors and the
-     * battery can die mid-question — but nothing is *kept* until you say so at the end.
-     * Crash-safety and "save in the journal?" are not in conflict; the entry simply
+     * Answers are written down after every tap regardless — the phone is outdoors and
+     * the battery can die mid-question — but nothing is *kept* until you say so at the
+     * end. Crash-safety and "save in the journal?" are not in conflict; the entry simply
      * exists before it is claimed.
      */
-    var showJournal by remember { mutableStateOf(false) }
     var asking by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) { if (draft == null && !showJournal) vm.startNewEntry() }
     var photographing by remember { mutableStateOf(false) }
     var season by remember { mutableStateOf(false) }
 
+    val open = draft
+
     // Back closes what is open rather than leaving the app, so a mis-tap on a find
     // costs nothing. Nothing here is destructive, so nothing here asks.
-    BackHandler(enabled = true) {
+    BackHandler(enabled = draft != null || about || photographing || season) {
         when {
             season -> season = false
             photographing -> photographing = false
             about -> about = false
             asking -> asking = false
-            showJournal -> showJournal = false
-            // Reading a saved find: back returns to the key rather than to nothing.
-            reading -> { reading = false; vm.close(); vm.startNewEntry() }
-            else -> asking = true
+            // Reading a saved find: back goes to the journal it came from.
+            reading -> { reading = false; vm.close() }
+            // Mid-key: back asks whether to keep it rather than losing it silently.
+            open != null -> asking = true
+            else -> Unit
         }
     }
 
-    val open = draft
-
-    // Everything the journal should show: what has been kept. The find being keyed out
-    // right now is written down after every tap so a dead battery cannot lose it, which
-    // means it is already a row in the database — but it is not a journal entry until
-    // the reader says so, and counting it would make the journal claim one more find
-    // than the reader has agreed to.
-    val kept = entries.filter { it.observation.id != open?.observationId }
+    // `entries` is already only what was kept — the DAO filters on it — so the find
+    // being keyed out right now never appears here however the app is left.
+    val kept = entries
 
     when {
-        showJournal -> JournalScreen(
+        open == null -> JournalScreen(
             entries = kept,
-            onOpen = { id -> showJournal = false; reading = true; vm.open(id) },
-            onNew = { showJournal = false; reading = false; vm.close(); vm.startNewEntry() },
+            onOpen = { id -> reading = true; vm.open(id) },
+            onNew = { reading = false; vm.resumeOrStart() },
             onAbout = { about = true },
             onDelete = vm::delete,
             seasonRow = {
@@ -145,7 +140,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             draft = open,
             onAddPhoto = { photographing = true },
             onDone = { asking = true },
-            onJournal = { showJournal = true },
+            onJournal = { vm.close() },
             journalCount = kept.size,
         )
 
@@ -156,14 +151,13 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
         SaveDialog(
             answered = open.answers.answeredCount,
             photos = open.photos.size,
-            onSave = { asking = false; reading = true },
+            onSave = { asking = false; vm.keep(); reading = true },
             onDiscard = {
                 // The photographs stay on the phone: the owner's call. Only the entry goes,
                 // so a mis-tap costs the record and not the pictures.
                 asking = false
                 open.observationId?.let(vm::delete)
                 vm.close()
-                vm.startNewEntry()
             },
             onBack = { asking = false },
         )

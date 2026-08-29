@@ -7,7 +7,7 @@
     <path
         android:pathData="M48,16 Q80,16 80,48 Q80,80 48,80 Q16,80 16,48 Q16,16 48,16 Z"
         android:strokeColor="#FF000000"
-        android:strokeWidth="4.0"
+        android:strokeWidth="2.8"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
@@ -21,7 +21,7 @@
     <path
         android:pathData="M48,30 Q64,30 64,48 Q64,66 48,66 Q32,66 32,48 Q32,30 48,30 Z"
         android:strokeColor="#FF000000"
-        android:strokeWidth="4.0"
+        android:strokeWidth="2.8"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />

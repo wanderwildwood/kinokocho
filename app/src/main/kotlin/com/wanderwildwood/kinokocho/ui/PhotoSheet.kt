@@ -2,8 +2,10 @@ package com.wanderwildwood.kinokocho.ui
 
 import android.content.Context
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -27,7 +29,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.core.content.FileProvider
+import com.mudita.mmd.components.buttons.ButtonMMD
+import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import java.io.File
 import java.util.UUID
 
@@ -68,6 +73,8 @@ fun PhotoSheet(
     val context = LocalContext.current
     var pending by remember { mutableStateOf<Pair<PhotoSlot, String>?>(null) }
 
+    var choosing by remember { mutableStateOf<PhotoSlot?>(null) }
+
     val camera = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { ok ->
         val (slot, fileName) = pending ?: return@rememberLauncherForActivityResult
         pending = null
@@ -77,6 +84,34 @@ fun PhotoSheet(
             // Cancelled: take the empty file back out rather than leaving a nought-byte
             // photograph in the directory pretending to be a picture.
             File(photoDir(context), fileName).delete()
+        }
+    }
+
+    /*
+     * Pictures taken outside the app.
+     *
+     * People photograph a mushroom before they think to open a journal about it, and
+     * telling them the picture they already have is no good would be absurd. The system
+     * photo picker needs no permission at all — it hands back one image the person
+     * chose and nothing else, which is a better bargain than read-my-whole-gallery.
+     *
+     * The file is copied into the app's own folder rather than referenced where it sits:
+     * a content:// URI is a loan that expires, and a journal entry pointing at a
+     * photograph the app can no longer open is worse than one with no photograph.
+     */
+    val picker = rememberLauncherForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        val slot = choosing
+        choosing = null
+        if (uri != null && slot != null) {
+            val fileName = "${UUID.randomUUID()}.jpg"
+            val copied = runCatching {
+                context.contentResolver.openInputStream(uri)?.use { input ->
+                    File(photoDir(context), fileName).outputStream().use(input::copyTo)
+                } != null
+            }.getOrDefault(false)
+            if (copied) onCaptured(slot.id, fileName)
         }
     }
 
@@ -103,15 +138,58 @@ fun PhotoSheet(
                         slot = slot,
                         taken = slot.id in filled,
                         modifier = Modifier.weight(1f),
+                        onClick = { choosing = slot },
+                    )
+                }
+                if (pair.size == 1) Column(Modifier.weight(1f)) {}
+            }
+        }
+
+        // Camera or gallery, asked once the slot is known — the slot is the useful
+        // question and "where from" is an afterthought.
+        choosing?.let { slot ->
+            Dialog(onDismissRequest = { choosing = null }) {
+                Column(
+                    Modifier
+                        .background(MaterialTheme.colorScheme.surface)
+                        .border(BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface))
+                        .padding(20.dp),
+                ) {
+                    Text(
+                        slot.label,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Text(
+                        slot.why,
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 4.dp, bottom = 14.dp),
+                    )
+                    ButtonMMD(
                         onClick = {
                             val fileName = "${UUID.randomUUID()}.jpg"
                             val file = File(photoDir(context), fileName)
                             pending = slot to fileName
+                            choosing = null
                             camera.launch(uriFor(context, file))
                         },
-                    )
+                        modifier = Modifier.fillMaxWidth(),
+                    ) { Text("Take one now") }
+                    OutlinedButtonMMD(
+                        onClick = {
+                            picker.launch(
+                                PickVisualMediaRequest(
+                                    ActivityResultContracts.PickVisualMedia.ImageOnly
+                                )
+                            )
+                        },
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                    ) { Text("Choose one already on the phone") }
+                    OutlinedButtonMMD(
+                        onClick = { choosing = null },
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                    ) { Text("Back") }
                 }
-                if (pair.size == 1) Column(Modifier.weight(1f)) {}
             }
         }
 
