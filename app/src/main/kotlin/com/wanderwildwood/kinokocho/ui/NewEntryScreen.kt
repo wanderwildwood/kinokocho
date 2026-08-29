@@ -148,17 +148,25 @@ fun NewEntryScreen(
                 }
             }
 
-            if (multi) {
-                item {
-                    ButtonMMD(
-                        onClick = { vm.answer(questionId, picked) },
-                        modifier = Modifier.fillMaxWidth(),
-                    ) { Text("Next") }
-                }
-            }
+
         }
 
-        Footer(draft, ranking, vm, onAddPhoto, onDone)
+        Footer(
+            draft = draft,
+            ranking = ranking,
+            vm = vm,
+            onAddPhoto = onAddPhoto,
+            onDone = onDone,
+            // Almost every character is multi-select now, so a question is committed by
+            // pressing on rather than by tapping a choice. That button was at the end of
+            // the list, which on a twelve-state question meant scrolling past everything
+            // to answer it. It belongs where the eye already is.
+            onNext = if (multi && picked.isNotEmpty()) {
+                { vm.answer(questionId, picked) }
+            } else {
+                null
+            },
+        )
     }
 }
 
@@ -201,6 +209,7 @@ private fun Footer(
     vm: JournalViewModel,
     onAddPhoto: () -> Unit,
     onDone: () -> Unit,
+    onNext: (() -> Unit)? = null,
 ) {
     HorizontalDividerMMD(Modifier.padding(top = 4.dp))
 
@@ -244,7 +253,13 @@ private fun Footer(
         OutlinedButtonMMD(onClick = onAddPhoto, modifier = Modifier.weight(1f)) {
             Text(if (draft.photos.isEmpty()) "Photo" else "Photo (${draft.photos.size})")
         }
-        ButtonMMD(onClick = onDone, modifier = Modifier.weight(1f)) { Text("Done") }
+        if (onNext != null) {
+            // Answering the question in front of you beats ending the whole entry, so
+            // while there is something chosen this is what the solid button does.
+            ButtonMMD(onClick = onNext, modifier = Modifier.weight(1f)) { Text("Next") }
+        } else {
+            ButtonMMD(onClick = onDone, modifier = Modifier.weight(1f)) { Text("Done") }
+        }
     }
 }
 
