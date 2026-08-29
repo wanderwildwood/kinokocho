@@ -98,6 +98,18 @@ interface JournalDao {
     @Query("DELETE FROM observation_photos WHERE id = :photoId")
     suspend fun deletePhoto(photoId: Long)
 
+    /**
+     * By file name, because a photograph taken in this session has no id yet.
+     *
+     * The draft holds rows built in memory and [addPhoto] returns the new id without
+     * anyone writing it back, so a picture taken a moment ago still carries id 0.
+     * Deleting by id would silently leave that row behind, pointing at a file that had
+     * just been removed — the photograph would come back as "(missing)" the next time
+     * the entry was opened. The file name is minted per photograph and never reused.
+     */
+    @Query("DELETE FROM observation_photos WHERE observation_id = :observationId AND file_name = :fileName")
+    suspend fun deletePhotoNamed(observationId: Long, fileName: String)
+
     @Query("SELECT * FROM observation_photos WHERE observation_id = :observationId")
     suspend fun photosOf(observationId: Long): List<ObservationPhoto>
 

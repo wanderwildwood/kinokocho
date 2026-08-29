@@ -240,12 +240,21 @@ fun EntryScreen(
             }
         }
 
-        // Photographs, shown rather than counted. A thumbnail is also the only way to
-        // notice that the picture of the base came out unusable before the specimen is
-        // back in the wood.
+        /*
+         * Photographs, shown rather than counted. A thumbnail is also the only way to
+         * notice that the picture of the base came out unusable before the specimen is
+         * back in the wood — which is only useful if it can then be taken again, and
+         * until now it could not: there was no way to remove a photograph at all, so the
+         * first bad one in a slot stayed there for the life of the entry.
+         *
+         * Tapping arms it and a second tap removes it, per the house rule. A photograph
+         * is a thing that cannot be got back once the mushroom is in the wood again, and
+         * a thumbnail is small and a thumb is not.
+         */
         if (draft.photos.isNotEmpty()) {
             item {
                 Section("Photographs")
+                var arming by remember(draft.uuid) { mutableStateOf<String?>(null) }
                 val context = LocalContext.current
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     items3(draft.photos.size) { i ->
@@ -261,7 +270,18 @@ fun EntryScreen(
                                 )?.asImageBitmap()
                             }.getOrNull()
                         }
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        val armed = arming == photo.fileName
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.clickable {
+                                if (armed) {
+                                    vm.deletePhoto(photo)
+                                    arming = null
+                                } else {
+                                    arming = photo.fileName
+                                }
+                            },
+                        ) {
                             if (bitmap != null) {
                                 Image(
                                     bitmap = bitmap,
@@ -273,10 +293,18 @@ fun EntryScreen(
                                 Text("(missing)", style = MaterialTheme.typography.bodySmall)
                             }
                             Text(
-                                PhotoSlot.entries.firstOrNull { it.id == photo.slot }
+                                if (armed) "Remove it?"
+                                else PhotoSlot.entries.firstOrNull { it.id == photo.slot }
                                     ?.label ?: photo.slot,
                                 style = MaterialTheme.typography.bodySmall,
+                                fontWeight = if (armed) FontWeight.Bold else FontWeight.Normal,
                             )
+                            if (armed) {
+                                Text(
+                                    "tap again",
+                                    style = MaterialTheme.typography.bodySmall,
+                                )
+                            }
                         }
                     }
                 }

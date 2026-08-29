@@ -15,6 +15,8 @@ import com.wanderwildwood.kinokocho.key.TaxonPack
 import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
 import com.wanderwildwood.kinokocho.schema.SchemaLoader
+import com.wanderwildwood.kinokocho.ui.photoDir
+import java.io.File
 import java.util.Calendar
 import java.util.UUID
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -241,6 +243,28 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
             d.photos.filter { it.fileName !in known }.forEach {
                 dao.addPhoto(it.copy(observationId = id))
             }
+        }
+    }
+
+    /**
+     * Takes a photograph back out, file and all.
+     *
+     * The camera goes out to whatever app the phone has, so a picture arrives however it
+     * came out — a thumb over the lens, the base still in the ground, the wrong mushroom
+     * entirely. There was no way to remove one: [JournalDao.deletePhoto] existed and
+     * nothing ever called it, so the first bad photograph in a slot stayed there.
+     *
+     * The file goes too. A journal entry is a small thing and a photograph is not, and
+     * leaving the picture on disk after the reader has said to remove it is keeping
+     * something they asked to be rid of.
+     */
+    fun deletePhoto(photo: ObservationPhoto) {
+        val d = _draft.value ?: return
+        _draft.value = d.copy(photos = d.photos.filterNot { it.fileName == photo.fileName })
+        val observationId = d.observationId
+        viewModelScope.launch {
+            if (observationId != null) dao.deletePhotoNamed(observationId, photo.fileName)
+            runCatching { File(photoDir(getApplication()), photo.fileName).delete() }
         }
     }
 

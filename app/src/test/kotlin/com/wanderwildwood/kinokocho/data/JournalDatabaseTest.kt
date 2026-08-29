@@ -160,4 +160,33 @@ class JournalDatabaseTest {
         assertNotNull(dao.findByUuid("field-uuid"))
         assertNull(dao.findByUuid("never-written"))
     }
+
+    @Test
+    fun `a photograph can be taken back out by name`() = runTest {
+        // By name, not by id: a picture taken a moment ago is still in the draft with
+        // id 0, because addPhoto returns the new id and nothing writes it back. Deleting
+        // by id left the row behind pointing at a file that had just been removed, and
+        // the photograph came back as "(missing)" next time the entry was opened.
+        val id = anObservation()
+        dao.addPhoto(ObservationPhoto(0, id, "cap", "one.jpg", 1_000L))
+        dao.addPhoto(ObservationPhoto(0, id, "underside", "two.jpg", 1_000L))
+        assertEquals(2, dao.photosOf(id).size)
+
+        dao.deletePhotoNamed(id, "one.jpg")
+        val left = dao.photosOf(id)
+        assertEquals(1, left.size)
+        assertEquals("two.jpg", left.single().fileName)
+    }
+
+    @Test
+    fun `removing a photograph leaves another observation's alone`() = runTest {
+        val mine = anObservation("u1")
+        val theirs = anObservation("u2")
+        dao.addPhoto(ObservationPhoto(0, mine, "cap", "same.jpg", 1_000L))
+        dao.addPhoto(ObservationPhoto(0, theirs, "cap", "same.jpg", 1_000L))
+
+        dao.deletePhotoNamed(mine, "same.jpg")
+        assertEquals(0, dao.photosOf(mine).size)
+        assertEquals(1, dao.photosOf(theirs).size)
+    }
 }
