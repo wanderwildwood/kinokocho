@@ -15,6 +15,21 @@ package com.wanderwildwood.kinokocho.data
  */
 object MeasurementRow {
 
+    /**
+     * The stored value that means "I looked and could not say".
+     *
+     * Not a state of the mushroom and not a gap either — the schema is explicit that
+     * these are different answers, because somebody who never cut the mushroom has not
+     * established that it does not bruise. It was held in memory and never written
+     * down, so it survived exactly as long as the app stayed open: reopen an entry and
+     * every question you had looked at and given up on came back to be asked again.
+     *
+     * It rides in a character row like everything else. The marker begins with a
+     * character no value id can contain — they are lower-case, digits and underscores —
+     * so it can never be mistaken for a state some pack introduced later.
+     */
+    const val NOT_TESTED = "!not_tested"
+
     private const val SEPARATOR = '='
 
     fun encode(valueId: String, millimetres: Int): String = "$valueId$SEPARATOR$millimetres"

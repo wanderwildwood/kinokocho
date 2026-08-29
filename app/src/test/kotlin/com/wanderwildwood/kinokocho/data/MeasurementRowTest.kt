@@ -52,4 +52,25 @@ class MeasurementRowTest {
         )
         assertTrue(schema.characters.any { it.kind == Character.Kind.MEASUREMENT })
     }
+
+    @Test
+    fun `the not-tested marker cannot collide with any value in the schema`() {
+        // It rides in a character row alongside real states, so it has to be something
+        // no pack can ever introduce. Value ids are lower-case, digits and underscores.
+        assertTrue(MeasurementRow.NOT_TESTED.none { it.isLetterOrDigit() || it == '_' }
+            || MeasurementRow.NOT_TESTED.first() !in 'a'..'z')
+        val schema = SchemaLoader.load(
+            ApplicationProvider.getApplicationContext<Context>().assets
+        )
+        schema.characters.forEach { character ->
+            schema.valuesOf(character).forEach {
+                assertTrue(it.id != MeasurementRow.NOT_TESTED)
+            }
+        }
+    }
+
+    @Test
+    fun `the not-tested marker is not read back as a measurement`() {
+        assertNull(MeasurementRow.decode(MeasurementRow.NOT_TESTED))
+    }
 }

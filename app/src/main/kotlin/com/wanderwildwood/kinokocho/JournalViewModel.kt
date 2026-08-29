@@ -72,8 +72,12 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                 recordedAt = full.observation.recordedAt,
                 answers = KeyEngine.Answers(
                     values = full.characters.filterNot { isMeasurement(it.characterId) }
+                        .filterNot { it.valueId == MeasurementRow.NOT_TESTED }
                         .groupBy { it.characterId }
                         .mapValues { (_, rows) -> rows.map { it.valueId }.toSet() },
+                    notTested = full.characters
+                        .filter { it.valueId == MeasurementRow.NOT_TESTED }
+                        .map { it.characterId }.toSet(),
                     measurements = full.characters.filter { isMeasurement(it.characterId) }
                         .mapNotNull { MeasurementRow.decode(it.valueId) }
                         .toMap(),
@@ -222,6 +226,15 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                 values.forEach { value ->
                     dao.addCharacter(ObservationCharacter(0, id, characterId, value, now))
                 }
+            }
+
+            // Written down, not just remembered. See [MeasurementRow.NOT_TESTED].
+            d.answers.notTested.forEach { characterId ->
+                dao.addCharacter(
+                    ObservationCharacter(
+                        0, id, characterId, MeasurementRow.NOT_TESTED, now,
+                    )
+                )
             }
 
             // Measurements go down the same rows, as `cap_width_mm=45`. Not a column,

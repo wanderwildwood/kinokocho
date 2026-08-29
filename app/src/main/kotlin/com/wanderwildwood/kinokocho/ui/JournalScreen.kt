@@ -29,6 +29,7 @@ import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.data.FullObservation
+import com.wanderwildwood.kinokocho.data.MeasurementRow
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -156,7 +157,12 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold,
             )
-            val counted = entry.characters.map { it.characterId }.distinct().size
+            // Not counting the ones the reader looked at and could not say. Those are
+            // rows too now, and counting them would tell somebody they had recorded
+            // twelve characters when four of them are "I could not tell".
+            val counted = entry.characters
+                .filterNot { it.valueId == MeasurementRow.NOT_TESTED }
+                .map { it.characterId }.distinct().size
             val place = entry.observation.placeNote.takeIf { it.isNotBlank() }
             Text(
                 listOfNotNull(
@@ -166,6 +172,9 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
                         ?.let { "$it photo${if (it == 1) "" else "s"}" },
                     // Spore print pending is the whole reason an entry stays open, so
                     // it is said on the row rather than found by opening it.
+                    // Gone once the print is recorded — and also once the reader has
+                    // said they tried and it never dropped, which is an answer and not
+                    // a thing still to do.
                     "spore print pending".takeIf {
                         entry.characters.none { c -> c.characterId == "spore_print" }
                     },

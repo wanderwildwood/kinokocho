@@ -429,7 +429,8 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items2(
     onContinue: () -> Unit,
 ) {
     val entries = draft.answers.values.entries.toList()
-    if (entries.isEmpty()) {
+    val gaveUp = draft.answers.notTested.toList()
+    if (entries.isEmpty() && gaveUp.isEmpty()) {
         item {
             Text(
                 "Nothing yet.",
@@ -463,6 +464,37 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items2(
                     }.joinToString(", "),
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold,
+                )
+            }
+        }
+    }
+
+    /*
+     * And what was looked at and given up on.
+     *
+     * These used to be invisible: an entry where the reader had honestly said "I looked
+     * and cannot say" to four questions read "Nothing yet". That is the answer the
+     * schema goes out of its way to treat as real — somebody who never cut the mushroom
+     * has not established that it does not bruise — and the reader could not see they
+     * had given it, or change their mind about it.
+     */
+    items(gaveUp.size) { i ->
+        val character = vm.schema.character(gaveUp[i])
+        if (character != null) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable { vm.revisit(character.id); onContinue() }
+                    .padding(vertical = 6.dp),
+            ) {
+                Text(
+                    character.label,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.weight(1f),
+                )
+                Text(
+                    if (character.notTested) "looked, cannot say" else "skipped",
+                    style = MaterialTheme.typography.bodySmall,
                 )
             }
         }
