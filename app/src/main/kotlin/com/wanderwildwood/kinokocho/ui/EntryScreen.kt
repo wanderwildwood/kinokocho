@@ -296,8 +296,13 @@ fun EntryScreen(
 
         item {
             Section("What you wrote down")
+            Text(
+                "Tap any of these to answer it differently and see what changes.",
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(bottom = 4.dp),
+            )
         }
-        items2(draft, vm)
+        items2(draft, vm, onContinue)
 
         item {
             HorizontalDividerMMD(Modifier.padding(top = 12.dp))
@@ -346,6 +351,7 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items3(
 private fun androidx.compose.foundation.lazy.LazyListScope.items2(
     draft: JournalViewModel.Draft,
     vm: JournalViewModel,
+    onContinue: () -> Unit,
 ) {
     val entries = draft.answers.values.entries.toList()
     if (entries.isEmpty()) {
@@ -361,7 +367,16 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items2(
         val (characterId, chosen) = entries[i]
         val character = vm.schema.character(characterId)
         if (character != null) {
-            Row(Modifier.fillMaxWidth().padding(vertical = 3.dp)) {
+            // Tapping an answer reopens that question. Trying a different answer and
+            // watching the list move is how a person learns which characters actually
+            // decide anything — and the reader who wants to do that is the reader this
+            // app is for.
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable { vm.revisit(characterId); onContinue() }
+                    .padding(vertical = 6.dp),
+            ) {
                 Text(
                     character.label,
                     style = MaterialTheme.typography.bodySmall,
