@@ -45,8 +45,10 @@ fun NewEntryScreen(
     journalCount: Int = 0,
     onCandidate: (String) -> Unit = {},
 ) {
-    val questionId = vm.currentQuestion(draft)
-    val ranking = vm.engine.rank(draft.answers)
+    // Keyed on what they actually depend on. Choosing a state on a multi-select question
+    // is local screen state and must not re-run the key over a hundred taxa on each tap.
+    val questionId = remember(draft.answers, draft.revisiting) { vm.currentQuestion(draft) }
+    val ranking = remember(draft.answers) { vm.engine.rank(draft.answers) }
 
     Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
 

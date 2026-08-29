@@ -62,9 +62,19 @@ fun EntryScreen(
     onClose: () -> Unit,
     onCandidate: (String) -> Unit = {},
 ) {
-    val ranking = vm.engine.rank(draft.answers)
-    val missing = vm.engine.mostValuableMissing(draft.answers)
-    val safety = vm.engine.safetyNotes(draft.answers)
+    /*
+     * Keyed on the answers, because nothing else changes them.
+     *
+     * All three walk the whole pack, and this screen holds three text fields: the place,
+     * the note, and what it turned out to be. Every keystroke in any of them changes the
+     * draft, recomposes, and re-ranked a hundred taxa, re-scored every character for the
+     * advice list, and rebuilt the safety notes — measured at about two milliseconds a
+     * keystroke on a laptop, which is not two milliseconds on the phone this is for.
+     * Typing a name is not a reason to work out what the mushroom might be again.
+     */
+    val ranking = remember(draft.answers) { vm.engine.rank(draft.answers) }
+    val missing = remember(draft.answers) { vm.engine.mostValuableMissing(draft.answers) }
+    val safety = remember(draft.answers) { vm.engine.safetyNotes(draft.answers) }
     val sporePrintPending = "spore_print" !in draft.answers.values.keys
 
     LazyColumn(
