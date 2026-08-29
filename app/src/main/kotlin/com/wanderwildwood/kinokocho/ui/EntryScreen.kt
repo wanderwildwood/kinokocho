@@ -296,11 +296,6 @@ fun EntryScreen(
 
         item {
             Section("What you wrote down")
-            Text(
-                "Tap any of these to answer it differently and see what changes.",
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(bottom = 4.dp),
-            )
         }
         items2(draft, vm, onContinue)
 
