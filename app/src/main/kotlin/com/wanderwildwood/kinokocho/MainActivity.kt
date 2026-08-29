@@ -24,6 +24,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mudita.mmd.ThemeMMD
 import com.wanderwildwood.kinokocho.ui.AboutDialog
+import com.wanderwildwood.kinokocho.ui.CandidateScreen
 import com.wanderwildwood.kinokocho.ui.EntryScreen
 import com.wanderwildwood.kinokocho.ui.JournalScreen
 import com.wanderwildwood.kinokocho.ui.PhotoSheet
@@ -79,18 +80,21 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
      * exists before it is claimed.
      */
     var asking by remember { mutableStateOf(false) }
+    var candidate by remember { mutableStateOf<String?>(null) }
     var photographing by remember { mutableStateOf(false) }
     var season by remember { mutableStateOf(false) }
 
     val open = draft
+    val shown = candidate?.let { vm.pack.taxon(it) }
 
     // Back closes what is open rather than leaving the app, so a mis-tap on a find
     // costs nothing. Nothing here is destructive, so nothing here asks.
-    BackHandler(enabled = draft != null || about || photographing || season) {
+    BackHandler(enabled = draft != null || about || photographing || season || candidate != null) {
         when {
             season -> season = false
             photographing -> photographing = false
             about -> about = false
+            candidate != null -> candidate = null
             asking -> asking = false
             // Reading a saved find: back goes to the journal it came from.
             reading -> { reading = false; vm.close() }
@@ -105,6 +109,13 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     val kept = entries
 
     when {
+        shown != null && open != null -> CandidateScreen(
+            vm = vm,
+            taxon = shown,
+            answers = open.answers,
+            onClose = { candidate = null },
+        )
+
         open == null -> JournalScreen(
             entries = kept,
             onOpen = { id -> reading = true; vm.open(id) },
@@ -133,6 +144,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             onContinue = { reading = false },
             onAddPhoto = { photographing = true },
             onClose = { reading = false; vm.close() },
+            onCandidate = { candidate = it },
         )
 
         open != null -> NewEntryScreen(
@@ -142,6 +154,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             onDone = { asking = true },
             onJournal = { vm.close() },
             journalCount = kept.size,
+            onCandidate = { candidate = it },
         )
 
         else -> Unit

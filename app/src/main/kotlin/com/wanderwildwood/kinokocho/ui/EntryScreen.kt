@@ -58,6 +58,7 @@ fun EntryScreen(
     onContinue: () -> Unit,
     onAddPhoto: () -> Unit,
     onClose: () -> Unit,
+    onCandidate: (String) -> Unit = {},
 ) {
     val ranking = vm.engine.rank(draft.answers)
     val missing = vm.engine.mostValuableMissing(draft.answers)
@@ -159,7 +160,10 @@ fun EntryScreen(
                         c.taxon.commonName?.let { "${c.taxon.scientificName} — $it" }
                             ?: c.taxon.scientificName,
                         style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.padding(top = 3.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onCandidate(c.taxon.id) }
+                            .padding(top = 6.dp, bottom = 6.dp),
                     )
                 }
             }

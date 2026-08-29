@@ -43,6 +43,7 @@ fun NewEntryScreen(
     onDone: () -> Unit,
     onJournal: () -> Unit = {},
     journalCount: Int = 0,
+    onCandidate: (String) -> Unit = {},
 ) {
     val questionId = vm.currentQuestion(draft)
     val ranking = vm.engine.rank(draft.answers)
@@ -161,6 +162,7 @@ fun NewEntryScreen(
             // pressing on rather than by tapping a choice. That button was at the end of
             // the list, which on a twelve-state question meant scrolling past everything
             // to answer it. It belongs where the eye already is.
+            onCandidate = onCandidate,
             onNext = if (multi && picked.isNotEmpty()) {
                 { vm.answer(questionId, picked) }
             } else {
@@ -209,6 +211,7 @@ private fun Footer(
     vm: JournalViewModel,
     onAddPhoto: () -> Unit,
     onDone: () -> Unit,
+    onCandidate: (String) -> Unit = {},
     onNext: (() -> Unit)? = null,
 ) {
     HorizontalDividerMMD(Modifier.padding(top = 4.dp))
@@ -226,11 +229,15 @@ private fun Footer(
             style = MaterialThemeTypography().bodySmall,
             modifier = Modifier.padding(top = 6.dp),
         )
-        ranking.candidates.take(2).forEach {
+        ranking.candidates.take(2).forEach { c ->
             Text(
-                it.taxon.commonName?.let { c -> "${it.taxon.scientificName} - $c" }
-                    ?: it.taxon.scientificName,
+                c.taxon.commonName?.let { n -> "${c.taxon.scientificName} - $n" }
+                    ?: c.taxon.scientificName,
                 style = MaterialThemeTypography().bodySmall,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onCandidate(c.taxon.id) }
+                    .padding(vertical = 3.dp),
             )
         }
 
