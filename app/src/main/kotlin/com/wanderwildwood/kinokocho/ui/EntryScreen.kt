@@ -37,6 +37,7 @@ import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.kinokocho.JournalViewModel
 import com.wanderwildwood.kinokocho.key.Hazard
+import com.wanderwildwood.kinokocho.schema.Character
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -76,24 +77,69 @@ fun EntryScreen(
             if (draft.placeNote.isNotBlank()) {
                 Text(draft.placeNote, style = MaterialTheme.typography.bodySmall)
             }
+            val n = draft.answers.answeredCount
+            val p = draft.photos.size
             Text(
-                "${draft.answers.answeredCount} characters · ${draft.photos.size} photographs",
+                "$n character${if (n == 1) "" else "s"} · " +
+                    "$p photograph${if (p == 1) "" else "s"}",
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 2.dp),
             )
         }
 
-        // The spore print is the reason an entry stays open overnight, so it is said
-        // first and plainly rather than being found by scrolling.
-        if (sporePrintPending) {
+        /*
+         * The characters that cannot be got in a wood, answered here.
+         *
+         * These are the reason an entry stays open overnight, and they are the only
+         * ones the question screen will never offer: nextQuestion asks field
+         * characters, because standing in a wood being asked for a spore print is
+         * useless. So they live here, at the table, where the answer exists.
+         */
+        val deferred = vm.schema.characters
+            .filter { it.availability == Character.Availability.DEFERRED }
+            .filter { vm.schema.isApplicable(it.id, draft.answers.values) }
+            .filter { it.id !in draft.answers.values.keys }
+
+        if (deferred.isNotEmpty()) {
             item {
-                Section("Still to do")
-                Text(
-                    "No spore print recorded. Leave the cap gills-down on paper " +
-                        "overnight and add it here — it is the one character that " +
-                        "settles more than any other, and it cannot be got in the field.",
-                    style = MaterialTheme.typography.bodySmall,
-                )
+                Section("Still to do, at home")
+                if (sporePrintPending) {
+                    Text(
+                        "Leave the cap gills-down on paper overnight. The spore print " +
+                            "settles more than any other character and cannot be got " +
+                            "in the field.",
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(bottom = 6.dp),
+                    )
+                }
+            }
+            items4(deferred.size) { i ->
+                val character = deferred[i]
+                var open by remember(character.id) { mutableStateOf(false) }
+                Column(Modifier.fillMaxWidth().padding(bottom = 6.dp)) {
+                    OutlinedButtonMMD(
+                        onClick = { open = !open },
+                        modifier = Modifier.fillMaxWidth(),
+                    ) { Text(character.label) }
+
+                    if (open) {
+                        vm.schema.valuesOf(character).forEach { value ->
+                            OutlinedButtonMMD(
+                                onClick = {
+                                    vm.answer(character.id, setOf(value.id))
+                                    open = false
+                                },
+                                modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                            ) { Text(value.label) }
+                        }
+                        // Not answering is a real answer here: a print that never
+                        // dropped is a fact about the specimen, not a gap in the record.
+                        OutlinedButtonMMD(
+                            onClick = { vm.skip(character.id); open = false },
+                            modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                        ) { Text("I tried and cannot say") }
+                    }
+                }
             }
         }
 
@@ -277,6 +323,11 @@ fun EntryScreen(
 }
 
 /** The answers themselves, one line each, label and value. */
+private fun androidx.compose.foundation.lazy.LazyListScope.items4(
+    count: Int,
+    content: @Composable (Int) -> Unit,
+) = items(count) { content(it) }
+
 private fun androidx.compose.foundation.lazy.LazyListScope.items3(
     count: Int,
     content: @Composable (Int) -> Unit,
