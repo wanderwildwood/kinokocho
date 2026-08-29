@@ -139,6 +139,19 @@ class KeyEngineTest {
     }
 
     @Test
+    fun `no prose carries markup the app cannot render`() {
+        // The death cap's note opened with "**Not expected here.**" and the app drew the
+        // asterisks, because Compose renders a string and not a document. Emphasis has
+        // to be in the words on a screen with one font and no bold in body text.
+        val prose = pack.taxa.flatMap {
+            listOfNotNull(it.note, it.hazard.note) + it.lookalikes.map { l -> l.note }
+        }
+        prose.forEach {
+            assertFalse("markup in: $it", it.contains("*") || it.contains("_ "))
+        }
+    }
+
+    @Test
     fun `anything that can kill or seriously harm says what and how fast`() {
         // Galerina marginata — the one that kills people who thought they had picked
         // honey mushrooms — carried no field note and no hazard note at all. Its page

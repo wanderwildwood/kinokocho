@@ -181,52 +181,64 @@ fun EntryScreen(
             }
         }
 
+        /*
+         * Dangerous, and not ruled out.
+         *
+         * Names and what would settle them, and nothing else. This section used to carry
+         * every lookalike note for every live hazard, and when the pack grew from
+         * twenty-nine confusions to sixty-one it became two and a half screens of prose
+         * — under the one heading in the app that a person might be reading while
+         * holding the thing. Long is the same as unread here.
+         *
+         * The prose is on each mushroom's own page, which is now one tap from this list.
+         * What belongs here is which of them are still live and what question would
+         * remove them, because those are the two things a person can act on standing up.
+         */
         val lethal = safety.filter { it.taxon.hazard.severity == Hazard.Severity.LETHAL }
         if (lethal.isNotEmpty()) {
             item {
                 Section("Dangerous, and not ruled out")
-                lethal.forEach { note ->
+                Text(
+                    "Tap one to read it properly.",
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(bottom = 2.dp),
+                )
+            }
+            items3(minOf(lethal.size, MOST_HAZARDS)) { i ->
+                val note = lethal[i]
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .clickable { onCandidate(note.taxon.id) }
+                        .padding(vertical = 6.dp),
+                ) {
                     Text(
-                        note.taxon.scientificName,
+                        note.taxon.commonName
+                            ?.let { "${note.taxon.scientificName} — $it" }
+                            ?: note.taxon.scientificName,
                         style = MaterialTheme.typography.bodySmall,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(top = 4.dp),
                     )
-                    // Spaced, and no more than three. Galerina is now confused with
-                    // five things in the pack, and their notes ran together into one
-                    // paragraph eight sentences long under the heading that says a
-                    // mushroom in front of you might kill you. The rest are on its own
-                    // page, which is one tap away and laid out for reading.
-                    note.notes.take(3).forEach {
-                        Text(
-                            it,
-                            style = MaterialTheme.typography.bodySmall,
-                            modifier = Modifier.padding(top = 4.dp),
-                        )
-                    }
-                    if (note.notes.size > 3) {
-                        Text(
-                            "…and ${note.notes.size - 3} more, on its own page.",
-                            style = MaterialTheme.typography.bodySmall,
-                            modifier = Modifier.padding(top = 4.dp),
-                        )
-                    }
                     if (note.discriminators.isNotEmpty()) {
-                        // Nouns joined by commas, not questions joined by spaces. Six
-                        // whole questions run together read as one long paragraph of
-                        // prose — "What colour are the gills, pores or teeth? What is
-                        // the base of the stem like? Is there a ring on the stem?" —
-                        // under the heading that says a mushroom in front of you might
-                        // kill you, which is the worst place in the app to be unreadable.
                         Text(
                             "Would settle it: " + note.discriminators
                                 .mapNotNull { vm.schema.character(it)?.noun?.lowercase() }
                                 .distinct()
+                                .take(4)
                                 .joinToString(", "),
                             style = MaterialTheme.typography.bodySmall,
-                            fontWeight = FontWeight.Bold,
                         )
                     }
+                }
+            }
+            if (lethal.size > MOST_HAZARDS) {
+                item {
+                    Text(
+                        "…and ${lethal.size - MOST_HAZARDS} more, which answering " +
+                            "anything above will start to rule out.",
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
                 }
             }
         }
@@ -548,6 +560,14 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items4(
     count: Int,
     content: @Composable (Int) -> Unit,
 ) = items(count) { content(it) }
+
+/**
+ * How many deadly candidates this screen names before it says "and more".
+ *
+ * Four is about what a person can hold in their head standing over a mushroom. The rest
+ * are not hidden — the count is said, and every one of them is on the shortlist above.
+ */
+private const val MOST_HAZARDS = 4
 
 private fun androidx.compose.foundation.lazy.LazyListScope.items3(
     count: Int,
