@@ -31,6 +31,7 @@ PACK = os.path.join(HERE, "..", "app", "src", "main", "assets", "packs",
                     "southern-appalachia-v1.json")
 SCHEMA = os.path.join(HERE, "..", "app", "src", "main", "assets", "schema",
                       "characters-v1.json")
+RES = os.path.join(HERE, "..", "app", "src", "main", "res", "drawable-nodpi")
 DEFAULT_OUT = os.path.expanduser("~/Desktop/mushroom-journal-drawings-wanted.txt")
 
 RULE = "=" * 72
@@ -321,11 +322,30 @@ def write_prompts(brief_path, tier1, tier2, tier3, describe_line):
     """
     out = os.path.splitext(brief_path)[0] + "-prompts.txt"
     every = tier1 + [t[0] for t in tier2] + [t[1] for t in tier3]
-    batches = [every[i:i + BATCH] for i in range(0, len(every), BATCH)]
+
+    # Only what is still missing. A work order that keeps asking for drawings that were
+    # done last week is one that gets skimmed, and then the one new line in it gets
+    # skimmed too. What is already installed is on disk, so it can simply be looked at.
+    done = {os.path.splitext(f)[0][len("plate_"):]
+            for f in os.listdir(RES) if f.startswith("plate_")} \
+        if os.path.isdir(RES) else set()
+    remaining = [t for t in every if t["id"] not in done]
+    batches = [remaining[i:i + BATCH] for i in range(0, len(remaining), BATCH)]
+
+    if not remaining:
+        with open(out, "w") as f:
+            f.write("MUSHROOM JOURNAL — IMAGE PROMPTS\n" + RULE + "\n\n"
+                    f"All {len(every)} drawings are done and installed. Nothing wanted.\n")
+        print(f"nothing left to draw -> {out}")
+        return
 
     blocks = [
         "MUSHROOM JOURNAL — IMAGE PROMPTS, SIX AT A TIME",
         RULE,
+        "",
+        wrap(f"{len(done & {t['id'] for t in every})} of {len(every)} are done and in "
+             f"the app. What follows is the {len(remaining)} still wanted — this file "
+             f"regenerates from what is actually installed, so it never asks twice.", ""),
         "",
         wrap("One prompt per batch of six. Not one sheet of thirty-two: that came back "
              "with two species drawn twice and two labels that were not species at all. "
