@@ -366,11 +366,6 @@ class KeyEngine(
         // without erasing it from the list entirely.
         const val MISMATCH = -2.0
 
-        // Enough to move a settling character to the front of the queue, not enough to
-        // make the key ask an otherwise useless question. It multiplies a real gain
-        // rather than replacing it, so a character that separates nothing still is not
-        // asked.
-
         const val SEASON_BONUS = 0.15
         const val SEASON_PENALTY = -0.15
         const val UNSCORED = " unscored"
