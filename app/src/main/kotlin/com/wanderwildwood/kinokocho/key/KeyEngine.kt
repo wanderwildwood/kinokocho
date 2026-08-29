@@ -367,7 +367,13 @@ class KeyEngine(
         return schema.characters
             .filter { it.id !in answers.values.keys }
             .filter { schema.isApplicable(it.id, answers.values) }
-            .map { it.id to informationGain(it.id, live) }
+            // Gain ratio weighted by power, exactly as nextQuestion scores. Raw
+            // information gain was used here and it put "what colour is the cap?" at
+            // the top of the advice, for the same reason it was once the first question
+            // the key ever asked: sixteen states, so the raw number is large. It is the
+            // one character every source calls unreliable, and telling a reader that is
+            // what they should have recorded is worse than saying nothing.
+            .map { it.id to askingValue(it, live) }
             .filter { it.second > 0.0 }
             .sortedByDescending { it.second }
     }
