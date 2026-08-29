@@ -166,12 +166,22 @@ class KeyEngine(
      * absent for most taxa, so any list sorted by usefulness asks it far too early.
      * Entropy handles that asymmetry and a hand-written order does not.
      *
-     * Until something has been answered there is no candidate set to measure, so the
-     * schema's own power hint breaks the tie and the first question is the root one.
+     * The window is the leading candidates rather than the whole pack, so that the
+     * question suits what is actually in play. But a window is only meaningful once
+     * there is a ranking to take the head of: with nothing answered every taxon scores
+     * the same and the sort falls through to scientific name, so taking twelve took the
+     * twelve nearest the front of the alphabet - four Amanitas and an Armillaria - and
+     * chose the opening question of the whole key from them. Where the leaders are tied
+     * with everything behind them there are no leaders, and the measurement is over the
+     * pack entire.
      */
     fun nextQuestion(answers: Answers, considerTop: Int = 12): String? {
         val ranking = rank(answers)
-        val live = ranking.candidates.take(considerTop).map { it.taxon }
+        val leading = ranking.candidates.take(considerTop)
+        val tied = leading.isNotEmpty() &&
+            ranking.candidates.size > leading.size &&
+            ranking.candidates.last().score == leading.last().score
+        val live = (if (tied) ranking.candidates else leading).map { it.taxon }
         if (live.isEmpty()) return null
 
         val settling = charactersThatSettleAHazard(ranking)
@@ -186,10 +196,9 @@ class KeyEngine(
              * A measurement is never a question here.
              *
              * It cannot be. A state character splits the live candidates into groups
-             * and, once the field is small, into singletons - which is a gain ratio of
-             * one, the most a character can score. Ranges overlap, so a number never
-             * leaves one taxon standing and a measurement tops out around a half. It
-             * therefore loses to every state character there is, and would sit at the
+             * and, once the field is small, into singletons. Ranges overlap, so a
+             * number never leaves one taxon standing; it scores about half what an
+             * ordinary state character does, loses to all of them, and would sit at the
              * bottom of the queue for ever.
              *
              * The answer is not to weight it up until it wins. Size is not a narrowing
@@ -219,13 +228,24 @@ class KeyEngine(
         // Within the tier, ordering is still gain ratio weighted by power - the boost
         // decides which questions are eligible, never which of them is best.
         // Three grades, in order: what a person said settles a deadly pair, what the
-        // data implies would settle it, then everything else. Within each grade the
-        // ordering is still gain ratio weighted by power.
-        return askable.filter { it.first.id in declared }
+        // data implies would settle it, then everything else.
+        //
+        // Within a settling grade the pick is by [Character.power] first and by
+        // information only to break the tie, which is the opposite of the general case
+        // and deliberate. The question there is not "what shrinks the list fastest" but
+        // "what most reliably tells these two apart", and those are different
+        // questions: ordering the settling grade by information sent a reader holding a
+        // destroying angel through cap surface, cap colour and cap margin - three
+        // characters that technically separate an Amanita from something and that rain
+        // or a dry week will turn into the wrong answer - and reached the base of the
+        // stem sixth.
+        val settle = compareBy<Pair<Character, Double>>({ it.first.power }, { it.second })
+        askable.filter { it.first.id in declared }
             .ifEmpty { askable.filter { it.first.id in disagreeing } }
-            .ifEmpty { askable }
-            .maxByOrNull { it.second }
-            ?.first?.id
+            .maxWithOrNull(settle)
+            ?.let { return it.first.id }
+
+        return askable.maxByOrNull { it.second }?.first?.id
     }
 
     /**
@@ -324,12 +344,27 @@ class KeyEngine(
      *
      * Two corrections to raw information gain, both needed:
      *
-     * **Gain ratio, not gain.** Raw gain rewards a character simply for having many
-     * states, because more states shatter the set into smaller groups. Cap colour has
-     * sixteen and would be chosen as the opening question - and cap colour is the one
-     * character every source warns is unreliable, since rain, age and sun all change it.
-     * Dividing by the entropy of the split itself is Quinlan's correction and it removes
-     * that bias.
+     * **A cardinality correction, but not the entropy of the split.** Raw gain rewards a
+     * character simply for having many states, because more states shatter the set into
+     * smaller groups. Cap colour has sixteen and would be chosen as the opening question
+     * - and cap colour is the one character every source warns is unreliable, since
+     * rain, age and sun all change it.
+     *
+     * Quinlan's gain ratio is the usual correction, and it was used here, and it did
+     * nothing at all. Quinlan divides by the entropy of the split, and that works
+     * because his groups contain *classes* whose entropy is measured separately. Here
+     * every taxon is its own class, so the entropy remaining in a group is the log of
+     * its size - and with that substitution the gain and the split entropy are the same
+     * number, algebraically, for every character there is. The ratio was 1.000000 across
+     * the board, every question the key ever asked was ordered by [Character.power]
+     * alone, and the symptom the correction was added for went away only because cap
+     * colour has a low power. Three paragraphs of comment described an adaptive key that
+     * was a hand-written list.
+     *
+     * What is used instead is the intrinsic value of the split: the log of how many
+     * distinct answers there are. A sixteen-state character has to be four bits better
+     * than a two-state one to be worth asking first, which is the bias that needed
+     * removing, and it does not collapse.
      *
      * **Reliability weighting.** DELTA weights characters by how dependably a person can
      * apply them, and the schema's power field is that judgement. A character that is
@@ -338,9 +373,10 @@ class KeyEngine(
     private fun askingValue(character: Character, live: List<Taxon>): Double {
         val gain = informationGain(character.id, live)
         if (gain <= 0.0) return 0.0
-        val split = splitEntropy(character.id, live)
-        val ratio = if (split <= 0.0) 0.0 else gain / split
-        return ratio * (character.power / 5.0)
+        val answers = groupsFor(character.id, live).size
+        if (answers < 2) return 0.0
+        val reliability = (character.power / 5.0) * (character.power / 5.0)
+        return (gain / (ln(answers.toDouble()) / LN2)) * reliability
     }
 
     /**

@@ -501,6 +501,49 @@ class KeyEngineTest {
     }
 
     @Test
+    fun `gain and split entropy are the same number, so the gain ratio was useless`() {
+        // Quinlan divides gain by the entropy of the split, and it works because his
+        // groups hold classes whose entropy is measured separately. Here each taxon is
+        // its own class, so what remains inside a group is the log of its size - and
+        // with that substitution the two quantities are algebraically identical. The
+        // ratio was 1.000000 for every character in the schema, which meant the key was
+        // ordered by power alone while three paragraphs of comment described something
+        // adaptive. Pinned here so it cannot come back.
+        pack.taxa.let { live ->
+            schema.characters.forEach { c ->
+                val gain = engine.informationGain(c.id, live)
+                if (gain > 0.0) {
+                    assertEquals(c.id, gain, engine.splitEntropy(c.id, live), 1e-9)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `answering truthfully reaches the right taxon within a few questions`() {
+        // The whole key in one number. Walk every taxon in the pack, answer whatever is
+        // asked the way that taxon is described, and see how long it takes to reach the
+        // top of the list.
+        var reached = 0
+        val steps = mutableListOf<Int>()
+        pack.taxa.forEach { target ->
+            var a = KeyEngine.Answers()
+            for (i in 1..12) {
+                val q = engine.nextQuestion(a) ?: break
+                val v = target.characters[q]?.firstOrNull()?.value
+                a = if (v != null) a.with(q, setOf(v)) else a.markNotTested(q)
+                if (engine.rank(a).candidates.first().taxon.id == target.id) {
+                    reached++
+                    steps += i
+                    break
+                }
+            }
+        }
+        assertTrue("only $reached of ${pack.taxa.size} reached first place", reached >= 80)
+        assertTrue("median was ${steps.sorted()[steps.size / 2]}", steps.sorted()[steps.size / 2] <= 6)
+    }
+
+    @Test
     fun `size is never offered as a question`() {
         // Not an oversight. A measurement cannot leave one taxon standing, so it would
         // lose to every state character for ever; it is recorded on the entry screen
