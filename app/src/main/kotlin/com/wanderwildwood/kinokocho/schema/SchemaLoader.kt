@@ -50,7 +50,11 @@ object SchemaLoader {
                 note = o.optString("note").ifEmpty { null },
                 valuesFromColours = o.optString("valuesFrom") == "colours",
                 values = o.optJSONArray("values")?.map {
-                    CharacterValue(it.getString("id"), it.getString("label"))
+                    CharacterValue(
+                        id = it.getString("id"),
+                        label = it.getString("label"),
+                        uncertain = it.optBoolean("uncertain", false),
+                    )
                 }.orEmpty(),
             )
         }

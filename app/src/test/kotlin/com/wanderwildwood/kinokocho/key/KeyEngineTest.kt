@@ -387,6 +387,34 @@ class KeyEngineTest {
     }
 
     @Test
+    fun `saying you could not tell never eliminates anything`() {
+        // The base was left in the ground, or the specimen is too old to say whether
+        // there was a ring. Those answers describe the reader, not the mushroom, and
+        // scoring them as states mismatched every taxon that had the character
+        // recorded - which dropped the hazards too, because a hazard is only carried
+        // while it has no mismatches. The honest answer used to hide the destroying
+        // angel; this is the test that says it must not.
+        val base = answers("fruitbody_type" to "gilled_stemmed", "substrate" to "soil")
+        val before = engine.rank(base)
+
+        val unsure = base
+            .with("stipe_base", setOf("buried"))
+            .with("ring", setOf("cannot_tell"))
+        val after = engine.rank(unsure)
+
+        assertEquals(
+            "an uncertain answer must not eliminate a candidate",
+            before.candidates.count { it.mismatched == 0 },
+            after.candidates.count { it.mismatched == 0 },
+        )
+        assertTrue(
+            "an uncertain answer must not drop a hazard",
+            after.hazards.map { it.taxon.id }
+                .containsAll(before.hazards.map { it.taxon.id }),
+        )
+    }
+
+    @Test
     fun `a deadly candidate pulls its settling question forward`() {
         // Clustered on wood, Galerina is live and Armillaria leads. The thing that
         // separates them is the ring and the base, not the cap.

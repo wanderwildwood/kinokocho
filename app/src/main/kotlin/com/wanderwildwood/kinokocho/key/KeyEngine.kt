@@ -74,6 +74,20 @@ class KeyEngine(
 
         answers.values.forEach { (characterId, chosen) ->
             if (chosen.isEmpty()) return@forEach
+
+            // Values that describe the observer rather than the mushroom - the base was
+            // left in the ground, the specimen is too old to tell whether it had a ring
+            // - are dropped before scoring. No taxon carries them, so treating them as
+            // states would mismatch everything: answering "I cannot tell" would empty
+            // the candidate list and, worse, drop every hazard, because a hazard is only
+            // shown while it has no mismatches. The honest answer must never be the one
+            // that hides the destroying angel.
+            val real = chosen.filterNot { schema.isUncertainValue(characterId, it) }.toSet()
+            if (real.isEmpty()) {
+                unscored++
+                return@forEach
+            }
+
             val states = taxon.characters[characterId]
             if (states == null) {
                 unscored++
@@ -82,7 +96,7 @@ class KeyEngine(
             // A multi-select answer matches if ANY chosen state is one the taxon shows.
             // A cap can be both scaly and dry, and requiring all of them would punish an
             // observant person for noticing more than the reference happened to record.
-            val best = chosen.mapNotNull { c -> states.firstOrNull { it.value == c }?.frequency }
+            val best = real.mapNotNull { c -> states.firstOrNull { it.value == c }?.frequency }
                 .minByOrNull { it.ordinal }
             when (best) {
                 Frequency.ALWAYS, Frequency.USUALLY -> { score += FULL_MATCH; matched++ }

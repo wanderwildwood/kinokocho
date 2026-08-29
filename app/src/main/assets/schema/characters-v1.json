@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "note": "The global character schema. Region packs supply taxon data and may refine the characters marked regional; they never redefine these ids. Every character is answerable as a state, as unanswered (which eliminates nothing), or as not applicable (set by the engine from a controlling character, never by a person).",
+  "note": "The global character schema. Region packs supply taxon data and may refine the characters marked regional; they never redefine these ids. Every character is answerable as a state, as unanswered (which eliminates nothing), or as not applicable (set by the engine from a controlling character, never by a person). Some values say something about the observer rather than the mushroom — the base was left in the ground, the specimen is too old to tell whether it had a ring. Those carry uncertain:true and must never eliminate a taxon; scoring them as a mismatch would mean an honest answer hid a deadly candidate.",
   "colours": [
     {
       "id": "white",
@@ -348,7 +348,8 @@
         },
         {
           "id": "cannot_tell",
-          "label": "Cannot tell — old or damaged"
+          "label": "Cannot tell — old or damaged",
+          "uncertain": true
         }
       ]
     },
@@ -396,7 +397,8 @@
         },
         {
           "id": "buried",
-          "label": "Buried — I did not get the base out"
+          "label": "Buried — I did not get the base out",
+          "uncertain": true
         }
       ]
     },
@@ -1363,7 +1365,8 @@
         },
         {
           "id": "unknown",
-          "label": "Could not tell"
+          "label": "Could not tell",
+          "uncertain": true
         }
       ]
     },

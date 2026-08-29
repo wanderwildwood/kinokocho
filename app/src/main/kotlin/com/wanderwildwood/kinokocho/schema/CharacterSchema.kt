@@ -16,6 +16,19 @@ data class CharacterSchema(
 ) {
     private val byId = characters.associateBy { it.id }
 
+    /**
+
+     * True for a value that says the reader could not tell, rather than saying what the
+
+     * mushroom is. Those must not be scored against a taxon.
+
+     */
+
+    fun isUncertainValue(characterId: String, valueId: String): Boolean =
+
+        character(characterId)?.values?.firstOrNull { it.id == valueId }?.uncertain == true
+
+
     fun character(id: String): Character? = byId[id]
 
     /** The values a character offers, resolving the shared colour list. */
@@ -40,7 +53,19 @@ data class CharacterSchema(
 
 data class ColourTerm(val id: String, val label: String, val gloss: String)
 
-data class CharacterValue(val id: String, val label: String)
+/**
+ * One state a character can take.
+ *
+ * [uncertain] marks a value that describes the observer rather than the mushroom —
+ * "buried, I did not get the base out", "too old to tell". It must never eliminate a
+ * taxon: scoring it as a mismatch would mean the honest answer is the one that hides
+ * a deadly candidate, which is precisely backwards.
+ */
+data class CharacterValue(
+    val id: String,
+    val label: String,
+    val uncertain: Boolean = false,
+)
 
 data class Character(
     val id: String,
