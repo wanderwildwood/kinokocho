@@ -952,25 +952,40 @@ def veil_remnants():
 
 
 def gill_edge():
+    """
+    One gill's edge, close up, hanging from the cap it belongs to.
+
+    The frame was three sides of a rectangle and the character was the fourth. Drawn
+    that way "an even edge" is an empty box: nothing in the picture says gill, and a
+    reader meeting it cold has no way in. Two lines of cap flesh across the top is all
+    it took — the same wedge the gill-attachment set hangs its gill from, so the two
+    close-ups read as views of the same mushroom.
+    """
     c = "gill_edge"
 
     def face():
-        return path("M16,26 L16,64 M80,26 L80,64 M16,26 L80,26", width=FINE)
+        # Hung from a cap rather than floating. Three offset blades were tried first and
+        # read as nested brackets; a band of cap flesh above says "gill" in two lines.
+        return (
+            path("M4,16 Q48,6 92,16"),
+            path("M4,24 Q48,14 92,24"),
+            path("M16,22 L16,64 M80,22 L80,64", width=FINE),
+        )
 
     write(f"art_{c}_even", "Agaricus campestris",
           "A clean straight edge, seen face-on.",
-          face(), path("M16,64 L80,64"))
+          *face(), path("M16,64 L80,64"))
     write(f"art_{c}_serrate", "Lentinellus ursinus",
           "Regularly toothed, like a saw.",
-          face(),
+          *face(),
           path("M16,64 L22,57 L28,64 L34,57 L40,64 L46,57 L52,64 L58,57 "
                "L64,64 L70,57 L76,64 L80,60"))
     write(f"art_{c}_wavy", "Pleurotus ostreatus",
           "Undulating without discrete teeth.",
-          face(), path("M16,62 Q26,52 36,62 Q46,72 56,62 Q66,52 76,62 Q79,64 80,63"))
+          *face(), path("M16,62 Q26,52 36,62 Q46,72 56,62 Q66,52 76,62 Q79,64 80,63"))
     write(f"art_{c}_different_colour", "Mycena galericulata",
           "The edge is pigmented differently from the gill face.",
-          face(), path("M16,60 L80,60 L80,68 L16,68 Z", width=FINE),
+          *face(), path("M16,60 L80,60 L80,68 L16,68 Z", width=FINE),
           hatch_shape([(16, 60), (80, 60), (80, 68), (16, 68)], 3.5))
 
 
@@ -1385,10 +1400,13 @@ def flesh_consistency():
           path("M78,34 Q62,26 48,32 Q50,44 48,52 Q62,62 78,58 Z"),
           # The finger that made the dent, coming down onto it.
           path("M48,8 L48,22 M42,16 L48,22 L54,16", width=FINE))
+    # No impact marks. Two little diagonal ticks over the break is a comic-book idiom,
+    # and the break itself already says it: a clean, square, chalky face on both halves
+    # with the gap between them. Where a drawing needs a verb it is a hand or an arrow,
+    # which is a diagram convention and not a sound effect.
     write(f"art_{c}_brittle", "Russula virescens", "Snaps clean across, like chalk.",
-          path("M14,34 L44,34 L48,50 L44,66 L14,66 Z"),
-          path("M82,34 L56,34 L52,50 L56,66 L82,66 Z"),
-          path("M46,26 L50,20 M52,26 L58,20", width=HAIR))
+          path("M14,34 L44,34 L47,42 L44,50 L47,58 L44,66 L14,66 Z"),
+          path("M82,34 L57,34 L54,42 L57,50 L54,58 L57,66 L82,66 Z"))
     write(f"art_{c}_fibrous", "Pleurotus ostreatus", "Tears into strands lengthways.",
           path("M14,32 L40,32 Q46,40 40,48 Q46,56 40,68 L14,68 Z"),
           path("M82,32 L56,32 Q50,40 56,48 Q50,56 56,68 L82,68 Z"),
@@ -1401,12 +1419,18 @@ def flesh_consistency():
           path("M18,34 L78,34 L78,64 L18,64 Z"),
           path("M26,34 L26,64 M38,34 L38,64 M50,34 L50,64 M62,34 L62,64 M70,34 L70,64",
                width=HAIR),
-          path("M30,24 L36,18 M46,24 L46,16 M62,24 L58,18", width=HAIR))
+          # A thumb pressing on it and the surface not moving, rather than three marks
+          # bouncing off. Same hand as the soft one, which is the point: the two are the
+          # same gesture with different results.
+          path("M48,10 L48,28 M42,22 L48,28 L54,22", width=FINE),
+          path("M34,30 L62,30", width=FINE))
     write(f"art_{c}_gelatinous", "Tremella mesenterica", "Rubbery and wobbling.",
           path("M22,54 Q20,36 34,34 Q44,24 56,34 Q74,34 74,52 Q76,72 48,74 "
                "Q22,72 22,54 Z"),
           path("M34,52 Q42,44 48,52 Q54,60 62,52", width=FINE),
-          path("M14,44 L8,40 M14,58 L8,60 M82,44 L88,40 M82,58 L88,60", width=HAIR))
+          # The wobble is in the outline, not in marks flying off the sides. A second
+          # contour just outside it, where the blob was a moment ago.
+          path("M18,54 Q16,34 32,30 Q44,20 58,31 Q78,32 78,52", width=HAIR))
     write(f"art_{c}_powdery", "Lycoperdon perlatum", "Collapses to dust when mature.",
           path("M26,40 Q26,26 48,26 Q70,26 70,40 Q70,56 48,58 Q26,56 26,40 Z"),
           path("M30,68 L31,68 M40,72 L41,72 M50,70 L51,70 M60,74 L61,74 "
