@@ -44,10 +44,43 @@ class KeyEngineTest {
     }
 
     @Test
-    fun `every taxon cites a source`() {
-        pack.taxa.forEach {
-            assertTrue("${it.id} cites nothing", it.sources.isNotEmpty())
+    fun `every taxon cites where its description came from, not only where it grows`() {
+        // Fifty-nine rows cited GBIF and nothing else. GBIF says where a fungus has been
+        // recorded and nothing whatever about how the gills meet the stem — citing an
+        // occurrence database for a description is pointing at the wrong thing, on a
+        // page headed "where this comes from".
+        pack.taxa.forEach { taxon ->
+            assertTrue("${taxon.id} cites nothing", taxon.sources.isNotEmpty())
+            assertTrue(
+                "${taxon.id} cites only where it grows",
+                taxon.sources.any { source ->
+                    !source.startsWith("GBIF") && !source.startsWith("iNaturalist")
+                },
+            )
         }
+    }
+
+    @Test
+    fun `one source is written one way`() {
+        // The same source appeared four ways — "GBIF occurrence counts over a southern
+        // Blue Ridge polygon" beside "GBIF occurrence data, southern Blue Ridge polygon"
+        // — so one source rendered as two lines on the page.
+        //
+        // A named list rather than a cleverer comparison. Two of these differ only by a
+        // qualifier and are genuinely different sources, which no amount of string
+        // similarity will ever get right; adding a real new one means writing it here,
+        // and that is the discipline worth having.
+        val known = setOf(
+            "GBIF occurrence counts over a southern Blue Ridge polygon",
+            "iNaturalist occurrence records, southern Blue Ridge",
+            "iNaturalist occurrence records, southern Blue Ridge, above 5,000 ft",
+            "North American Mycological Association poisoning references",
+            "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+            "Macromorphology as standard North American field guides agree it — " +
+                "written out, not reproduced",
+        )
+        val used = pack.taxa.flatMap { it.sources }.toSet()
+        assertEquals("undeclared citations", emptySet<String>(), used - known)
     }
 
     @Test

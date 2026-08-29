@@ -570,7 +570,7 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -968,7 +968,7 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -1155,7 +1155,7 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -1383,7 +1383,7 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -1586,7 +1586,7 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -1775,7 +1775,7 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -2171,7 +2171,7 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -2564,7 +2564,7 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "lookalikes": [
@@ -2941,7 +2941,7 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -3104,7 +3104,7 @@
       ],
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -3285,7 +3285,7 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -3479,7 +3479,7 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -3649,7 +3649,7 @@
       ],
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -3845,7 +3845,7 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence data, southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -4184,7 +4184,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -4442,7 +4443,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -4686,7 +4688,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -4924,7 +4927,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -5137,7 +5141,7 @@
       ],
       "sources": [
         "North American Mycological Association poisoning references",
-        "iNaturalist occurrence records above 5,000 ft in the southern Blue Ridge"
+        "iNaturalist occurrence records, southern Blue Ridge, above 5,000 ft"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -5411,7 +5415,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -5632,7 +5637,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -5848,7 +5854,7 @@
       },
       "lookalikes": [],
       "sources": [
-        "North American Mycological Association references"
+        "North American Mycological Association poisoning references"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -6010,7 +6016,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -6245,7 +6252,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -6410,7 +6418,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -6576,7 +6585,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -6782,7 +6792,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -6988,7 +6999,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -7127,7 +7139,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -7293,7 +7306,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -7562,7 +7576,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -8369,7 +8384,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -8567,7 +8583,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -8792,7 +8809,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -9015,7 +9033,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -9290,7 +9309,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -9543,7 +9563,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -10030,7 +10051,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -10238,7 +10260,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -10474,7 +10497,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -10955,7 +10979,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -11183,7 +11208,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -11571,7 +11597,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -11845,7 +11872,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -12074,7 +12102,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -12286,7 +12315,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -12493,7 +12523,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -12740,7 +12771,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -12955,7 +12987,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -13179,7 +13212,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -13405,7 +13439,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -13651,7 +13686,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -13813,7 +13849,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -13992,7 +14029,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -14202,7 +14240,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -14372,7 +14411,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -14599,7 +14639,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -14818,7 +14859,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -15265,7 +15307,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -15501,7 +15544,7 @@
         }
       ],
       "sources": [
-        "iNaturalist occurrence records for the southern Blue Ridge",
+        "iNaturalist occurrence records, southern Blue Ridge",
         "North American Mycological Association poisoning references"
       ],
       "reviewed": false,
@@ -16250,7 +16293,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -16459,7 +16503,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -16652,7 +16697,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -16861,7 +16907,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -17857,7 +17904,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -18320,7 +18368,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -18521,7 +18570,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -18704,7 +18754,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
     },
@@ -18933,7 +18984,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
     },
@@ -19142,7 +19194,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
     },
@@ -19932,7 +19985,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
     },
@@ -20656,7 +20710,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
     },
@@ -20824,7 +20879,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
     },
@@ -21045,7 +21101,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
     },
@@ -21219,7 +21276,8 @@
         }
       ],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
     },
@@ -21389,7 +21447,8 @@
       },
       "lookalikes": [],
       "sources": [
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
     },
