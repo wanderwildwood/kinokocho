@@ -48,6 +48,7 @@ fun JournalScreen(
     onNew: () -> Unit,
     onAbout: () -> Unit,
     onDelete: (Long) -> Unit,
+    seasonRow: (@Composable () -> Unit)? = null,
 ) {
     Box(Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxSize()) {
@@ -71,6 +72,11 @@ fun JournalScreen(
                     modifier = Modifier.size(28.dp).clickable(onClick = onAbout),
                 )
             }
+
+            // What is about this month, before anything has been found. It is the one
+            // thing a journal can say when it is still empty.
+            seasonRow?.invoke()
+            HorizontalDividerMMD()
 
             if (entries.isEmpty()) {
                 Empty(Modifier.weight(1f))

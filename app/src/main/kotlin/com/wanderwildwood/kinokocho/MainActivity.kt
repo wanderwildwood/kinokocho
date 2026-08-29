@@ -26,6 +26,9 @@ import com.wanderwildwood.kinokocho.ui.AboutDialog
 import com.wanderwildwood.kinokocho.ui.EntryScreen
 import com.wanderwildwood.kinokocho.ui.JournalScreen
 import com.wanderwildwood.kinokocho.ui.PhotoSheet
+import com.wanderwildwood.kinokocho.ui.SeasonRow
+import com.wanderwildwood.kinokocho.ui.SeasonScreen
+import java.util.Calendar
 import com.wanderwildwood.kinokocho.ui.NewEntryScreen
 
 class MainActivity : ComponentActivity() {
@@ -61,11 +64,13 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     // print is not known until the morning.
     var reading by remember { mutableStateOf(false) }
     var photographing by remember { mutableStateOf(false) }
+    var season by remember { mutableStateOf(false) }
 
     // Back closes what is open rather than leaving the app, so a mis-tap on a find
     // costs nothing. Nothing here is destructive, so nothing here asks.
     BackHandler(enabled = draft != null || about || photographing) {
         when {
+            season -> season = false
             photographing -> photographing = false
             about -> about = false
             // Answering, on a find opened for reading: back returns to the reading
@@ -77,12 +82,26 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
 
     val open = draft
     when {
+        season -> SeasonScreen(
+            taxa = vm.pack.taxa,
+            month = thisMonth(),
+            onClose = { season = false },
+        )
+
         open == null -> JournalScreen(
             entries = entries,
             onOpen = { id -> reading = true; vm.open(id) },
             onNew = { reading = false; vm.startNewEntry() },
             onAbout = { about = true },
             onDelete = vm::delete,
+            seasonRow = {
+                val m = thisMonth()
+                SeasonRow(
+                    month = m,
+                    count = vm.pack.taxa.count { it.seasonMonths.isEmpty() || m in it.seasonMonths },
+                    onOpen = { season = true },
+                )
+            },
         )
 
         reading -> EntryScreen(
@@ -120,3 +139,6 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
         }
     }
 }
+
+private fun thisMonth(): Int =
+    Calendar.getInstance().get(Calendar.MONTH) + 1
