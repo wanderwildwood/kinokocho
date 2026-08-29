@@ -90,6 +90,32 @@ class KeyEngineTest {
             .forEach { assertTrue("no such character: $it", it in ids) }
     }
 
+    @Test
+    fun `anything that can kill or seriously harm says what and how fast`() {
+        // Galerina marginata — the one that kills people who thought they had picked
+        // honey mushrooms — carried no field note and no hazard note at all. Its page
+        // said it could kill and had nothing further to offer, which is a warning with
+        // no way to act on it.
+        //
+        // Onset is not decoration here. The shape of an amatoxin poisoning is that a
+        // person feels fine for most of a day and then feels ill long after anybody
+        // would connect the two, and somebody reading this at two in the morning needs
+        // the number.
+        pack.taxa
+            .filter {
+                it.hazard.severity == Hazard.Severity.LETHAL ||
+                    it.hazard.severity == Hazard.Severity.SEVERE
+            }
+            .forEach {
+                assertTrue("${it.id} has no field note", !it.note.isNullOrBlank())
+                assertTrue("${it.id} has no hazard note", !it.hazard.note.isNullOrBlank())
+                assertTrue(
+                    "${it.id} does not say how fast",
+                    !it.hazard.onset.isNullOrBlank() && it.hazard.onset != "—",
+                )
+            }
+    }
+
     // ---- ranking ---------------------------------------------------------------
 
     @Test
