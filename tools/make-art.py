@@ -22,6 +22,26 @@ not attempted, because the panel has neither and the schema asks about them sepa
 Output is 96x96 vector drawables in app/src/main/res/drawable/, named
 art_<character>_<value>.xml, stroke only. Drawn at about 56dp, so nothing finer than
 a 3-unit gap survives — that is the constraint every drawing is built to.
+
+**The hand**, taken from the owner's own chanterelle rather than invented. The drawing was
+measured, not admired, and these are the five things that came out of it:
+
+1. *Thin.* His pen line is about 0.014 of the width of what it draws. Everything here
+   was at 0.037, which is why a page of them read as diagrams.
+2. *One weight.* A pen does not change nibs halfway through a drawing. The three
+   constants below are nearly one number; a weight hierarchy is a way of rescuing a
+   drawing that has too much in it.
+3. *Few lines.* His chanterelle is eight strokes. What is left out is most of why it
+   works.
+4. *Crooked.* His left margin is rolled and the right is not. A symmetrical mushroom
+   reads as an ornament — [capped_cap] leans on purpose, and so does every drawing
+   hand-written since.
+5. *No black.* A solid fill on a page of thin lines is not a darker area, it is a hole.
+   Tone is an open hatch — see [hatch_shape] — and the only fills left are droplets
+   small enough to be dots.
+
+None of that is licence to be vague. A drawing is still of a named species doing the
+thing it is there to show, and thrift that costs accuracy is just a worse drawing.
 """
 
 import os
@@ -32,15 +52,19 @@ OUT = os.path.join(HERE, "..", "app", "src", "main", "res", "drawable")
 KT = os.path.join(HERE, "..", "app", "src", "main", "kotlin", "com",
                   "wanderwildwood", "kinokocho", "ui", "CharacterArt.kt")
 
-# Lighter than the first pass. These started at 4.0/2.5/1.8 on the theory that an
-# e-ink panel needs weight, and the drawings came out heavy and blunt — the owner compared
-# them to a hand-drawn reference and the difference was line weight more than anything
-# else. A pen drawing is thin and confident; thick strokes also close up small shapes,
-# which is what wrecked the launcher icon. Legibility at 64px comes from clear shapes,
-# not from fat lines.
-STROKE = 2.8          # the silhouette
-FINE = 1.9            # gills, tubes, cross-veins: things meant to read as many
-HAIR = 1.3            # texture that must not compete with the silhouette
+# Measured off the owner's chanterelle rather than guessed. The pen line is about 0.014 of
+# the width of what it draws; these were at 0.037, which is why the drawings read as
+# diagrams and his reads as a mushroom. 4.0/2.5/1.8 was the first pass, 2.8/1.9/1.3 the
+# second, and both were still arguing about how thick to make a line when the answer was
+# to make it thin and draw fewer of them.
+#
+# The three values are nearly one value on purpose. A pen does not change nibs halfway
+# through a drawing, and his does not: what separates the cap from the ridges under it is
+# where the lines go, not how heavy they are. A weight hierarchy is a way of rescuing a
+# drawing that has too much in it.
+STROKE = 1.2          # the silhouette
+FINE = 1.0            # gills, tubes, cross-veins: things meant to read as many
+HAIR = 0.8            # texture that must not compete with the silhouette
 GROUND = 86.0
 
 # The species each drawing is taken from, and what it is doing there. Written down
@@ -90,6 +114,108 @@ def write(name, species, why, *paths):
 # ---------------------------------------------------------------------------
 # Anatomy shared between drawings, so a stem is the same stem everywhere.
 
+def hatch_shape(points, step=5.0, width=None):
+    """
+    A tone over any region, as an open hatch clipped to it.
+
+    [points] is the region as a polygon - curves approximated by enough points that the
+    hatch stops where the eye expects. Lines run at 45 degrees and are clipped by
+    scanline, which is why this works on a cap segment or a cut face and not only on
+    the circles and boxes the first version handled.
+
+    Not a clip-path: the preview renderer lifts paths straight out of the drawable and
+    would ignore one, and art that cannot be looked at is art that stays wrong.
+    """
+    xs = [p[0] for p in points]
+    ys = [p[1] for p in points]
+    # Lines of constant (x - y). Walk that value across the shape's whole range.
+    lo = min(x - y for x, y in points)
+    hi = max(x - y for x, y in points)
+    out = []
+    k = lo + step
+    while k < hi:
+        hits = []
+        for i in range(len(points)):
+            x1, y1 = points[i]
+            x2, y2 = points[(i + 1) % len(points)]
+            d1, d2 = (x1 - y1) - k, (x2 - y2) - k
+            if d1 == d2:
+                continue
+            t = d1 / (d1 - d2)
+            if 0.0 <= t <= 1.0:
+                hits.append((y1 + t * (y2 - y1)))
+        hits.sort()
+        for i in range(0, len(hits) - 1, 2):
+            a, b = hits[i], hits[i + 1]
+            if b - a > 0.8:
+                out.append(f"M{a + k:.1f},{a:.1f} L{b + k:.1f},{b:.1f}")
+        k += step * 1.4142
+    return path(" ".join(out), width=width or HAIR)
+
+
+def arc_points(x1, y1, cx, cy, x2, y2, n=8):
+    """A quadratic curve as points, for handing a drawn shape to [hatch_shape]."""
+    out = []
+    for i in range(n + 1):
+        t = i / n
+        u = 1 - t
+        out.append((u * u * x1 + 2 * u * t * cx + t * t * x2,
+                    u * u * y1 + 2 * u * t * cy + t * t * y2))
+    return out
+
+
+def hatch_ellipse(cx, cy, rx, ry, step=5.0):
+    """
+    A tone, drawn as an open hatch rather than filled in.
+
+    "The centre is darker" and "the margin is paler" are about tone, and the first
+    drawings said so with a solid black disc. On a page of thin lines a black disc is
+    not a darker area, it is a hole - it reads as mass, it is the heaviest thing in the
+    app, and it is the opposite of the restraint everything else was redrawn for.
+
+    Diagonal lines at four or five units read as grey at 64px and stay lines. Clipped to
+    the ellipse analytically rather than with a clip-path, because the preview renderer
+    lifts paths straight out of the drawable and would not honour one - and art that
+    cannot be looked at is art that stays wrong.
+    """
+    out = []
+    n = int((2 * rx + 2 * ry) / step)
+    for i in range(-n, n + 1):
+        # Lines at 45 degrees: x - y = k. Solve against (x/rx)^2 + (y/ry)^2 = 1.
+        k = i * step * 1.4142
+        a = 1 / (rx * rx) + 1 / (ry * ry)
+        b = 2 * k / (rx * rx)
+        c = k * k / (rx * rx) - 1
+        disc = b * b - 4 * a * c
+        if disc <= 0:
+            continue
+        r = disc ** 0.5
+        y1, y2 = (-b - r) / (2 * a), (-b + r) / (2 * a)
+        out.append(f"M{cx + y1 + k:.1f},{cy + y1:.1f} L{cx + y2 + k:.1f},{cy + y2:.1f}")
+    return path(" ".join(out), width=HAIR)
+
+
+def hatch_band(x1, y1, x2, y2, step=5.0):
+    """The same tone on a rectangle - a bruised patch on a stem, a zone on a cap."""
+    out = []
+    i = 0
+    while True:
+        k = i * step * 1.4142
+        if k > (x2 - x1) + (y2 - y1):
+            break
+        # the line x - y = (x1 - y2) + k, clipped to the box
+        ax, ay = x1 + k, y2
+        bx, by = x1, y2 - k
+        if ay - by > y2 - y1:
+            bx, by = x1 + (k - (y2 - y1)), y1
+        if ax > x2:
+            ay, ax = y2 - (ax - x2), x2
+        if ax > bx or ay < by:
+            out.append(f"M{bx:.1f},{by:.1f} L{ax:.1f},{ay:.1f}")
+        i += 1
+    return path(" ".join(out), width=HAIR)
+
+
 def ground(x1=10, x2=86, y=GROUND):
     return path(f"M{x1},{y} L{x2},{y}", width=FINE)
 
@@ -98,19 +224,25 @@ def stem_sides(x=48, top=48, bottom=GROUND, half=6):
     return f"M{x - half},{top} L{x - half},{bottom} M{x + half},{top} L{x + half},{bottom}"
 
 
-def capped_cap(cx=48, half=34, base=46, rise=24, flesh=5):
+def capped_cap(cx=48, half=34, base=46, rise=24, flesh=5, lean=1.5):
     """
     A cap in section, with thickness.
 
     Cap flesh is not a line: gills hang from a wedge of tissue, and drawing it as one
     line is what makes amateur diagrams look wrong. The lower curve is where the gills
     attach, the upper is the surface.
+
+    [lean] is small and deliberate. Every drawing here was bilaterally symmetric, which
+    is what made a page of them read as a set of icons: a mushroom is not symmetric, and
+    the thing that most separates the owner's chanterelle from the version drawn to replace
+    it is that his is crooked. Two or three units is enough — it must not be read as
+    off-centre, which is a state of a different character.
     """
     return (
         f"M{cx - half},{base} "
-        f"Q{cx - half},{base - rise} {cx},{base - rise} "
-        f"Q{cx + half},{base - rise} {cx + half},{base} "
-        f"Q{cx + half - 4},{base - flesh} {cx + half - 10},{base - flesh + 1} "
+        f"Q{cx - half},{base - rise} {cx - lean},{base - rise - 1} "
+        f"Q{cx + half},{base - rise + 1} {cx + half},{base + 1} "
+        f"Q{cx + half - 4},{base - flesh + 1} {cx + half - 10},{base - flesh + 2} "
         f"L{cx - half + 10},{base - flesh + 1} "
         f"Q{cx - half + 4},{base - flesh} {cx - half},{base} Z"
     )
@@ -216,7 +348,7 @@ def fruitbody_type():
           radiating(n=15),
           underside_rim(),
           path("M42,60 L42,86 M54,60 L54,86"),
-          ground())
+)
 
     # The tube layer is a mat of its own thickness, and the stem of a bolete is fat —
     # both are how you tell it from a gilled mushroom before you even look closely.
@@ -233,7 +365,7 @@ def fruitbody_type():
                width=HAIR),
           path("M36,62 Q30,72 32,86 L64,86 Q66,72 60,62"),
           path("M35,70 Q48,74 62,70 M33,78 Q48,82 63,78", width=HAIR),
-          ground())
+)
 
     write(f"art_{c}_polypore",
           "Trametes versicolor",
@@ -252,19 +384,24 @@ def fruitbody_type():
                "M48,62 L49,77 M54,62 L55,76 M60,61 L61,74 M66,59 L67,71 M72,56 L73,67 "
                "M78,53 L79,63", width=FINE),
           path("M42,62 Q41,74 42,86 M56,62 Q57,74 56,86"),
-          ground())
+)
 
+    # Redrawn off the owner's own chanterelle, measured rather than eyeballed. The profile
+    # is a funnel: the cap is a thin lopsided plate across the top fifth, the stem is
+    # parallel-sided at about a fifth of the width and runs the whole bottom half, and
+    # the ridges are short and hang under the cap rather than sweeping the full height.
+    # The scalloped fan drawn here before was a symmetrical ornament — the left margin
+    # is rolled and the right is not, and that asymmetry is most of why his reads as a
+    # mushroom. Do not tidy it out.
     write(f"art_{c}_chanterelle_like",
           "Cantharellus lateritius",
           "Underneath: blunt forking ridges, thick and rounded where a gill is thin.",
-          path("M12,32 Q22,20 32,28 Q42,18 50,26 Q60,17 70,27 Q82,20 86,34 "
-               "Q76,44 66,50 L58,72 Q54,82 52,88 L44,88 Q42,78 38,70 L30,48 "
-               "Q18,42 12,32 Z"),
-          path("M24,36 Q30,50 34,62 M36,34 Q40,50 42,66 M50,32 Q50,50 49,68 "
-               "M63,34 Q58,50 55,64 M74,36 Q66,46 62,54", width=STROKE),
-          path("M28,44 Q31,48 34,44 M44,42 Q47,46 50,42 M55,46 Q58,50 61,46",
-               width=FINE),
-          ground(30, 66))
+          path("M17,17 Q7,18 8,24 Q10,28 17,26"),
+          path("M17,17 Q34,12 52,14 Q72,12 89,20"),
+          path("M17,26 Q27,31 34,37 Q38,44 38,50 L38,83 Q39,89 46,87"),
+          path("M89,20 Q74,29 64,36 Q59,43 58,50 L58,81"),
+          path("M27,25 Q31,32 35,39 M41,20 Q43,31 44,42 M54,19 Q54,32 53,43 "
+               "M54,34 Q50,39 48,43 M69,21 Q64,31 58,39", width=FINE))
 
     write(f"art_{c}_coral_club",
           "Ramaria stricta",
@@ -274,7 +411,7 @@ def fruitbody_type():
                "M48,62 Q52,48 54,34"),
           path("M34,38 L28,24 M34,38 L36,22 M62,38 L60,22 M62,38 L68,24 "
                "M44,34 L40,20 M44,34 L46,18 M54,34 L52,18 M56,34 L60,20", width=FINE),
-          ground(24, 72))
+)
 
     # Lycoperdon: the sterile base is what separates a puffball from a ball of anything
     # else, and the apical pore is where the spores actually leave.
@@ -286,7 +423,7 @@ def fruitbody_type():
           path("M44,30 Q48,26 52,30", width=FINE),
           path("M37,42 L39,44 M46,38 L48,40 M56,42 L58,44 M40,54 L42,56 M54,54 L56,56",
                width=HAIR),
-          ground())
+)
 
     write(f"art_{c}_cup_disc",
           "Peziza badia",
@@ -294,7 +431,7 @@ def fruitbody_type():
           path("M18,40 Q18,74 48,74 Q78,74 78,40"),
           path("M18,40 Q48,28 78,40 Q48,50 18,40 Z"),
           path("M30,46 Q48,54 66,46", width=HAIR),
-          ground(14, 82))
+)
 
     write(f"art_{c}_resupinate",
           "Stereum ostrea",
@@ -335,7 +472,7 @@ def fruitbody_type():
           path("M34,26 Q48,22 62,26 M31,38 Q48,34 65,38 M33,50 Q48,46 63,50", width=FINE),
           path("M40,17 Q40,34 39,50 M48,14 L48,58 M56,17 Q56,34 57,50", width=FINE),
           path("M38,60 Q34,72 36,84 M58,60 Q62,72 60,84"),
-          ground(28, 68))
+)
 
     write(f"art_{c}_other",
           "—",
@@ -380,7 +517,7 @@ def gill_attachment():
         # Cap above, stem to the right. The stem runs off the bottom edge: this is a
         # corner of a mushroom, not a small mushroom.
         return (
-            path("M0,26 Q30,6 62,20 L62,30 Q30,18 0,36 Z", width=0, fill=True),
+            path("M0,26 Q30,6 62,20 L62,30 Q30,18 0,36 Z"),
             path("M62,20 L62,96 M96,26 L96,96", width=STROKE),
         )
 
@@ -388,7 +525,7 @@ def gill_attachment():
           "Agaricus campestris",
           "The gill stops short of the stem, leaving a clear gap all the way round it.",
           *frame(),
-          path("M8,34 L46,28 L46,74 L8,66 Z", fill=True),
+          path("M8,34 L46,28 L46,74 L8,66 Z"),
           # The gap is the whole character, so it is measured out with an arrow.
           path("M50,50 L58,50", width=FINE),
           path("M55,46 L59,50 L55,54", width=FINE))
@@ -397,33 +534,33 @@ def gill_attachment():
           "Mycena galericulata",
           "The gill reaches the stem, but touches over only the top of its depth.",
           *frame(),
-          path("M8,34 L62,26 L62,40 L46,72 L8,66 Z", fill=True))
+          path("M8,34 L62,26 L62,40 L46,72 L8,66 Z"))
 
     write(f"art_{c}_adnate",
           "Gymnopus dryophilus",
           "The gill meets the stem squarely, over its whole depth.",
           *frame(),
-          path("M8,34 L62,26 L62,76 L8,66 Z", fill=True))
+          path("M8,34 L62,26 L62,76 L8,66 Z"))
 
     write(f"art_{c}_notched",
           "Tricholoma sejunctum",
           "The gill runs in deep, then is cut away sharply just before the stem.",
           *frame(),
-          path("M8,34 L62,26 L62,38 L48,52 L48,84 L8,72 Z", fill=True))
+          path("M8,34 L62,26 L62,38 L48,52 L48,84 L8,72 Z"))
 
     write(f"art_{c}_decurrent",
           "Cantharellus lateritius",
           "The gill does not stop at the stem — it turns and runs down the outside.",
           *frame(),
-          path("M8,34 L62,26 L62,96 L44,96 L44,60 L8,66 Z", fill=True))
+          path("M8,34 L62,26 L62,96 L44,96 L44,60 L8,66 Z"))
 
     write(f"art_{c}_no_stem",
           "Pleurotus ostreatus",
           "Attached to the wood at one side, so there is no stem for a gill to meet.",
-          path("M0,26 Q34,6 74,22 L74,32 Q34,20 0,36 Z", width=0, fill=True),
+          path("M0,26 Q34,6 74,22 L74,32 Q34,20 0,36 Z"),
           # The wood, not a stem.
           path("M88,4 L88,92", width=STROKE),
-          path("M74,22 L88,26 L88,44 L74,40 Z", fill=True),
+          path("M74,22 L88,26 L88,44 L74,40 Z"),
           path("M10,38 L10,64 M22,36 L22,68 M34,34 L34,72 M46,31 L46,74 M58,28 L58,74 "
                "M70,26 L70,70", width=STROKE))
 
@@ -520,23 +657,23 @@ def cap_shape():
     write(f"art_{c}_egg", "Coprinus comatus",
           "Taller than wide, sides near-parallel, before any expansion.",
           path("M32,68 Q30,22 48,20 Q66,22 64,68"),
-          path("M44,68 L44,86 M52,68 L52,86"), ground())
+          path("M44,68 L44,86 M52,68 L52,86"))
 
     write(f"art_{c}_conical", "Hygrocybe conica",
           "Straight sides meeting at a point; never flattening with age.",
-          path("M22,66 L48,18 L74,66 Q48,72 22,66 Z"), st, ground())
+          path("M22,66 L48,18 L74,66 Q48,72 22,66 Z"), st)
 
     write(f"art_{c}_bell", "Panaeolus papilionaceus",
           "Sides curve out and hang down: a bell, not a cone.",
-          path("M24,66 Q24,24 48,24 Q72,24 72,66 Q48,72 24,66 Z"), st, ground())
+          path("M24,66 Q24,24 48,24 Q72,24 72,66 Q48,72 24,66 Z"), st)
 
     write(f"art_{c}_convex", "Agaricus campestris",
           "An even dome, the margin still turned down.",
-          path("M16,58 Q16,30 48,30 Q80,30 80,58 Q48,66 16,58 Z"), st, ground())
+          path("M16,58 Q16,30 48,30 Q80,30 80,58 Q48,66 16,58 Z"), st)
 
     write(f"art_{c}_flat", "Russula virescens",
           "Expanded flat, the margin level with the centre.",
-          path("M14,52 Q48,42 82,52 Q48,62 14,52 Z"), st, ground())
+          path("M14,52 Q48,42 82,52 Q48,62 14,52 Z"), st)
 
     # The three dished shapes are told apart by how the centre goes down, so each is
     # drawn to the glossary wording: depressed is merely lower, umbilicate is a sudden
@@ -545,22 +682,22 @@ def cap_shape():
     write(f"art_{c}_depressed", "Lactarius deliciosus",
           "Broad and saucer-like: the middle is lower, and no more than that.",
           path("M12,46 Q26,38 40,50 Q48,55 56,50 Q70,38 84,46 Q48,60 12,46 Z"),
-          st, ground())
+          st)
 
     write(f"art_{c}_funnel", "Clitocybe gibba",
           "The whole cap slopes down into the stem — a funnel, not a dish.",
           path("M10,28 L42,62 L54,62 L86,28 Q84,40 58,72 L38,72 Q12,40 10,28 Z"),
-          path("M42,68 L42,86 M54,68 L54,86"), ground())
+          path("M42,68 L42,86 M54,68 L54,86"))
 
     write(f"art_{c}_umbonate", "Amanita parcivolvata",
           "A broad cap with a distinct raised boss at the centre.",
           path("M14,56 Q28,44 40,42 Q44,28 48,26 Q52,28 56,42 Q68,44 82,56 "
-               "Q48,64 14,56 Z"), st, ground())
+               "Q48,64 14,56 Z"), st)
 
     write(f"art_{c}_umbilicate", "Arrhenia epichysium",
           "An otherwise flat cap with one sudden narrow pit, like a navel.",
           path("M12,44 Q28,38 44,42 L45,62 L51,62 L52,42 Q68,38 84,44 Q48,56 12,44 Z"),
-          st, ground())
+          st)
 
 
 # ---------------------------------------------------------------------------
@@ -611,12 +748,12 @@ def stipe_presence():
     write(f"art_{c}_central", "Agaricus campestris",
           "The stem meets the cap at its centre.",
           path(capped_cap(base=48, rise=22)), gill_blades(base=47, depth=8),
-          path("M42,47 L42,86 M54,47 L54,86"), ground())
+          path("M42,47 L42,86 M54,47 L54,86"))
 
     write(f"art_{c}_off_centre", "Pluteus petasatus",
           "The stem meets the cap away from the centre, but not at the edge.",
           path(capped_cap(base=48, rise=22)), gill_blades(base=47, depth=8),
-          path("M26,47 L26,86 M38,47 L38,86"), ground())
+          path("M26,47 L26,86 M38,47 L38,86"))
 
     # The stem is the whole difference from absent_attached, so it is drawn as a real
     # stubby stem standing clear of the wood, not two short marks. At 64px the marks
@@ -627,7 +764,8 @@ def stipe_presence():
           path("M66,34 Q40,20 12,36 Q10,42 16,44 Q42,44 66,44 Z"),
           path("M18,44 L20,54 M26,44 L28,56 M34,44 L36,56 M42,44 L44,55 "
                "M50,44 L52,53", width=HAIR),
-          path("M66,32 L88,28 L88,50 L66,46 Z", fill=True))
+          path("M66,32 L88,28 L88,50 L66,46 Z", width=FINE),
+          hatch_shape([(66, 32), (88, 28), (88, 50), (66, 46)], 3.5))
 
     write(f"art_{c}_absent_attached", "Pleurotus ostreatus",
           "Joined straight to the wood with no stem at all.",
@@ -640,7 +778,7 @@ def stipe_presence():
           "Sitting on the substrate, attached only by cords.",
           path("M24,56 Q24,32 48,32 Q72,32 72,56 Q72,72 48,76 Q24,72 24,56 Z"),
           path("M40,60 Q34,72 30,78 M56,60 Q62,72 66,78", width=HAIR),
-          ground(14, 82, 78))
+)
 
 
 def gill_spacing():
@@ -800,7 +938,8 @@ def gill_edge():
           face(), path("M16,62 Q26,52 36,62 Q46,72 56,62 Q66,52 76,62 Q79,64 80,63"))
     write(f"art_{c}_different_colour", "Mycena galericulata",
           "The edge is pigmented differently from the gill face.",
-          face(), path("M16,60 L80,60 L80,68 L16,68 Z", fill=True))
+          face(), path("M16,60 L80,60 L80,68 L16,68 Z", width=FINE),
+          hatch_shape([(16, 60), (80, 60), (80, 68), (16, 68)], 3.5))
 
 
 def stipe_flesh():
@@ -872,12 +1011,13 @@ def cap_colour_pattern():
     write(f"art_{c}_darker_centre", "Amanita parcivolvata",
           "A darker disc at the centre fading outwards.",
           rim(),
-          path("M48,28 Q66,28 66,48 Q66,68 48,68 Q30,68 30,48 Q30,28 48,28 Z", fill=True))
+          path("M48,28 Q66,28 66,48 Q66,68 48,68 Q30,68 30,48 Q30,28 48,28 Z", width=FINE),
+          hatch_ellipse(48, 48, 18, 20, 4.5))
     write(f"art_{c}_paler_margin", "Panaeolus papilionaceus",
           "Dark over most of the cap, with a pale band at the edge.",
           rim(),
-          path("M48,22 Q73,22 73,48 Q73,74 48,74 Q23,74 23,48 Q23,22 48,22 Z", fill=True),
-          path("M48,30 Q64,30 64,48 Q64,66 48,66 Q32,66 32,48 Q32,30 48,30 Z"))
+          path("M48,22 Q73,22 73,48 Q73,74 48,74 Q23,74 23,48 Q23,22 48,22 Z", width=FINE),
+          hatch_ellipse(48, 48, 25, 26, 4.5))
 
 
 def substrate():
@@ -946,9 +1086,12 @@ def substrate():
 
     write(f"art_{c}_burnt", "—", "A burnt site: charcoal, or ground after a fire.",
           path("M8,74 L88,74", width=FINE),
-          path("M16,74 L24,54 L34,74 Z", fill=True),
-          path("M38,74 L48,48 L58,74 Z", fill=True),
-          path("M62,74 L70,58 L80,74 Z", fill=True),
+          path("M16,74 L24,54 L34,74 Z", width=FINE),
+          hatch_shape([(16, 74), (24, 54), (34, 74)], 3.5),
+          path("M38,74 L48,48 L58,74 Z", width=FINE),
+          hatch_shape([(38, 74), (48, 48), (58, 74)], 3.5),
+          path("M62,74 L70,58 L80,74 Z", width=FINE),
+          hatch_shape([(62, 74), (70, 58), (80, 74)], 3.5),
           path("M28,44 Q32,38 30,32 M52,40 Q56,32 54,26 M72,48 Q76,42 74,36",
                width=HAIR))
 
@@ -1004,7 +1147,7 @@ def latex():
           path("M30,32 Q27,38 30,41 Q35,41 35,36 Q35,34 33,30 Z", fill=True),
           path("M60,30 Q57,36 60,39 Q65,39 65,34 Q65,32 63,28 Z", fill=True),
           path("M46,54 Q43,60 46,63 Q51,63 51,58 Q51,56 49,52 Z", fill=True),
-          ground())
+)
 
 
 def bruising():
@@ -1025,7 +1168,11 @@ def bruising():
           "A dark stain spreads where the thumb was.",
           cap_above(),
           path("M38,40 Q38,30 48,30 Q58,30 58,40 Q58,54 48,58 Q38,54 38,40 Z",
-               fill=True),
+               width=FINE),
+          hatch_shape(arc_points(38, 40, 38, 28, 48, 30)
+                      + arc_points(48, 30, 58, 28, 58, 40)
+                      + arc_points(58, 40, 58, 54, 48, 58)
+                      + arc_points(48, 58, 38, 54, 38, 40), 3.5),
           path("M34,62 Q48,68 62,62", width=HAIR))
 
 
@@ -1118,18 +1265,26 @@ def cap_surface():
     write(f"art_{c}_powdery", "Cystoderma amianthinum",
           "A loose bloom that a finger wipes away, leaving a clean streak.",
           swatch(),
+          # The streak is where the bloom is *not*. It used to be a nine-wide black bar
+          # with a seven-wide black bar drawn over it — the knock-out was never a
+          # knock-out, both strokes being the same colour, so the character came out as
+          # the heaviest mark on the sheet and said nothing. A gap in the speckle, with
+          # its edges just marked, says it and costs two lines.
           path("M28,28 L29,28 M40,26 L41,26 M52,28 L53,28 M64,32 L65,32 "
                "M26,40 L27,40 M38,38 L39,38 M62,44 L63,44 "
-               "M30,68 L31,68 M42,70 L43,70 M56,70 L57,70 M66,64 L67,64", width=4),
-          path("M24,54 Q48,48 72,56", width=9, cap="butt"),
-          path("M24,54 Q48,48 72,56", width=7, cap="butt", fill=False))
+               "M30,70 L31,70 M42,72 L43,72 M56,72 L57,72 M66,66 L67,66", width=2.5),
+          path("M24,50 Q48,44 72,52 M24,60 Q48,54 72,62", width=HAIR))
     # Bands, not lines: silky is fine parallel fibres and at 64px a thin-lined zoned cap
     # was the same picture. Alternate bands are filled so the eye reads tone, which is
     # what zonation is.
     write(f"art_{c}_zoned", "Trametes versicolor", "Concentric bands of alternating tone.",
           swatch(),
-          path("M21,34 Q48,28 75,34 Q48,40 21,46 Z", fill=True),
-          path("M20,56 Q48,50 76,56 Q48,62 20,68 Z", fill=True))
+          path("M21,34 Q48,28 75,34 Q48,40 21,46 Z", width=FINE),
+          hatch_shape(arc_points(21, 34, 48, 28, 75, 34)
+                      + arc_points(75, 34, 48, 40, 21, 46), 3.5),
+          path("M20,56 Q48,50 76,56 Q48,62 20,68 Z", width=FINE),
+          hatch_shape(arc_points(20, 56, 48, 50, 76, 56)
+                      + arc_points(76, 56, 48, 62, 20, 68), 3.5))
 
 
 def stipe_surface():
@@ -1165,9 +1320,8 @@ def stipe_surface():
           band(),
           path("M37,20 L38,20 M45,26 L46,26 M53,22 L54,22 M59,30 L60,30 "
                "M36,38 L37,38 M46,42 L47,42 M58,38 L59,38 "
-               "M38,70 L39,70 M50,74 L51,74 M58,68 L59,68", width=3),
-          path("M33,54 Q48,50 63,56", width=10, cap="butt"),
-          path("M33,54 Q48,50 63,56", width=8, cap="butt", fill=False))
+               "M38,72 L39,72 M50,76 L51,76 M58,70 L59,70", width=2.5),
+          path("M33,50 Q48,46 63,52 M33,60 Q48,56 63,62", width=HAIR))
     write(f"art_{c}_hairy", "Panellus stipticus", "Distinct hairs standing off it.",
           band(),
           path("M32,22 L24,18 M32,36 L23,33 M32,50 L24,47 M32,64 L23,61 "
@@ -1229,35 +1383,47 @@ def flesh_consistency():
 
 
 def bruising_where():
-    """Where the colour moved, shown by filling that part of a whole mushroom solid."""
+    """
+    Where the colour moved, shown as a hatch over that part of a whole mushroom.
+
+    It was a solid black fill, and a solid fill is the one thing these drawings must not
+    use: on a page of thin lines a black mass reads as a hole rather than as a darker
+    area, and half a mushroom filled in is the heaviest mark in the app. A diagonal
+    hatch says the same thing and stays a drawing - and it cannot be confused with any
+    of the surface characters, because no mushroom is cross-hatched at forty-five
+    degrees.
+    """
     c = "bruising_where"
 
     def outline():
         return (
             path("M14,44 Q48,20 82,44 Q80,49 74,49 L22,49 Q14,49 14,44 Z"),
             path("M42,49 L42,84 M54,49 L54,84"),
-            ground(),
         )
 
     write(f"art_{c}_cap", "—", "On the cap surface.",
-          path("M14,44 Q48,20 82,44 Q80,49 74,49 L22,49 Q14,49 14,44 Z", fill=True),
-          path("M42,49 L42,84 M54,49 L54,84"), ground())
+          *outline(),
+          hatch_shape(arc_points(14, 44, 48, 20, 82, 44) + [(74, 49), (22, 49)], 4.0))
     write(f"art_{c}_hymenophore", "—", "On the gills, pores or teeth.",
           *outline(),
           path("M20,49 L20,60 M27,49 L27,62 M34,49 L34,63 M62,49 L62,63 "
-               "M69,49 L69,62 M76,49 L76,60", width=6))
+               "M69,49 L69,62 M76,49 L76,60", width=FINE),
+          hatch_shape([(18, 49), (36, 49), (34, 63), (20, 60)], 3.5),
+          hatch_shape([(60, 49), (78, 49), (76, 60), (62, 63)], 3.5))
     write(f"art_{c}_stipe", "—", "On the stem.",
-          path("M14,44 Q48,20 82,44 Q80,49 74,49 L22,49 Q14,49 14,44 Z"),
-          path("M42,49 L42,84 L54,84 L54,49 Z", fill=True), ground())
+          *outline(),
+          hatch_shape([(42, 49), (54, 49), (54, 84), (42, 84)], 3.5))
     write(f"art_{c}_flesh", "—", "Inside, on the face of a cut.",
           # Cut down the middle and opened: the whole exposed face is what changed.
           path("M12,44 Q30,22 46,40 L46,84 L34,84 L34,49 L20,49 Q12,49 12,44 Z"),
-          path("M52,40 Q68,22 84,44 Q84,49 76,49 L62,49 L62,84 L50,84 L50,40 Z",
-               fill=True),
-          ground())
+          path("M52,40 Q68,22 84,44 Q84,49 76,49 L62,49 L62,84 L50,84 L50,40 Z"),
+          hatch_shape(
+              [(52, 40)] + arc_points(52, 40, 68, 22, 84, 44)
+              + [(84, 49), (76, 49), (62, 49), (62, 84), (50, 84), (50, 40)], 4.0),
+)
     write(f"art_{c}_stipe_base", "—", "At the base of the stem, and nowhere else.",
           *outline(),
-          path("M42,70 L54,70 L54,84 L42,84 Z", fill=True))
+          hatch_shape([(42, 70), (54, 70), (54, 84), (42, 84)], 3.5))
 
 
 def latex_change():
@@ -1301,7 +1467,9 @@ def substrate_wood():
           path("M20,32 Q28,32 28,50 Q28,68 20,68", width=FINE),
           # A whole fir in silhouette, so this cannot be mistaken for the broadleaf
           # one. Angel wings against an oyster mushroom turns on this question.
-          path("M48,4 L38,16 L44,16 L34,26 L62,26 L52,16 L58,16 Z", fill=True),
+          path("M48,4 L38,16 L44,16 L34,26 L62,26 L52,16 L58,16 Z", width=FINE),
+          hatch_shape([(48, 4), (38, 16), (44, 16), (34, 26), (62, 26), (52, 16),
+                       (58, 16)], 3.5),
           path("M48,26 L48,32", width=FINE),
           path("M40,44 L40,56 M52,42 L52,58 M64,46 L64,54", width=HAIR))
 
@@ -1365,29 +1533,36 @@ def bruising_speed():
           "The colour is already moving as the knife leaves.",
           dial(),
           path("M48,26 L48,48 L58,54", width=FINE),
-          path("M48,48 L48,26 A22,22 0 0,1 62,32 Z", fill=True))
+          path("M48,48 L48,26 A22,22 0 0,1 62,32 Z", width=FINE),
+          hatch_shape([(48, 48), (48, 26), (56, 27), (62, 32)], 3.5))
 
     write(f"art_{c}_minute", "—", "Within a minute or so.",
           dial(),
           path("M48,26 L48,48 L64,48", width=FINE),
-          path("M48,48 L48,26 A22,22 0 0,1 70,48 Z", fill=True))
+          path("M48,48 L48,26 A22,22 0 0,1 70,48 Z", width=FINE),
+          hatch_shape([(48, 48), (48, 26), (60, 29), (68, 38), (70, 48)], 3.5))
 
     write(f"art_{c}_slow", "—", "Several minutes, and easy to miss.",
           dial(),
           path("M48,26 L48,48 L48,70", width=FINE),
-          path("M48,48 L48,26 A22,22 0 1,1 48,70 Z", fill=True))
+          path("M48,48 L48,26 A22,22 0 1,1 48,70 Z", width=FINE),
+          hatch_shape([(48, 48), (48, 26), (62, 30), (70, 42), (68, 58),
+                       (58, 68), (48, 70)], 3.5))
 
 
 def launcher():
+    # The mark on the empty journal and at the top of the season page. Same drawing as
+    # the fruitbody type, and for the same reason: it is the owner's chanterelle, so the one
+    # picture the app opens on is in the hand everything else was redrawn to match.
     write("art_launcher_chanterelle",
           "Cantharellus lateritius",
-          "The launcher mark: wavy funnel cap and blunt decurrent ridges.",
-          path("M12,36 Q24,22 36,32 Q48,20 60,31 Q74,22 84,36 "
-               "L64,60 Q56,72 54,88 L42,88 Q40,72 32,60 Z"),
-          path("M24,42 Q31,62 38,84 M38,39 Q42,60 44,86 M54,39 Q52,60 52,86 "
-               "M68,42 Q60,60 55,82", width=FINE),
-          path("M28,52 Q31,57 34,52 M46,49 Q49,54 52,49 M58,54 Q61,58 64,54",
-               width=HAIR))
+          "The launcher mark: a rolled margin one side, ridges running onto the stem.",
+          path("M17,17 Q7,18 8,24 Q10,28 17,26"),
+          path("M17,17 Q34,12 52,14 Q72,12 89,20"),
+          path("M17,26 Q27,31 34,37 Q38,44 38,50 L38,83 Q39,89 46,87"),
+          path("M89,20 Q74,29 64,36 Q59,43 58,50 L58,81"),
+          path("M27,25 Q31,32 35,39 M41,20 Q43,31 44,42 M54,19 Q54,32 53,43 "
+               "M54,34 Q50,39 48,43 M69,21 Q64,31 58,39", width=FINE))
 
 
 def interface_icons():

@@ -7,14 +7,14 @@
     <path
         android:pathData="M10,30 Q48,12 86,30 Q84,35 78,35 L18,35 Q10,35 10,30 Z"
         android:strokeColor="#FF000000"
-        android:strokeWidth="2.8"
+        android:strokeWidth="1.2"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
         android:pathData="M18,35 L18,50 Q18,58 13,68 M18,50 Q18,58 24,68 M40,35 L40,50 Q40,58 35,68 M40,50 Q40,58 46,68 M62,35 L62,50 Q62,58 57,68 M62,50 Q62,58 68,68 M80,35 L80,68 M30,35 L30,68 M52,35 L52,68"
         android:strokeColor="#FF000000"
-        android:strokeWidth="1.9"
+        android:strokeWidth="1.0"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
