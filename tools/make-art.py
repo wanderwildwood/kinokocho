@@ -1414,40 +1414,55 @@ def interface_icons():
           path("M42,42 L43,70 M54,42 L53,70", width=FINE))
 
 
+# The owner's own drawing of a chanterelle, traced. Kept as a literal because the trace is
+# the artwork: re-running potrace on the photograph would give a slightly different line
+# every time, and this is the one he approved.
+#
+#   tools/reference/chanterelle-david.png   the drawing
+#   potrace, --tight -W 72pt -H 72pt        how it was traced
+#   -morphology Dilate Disk:2               a little weight, so a hairline pen
+#                                           line survives being shown at 48dp
+#
+# potrace emits a filled outline rather than a stroke, so the ink is a fill and there is
+# no stroke width to tune. The group transform is potrace's own, shifted to centre the
+# drawing in the 108x108 canvas.
+#
+# ⚠ Fitted to 54x54, not the 72x72 usually quoted as the safe zone. 72 is the diameter
+# of the safe *circle*, and a square only fits inside a circle of that diameter if its
+# side is about 51. Fitted to 72 the cap was clipped flat by a round launcher mask -
+# visible only once the icon was looked at on a home screen, not in any preview.
+TRACED_CHANTERELLE = (
+    "M2460 3779 c-30 -4 -82 -14 -115 -24 -219 -63 -445 -79 -676 -50 -158 21 -375 32 -474 23 -44 -3 -125 -9 -180 -12 -55 -4 -120 -11 -145 -16 -25 -5 -64 -11 -87 -14 -141 -17 -337 -94 -438 -173 -63 -49 -107 -119 -113 -181 -9 -102 82 -221 173 -223 48 -1 201 16 232 26 16 5 31 -2 65 -32 24 -22 59 -48 78 -59 51 -27 69 -44 86 -78 8 -17 43 -50 78 -74 35 -24 94 -70 130 -103 82 -76 342 -367 386 -434 184 -277 226 -423 216 -747 -4 -110 -2 -244 3 -305 6 -59 15 -166 21 -238 23 -270 88 -516 162 -616 84 -113 256 -183 482 -196 93 -6 144 4 269 50 39 15 57 27 57 39 0 29 -42 31 -101 5 -140 -62 -293 -72 -409 -27 -30 12 -66 25 -80 30 -121 40 -192 119 -249 275 -66 183 -115 643 -104 976 15 436 -76 640 -495 1113 -57 64 -116 124 -130 134 -15 9 -55 39 -90 65 -75 59 -72 77 11 69 58 -5 77 -16 77 -42 0 -10 16 -28 35 -40 19 -12 40 -31 46 -41 16 -31 129 -159 139 -159 6 0 10 6 10 13 0 17 -149 185 -190 216 -49 35 -25 49 73 43 l77 -4 95 -118 c52 -65 95 -122 95 -127 0 -15 58 -78 65 -72 18 18 -70 152 -167 255 -30 32 -36 43 -26 51 11 8 377 48 513 55 46 3 50 1 64 -27 20 -39 15 -234 -6 -269 -12 -19 -2 -302 12 -352 14 -48 14 -46 14 86 0 147 15 343 30 382 5 13 12 60 16 103 3 44 10 84 15 91 6 6 40 14 78 18 37 3 121 12 187 20 141 17 158 11 131 -42 -22 -42 -54 -165 -82 -307 -12 -66 -34 -178 -48 -250 -22 -108 -26 -158 -26 -295 -1 -183 11 -266 24 -173 5 29 12 56 17 59 6 3 7 48 3 108 -7 104 -4 134 37 351 73 394 86 431 183 523 52 50 59 53 128 62 81 10 110 0 85 -29 -8 -9 -20 -43 -27 -76 -7 -33 -19 -72 -27 -88 -8 -15 -35 -85 -62 -155 -26 -70 -58 -149 -71 -176 -25 -55 -101 -288 -96 -293 6 -7 23 23 44 77 44 113 113 284 132 326 11 23 20 47 20 53 0 32 51 116 108 178 37 39 90 100 119 136 61 76 63 77 269 77 111 0 144 -3 153 -14 10 -12 8 -17 -11 -29 -101 -63 -183 -112 -238 -142 -166 -90 -299 -241 -405 -460 -115 -239 -138 -339 -186 -815 -14 -135 -6 -655 11 -730 38 -168 129 -269 257 -286 58 -7 93 7 93 36 0 23 -9 25 -44 9 -64 -30 -202 75 -245 186 -48 124 -57 606 -17 915 13 107 27 218 30 245 21 206 180 550 329 711 48 52 241 194 263 194 3 0 20 11 36 26 17 14 52 36 77 50 25 14 75 41 111 60 62 34 68 35 135 29 106 -9 109 -10 121 -17 48 -31 173 -63 226 -58 67 6 82 17 72 54 -7 29 -48 65 -225 200 -57 44 -147 122 -199 175 -115 116 -206 183 -297 217 -158 60 -559 111 -723 93z m400 -63 c307 -47 419 -101 605 -290 79 -81 218 -199 338 -289 31 -23 36 -32 26 -43 -18 -22 -55 -17 -164 22 -68 24 -129 37 -190 43 -132 11 -504 13 -563 1 -28 -5 -110 -12 -184 -16 -73 -3 -135 -8 -138 -9 -3 -2 -44 -6 -90 -10 -78 -5 -190 -17 -440 -45 -52 -6 -169 -20 -260 -30 -435 -50 -758 -53 -895 -10 -128 41 -205 92 -205 136 0 61 -20 67 -68 22 -31 -31 -38 -33 -118 -37 -54 -2 -90 1 -97 8 -6 6 -22 11 -34 11 -32 0 -72 22 -107 58 -26 28 -28 35 -21 79 11 72 120 177 248 237 115 54 141 62 355 101 183 34 599 39 787 10 131 -20 440 -24 474 -6 12 7 50 14 84 17 34 3 80 12 102 21 115 44 341 52 555 19z"
+)
+
+
 def launcher_icon():
     """
-    The launcher mark: the owner's own drawing of a chanterelle, traced.
+    The launcher mark: the owner's drawing, traced rather than imitated.
 
-    Six attempts at inventing one all failed the same way — a symmetric front-on
-    silhouette that read as wings, a tulip or a pair of quote marks. He drew one and
-    handed it over, and the reason it works is the thing none of mine had: it is
-    **asymmetric**. The cap is a lopsided wavy lobe with a nick out of the left side,
-    the trumpet leans, and the foot is left open rather than closed off. A symmetrical
-    chanterelle reads as an ornament; a crooked one reads as a mushroom.
+    Six attempts at inventing one all failed the same way — symmetric, front-on
+    silhouettes that read as wings, a tulip or a pair of quote marks. A seventh, drawn
+    by hand from his photograph, was no better: approximating someone's line is still
+    inventing one.
 
-    Traced from the original proportions: cap about as wide as the whole thing is tall,
-    the stem flaring from a narrow open foot, false gills running from under the cap
-    down onto the upper stem and stopping well short of the bottom.
+    So this is the line itself, run through potrace. What makes it work is what none of
+    the invented ones had: it is **asymmetric**. The cap is a lopsided lobe with a nick
+    out of the left, the trumpet leans, the foot is left open. A symmetrical chanterelle
+    reads as an ornament; a crooked one reads as a mushroom. Do not tidy that out.
+
+    The fit is not a 72-square. A launcher's safe zone is a circle 72 across on the 108
+    canvas, so a square only survives it at about 51 — a first fit to the full 72 came
+    back from the emulator with the cap sliced flat. What is fitted here instead is the
+    drawing's own smallest enclosing circle, centred and scaled to radius 34: it earns
+    back most of the size a square fit throws away, because the corners a chanterelle
+    leaves empty are exactly the corners the mask cuts.
     """
-    W = 3.4
-    inner = "".join([
-        # The cap: wavy, lopsided, with the small nick at the left that his has.
-        path("M7,22 Q7,17 12,15 Q11,19 15,20 Q21,11 34,8 Q47,6 59,10 "
-             "Q71,7 80,13 Q88,18 89,23 Q74,27 58,25 Q40,27 25,24 Q14,24 7,22 Z",
-             width=W),
-        # The trumpet, leaning, and open at the foot the way he left it.
-        path("M25,25 Q31,46 40,67 Q43,77 44,86", width=W),
-        path("M64,26 Q62,46 59,63 Q58,71 62,76", width=W),
-        path("M44,86 Q52,88 58,84", width=W),
-        # False gills, running onto the stem and stopping short.
-        path("M27,26 Q31,33 34,39 M33,26 Q36,34 37,43 M40,26 Q41,36 41,47 "
-             "M47,26 Q47,37 47,49 M53,26 Q53,37 52,48 M59,26 Q58,35 56,44",
-             width=W - 1.4),
-    ])
     body = (
-        '    <group android:scaleX="0.75" android:scaleY="0.75"\n'
-        '        android:translateX="18" android:translateY="18">\n'
-        + inner +
+        '    <group android:scaleX="0.016055" android:scaleY="-0.016712"\n'
+        '        android:translateX="22.201739" android:translateY="91.439579">\n'
+        '        <path\n'
+        '            android:fillColor="#FF000000"\n'
+        f'            android:pathData="{TRACED_CHANTERELLE}" />\n'
         '    </group>\n'
     )
     head = HEADER.replace('android:width="96dp"', 'android:width="108dp"') \
@@ -1456,7 +1471,7 @@ def launcher_icon():
                  .replace('android:viewportHeight="96"', 'android:viewportHeight="108"')
     with open(os.path.join(OUT, "ic_launcher_foreground.xml"), "w") as f:
         f.write(head + body + FOOTER)
-    print("  launcher foreground: traced from the owner's drawing")
+    print("  launcher foreground: the owner's drawing, traced")
 
 
 def emit_kotlin():
