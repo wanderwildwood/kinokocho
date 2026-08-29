@@ -30,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -206,12 +207,27 @@ fun EntryScreen(
             }
             items3(minOf(lethal.size, MOST_HAZARDS)) { i ->
                 val note = lethal[i]
-                Column(
+                Row(
                     Modifier
                         .fillMaxWidth()
                         .clickable { onCandidate(note.taxon.id) }
                         .padding(vertical = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
+                    // The drawing beside the name, on the one screen where a person is
+                    // most likely to be holding the thing. This list is the deadly
+                    // candidates still in play, which is the set the plates were drawn
+                    // for first — a shape is quicker to check against a mushroom in your
+                    // hand than a sentence is.
+                    TaxonPlate.of(note.taxon.id)?.let { plate ->
+                        Image(
+                            painter = painterResource(plate),
+                            contentDescription = null,
+                            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
+                            modifier = Modifier.size(52.dp).padding(end = 8.dp),
+                        )
+                    }
+                    Column(Modifier.weight(1f)) {
                     Text(
                         note.taxon.commonName
                             ?.let { "${note.taxon.scientificName} — $it" }
@@ -228,6 +244,7 @@ fun EntryScreen(
                                 .joinToString(", "),
                             style = MaterialTheme.typography.bodySmall,
                         )
+                    }
                     }
                 }
             }
