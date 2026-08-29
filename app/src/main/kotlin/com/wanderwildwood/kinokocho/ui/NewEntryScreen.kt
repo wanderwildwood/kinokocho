@@ -1,5 +1,6 @@
 package com.wanderwildwood.kinokocho.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,11 +41,27 @@ fun NewEntryScreen(
     draft: JournalViewModel.Draft,
     onAddPhoto: () -> Unit,
     onDone: () -> Unit,
+    onJournal: () -> Unit = {},
+    journalCount: Int = 0,
 ) {
     val questionId = vm.currentQuestion(draft)
     val ranking = vm.engine.rank(draft.answers)
 
     Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
+
+        // The way to the journal, from the screen the app opens on. A row rather than a
+        // hamburger: it goes to one place and says which.
+        Row(
+            Modifier.fillMaxWidth().padding(top = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                if (journalCount == 0) "Journal" else "Journal · $journalCount",
+                style = MaterialThemeTypography().bodySmall,
+                modifier = Modifier.weight(1f).clickable(onClick = onJournal),
+            )
+        }
+        HorizontalDividerMMD()
 
         if (questionId == null) {
             NothingLeftToAsk(draft, ranking, onAddPhoto, onDone)
