@@ -218,14 +218,61 @@ class KeyEngineTest {
 
     @Test
     fun `a character the data does not record costs a taxon nothing`() {
-        // Bondarzewia records no odour at all. Answering odour must not push it down
-        // relative to where it was, or the best-documented taxa would rank worst.
+        // Bondarzewia records no odour at all. Answering odour must not push it down,
+        // or the best-documented taxa would rank worst.
+        //
+        // It used to assert the score was left exactly where it was, which is the same
+        // idea stated too weakly: no penalty, but no credit either, and since the score
+        // is a sum that quietly meant a row documented on eight characters could never
+        // out-rank one documented on thirty that agreed no better. The pack runs from
+        // eight to thirty. What silence earns now is what this row earns where it does
+        // speak, damped — so it is neither punished nor rewarded for how much of it has
+        // been written down.
+        // The taxon is found rather than named: this test used to point at Bondarzewia,
+        // which then had its odour written down, and the test went on asserting
+        // something about a row that no longer said nothing.
         val before = answers("fruitbody_type" to "polypore", "substrate" to "wood")
+        val silent = engine.rank(before).candidates
+            .first { it.mismatched == 0 && "odour" !in it.taxon.characters }
+            .taxon.id
         val after = before.with("odour", setOf("almond"))
-        val b = engine.rank(before).candidates.first { it.taxon.id == "bondarzewia_berkeleyi" }
-        val a = engine.rank(after).candidates.first { it.taxon.id == "bondarzewia_berkeleyi" }
-        assertEquals(b.score, a.score, 1e-9)
+        val b = engine.rank(before).candidates.first { it.taxon.id == silent }
+        val a = engine.rank(after).candidates.first { it.taxon.id == silent }
+        assertTrue("saying nothing cost $silent score", a.score >= b.score - 1e-9)
         assertEquals(1, a.unscored)
+    }
+
+    @Test
+    fun `standing in for silence is damped, so one lucky match proves nothing`() {
+        // Silence is scored at what the row scores where it speaks, which without
+        // damping would let a taxon that records one character and happens to match it
+        // claim a perfect record across the whole schema.
+        val a = answers(
+            "fruitbody_type" to "gilled_stemmed",
+            "substrate" to "soil",
+            "stipe_base" to "sac_volva",
+            "ring" to "skirt",
+            "hymenophore_colour" to "white",
+            "spore_print" to "pale",
+        )
+        val ranked = engine.rank(a).candidates
+        val leader = ranked.first()
+        // Whatever leads, it leads on characters actually recorded rather than on a
+        // handful of matches stretched over everything it never mentions.
+        assertTrue("leader is ${leader.taxon.id}", leader.matched >= 4)
+        // Standing in for silence can at most double a row's score. More than that and
+        // most of what put a taxon at the top would be arithmetic over what it does not
+        // say.
+        ranked.forEach {
+            assertTrue(
+                "${it.taxon.id} scores ${it.score} off ${it.matched} matches",
+                it.score <= it.matched * FULL_MATCH * 2 + 1e-9,
+            )
+        }
+    }
+
+    private companion object {
+        const val FULL_MATCH = 1.0
     }
 
     @Test
@@ -563,10 +610,16 @@ class KeyEngineTest {
         // The whole key in one number. Walk every taxon in the pack, answer whatever is
         // asked the way that taxon is described, and see how long it takes to reach the
         // top of the list.
+        //
+        // Every one of them, not most. A taxon that cannot be reached by answering
+        // truthfully is a row too thin to be found — which is what *Meripilus* was, and
+        // it agreed with everything it was asked and simply had fewer places to agree.
+        // A new taxon that fails this needs writing down properly, not excusing.
         var reached = 0
         val steps = mutableListOf<Int>()
+        val unreachable = mutableListOf<String>()
         pack.taxa.forEach { target ->
-            var a = KeyEngine.Answers()
+            var a = KeyEngine.Answers(month = 9)
             for (i in 1..12) {
                 val q = engine.nextQuestion(a) ?: break
                 val v = target.characters[q]?.firstOrNull()?.value
@@ -576,9 +629,11 @@ class KeyEngineTest {
                     steps += i
                     break
                 }
+                if (i == 12) unreachable += target.id
             }
         }
-        assertTrue("only $reached of ${pack.taxa.size} reached first place", reached >= 80)
+        assertTrue("never reached first place: $unreachable", unreachable.isEmpty())
+        assertEquals(pack.taxa.size, reached)
         assertTrue("median was ${steps.sorted()[steps.size / 2]}", steps.sorted()[steps.size / 2] <= 6)
     }
 

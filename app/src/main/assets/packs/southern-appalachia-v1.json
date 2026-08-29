@@ -2476,6 +2476,64 @@
             "value": "broadleaf",
             "frequency": "usually"
           }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "cream",
+            "frequency": "USUALLY"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "single",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "few",
+            "frequency": "USUALLY"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "SOMETIMES"
+          },
+          {
+            "value": "disturbed",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "mushroomy",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "substrate_wood": [
+          {
+            "value": "dead",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "buried",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "broadleaf",
+            "frequency": "SOMETIMES"
+          }
         ]
       },
       "measurements": {
@@ -2628,6 +2686,56 @@
             "value": "broadleaf",
             "frequency": "usually"
           }
+        ],
+        "flesh_colour": [
+          {
+            "value": "black",
+            "frequency": "ALWAYS"
+          },
+          {
+            "value": "purple",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "white",
+            "frequency": "USUALLY"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "troop",
+            "frequency": "USUALLY"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "heath",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "odour": [
+          {
+            "value": "unpleasant_other",
+            "frequency": "USUALLY"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "straight",
+            "frequency": "USUALLY"
+          }
         ]
       },
       "measurements": {
@@ -2646,8 +2754,9 @@
         {
           "taxon": "lycoperdon_perlatum",
           "discriminators": [
-            "cap_surface",
-            "flesh_consistency"
+            "flesh_colour",
+            "flesh_consistency",
+            "cap_surface"
           ],
           "note": "Cut it in half. The inside here is HARD and purple-black to purple-grey even when young; an edible puffball is pure white and soft. The rind is 1-3mm thick and tough, not paper thin."
         }
@@ -2735,6 +2844,78 @@
           {
             "value": "none",
             "frequency": "always"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "olive",
+            "frequency": "SOMETIMES"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "troop",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "single",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "conifer_wood",
+            "frequency": "SOMETIMES"
+          },
+          {
+            "value": "disturbed",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "conifer",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "mushroomy",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "taste": [
+          {
+            "value": "mild",
+            "frequency": "USUALLY"
           }
         ]
       },
@@ -3011,6 +3192,76 @@
             "value": "broadleaf",
             "frequency": "always"
           }
+        ],
+        "cap_surface": [
+          {
+            "value": "smooth",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "velvety",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "wrinkled",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "fibrous",
+            "frequency": "SOMETIMES"
+          },
+          {
+            "value": "leathery",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "cream",
+            "frequency": "USUALLY"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "wood_pasture",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "mushroomy",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "taste": [
+          {
+            "value": "mild",
+            "frequency": "USUALLY"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "wavy",
+            "frequency": "USUALLY"
+          }
         ]
       },
       "measurements": {
@@ -3141,6 +3392,70 @@
           {
             "value": "broadleaf",
             "frequency": "always"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "wavy",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "straight",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "fibrous",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "woody",
+            "frequency": "SOMETIMES"
+          },
+          {
+            "value": "leathery",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "cream",
+            "frequency": "USUALLY"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "wood_pasture",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "taste": [
+          {
+            "value": "acrid",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "mild",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "mushroomy",
+            "frequency": "SOMETIMES"
           }
         ]
       },
@@ -3437,6 +3752,76 @@
           {
             "value": "broadleaf",
             "frequency": "always"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "velvety",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "wrinkled",
+            "frequency": "SOMETIMES"
+          },
+          {
+            "value": "smooth",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "wavy",
+            "frequency": "USUALLY"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "fibrous",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "black",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "wood_pasture",
+            "frequency": "SOMETIMES"
+          },
+          {
+            "value": "urban",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "mushroomy",
+            "frequency": "SOMETIMES"
+          }
+        ],
+        "taste": [
+          {
+            "value": "mild",
+            "frequency": "USUALLY"
           }
         ]
       },
@@ -5977,6 +6362,26 @@
           {
             "value": "caespitose",
             "frequency": "sometimes"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "cream",
+            "frequency": "USUALLY"
+          }
+        ],
+        "taste": [
+          {
+            "value": "acrid",
+            "frequency": "USUALLY"
+          },
+          {
+            "value": "mild",
+            "frequency": "SOMETIMES"
           }
         ]
       },

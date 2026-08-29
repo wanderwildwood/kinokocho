@@ -148,6 +148,35 @@ class KeyEngine(
             }
         }
 
+        /*
+         * Silence, scored at what the row scores when it does speak.
+         *
+         * "An unscored character costs a taxon nothing" was only half true. It cost no
+         * penalty, but it earned nothing either, and the score is a sum — so a row
+         * documented on eight characters could never out-rank one documented on thirty
+         * that agreed just as well. The pack runs from eight to thirty with a median of
+         * twenty-one, and *Meripilus sumstinei* was unreachable: it agreed with
+         * everything asked and simply had fewer places to agree. That is the same bias
+         * the rule above was written to prevent, arrived at from the other side.
+         *
+         * So an unrecorded character is scored at what this taxon scores where it is
+         * recorded, which is the ordinary treatment of missing data and leaves a row
+         * neither better nor worse for how much of it has been written.
+         *
+         * Damped, because a row with one described character that happens to match must
+         * not be able to claim a perfect record over the whole schema. And never below
+         * zero: silence is not a mismatch, however badly the rest of the row is going.
+         */
+        val scored = matched + mismatched
+        if (unscored > 0 && scored > 0) {
+            val mean = (score / scored).coerceAtLeast(0.0)
+            // Never more than the evidence it is extrapolating from. Without the cap a
+            // row that records four of the twenty characters somebody answered could
+            // have most of its score standing in for the sixteen it says nothing about,
+            // which is not a mushroom matching well, it is arithmetic.
+            score += (unscored * mean * (scored / (scored + IMPUTE_DAMPING))).coerceAtMost(score)
+        }
+
         // Season is a tiebreaker and never a filter. Fungi do not read calendars, and an
         // out-of-season find is exactly the kind of thing worth writing down.
         val month = answers.month
@@ -568,6 +597,10 @@ class KeyEngine(
         // of measurements above for why a wrong number must not be able to rule
         // anything out.
         const val SIZE_MISS = -0.8
+
+        // How much corroboration it takes before a row's own average is trusted to
+        // stand in for what it does not say. Two.
+        const val IMPUTE_DAMPING = 2.0
 
         const val SEASON_BONUS = 0.15
         const val SEASON_PENALTY = -0.15
