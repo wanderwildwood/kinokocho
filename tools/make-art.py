@@ -1416,34 +1416,33 @@ def interface_icons():
 
 def launcher_icon():
     """
-    The launcher mark: a chanterelle, drawn from a chosen reference.
+    The launcher mark: the owner's own drawing of a chanterelle, traced.
 
-    Three earlier attempts failed and all three failed the same way — a symmetric,
-    front-on silhouette that read as wings, a tulip or a pair of quote marks. The
-    reference he pointed at (a hand-drawn fly agaric, pictureboxblue) shows why: it is a
-    **three-quarter view**, tilted so the eye sees the top of the cap *and* into the
-    underside at once, with the gills as fine radiating hatching. That is what makes it
-    read as a mushroom in one look rather than as a shape.
+    Six attempts at inventing one all failed the same way — a symmetric front-on
+    silhouette that read as wings, a tulip or a pair of quote marks. He drew one and
+    handed it over, and the reason it works is the thing none of mine had: it is
+    **asymmetric**. The cap is a lopsided wavy lobe with a nick out of the left side,
+    the trumpet leans, and the foot is left open rather than closed off. A symmetrical
+    chanterelle reads as an ornament; a crooked one reads as a mushroom.
 
-    So this is the same view for a chanterelle: looking slightly down into the funnel,
-    wavy rim, the blunt decurrent ridges running down the front, and one confident
-    outline. Outline only, per the reference — no solid fill.
+    Traced from the original proportions: cap about as wide as the whole thing is tall,
+    the stem flaring from a narrow open foot, false gills running from under the cap
+    down onto the upper stem and stopping well short of the bottom.
     """
-    W = 6.0
+    W = 3.4
     inner = "".join([
-        # The reference's geometry, not my idea of a chanterelle. Four attempts drew a
-        # symmetric V — a vase seen dead on — and every one read as wings or a crown.
-        # The fly agaric in the reference reads instantly because it is a cap *mass*
-        # seen from above and in front, with a stem beneath it. So: the same, with a
-        # chanterelle's wavy rim and its funnel showing.
-        path("M13,41 Q15,25 33,22 Q48,15 63,22 Q82,26 84,42 "
-             "Q68,55 48,56 Q26,55 13,41 Z", width=W),
-        # The funnel, seen into.
-        path("M30,33 Q48,44 66,32", width=W - 2.0),
-        # The stem below, one shape, narrowing.
-        path("M40,55 Q39,72 42,88 L54,88 Q57,72 56,55", width=W),
-        # Ridges running off the near rim onto the stem.
-        path("M31,53 Q30,62 31,70 M64,52 Q66,62 65,70", width=W - 2.5),
+        # The cap: wavy, lopsided, with the small nick at the left that his has.
+        path("M7,22 Q7,17 12,15 Q11,19 15,20 Q21,11 34,8 Q47,6 59,10 "
+             "Q71,7 80,13 Q88,18 89,23 Q74,27 58,25 Q40,27 25,24 Q14,24 7,22 Z",
+             width=W),
+        # The trumpet, leaning, and open at the foot the way he left it.
+        path("M25,25 Q31,46 40,67 Q43,77 44,86", width=W),
+        path("M64,26 Q62,46 59,63 Q58,71 62,76", width=W),
+        path("M44,86 Q52,88 58,84", width=W),
+        # False gills, running onto the stem and stopping short.
+        path("M27,26 Q31,33 34,39 M33,26 Q36,34 37,43 M40,26 Q41,36 41,47 "
+             "M47,26 Q47,37 47,49 M53,26 Q53,37 52,48 M59,26 Q58,35 56,44",
+             width=W - 1.4),
     ])
     body = (
         '    <group android:scaleX="0.75" android:scaleY="0.75"\n'
@@ -1457,7 +1456,7 @@ def launcher_icon():
                  .replace('android:viewportHeight="96"', 'android:viewportHeight="108"')
     with open(os.path.join(OUT, "ic_launcher_foreground.xml"), "w") as f:
         f.write(head + body + FOOTER)
-    print("  launcher foreground: chanterelle, three-quarter, from the owner's reference")
+    print("  launcher foreground: traced from the owner's drawing")
 
 
 def emit_kotlin():

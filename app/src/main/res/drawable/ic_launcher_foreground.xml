@@ -7,30 +7,37 @@
     <group android:scaleX="0.75" android:scaleY="0.75"
         android:translateX="18" android:translateY="18">
     <path
-        android:pathData="M13,41 Q15,25 33,22 Q48,15 63,22 Q82,26 84,42 Q68,55 48,56 Q26,55 13,41 Z"
+        android:pathData="M7,22 Q7,17 12,15 Q11,19 15,20 Q21,11 34,8 Q47,6 59,10 Q71,7 80,13 Q88,18 89,23 Q74,27 58,25 Q40,27 25,24 Q14,24 7,22 Z"
         android:strokeColor="#FF000000"
-        android:strokeWidth="6.0"
+        android:strokeWidth="3.4"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
-        android:pathData="M30,33 Q48,44 66,32"
+        android:pathData="M25,25 Q31,46 40,67 Q43,77 44,86"
         android:strokeColor="#FF000000"
-        android:strokeWidth="4.0"
+        android:strokeWidth="3.4"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
-        android:pathData="M40,55 Q39,72 42,88 L54,88 Q57,72 56,55"
+        android:pathData="M64,26 Q62,46 59,63 Q58,71 62,76"
         android:strokeColor="#FF000000"
-        android:strokeWidth="6.0"
+        android:strokeWidth="3.4"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
-        android:pathData="M31,53 Q30,62 31,70 M64,52 Q66,62 65,70"
+        android:pathData="M44,86 Q52,88 58,84"
         android:strokeColor="#FF000000"
-        android:strokeWidth="3.5"
+        android:strokeWidth="3.4"
+        android:fillColor="#00000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M27,26 Q31,33 34,39 M33,26 Q36,34 37,43 M40,26 Q41,36 41,47 M47,26 Q47,37 47,49 M53,26 Q53,37 52,48 M59,26 Q58,35 56,44"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="2.0"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
