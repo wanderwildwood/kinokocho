@@ -83,6 +83,10 @@ solid black — which is written down at the top of `tools/make-art.py`.
 ./gradlew assembleRelease
 ```
 
+The release build is minified. It is worth actually running rather than only building:
+R8 takes it from 32 MB to under 3, and a minified Android app is where the surprises
+live. This one has no keep rules and needs none — see `app/proguard-rules.pro` for why.
+
 Builds are signed with a keystore in `signing/`, which is gitignored. There is no
 fallback: without it the build produces an *unsigned* APK, which will not install
 anywhere. That is deliberate — a signing key committed to a public repo is not a signing
