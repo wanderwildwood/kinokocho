@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    The single directory the camera app is allowed to write into.
+
+    Scoped as narrowly as it goes: one folder inside the app's own files, granted one
+    URI at a time for one picture. Nothing else in the app is reachable through this.
+-->
+<paths>
+    <files-path name="observation_photos" path="photos/" />
+</paths>

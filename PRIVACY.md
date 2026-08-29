@@ -17,14 +17,30 @@ the Android build tools, it is defined by this app for this app, and it grants n
 the device or to you — it exists so that the app's own internal broadcasts cannot be
 received by other apps. Nothing in this repository asks for it.
 
+## Photographs, and why they cost no permission
+
+The app takes photographs and still declares no CAMERA permission, which is worth
+explaining rather than leaving to look like an oversight.
+
+It does not open a camera. It hands one write-once file address to whatever camera app
+the phone already has, and gets a picture back. An app that *declares* CAMERA must then
+be granted it before the system camera will answer; an app that does not declare it can
+do this and never ask for anything. The photograph arrives either way, so the manifest
+stays empty.
+
+Pictures are written to the app's own private storage, not the shared Pictures folder,
+and are removed with the observation they belong to. (Birding wrote its recordings into
+shared `Music/` and every media scanner on the phone picked them up. That mistake is not
+being repeated, and where you forage is a worse thing to scatter about a phone than a
+bird recording.)
+
+A `FileProvider` is declared for this. It is not a permission — it is the mechanism that
+lets exactly one file, once, be written by one other app.
+
 ## What is planned, and the rules it will be held to
 
-Two permissions are expected, and each will be added in the commit that first needs it:
+One permission is still expected, and it will be added in the commit that first needs it:
 
-- **CAMERA** — to attach photographs to an observation. Photographs are written to the
-  app's own private storage, not to the shared Pictures folder. (Birding wrote its
-  recordings into shared `Music/` and every media scanner on the phone picked them up;
-  that mistake is not being repeated.)
 - **INTERNET** — used *only* when you explicitly push an observation to iNaturalist.
   There is no background sync, no analytics, no crash reporting, and no telemetry.
 

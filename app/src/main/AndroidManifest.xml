@@ -28,6 +28,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--
+            Hands one write-once URI to whatever camera app the phone has, for one
+            photograph at a time.
+
+            This is why there is still no CAMERA permission. An app that declares
+            CAMERA must then be granted it before the system camera will answer an
+            intent; an app that does not declare it can hand over a file URI and get a
+            picture back with no permission at all. The picture arrives either way,
+            so the manifest stays empty.
+        -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.photos"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
