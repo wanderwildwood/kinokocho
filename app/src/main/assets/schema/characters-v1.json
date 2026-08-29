@@ -93,7 +93,7 @@
       "availability": "field",
       "power": 5,
       "controlling": true,
-      "note": "MycoKey's top-level split, extended with iNaturalist field 17892 for the ascomycetes and crusts it omits.",
+      "note": "MycoKey's top-level split, extended with iNaturalist field 17892 for the ascomycetes and crusts it omits. A stalked ascomycete with a pitted or brain-like head has no home in MycoKey's split and was landing in cup_disc; morels and false morels are the spring pair this app most needs to be able to write down, so they get their own state and are told apart by stipe_flesh, which is the knife test.",
       "values": [
         {
           "id": "gilled_stemmed",
@@ -138,6 +138,10 @@
         {
           "id": "flask",
           "label": "Flask-like, or tiny dots on wood"
+        },
+        {
+          "id": "morel_like",
+          "label": "A pitted or wrinkled head on a stem"
         },
         {
           "id": "other",
@@ -344,7 +348,7 @@
         },
         {
           "id": "cannot_tell",
-          "label": "Cannot tell \u2014 old or damaged"
+          "label": "Cannot tell — old or damaged"
         }
       ]
     },
@@ -392,7 +396,7 @@
         },
         {
           "id": "buried",
-          "label": "Buried \u2014 I did not get the base out"
+          "label": "Buried — I did not get the base out"
         }
       ]
     },
@@ -479,7 +483,7 @@
       "values": [
         {
           "id": "free",
-          "label": "Free \u2014 not reaching the stem"
+          "label": "Free — not reaching the stem"
         },
         {
           "id": "adnexed",
@@ -729,7 +733,7 @@
         },
         {
           "id": "translucent_striate",
-          "label": "Translucent \u2014 the gills show through"
+          "label": "Translucent — the gills show through"
         },
         {
           "id": "appendiculate",
@@ -740,7 +744,7 @@
     {
       "id": "cap_colour",
       "label": "What colour is the cap?",
-      "hint": "Notoriously unreliable \u2014 rain, age and sun all change it. It never eliminates on its own.",
+      "hint": "Notoriously unreliable — rain, age and sun all change it. It never eliminates on its own.",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -955,6 +959,17 @@
           "label": "Powdery when mature"
         }
       ]
+    },
+    {
+      "id": "flesh_colour",
+      "label": "What colour is the flesh inside?",
+      "hint": "Cut it through and look at once. This is what settles an orange chanterelle-like mushroom against a jack-o'-lantern, and it takes one cut.",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 4,
+      "valuesFrom": "colours",
+      "note": "Distinct from bruising_colour, which is what the flesh becomes after exposure. This is what it is on the instant of cutting."
     },
     {
       "id": "odour",

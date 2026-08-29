@@ -117,16 +117,39 @@ class KeyEngine(
         val live = ranking.candidates.take(considerTop).map { it.taxon }
         if (live.isEmpty()) return null
 
-        val settling = withGatingQuestions(charactersThatSettleAHazard(ranking), answers)
+        val settling = charactersThatSettleAHazard(ranking)
+        val declared = withGatingQuestions(settling.declared, answers)
+        val disagreeing = withGatingQuestions(settling.disagreeing, answers)
 
-        return schema.characters
+        val askable = schema.characters
             .filter { it.id !in answers.values.keys && it.id !in answers.notTested }
             .filter { schema.isApplicable(it.id, answers.values) }
             .filter { it.availability == Character.Availability.FIELD }
-            .map { it to askingValue(it, live) * if (it.id in settling) SAFETY_BOOST else 1.0 }
+            .map { it to askingValue(it, live) }
             // Never ask something that cannot separate anything. Once one candidate
             // stands alone there is no next question, and the honest answer is none.
+            // This applies to a settling character too: boosting a question that
+            // splits nothing would be asking for the appearance of safety.
             .filter { it.second > 0.0 }
+
+        // Anything that would settle a live deadly candidate is asked before anything
+        // that would not, rather than merely scoring higher than it.
+        //
+        // This was a x3 multiplier, which is a bet that no ordinary question can ever
+        // score three times a lethal one. The bet held at twenty taxa and lost at
+        // thirty-nine: adding two more gilled mushrooms on wood was enough to push
+        // Galerina's settling question past the fourth question asked, with no warning
+        // and no failure anywhere except one test. A multiplier degrades as the pack
+        // grows, and this pack is meant to grow to a hundred. Precedence does not.
+        //
+        // Within the tier, ordering is still gain ratio weighted by power - the boost
+        // decides which questions are eligible, never which of them is best.
+        // Three grades, in order: what a person said settles a deadly pair, what the
+        // data implies would settle it, then everything else. Within each grade the
+        // ordering is still gain ratio weighted by power.
+        return askable.filter { it.first.id in declared }
+            .ifEmpty { askable.filter { it.first.id in disagreeing } }
+            .ifEmpty { askable }
             .maxByOrNull { it.second }
             ?.first?.id
     }
@@ -141,9 +164,9 @@ class KeyEngine(
      * the entire Amanita problem turns on. Entropy has no idea which mistakes are fatal
      * and which are merely wrong, so it cannot be left to decide alone.
      */
-    private fun charactersThatSettleAHazard(ranking: Ranking): Set<String> {
+    private fun charactersThatSettleAHazard(ranking: Ranking): Settling {
         val hazards = ranking.hazards
-        if (hazards.isEmpty()) return emptySet()
+        if (hazards.isEmpty()) return Settling(emptySet(), emptySet())
 
         val leader = ranking.candidates.firstOrNull()?.taxon
         return hazards.flatMap { hazard ->
@@ -165,9 +188,29 @@ class KeyEngine(
                     mine.isNotEmpty() && theirs.isNotEmpty() && mine.intersect(theirs).isEmpty()
                 }
             }
-            declared + disagreeing
-        }.toSet()
+            declared.map { it to true } + disagreeing.map { it to false }
+        }.let { pairs ->
+            val declared = pairs.filter { it.second }.map { it.first }.toSet()
+            // A character named by hand is not put in the same bag as one merely
+            // inferred, even if both would settle the pair.
+            Settling(declared, pairs.map { it.first }.toSet() - declared)
+        }
     }
+
+    /**
+     * What would settle a live deadly candidate, in two grades.
+     *
+     * [declared] is what a person wrote into a lookalike entry: this is the character
+     * that tells these two apart. [disagreeing] is what the data merely implies,
+     * because the hazard and the current leader happen to hold different states.
+     *
+     * They are kept apart because the second grows with the pack and the first does
+     * not. At thirty-nine taxa the inferred set had swollen enough to bury Galerina's
+     * hand-written discriminators under questions that were technically settling and
+     * practically beside the point - which is how the pack getting better made the key
+     * get worse.
+     */
+    private data class Settling(val declared: Set<String>, val disagreeing: Set<String>)
 
     /**
      * Adds the questions standing between the reader and a character that would settle
@@ -327,7 +370,6 @@ class KeyEngine(
         // make the key ask an otherwise useless question. It multiplies a real gain
         // rather than replacing it, so a character that separates nothing still is not
         // asked.
-        const val SAFETY_BOOST = 3.0
 
         const val SEASON_BONUS = 0.15
         const val SEASON_PENALTY = -0.15

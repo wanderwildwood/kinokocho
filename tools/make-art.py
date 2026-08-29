@@ -319,6 +319,18 @@ def fruitbody_type():
           path("M35,53 L34,45 M51,56 L53,44 M64,52 L67,46", width=HAIR),
           path("M33,44 L35,43 M52,43 L54,42 M66,45 L68,44", width=FINE))
 
+    # A stalked ascomycete with a pitted head. Drawn with the pits as a net of ridges
+    # rather than as dots, because ridges-around-pits is what separates a morel from a
+    # false morel's brain-like folds, and it is the first thing to look at.
+    write(f"art_{c}_morel_like",
+          "Morchella americana",
+          "A pitted head fused to the stem, the pits enclosed by ridges.",
+          path("M30,52 Q28,18 48,14 Q68,18 66,52 Q60,60 48,60 Q36,60 30,52 Z"),
+          path("M34,26 Q48,22 62,26 M31,38 Q48,34 65,38 M33,50 Q48,46 63,50", width=FINE),
+          path("M40,17 Q40,34 39,50 M48,14 L48,58 M56,17 Q56,34 57,50", width=FINE),
+          path("M38,60 Q34,72 36,84 M58,60 Q62,72 60,84"),
+          ground(28, 68))
+
     write(f"art_{c}_other",
           "—",
           "Not a taxon: the honest exit when nothing above fits.",
@@ -847,6 +859,395 @@ def cap_colour_pattern():
           path("M48,30 Q64,30 64,48 Q64,66 48,66 Q32,66 32,48 Q32,30 48,30 Z"))
 
 
+def substrate():
+    """
+    What it is growing on. Asked second every time, and the answer is usually visible
+    without touching anything, so it earns pictures more than most.
+    """
+    c = "substrate"
+
+    write(f"art_{c}_wood", "—", "A log, branch or stump.",
+          path("M10,44 Q10,34 20,34 L76,34 Q86,34 86,44 L86,58 Q86,68 76,68 L20,68 "
+               "Q10,68 10,58 Z"),
+          path("M20,34 Q28,34 28,51 Q28,68 20,68", width=FINE),
+          path("M20,51 Q24,45 24,51 Q24,57 20,58", width=HAIR),
+          path("M40,38 L44,64 M56,36 L60,66", width=HAIR))
+
+    write(f"art_{c}_soil", "—", "Bare ground, with nothing between it and the fungus.",
+          path("M8,44 L88,44"),
+          path("M16,54 L26,54 M34,52 L46,52 M54,54 L66,54 M72,52 L82,52 "
+               "M20,64 L32,64 M40,62 L52,62 M60,64 L72,64 M28,74 L40,74 M52,74 L64,74",
+               width=HAIR))
+
+    write(f"art_{c}_litter", "—", "Fallen leaves and needles, not the soil beneath them.",
+          path("M8,62 L88,62", width=FINE),
+          path("M14,62 Q20,48 34,52 Q30,64 14,62 Z"),
+          path("M32,58 Q42,44 56,50 Q50,62 32,58 Z"),
+          path("M54,62 Q64,50 78,56 Q72,66 54,62 Z"),
+          path("M22,56 L28,58 M42,52 L50,55 M64,58 L72,60", width=HAIR))
+
+    write(f"art_{c}_grass", "—", "Lawn, pasture or verge.",
+          path("M8,80 L88,80", width=FINE),
+          path("M16,80 Q14,60 20,48 M26,80 Q28,62 24,52 M36,80 Q34,58 40,44 "
+               "M46,80 Q48,60 44,50 M56,80 Q54,58 60,46 M66,80 Q68,62 64,52 "
+               "M76,80 Q74,62 80,50"))
+
+    write(f"art_{c}_moss", "—", "A moss cushion, on ground or on wood.",
+          path("M10,72 Q10,58 22,58 Q26,46 40,52 Q52,42 62,54 Q78,52 80,66 "
+               "Q88,70 84,78 L12,78 Q6,74 10,72 Z"),
+          path("M22,58 L22,50 M34,52 L34,44 M46,50 L46,42 M58,52 L58,44 M70,56 L70,48",
+               width=HAIR))
+
+    write(f"art_{c}_dung", "—", "Droppings, usually of a grazing animal.",
+          path("M8,76 L88,76", width=FINE),
+          path("M22,76 Q20,60 34,58 Q42,50 54,58 Q70,58 70,76 Z"),
+          path("M32,68 Q40,64 48,68 M50,62 Q56,60 60,64", width=HAIR))
+
+    write(f"art_{c}_another_fungus", "—", "Growing out of another fungus.",
+          path("M14,74 Q14,56 34,56 Q54,56 54,74 Z"),
+          path("M8,74 L88,74", width=FINE),
+          path("M44,54 Q44,42 56,42 Q68,42 68,54 Q60,58 56,58 Q48,58 44,54 Z"),
+          path("M54,54 L54,70 M60,54 L60,70", width=FINE))
+
+    write(f"art_{c}_living_plant", "—", "On a living plant, not on dead wood.",
+          path("M48,84 L48,30"),
+          path("M48,58 Q32,54 26,40 Q42,38 48,52 M48,46 Q64,42 70,28 Q54,26 48,40"),
+          path("M48,34 Q40,26 44,16 Q52,22 48,32", width=FINE))
+
+    write(f"art_{c}_animal", "—", "On an insect or other animal.",
+          path("M8,74 L88,74", width=FINE),
+          path("M26,62 Q20,56 26,50 Q32,46 40,50 L58,50 Q70,50 72,58 Q70,66 58,66 "
+               "L40,66 Q30,68 26,62 Z"),
+          path("M40,50 L40,66 M52,50 L52,66", width=FINE),
+          path("M34,66 L30,74 M46,66 L44,74 M58,66 L60,74", width=HAIR),
+          path("M26,50 L20,42 M30,48 L28,40", width=HAIR),
+          path("M48,50 Q52,38 60,32 M56,50 Q62,40 70,36", width=FINE))
+
+    write(f"art_{c}_burnt", "—", "A burnt site: charcoal, or ground after a fire.",
+          path("M8,74 L88,74", width=FINE),
+          path("M16,74 L24,54 L34,74 Z", fill=True),
+          path("M38,74 L48,48 L58,74 Z", fill=True),
+          path("M62,74 L70,58 L80,74 Z", fill=True),
+          path("M28,44 Q32,38 30,32 M52,40 Q56,32 54,26 M72,48 Q76,42 74,36",
+               width=HAIR))
+
+    write(f"art_{c}_stone", "—", "Rock, wall or bare stone.",
+          path("M14,76 L24,46 L44,36 L68,44 L82,68 L76,78 Z"),
+          path("M24,46 L46,58 L68,44 M46,58 L44,78", width=HAIR),
+          path("M8,80 L88,80", width=FINE))
+
+    write(f"art_{c}_other", "—", "Something else entirely.",
+          path("M48,26 Q66,26 66,42 Q66,54 48,58 L48,66"),
+          path("M48,76 L48,78", width=6))
+
+
+def latex():
+    """
+    Whether it bleeds. Drawn as a snapped stem rather than a flat cut face, because
+    the first attempt read as a heraldic shield and because snapping is what a person
+    actually does.
+    """
+    c = "latex"
+
+    def snapped():
+        # The cap stays on the upper half, so the picture reads as a mushroom broken
+        # in two rather than as a bracket. Without it the frame is an abstract H.
+        return (
+            path("M14,26 Q48,6 82,26 Q80,31 74,31 L22,31 Q14,31 14,26 Z"),
+            path("M34,31 L34,44 L62,44 L62,31"),
+            path("M34,56 L34,86 M62,56 L62,86"),
+            path("M34,56 L62,56", width=FINE),
+        )
+
+    write(f"art_{c}_none", "Russula virescens",
+          "Snap it, and nothing comes out of the break.",
+          *snapped())
+
+    write(f"art_{c}_present", "Lactifluus volemus",
+          "White drops stand on the break at once, and go on coming.",
+          *snapped(),
+          path("M40,46 Q36,52 40,55 Q45,55 45,50 Q45,48 43,44 Z", fill=True),
+          path("M54,46 Q50,52 54,55 Q59,55 59,50 Q59,48 57,44 Z", fill=True),
+          path("M47,48 Q44,53 47,56 Q51,56 51,52 Q51,50 49,47 Z", fill=True))
+
+    write(f"art_{c}_watery", "Mycena galericulata",
+          "A thin clear liquid rather than a milk: it wets the break and runs.",
+          *snapped(),
+          path("M40,46 Q36,52 40,55 Q45,55 45,50 Q45,48 43,44 Z", width=FINE),
+          path("M55,47 Q52,52 55,55 Q59,55 59,51 Q59,49 57,46 Z", width=FINE))
+
+    write(f"art_{c}_guttation", "—",
+          "Beads standing on the outside of an uncut mushroom.",
+          path(capped_cap(base=44, rise=20)),
+          path("M42,44 L42,80 M54,44 L54,80"),
+          path("M30,32 Q27,38 30,41 Q35,41 35,36 Q35,34 33,30 Z", fill=True),
+          path("M60,30 Q57,36 60,39 Q65,39 65,34 Q65,32 63,28 Z", fill=True),
+          path("M46,54 Q43,60 46,63 Q51,63 51,58 Q51,56 49,52 Z", fill=True),
+          ground())
+
+
+def bruising():
+    """A cap seen from above, with the mark a thumb left on it."""
+    c = "bruising"
+
+    def cap_above():
+        return path("M48,14 Q82,14 82,48 Q82,82 48,82 Q14,82 14,48 Q14,14 48,14 Z")
+
+    write(f"art_{c}_no", "Russula virescens",
+          "Pressed hard, and the colour does not move.",
+          cap_above(),
+          path("M38,40 Q38,30 48,30 Q58,30 58,40 Q58,54 48,58 Q38,54 38,40 Z",
+               width=FINE),
+          path("M30,66 L40,58 M66,66 L56,58", width=HAIR))
+
+    write(f"art_{c}_yes", "Suillellus subvelutipes",
+          "A dark stain spreads where the thumb was.",
+          cap_above(),
+          path("M38,40 Q38,30 48,30 Q58,30 58,40 Q58,54 48,58 Q38,54 38,40 Z",
+               fill=True),
+          path("M34,62 Q48,68 62,62", width=HAIR))
+
+
+def associated_tree():
+    c = "associated_tree"
+
+    write(f"art_{c}_conifer", "—", "Pine, hemlock, spruce: needles and cones.",
+          path("M48,84 L48,20"),
+          path("M48,26 L30,40 M48,26 L66,40 M48,40 L26,56 M48,40 L70,56 "
+               "M48,54 L22,72 M48,54 L74,72"))
+
+    write(f"art_{c}_broadleaf", "—", "Oak, beech, poplar: a broad leaf.",
+          path("M48,84 L48,52"),
+          path("M48,52 Q22,48 20,28 Q44,24 48,44 Q52,24 76,28 Q74,48 48,52 Z"),
+          path("M34,32 L44,42 M62,32 L52,42", width=HAIR))
+
+    write(f"art_{c}_unknown", "—", "Not known, or nothing close enough to say.",
+          path("M48,26 Q66,26 66,42 Q66,54 48,58 L48,66"),
+          path("M48,76 L48,78", width=6))
+
+
+def cap_surface():
+    """
+    A patch of cap, always the same patch, so only the texture moves. Drawn as a
+    magnified swatch rather than a whole mushroom: at 56dp a texture on a full cap is
+    three pixels of noise.
+    """
+    c = "cap_surface"
+
+    def swatch():
+        return path("M20,20 Q48,12 76,20 Q84,48 76,76 Q48,84 20,76 Q12,48 20,20 Z")
+
+    write(f"art_{c}_smooth", "Russula virescens", "Even and unbroken.",
+          swatch())
+    write(f"art_{c}_viscid", "Suillus americanus", "Slimy or sticky, and it shines wet.",
+          swatch(),
+          path("M28,34 Q38,30 46,36 M52,44 Q62,40 70,46 M26,56 Q36,52 44,58 "
+               "M50,66 Q60,62 68,68", width=FINE),
+          path("M60,28 Q64,26 66,30", width=HAIR))
+    write(f"art_{c}_dry", "Agaricus campestris", "Matt and dry to the finger.",
+          swatch(),
+          path("M32,40 L36,40 M46,36 L50,36 M60,42 L64,42 M36,56 L40,56 "
+               "M52,58 L56,58 M44,68 L48,68", width=HAIR))
+    write(f"art_{c}_silky", "Inocybe rimosa", "Fine parallel fibres, like brushed silk.",
+          swatch(),
+          path("M24,30 Q48,26 72,32 M22,42 Q48,38 74,44 M22,54 Q48,50 74,56 "
+               "M24,66 Q48,62 72,68", width=HAIR))
+    write(f"art_{c}_scaly", "Pholiota squarrosa", "Flat scales that are part of the skin.",
+          swatch(),
+          path("M28,34 L38,30 L40,40 Z M48,28 L58,26 L58,38 Z M62,38 L72,36 L70,46 Z "
+               "M30,52 L40,48 L42,58 Z M50,50 L60,48 L60,58 Z M34,68 L44,64 L46,74 Z "
+               "M56,66 L66,62 L66,72 Z"))
+    write(f"art_{c}_warty", "Amanita muscaria", "Loose warts sitting on the surface.",
+          swatch(),
+          path("M30,34 Q35,29 40,34 Q35,39 30,34 Z M50,28 Q55,23 60,28 Q55,33 50,28 Z "
+               "M62,44 Q67,39 72,44 Q67,49 62,44 Z M28,54 Q33,49 38,54 Q33,59 28,54 Z "
+               "M48,52 Q53,47 58,52 Q53,57 48,52 Z M38,68 Q43,63 48,68 Q43,73 38,68 Z "
+               "M58,66 Q63,61 68,66 Q63,71 58,66 Z"))
+    write(f"art_{c}_velvety", "Xerocomellus chrysenteron",
+          "Short dense pile, like the back of a leaf.",
+          swatch(),
+          path("M26,32 L26,26 M34,30 L34,24 M42,29 L42,23 M50,29 L50,23 M58,30 L58,24 "
+               "M66,32 L66,26 M24,44 L24,38 M72,44 L72,38 M24,58 L24,52 M72,58 L72,52",
+               width=HAIR),
+          path("M32,44 L32,50 M44,42 L44,48 M56,44 L56,50 M38,58 L38,64 M52,58 L52,64",
+               width=HAIR))
+    write(f"art_{c}_hairy", "Trametes hirsuta", "Long distinct hairs, not a pile.",
+          swatch(),
+          path("M26,28 Q22,18 28,12 M38,24 Q34,14 40,8 M50,23 Q48,12 54,8 "
+               "M62,26 Q60,16 68,12 M72,34 Q72,24 80,20", width=FINE))
+    write(f"art_{c}_wrinkled", "Gyromitra caroliniana",
+          "Folded into ridges and hollows, like a brain.",
+          swatch(),
+          path("M24,34 Q34,26 42,36 Q50,46 60,36 Q68,28 74,38 "
+               "M22,52 Q32,44 40,54 Q48,64 58,54 Q66,46 74,56 "
+               "M28,70 Q38,62 46,72 Q54,80 62,72", width=FINE))
+    write(f"art_{c}_cracked", "Russula virescens",
+          "Split into patches with the flesh showing between.",
+          swatch(),
+          path("M40,14 L38,40 L20,50 M38,40 L62,44 L76,26 M62,44 L58,80 "
+               "M62,44 L82,58 M38,40 L30,76", width=FINE))
+    write(f"art_{c}_striate", "Amanita parcivolvata",
+          "Lined or grooved, usually following the gills beneath.",
+          swatch(),
+          path("M30,18 L26,78 M40,15 L38,82 M50,14 L50,83 M60,15 L62,82 M70,19 L74,76",
+               width=FINE))
+    write(f"art_{c}_powdery", "Cystoderma amianthinum",
+          "A loose bloom that a finger wipes away.",
+          swatch(),
+          path("M30,32 L31,32 M40,28 L41,28 M52,30 L53,30 M62,34 L63,34 "
+               "M28,44 L29,44 M38,42 L39,42 M50,44 L51,44 M64,46 L65,46 "
+               "M32,58 L33,58 M44,56 L45,56 M56,58 L57,58 M38,70 L39,70 M52,68 L53,68",
+               width=4))
+    write(f"art_{c}_zoned", "Trametes versicolor", "Concentric bands of tone.",
+          swatch(),
+          path("M22,30 Q48,24 74,30 M20,44 Q48,38 76,44 M20,58 Q48,52 76,58 "
+               "M24,70 Q48,64 72,70", width=FINE))
+
+
+def stipe_surface():
+    """A length of stem, magnified, with only the surface changing."""
+    c = "stipe_surface"
+
+    def band():
+        return path("M32,12 L32,84 M64,12 L64,84")
+
+    write(f"art_{c}_smooth", "Agaricus campestris", "Even, with nothing on it.",
+          band())
+    write(f"art_{c}_fibrous", "Pholiota squarrosa", "Streaked lengthways with fibres.",
+          band(),
+          path("M38,14 Q36,48 38,82 M45,13 Q44,48 45,83 M52,13 Q53,48 52,83 "
+               "M58,14 Q60,48 58,82", width=HAIR))
+    write(f"art_{c}_scaly", "Pholiota squarrosa", "Scales standing off the surface.",
+          band(),
+          path("M36,24 L46,22 L44,32 Z M50,20 L60,20 L58,30 Z M36,44 L46,42 L44,52 Z "
+               "M50,48 L60,46 L58,56 Z M38,66 L48,64 L46,74 Z M52,70 L62,68 L60,78 Z"))
+    write(f"art_{c}_reticulate", "Tylopilus felleus", "A raised net over the surface.",
+          band(),
+          path("M32,26 L64,26 M32,42 L64,42 M32,58 L64,58 M32,74 L64,74", width=HAIR),
+          path("M40,12 L40,84 M48,12 L48,84 M56,12 L56,84", width=HAIR))
+    write(f"art_{c}_punctate", "Suillellus subvelutipes", "Scattered granular dots.",
+          band(),
+          path("M38,22 L39,22 M50,20 L51,20 M58,26 L59,26 M40,36 L41,36 M52,34 L53,34 "
+               "M60,42 L61,42 M38,50 L39,50 M50,48 L51,48 M58,58 L59,58 M42,64 L43,64 "
+               "M54,68 L55,68 M38,76 L39,76", width=4))
+    write(f"art_{c}_powdery", "Cystoderma amianthinum", "A bloom that wipes off.",
+          band(),
+          path("M37,20 L38,20 M45,26 L46,26 M53,22 L54,22 M59,30 L60,30 "
+               "M36,38 L37,38 M46,44 L47,44 M56,40 L57,40 M40,54 L41,54 M52,58 L53,58 "
+               "M60,52 L61,52 M38,70 L39,70 M50,74 L51,74 M58,68 L59,68", width=3))
+    write(f"art_{c}_hairy", "Panellus stipticus", "Distinct hairs standing off it.",
+          band(),
+          path("M32,22 L24,18 M32,36 L23,33 M32,50 L24,47 M32,64 L23,61 "
+               "M64,26 L73,22 M64,40 L72,37 M64,54 L73,51 M64,68 L72,65", width=HAIR))
+    write(f"art_{c}_slimy", "Suillus americanus", "Sticky, and it shines.",
+          band(),
+          path("M38,20 Q46,16 54,22 M40,40 Q48,36 58,42 M38,60 Q46,56 56,62 "
+               "M42,76 Q50,72 58,78", width=FINE),
+          path("M54,30 Q58,28 60,32", width=HAIR))
+    write(f"art_{c}_grooved", "Cantharellus lateritius", "Ridged or grooved lengthways.",
+          band(),
+          path("M40,12 L40,84 M48,12 L48,84 M56,12 L56,84", width=FINE))
+
+
+def flesh_consistency():
+    """
+    What the flesh does when it is broken, drawn as the break itself. Snapping a stem
+    is two seconds of work and separates whole families, so the drawings show the
+    gesture and its result rather than a whole mushroom.
+    """
+    c = "flesh_consistency"
+
+    write(f"art_{c}_soft", "Agaricus campestris",
+          "Gives under a finger and keeps the dent.",
+          path("M18,34 Q34,26 48,32 Q46,44 48,52 Q34,62 18,58 Z"),
+          path("M78,34 Q62,26 48,32 Q50,44 48,52 Q62,62 78,58 Z"),
+          # The finger that made the dent, coming down onto it.
+          path("M48,8 L48,22 M42,16 L48,22 L54,16", width=FINE))
+    write(f"art_{c}_brittle", "Russula virescens", "Snaps clean across, like chalk.",
+          path("M14,34 L44,34 L48,50 L44,66 L14,66 Z"),
+          path("M82,34 L56,34 L52,50 L56,66 L82,66 Z"),
+          path("M46,26 L50,20 M52,26 L58,20", width=HAIR))
+    write(f"art_{c}_fibrous", "Pleurotus ostreatus", "Tears into strands lengthways.",
+          path("M14,32 L40,32 Q46,40 40,48 Q46,56 40,68 L14,68 Z"),
+          path("M82,32 L56,32 Q50,40 56,48 Q50,56 56,68 L82,68 Z"),
+          path("M40,36 L56,36 M40,46 L56,46 M40,58 L56,58", width=HAIR))
+    write(f"art_{c}_leathery", "Trametes versicolor", "Bends without breaking.",
+          path("M16,60 Q34,26 52,32 Q72,38 80,28"),
+          path("M16,72 Q34,38 52,44 Q72,50 80,40"),
+          path("M16,60 L16,72 M80,28 L80,40", width=FINE))
+    write(f"art_{c}_woody", "Ganoderma applanatum", "Hard: it will not bend at all.",
+          path("M18,34 L78,34 L78,64 L18,64 Z"),
+          path("M26,34 L26,64 M38,34 L38,64 M50,34 L50,64 M62,34 L62,64 M70,34 L70,64",
+               width=HAIR),
+          path("M30,24 L36,18 M46,24 L46,16 M62,24 L58,18", width=HAIR))
+    write(f"art_{c}_gelatinous", "Tremella mesenterica", "Rubbery and wobbling.",
+          path("M22,54 Q20,36 34,34 Q44,24 56,34 Q74,34 74,52 Q76,72 48,74 "
+               "Q22,72 22,54 Z"),
+          path("M34,52 Q42,44 48,52 Q54,60 62,52", width=FINE),
+          path("M14,44 L8,40 M14,58 L8,60 M82,44 L88,40 M82,58 L88,60", width=HAIR))
+    write(f"art_{c}_powdery", "Lycoperdon perlatum", "Collapses to dust when mature.",
+          path("M26,40 Q26,26 48,26 Q70,26 70,40 Q70,56 48,58 Q26,56 26,40 Z"),
+          path("M30,68 L31,68 M40,72 L41,72 M50,70 L51,70 M60,74 L61,74 "
+               "M36,80 L37,80 M48,82 L49,82 M62,80 L63,80 M22,76 L23,76 M70,68 L71,68",
+               width=4))
+
+
+def bruising_where():
+    """Where the colour moved, shown by filling that part of a whole mushroom solid."""
+    c = "bruising_where"
+
+    def outline():
+        return (
+            path("M14,44 Q48,20 82,44 Q80,49 74,49 L22,49 Q14,49 14,44 Z"),
+            path("M42,49 L42,84 M54,49 L54,84"),
+            ground(),
+        )
+
+    write(f"art_{c}_cap", "—", "On the cap surface.",
+          path("M14,44 Q48,20 82,44 Q80,49 74,49 L22,49 Q14,49 14,44 Z", fill=True),
+          path("M42,49 L42,84 M54,49 L54,84"), ground())
+    write(f"art_{c}_hymenophore", "—", "On the gills, pores or teeth.",
+          *outline(),
+          path("M20,49 L20,60 M27,49 L27,62 M34,49 L34,63 M62,49 L62,63 "
+               "M69,49 L69,62 M76,49 L76,60", width=6))
+    write(f"art_{c}_stipe", "—", "On the stem.",
+          path("M14,44 Q48,20 82,44 Q80,49 74,49 L22,49 Q14,49 14,44 Z"),
+          path("M42,49 L42,84 L54,84 L54,49 Z", fill=True), ground())
+    write(f"art_{c}_flesh", "—", "Inside, on the face of a cut.",
+          # Cut down the middle and opened: the whole exposed face is what changed.
+          path("M12,44 Q30,22 46,40 L46,84 L34,84 L34,49 L20,49 Q12,49 12,44 Z"),
+          path("M52,40 Q68,22 84,44 Q84,49 76,49 L62,49 L62,84 L50,84 L50,40 Z",
+               fill=True),
+          ground())
+    write(f"art_{c}_stipe_base", "—", "At the base of the stem, and nowhere else.",
+          *outline(),
+          path("M42,70 L54,70 L54,84 L42,84 Z", fill=True))
+
+
+def latex_change():
+    c = "latex_change"
+
+    def frame():
+        return (
+            path("M20,24 L20,44 L76,44 L76,24"),
+            path("M20,56 L20,80 M76,56 L76,80"),
+            path("M20,56 L76,56", width=FINE),
+        )
+
+    write(f"art_{c}_no", "Lactarius indigo",
+          "The drop is the same colour minutes later.",
+          *frame(),
+          path("M36,46 Q32,52 36,55 Q41,55 41,50 Q41,48 39,44 Z", fill=True),
+          path("M56,46 Q52,52 56,55 Q61,55 61,50 Q61,48 59,44 Z", fill=True),
+          path("M46,64 L50,64 M46,70 L50,70", width=HAIR))
+    write(f"art_{c}_yes", "Lactifluus volemus",
+          "The drop changes as you watch, or stains what it touches.",
+          *frame(),
+          path("M36,46 Q32,52 36,55 Q41,55 41,50 Q41,48 39,44 Z", width=FINE),
+          path("M56,46 Q52,52 56,55 Q61,55 61,50 Q61,48 59,44 Z", fill=True),
+          path("M44,50 L52,50 M50,47 L53,50 L50,53", width=HAIR))
+
+
 def launcher():
     write("art_launcher_chanterelle",
           "Cantharellus lateritius",
@@ -951,6 +1352,9 @@ CHARACTERS = [
     "fruitbody_type", "gill_attachment", "stipe_base", "cap_shape", "ring",
     "stipe_presence", "gill_spacing", "growth_habit", "cap_margin", "veil_remnants",
     "gill_edge", "stipe_flesh", "gill_extras", "cap_colour_pattern",
+    "substrate", "latex", "bruising", "associated_tree",
+    "cap_surface", "stipe_surface", "flesh_consistency", "bruising_where",
+    "latex_change",
 ]
 
 if __name__ == "__main__":
@@ -968,6 +1372,15 @@ if __name__ == "__main__":
     stipe_flesh()
     gill_extras()
     cap_colour_pattern()
+    substrate()
+    latex()
+    bruising()
+    associated_tree()
+    cap_surface()
+    stipe_surface()
+    flesh_consistency()
+    bruising_where()
+    latex_change()
     launcher()
     interface_icons()
     emit_kotlin()
