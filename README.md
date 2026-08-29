@@ -26,9 +26,12 @@ and then help you work out what you are looking at once you get home.
 - **At home:** review the entry on a real screen with the photographs in colour, add the
   spore print you set overnight, and see which unrecorded character would have narrowed
   things most — the part that trains the next walk.
-- **Then ask someone:** push the observation to your own iNaturalist account, photographs
-  and characters and all, and let the community identify it. The identification comes back
-  into your journal. The app never guesses; it helps you ask.
+- **Then ask someone:** send the find out as plain text and photographs through whatever
+  the phone already has — a message, an email, a forum post. It goes as a description and
+  a shortlist of what has *not* been ruled out, with what you looked at and could not say
+  said plainly, because that is the first thing anybody experienced will ask.
+- **And write down the answer:** when somebody tells you what it was, there is a line to
+  put it on. That is the whole point of keeping the book.
 
 ## Why E Ink is the right screen for this
 
@@ -43,10 +46,35 @@ else on it.
 The character schema is global; the taxon data is a swappable region pack. Southern
 Appalachia is pack one.
 
+Everything generated is generated: the drawings from `tools/make-art.py`, the pack from
+the `tools/add-*.py` batches, the illustrator's brief from the pack itself. A file that
+has to be kept in step by hand is a file that drifts, and a work order that has drifted
+from the data is worse than none.
+
+## Also in it
+
+- **A month view.** What is about now, split evenly between the ones people go looking for
+  and the ones that hurt people — which are often out at the same time. Anything lethal is
+  listed however rarely it turns up. "Sought after" means people look for it; it is not
+  the app saying anything is safe.
+- **A page per mushroom.** What it looks like, where and when, what it is confused with and
+  how to tell them apart, and how what you recorded lines up against it. Reachable from a
+  shortlist, from the month view, or by looking a name up in any month.
+- **Measurements, age and condition.** Facts about the specimen rather than the species,
+  so they are recorded rather than asked. Age earns its place: a ring or a veil that is
+  missing from an old mushroom proves nothing, and the key stops ruling things out on it.
+
 ## Status
 
-Early. Repository scaffolding and a placeholder screen — the character schema is being
-drawn up now. The launcher icon is a placeholder and not a design.
+Working and in daily use, and not finished. A hundred taxa in the Southern Appalachia
+pack, one hundred and sixty-eight drawings, and a key that reaches the right taxon in
+about four questions when the answers are true.
+
+Nothing in the pack has been checked by a mycologist. Every row says so on its own page.
+
+The launcher mark is a drawing of a chanterelle by the author, traced rather than
+imitated. The rest of the drawings are worked to the same hand — thin, few lines, no
+solid black — which is written down at the top of `tools/make-art.py`.
 
 ## Building
 
@@ -55,11 +83,16 @@ drawn up now. The launcher icon is a placeholder and not a design.
 ./gradlew assembleRelease
 ```
 
-Release builds are signed with a keystore in `signing/`, which is gitignored. There is no
-fallback: without it `assembleRelease` produces an *unsigned* APK, which will not install
-anywhere. That is deliberate — a signing key committed to a public repo is not a signing key,
-it is a formality, and a missing one should stop you rather than quietly hand you something
-installable. (`assembleDebug` still works, signed with the usual Android debug key.)
+Builds are signed with a keystore in `signing/`, which is gitignored. There is no
+fallback: without it the build produces an *unsigned* APK, which will not install
+anywhere. That is deliberate — a signing key committed to a public repo is not a signing
+key, it is a formality, and a missing one should stop you rather than quietly hand you
+something installable.
+
+**The debug build takes the same key**, which this file used to deny. It matters: the
+first install of any variant fixes the signer for good, so a debug build put on a phone is
+not a throwaway — install one signed with the Android debug key and the real one will not
+go over the top of it.
 
 ## Licence
 

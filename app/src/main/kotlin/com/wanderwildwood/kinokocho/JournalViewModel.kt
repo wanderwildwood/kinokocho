@@ -298,8 +298,27 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    /**
+     * Removes a find from the journal, photographs and all.
+     *
+     * The files used to stay on disk for ever: the database rows cascade and nothing
+     * touched the pictures, so a deleted entry left its photographs behind — while
+     * PRIVACY.md said they went with it. A promise about where somebody forages is not a
+     * promise to be approximately true.
+     *
+     * This is deletion, not discard. Throwing away a find that was never kept leaves its
+     * photographs alone on purpose, so that a mis-tap at the end of a walk costs the
+     * record and not the pictures; deleting one from the journal is a thing a person did
+     * on purpose, twice.
+     */
     fun delete(observationId: Long) {
-        viewModelScope.launch { dao.deleteObservation(observationId) }
+        viewModelScope.launch {
+            val dir = photoDir(getApplication())
+            dao.photosOf(observationId).forEach {
+                runCatching { File(dir, it.fileName).delete() }
+            }
+            dao.deleteObservation(observationId)
+        }
     }
 
     private val measurementCharacters
