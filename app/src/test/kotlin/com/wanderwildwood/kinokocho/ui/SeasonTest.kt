@@ -65,4 +65,25 @@ class SeasonTest {
         // month view. A new row has to say.
         assertTrue(pack.taxa.count { it.prevalence != Prevalence.UNCOMMON } >= 60)
     }
+
+    @Test
+    fun `the month view gives the sought-after ones room of their own`() {
+        // Sorted by severity alone, August put eight hazards above the first mushroom
+        // anybody was looking for — which is the page it was before they were added.
+        val august = worthKnowing(inMonth(8))
+        assertTrue("nothing sought after in August: $august", august.count { it.sought } >= 3)
+        assertTrue(august.any { it.hazard.severity.alwaysShow })
+    }
+
+    @Test
+    fun `the dangerous ones still come first`() {
+        (1..12).forEach { month ->
+            val named = worthKnowing(inMonth(month))
+            val lastDangerous = named.indexOfLast { it.hazard.severity.alwaysShow }
+            val firstSought = named.indexOfFirst { !it.hazard.severity.alwaysShow }
+            if (lastDangerous >= 0 && firstSought >= 0) {
+                assertTrue("month $month interleaves them", lastDangerous < firstSought)
+            }
+        }
+    }
 }

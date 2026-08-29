@@ -186,25 +186,48 @@ private fun TaxonLine(taxon: Taxon, onOpen: (String) -> Unit) {
  * worth being sure of: that a death cap cannot be dropped for being uncommon, and that
  * the list stays a list rather than becoming the pack again.
  */
-fun worthKnowing(inSeason: List<Taxon>): List<Taxon> = inSeason
-    .filter {
-        it.hazard.severity == Hazard.Severity.LETHAL ||
-            (it.prevalence != Prevalence.UNCOMMON &&
-                (it.hazard.severity.alwaysShow || it.sought))
-    }
-    .sortedWith(
-        compareByDescending<Taxon> { it.hazard.severity.ordinal }
-            .thenBy { it.prevalence.ordinal }
-            .thenBy { it.scientificName }
-    )
-    .take(MOST)
+fun worthKnowing(inSeason: List<Taxon>): List<Taxon> {
+    val order = compareBy<Taxon>({ it.prevalence.ordinal }, { it.scientificName })
+
+    // Everything that can kill, however rarely it turns up. Dropping a death cap for
+    // being uncommon is not a trade this app makes.
+    val lethal = inSeason
+        .filter { it.hazard.severity == Hazard.Severity.LETHAL }
+        .sortedWith(order)
+    val harmful = inSeason
+        .filter {
+            it.hazard.severity == Hazard.Severity.SEVERE &&
+                it.prevalence != Prevalence.UNCOMMON
+        }
+        .sortedWith(order)
+    val sought = inSeason
+        .filter {
+            it.sought && !it.hazard.severity.alwaysShow &&
+                it.prevalence != Prevalence.UNCOMMON
+        }
+        .sortedWith(order)
+
+    /*
+     * Half and half, rather than by severity.
+     *
+     * Sorting the whole list by how bad it would be put eight hazards above the first
+     * mushroom anybody was looking for, which is the page it was before the sought-after
+     * ones were added to it at all. The two halves are given their own room: the
+     * dangerous ones lead, because a person may be holding one, and the ones people go
+     * out for are on the same short list rather than below a fold nobody reaches.
+     */
+    val dangerous = (lethal + harmful).take(maxOf(HALF, lethal.size))
+    return dangerous + sought.take(MOST - dangerous.size)
+}
 
 /**
  * How many the month view will name at the top.
  *
- * A number rather than a scroll. Ten is about what a person carries out of the door.
+ * A number rather than a scroll. Ten is about what a person carries out of the door,
+ * and half of them are the ones they were hoping to find.
  */
 private const val MOST = 10
+private const val HALF = MOST / 2
 
 /** The row on the journal that opens it. */
 @Composable
