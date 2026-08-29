@@ -1248,6 +1248,100 @@ def latex_change():
           path("M44,50 L52,50 M50,47 L53,50 L50,53", width=HAIR))
 
 
+def substrate_wood():
+    """
+    What kind of wood, which is not a footnote: conifer against broadleaf is what
+    separates angel wings from an oyster mushroom, and that pair has killed people.
+    Drawn as the wood itself, with the tree that made it where it helps.
+    """
+    c = "substrate_wood"
+
+    def log():
+        return path("M12,40 Q12,32 20,32 L76,32 Q84,32 84,40 L84,60 Q84,68 76,68 "
+                    "L20,68 Q12,68 12,60 Z")
+
+    write(f"art_{c}_conifer", "—", "Pine, hemlock, spruce.",
+          log(),
+          path("M20,32 Q28,32 28,50 Q28,68 20,68", width=FINE),
+          # A whole fir in silhouette, so this cannot be mistaken for the broadleaf
+          # one. Angel wings against an oyster mushroom turns on this question.
+          path("M48,4 L38,16 L44,16 L34,26 L62,26 L52,16 L58,16 Z", fill=True),
+          path("M48,26 L48,32", width=FINE),
+          path("M40,44 L40,56 M52,42 L52,58 M64,46 L64,54", width=HAIR))
+
+    write(f"art_{c}_broadleaf", "—", "Oak, beech, poplar, maple.",
+          log(),
+          path("M20,32 Q28,32 28,50 Q28,68 20,68", width=FINE),
+          path("M46,26 Q34,24 33,14 Q45,12 46,20 Q47,12 59,14 Q58,24 46,26 Z",
+               width=FINE),
+          path("M46,26 L46,30", width=HAIR),
+          path("M40,44 Q46,48 40,54 M56,44 Q62,50 56,56", width=HAIR))
+
+    write(f"art_{c}_living", "—", "A living tree, still standing.",
+          path("M38,86 L38,34 Q38,24 48,24 Q58,24 58,34 L58,86"),
+          path("M40,30 Q24,26 18,14 M56,30 Q72,26 78,14", width=FINE),
+          path("M22,20 Q28,10 38,12 M74,20 Q68,10 58,12", width=HAIR),
+          path("M44,46 Q48,52 44,58 M52,50 Q56,56 52,62", width=HAIR),
+          ground(28, 68))
+
+    write(f"art_{c}_dead", "—", "A dead stump, log or fallen branch.",
+          path("M14,66 L26,34 Q28,28 34,30 L64,38 Q70,40 68,46 L60,70 Z"),
+          path("M30,34 L58,42", width=HAIR),
+          path("M34,46 L52,52 M30,56 L48,62", width=HAIR),
+          path("M8,74 L88,74", width=FINE))
+
+    write(f"art_{c}_bark", "—", "On the bark, not on wood the bark has left.",
+          log(),
+          path("M18,36 Q22,50 18,64 M26,34 Q30,50 26,66 M34,33 Q38,50 34,67 "
+               "M42,32 Q46,50 42,68 M50,32 Q54,50 50,68 M58,32 Q62,50 58,68 "
+               "M66,32 Q70,50 66,68 M74,33 Q78,50 74,67", width=HAIR))
+
+    write(f"art_{c}_bare_wood", "—", "Bark gone; the wood itself is exposed.",
+          log(),
+          path("M20,32 Q26,50 20,68", width=FINE),
+          path("M30,40 Q48,36 70,42 M30,50 Q48,46 70,52 M32,60 Q48,56 68,62",
+               width=HAIR))
+
+    write(f"art_{c}_woodchip", "—", "Mulch, chips or a bark bed.",
+          path("M8,72 L88,72", width=FINE),
+          path("M14,72 L22,60 L34,64 L28,72 Z"),
+          path("M32,72 L38,58 L52,62 L48,72 Z"),
+          path("M52,72 L60,60 L72,66 L68,72 Z"),
+          path("M22,60 L28,54 M60,60 L66,54", width=HAIR))
+
+    write(f"art_{c}_buried", "—", "Wood under the surface, found only by digging.",
+          path("M10,44 L86,44"),
+          path("M22,74 Q22,66 30,66 L62,66 Q70,66 70,74 Q70,82 62,82 L30,82 "
+               "Q22,82 22,74 Z"),
+          path("M30,66 Q36,74 30,82", width=HAIR),
+          path("M18,54 L28,54 M38,52 L50,52 M58,54 L70,54 M26,60 L36,60 M52,60 L64,60",
+               width=HAIR))
+
+
+def bruising_speed():
+    """A clock face, filled by how much of it passes before the colour moves."""
+    c = "bruising_speed"
+
+    def dial():
+        return path("M48,16 Q80,16 80,48 Q80,80 48,80 Q16,80 16,48 Q16,16 48,16 Z")
+
+    write(f"art_{c}_instant", "Suillellus subvelutipes",
+          "The colour is already moving as the knife leaves.",
+          dial(),
+          path("M48,26 L48,48 L58,54", width=FINE),
+          path("M48,48 L48,26 A22,22 0 0,1 62,32 Z", fill=True))
+
+    write(f"art_{c}_minute", "—", "Within a minute or so.",
+          dial(),
+          path("M48,26 L48,48 L64,48", width=FINE),
+          path("M48,48 L48,26 A22,22 0 0,1 70,48 Z", fill=True))
+
+    write(f"art_{c}_slow", "—", "Several minutes, and easy to miss.",
+          dial(),
+          path("M48,26 L48,48 L48,70", width=FINE),
+          path("M48,48 L48,26 A22,22 0 1,1 48,70 Z", fill=True))
+
+
 def launcher():
     write("art_launcher_chanterelle",
           "Cantharellus lateritius",
@@ -1354,7 +1448,7 @@ CHARACTERS = [
     "gill_edge", "stipe_flesh", "gill_extras", "cap_colour_pattern",
     "substrate", "latex", "bruising", "associated_tree",
     "cap_surface", "stipe_surface", "flesh_consistency", "bruising_where",
-    "latex_change",
+    "latex_change", "substrate_wood", "bruising_speed",
 ]
 
 if __name__ == "__main__":
@@ -1381,6 +1475,8 @@ if __name__ == "__main__":
     flesh_consistency()
     bruising_where()
     latex_change()
+    substrate_wood()
+    bruising_speed()
     launcher()
     interface_icons()
     emit_kotlin()

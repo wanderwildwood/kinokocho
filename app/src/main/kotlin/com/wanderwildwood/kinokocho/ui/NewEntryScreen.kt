@@ -75,27 +75,47 @@ fun NewEntryScreen(
             )
         }
 
+        val choose = { valueId: String ->
+            val selected = valueId in picked
+            picked = when {
+                !multi -> setOf(valueId)
+                selected -> picked - valueId
+                else -> picked + valueId
+            }
+            if (!multi) vm.answer(questionId, picked)
+        }
+
+        // Pictures where there are pictures. Colour and smell get none — a monochrome
+        // panel cannot draw a brown spore print or an almond smell, and a drawing that
+        // stands in for one would be worse than the word.
+        val drawn = CharacterArt.coversAll(questionId, values.map { it.id })
+
         LazyColumn(
             Modifier.weight(1f).fillMaxWidth().padding(top = 8.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            items(values, key = { it.id }) { value ->
-                val selected = value.id in picked
-                val choose = {
-                    picked = when {
-                        !multi -> setOf(value.id)
-                        selected -> picked - value.id
-                        else -> picked + value.id
-                    }
-                    if (!multi) vm.answer(questionId, picked)
+            if (drawn) {
+                item {
+                    ChoiceGrid(
+                        characterId = questionId,
+                        values = values,
+                        picked = picked,
+                        onPick = choose,
+                    )
                 }
-                if (selected) {
-                    ButtonMMD(onClick = choose, modifier = Modifier.fillMaxWidth()) {
-                        Text(value.label)
-                    }
-                } else {
-                    OutlinedButtonMMD(onClick = choose, modifier = Modifier.fillMaxWidth()) {
-                        Text(value.label)
+            } else {
+                items(values, key = { it.id }) { value ->
+                    val selected = value.id in picked
+                    if (selected) {
+                        ButtonMMD(
+                            onClick = { choose(value.id) },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) { Text(value.label) }
+                    } else {
+                        OutlinedButtonMMD(
+                            onClick = { choose(value.id) },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) { Text(value.label) }
                     }
                 }
             }
