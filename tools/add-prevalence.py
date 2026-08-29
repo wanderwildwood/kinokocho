@@ -43,6 +43,11 @@ COMMON = {
     "russula_virescens", "scleroderma_citrinum", "stereum_ostrea",
     "trametes_hirsuta", "trametes_versicolor", "tremella_mesenterica",
     "tylopilus_felleus", "xerocomellus_chrysenteron",
+    # Sixth batch: the things on every fallen hardwood here.
+    "xylaria_polymorpha", "schizophyllum_commune", "trichaptum_biforme",
+    "coprinellus_micaceus", "amanita_brunnescens", "baorangia_bicolor",
+    "marasmius_rotula", "clavulina_cristata", "chlorociboria_aeruginascens",
+    "psathyrella_candolleana",
 }
 
 # Found regularly, but you go looking rather than tripping over it.
@@ -59,6 +64,8 @@ OCCASIONAL = {
     "phallus_ravenelii", "pluteus_petasatus", "ramaria_stricta",
     "sarcoscypha_dudleyi", "suillellus_subvelutipes", "suillus_americanus",
     "tricholoma_sejunctum",
+    "strobilomyces_strobilaceus", "cortinarius_iodes", "ganoderma_tsugae",
+    "hericium_coralloides",
 }
 
 # People go out to look for these. NOT a claim that any of them is safe to eat.
@@ -74,6 +81,8 @@ SOUGHT = {
     "laetiporus_cincinnatus", "laetiporus_sulphureus", "lycoperdon_perlatum",
     "marasmius_oreades", "morchella_americana", "morchella_angusticeps",
     "pleurotus_ostreatus", "russula_virescens", "trametes_versicolor",
+    "coprinellus_micaceus", "strobilomyces_strobilaceus", "baorangia_bicolor",
+    "ganoderma_tsugae", "hericium_coralloides",
 }
 
 
