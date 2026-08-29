@@ -2484,59 +2484,59 @@
         "flesh_colour": [
           {
             "value": "white",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "cream",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ],
         "growth_habit": [
           {
             "value": "single",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "few",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ],
         "habitat": [
           {
             "value": "broadleaf_wood",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "mixed_wood",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           },
           {
             "value": "disturbed",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "odour": [
           {
             "value": "none",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "mushroomy",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "substrate_wood": [
           {
             "value": "dead",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "buried",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "broadleaf",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ]
       },
@@ -2694,51 +2694,51 @@
         "flesh_colour": [
           {
             "value": "black",
-            "frequency": "ALWAYS"
+            "frequency": "always"
           },
           {
             "value": "purple",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "white",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ],
         "growth_habit": [
           {
             "value": "few",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "troop",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ],
         "habitat": [
           {
             "value": "broadleaf_wood",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "mixed_wood",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "heath",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "odour": [
           {
             "value": "unpleasant_other",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ],
         "cap_margin": [
           {
             "value": "straight",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ]
       },
@@ -2853,73 +2853,73 @@
         "flesh_colour": [
           {
             "value": "white",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "olive",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           },
           {
             "value": "dark_brown",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "growth_habit": [
           {
             "value": "few",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "troop",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "single",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "habitat": [
           {
             "value": "broadleaf_wood",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "mixed_wood",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "conifer_wood",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           },
           {
             "value": "disturbed",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "associated_tree": [
           {
             "value": "broadleaf",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "conifer",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "odour": [
           {
             "value": "none",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "mushroomy",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "taste": [
           {
             "value": "mild",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ]
       },
@@ -3201,71 +3201,71 @@
         "cap_surface": [
           {
             "value": "smooth",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "velvety",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "wrinkled",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "flesh_consistency": [
           {
             "value": "soft",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "fibrous",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           },
           {
             "value": "leathery",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "flesh_colour": [
           {
             "value": "white",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "cream",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ],
         "habitat": [
           {
             "value": "broadleaf_wood",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "wood_pasture",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "odour": [
           {
             "value": "none",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "mushroomy",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "taste": [
           {
             "value": "mild",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ],
         "cap_margin": [
           {
             "value": "wavy",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ]
       },
@@ -3403,65 +3403,65 @@
         "cap_margin": [
           {
             "value": "wavy",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "straight",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "flesh_consistency": [
           {
             "value": "fibrous",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "woody",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           },
           {
             "value": "leathery",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "flesh_colour": [
           {
             "value": "white",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "cream",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ],
         "habitat": [
           {
             "value": "broadleaf_wood",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "wood_pasture",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "taste": [
           {
             "value": "acrid",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "mild",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "odour": [
           {
             "value": "none",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "mushroomy",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ]
       },
@@ -3764,71 +3764,71 @@
         "cap_surface": [
           {
             "value": "velvety",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "wrinkled",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           },
           {
             "value": "smooth",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "cap_margin": [
           {
             "value": "wavy",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ],
         "flesh_consistency": [
           {
             "value": "soft",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "fibrous",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "flesh_colour": [
           {
             "value": "white",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "black",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "habitat": [
           {
             "value": "broadleaf_wood",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "wood_pasture",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           },
           {
             "value": "urban",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "odour": [
           {
             "value": "none",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "mushroomy",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ],
         "taste": [
           {
             "value": "mild",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ]
       },
@@ -6383,21 +6383,21 @@
         "flesh_colour": [
           {
             "value": "white",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "cream",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           }
         ],
         "taste": [
           {
             "value": "acrid",
-            "frequency": "USUALLY"
+            "frequency": "usually"
           },
           {
             "value": "mild",
-            "frequency": "SOMETIMES"
+            "frequency": "sometimes"
           }
         ]
       },
@@ -21725,6 +21725,2593 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "russula_compacta",
+      "scientificName": "Russula compacta",
+      "commonName": "firm russula",
+      "prevalence": "common",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "unknown",
+        "severity": "UNKNOWN",
+        "onset": "—",
+        "note": "Not eaten here, mostly on account of the smell.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "Heavy and firm for a russula, whitish then browning all over as it ages or is handled. The smell turns strongly of old fish or shellfish as it goes over, which is what settles it — most russulas smell of nothing much.",
+      "characters": {
+        "fruitbody_type": [
+          {
+            "value": "gilled_stemmed",
+            "frequency": "always"
+          }
+        ],
+        "substrate": [
+          {
+            "value": "soil",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "central",
+            "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "brittle",
+            "frequency": "always"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "smooth",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "solid",
+            "frequency": "always"
+          }
+        ],
+        "gill_attachment": [
+          {
+            "value": "adnate",
+            "frequency": "usually"
+          },
+          {
+            "value": "adnexed",
+            "frequency": "sometimes"
+          }
+        ],
+        "gill_spacing": [
+          {
+            "value": "close",
+            "frequency": "usually"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "usually"
+          },
+          {
+            "value": "flat",
+            "frequency": "usually"
+          },
+          {
+            "value": "depressed",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "straight",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "dry",
+            "frequency": "usually"
+          },
+          {
+            "value": "smooth",
+            "frequency": "usually"
+          },
+          {
+            "value": "cracked",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "usually"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "yes",
+            "frequency": "always"
+          }
+        ],
+        "bruising_where": [
+          {
+            "value": "flesh",
+            "frequency": "always"
+          },
+          {
+            "value": "cap",
+            "frequency": "usually"
+          },
+          {
+            "value": "hymenophore",
+            "frequency": "usually"
+          }
+        ],
+        "bruising_colour": [
+          {
+            "value": "red_brown",
+            "frequency": "always"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "usually"
+          }
+        ],
+        "bruising_speed": [
+          {
+            "value": "slow",
+            "frequency": "usually"
+          }
+        ],
+        "odour": [
+          {
+            "value": "foetid",
+            "frequency": "usually"
+          },
+          {
+            "value": "unpleasant_other",
+            "frequency": "usually"
+          }
+        ],
+        "taste": [
+          {
+            "value": "mild",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "usually"
+          },
+          {
+            "value": "single",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          50,
+          150
+        ],
+        "stipe_height_mm": [
+          40,
+          110
+        ]
+      },
+      "season": {
+        "months": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "lookalikes": [
+        {
+          "taxon": "russula_virescens",
+          "discriminators": [
+            "cap_colour",
+            "cap_surface",
+            "bruising"
+          ],
+          "note": "The green-cracking russula is green and cracked into patches, and it does not brown where it is handled."
+        }
+      ],
+      "sources": [
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "russula_variata",
+      "scientificName": "Russula variata",
+      "commonName": "variable russula",
+      "prevalence": "common",
+      "sought": true,
+      "hazard": {
+        "toxinClass": "unknown",
+        "severity": "UNKNOWN",
+        "onset": "—",
+        "note": "Eaten by some. Russula is a genus where the acrid ones are the trouble and taste is how they are told apart.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "Gills that fork repeatedly from the stem outwards — run a finger across them and count the forks. The cap is mottled green, purple and buff in the same specimen, which is where the name comes from and why colour will not settle it.",
+      "characters": {
+        "fruitbody_type": [
+          {
+            "value": "gilled_stemmed",
+            "frequency": "always"
+          }
+        ],
+        "substrate": [
+          {
+            "value": "soil",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "central",
+            "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "brittle",
+            "frequency": "always"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "smooth",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "solid",
+            "frequency": "usually"
+          },
+          {
+            "value": "stuffed",
+            "frequency": "sometimes"
+          }
+        ],
+        "gill_attachment": [
+          {
+            "value": "adnate",
+            "frequency": "usually"
+          },
+          {
+            "value": "decurrent",
+            "frequency": "sometimes"
+          }
+        ],
+        "gill_extras": [
+          {
+            "value": "forked",
+            "frequency": "always"
+          }
+        ],
+        "gill_spacing": [
+          {
+            "value": "close",
+            "frequency": "usually"
+          },
+          {
+            "value": "crowded",
+            "frequency": "sometimes"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "usually"
+          },
+          {
+            "value": "depressed",
+            "frequency": "usually"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "straight",
+            "frequency": "usually"
+          },
+          {
+            "value": "striate",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "dry",
+            "frequency": "usually"
+          },
+          {
+            "value": "smooth",
+            "frequency": "usually"
+          },
+          {
+            "value": "viscid",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "green",
+            "frequency": "usually"
+          },
+          {
+            "value": "purple",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "olive",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_colour_pattern": [
+          {
+            "value": "darker_centre",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
+            "frequency": "usually"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "taste": [
+          {
+            "value": "mild",
+            "frequency": "usually"
+          },
+          {
+            "value": "acrid",
+            "frequency": "sometimes"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "usually"
+          },
+          {
+            "value": "troop",
+            "frequency": "sometimes"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          50,
+          140
+        ],
+        "stipe_height_mm": [
+          40,
+          100
+        ]
+      },
+      "season": {
+        "months": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "lookalikes": [
+        {
+          "taxon": "russula_virescens",
+          "discriminators": [
+            "gill_extras",
+            "cap_surface"
+          ],
+          "note": "The green-cracking russula does not fork its gills and its cap breaks into distinct patches."
+        }
+      ],
+      "sources": [
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "russula_silvicola",
+      "scientificName": "Russula silvicola",
+      "commonName": "woodland sickener",
+      "prevalence": "common",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "unknown",
+        "severity": "GI",
+        "onset": "30 minutes to 3 hours",
+        "note": "Fiercely acrid, and it makes people vomit. The taste is the warning and it arrives long before you have swallowed anything.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "Bright scarlet cap, pure white stem and gills, and a taste like chewing a chilli — a fragment on the tongue is unmistakable within seconds. The red washes out in rain to pink or nearly white, so colour alone settles nothing.",
+      "characters": {
+        "fruitbody_type": [
+          {
+            "value": "gilled_stemmed",
+            "frequency": "always"
+          }
+        ],
+        "substrate": [
+          {
+            "value": "soil",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "central",
+            "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "brittle",
+            "frequency": "always"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "smooth",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "stuffed",
+            "frequency": "usually"
+          },
+          {
+            "value": "hollow",
+            "frequency": "sometimes"
+          }
+        ],
+        "gill_attachment": [
+          {
+            "value": "adnexed",
+            "frequency": "usually"
+          },
+          {
+            "value": "adnate",
+            "frequency": "sometimes"
+          }
+        ],
+        "gill_spacing": [
+          {
+            "value": "close",
+            "frequency": "usually"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "usually"
+          },
+          {
+            "value": "flat",
+            "frequency": "usually"
+          },
+          {
+            "value": "depressed",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "striate",
+            "frequency": "usually"
+          },
+          {
+            "value": "straight",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "viscid",
+            "frequency": "usually"
+          },
+          {
+            "value": "smooth",
+            "frequency": "usually"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "red",
+            "frequency": "always"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
+            "frequency": "usually"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          },
+          {
+            "value": "fruity",
+            "frequency": "sometimes"
+          }
+        ],
+        "taste": [
+          {
+            "value": "acrid",
+            "frequency": "always"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "conifer_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "broadleaf_wood",
+            "frequency": "sometimes"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "usually"
+          },
+          {
+            "value": "single",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          25,
+          90
+        ],
+        "stipe_height_mm": [
+          30,
+          90
+        ]
+      },
+      "season": {
+        "months": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "lookalikes": [
+        {
+          "taxon": "russula_mariae",
+          "discriminators": [
+            "taste",
+            "cap_surface",
+            "stipe_surface"
+          ],
+          "note": "Both are red. Mariae is velvety and dry with a flushed stem and a mild taste; this one is sticky, white-stemmed and violently acrid."
+        }
+      ],
+      "sources": [
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "North American Mycological Association poisoning references",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "russula_mariae",
+      "scientificName": "Russula mariae",
+      "commonName": "purple-bloom russula",
+      "prevalence": "common",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "unknown",
+        "severity": "UNKNOWN",
+        "onset": "—",
+        "note": "Eaten by some. In a genus told apart by taste, a russula nobody has tasted is a russula nobody knows.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "Dry and velvety rather than sticky, deep purple-red with a powdery bloom, and the stem is flushed pink rather than white. Common under oaks, and one of the few russulas that can be recognised without tasting it.",
+      "characters": {
+        "fruitbody_type": [
+          {
+            "value": "gilled_stemmed",
+            "frequency": "always"
+          }
+        ],
+        "substrate": [
+          {
+            "value": "soil",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "central",
+            "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "brittle",
+            "frequency": "always"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "powdery",
+            "frequency": "usually"
+          },
+          {
+            "value": "smooth",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "stuffed",
+            "frequency": "usually"
+          }
+        ],
+        "gill_attachment": [
+          {
+            "value": "adnate",
+            "frequency": "usually"
+          },
+          {
+            "value": "adnexed",
+            "frequency": "sometimes"
+          }
+        ],
+        "gill_spacing": [
+          {
+            "value": "close",
+            "frequency": "usually"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "usually"
+          },
+          {
+            "value": "flat",
+            "frequency": "usually"
+          },
+          {
+            "value": "depressed",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "straight",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "velvety",
+            "frequency": "always"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          },
+          {
+            "value": "powdery",
+            "frequency": "usually"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "purple",
+            "frequency": "always"
+          },
+          {
+            "value": "red",
+            "frequency": "usually"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
+            "frequency": "usually"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "taste": [
+          {
+            "value": "mild",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "sometimes"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "usually"
+          },
+          {
+            "value": "single",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          20,
+          80
+        ],
+        "stipe_height_mm": [
+          30,
+          80
+        ]
+      },
+      "season": {
+        "months": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "lookalikes": [],
+      "sources": [
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "lactarius_corrugis",
+      "scientificName": "Lactarius corrugis",
+      "commonName": "corrugated milkcap",
+      "prevalence": "common",
+      "sought": true,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "",
+        "source": "—"
+      },
+      "note": "Dark red-brown and wrinkled like old leather, bleeding copious white milk that browns within a minute and stains everything it touches. The wrinkles and the browning milk are the pair that settle it.",
+      "characters": {
+        "fruitbody_type": [
+          {
+            "value": "gilled_stemmed",
+            "frequency": "always"
+          }
+        ],
+        "substrate": [
+          {
+            "value": "soil",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "central",
+            "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          },
+          {
+            "value": "tapering",
+            "frequency": "sometimes"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "present",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "brittle",
+            "frequency": "always"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "hairy",
+            "frequency": "usually"
+          },
+          {
+            "value": "smooth",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "solid",
+            "frequency": "always"
+          }
+        ],
+        "gill_attachment": [
+          {
+            "value": "adnate",
+            "frequency": "usually"
+          },
+          {
+            "value": "decurrent",
+            "frequency": "sometimes"
+          }
+        ],
+        "gill_spacing": [
+          {
+            "value": "close",
+            "frequency": "usually"
+          },
+          {
+            "value": "crowded",
+            "frequency": "sometimes"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "usually"
+          },
+          {
+            "value": "depressed",
+            "frequency": "usually"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "incurved",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "wrinkled",
+            "frequency": "always"
+          },
+          {
+            "value": "velvety",
+            "frequency": "usually"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "red_brown",
+            "frequency": "always"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "latex_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "latex_change": [
+          {
+            "value": "yes",
+            "frequency": "always"
+          }
+        ],
+        "latex_change_colour": [
+          {
+            "value": "dark_brown",
+            "frequency": "always"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "yes",
+            "frequency": "always"
+          }
+        ],
+        "bruising_where": [
+          {
+            "value": "flesh",
+            "frequency": "usually"
+          },
+          {
+            "value": "hymenophore",
+            "frequency": "usually"
+          }
+        ],
+        "bruising_colour": [
+          {
+            "value": "dark_brown",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          },
+          {
+            "value": "mushroomy",
+            "frequency": "sometimes"
+          }
+        ],
+        "taste": [
+          {
+            "value": "mild",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "sometimes"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "usually"
+          },
+          {
+            "value": "single",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          50,
+          140
+        ],
+        "stipe_height_mm": [
+          40,
+          110
+        ]
+      },
+      "season": {
+        "months": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "lookalikes": [
+        {
+          "taxon": "lactifluus_volemus",
+          "discriminators": [
+            "cap_surface",
+            "odour"
+          ],
+          "note": "The weeping milkcap is smooth rather than wrinkled and smells strongly of fish. Both bleed white milk that browns."
+        }
+      ],
+      "sources": [
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "lactifluus_hygrophoroides",
+      "scientificName": "Lactifluus hygrophoroides",
+      "commonName": "hygrophorus milkcap",
+      "prevalence": "common",
+      "sought": true,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "",
+        "source": "—"
+      },
+      "note": "Orange-brown and velvety, with gills so widely spaced you can count them at arm's length. White milk that does not change colour. The spacing is the character — nothing else here has gills like that.",
+      "characters": {
+        "fruitbody_type": [
+          {
+            "value": "gilled_stemmed",
+            "frequency": "always"
+          }
+        ],
+        "substrate": [
+          {
+            "value": "soil",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "central",
+            "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          },
+          {
+            "value": "tapering",
+            "frequency": "sometimes"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "present",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "brittle",
+            "frequency": "always"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "hairy",
+            "frequency": "usually"
+          },
+          {
+            "value": "smooth",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "solid",
+            "frequency": "always"
+          }
+        ],
+        "gill_attachment": [
+          {
+            "value": "adnate",
+            "frequency": "usually"
+          },
+          {
+            "value": "decurrent",
+            "frequency": "usually"
+          }
+        ],
+        "gill_spacing": [
+          {
+            "value": "distant",
+            "frequency": "always"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "usually"
+          },
+          {
+            "value": "depressed",
+            "frequency": "usually"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "incurved",
+            "frequency": "usually"
+          },
+          {
+            "value": "wavy",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "velvety",
+            "frequency": "always"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          },
+          {
+            "value": "wrinkled",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "orange",
+            "frequency": "always"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "latex_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "latex_change": [
+          {
+            "value": "no",
+            "frequency": "always"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
+            "frequency": "usually"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "taste": [
+          {
+            "value": "mild",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "sometimes"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "usually"
+          },
+          {
+            "value": "troop",
+            "frequency": "sometimes"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          30,
+          110
+        ],
+        "stipe_height_mm": [
+          25,
+          80
+        ]
+      },
+      "season": {
+        "months": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "lookalikes": [
+        {
+          "taxon": "lactifluus_volemus",
+          "discriminators": [
+            "gill_spacing",
+            "odour",
+            "latex_change"
+          ],
+          "note": "The weeping milkcap has crowded gills, smells of fish, and its milk browns. This one has gills you can count and milk that stays white."
+        }
+      ],
+      "sources": [
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "lactarius_subvellereus",
+      "scientificName": "Lactarius subvellereus",
+      "commonName": "white acrid milkcap",
+      "prevalence": "common",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "unknown",
+        "severity": "GI",
+        "onset": "1-3 hours",
+        "note": "Acrid enough to make people ill. The taste says so at once.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "A big chalk-white funnel with crowded gills and a short stubby stem, bleeding copious white milk that is fiercely acrid on the tongue. Common under oaks and often half-buried in leaf litter.",
+      "characters": {
+        "fruitbody_type": [
+          {
+            "value": "gilled_stemmed",
+            "frequency": "always"
+          }
+        ],
+        "substrate": [
+          {
+            "value": "soil",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "central",
+            "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          },
+          {
+            "value": "tapering",
+            "frequency": "sometimes"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "present",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "brittle",
+            "frequency": "always"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "hairy",
+            "frequency": "usually"
+          },
+          {
+            "value": "smooth",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "solid",
+            "frequency": "always"
+          }
+        ],
+        "gill_attachment": [
+          {
+            "value": "adnate",
+            "frequency": "usually"
+          },
+          {
+            "value": "decurrent",
+            "frequency": "usually"
+          }
+        ],
+        "gill_spacing": [
+          {
+            "value": "crowded",
+            "frequency": "always"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "depressed",
+            "frequency": "usually"
+          },
+          {
+            "value": "funnel",
+            "frequency": "usually"
+          },
+          {
+            "value": "convex",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "inrolled",
+            "frequency": "always"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "velvety",
+            "frequency": "usually"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "latex_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "latex_change": [
+          {
+            "value": "no",
+            "frequency": "usually"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "yes",
+            "frequency": "sometimes"
+          }
+        ],
+        "bruising_where": [
+          {
+            "value": "hymenophore",
+            "frequency": "usually"
+          }
+        ],
+        "bruising_colour": [
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "taste": [
+          {
+            "value": "acrid",
+            "frequency": "always"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "sometimes"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "usually"
+          },
+          {
+            "value": "single",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          60,
+          160
+        ],
+        "stipe_height_mm": [
+          20,
+          60
+        ]
+      },
+      "season": {
+        "months": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "lookalikes": [
+        {
+          "taxon": "lactifluus_hygrophoroides",
+          "discriminators": [
+            "gill_spacing",
+            "taste",
+            "cap_colour"
+          ],
+          "note": "Both are pale milkcaps of much the same size. The hygrophorus milkcap has gills you can count at arm's length and mild milk; this one has crowded gills and milk that burns the tongue."
+        }
+      ],
+      "sources": [
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "North American Mycological Association poisoning references",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "tylopilus_plumbeoviolaceus",
+      "scientificName": "Tylopilus plumbeoviolaceus",
+      "commonName": "violet-grey bolete",
+      "prevalence": "occasional",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "unknown",
+        "severity": "UNKNOWN",
+        "onset": "—",
+        "note": "Not eaten, on account of being inedibly bitter rather than toxic.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "Deep violet fading to grey-brown, over pores that start white and go pink. Bitter enough that a fragment on the tongue ends the question. The stem keeps its violet longer than the cap does.",
+      "characters": {
+        "fruitbody_type": [
+          {
+            "value": "bolete",
+            "frequency": "always"
+          }
+        ],
+        "substrate": [
+          {
+            "value": "soil",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "central",
+            "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          },
+          {
+            "value": "bulbous",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "smooth",
+            "frequency": "usually"
+          },
+          {
+            "value": "reticulate",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "solid",
+            "frequency": "always"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "pink",
+            "frequency": "usually"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "usually"
+          },
+          {
+            "value": "flat",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "incurved",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "dry",
+            "frequency": "always"
+          },
+          {
+            "value": "velvety",
+            "frequency": "usually"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "purple",
+            "frequency": "always"
+          },
+          {
+            "value": "grey",
+            "frequency": "usually"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
+            "frequency": "usually"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "taste": [
+          {
+            "value": "bitter",
+            "frequency": "always"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pink",
+            "frequency": "always"
+          }
+        ],
+        "spore_print_fine": [
+          {
+            "value": "pink_salmon",
+            "frequency": "always"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "single",
+            "frequency": "usually"
+          },
+          {
+            "value": "few",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          50,
+          140
+        ],
+        "stipe_height_mm": [
+          60,
+          130
+        ]
+      },
+      "season": {
+        "months": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "lookalikes": [
+        {
+          "taxon": "tylopilus_felleus",
+          "discriminators": [
+            "cap_colour",
+            "stipe_surface"
+          ],
+          "note": "The bitter bolete is plain brown with a coarse dark net on the stem. Both are bitter, which is the point: taste settles a bolete faster than anything else."
+        }
+      ],
+      "sources": [
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "gymnopilus_luteofolius",
+      "scientificName": "Gymnopilus luteofolius",
+      "commonName": "yellow-gilled rustgill",
+      "prevalence": "occasional",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "psilocybin",
+        "severity": "INTOXICATION",
+        "onset": "20 minutes to 2 hours",
+        "note": "Some collections are psychoactive and some are not, which is its own reason to leave it alone.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "Clustered on dead hardwood and woodchips, purple-red and scaly when young, fading to tawny. Yellow gills that rust with the spores, and a rust-brown print — bitter, and nothing about it is subtle.",
+      "characters": {
+        "fruitbody_type": [
+          {
+            "value": "gilled_stemmed",
+            "frequency": "always"
+          }
+        ],
+        "substrate": [
+          {
+            "value": "wood",
+            "frequency": "always"
+          }
+        ],
+        "substrate_wood": [
+          {
+            "value": "dead",
+            "frequency": "always"
+          },
+          {
+            "value": "broadleaf",
+            "frequency": "usually"
+          },
+          {
+            "value": "woodchip",
+            "frequency": "usually"
+          },
+          {
+            "value": "conifer",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "central",
+            "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "fibrous",
+            "frequency": "usually"
+          },
+          {
+            "value": "scaly",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "stuffed",
+            "frequency": "usually"
+          },
+          {
+            "value": "hollow",
+            "frequency": "sometimes"
+          }
+        ],
+        "ring": [
+          {
+            "value": "zone",
+            "frequency": "usually"
+          },
+          {
+            "value": "absent",
+            "frequency": "sometimes"
+          }
+        ],
+        "gill_attachment": [
+          {
+            "value": "adnate",
+            "frequency": "usually"
+          },
+          {
+            "value": "notched",
+            "frequency": "sometimes"
+          }
+        ],
+        "gill_spacing": [
+          {
+            "value": "close",
+            "frequency": "usually"
+          },
+          {
+            "value": "crowded",
+            "frequency": "sometimes"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "usually"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "usually"
+          },
+          {
+            "value": "flat",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "incurved",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "scaly",
+            "frequency": "always"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          },
+          {
+            "value": "silky",
+            "frequency": "usually"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "purple",
+            "frequency": "usually"
+          },
+          {
+            "value": "red",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "fibrous",
+            "frequency": "usually"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "yes",
+            "frequency": "sometimes"
+          }
+        ],
+        "bruising_where": [
+          {
+            "value": "flesh",
+            "frequency": "usually"
+          }
+        ],
+        "bruising_colour": [
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "taste": [
+          {
+            "value": "bitter",
+            "frequency": "always"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "disturbed",
+            "frequency": "usually"
+          },
+          {
+            "value": "garden",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "urban",
+            "frequency": "sometimes"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "brown",
+            "frequency": "always"
+          }
+        ],
+        "spore_print_fine": [
+          {
+            "value": "rust",
+            "frequency": "always"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "caespitose",
+            "frequency": "always"
+          },
+          {
+            "value": "troop",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          20,
+          90
+        ],
+        "stipe_height_mm": [
+          30,
+          100
+        ]
+      },
+      "season": {
+        "months": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      "lookalikes": [
+        {
+          "taxon": "galerina_marginata",
+          "discriminators": [
+            "hymenophore_colour",
+            "taste",
+            "size"
+          ],
+          "note": "Both cluster on dead wood and print rust-brown. Galerina is small, plain tawny and mild; this is larger, scaly, purple-tinged and bitter. Getting it wrong is fatal — take the print and look at the gill colour."
+        }
+      ],
+      "sources": [
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "North American Mycological Association poisoning references",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "cantharellus_minor",
+      "scientificName": "Cantharellus minor",
+      "commonName": "small chanterelle",
+      "prevalence": "common",
+      "sought": true,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "",
+        "source": "—"
+      },
+      "note": "A chanterelle the size of a fingernail, orange throughout, coming up in troops through moss and leaf litter. It is not a young big one — it is full-grown at two centimetres, and there will be dozens.",
+      "characters": {
+        "fruitbody_type": [
+          {
+            "value": "chanterelle_like",
+            "frequency": "always"
+          }
+        ],
+        "substrate": [
+          {
+            "value": "soil",
+            "frequency": "always"
+          },
+          {
+            "value": "moss",
+            "frequency": "usually"
+          },
+          {
+            "value": "litter",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "central",
+            "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "tapering",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "smooth",
+            "frequency": "always"
+          }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "hollow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "stuffed",
+            "frequency": "usually"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
+        ],
+        "gill_attachment": [
+          {
+            "value": "decurrent",
+            "frequency": "always"
+          }
+        ],
+        "gill_extras": [
+          {
+            "value": "forked",
+            "frequency": "usually"
+          },
+          {
+            "value": "veined",
+            "frequency": "usually"
+          }
+        ],
+        "gill_spacing": [
+          {
+            "value": "distant",
+            "frequency": "usually"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "orange",
+            "frequency": "always"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "flat",
+            "frequency": "usually"
+          },
+          {
+            "value": "depressed",
+            "frequency": "usually"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "wavy",
+            "frequency": "usually"
+          },
+          {
+            "value": "uplifted",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "smooth",
+            "frequency": "always"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "orange",
+            "frequency": "always"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "usually"
+          },
+          {
+            "value": "fibrous",
+            "frequency": "sometimes"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
+            "frequency": "usually"
+          }
+        ],
+        "odour": [
+          {
+            "value": "fruity",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "taste": [
+          {
+            "value": "mild",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "troop",
+            "frequency": "always"
+          },
+          {
+            "value": "few",
+            "frequency": "sometimes"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          5,
+          30
+        ],
+        "stipe_height_mm": [
+          10,
+          50
+        ]
+      },
+      "season": {
+        "months": [
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "lookalikes": [
+        {
+          "taxon": "hygrophoropsis_aurantiaca",
+          "discriminators": [
+            "gill_extras",
+            "gill_spacing",
+            "substrate"
+          ],
+          "note": "The false chanterelle has thin crowded gills that break away, and grows on wood or conifer litter. This has blunt ridges and comes out of moss and soil."
+        }
+      ],
+      "sources": [
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
     }

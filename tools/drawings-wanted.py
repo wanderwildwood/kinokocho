@@ -170,6 +170,24 @@ def main():
                 return False
         return True
 
+    def describe_line(taxon):
+        """The same characters, as a sentence rather than a column."""
+        bits = []
+        for cid in ["cap_shape", "cap_surface", "cap_margin", "cap_colour",
+                    "veil_remnants", "gill_attachment", "gill_spacing",
+                    "stipe_surface", "stipe_base", "ring", "growth_habit",
+                    "substrate"]:
+            states = taxon["characters"].get(cid)
+            if not states or not applicable(taxon, cid):
+                continue
+            shown = [value_label(cid, st["value"]).lower() for st in states
+                     if st["frequency"].lower() in ("always", "usually")]
+            if shown:
+                bits.append(f"{field(cid).lower()} {' or '.join(shown[:2])}")
+        sentence = "; ".join(bits)
+        note = (taxon.get("note") or "").strip()
+        return (f"It has {sentence}. {note}" if sentence else note)
+
     def describe(taxon, lines):
         """The characters an illustrator has to get right, in reading order."""
         for cid in ["fruitbody_type", "stipe_base", "ring", "gill_attachment",
@@ -180,7 +198,7 @@ def main():
             if not states or not applicable(taxon, cid):
                 continue
             shown = [value_label(cid, st["value"]) for st in states
-                     if st["frequency"] != "RARELY"]
+                     if st["frequency"].lower() != "rarely"]
             if shown:
                 lines.append(f"      {field(cid)}: {', '.join(shown)}")
 
@@ -265,6 +283,80 @@ def main():
         f.write("\n".join(lines) + "\n")
     print(f"{total} drawings -> {out_path}")
     print(f"  tier 1: {len(tier1)}   tier 2: {len(tier2)}   tier 3: {len(tier3)}")
+
+    write_prompts(out_path, tier1, tier2, tier3, describe_line)
+
+
+# The style, said in the terms an image generator actually responds to: what to leave
+# out, repeated, because these models add tone unless told four times not to.
+PREAMBLE = (
+    "Black and white line drawing. A single thin ink line of even weight, on a plain "
+    "white background. NO colour anywhere. NO grey. NO shading, stippling, hatching, "
+    "cross-hatching or tone of any kind. NO filled or solid black areas. NO background, "
+    "no scene, no ground, no border, no frame, no text, no lettering, no label, no "
+    "caption, no signature, no watermark. Nothing but clean contour lines, as if a "
+    "field-guide plate had been reduced to its outlines."
+)
+
+CLOSING = (
+    "Draw it slightly lopsided rather than symmetrical — a real specimen, not a diagram. "
+    "It must still read clearly when the picture is shrunk to 64 by 64 pixels, so use as "
+    "few lines as will carry the shape."
+)
+
+
+def write_prompts(brief_path, tier1, tier2, tier3, describe_line):
+    """
+    One prompt per drawing, ready to paste.
+
+    A single sheet of thirty-two came back with two species drawn twice and two labels
+    that were not species at all — "Amanita margeata", "Amanita bunnescens". Asking for
+    many at once is what produces both: the model fills the grid rather than working
+    through a list, and it writes captions from memory rather than from the brief.
+
+    So: one image per prompt, and no text inside the image. If the picture carries no
+    lettering it cannot carry a wrong name, and the file name says which is which.
+    """
+    out = os.path.splitext(brief_path)[0] + "-prompts.txt"
+    blocks = [
+        "MUSHROOM JOURNAL — ONE PROMPT PER DRAWING",
+        RULE,
+        "",
+        "Paste these one at a time. One image per prompt, never a sheet of many: a sheet",
+        "came back with two species drawn twice and two labels that were not species at",
+        "all. Save each result as the file name given above it.",
+        "",
+        "Nothing here asks for lettering, on purpose. A picture with no text in it cannot",
+        "have the wrong name written on it, and the file name carries that instead.",
+        "",
+        "The nine that can kill are worth checking against a photograph before they go in.",
+        "An image generator will give you a plausible mushroom rather than a particular",
+        "one, and plausible is not the standard for those.",
+        "",
+    ]
+    n = 0
+    for taxon in tier1 + [t[0] for t in tier2] + [t[1] for t in tier3]:
+        n += 1
+        traits = describe_line(taxon)
+        common = f" ({taxon['commonName']})" if taxon.get("commonName") else ""
+        blocks.append(THIN)
+        blocks.append(f"{n:02d}.  FILE: {taxon['id']}.png")
+        blocks.append(f"     {taxon['scientificName']}{common}")
+        blocks.append("")
+        blocks.append(wrap(PREAMBLE, "     "))
+        blocks.append("")
+        blocks.append(wrap(
+            f"The subject is a single {taxon['scientificName']}, drawn as a botanical "
+            f"field-guide illustration. {traits} Show it in three-quarter view from a "
+            f"little above, so that the top of the cap and the underside are both "
+            f"visible at once. Show the base of the stem, dug up and complete, not cut "
+            f"off.", "     "))
+        blocks.append("")
+        blocks.append(wrap(CLOSING, "     "))
+        blocks.append("")
+    with open(out, "w") as f:
+        f.write("\n".join(blocks) + "\n")
+    print(f"{n} prompts -> {out}")
 
 
 if __name__ == "__main__":

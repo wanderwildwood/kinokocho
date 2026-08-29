@@ -354,6 +354,26 @@ class KeyEngine(
                 ?.let { return it.first.id }
         }
 
+        /*
+         * The opening question is the one that unlocks the most others.
+         *
+         * Information gain cannot see this. It measures how well a character splits the
+         * candidates in front of it, and is blind to the fact that answering "what kind
+         * of fungus is it?" makes five further characters askable while "what is the cap
+         * surface like?" makes none. With a hundred taxa the cap surface started winning
+         * on gain alone, and the key opened by asking about a texture before it knew
+         * whether the thing had a cap.
+         *
+         * Only for the first question. After that there is a real candidate set and
+         * information is the better guide.
+         */
+        if (answers.values.isEmpty()) {
+            val unlocks = schema.dependencies.groupingBy { it.requiresCharacter }.eachCount()
+            askable.maxWithOrNull(
+                compareBy({ unlocks[it.first.id] ?: 0 }, { it.second })
+            )?.let { return it.first.id }
+        }
+
         return bestByGainRatio(askable, live)
     }
 

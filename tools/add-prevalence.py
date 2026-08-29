@@ -48,6 +48,10 @@ COMMON = {
     "coprinellus_micaceus", "amanita_brunnescens", "baorangia_bicolor",
     "marasmius_rotula", "clavulina_cristata", "chlorociboria_aeruginascens",
     "psathyrella_candolleana",
+    # Seventh batch: the two genera you cannot walk past in July.
+    "russula_compacta", "russula_variata", "russula_silvicola", "russula_mariae",
+    "lactarius_corrugis", "lactifluus_hygrophoroides", "lactarius_subvellereus",
+    "cantharellus_minor",
 }
 
 # Found regularly, but you go looking rather than tripping over it.
@@ -65,7 +69,7 @@ OCCASIONAL = {
     "sarcoscypha_dudleyi", "suillellus_subvelutipes", "suillus_americanus",
     "tricholoma_sejunctum",
     "strobilomyces_strobilaceus", "cortinarius_iodes", "ganoderma_tsugae",
-    "hericium_coralloides",
+    "hericium_coralloides", "tylopilus_plumbeoviolaceus", "gymnopilus_luteofolius",
 }
 
 # People go out to look for these. NOT a claim that any of them is safe to eat.
@@ -82,7 +86,8 @@ SOUGHT = {
     "marasmius_oreades", "morchella_americana", "morchella_angusticeps",
     "pleurotus_ostreatus", "russula_virescens", "trametes_versicolor",
     "coprinellus_micaceus", "strobilomyces_strobilaceus", "baorangia_bicolor",
-    "ganoderma_tsugae", "hericium_coralloides",
+    "ganoderma_tsugae", "hericium_coralloides", "russula_variata",
+    "lactarius_corrugis", "lactifluus_hygrophoroides", "cantharellus_minor",
 }
 
 

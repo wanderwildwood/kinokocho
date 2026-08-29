@@ -183,6 +183,13 @@ PAIRS = [
      "The indigo milkcap is blue throughout and bleeds blue latex. There is nothing else "
      "it can be confused with once it is cut."),
 
+    # A big white acrid milkcap against a big pale mild one.
+    ("lactarius_subvellereus", "lactifluus_hygrophoroides",
+     ["gill_spacing", "taste", "cap_colour"],
+     "Both are pale milkcaps of much the same size. The hygrophorus milkcap has gills "
+     "you can count at arm's length and mild milk; this one has crowded gills and milk "
+     "that burns the tongue."),
+
     # Chanterelle-adjacent, and the two morels.
     ("hydnum_repandum", "cantharellus_lateritius",
      ["fruitbody_type", "gill_attachment"],

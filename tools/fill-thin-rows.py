@@ -28,12 +28,12 @@ PACK = os.path.join(HERE, "..", "app", "src", "main", "assets", "packs",
                     "southern-appalachia-v1.json")
 
 
-def s(*values, freq="ALWAYS"):
+def s(*values, freq="always"):
     return [{"value": v, "frequency": freq} for v in values]
 
 
 def mixed(always=(), usually=(), sometimes=()):
-    return (s(*always) + s(*usually, freq="USUALLY") + s(*sometimes, freq="SOMETIMES"))
+    return (s(*always) + s(*usually, freq="usually") + s(*sometimes, freq="sometimes"))
 
 
 FILL = {
