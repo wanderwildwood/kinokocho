@@ -7,16 +7,30 @@
     <group android:scaleX="0.75" android:scaleY="0.75"
         android:translateX="18" android:translateY="18">
     <path
-        android:pathData="M10,30 Q26,16 40,28 Q48,20 56,28 Q70,16 86,30 Q72,44 62,58 Q54,70 52,88 L44,88 Q42,70 34,58 Q24,44 10,30 Z"
+        android:pathData="M13,41 Q15,25 33,22 Q48,15 63,22 Q82,26 84,42 Q68,55 48,56 Q26,55 13,41 Z"
         android:strokeColor="#FF000000"
-        android:strokeWidth="7.0"
+        android:strokeWidth="6.0"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
-        android:pathData="M36,46 Q40,64 44,84 M60,46 Q56,64 52,84"
+        android:pathData="M30,33 Q48,44 66,32"
         android:strokeColor="#FF000000"
-        android:strokeWidth="4.5"
+        android:strokeWidth="4.0"
+        android:fillColor="#00000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M40,55 Q39,72 42,88 L54,88 Q57,72 56,55"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="6.0"
+        android:fillColor="#00000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M31,53 Q30,62 31,70 M64,52 Q66,62 65,70"
+        android:strokeColor="#FF000000"
+        android:strokeWidth="3.5"
         android:fillColor="#00000000"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />

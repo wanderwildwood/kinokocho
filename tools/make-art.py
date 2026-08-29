@@ -574,11 +574,15 @@ def ring():
           path("M42,52 Q28,54 24,66 Q34,72 48,70 Q62,72 72,66 Q68,54 54,52"),
           path("M32,62 Q40,66 48,66 Q56,66 64,62", width=HAIR))
 
+    # Drawn at FINE and as a continuous band, not hairline ticks: at 64px the hairline
+    # version was indistinguishable from no ring at all, and a cortina remnant against
+    # a bare stem is the whole of the Cortinarius question.
     write(f"art_{c}_zone", "Cortinarius armillatus",
           "A cortina leaves no membrane, only a fibrous band where it broke.",
           cap, path(st),
-          path("M42,56 L34,55 M54,56 L62,55 M42,60 L36,60 M54,60 L60,60 "
-               "M42,52 L37,51 M54,52 L59,51", width=HAIR))
+          path("M30,52 L66,52 M30,62 L66,62", width=FINE),
+          path("M34,52 L32,62 M40,52 L38,62 M46,52 L44,62 M52,52 L50,62 "
+               "M58,52 L56,62 M64,52 L62,62", width=FINE))
 
     write(f"art_{c}_movable", "Amanita jacksonii",
           "A free collar that slides on the stem rather than gripping it.",
@@ -608,13 +612,16 @@ def stipe_presence():
           path(capped_cap(base=48, rise=22)), gill_blades(base=47, depth=8),
           path("M26,47 L26,86 M38,47 L38,86"), ground())
 
+    # The stem is the whole difference from absent_attached, so it is drawn as a real
+    # stubby stem standing clear of the wood, not two short marks. At 64px the marks
+    # vanished and the two states were one picture.
     write(f"art_{c}_lateral", "Panellus stipticus",
-          "A short stem at the very edge, against the wood.",
-          path("M84,14 L84,86", width=FINE),
-          path("M84,40 Q54,26 22,42 Q20,48 26,50 Q56,50 84,48 Z"),
-          path("M26,50 L28,58 M34,50 L36,60 M42,50 L44,60 M50,50 L52,59 "
-               "M58,50 L60,57", width=HAIR),
-          path("M70,50 L70,60 M80,49 L80,60"))
+          "A short stem at the very edge, holding the cap off the wood.",
+          path("M88,10 L88,86", width=FINE),
+          path("M66,34 Q40,20 12,36 Q10,42 16,44 Q42,44 66,44 Z"),
+          path("M18,44 L20,54 M26,44 L28,56 M34,44 L36,56 M42,44 L44,55 "
+               "M50,44 L52,53", width=HAIR),
+          path("M66,32 L88,28 L88,50 L66,46 Z", fill=True))
 
     write(f"art_{c}_absent_attached", "Pleurotus ostreatus",
           "Joined straight to the wood with no stem at all.",
@@ -1099,17 +1106,24 @@ def cap_surface():
           swatch(),
           path("M30,18 L26,78 M40,15 L38,82 M50,14 L50,83 M60,15 L62,82 M70,19 L74,76",
                width=FINE))
+    # The character is not "there are specks on it" — dry has those too — it is that a
+    # finger takes them off. So the drawing is the wipe: a clean streak through the
+    # bloom, which is what the reader actually does to test it.
     write(f"art_{c}_powdery", "Cystoderma amianthinum",
-          "A loose bloom that a finger wipes away.",
+          "A loose bloom that a finger wipes away, leaving a clean streak.",
           swatch(),
-          path("M30,32 L31,32 M40,28 L41,28 M52,30 L53,30 M62,34 L63,34 "
-               "M28,44 L29,44 M38,42 L39,42 M50,44 L51,44 M64,46 L65,46 "
-               "M32,58 L33,58 M44,56 L45,56 M56,58 L57,58 M38,70 L39,70 M52,68 L53,68",
-               width=4))
-    write(f"art_{c}_zoned", "Trametes versicolor", "Concentric bands of tone.",
+          path("M28,28 L29,28 M40,26 L41,26 M52,28 L53,28 M64,32 L65,32 "
+               "M26,40 L27,40 M38,38 L39,38 M62,44 L63,44 "
+               "M30,68 L31,68 M42,70 L43,70 M56,70 L57,70 M66,64 L67,64", width=4),
+          path("M24,54 Q48,48 72,56", width=9, cap="butt"),
+          path("M24,54 Q48,48 72,56", width=7, cap="butt", fill=False))
+    # Bands, not lines: silky is fine parallel fibres and at 64px a thin-lined zoned cap
+    # was the same picture. Alternate bands are filled so the eye reads tone, which is
+    # what zonation is.
+    write(f"art_{c}_zoned", "Trametes versicolor", "Concentric bands of alternating tone.",
           swatch(),
-          path("M22,30 Q48,24 74,30 M20,44 Q48,38 76,44 M20,58 Q48,52 76,58 "
-               "M24,70 Q48,64 72,70", width=FINE))
+          path("M21,34 Q48,28 75,34 Q48,40 21,46 Z", fill=True),
+          path("M20,56 Q48,50 76,56 Q48,62 20,68 Z", fill=True))
 
 
 def stipe_surface():
@@ -1138,11 +1152,16 @@ def stipe_surface():
           path("M38,22 L39,22 M50,20 L51,20 M58,26 L59,26 M40,36 L41,36 M52,34 L53,34 "
                "M60,42 L61,42 M38,50 L39,50 M50,48 L51,48 M58,58 L59,58 M42,64 L43,64 "
                "M54,68 L55,68 M38,76 L39,76", width=4))
-    write(f"art_{c}_powdery", "Cystoderma amianthinum", "A bloom that wipes off.",
+    # Same test as the cap: powder is the stuff a finger takes off. Punctate dots are
+    # part of the surface and stay, so the wipe is what separates the two pictures.
+    write(f"art_{c}_powdery", "Cystoderma amianthinum",
+          "A bloom that wipes off, leaving a clean streak.",
           band(),
           path("M37,20 L38,20 M45,26 L46,26 M53,22 L54,22 M59,30 L60,30 "
-               "M36,38 L37,38 M46,44 L47,44 M56,40 L57,40 M40,54 L41,54 M52,58 L53,58 "
-               "M60,52 L61,52 M38,70 L39,70 M50,74 L51,74 M58,68 L59,68", width=3))
+               "M36,38 L37,38 M46,42 L47,42 M58,38 L59,38 "
+               "M38,70 L39,70 M50,74 L51,74 M58,68 L59,68", width=3),
+          path("M33,54 Q48,50 63,56", width=10, cap="butt"),
+          path("M33,54 Q48,50 63,56", width=8, cap="butt", fill=False))
     write(f"art_{c}_hairy", "Panellus stipticus", "Distinct hairs standing off it.",
           band(),
           path("M32,22 L24,18 M32,36 L23,33 M32,50 L24,47 M32,64 L23,61 "
@@ -1152,9 +1171,12 @@ def stipe_surface():
           path("M38,20 Q46,16 54,22 M40,40 Q48,36 58,42 M38,60 Q46,56 56,62 "
                "M42,76 Q50,72 58,78", width=FINE),
           path("M54,30 Q58,28 60,32", width=HAIR))
-    write(f"art_{c}_grooved", "Cantharellus lateritius", "Ridged or grooved lengthways.",
-          band(),
-          path("M40,12 L40,84 M48,12 L48,84 M56,12 L56,84", width=FINE))
+    # A groove changes the silhouette and a fibre does not — that is the difference, and
+    # drawing both as vertical lines made them one picture at 64px. So the edges are
+    # fluted here and the channels are heavy.
+    write(f"art_{c}_grooved", "Cantharellus lateritius", "Ridged and furrowed lengthways.",
+          path("M32,12 Q28,30 32,48 Q28,66 32,84 M64,12 Q68,30 64,48 Q68,66 64,84"),
+          path("M42,12 L42,84 M54,12 L54,84", width=STROKE))
 
 
 def flesh_consistency():
@@ -1388,24 +1410,34 @@ def interface_icons():
 
 def launcher_icon():
     """
-    The launcher mark: a chanterelle, drawn heavier than the character art.
+    The launcher mark: a chanterelle, drawn from a chosen reference.
 
-    An adaptive icon is a 108x108 canvas of which only the middle 72x72 survives
-    whatever mask the launcher applies, and it is read at about 48dp. The character
-    drawings scaled down into that space came out spidery and splayed - recognisable
-    as line art, not recognisable as a mushroom. So this is the same subject drawn for
-    its size: a tighter vase, a heavier line, three ridges rather than five.
+    Three earlier attempts failed and all three failed the same way — a symmetric,
+    front-on silhouette that read as wings, a tulip or a pair of quote marks. The
+    reference he pointed at (a hand-drawn fly agaric, pictureboxblue) shows why: it is a
+    **three-quarter view**, tilted so the eye sees the top of the cap *and* into the
+    underside at once, with the gills as fine radiating hatching. That is what makes it
+    read as a mushroom in one look rather than as a shape.
+
+    So this is the same view for a chanterelle: looking slightly down into the funnel,
+    wavy rim, the blunt decurrent ridges running down the front, and one confident
+    outline. Outline only, per the reference — no solid fill.
     """
-    W = 7.0   # at 0.75 scale this lands near 5 units in the icon canvas
+    W = 6.0
     inner = "".join([
-        # The funnel, waisted rather than splayed, with a wavy margin.
-        # Wide flaring mouth, two shallow lobes rather than three deep ones, tapering
-        # to a narrow foot. Trumpet, not tulip: the lobes were reading as petals.
-        path("M10,30 Q26,16 40,28 Q48,20 56,28 Q70,16 86,30 "
-             "Q72,44 62,58 Q54,70 52,88 L44,88 Q42,70 34,58 Q24,44 10,30 Z",
-             width=W),
-        # Two ridges only. Three closed the gap and the middle read as a solid stem.
-        path("M36,46 Q40,64 44,84 M60,46 Q56,64 52,84", width=W - 2.5),
+        # The reference's geometry, not my idea of a chanterelle. Four attempts drew a
+        # symmetric V — a vase seen dead on — and every one read as wings or a crown.
+        # The fly agaric in the reference reads instantly because it is a cap *mass*
+        # seen from above and in front, with a stem beneath it. So: the same, with a
+        # chanterelle's wavy rim and its funnel showing.
+        path("M13,41 Q15,25 33,22 Q48,15 63,22 Q82,26 84,42 "
+             "Q68,55 48,56 Q26,55 13,41 Z", width=W),
+        # The funnel, seen into.
+        path("M30,33 Q48,44 66,32", width=W - 2.0),
+        # The stem below, one shape, narrowing.
+        path("M40,55 Q39,72 42,88 L54,88 Q57,72 56,55", width=W),
+        # Ridges running off the near rim onto the stem.
+        path("M31,53 Q30,62 31,70 M64,52 Q66,62 65,70", width=W - 2.5),
     ])
     body = (
         '    <group android:scaleX="0.75" android:scaleY="0.75"\n'
@@ -1419,7 +1451,7 @@ def launcher_icon():
                  .replace('android:viewportHeight="96"', 'android:viewportHeight="108"')
     with open(os.path.join(OUT, "ic_launcher_foreground.xml"), "w") as f:
         f.write(head + body + FOOTER)
-    print("  launcher foreground: chanterelle, drawn for icon size")
+    print("  launcher foreground: chanterelle, three-quarter, from the owner's reference")
 
 
 def emit_kotlin():
