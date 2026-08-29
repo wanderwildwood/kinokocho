@@ -1,5 +1,6 @@
 package com.wanderwildwood.kinokocho.ui
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -314,9 +315,21 @@ fun EntryScreen(
                     Text("Answer more")
                 }
             }
+            // The whole point of the record: handing it to someone who can look at it.
+            val context = LocalContext.current
+            OutlinedButtonMMD(
+                onClick = {
+                    val intent = ShareFind.intent(context, vm.schema, vm.engine, draft)
+                    context.startActivity(
+                        Intent.createChooser(intent, "Ask someone about this find")
+                    )
+                },
+                modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+            ) { Text("Ask someone about this") }
+
             OutlinedButtonMMD(
                 onClick = onClose,
-                modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 20.dp),
             ) { Text("Close") }
         }
     }
