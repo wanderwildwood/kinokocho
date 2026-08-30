@@ -24,10 +24,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.delay
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -329,6 +331,15 @@ fun EntryScreen(
             item {
                 Section("Photographs")
                 var arming by remember(draft.uuid) { mutableStateOf<String?>(null) }
+
+                // A thumbnail armed by a stray tap used to stay armed for as long as the
+                // screen was open, so the next tap anywhere near it deleted a photograph.
+                // Every other question in these apps withdraws itself; this one did not.
+                LaunchedEffect(arming) {
+                    if (arming == null) return@LaunchedEffect
+                    delay(4000)
+                    arming = null
+                }
                 val context = LocalContext.current
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     items3(draft.photos.size) { i ->
@@ -367,7 +378,7 @@ fun EntryScreen(
                                 Text("(missing)", style = MaterialTheme.typography.bodySmall)
                             }
                             Text(
-                                if (armed) "Remove it?"
+                                if (armed) "Remove this"
                                 else PhotoSlot.entries.firstOrNull { it.id == photo.slot }
                                     ?.label ?: photo.slot,
                                 style = MaterialTheme.typography.bodySmall,
