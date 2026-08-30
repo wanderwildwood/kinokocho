@@ -115,6 +115,36 @@ class KeyEngineTest {
     }
 
     @Test
+    fun `every discriminator actually tells the two apart`() {
+        // Sixty-three of eighty-three confusions named at least one character that does
+        // not separate the pair, and two places use those names: the candidate page
+        // prints them as advice, and the key pulls them forward ahead of their
+        // information gain. The worst were not merely useless — Tricholoma sejunctum
+        // against the death cap named the spore print, and both print pale, so a reader
+        // told to take a print takes one, learns nothing, and believes they have ruled
+        // something out.
+        fun definite(taxon: Taxon, characterId: String) =
+            taxon.characters[characterId].orEmpty()
+                .filter { it.frequency == Frequency.ALWAYS || it.frequency == Frequency.USUALLY }
+                .map { it.value }.toSet()
+
+        val useless = mutableListOf<String>()
+        pack.taxa.forEach { taxon ->
+            taxon.lookalikes.forEach { look ->
+                val other = pack.taxon(look.taxon) ?: return@forEach
+                look.discriminators.forEach { characterId ->
+                    val mine = definite(taxon, characterId)
+                    val theirs = definite(other, characterId)
+                    if (mine.isEmpty() || theirs.isEmpty() || (mine intersect theirs).isNotEmpty()) {
+                        useless += "${taxon.id} -> ${look.taxon}: $characterId"
+                    }
+                }
+            }
+        }
+        assertTrue("these settle nothing: $useless", useless.isEmpty())
+    }
+
+    @Test
     fun `every discriminator names a character the schema has`() {
         // A typo here is silent: the key looks the character up, gets nothing, and the
         // settling boost quietly does not happen for that pair.

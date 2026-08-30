@@ -238,7 +238,7 @@ fun EntryScreen(
                     if (note.discriminators.isNotEmpty()) {
                         Text(
                             "Would settle it: " + note.discriminators
-                                .mapNotNull { vm.schema.character(it)?.noun?.lowercase() }
+                                .mapNotNull { vm.schema.character(it)?.inFull() }
                                 .distinct()
                                 .take(4)
                                 .joinToString(", "),

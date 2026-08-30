@@ -229,7 +229,8 @@ fun CandidateScreen(
                     if (look.discriminators.isNotEmpty()) {
                         Text(
                             "Tells them apart: " + look.discriminators
-                                .mapNotNull { vm.schema.character(it)?.noun?.lowercase() }
+                                .mapNotNull { vm.schema.character(it)?.inFull() }
+                                .distinct()
                                 .joinToString(", "),
                             style = MaterialTheme.typography.bodySmall,
                             fontWeight = FontWeight.Bold,

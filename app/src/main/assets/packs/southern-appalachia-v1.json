@@ -215,7 +215,7 @@
             "spore_print",
             "hymenophore_colour",
             "stipe_base",
-            "ring"
+            "odour"
           ],
           "note": "Agaricus has a brown spore print and gills that darken; this stays white and has a sac at the base."
         }
@@ -737,8 +737,6 @@
         {
           "taxon": "amanita_muscaria_guessowii",
           "discriminators": [
-            "cap_colour",
-            "veil_remnants",
             "stipe_base"
           ],
           "note": "Both carry yellow warts. Flavoconia is smaller with a yellow-orange cap and a ragged basal collar; the fly agaric has a bulb ringed with concentric scales."
@@ -960,7 +958,8 @@
           "discriminators": [
             "spore_print",
             "hymenophore_colour",
-            "stipe_base"
+            "ring",
+            "cap_surface"
           ],
           "note": "Armillaria's print is WHITE and it has black rhizomorphs. This one's print is rusty brown. A spore print settles it and nothing in the field does as reliably."
         }
@@ -1164,9 +1163,10 @@
         {
           "taxon": "pholiota_squarrosa",
           "discriminators": [
-            "cap_surface",
             "spore_print",
-            "hymenophore_colour"
+            "hymenophore_colour",
+            "stipe_base",
+            "ring"
           ],
           "note": "The shaggy scalycap is covered in coarse recurved scales on both cap and stem, and drops a brown print. The honey mushroom drops white."
         },
@@ -1175,7 +1175,8 @@
           "discriminators": [
             "ring",
             "spore_print",
-            "stipe_surface"
+            "substrate",
+            "stipe_base"
           ],
           "note": "The red-banded webcap has rusty bands around the stem rather than a membranous ring, a cobwebby veil when young, and a rust-brown print."
         }
@@ -1374,8 +1375,9 @@
           "taxon": "cantharellus_lateritius",
           "discriminators": [
             "flesh_colour",
-            "gill_attachment",
-            "growth_habit"
+            "growth_habit",
+            "fruitbody_type",
+            "substrate"
           ],
           "note": "Cut it through and look at the flesh at once: a jack-o'-lantern is orange all the way in, a chanterelle is white or pale. Arguing about whether the ridges count as gills settles nothing."
         }
@@ -1595,10 +1597,10 @@
         {
           "taxon": "hygrophoropsis_aurantiaca",
           "discriminators": [
-            "gill_extras",
-            "gill_spacing",
             "substrate",
-            "flesh_consistency"
+            "fruitbody_type",
+            "bruising",
+            "cap_surface"
           ],
           "note": "The false chanterelle has true gills: thin, crowded, repeatedly forked, and they break away from the flesh if you push them. A chanterelle has blunt ridges that will not come off, and it comes up from soil rather than from wood or conifer litter."
         }
@@ -1787,16 +1789,17 @@
             "gill_extras",
             "gill_spacing",
             "substrate",
-            "flesh_consistency"
+            "fruitbody_type"
           ],
           "note": "Thin crowded gills that break away, on wood or conifer litter, against blunt ridges that will not come off, from soil."
         },
         {
           "taxon": "omphalotus_illudens",
           "discriminators": [
-            "gill_attachment",
-            "growth_habit",
-            "substrate"
+            "substrate",
+            "fruitbody_type",
+            "flesh_colour",
+            "gill_spacing"
           ],
           "note": "Clustered on wood with true crowded gills, against a few together from soil with blunt ridges."
         }
@@ -2163,7 +2166,8 @@
           "discriminators": [
             "spore_print",
             "substrate",
-            "bruising_colour"
+            "ring",
+            "spore_print_fine"
           ],
           "note": "The spore print is the whole answer: DULL GREYISH GREEN here, WHITE in the parasols. Gills only turn green with age, so a young one gives nothing away."
         }
@@ -2572,7 +2576,7 @@
           "taxon": "morchella_americana",
           "discriminators": [
             "stipe_flesh",
-            "cap_surface"
+            "cap_colour"
           ],
           "note": "A true morel is one hollow space from top to bottom and its head is pitted with ridges. This is chambered inside and folded like a brain."
         }
@@ -2758,9 +2762,9 @@
         {
           "taxon": "lycoperdon_perlatum",
           "discriminators": [
-            "flesh_colour",
-            "flesh_consistency",
-            "cap_surface"
+            "bruising",
+            "odour",
+            "cap_colour"
           ],
           "note": "Cut it in half. The inside here is HARD and purple-black to purple-grey even when young; an edible puffball is pure white and soft. The rind is 1-3mm thick and tough, not paper thin."
         }
@@ -2950,9 +2954,8 @@
         {
           "taxon": "amanita_bisporigera",
           "discriminators": [
-            "flesh_colour",
-            "flesh_consistency",
-            "stipe_base"
+            "fruitbody_type",
+            "stipe_presence"
           ],
           "note": "An Amanita in its egg stage is a white ball in the soil. Cut every puffball from top to bottom before anything else: a puffball is uniform white paste throughout, an Amanita egg shows the outline of a cap, gills and stem inside."
         }
@@ -3633,16 +3636,14 @@
           "taxon": "meripilus_sumstinei",
           "discriminators": [
             "bruising",
-            "bruising_colour"
+            "cap_colour"
           ],
           "note": "Meripilus bruises DARK BROWN TO BLACK and peaks in July, three months earlier. Grifola does not bruise at all."
         },
         {
           "taxon": "bondarzewia_berkeleyi",
           "discriminators": [
-            "size",
-            "flesh_consistency",
-            "hymenophore_colour"
+            "cap_colour"
           ],
           "note": "Berkeley's polypore is much larger, with thick, tough, cream-coloured fronds and coarse pores. Hen of the woods is a mass of small grey-brown spoon-shaped caps."
         }
@@ -4008,7 +4009,7 @@
           "taxon": "gyromitra_caroliniana",
           "discriminators": [
             "stipe_flesh",
-            "cap_surface"
+            "cap_colour"
           ],
           "note": "A false morel is chambered or cottony inside, not one hollow space, and its head is folded like a brain rather than pitted with ridges."
         }
@@ -4169,16 +4170,14 @@
           "taxon": "gyromitra_caroliniana",
           "discriminators": [
             "stipe_flesh",
-            "cap_surface"
+            "cap_colour"
           ],
           "note": "Chambered inside rather than hollow, and folded rather than pitted."
         },
         {
           "taxon": "morchella_americana",
           "discriminators": [
-            "cap_colour",
-            "habitat",
-            "associated_tree"
+            "cap_colour"
           ],
           "note": "Both are hollow from tip to base. The black morel has dark ridges that darken further with age and comes earlier, often in mixed or burnt woodland; the yellow morel is paler with ridges no darker than its pits."
         }
@@ -4437,7 +4436,9 @@
           "taxon": "lactarius_deliciosus",
           "discriminators": [
             "latex_colour",
-            "cap_colour"
+            "cap_colour",
+            "flesh_colour",
+            "associated_tree"
           ],
           "note": "The indigo milkcap is blue throughout and bleeds blue latex. There is nothing else it can be confused with once it is cut."
         }
@@ -4919,9 +4920,10 @@
         {
           "taxon": "amanita_phalloides",
           "discriminators": [
-            "stipe_base",
             "ring",
-            "flesh_consistency"
+            "flesh_consistency",
+            "gill_attachment",
+            "cap_surface"
           ],
           "note": "Any green-capped, white-gilled mushroom deserves the base dug out. Russula flesh is brittle and snaps like chalk, and there is no ring and no sac."
         }
@@ -5132,9 +5134,10 @@
         {
           "taxon": "pleurotus_ostreatus",
           "discriminators": [
-            "substrate_wood",
             "associated_tree",
-            "flesh_consistency"
+            "gill_attachment",
+            "odour",
+            "gill_spacing"
           ],
           "note": "An oyster mushroom is on broadleaf wood and is thick and fleshy. This is on conifer, and it is thin. If the wood is not certain, do not resolve it in the field."
         }
@@ -5378,19 +5381,20 @@
         {
           "taxon": "pleurocybella_porrigens",
           "discriminators": [
-            "substrate_wood",
             "associated_tree",
-            "flesh_consistency"
+            "gill_attachment",
+            "odour",
+            "gill_spacing"
           ],
           "note": "Angel wings is on conifer and is thin and pure white."
         },
         {
           "taxon": "panellus_stipticus",
           "discriminators": [
-            "size",
-            "taste",
-            "gill_spacing",
-            "stipe_presence"
+            "flesh_consistency",
+            "flesh_colour",
+            "odour",
+            "hymenophore_colour"
           ],
           "note": "The bitter oyster is small — thumbnail to a few centimetres — with a tough, cinnamon cap and a fiercely bitter taste. An oyster mushroom is broad, pale and mild."
         },
@@ -5398,18 +5402,19 @@
           "taxon": "lentinellus_ursinus",
           "discriminators": [
             "gill_edge",
-            "taste",
-            "cap_surface"
+            "gill_attachment",
+            "flesh_consistency",
+            "flesh_colour"
           ],
           "note": "Bear lentinellus has ragged, saw-toothed gill edges and an acrid taste; the cap is hairy toward the base. An oyster's gill edges are even."
         },
         {
           "taxon": "omphalotus_illudens",
           "discriminators": [
-            "growth_habit",
-            "gill_attachment",
             "cap_colour",
-            "stipe_presence"
+            "stipe_presence",
+            "flesh_colour",
+            "hymenophore_colour"
           ],
           "note": "The jack-o'-lantern is orange throughout and grows in dense clusters with a definite stem, its gills running down it. An oyster is pale and grows shelved off the wood with little or no stem."
         }
@@ -6246,7 +6251,9 @@
           "taxon": "cantharellus_lateritius",
           "discriminators": [
             "fruitbody_type",
-            "gill_attachment"
+            "flesh_consistency",
+            "odour",
+            "hymenophore_colour"
           ],
           "note": "Look underneath: the hedgehog has soft spines that rub off, the chanterelle has blunt ridges running down the stem."
         }
@@ -7298,9 +7305,7 @@
         {
           "taxon": "hypoxylon_fragiforme",
           "discriminators": [
-            "substrate_wood",
-            "size",
-            "flesh_consistency"
+            "growth_habit"
           ],
           "note": "Cut it: carbon balls are ringed inside in concentric silvery bands. Beech woodwart is smaller, pinkish when young, and on beech."
         }
@@ -7872,7 +7877,7 @@
             "spore_print",
             "hymenophore_colour",
             "stipe_base",
-            "ring"
+            "odour"
           ],
           "note": "A destroying angel keeps white gills at every age, drops a white print, and sits in a membranous sac. If the base was not dug up, that question is not answered."
         }
@@ -8136,7 +8141,8 @@
           "discriminators": [
             "stipe_base",
             "cap_colour",
-            "veil_remnants"
+            "cap_surface",
+            "associated_tree"
           ],
           "note": "A destroying angel is white throughout and stands in a membranous sac. This is coloured and its bulb wears rings of scales."
         }
@@ -8378,7 +8384,9 @@
           "taxon": "amanita_parcivolvata",
           "discriminators": [
             "ring",
-            "stipe_base"
+            "cap_surface",
+            "gill_spacing",
+            "hymenophore_colour"
           ],
           "note": "Amanita parcivolvata has no ring at all and no sac — only loose volval material scattered at the base."
         }
@@ -8577,7 +8585,8 @@
           "discriminators": [
             "odour",
             "cap_colour",
-            "stipe_base"
+            "stipe_base",
+            "veil_remnants"
           ],
           "note": "The false death cap smells strongly of raw potato and has a rimmed round bulb. The death cap has a sac-like volva and no potato smell. Do not settle this on colour."
         }
@@ -8803,7 +8812,8 @@
           "discriminators": [
             "stipe_base",
             "ring",
-            "spore_print"
+            "gill_attachment",
+            "odour"
           ],
           "note": "Both can be greenish with white gills. The death cap has a sac at the base and a skirt on the stem; the deceiving knight has neither. Dig the base out."
         }
@@ -9303,7 +9313,8 @@
           "discriminators": [
             "spore_print",
             "ring",
-            "stipe_surface"
+            "hymenophore_colour",
+            "cap_colour"
           ],
           "note": "Galerina has a ring or a ring zone and a rust-brown print. The common bonnet has neither ring nor coloured print. Getting this one wrong is fatal, so take the print before deciding."
         }
@@ -9556,8 +9567,8 @@
           "discriminators": [
             "spore_print",
             "odour",
-            "cap_shape",
-            "cap_surface"
+            "stipe_surface",
+            "gill_spacing"
           ],
           "note": "Fibrecaps have a radially split, silky-fibrous cap, an umbo, a dull earthy or spermatic smell, and a dull brown print. The fairy ring champignon is smooth, smells faintly of almonds and prints white. Fibrecaps are muscarine poisonings."
         }
@@ -10491,7 +10502,8 @@
           "discriminators": [
             "spore_print",
             "hymenophore_colour",
-            "ring"
+            "ring",
+            "substrate"
           ],
           "note": "Armillaria drops a white print and has a ring; this drops pink and has none."
         }
@@ -11201,8 +11213,8 @@
           "discriminators": [
             "cap_margin",
             "bruising",
-            "bruising_colour",
-            "spore_print"
+            "spore_print",
+            "cap_surface"
           ],
           "note": "The brown roll-rim has a margin rolled tightly under, gills that bruise rust-brown to the touch and lift away from the cap, and a brown print. The common funnel does none of that."
         }
@@ -11571,7 +11583,9 @@
           "taxon": "tylopilus_felleus",
           "discriminators": [
             "taste",
-            "hymenophore_colour"
+            "hymenophore_colour",
+            "spore_print",
+            "odour"
           ],
           "note": "The bitter bolete has a dark coarse net and pores that age pink, and one touch on the tongue settles it."
         },
@@ -11579,9 +11593,9 @@
           "taxon": "suillellus_subvelutipes",
           "discriminators": [
             "bruising",
-            "bruising_colour",
             "hymenophore_colour",
-            "bruising_speed"
+            "stipe_base",
+            "cap_surface"
           ],
           "note": "The red-mouth bolete has red pore mouths and turns blue-black almost the instant it is cut. Porcini has whitish to olive pores and does not stain blue."
         },
@@ -11590,8 +11604,8 @@
           "discriminators": [
             "cap_surface",
             "stipe_surface",
-            "size",
-            "bruising"
+            "bruising",
+            "stipe_base"
           ],
           "note": "The red cracking bolete is small, its cap cracks to show red flesh in the fissures, and it bruises blue. Porcini is heavy, uncracked and unstaining, with a netted stem."
         }
@@ -11865,8 +11879,9 @@
           "taxon": "lactifluus_volemus",
           "discriminators": [
             "latex_colour",
-            "latex_change",
-            "odour"
+            "odour",
+            "gill_attachment",
+            "cap_surface"
           ],
           "note": "Saffron milkcap bleeds carrot-orange latex that greens where it dries. The weeping milkcap bleeds copious white latex, stains brown, and smells strongly of fish."
         }
@@ -12094,9 +12109,9 @@
           "taxon": "boletus_edulis",
           "discriminators": [
             "cap_surface",
-            "associated_tree",
-            "ring",
-            "size"
+            "stipe_base",
+            "bruising",
+            "flesh_colour"
           ],
           "note": "Chicken-fat suillus is small, slimy, yellow and tied to white pine, often with a ring zone. Porcini is dry, brown and heavy."
         }
@@ -13433,7 +13448,8 @@
           "discriminators": [
             "spore_print",
             "ring",
-            "substrate"
+            "substrate",
+            "flesh_colour"
           ],
           "note": "Both are small, tan and on or near wood. Galerina has a ring zone and a rust-brown print; russet toughshank has no ring and a white one."
         }
@@ -14023,7 +14039,10 @@
         {
           "taxon": "artomyces_pyxidatus",
           "discriminators": [
-            "fruitbody_type"
+            "bruising",
+            "flesh_consistency",
+            "growth_habit",
+            "taste"
           ],
           "note": "Crown-tipped coral ends every branch in a ring of points; these branches end blunt."
         }
@@ -14226,7 +14245,7 @@
         {
           "taxon": "trametes_versicolor",
           "discriminators": [
-            "cap_surface"
+            "cap_margin"
           ],
           "note": "Turkey tail is velvety and banded in colour; this is coarsely hairy and mostly grey."
         },
@@ -14234,7 +14253,8 @@
           "taxon": "stereum_ostrea",
           "discriminators": [
             "fruitbody_type",
-            "hymenophore_colour"
+            "cap_margin",
+            "cap_colour"
           ],
           "note": "Look underneath. Stereum has a smooth underside with no pores at all."
         }
@@ -15538,7 +15558,8 @@
         {
           "taxon": "amanita_bisporigera",
           "discriminators": [
-            "cap_colour"
+            "cap_colour",
+            "stipe_surface"
           ],
           "note": "The destroying angel is pure white and is the one actually found here. This is olive to green."
         }
@@ -15807,9 +15828,9 @@
           "taxon": "amanita_multisquamosa",
           "discriminators": [
             "bruising",
-            "bruising_colour",
             "stipe_base",
-            "cap_colour"
+            "cap_colour",
+            "cap_margin"
           ],
           "note": "The blusher stains dull wine-red where it is bruised or eaten by slugs, and the flesh reddens on cutting. The panther group does not redden and is dangerously more toxic."
         }
@@ -16042,7 +16063,9 @@
           "taxon": "amanita_bisporigera",
           "discriminators": [
             "ring",
-            "cap_margin"
+            "cap_margin",
+            "stipe_surface",
+            "cap_colour"
           ],
           "note": "A destroying angel has a ring and an unlined cap edge. This has a lined edge and no ring. Both stand in a sac, so the sac decides nothing on its own."
         }
@@ -16276,18 +16299,19 @@
           "taxon": "omphalotus_illudens",
           "discriminators": [
             "flesh_colour",
-            "gill_attachment",
-            "growth_habit"
+            "growth_habit",
+            "fruitbody_type",
+            "substrate"
           ],
           "note": "Cut it: a jack-o'-lantern is orange all the way through and grows in fused clumps on wood."
         },
         {
           "taxon": "hygrophoropsis_aurantiaca",
           "discriminators": [
-            "gill_extras",
             "gill_spacing",
-            "substrate",
-            "flesh_consistency"
+            "fruitbody_type",
+            "flesh_colour",
+            "associated_tree"
           ],
           "note": "Thin crowded gills that break away, on wood or conifer litter, against blunt ridges that will not come off, from soil."
         }
@@ -16689,9 +16713,9 @@
         {
           "taxon": "tremella_mesenterica",
           "discriminators": [
-            "fruitbody_type",
-            "cap_shape",
-            "cap_colour"
+            "cap_colour",
+            "growth_habit",
+            "habitat"
           ],
           "note": "Witch's butter is a bright yellow, folded, brain-like blob. Wood ear is brown, ear-shaped and thinner, with a distinct upper and lower surface."
         }
@@ -17140,7 +17164,8 @@
           "discriminators": [
             "spore_print",
             "ring",
-            "hymenophore_colour"
+            "hymenophore_colour",
+            "gill_attachment"
           ],
           "note": "Galerina drops a rusty brown print and has a ring zone. This drops white and has no ring at all. A print settles it and nothing in the field does."
         }
@@ -17387,9 +17412,10 @@
         {
           "taxon": "armillaria_mellea",
           "discriminators": [
-            "taste",
             "hymenophore_colour",
-            "spore_print"
+            "spore_print",
+            "stipe_base",
+            "ring"
           ],
           "note": "A honey mushroom is mild with white gills and a white print. This is bitter, the gills go green, and the print is dark."
         }
@@ -17666,9 +17692,9 @@
         {
           "taxon": "agaricus_campestris",
           "discriminators": [
-            "bruising_colour",
-            "bruising_where",
-            "odour"
+            "odour",
+            "stipe_base",
+            "bruising"
           ],
           "note": "Scratch the very base of the stem. A field mushroom does not go chrome yellow in seconds, and does not smell of ink."
         }
@@ -18150,7 +18176,9 @@
           "taxon": "cortinarius_alboviolaceus",
           "discriminators": [
             "spore_print",
-            "ring"
+            "ring",
+            "cap_surface",
+            "flesh_colour"
           ],
           "note": "A violet Cortinarius drops a rusty brown print and has a cortina band. This drops pale pink and has neither."
         }
@@ -18553,18 +18581,20 @@
         {
           "taxon": "scleroderma_citrinum",
           "discriminators": [
-            "flesh_colour",
-            "flesh_consistency",
-            "cap_surface"
+            "cap_surface",
+            "odour",
+            "cap_colour",
+            "bruising_where"
           ],
           "note": "An earthball is hard, thick-skinned and black-purple inside almost from the start. Cut every puffball open."
         },
         {
           "taxon": "amanita_bisporigera",
           "discriminators": [
-            "flesh_colour",
-            "flesh_consistency",
-            "stipe_base"
+            "fruitbody_type",
+            "spore_print",
+            "stipe_presence",
+            "ring"
           ],
           "note": "Cut it in half from top to bottom. Uniform white throughout is a puffball; the silhouette of a mushroom inside it is a deadly Amanita that has not opened yet."
         }
@@ -18747,8 +18777,9 @@
         {
           "taxon": "daldinia_childiae",
           "discriminators": [
-            "cap_shape",
-            "flesh_colour"
+            "fruitbody_type",
+            "stipe_presence",
+            "cap_surface"
           ],
           "note": "Carbon balls are round and ringed inside in concentric bands. These are upright clubs, white inside."
         }
@@ -18977,8 +19008,10 @@
         {
           "taxon": "panellus_stipticus",
           "discriminators": [
-            "gill_edge",
-            "cap_surface"
+            "cap_margin",
+            "stipe_presence",
+            "gill_attachment",
+            "flesh_colour"
           ],
           "note": "The bitter oyster has ordinary even gill edges and a smoother cap. Split gill is hairy and every edge is split in two."
         }
@@ -19187,8 +19220,7 @@
         {
           "taxon": "trametes_versicolor",
           "discriminators": [
-            "hymenophore_colour",
-            "fruitbody_type"
+            "hymenophore_colour"
           ],
           "note": "Turkey tail keeps fine round white pores. This one is violet underneath when fresh and tears into teeth."
         }
@@ -19452,9 +19484,10 @@
         {
           "taxon": "coprinus_comatus",
           "discriminators": [
-            "size",
-            "cap_shape",
-            "growth_habit"
+            "substrate",
+            "bruising",
+            "gill_attachment",
+            "cap_surface"
           ],
           "note": "Shaggy mane is much larger, cylindrical and shaggy, and stands alone in grass rather than clustered on wood."
         }
@@ -19714,7 +19747,8 @@
           "discriminators": [
             "stipe_base",
             "bruising",
-            "cap_colour"
+            "cap_colour",
+            "cap_surface"
           ],
           "note": "A destroying angel is white throughout, does not stain, and stands in a loose sac. This has a cleft bulb with no free rim, and browns where it is handled."
         },
@@ -19723,7 +19757,8 @@
           "discriminators": [
             "odour",
             "bruising",
-            "cap_colour"
+            "cap_colour",
+            "cap_surface"
           ],
           "note": "The false death cap smells of raw potato and does not brown; its bulb is round rather than cleft."
         }
@@ -20233,7 +20268,8 @@
           "discriminators": [
             "hymenophore_colour",
             "bruising_speed",
-            "stipe_surface"
+            "stipe_surface",
+            "cap_colour"
           ],
           "note": "The red-mouth bolete has red pore mouths and goes blue-black the instant it is cut. This one has yellow pores and blues slowly."
         }
@@ -20477,7 +20513,8 @@
           "discriminators": [
             "spore_print",
             "ring",
-            "cap_surface"
+            "gill_attachment",
+            "flesh_colour"
           ],
           "note": "A blewit prints pale pink and has no veil at all. Any purple mushroom printing rust-brown is a webcap, and webcaps are left alone."
         }
@@ -20702,9 +20739,10 @@
         {
           "taxon": "marasmius_oreades",
           "discriminators": [
-            "size",
             "substrate",
-            "gill_attachment"
+            "gill_attachment",
+            "flesh_consistency",
+            "hymenophore_colour"
           ],
           "note": "The fairy ring champignon is far bigger, grows in grass, and its gills reach the stem. This is a few millimetres across on a twig."
         }
@@ -20871,9 +20909,10 @@
         {
           "taxon": "ramaria_stricta",
           "discriminators": [
-            "cap_colour",
             "substrate",
-            "taste"
+            "taste",
+            "bruising",
+            "stipe_presence"
           ],
           "note": "Upright coral is tan to ochre, grows straight out of wood, and tastes bitter. This is white, on soil, and crested at the tips."
         }
@@ -21093,9 +21132,10 @@
         {
           "taxon": "ganoderma_applanatum",
           "discriminators": [
-            "cap_surface",
             "cap_colour",
-            "associated_tree"
+            "associated_tree",
+            "stipe_presence",
+            "flesh_consistency"
           ],
           "note": "The artist's conk is dull grey-brown and unvarnished, on hardwood, and its white underside bruises brown to a fingernail. This is lacquered red, on hemlock."
         }
@@ -21267,11 +21307,7 @@
       "lookalikes": [
         {
           "taxon": "hericium_erinaceus",
-          "discriminators": [
-            "fruitbody_type",
-            "growth_habit",
-            "size"
-          ],
+          "discriminators": [],
           "note": "Lion's mane is one unbranched cushion hung with long spines. This is a branched framework with short teeth in rows."
         }
       ],
@@ -21717,7 +21753,8 @@
           "discriminators": [
             "spore_print_fine",
             "ring",
-            "flesh_consistency"
+            "cap_margin",
+            "spore_print"
           ],
           "note": "Galerina prints rust-brown and has a ring; this prints purple-brown and has only veil fragments at the cap edge. Take the print. The mistake is fatal."
         }
@@ -21993,8 +22030,9 @@
           "taxon": "russula_virescens",
           "discriminators": [
             "cap_colour",
-            "cap_surface",
-            "bruising"
+            "bruising",
+            "gill_attachment",
+            "odour"
           ],
           "note": "The green-cracking russula is green and cracked into patches, and it does not brown where it is handled."
         }
@@ -22255,8 +22293,8 @@
         {
           "taxon": "russula_virescens",
           "discriminators": [
-            "gill_extras",
-            "cap_surface"
+            "gill_attachment",
+            "cap_colour_pattern"
           ],
           "note": "The green-cracking russula does not fork its gills and its cap breaks into distinct patches."
         }
@@ -22494,7 +22532,8 @@
           "discriminators": [
             "taste",
             "cap_surface",
-            "stipe_surface"
+            "stipe_surface",
+            "gill_attachment"
           ],
           "note": "Both are red. Mariae is velvety and dry with a flushed stem and a mild taste; this one is sticky, white-stemmed and violently acrid."
         }
@@ -23011,8 +23050,9 @@
         {
           "taxon": "lactifluus_volemus",
           "discriminators": [
-            "cap_surface",
-            "odour"
+            "odour",
+            "bruising_colour",
+            "latex_change_colour"
           ],
           "note": "The weeping milkcap is smooth rather than wrinkled and smells strongly of fish. Both bleed white milk that browns."
         }
@@ -23267,7 +23307,8 @@
           "discriminators": [
             "gill_spacing",
             "odour",
-            "latex_change"
+            "latex_change",
+            "bruising"
           ],
           "note": "The weeping milkcap has crowded gills, smells of fish, and its milk browns. This one has gills you can count and milk that stays white."
         }
@@ -23526,7 +23567,8 @@
           "discriminators": [
             "gill_spacing",
             "taste",
-            "cap_colour"
+            "cap_colour",
+            "cap_margin"
           ],
           "note": "Both are pale milkcaps of much the same size. The hygrophorus milkcap has gills you can count at arm's length and mild milk; this one has crowded gills and milk that burns the tongue."
         }
@@ -23751,7 +23793,8 @@
           "taxon": "tylopilus_felleus",
           "discriminators": [
             "cap_colour",
-            "stipe_surface"
+            "stipe_surface",
+            "stipe_base"
           ],
           "note": "The bitter bolete is plain brown with a coarse dark net on the stem. Both are bitter, which is the point: taste settles a bolete faster than anything else."
         }
@@ -24040,9 +24083,10 @@
         {
           "taxon": "galerina_marginata",
           "discriminators": [
-            "hymenophore_colour",
-            "taste",
-            "size"
+            "cap_colour",
+            "flesh_colour",
+            "cap_surface",
+            "cap_margin"
           ],
           "note": "Both cluster on dead wood and print rust-brown. Galerina is small, plain tawny and mild; this is larger, scaly, purple-tinged and bitter. Getting it wrong is fatal — take the print and look at the gill colour."
         }
@@ -24302,9 +24346,10 @@
         {
           "taxon": "hygrophoropsis_aurantiaca",
           "discriminators": [
-            "gill_extras",
             "gill_spacing",
-            "substrate"
+            "fruitbody_type",
+            "flesh_colour",
+            "associated_tree"
           ],
           "note": "The false chanterelle has thin crowded gills that break away, and grows on wood or conifer litter. This has blunt ridges and comes out of moss and soil."
         }

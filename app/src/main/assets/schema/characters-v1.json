@@ -1253,7 +1253,7 @@
     {
       "id": "spore_print_fine",
       "label": "More precisely?",
-      "noun": "More precisely",
+      "noun": "Exact print",
       "group": "spores",
       "kind": "state",
       "cardinality": "multi",

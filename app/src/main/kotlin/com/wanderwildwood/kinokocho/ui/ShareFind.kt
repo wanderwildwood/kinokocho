@@ -100,7 +100,7 @@ object ShareFind {
                 schema.valuesOf(character).firstOrNull { it.id == c }?.label
             }
             if (labels.isNotEmpty()) {
-                appendLine("  ${named(character)}: ${labels.joinToString(", ")}")
+                appendLine("  ${character.inFull().replaceFirstChar { c -> c.uppercase() }}: ${labels.joinToString(", ")}")
             }
         }
 
@@ -122,7 +122,7 @@ object ShareFind {
             appendLine()
             appendLine("Looked at and could not say")
             draft.answers.notTested.forEach { id ->
-                schema.character(id)?.let { appendLine("  ${named(it)}") }
+                schema.character(id)?.let { appendLine("  ${it.inFull().replaceFirstChar { c -> c.uppercase() }}") }
             }
         }
 
@@ -131,7 +131,7 @@ object ShareFind {
             appendLine()
             appendLine("Not recorded")
             missing.forEach { (id, _) ->
-                schema.character(id)?.let { appendLine("  ${named(it)}") }
+                schema.character(id)?.let { appendLine("  ${it.inFull().replaceFirstChar { c -> c.uppercase() }}") }
             }
         }
 
@@ -153,21 +153,6 @@ object ShareFind {
             "Recorded with Mushroom Journal, which narrows and does not decide. " +
                 "Nothing here is an identification."
         )
-    }
-
-    /**
-     * A character as a name, with the part of the mushroom it belongs to.
-     *
-     * The nouns are short because the app puts a heading above them saying which part
-     * they are about. A message has no headings, so "Colour" would appear twice meaning
-     * the cap and then the gills.
-     */
-    private fun named(character: Character): String = when (character.group) {
-        Character.Group.CAP -> "Cap ${character.noun.lowercase()}"
-        Character.Group.GILLS -> "Gill ${character.noun.lowercase()}"
-        Character.Group.STEM -> "Stem ${character.noun.lowercase()}"
-        Character.Group.FLESH -> "Flesh ${character.noun.lowercase()}"
-        else -> character.noun
     }
 
     private fun dateOf(millis: Long): String =
