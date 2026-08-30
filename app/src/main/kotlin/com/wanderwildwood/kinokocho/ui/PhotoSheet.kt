@@ -6,6 +6,8 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -115,7 +117,16 @@ fun PhotoSheet(
         }
     }
 
-    Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+    // Scrolls. Six slots and the Done row fit a 480x800 panel with nothing to spare, and
+    // the About dialog has already demonstrated what happens to the last row when one of
+    // these outgrows the screen: it lands in the system's gesture strip and stops being
+    // tappable at all. A seventh slot should be a layout that gets longer, not a control
+    // that quietly disappears.
+    Column(
+        Modifier.fillMaxWidth()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 16.dp),
+    ) {
         Text(
             "Photographs",
             style = MaterialTheme.typography.titleMedium,

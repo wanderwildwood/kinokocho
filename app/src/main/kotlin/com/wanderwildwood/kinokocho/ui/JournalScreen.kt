@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
+import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.data.FullObservation
 import com.wanderwildwood.kinokocho.data.MeasurementRow
@@ -79,11 +80,45 @@ fun JournalScreen(
             seasonRow?.invoke()
             HorizontalDividerMMD()
 
-            if (entries.isEmpty()) {
-                Empty(Modifier.weight(1f))
-            } else {
-                LazyColumn(Modifier.weight(1f).padding(top = 8.dp)) {
-                    items(entries, key = { it.observation.id }) { entry ->
+            /*
+             * A way to find one again.
+             *
+             * A journal is kept for years, and the whole point of keeping it is going
+             * back to something. Newest-first with no way to look is fine at a dozen
+             * finds and useless at three hundred — "that white one from the spring, below
+             * the spring" is a thing a person remembers in exactly these terms: a name, a
+             * place, a month.
+             *
+             * It appears only once there is enough to lose something in. A search box
+             * over four finds is furniture.
+             */
+            var query by remember { mutableStateOf("") }
+            if (entries.size > ENOUGH_TO_LOSE_ONE_IN) {
+                TextFieldMMD(
+                    value = query,
+                    onValueChange = { query = it },
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 6.dp),
+                    placeholder = { Text("A name, a place, a month") },
+                    singleLine = true,
+                )
+            }
+            val shown = remember(entries, query) { entries.matching(query) }
+
+            when {
+                entries.isEmpty() -> Empty(Modifier.weight(1f))
+                shown.isEmpty() -> Column(
+                    Modifier.weight(1f).fillMaxWidth().padding(32.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(
+                        "Nothing here matches that.",
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                }
+                else -> LazyColumn(Modifier.weight(1f).padding(top = 8.dp)) {
+                    items(shown, key = { it.observation.id }) { entry ->
                         EntryRow(entry, onOpen = { onOpen(entry.observation.id) },
                             onDelete = { onDelete(entry.observation.id) })
                         HorizontalDividerMMD()
@@ -200,6 +235,31 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
         )
     }
 }
+
+/**
+ * The finds a search matches, or all of them when nothing is being searched for.
+ *
+ * Matches on the four things a person actually remembers about a find: what it turned out
+ * to be, where it was, what they wrote about it, and roughly when. The date is matched as
+ * the words it is displayed as, so "September" and "2026" both work and neither needs a
+ * date picker to express.
+ */
+fun List<FullObservation>.matching(query: String): List<FullObservation> {
+    val q = query.trim()
+    if (q.isBlank()) return this
+    return filter { entry ->
+        val o = entry.observation
+        listOf(o.identifiedAs, o.placeNote, o.note, dateOf(o.recordedAt))
+            .any { it.contains(q, ignoreCase = true) }
+    }
+}
+
+/**
+ * How many finds it takes before a journal is worth searching.
+ *
+ * Below this the list is the search. A box over four finds is furniture.
+ */
+private const val ENOUGH_TO_LOSE_ONE_IN = 6
 
 private fun dateOf(millis: Long): String =
     SimpleDateFormat("d MMMM yyyy, HH:mm", Locale.getDefault()).format(Date(millis))
