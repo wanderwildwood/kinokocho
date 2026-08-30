@@ -10,6 +10,11 @@ already ships with.
 *Kinokochō* is 茸帳 — a mushroom notebook. The 帳 is the one in 手帳 (pocket notebook)
 and 野帳 (a surveyor's field book): a plain book you fill by going places.
 
+| | |
+|---|---|
+| ![The journal](docs/screenshots/journal.png) | ![A question in the key](docs/screenshots/key.png) |
+| ![What is about this month](docs/screenshots/month.png) | ![One mushroom's page](docs/screenshots/candidate.png) |
+
 ## What it is, and what it is not
 
 **It does not tell you what a mushroom is, and it will never tell you whether one is

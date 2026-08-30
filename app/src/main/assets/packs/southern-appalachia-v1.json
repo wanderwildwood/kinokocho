@@ -18,7 +18,7 @@
       "hazard": {
         "toxinClass": "amatoxin",
         "severity": "LETHAL",
-        "onset": "6-24 hours",
+        "onset": "6–24 hours",
         "note": "Around 50% fatality untreated.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -751,7 +751,7 @@
       "hazard": {
         "toxinClass": "amatoxin",
         "severity": "LETHAL",
-        "onset": "6-24 hours",
+        "onset": "6–24 hours",
         "source": "North American Mycological Association poisoning references",
         "note": "The same amatoxins as a destroying angel, in a mushroom the size of a thumbnail. People have died from a small quantity picked among honey mushrooms. The delay is the trap: you feel fine all day, then ill long after anybody would connect it to a meal."
       },
@@ -1191,7 +1191,7 @@
       "hazard": {
         "toxinClass": "illudin",
         "severity": "GI",
-        "onset": "1-3 hours",
+        "onset": "1–3 hours",
         "note": "Recovery usually within about 12 hours (NAMA).",
         "source": "North American Mycological Association poisoning references"
       },
@@ -2401,7 +2401,7 @@
       "hazard": {
         "toxinClass": "gyromitrin",
         "severity": "SEVERE",
-        "onset": "2-24 hours",
+        "onset": "2–24 hours",
         "note": "Liver, kidney and blood damage (NAMA, for the genus).",
         "source": "North American Mycological Association poisoning references"
       },
@@ -5670,7 +5670,7 @@
       "hazard": {
         "toxinClass": "gastrointestinal",
         "severity": "GI",
-        "onset": "1-3 hours",
+        "onset": "1–3 hours",
         "note": "Red-pored boletes that stain blue instantly are not eaten.",
         "source": "North American Mycological Association references"
       },
@@ -9602,7 +9602,7 @@
       "hazard": {
         "toxinClass": "gastrointestinal",
         "severity": "GI",
-        "onset": "1-3 hours",
+        "onset": "1–3 hours",
         "note": "Upsets many people, especially with alcohol.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -9849,7 +9849,7 @@
       "hazard": {
         "toxinClass": "gastrointestinal",
         "severity": "GI",
-        "onset": "1-3 hours",
+        "onset": "1–3 hours",
         "note": "Bitter and purgative.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -11915,7 +11915,7 @@
       "hazard": {
         "toxinClass": "gastrointestinal",
         "severity": "GI",
-        "onset": "1-3 hours",
+        "onset": "1–3 hours",
         "note": "The slime layer upsets some people; it is usually peeled off.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -13730,7 +13730,7 @@
       "hazard": {
         "toxinClass": "gastrointestinal",
         "severity": "GI",
-        "onset": "1-3 hours",
+        "onset": "1–3 hours",
         "note": "Raw Peziza upsets people.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -13893,7 +13893,7 @@
       "hazard": {
         "toxinClass": "gastrointestinal",
         "severity": "GI",
-        "onset": "1-3 hours",
+        "onset": "1–3 hours",
         "note": "",
         "source": "North American Mycological Association poisoning references"
       },
@@ -15355,7 +15355,7 @@
       "hazard": {
         "toxinClass": "amatoxin",
         "severity": "LETHAL",
-        "onset": "6-24 hours",
+        "onset": "6–24 hours",
         "note": "The most lethal mushroom in the world, and the one every person has heard of. Not expected in these mountains.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -15593,7 +15593,7 @@
       "hazard": {
         "toxinClass": "haemolysin",
         "severity": "SEVERE",
-        "onset": "1-4 hours",
+        "onset": "1–4 hours",
         "note": "Raw flesh is toxic; the toxin breaks down with cooking. Not a mushroom to be casual about in a genus like this one.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -16959,7 +16959,7 @@
       "hazard": {
         "toxinClass": "gastrointestinal",
         "severity": "GI",
-        "onset": "1-3 hours",
+        "onset": "1–3 hours",
         "note": "Upsets a good many people, and always when undercooked.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -17199,7 +17199,7 @@
       "hazard": {
         "toxinClass": "gastrointestinal",
         "severity": "GI",
-        "onset": "5-10 hours",
+        "onset": "5–10 hours",
         "note": "Severe and long-lasting for a gastrointestinal poisoning.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -17449,7 +17449,7 @@
       "hazard": {
         "toxinClass": "gastrointestinal",
         "severity": "GI",
-        "onset": "1-3 hours",
+        "onset": "1–3 hours",
         "note": "The commonest mushroom poisoning in places where field mushrooms are picked, because it looks like one.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -19521,7 +19521,7 @@
       "hazard": {
         "toxinClass": "unknown",
         "severity": "SEVERE",
-        "onset": "Not well recorded",
+        "onset": "not well recorded",
         "note": "Treated as poisonous. In this genus that is where the matter ends.",
         "source": "North American Mycological Association poisoning references"
       },
@@ -23342,7 +23342,7 @@
       "hazard": {
         "toxinClass": "unknown",
         "severity": "GI",
-        "onset": "1-3 hours",
+        "onset": "1–3 hours",
         "note": "Acrid enough to make people ill. The taste says so at once.",
         "source": "North American Mycological Association poisoning references"
       },
