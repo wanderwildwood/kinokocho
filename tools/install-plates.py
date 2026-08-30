@@ -58,6 +58,9 @@ object TaxonPlate {
     /** The drawing for a taxon, or null where there is none. */
     fun of(taxonId: String): Int? = PLATES[taxonId]
 
+    /** Every taxon that has one, so a test can check they are all real. */
+    val ids: Set<String> get() = PLATES.keys
+
     private val PLATES: Map<String, Int> = mapOf(
 '''
 
