@@ -144,6 +144,28 @@ def find_drawings(path, threshold, gutter_divisor=60):
     return boxes
 
 
+def even_grid(path, rows, cols, threshold):
+    """
+    An even grid, for a sheet the finder cannot read.
+
+    Finding the drawings works when white gutters run the whole way across, and on a
+    tightly-packed sheet they do not: captions bridge the rows and the whole page comes
+    back as one connected mass. A regular grid needs no finding — it needs dividing, and
+    then each cell trimmed to its own ink the same way.
+    """
+    from PIL import Image
+    im = Image.open(path).convert("L")
+    w, h = im.size
+    px = im.load()
+    ink = [[px[x, y] < threshold for x in range(w)] for y in range(h)]
+    cw, ch = w // cols, h // rows
+    out = []
+    for r in range(rows):
+        for c in range(cols):
+            out.append(drop_caption(ink, c * cw, r * ch, (c + 1) * cw, (r + 1) * ch))
+    return out
+
+
 def drop_caption(ink, x0, y0, x1, y1):
     """
     Takes the caption off the bottom of a drawing that has one.
@@ -175,16 +197,26 @@ def drop_caption(ink, x0, y0, x1, y1):
     if not bands:
         return (x0, y0, x1, y1)
 
-    # Drop trailing bands that are a line of type: short, and with the drawing still
-    # above them. A drawing with a detached part low down — a puffball beside its cut
-    # half — is taller than a line of type and is kept.
-    while len(bands) > 1:
-        top, bottom = bands[-1]
-        if (bottom - top) < height * 0.12 and bands[0][1] - bands[0][0] > height * 0.4:
-            bands.pop()
-        else:
-            break
-    return (x0, y0, x1, y0 + bands[-1][1])
+    # Drop bands that are a line of type: short, with the drawing still bigger than them.
+    # Both ends, because which end the caption sits on is the generator's choice and
+    # changes between sheets — the first sheet back put them under each drawing and the
+    # next put them over. A drawing with a detached part — a puffball beside its cut half
+    # — is taller than a line of type and is kept.
+    def biggest(bs):
+        return max(b - a for a, b in bs)
+
+    changed = True
+    while changed and len(bands) > 1:
+        changed = False
+        for end in (-1, 0):
+            if len(bands) < 2:
+                break
+            top, bottom = bands[end]
+            others = bands[:-1] if end == -1 else bands[1:]
+            if (bottom - top) < height * 0.22 and biggest(others) > height * 0.30:
+                bands.pop(end)
+                changed = True
+    return (x0, y0 + bands[0][0], x1, y0 + bands[-1][1])
 
 
 def main():
@@ -197,6 +229,9 @@ def main():
                          "'skip' for a duplicate or anything that is not wanted. Use "
                          "this whenever the sheet does not match a batch, which is most "
                          "of the time.")
+    ap.add_argument("--grid", metavar="RxC",
+                    help="cut an even grid instead of finding the drawings, for a sheet "
+                         "whose rows touch — 6x6 for a full sheet of thirty-two")
     ap.add_argument("--list", action="store_true",
                     help="find the drawings and say where they are, writing nothing")
     ap.add_argument("--threshold", type=int, default=170,
@@ -205,8 +240,13 @@ def main():
                     help="leave it grey instead of forcing black on white")
     args = ap.parse_args()
 
-    boxes = find_drawings(args.sheet, args.threshold)
-    print(f"{args.sheet}: {len(boxes)} drawings found")
+    if args.grid:
+        rows, cols = (int(n) for n in args.grid.lower().split("x"))
+        boxes = even_grid(args.sheet, rows, cols, args.threshold)
+        print(f"{args.sheet}: cut as {rows} by {cols}")
+    else:
+        boxes = find_drawings(args.sheet, args.threshold)
+        print(f"{args.sheet}: {len(boxes)} drawings found")
 
     if args.list or (not args.batch and not args.cells):
         for i, (x0, y0, x1, y1) in enumerate(boxes, 1):
