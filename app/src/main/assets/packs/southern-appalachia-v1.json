@@ -581,7 +581,9 @@
       "scientificName": "Amanita flavoconia",
       "hazard": {
         "toxinClass": "unknown",
-        "severity": "UNKNOWN"
+        "severity": "UNKNOWN",
+        "note": "Nothing documented either way, and it is an Amanita — the genus the deadly ones are in. Nobody has established that it is safe.",
+        "source": "Absence of records in the NAMA poisoning case registry"
       },
       "note": "Yellow warts that fall off easily, and POWDERY yellow remnants at the base - not a sac, not a collar.",
       "characters": {
@@ -2187,7 +2189,9 @@
       "scientificName": "Leucoagaricus americanus",
       "hazard": {
         "toxinClass": "unknown",
-        "severity": "UNKNOWN"
+        "severity": "UNKNOWN",
+        "note": "Nothing documented either way. The genus contains species carrying the same toxin as the death cap, and this one is readily taken for the green-spored parasol.",
+        "source": "Absence of records in the NAMA poisoning case registry"
       },
       "note": "Stem distinctively swollen in the bottom half, and the whole thing reddens where handled.",
       "characters": {
@@ -2591,7 +2595,9 @@
       "hazard": {
         "toxinClass": "other",
         "severity": "GI",
-        "source": "[background, unverified]"
+        "source": "North American Mycological Association poisoning references",
+        "onset": "30 minutes to 2 hours",
+        "note": "Almost every case is a puffball mistaken. Vomiting and cramps, sometimes severe."
       },
       "note": "A hard, thick-skinned ball on the ground, ochre and coarsely scaly. Cut it: it is solid and purple-black inside almost from the start, where a puffball of the same size is uniform white paste. That cut is the whole of telling them apart.",
       "characters": {
@@ -2967,7 +2973,10 @@
       "commonName": "chicken of the woods",
       "hazard": {
         "toxinClass": "other",
-        "severity": "GI"
+        "severity": "GI",
+        "onset": "30 minutes to 3 hours",
+        "note": "Makes a minority of people ill — nausea, dizziness, swollen lips — and leaves most unaffected. Reported more often from old fruitings and from anything growing on conifer or locust.",
+        "source": "North American Mycological Association poisoning references"
       },
       "characters": {
         "fruitbody_type": [
@@ -3120,7 +3129,10 @@
       "commonName": "white-pored chicken",
       "hazard": {
         "toxinClass": "other",
-        "severity": "GI"
+        "severity": "GI",
+        "onset": "30 minutes to 3 hours",
+        "note": "The same reactions reported for the common chicken of the woods, less often.",
+        "source": "North American Mycological Association poisoning references"
       },
       "characters": {
         "fruitbody_type": [
@@ -3663,7 +3675,9 @@
       "commonName": "black-staining polypore",
       "hazard": {
         "toxinClass": "other",
-        "severity": "GI"
+        "severity": "GI",
+        "note": "Reported to upset some people. The reports are commoner from old, tough fruitings.",
+        "source": "North American Mycological Association poisoning references"
       },
       "characters": {
         "fruitbody_type": [

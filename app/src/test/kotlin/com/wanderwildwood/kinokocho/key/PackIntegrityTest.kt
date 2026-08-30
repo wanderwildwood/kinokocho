@@ -115,6 +115,20 @@ class PackIntegrityTest {
     }
 
     @Test
+    fun `no page raises an alarm it does not explain`() {
+        // The candidate screen prints a heading for any severity but NONE_KNOWN. A
+        // heading with nothing under it tells a person holding the mushroom that
+        // something is wrong and then refuses to say what.
+        pack.taxa.filter { it.hazard.severity != Hazard.Severity.NONE_KNOWN }.forEach {
+            assertTrue(
+                "${it.id} warns and then says nothing",
+                !it.hazard.note.isNullOrBlank() || !it.hazard.onset.isNullOrBlank(),
+            )
+            assertTrue("${it.id} warns and cites nothing", !it.hazard.source.isNullOrBlank())
+        }
+    }
+
+    @Test
     fun `anything that can kill is drawn, and says so`() {
         pack.taxa.filter { it.hazard.severity == Hazard.Severity.LETHAL }.forEach {
             assertTrue("${it.id} can kill and has no drawing", TaxonPlate.of(it.id) != null)
