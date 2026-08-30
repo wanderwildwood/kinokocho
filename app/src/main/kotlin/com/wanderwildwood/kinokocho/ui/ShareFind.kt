@@ -142,7 +142,7 @@ object ShareFind {
             appendLine("Not ruled out — ${live.size} of ${ranking.candidates.size}")
             live.take(6).forEach { c ->
                 appendLine(
-                    "  " + (c.taxon.commonName?.let { "${c.taxon.scientificName} - $it" }
+                    "  " + (c.taxon.commonName?.let { "${c.taxon.scientificName} — $it" }
                         ?: c.taxon.scientificName)
                 )
             }
