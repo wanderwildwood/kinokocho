@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +26,7 @@ import com.wanderwildwood.kinokocho.key.Taxon
 import com.wanderwildwood.kinokocho.schema.Character
 import java.text.DateFormatSymbols
 import java.util.Locale
+import com.mudita.mmd.components.lazy.LazyColumnMMD
 
 /**
  * One candidate, read properly.
@@ -67,7 +67,7 @@ fun CandidateScreen(
     val agree = answered.count { agrees(vm, taxon, it, answers) }
     val differ = answered.size - agree
 
-    LazyColumn(
+    LazyColumnMMD(
         Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 16.dp),
     ) {

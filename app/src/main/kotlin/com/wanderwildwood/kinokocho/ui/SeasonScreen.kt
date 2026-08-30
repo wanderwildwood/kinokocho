@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -34,6 +33,7 @@ import com.wanderwildwood.kinokocho.key.Prevalence
 import com.wanderwildwood.kinokocho.key.Taxon
 import java.text.DateFormatSymbols
 import java.util.Locale
+import com.mudita.mmd.components.lazy.LazyColumnMMD
 
 /**
  * What the pack expects to be about this month.
@@ -91,7 +91,7 @@ fun SeasonScreen(
         .sortedBy { it.scientificName }
     val monthName = DateFormatSymbols(Locale.getDefault()).months[month - 1]
 
-    LazyColumn(
+    LazyColumnMMD(
         Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 16.dp),
     ) {

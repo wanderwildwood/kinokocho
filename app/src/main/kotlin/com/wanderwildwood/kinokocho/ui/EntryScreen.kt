@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.Image
 import androidx.compose.ui.layout.ContentScale
@@ -48,6 +46,8 @@ import com.wanderwildwood.kinokocho.schema.Character
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.mudita.mmd.components.lazy.LazyColumnMMD
+import com.mudita.mmd.components.lazy.LazyRowMMD
 
 /**
  * One find, read back.
@@ -81,7 +81,7 @@ fun EntryScreen(
     val safety = remember(draft.answers) { vm.engine.safetyNotes(draft.answers) }
     val sporePrintPending = "spore_print" !in draft.answers.values.keys
 
-    LazyColumn(
+    LazyColumnMMD(
         Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 16.dp),
     ) {
@@ -341,7 +341,7 @@ fun EntryScreen(
                     arming = null
                 }
                 val context = LocalContext.current
-                LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                LazyRowMMD(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     items3(draft.photos.size) { i ->
                         val photo = draft.photos[i]
                         val file = File(photoDir(context), photo.fileName)

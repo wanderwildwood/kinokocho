@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,6 +34,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import kotlinx.coroutines.delay
+import com.mudita.mmd.components.lazy.LazyColumnMMD
 
 /**
  * Everything recorded, newest first.
@@ -117,7 +117,7 @@ fun JournalScreen(
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
-                else -> LazyColumn(Modifier.weight(1f).padding(top = 8.dp)) {
+                else -> LazyColumnMMD(Modifier.weight(1f).padding(top = 8.dp)) {
                     items(shown, key = { it.observation.id }) { entry ->
                         EntryRow(entry, onOpen = { onOpen(entry.observation.id) },
                             onDelete = { onDelete(entry.observation.id) })
