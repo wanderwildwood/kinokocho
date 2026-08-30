@@ -72,9 +72,11 @@ from the data is worse than none.
 
 ## Status
 
-Working and in daily use, and not finished. A hundred taxa in the Southern Appalachia
-pack, one hundred and sixty-eight drawings, and a key that reaches the right taxon in
-about four questions when the answers are true.
+Working and in daily use, and not finished. A hundred and ten taxa in the Southern
+Appalachia pack across forty characters, eighty-three pairs that get confused for one
+another, a hundred and seventy-four drawings of single characters and thirty-two of whole
+mushrooms, and a key that reaches the right taxon in about four questions when the answers
+are true.
 
 Nothing in the pack has been checked by a mycologist. Every row says so on its own page.
 
