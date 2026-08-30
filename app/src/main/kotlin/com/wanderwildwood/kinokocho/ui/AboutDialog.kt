@@ -13,6 +13,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.foundation.background
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.border
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
@@ -27,12 +29,22 @@ import com.wanderwildwood.kinokocho.BuildConfig
  * of their games, and nobody can safely assume which way a journal app went.
  */
 @Composable
-fun AboutDialog(onDismiss: () -> Unit, onExport: () -> Unit = {}) {
+fun AboutDialog(
+    onDismiss: () -> Unit,
+    onExport: () -> Unit = {},
+    onImport: () -> Unit = {},
+) {
     Dialog(onDismissRequest = onDismiss) {
         Column(
             Modifier
                 .background(MaterialTheme.colorScheme.surface)
                 .border(BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface))
+                // Scrolls, because it outgrew the screen. With the two backup rows on it
+                // the last one sat in the system's gesture strip along the bottom edge on
+                // a 480x800 panel — which is the Kompakt — and could not be tapped at
+                // all: the swipe was taken as a navigation gesture and the row never saw
+                // it. A dialog that cannot be scrolled is a dialog that must never grow.
+                .verticalScroll(rememberScrollState())
                 .padding(20.dp),
         ) {
             Line("茸帳 Mushroom Journal ${BuildConfig.VERSION_NAME}", bold = true)
@@ -79,6 +91,18 @@ fun AboutDialog(onDismiss: () -> Unit, onExport: () -> Unit = {}) {
             Line(
                 "A zip of every find and every photograph, handed to whatever you keep " +
                     "things in. Plain JSON inside, readable without this app."
+            )
+
+            Spacer(10)
+            Text(
+                "Read a copy back in",
+                style = MaterialTheme.typography.bodySmall,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.fillMaxWidth().clickable(onClick = onImport),
+            )
+            Line(
+                "Adds whatever is not already here. Nothing is deleted and nothing is " +
+                    "overwritten, so an old copy read onto a full journal keeps both."
             )
 
             Spacer(14)

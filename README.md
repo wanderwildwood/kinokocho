@@ -31,9 +31,11 @@ and then help you work out what you are looking at once you get home.
   a shortlist of what has *not* been ruled out, with what you looked at and could not say
   said plainly, because that is the first thing anybody experienced will ask.
 - **And keep a copy:** the whole journal, photographs and all, written to a zip and handed
-  wherever you want it. The database holds notes that cannot be taken again — the mushroom
-  is gone and the season is over — and a book that lives in exactly one place is a book
-  with a date on it.
+  wherever you want it, and read back in on the other side of a lost phone. The database
+  holds notes that cannot be taken again — the mushroom is gone and the season is over —
+  and a book that lives in exactly one place is a book with a date on it. Reading a copy
+  back in only ever adds: an old backup onto a journal that has been used since keeps
+  both.
 - **And write down the answer:** when somebody tells you what it was, there is a line to
   put it on. That is the whole point of keeping the book.
 

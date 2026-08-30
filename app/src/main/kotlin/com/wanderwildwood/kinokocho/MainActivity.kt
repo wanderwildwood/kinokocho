@@ -4,11 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -24,10 +29,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mudita.mmd.ThemeMMD
+import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.wanderwildwood.kinokocho.key.KeyEngine
 import androidx.compose.ui.platform.LocalContext
 import com.wanderwildwood.kinokocho.ui.AboutDialog
 import com.wanderwildwood.kinokocho.ui.JournalExport
+import com.wanderwildwood.kinokocho.ui.JournalImport
 import com.wanderwildwood.kinokocho.ui.CandidateScreen
 import com.wanderwildwood.kinokocho.ui.EntryScreen
 import com.wanderwildwood.kinokocho.ui.JournalScreen
@@ -188,6 +195,15 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
         )
     }
 
+    // What the last import did, said once and dismissed. A count is the whole report a
+    // person needs from a restore: how many came in, and how many were already here.
+    var imported by remember { mutableStateOf<JournalImport.Result?>(null) }
+    val pickBackup = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri ->
+        if (uri != null) vm.importJournal(uri) { imported = it }
+    }
+
     if (about) {
         val context = LocalContext.current
         AboutDialog(
@@ -205,7 +221,44 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
                 }
                 about = false
             },
+            onImport = {
+                about = false
+                // Anything, because a backup handed back by a cloud drive often arrives
+                // as octet-stream rather than as a zip, and a filter that hides the file
+                // somebody is looking for is worse than one that shows too much.
+                pickBackup.launch(arrayOf("*/*"))
+            },
         )
+    }
+
+    imported?.let { result ->
+        Dialog(onDismissRequest = { imported = null }) {
+            Column(
+                Modifier
+                    .background(MaterialTheme.colorScheme.surface)
+                    .border(BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface))
+                    .padding(20.dp),
+            ) {
+                Text(
+                    result.failed ?: when {
+                        result.added == 0 && result.alreadyHere > 0 ->
+                            "Everything in that copy was already here."
+                        result.added == 0 -> "Nothing in that file to read."
+                        else -> "${result.added} find" +
+                            (if (result.added == 1) "" else "s") + " added" +
+                            (if (result.photos > 0) ", with ${result.photos} photograph" +
+                                (if (result.photos == 1) "" else "s") else "") + "." +
+                            (if (result.alreadyHere > 0)
+                                " ${result.alreadyHere} were already here." else "")
+                    },
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+                OutlinedButtonMMD(
+                    onClick = { imported = null },
+                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                ) { Text("Close") }
+            }
+        }
     }
 
     val forPhotos = draft

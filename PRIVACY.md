@@ -106,6 +106,12 @@ app at all.
 It only reads. Nothing in the export can alter the journal, which is the property that
 matters in a thing you reach for when something has already gone wrong.
 
+"Read a copy back in" is the other direction, and it only ever adds. A find whose id is
+already in your journal is left exactly as it is, so an old copy read onto a phone that
+has been used since keeps both. Nothing is deleted and nothing is overwritten. The file
+is read through the system picker, which hands this app one file you chose and nothing
+else — no storage permission is asked for or held.
+
 ## Sending a find to a person
 
 What the app can do today is hand a find to the share sheet: plain text and the

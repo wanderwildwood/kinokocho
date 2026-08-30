@@ -16,6 +16,7 @@ import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
 import com.wanderwildwood.kinokocho.schema.SchemaLoader
 import com.wanderwildwood.kinokocho.ui.JournalExport
+import com.wanderwildwood.kinokocho.ui.JournalImport
 import com.wanderwildwood.kinokocho.ui.photoDir
 import java.io.File
 import java.util.Calendar
@@ -342,6 +343,20 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                 JournalExport.write(getApplication(), dao.allKept())
             }.getOrNull()
             onReady(file)
+        }
+    }
+
+    /**
+     * Reads a backup back in, adding only what is not already here.
+     *
+     * See [JournalImport]: nothing is deleted and nothing is overwritten, so restoring an
+     * old backup onto a phone that has newer finds on it keeps both.
+     */
+    fun importJournal(uri: android.net.Uri, onDone: (JournalImport.Result) -> Unit) {
+        viewModelScope.launch {
+            val result = runCatching { JournalImport.read(getApplication(), uri, dao) }
+                .getOrElse { JournalImport.Result(failed = "That file could not be read.") }
+            onDone(result)
         }
     }
 
