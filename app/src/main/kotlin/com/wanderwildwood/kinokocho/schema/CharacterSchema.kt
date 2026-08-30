@@ -136,7 +136,10 @@ data class Character(
         STEM("Stem"),
         FLESH("Flesh"),
         SMELL("Smell and taste"),
-        SPORES("Spore print"),
+        // "Spores" and not "Spore print", so that the first row under it is not
+        // "Spore print — Pink" beneath a heading reading "Spore print". The KOH
+        // drop is not a print either.
+        SPORES("Spores"),
         WHERE("Where and when"),
     }
     enum class Cardinality { SINGLE, MULTI }

@@ -95,6 +95,23 @@ fun CandidateScreen(
                         else -> "Not known to be safe"
                     }
                 )
+                // What "unknown" means, said rather than left to the heading.
+                //
+                // Eleven pages printed "Not known to be safe" and then nothing at all,
+                // because an unstudied mushroom has no onset and no case report to
+                // quote — the pack carries an em dash where the time would go and the
+                // row above hides it. A heading that raises an alarm and then goes
+                // quiet is worse than no heading. This is true of every one of them
+                // and so it is written once, here, rather than eleven times in the
+                // data.
+                if (taxon.hazard.severity == Hazard.Severity.UNKNOWN) {
+                    Text(
+                        "Nobody has written down what this one does, either way. That " +
+                            "is not the same as safe — it is the absence of anyone " +
+                            "having looked.",
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                }
                 taxon.hazard.onset?.takeIf { it.isNotBlank() && it != "—" }?.let {
                     Row(it, "Comes on")
                 }
@@ -333,7 +350,12 @@ private fun marked(
     val mine = chosen.mapNotNull { c ->
         vm.schema.valuesOf(character).firstOrNull { it.id == c }?.label
     }
-    return "you recorded " + mine.joinToString(", ").lowercase()
+    // Said outright. The only thing separating agreement from disagreement was
+    // "this" against the name of a value — "you recorded this" beside "you recorded
+    // smooth" — and a reader running down the page has no reason to notice which of
+    // those two is the one that does not fit. The count above says how many disagree;
+    // this is how you find them.
+    return "you recorded " + mine.joinToString(", ").lowercase() + ", which does not fit"
 }
 
 /**

@@ -243,15 +243,34 @@ private fun Footer(
     } else {
         val live = ranking.candidates.filter { it.mismatched == 0 }
         Text(
-            "Closest so far, of ${live.size} still possible",
+            // "of 0 still possible" printed directly above two named candidates, which
+            // is what the screen said whenever the answers contradicted each other —
+            // and answers contradict each other often, because a person is looking at a
+            // real mushroom and the pack is a description of a typical one. Say that
+            // plainly instead of printing a count that argues with the list under it.
+            if (live.isEmpty()) {
+                "Nothing fits everything you have said. Nearest anyway:"
+            } else {
+                "Closest so far, of ${live.size} still possible"
+            },
             style = MaterialThemeTypography().bodySmall,
             modifier = Modifier.padding(top = 6.dp),
         )
-        ranking.candidates.take(2).forEach { c ->
+        val shown = ranking.candidates.take(2)
+        shown.forEach { c ->
             Text(
-                c.taxon.commonName?.let { n -> "${c.taxon.scientificName} - $n" }
+                c.taxon.commonName?.let { n -> "${c.taxon.scientificName} — $n" }
                     ?: c.taxon.scientificName,
                 style = MaterialThemeTypography().bodySmall,
+                // Bold where it can kill. A lethal taxon that is also the closest match
+                // used to be printed plain here and then again, bold, on the line below
+                // — the same name twice, two lines apart, which reads as a fault rather
+                // than as a warning. It is marked where it stands instead.
+                fontWeight = if (c.taxon.hazard.severity == Hazard.Severity.LETHAL) {
+                    FontWeight.Bold
+                } else {
+                    FontWeight.Normal
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onCandidate(c.taxon.id) }
@@ -259,7 +278,13 @@ private fun Footer(
             )
         }
 
-        val hazards = ranking.hazards.filter { it.taxon.hazard.severity == Hazard.Severity.LETHAL }
+        // And the line below names only what is not already on the screen. Nothing is
+        // dropped: a lethal candidate is either standing in the list in bold or named
+        // here, and never neither.
+        val visible = shown.map { it.taxon.id }.toSet()
+        val hazards = ranking.hazards
+            .filter { it.taxon.hazard.severity == Hazard.Severity.LETHAL }
+            .filter { it.taxon.id !in visible }
         if (hazards.isNotEmpty()) {
             Text(
                 "Still not ruled out: " + hazards.joinToString(", ") { it.taxon.scientificName },

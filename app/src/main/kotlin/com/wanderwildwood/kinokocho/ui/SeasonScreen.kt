@@ -140,7 +140,10 @@ fun SeasonScreen(
                     modifier = Modifier.padding(bottom = 4.dp),
                 )
             }
-            items(worthKnowing.size) { i -> TaxonLine(worthKnowing[i], onOpen, plate = true) }
+            items(worthKnowing.size) { i ->
+                val t = worthKnowing[i]
+                TaxonLine(t, onOpen, plate = true, confusion = confusedWith(t, inSeason))
+            }
         }
 
         item {
@@ -171,7 +174,12 @@ fun SeasonScreen(
  * than after; a sought-after one is marked as sought after and nothing more.
  */
 @Composable
-private fun TaxonLine(taxon: Taxon, onOpen: (String) -> Unit, plate: Boolean = false) {
+private fun TaxonLine(
+    taxon: Taxon,
+    onOpen: (String) -> Unit,
+    plate: Boolean = false,
+    confusion: Taxon? = null,
+) {
     val danger = taxon.hazard.severity.alwaysShow
     // Tapping a name opens the same page a shortlist opens, with nothing laid against
     // it. Reading about a mushroom before finding one is how anybody learns which ones
@@ -222,17 +230,65 @@ private fun TaxonLine(taxon: Taxon, onOpen: (String) -> Unit, plate: Boolean = f
                 style = MaterialTheme.typography.bodySmall,
             )
             taxon.sought -> Text(
-                "Sought after." + when (taxon.hazard.severity) {
-                    Hazard.Severity.GI -> " Also makes some people ill."
-                    Hazard.Severity.INTOXICATION -> " Also intoxicating."
-                    Hazard.Severity.UNKNOWN -> " Nothing documented either way."
-                    else -> ""
-                },
+                // What it is taken for, in preference to saying "Sought after" a fifth
+                // time. The heading has already explained the word; five rows repeating
+                // it say nothing a person could act on, and the mushroom standing next
+                // to this one in the same week is the thing they walked out needing.
+                (confusion?.let { "Taken for ${nameOf(it)}, which ${harmOf(it)}." }
+                    ?: "Sought after.") +
+                    when (taxon.hazard.severity) {
+                        Hazard.Severity.GI -> " Makes some people ill in its own right."
+                        Hazard.Severity.INTOXICATION -> " Intoxicating in its own right."
+                        Hazard.Severity.UNKNOWN -> " Nothing documented either way."
+                        else -> ""
+                    },
+                style = MaterialTheme.typography.bodySmall,
+            )
+            // Anything else the pack has something against. Without this branch a row
+            // like Chlorophyllum molybdites — which the pack's own note calls the most
+            // common cause of mushroom poisoning in North America — appeared down the
+            // long list as a bare name with nothing beside it, because it is neither
+            // lethal nor looked for. Twenty-one rows were silent that way.
+            taxon.hazard.severity == Hazard.Severity.GI -> Text(
+                "Makes people ill.",
+                style = MaterialTheme.typography.bodySmall,
+            )
+            taxon.hazard.severity == Hazard.Severity.INTOXICATION -> Text(
+                "Intoxicating.",
                 style = MaterialTheme.typography.bodySmall,
             )
         }
         }
     }
+}
+
+/** How a confused-with mushroom is best referred to in one clause. */
+private fun nameOf(taxon: Taxon): String =
+    taxon.commonName?.let { "the $it" } ?: taxon.scientificName
+
+/** What it does to you, as the tail of that clause. */
+private fun harmOf(taxon: Taxon): String = when (taxon.hazard.severity) {
+    Hazard.Severity.LETHAL -> "can kill"
+    Hazard.Severity.SEVERE -> "can cause serious harm"
+    Hazard.Severity.GI -> "makes people ill"
+    Hazard.Severity.INTOXICATION -> "is intoxicating"
+    else -> "is not a mushroom to eat"
+}
+
+/**
+ * The worst thing a sought-after mushroom is taken for, out of the ones also in season.
+ *
+ * This is the sentence that earns the sought-after half of the list its place on the
+ * page. It says nothing about eating anything and ranks nothing — only that the two
+ * are out in the same week and get mistaken for one another, which is the reason to
+ * read a month page before a walk rather than after one.
+ */
+fun confusedWith(taxon: Taxon, inSeason: List<Taxon>): Taxon? {
+    val out = inSeason.associateBy { it.id }
+    return taxon.lookalikes
+        .mapNotNull { out[it.taxon] }
+        .filter { it.hazard.severity.ordinal > Hazard.Severity.UNKNOWN.ordinal }
+        .maxByOrNull { it.hazard.severity.ordinal }
 }
 
 /**

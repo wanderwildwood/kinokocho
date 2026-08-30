@@ -157,7 +157,10 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             },
         )
 
-        reading && open != null -> EntryScreen(
+        // Everything from here down has a draft. The `open == null` branch above took
+        // the journal, so the compiler already knows it — saying `open != null` again
+        // reads like a guard and compiles to nothing.
+        reading -> EntryScreen(
             vm = vm,
             draft = open,
             onContinue = { reading = false },
@@ -166,7 +169,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             onCandidate = { candidate = it },
         )
 
-        open != null -> NewEntryScreen(
+        else -> NewEntryScreen(
             vm = vm,
             draft = open,
             onAddPhoto = { photographing = true },
@@ -175,8 +178,6 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             journalCount = kept.size,
             onCandidate = { candidate = it },
         )
-
-        else -> Unit
     }
 
     if (asking && open != null) {

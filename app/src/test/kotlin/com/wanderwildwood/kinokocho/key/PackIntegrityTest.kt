@@ -119,13 +119,23 @@ class PackIntegrityTest {
         // The candidate screen prints a heading for any severity but NONE_KNOWN. A
         // heading with nothing under it tells a person holding the mushroom that
         // something is wrong and then refuses to say what.
-        pack.taxa.filter { it.hazard.severity != Hazard.Severity.NONE_KNOWN }.forEach {
-            assertTrue(
-                "${it.id} warns and then says nothing",
-                !it.hazard.note.isNullOrBlank() || !it.hazard.onset.isNullOrBlank(),
-            )
-            assertTrue("${it.id} warns and cites nothing", !it.hazard.source.isNullOrBlank())
-        }
+        //
+        // The emptiness rule has to be the screen's rule, not a looser one. This test
+        // first passed while eleven pages were still blank, because the pack writes an
+        // em dash where an unstudied mushroom's onset would go and the screen hides
+        // that row — "not blank" was true and the reader still saw nothing. UNKNOWN is
+        // exempt because the screen now answers it in one standing sentence.
+        fun said(s: String?) = !s.isNullOrBlank() && s.trim() != "—"
+        pack.taxa
+            .filter { it.hazard.severity != Hazard.Severity.NONE_KNOWN }
+            .filter { it.hazard.severity != Hazard.Severity.UNKNOWN }
+            .forEach {
+                assertTrue(
+                    "${it.id} warns and then says nothing",
+                    said(it.hazard.note) || said(it.hazard.onset),
+                )
+                assertTrue("${it.id} warns and cites nothing", !it.hazard.source.isNullOrBlank())
+            }
     }
 
     @Test

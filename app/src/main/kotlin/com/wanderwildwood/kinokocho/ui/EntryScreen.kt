@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -165,7 +166,17 @@ fun EntryScreen(
                 Section("Not yet ruled out")
                 val live = ranking.candidates.filter { it.mismatched == 0 }
                 Text(
-                    "${live.size} of ${ranking.candidates.size} still fit what you wrote down.",
+                    // Not "0 of 110 still fit", printed above four names. Answers
+                    // contradict one another often — a real mushroom against a
+                    // description of a typical one — and when they do, the honest
+                    // thing is to say so and still show the nearest, rather than a
+                    // count that argues with the list beneath it.
+                    if (live.isEmpty()) {
+                        "Nothing fits everything you wrote down. These come nearest, " +
+                            "and one of the answers may be worth looking at again."
+                    } else {
+                        "${live.size} of ${ranking.candidates.size} still fit what you wrote down."
+                    },
                     style = MaterialTheme.typography.bodySmall,
                 )
                 ranking.candidates.take(4).forEach { c ->
@@ -615,11 +626,16 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items2(
             // watching the list move is how a person learns which characters actually
             // decide anything — and the reader who wants to do that is the reader this
             // app is for.
+            // Half and half, with a gap. The answer used to take whatever width it
+            // wanted and the question got the rest, so a long pair ran together with no
+            // space at all between them — "What is the base of theSimple, the same
+            // width down". Both sides wrap now and neither can crush the other.
             Row(
                 Modifier
                     .fillMaxWidth()
                     .clickable { vm.revisit(characterId); onContinue() }
                     .padding(vertical = 6.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Text(
                     character.label,
@@ -632,6 +648,8 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items2(
                     }.joinToString(", "),
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.End,
+                    modifier = Modifier.weight(1f),
                 )
             }
         }
@@ -654,6 +672,7 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items2(
                     .fillMaxWidth()
                     .clickable { vm.revisit(character.id); onContinue() }
                     .padding(vertical = 6.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Text(
                     character.label,
@@ -663,6 +682,8 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items2(
                 Text(
                     if (character.notTested) "looked, cannot say" else "skipped",
                     style = MaterialTheme.typography.bodySmall,
+                    textAlign = TextAlign.End,
+                    modifier = Modifier.weight(1f),
                 )
             }
         }
