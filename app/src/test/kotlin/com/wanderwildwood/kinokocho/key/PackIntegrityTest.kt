@@ -145,4 +145,34 @@ class PackIntegrityTest {
             assertTrue("${it.id} can kill and carries no note", !it.note.isNullOrBlank())
         }
     }
+    @Test
+    fun `the pack does not shout`() {
+        // Fourteen notes carried emphasis in capitals — "Margin NOT lined", "FALSE
+        // gills", "DULL GREYISH GREEN". Sentence case everywhere is the house rule, and
+        // on a panel with one ink an all-capital word is the only shout available, so it
+        // gets used for whatever the writer felt strongest about rather than for what
+        // matters most. The emphasis belongs in the wording.
+        val shout = Regex("""\b[A-Z]{2,}\b""")
+        val allowed = setOf("NAMA", "GBIF", "KOH", "DNA", "UV", "NC")
+        fun check(where: String, text: String?) {
+            text ?: return
+            shout.findAll(text).map { it.value }.filterNot { it in allowed }.forEach {
+                throw AssertionError("$where shouts '$it': $text")
+            }
+        }
+        pack.taxa.forEach { t ->
+            check("${t.id} note", t.note)
+            check("${t.id} hazard", t.hazard.note)
+            t.lookalikes.forEach { check("${t.id} vs ${it.taxon}", it.note) }
+        }
+    }
+
+    @Test
+    fun `a hyphen is not a dash`() {
+        pack.taxa.forEach { t ->
+            listOf(t.note, t.hazard.note).plus(t.lookalikes.map { it.note }).forEach {
+                assertTrue("${t.id} uses ' - ' where a dash belongs: $it", it?.contains(" - ") != true)
+            }
+        }
+    }
 }

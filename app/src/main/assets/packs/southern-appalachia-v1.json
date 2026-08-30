@@ -22,7 +22,7 @@
         "note": "Around 50% fatality untreated.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Margin NOT lined. White throughout, and it stays white - there is no colour change to wait for.",
+      "note": "The margin is not lined. White throughout, and it stays white — there is no colour change to wait for.",
       "characters": {
         "fruitbody_type": [
           {
@@ -239,7 +239,7 @@
         "note": "No documented deaths in 100 years (NAMA).",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "The volva is a collar-like rim folded over a pinched bulb - not a sac.",
+      "note": "The volva is a collar-like rim folded over a pinched bulb — not a sac.",
       "characters": {
         "fruitbody_type": [
           {
@@ -406,7 +406,7 @@
         "note": "Not in NAMA's lists. Treat as unknown, not as safe.",
         "source": "[background, unverified]"
       },
-      "note": "The most-recorded Amanita of the region (643 observations). A red warted cap with NO RING - it sits between A. jacksonii, which people eat, and the muscaria group.",
+      "note": "The most-recorded Amanita of the region (643 observations). A red warted cap and no ring at all — it sits between A. jacksonii, which people eat, and the muscaria group.",
       "characters": {
         "fruitbody_type": [
           {
@@ -585,7 +585,7 @@
         "note": "Nothing documented either way, and it is an Amanita — the genus the deadly ones are in. Nobody has established that it is safe.",
         "source": "Absence of records in the NAMA poisoning case registry"
       },
-      "note": "Yellow warts that fall off easily, and POWDERY yellow remnants at the base - not a sac, not a collar.",
+      "note": "Yellow warts that fall off easily, and yellow remnants at the base that are powdery rather than a sac or a collar.",
       "characters": {
         "fruitbody_type": [
           {
@@ -963,7 +963,7 @@
             "ring",
             "cap_surface"
           ],
-          "note": "Armillaria's print is WHITE and it has black rhizomorphs. This one's print is rusty brown. A spore print settles it and nothing in the field does as reliably."
+          "note": "Armillaria’s print is white and it has black rhizomorphs. This one’s print is rusty brown. A spore print settles it and nothing in the field does as reliably."
         }
       ],
       "sources": [
@@ -1195,7 +1195,7 @@
         "note": "Recovery usually within about 12 hours (NAMA).",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "The number one volume risk in this region: 519 observations against the chanterelle's 503, with overlapping July to September peaks. TRUE gills, and luminescent when fresh.",
+      "note": "The number one volume risk in this region: 519 observations against the chanterelle’s 503, with overlapping July to September peaks. True gills rather than ridges, and luminescent when fresh.",
       "characters": {
         "fruitbody_type": [
           {
@@ -1401,7 +1401,7 @@
         "toxinClass": "none",
         "severity": "NONE_KNOWN"
       },
-      "note": "FALSE gills - smooth or shallowly wrinkled, running down the stem. Flesh WHITE. Smells of apricots.",
+      "note": "False gills — smooth or shallowly wrinkled, running down the stem. The flesh is white. Smells of apricots.",
       "characters": {
         "fruitbody_type": [
           {
@@ -1816,10 +1816,10 @@
         "toxinClass": "acromelic_acid",
         "severity": "SEVERE",
         "onset": "about a week",
-        "note": "NAMA lists it under erythromelalgia - painful for months.",
+        "note": "NAMA lists it under erythromelalgia — painful for months.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "TRUE gills, and repeatedly FORKED. That forking is the character.",
+      "note": "True gills, and they fork again and again. That forking is the character.",
       "characters": {
         "fruitbody_type": [
           {
@@ -2171,7 +2171,7 @@
             "ring",
             "spore_print_fine"
           ],
-          "note": "The spore print is the whole answer: DULL GREYISH GREEN here, WHITE in the parasols. Gills only turn green with age, so a young one gives nothing away."
+          "note": "The spore print is the whole answer: a dull greyish green here, white in the parasols. Gills only turn green with age, so a young one gives nothing away."
         }
       ],
       "sources": [
@@ -2405,7 +2405,7 @@
         "note": "Liver, kidney and blood damage (NAMA, for the genus).",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Much rarer here than the literature implies: 3 Discinaceae records against 227 Morchella in the same data, and none in NC. Carried for safety, not as a spring expectation. Head ROUND and tightly wrinkled, not lobed; stem CHAMBERED, not hollow.",
+      "note": "Much rarer here than the literature implies: 3 Discinaceae records against 227 Morchella in the same data, and none in NC. Carried for safety, not as a spring expectation. Head round and tightly wrinkled rather than lobed; stem chambered rather than hollow.",
       "characters": {
         "fruitbody_type": [
           {
@@ -2772,7 +2772,7 @@
             "odour",
             "cap_colour"
           ],
-          "note": "Cut it in half. The inside here is HARD and purple-black to purple-grey even when young; an edible puffball is pure white and soft. The rind is 1-3mm thick and tough, not paper thin."
+          "note": "Cut it in half. The inside here is hard and purple-black to purple-grey even when young; an edible puffball is pure white and soft. The rind is 1–3 mm thick and tough, not paper thin."
         }
       ],
       "sources": [
@@ -2790,7 +2790,7 @@
         "toxinClass": "none",
         "severity": "NONE_KNOWN"
       },
-      "note": "Inverted pear with a prominent sterile base. Outer skin PAPER THIN. White and firm inside when young.",
+      "note": "Inverted pear with a prominent sterile base. The outer skin is paper thin. White and firm inside when young.",
       "characters": {
         "fruitbody_type": [
           {
@@ -3111,7 +3111,7 @@
             "hymenophore_colour",
             "growth_habit"
           ],
-          "note": "Pore surface YELLOW and shelving above ground here; WHITISH and a rosette at the base there. Both characters are field-observable."
+          "note": "Pore surface yellow and shelving above ground here; whitish and a rosette at the base there. Both characters are field-observable."
         }
       ],
       "sources": [
@@ -3315,7 +3315,7 @@
         "toxinClass": "none",
         "severity": "NONE_KNOWN"
       },
-      "note": "Originally described from North Carolina. A SUMMER polypore, unlike Grifola. Never scaly.",
+      "note": "Originally described from North Carolina. A summer polypore, where Grifola is not. Never scaly.",
       "characters": {
         "fruitbody_type": [
           {
@@ -3650,7 +3650,7 @@
             "bruising",
             "cap_colour"
           ],
-          "note": "Meripilus bruises DARK BROWN TO BLACK and peaks in July, three months earlier. Grifola does not bruise at all."
+          "note": "Meripilus bruises dark brown to black and peaks in July, three months earlier. Grifola does not bruise at all."
         },
         {
           "taxon": "bondarzewia_berkeleyi",
