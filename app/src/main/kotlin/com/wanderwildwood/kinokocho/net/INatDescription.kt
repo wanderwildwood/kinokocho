@@ -4,6 +4,7 @@ import com.wanderwildwood.kinokocho.JournalViewModel
 import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
+import com.wanderwildwood.kinokocho.ui.asPhrases
 import com.wanderwildwood.kinokocho.ui.inFull
 
 /**
@@ -50,7 +51,7 @@ object INatDescription {
             val labels = chosen.mapNotNull { c ->
                 schema.valuesOf(character).firstOrNull { it.id == c }?.label
             }
-            if (labels.isNotEmpty()) appendLine("  ${named(character)}: ${labels.joinToString(", ")}")
+            if (labels.isNotEmpty()) appendLine("  ${named(character)}: ${labels.asPhrases()}")
         }
 
         if (draft.answers.measurements.isNotEmpty()) {

@@ -241,7 +241,7 @@ fun CandidateScreen(
                             "Tells them apart: " + look.discriminators
                                 .mapNotNull { vm.schema.character(it)?.inFull() }
                                 .distinct()
-                                .joinToString(", "),
+                                .asPhrases(),
                             style = MaterialTheme.typography.bodySmall,
                             fontWeight = FontWeight.Bold,
                         )
@@ -316,7 +316,7 @@ private fun statesOf(vm: JournalViewModel, taxon: Taxon, character: Character): 
         .mapNotNull { st ->
             vm.schema.valuesOf(character).firstOrNull { it.id == st.value }?.label
         }
-    return labels.takeIf { it.isNotEmpty() }?.joinToString(", ")
+    return labels.takeIf { it.isNotEmpty() }?.asPhrases()
 }
 
 private fun agrees(
@@ -355,7 +355,7 @@ private fun marked(
     // smooth" — and a reader running down the page has no reason to notice which of
     // those two is the one that does not fit. The count above says how many disagree;
     // this is how you find them.
-    return "you recorded " + mine.joinToString(", ").lowercase() + ", which does not fit"
+    return "you recorded " + mine.asPhrases().lowercase() + ", which does not fit"
 }
 
 /**

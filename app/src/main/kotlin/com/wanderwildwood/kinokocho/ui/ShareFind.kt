@@ -100,7 +100,7 @@ object ShareFind {
                 schema.valuesOf(character).firstOrNull { it.id == c }?.label
             }
             if (labels.isNotEmpty()) {
-                appendLine("  ${character.inFull().replaceFirstChar { c -> c.uppercase() }}: ${labels.joinToString(", ")}")
+                appendLine("  ${character.inFull().replaceFirstChar { c -> c.uppercase() }}: ${labels.asPhrases()}")
             }
         }
 

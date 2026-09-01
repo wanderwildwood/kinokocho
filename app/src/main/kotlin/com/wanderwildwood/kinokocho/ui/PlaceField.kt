@@ -76,6 +76,21 @@ fun PlaceField(
      * afterwards is not a thing this app does.
      */
     val context = LocalContext.current
+    /*
+     * Deliberately not keyed, and deliberately not keyed on [place].
+     *
+     * The neighbouring note and measurement fields key their state on the draft, and the
+     * reflex is to do the same here. There is nothing to key on from inside this
+     * function, and keying on [place] is actively wrong: the value goes back out through
+     * [onPlaceChange] on every keystroke and comes back as a new [place], so the state
+     * would be rebuilt on each character typed and take the cursor with it.
+     *
+     * What keeps it correct is that the entry screen is unmounted on the way back to the
+     * journal, so this is thrown away between finds rather than following one find's
+     * words onto another. That is a property of how the screens are arranged rather than
+     * of this field — worth knowing before anyone gives the entry screen a way to change
+     * which find it is showing without leaving it.
+     */
     var text by remember { mutableStateOf(place) }
     var message by remember { mutableStateOf<String?>(null) }
 

@@ -19,3 +19,21 @@ fun Character.inFull(): String = when (group) {
     Character.Group.FLESH -> "flesh ${noun.lowercase()}"
     else -> noun.lowercase()
 }
+
+/**
+ * Runs several labels together without them dissolving into one another.
+ *
+ * Two dozen value labels in the schema have a comma inside them — "Gilled, with a stem",
+ * "Foetid, of rot or carrion", "Warty, with loose patches" — because that is how the
+ * things are actually said. Joining those with a comma produces a run of fragments where
+ * nobody can see where one answer ends and the next begins: a candidate page read
+ * "Smell  Nothing distinctive, Foetid, of rot or carrion", which is two answers wearing
+ * the shape of three.
+ *
+ * So the separator is chosen by what is being separated. Commas while the parts have
+ * none, which is the ordinary case and reads as English; semicolons the moment any part
+ * contains one, which is what semicolons have always been for. Nothing is rewritten and
+ * no label has to be shortened to fit a punctuation mark.
+ */
+fun List<String>.asPhrases(): String =
+    joinToString(if (any { it.contains(',') }) "; " else ", ")
