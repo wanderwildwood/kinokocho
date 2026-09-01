@@ -62,11 +62,18 @@ the `tools/add-*.py` batches, the illustrator's brief from the pack itself. A fi
 has to be kept in step by hand is a file that drifts, and a work order that has drifted
 from the data is worse than none.
 
-`tools/check-names.py` asks GBIF and iNaturalist whether every name in the pack exists.
-Not a unit test: it needs the network and it depends on other people's databases moving
-under it. Run it when the pack changes. The tests can see that a name is a well-formed
-binomial, that its id agrees with it, that its lookalikes resolve — and all of that
-passes for a name that is well-formed, consistent, and not real.
+Two checks live outside the test suite because they need the network and depend on other
+people's databases moving under them. Run both when the pack changes.
+
+`tools/check-names.py` asks GBIF and iNaturalist whether every name exists. The tests can
+see that a name is a well-formed binomial, that its id agrees with it, that its lookalikes
+resolve — and all of that passes for a name that is well-formed, consistent, and not real.
+
+`tools/check-seasons.py` asks how each taxon's research-grade records fall across the
+year here, and reports months the pack leaves out. It only ever widens: a season a month
+too narrow hides a mushroom that is out and takes any warning attached to it away, while
+one a month too wide shows a mushroom in a month it may not be out — which the month page
+already says of every row on it. `--write` applies the widenings.
 
 ## Also in it
 
