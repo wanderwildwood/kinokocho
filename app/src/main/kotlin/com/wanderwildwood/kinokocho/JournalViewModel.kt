@@ -428,6 +428,11 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         _inatState.value = INatState.Idle
     }
 
+    /** Something the screen needs said, that did not come from a call. */
+    fun sayINat(text: String) {
+        _inatState.value = INatState.Said(text)
+    }
+
     /**
      * Starts a sign-in, and hands the reader to their own browser.
      *

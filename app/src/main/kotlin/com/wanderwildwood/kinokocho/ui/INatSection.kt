@@ -65,7 +65,7 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
                 style = MaterialTheme.typography.bodySmall,
             )
             OutlinedButtonMMD(
-                onClick = { context.startActivity(vm.signInIntent()) },
+                onClick = { openOrSay(context, vm, vm.signInIntent(), "sign in") },
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
             ) { Text("Sign in to iNaturalist") }
         }
@@ -184,11 +184,7 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
     )
     OutlinedButtonMMD(
         onClick = {
-            geoprivacy = when (geoprivacy) {
-                INatAccount.OBSCURED -> INatAccount.PRIVATE
-                INatAccount.PRIVATE -> null
-                else -> INatAccount.OBSCURED
-            }
+            geoprivacy = INatAccount.next(geoprivacy)
             vm.inat.geoprivacy = geoprivacy
         },
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
@@ -297,7 +293,9 @@ private fun Published(
     }
 
     OutlinedButtonMMD(
-        onClick = { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url))) },
+        onClick = {
+            openOrSay(context, vm, Intent(Intent.ACTION_VIEW, Uri.parse(url)), "open that")
+        },
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
     ) { Text("Open on iNaturalist") }
 
@@ -308,6 +306,30 @@ private fun Published(
         onClick = vm::checkForNames,
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
     ) { Text("Check what has been named") }
+}
+
+/**
+ * Hands something to a browser, or says there is not one.
+ *
+ * `startActivity` on a VIEW intent throws [android.content.ActivityNotFoundException]
+ * when nothing on the phone handles it, and an uncaught one closes the app. A Kompakt
+ * ships with a browser so this ought never to fire — but "ought never" is doing a lot of
+ * work in a sentence about a device somebody has been stripping apps off, and the cost of
+ * being wrong is the journal disappearing mid-sentence rather than a line of text.
+ *
+ * Sign-in genuinely cannot proceed without a browser, and that is the honest thing to
+ * say: this app will not draw the login form itself, which is the entire reason it never
+ * sees a password.
+ */
+private fun openOrSay(
+    context: android.content.Context,
+    vm: JournalViewModel,
+    intent: Intent,
+    doing: String,
+) {
+    runCatching { context.startActivity(intent) }.onFailure {
+        vm.sayINat("There is no browser on this phone to $doing with.")
+    }
 }
 
 private fun dateOnly(millis: Long): String =

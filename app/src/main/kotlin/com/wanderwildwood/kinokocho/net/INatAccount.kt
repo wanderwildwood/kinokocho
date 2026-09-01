@@ -163,6 +163,24 @@ class INatAccount(context: Context) {
         /** Stored to mean "tell them nothing extra"; never sent. See [geoprivacy]. */
         const val OPEN = "open"
 
+        /**
+         * What the "Change" button moves to next, in the one order that is safe.
+         *
+         * Here rather than inline in the composable that draws the button, because the
+         * order is a privacy decision and not a piece of layout. It starts at obscured
+         * and reaches exact last, so that somebody tapping through without reading lands
+         * on a *more* private setting before a less private one, and cannot arrive at
+         * exact coordinates for a foraging patch by tapping once.
+         *
+         * A test holds this. Reordering it would look like tidying and would be a
+         * regression that nothing else would notice.
+         */
+        fun next(current: String?): String? = when (current) {
+            OBSCURED -> PRIVATE
+            PRIVATE -> null
+            else -> OBSCURED
+        }
+
         private const val ACCESS_TOKEN = "access_token"
         private const val PENDING_VERIFIER = "pending_verifier"
         private const val PENDING_CODE = "pending_code"
