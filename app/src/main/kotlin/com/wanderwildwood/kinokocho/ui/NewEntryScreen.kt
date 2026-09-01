@@ -197,14 +197,35 @@ private fun NothingLeftToAsk(
     onAddPhoto: () -> Unit,
     onDone: () -> Unit,
 ) {
+    /*
+     * The end of the key, and the list somebody actually walks away with.
+     *
+     * This showed the top three by score under the word "these", which is not the same
+     * set as the ones that fit: the ranking sorts on score alone, and a mismatch is worth
+     * -2.0 against a full match's +1.0, so a contradicted taxon can outrank an
+     * uncontradicted one. The same fault as the entry screen's "Not yet ruled out" list,
+     * in the place it matters most — this is the screen the questions were leading to.
+     *
+     * When nothing fits everything, the nearest few are still the useful answer, but the
+     * line above them has to stop calling them "these" and say what they are.
+     */
+    val live = ranking.live
+    val shortlist = ranking.shortlist(3)
+
     Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
         Text("Nothing more to ask", fontWeight = FontWeight.Bold)
         Text(
-            "Every question that would tell these apart has been answered or skipped.",
+            if (live.isEmpty()) {
+                "Nothing fits everything you wrote down — a real mushroom against a " +
+                    "description of a typical one. These come nearest, and one of the " +
+                    "answers may be worth looking at again."
+            } else {
+                "Every question that would tell these apart has been answered or skipped."
+            },
             style = MaterialThemeTypography().bodySmall,
             modifier = Modifier.padding(top = 4.dp),
         )
-        ranking.candidates.take(3).forEach {
+        shortlist.forEach {
             Text("· ${it.taxon.scientificName}", modifier = Modifier.padding(top = 6.dp))
         }
         ButtonMMD(onClick = onAddPhoto, modifier = Modifier.fillMaxWidth().padding(top = 16.dp)) {
@@ -241,7 +262,7 @@ private fun Footer(
             modifier = Modifier.padding(vertical = 6.dp),
         )
     } else {
-        val live = ranking.candidates.filter { it.mismatched == 0 }
+        val live = ranking.live
         Text(
             // "of 0 still possible" printed directly above two named candidates, which
             // is what the screen said whenever the answers contradicted each other —
@@ -256,7 +277,11 @@ private fun Footer(
             style = MaterialThemeTypography().bodySmall,
             modifier = Modifier.padding(top = 6.dp),
         )
-        val shown = ranking.candidates.take(2)
+        // The ones that still fit, so that "closest" means closest among those the line
+        // above has just counted. Showing the top two by score could put a contradicted
+        // taxon under "of 2 still possible", because the ranking sorts on score alone and
+        // a mismatch is -2.0 against a full match's +1.0.
+        val shown = ranking.shortlist(2)
         shown.forEach { c ->
             Text(
                 c.taxon.commonName?.let { n -> "${c.taxon.scientificName} — $n" }

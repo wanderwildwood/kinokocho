@@ -891,13 +891,49 @@ class KeyEngineTest {
             month = 9,
         )
         val ranking = engine.rank(answers)
-        val live = ranking.candidates.filter { it.mismatched == 0 }
 
-        assertTrue("expected something to still fit", live.isNotEmpty())
+        assertTrue("expected something to still fit", ranking.live.isNotEmpty())
         assertTrue(
             "the top of the list is now all live - if the scoring changed, this test's " +
                 "example needs replacing rather than deleting",
             ranking.candidates.take(4).any { it.mismatched > 0 },
+        )
+
+        // And the thing the screens actually call does not have that problem.
+        assertTrue(
+            "shortlist handed back something that had been contradicted",
+            ranking.shortlist(4).all { it.mismatched == 0 },
+        )
+    }
+
+    /**
+     * Nothing fitting everything is ordinary, not an error state.
+     *
+     * A person is looking at a real mushroom and the pack describes a typical one, so
+     * answers contradict each other often. The nearest few are then the useful thing to
+     * show — which is why [KeyEngine.Ranking.shortlist] falls back rather than going
+     * empty, and why the screens ask [KeyEngine.Ranking.live] whether that happened
+     * instead of inferring it from a length.
+     */
+    @Test
+    fun `when nothing fits, the shortlist is the nearest few rather than nothing`() {
+        // Two answers no single taxon in the pack carries together.
+        val contradictory = KeyEngine.Answers(
+            values = mapOf(
+                "fruitbody_type" to setOf("jelly"),
+                "gill_attachment" to setOf("decurrent"),
+                "ring" to setOf("skirt"),
+                "stipe_base" to setOf("sac_volva"),
+                "latex" to setOf("copious"),
+            ),
+            month = 9,
+        )
+        val ranking = engine.rank(contradictory)
+        assertTrue("expected this to contradict itself", ranking.live.isEmpty())
+        assertEquals(3, ranking.shortlist(3).size)
+        assertTrue(
+            "the nearest are ordered by score",
+            ranking.shortlist(3) == ranking.candidates.take(3),
         )
     }
 }

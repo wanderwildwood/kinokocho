@@ -169,7 +169,7 @@ fun EntryScreen(
         if (draft.answers.answeredCount > 0) {
             item {
                 Section("Not yet ruled out")
-                val live = ranking.candidates.filter { it.mismatched == 0 }
+                val live = ranking.live
                 Text(
                     // Not "0 of 110 still fit", printed above four names. Answers
                     // contradict one another often — a real mushroom against a
@@ -201,8 +201,7 @@ fun EntryScreen(
                  * ordinary, and the useful response is the nearest few rather than a
                  * blank space.
                  */
-                val listed = if (live.isEmpty()) ranking.candidates else live
-                listed.take(4).forEach { c ->
+                ranking.shortlist(4).forEach { c ->
                     Text(
                         c.taxon.commonName?.let { "${c.taxon.scientificName} — $it" }
                             ?: c.taxon.scientificName,
@@ -562,9 +561,7 @@ fun EntryScreen(
                 // The same correction as above, for the same reason: a name offered to
                 // be written down as what this turned out to be should not be one the
                 // answers have already ruled out.
-                val suggestable = ranking.candidates.filter { it.mismatched == 0 }
-                    .ifEmpty { ranking.candidates }
-                suggestable.take(3).forEach { c ->
+                ranking.shortlist(3).forEach { c ->
                     Text(
                         c.taxon.scientificName,
                         style = MaterialTheme.typography.bodySmall,

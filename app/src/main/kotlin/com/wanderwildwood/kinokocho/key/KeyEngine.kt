@@ -66,7 +66,32 @@ class KeyEngine(
          * rank. This is the list that must never be collapsed into a single number.
          */
         val hazards: List<Candidate>,
-    )
+    ) {
+        /**
+         * The ones nothing has contradicted.
+         *
+         * ⚠ **Not the top of [candidates].** That list is sorted on score alone, and a
+         * mismatch is worth -2.0 against a full match's +1.0 — so three good matches and
+         * one contradiction outranks two partial matches and none. Every screen that
+         * means "still possible" wants this, and four of them were taking the head of
+         * [candidates] instead, which put ruled-out taxa under headings that said they
+         * had not been ruled out.
+         */
+        val live: List<Candidate> get() = candidates.filter { it.mismatched == 0 }
+
+        /**
+         * What to put in front of somebody: the ones that fit, or the nearest few when
+         * nothing fits everything.
+         *
+         * The fallback is deliberate and is not a way of hiding the empty case.
+         * Contradictory answers are ordinary — a real mushroom against a description of a
+         * typical one — and the nearest few are then the useful thing to show. But the
+         * wording above the list has to change with it, so ask [live] whether it is
+         * empty rather than inferring it from the length of this.
+         */
+        fun shortlist(limit: Int): List<Candidate> =
+            live.ifEmpty { candidates }.take(limit)
+    }
 
     fun rank(answers: Answers): Ranking {
         val scored = pack.taxa.map { score(it, answers) }

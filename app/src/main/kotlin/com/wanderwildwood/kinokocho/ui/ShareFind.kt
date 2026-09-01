@@ -136,7 +136,7 @@ object ShareFind {
         }
 
         val ranking = engine.rank(draft.answers)
-        val live = ranking.candidates.filter { it.mismatched == 0 }
+        val live = ranking.live
         if (draft.answers.answeredCount > 0 && live.isNotEmpty()) {
             appendLine()
             appendLine("Not ruled out — ${live.size} of ${ranking.candidates.size}")
