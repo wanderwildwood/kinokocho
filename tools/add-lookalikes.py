@@ -126,7 +126,7 @@ PAIRS = [
      "silhouette of a mushroom inside it is a deadly Amanita that has not opened yet."),
 
     # Boletes.
-    ("boletus_edulis", "suillellus_subvelutipes",
+    ("boletus_edulis", "neoboletus_subvelutipes",
      ["bruising", "bruising_colour", "hymenophore_colour", "bruising_speed"],
      "The red-mouth bolete has red pore mouths and turns blue-black almost the instant it "
      "is cut. Porcini has whitish to olive pores and does not stain blue."),

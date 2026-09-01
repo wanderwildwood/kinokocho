@@ -62,6 +62,12 @@ the `tools/add-*.py` batches, the illustrator's brief from the pack itself. A fi
 has to be kept in step by hand is a file that drifts, and a work order that has drifted
 from the data is worse than none.
 
+`tools/check-names.py` asks GBIF and iNaturalist whether every name in the pack exists.
+Not a unit test: it needs the network and it depends on other people's databases moving
+under it. Run it when the pack changes. The tests can see that a name is a well-formed
+binomial, that its id agrees with it, that its lookalikes resolve — and all of that
+passes for a name that is well-formed, consistent, and not real.
+
 ## Also in it
 
 - **A month view.** What is about now, split evenly between the ones people go looking for

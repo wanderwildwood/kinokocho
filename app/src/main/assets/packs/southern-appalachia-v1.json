@@ -5664,8 +5664,8 @@
       "sought": false
     },
     {
-      "id": "suillellus_subvelutipes",
-      "scientificName": "Suillellus subvelutipes",
+      "id": "neoboletus_subvelutipes",
+      "scientificName": "Neoboletus subvelutipes",
       "commonName": "red-mouth bolete",
       "hazard": {
         "toxinClass": "gastrointestinal",
@@ -11604,7 +11604,7 @@
           "note": "The bitter bolete has a dark coarse net and pores that age pink, and one touch on the tongue settles it."
         },
         {
-          "taxon": "suillellus_subvelutipes",
+          "taxon": "neoboletus_subvelutipes",
           "discriminators": [
             "bruising",
             "hymenophore_colour",
@@ -20278,7 +20278,7 @@
       },
       "lookalikes": [
         {
-          "taxon": "suillellus_subvelutipes",
+          "taxon": "neoboletus_subvelutipes",
           "discriminators": [
             "hymenophore_colour",
             "bruising_speed",

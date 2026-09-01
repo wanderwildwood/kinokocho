@@ -89,8 +89,8 @@ TAXA = [
         reviewed=False,
     ),
     dict(
-        id="suillellus_subvelutipes",
-        scientificName="Suillellus subvelutipes",
+        id="neoboletus_subvelutipes",
+        scientificName="Neoboletus subvelutipes",
         commonName="red-mouth bolete",
         hazard=dict(toxinClass="gastrointestinal", severity="GI", onset="1-3 hours",
                     note="Red-pored boletes that stain blue instantly are not eaten.",

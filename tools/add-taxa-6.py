@@ -291,7 +291,7 @@ TAXA = [
              growth_habit={"single": "usually", "few": "usually"}),
          measurements=dict(cap_width_mm=[50, 150], stipe_height_mm=[50, 120]),
          season=dict(months=[6, 7, 8, 9, 10]),
-         lookalikes=[dict(taxon="suillellus_subvelutipes",
+         lookalikes=[dict(taxon="neoboletus_subvelutipes",
                           discriminators=["hymenophore_colour", "bruising_speed",
                                           "stipe_surface"],
                           note="The red-mouth bolete has red pore mouths and goes "

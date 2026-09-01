@@ -129,7 +129,7 @@ FLESH = {
     "armillaria_mellea": dict(white="usually", cream="sometimes"),
     "galerina_marginata": dict(tan="usually", yellow_brown="sometimes"),
     "laetiporus_sulphureus": dict(white="usually", cream="usually"),
-    "suillellus_subvelutipes": dict(yellow="usually"),
+    "neoboletus_subvelutipes": dict(yellow="usually"),
     "tylopilus_felleus": dict(white="usually"),
     "russula_virescens": dict(white="always"),
     "lactarius_indigo": dict(blue="usually"),

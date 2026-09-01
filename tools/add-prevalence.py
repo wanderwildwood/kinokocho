@@ -66,7 +66,7 @@ OCCASIONAL = {
     "lactifluus_volemus", "laetiporus_cincinnatus", "leucoagaricus_americanus",
     "morchella_americana", "panaeolus_papilionaceus", "peziza_badia",
     "phallus_ravenelii", "pluteus_petasatus", "ramaria_stricta",
-    "sarcoscypha_dudleyi", "suillellus_subvelutipes", "suillus_americanus",
+    "sarcoscypha_dudleyi", "neoboletus_subvelutipes", "suillus_americanus",
     "tricholoma_sejunctum",
     "strobilomyces_strobilaceus", "cortinarius_iodes", "ganoderma_tsugae",
     "hericium_coralloides", "tylopilus_plumbeoviolaceus", "gymnopilus_luteofolius",
