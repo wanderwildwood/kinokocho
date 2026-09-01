@@ -155,7 +155,27 @@ fun SeasonScreen(
                 modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
             )
         }
-        items(rest.size) { i -> TaxonLine(rest[i], onOpen) }
+        /*
+         * The same sentence the top of the page gets, for the rest of the list and for
+         * search results.
+         *
+         * The fix that stopped five rows all reading "Sought after." was applied to the
+         * short list at the top and nowhere else, so the long list under it and every
+         * search result still carried the bare label — which restates the heading and
+         * says nothing anyone can act on. Searching "morel" printed the false morel with
+         * its harm and then two morels reading only "Sought after.", when what those two
+         * rows most needed to say was that they are taken for the mushroom listed
+         * immediately above them.
+         *
+         * Against the whole pack while looking one up, because a search is explicitly
+         * "whatever month they are out in" and a confusion that only holds in season is
+         * the wrong answer to a question that has left the calendar behind. Against what
+         * is in season while browsing the month, which is what the top of the page does.
+         */
+        val against = if (looking) taxa else inSeason
+        items(rest.size) { i ->
+            TaxonLine(rest[i], onOpen, confusion = confusedWith(rest[i], against))
+        }
 
         item {
             OutlinedButtonMMD(
