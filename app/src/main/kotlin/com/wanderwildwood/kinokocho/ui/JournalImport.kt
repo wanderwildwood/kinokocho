@@ -54,7 +54,9 @@ object JournalImport {
                         entry.name == "journal.json" ->
                             journal = JSONObject(zip.readBytes().decodeToString())
                         entry.name.startsWith("photos/") && !entry.isDirectory ->
-                            pictures[entry.name.removePrefix("photos/")] = zip.readBytes()
+                            entry.name.removePrefix("photos/")
+                                .takeIf(::isPlainFileName)
+                                ?.let { pictures[it] = zip.readBytes() }
                     }
                     zip.closeEntry()
                 }
@@ -137,7 +139,19 @@ object JournalImport {
             find.optJSONArray("photos")?.let { list ->
                 for (p in 0 until list.length()) {
                     val photo = list.getJSONObject(p)
-                    val name = photo.optString("file").takeIf { it.isNotBlank() } ?: continue
+                    // The name comes out of the JSON inside the archive, and it is used
+                    // to build a path. A backup written by this app carries a uuid and
+                    // ".jpg", but nothing about reading a file somebody handed you
+                    // guarantees that: "../../databases/journal.db" is a valid string in
+                    // a JSON field, and File(photoDir, it) resolves happily out of the
+                    // photo directory and into the rest of the app's own storage.
+                    //
+                    // Restoring a backup is the one moment this app takes a whole file
+                    // from outside itself, and it is reached when something has already
+                    // gone wrong and somebody is anxious — which is not when anyone
+                    // inspects a zip before opening it.
+                    val name = photo.optString("file")
+                        .takeIf { it.isNotBlank() && isPlainFileName(it) } ?: continue
                     val file = File(dir, name)
                     // A file already on disk is left alone: names are uuids, so one that
                     // is there is the same picture, and rewriting it would be busywork at
@@ -162,4 +176,24 @@ object JournalImport {
         }
         return Result(added = added, alreadyHere = already, photos = photos)
     }
+
+    /**
+     * A bare file name, and nothing that can climb out of the directory it is joined to.
+     *
+     * Photographs written by [JournalExport] are a uuid and an extension, so this refuses
+     * nothing a real backup contains. It refuses what a hand-made one could: a separator
+     * of either slash, a `..` segment, an absolute path, and the two names that mean a
+     * directory rather than a file.
+     *
+     * Applied to the zip's own entry names as well as to the names in the JSON, because
+     * either half of the archive can be written by hand and the two are matched by that
+     * string — a check on one of them is a check on neither.
+     */
+    internal fun isPlainFileName(name: String): Boolean =
+        name.isNotBlank() &&
+            !name.contains('/') &&
+            !name.contains('\\') &&
+            name != "." &&
+            name != ".." &&
+            !name.startsWith("..")
 }

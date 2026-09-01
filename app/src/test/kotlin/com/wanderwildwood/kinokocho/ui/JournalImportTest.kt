@@ -136,4 +136,59 @@ class JournalImportTest {
         assertEquals(0, result.added)
         assertEquals(1, dao.allKept().size)
     }
+
+    /**
+     * A backup is the one whole file this app takes from outside itself.
+     *
+     * The photograph's name comes out of the JSON *inside* the archive and is joined to
+     * the photo directory to make a path — so a hand-made zip can ask for
+     * "../../databases/journal.db" and be answered, landing in the app's own storage
+     * rather than in its pictures. Nothing about a file somebody hands you guarantees it
+     * was written by [JournalExport], and this is reached when something has already gone
+     * wrong and somebody is anxious, which is not when anyone inspects a zip first.
+     *
+     * The find itself still imports. Refusing the whole backup over one bad name would
+     * lose the notes to protect the pictures.
+     */
+    @Test
+    fun `a photograph cannot be written outside the photo directory`() = runTest {
+        val escape = "../../escaped.jpg"
+        val crafted = File(context.cacheDir, "crafted.zip")
+        java.util.zip.ZipOutputStream(crafted.outputStream()).use { zip ->
+            zip.putNextEntry(java.util.zip.ZipEntry("journal.json"))
+            zip.write(
+                """
+                {"journal":[{"uuid":"crafted","recordedAt":1,"note":"","place":"",
+                 "identifiedAs":"","schemaVersion":1,
+                 "photos":[{"slot":"cap","file":"$escape"}]}]}
+                """.trimIndent().toByteArray()
+            )
+            zip.closeEntry()
+            zip.putNextEntry(java.util.zip.ZipEntry("photos/$escape"))
+            zip.write(byteArrayOf(9, 9, 9))
+            zip.closeEntry()
+        }
+
+        val outside = File(photoDir(context), escape)
+        val result = JournalImport.read(context, Uri.fromFile(crafted), dao)
+
+        assertNull(result.failed)
+        assertTrue("the find itself should still come in", result.added == 1)
+        assertEquals("a photograph was written outside the photo directory", false, outside.exists())
+        assertEquals("nothing should have been counted as written", 0, result.photos)
+        // And no row points at a name that is really a path.
+        assertTrue(dao.findByUuid("crafted")!!.photos.none { it.fileName.contains("..") })
+        crafted.delete()
+    }
+
+    @Test
+    fun `only a bare file name is accepted`() {
+        assertTrue(JournalImport.isPlainFileName("3f2b-9c.jpg"))
+        assertEquals(false, JournalImport.isPlainFileName("../secrets"))
+        assertEquals(false, JournalImport.isPlainFileName("a/b.jpg"))
+        assertEquals(false, JournalImport.isPlainFileName("a\\b.jpg"))
+        assertEquals(false, JournalImport.isPlainFileName("/etc/passwd"))
+        assertEquals(false, JournalImport.isPlainFileName(".."))
+        assertEquals(false, JournalImport.isPlainFileName(""))
+    }
 }
