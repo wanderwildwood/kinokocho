@@ -114,7 +114,10 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
 /** A find not yet published: what will be sent, and the button that sends it. */
 @Composable
 private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
-    var geoprivacy by remember { mutableStateOf(vm.inat.geoprivacy) }
+    // Keyed on the find, not remembered loosely. See the note on `armed` below; the
+    // setting itself is global, but re-reading it per find also means a change made
+    // while looking at another one is not shown stale here.
+    var geoprivacy by remember(draft.uuid) { mutableStateOf(vm.inat.geoprivacy) }
 
     /*
      * A find with no coordinates, which is the ordinary case rather than the odd one.
@@ -200,7 +203,15 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
      * who already read it, which is the same reason for asking. The row disarms itself
      * after four seconds so a stray tap does not leave a live trigger.
      */
-    var armed by remember { mutableStateOf(false) }
+    /*
+     * ⚠ Keyed on the find. Without the key this is the photograph bug again, which this
+     * repo has already fixed once ("The armed photograph never put its own question
+     * down"): Compose keeps the state in the slot, not with the data, so arming Publish
+     * on one find and then opening another within four seconds left the second one armed
+     * — and a single tap published a mushroom nobody had been asked about. Four seconds
+     * is a narrow window and it is somebody's observation going public.
+     */
+    var armed by remember(draft.uuid) { mutableStateOf(false) }
     LaunchedEffect(armed) {
         if (armed) {
             delay(4000)
