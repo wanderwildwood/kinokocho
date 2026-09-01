@@ -40,7 +40,7 @@ object TaxonPlate {
         "chlorociboria_aeruginascens" to R.drawable.plate_chlorociboria_aeruginascens,
         "clavulina_coralloides" to R.drawable.plate_clavulina_coralloides,
         "daldinia_childiae" to R.drawable.plate_daldinia_childiae,
-        "desarmillaria_tabescens" to R.drawable.plate_desarmillaria_tabescens,
+        "desarmillaria_caespitosa" to R.drawable.plate_desarmillaria_caespitosa,
         "galerina_marginata" to R.drawable.plate_galerina_marginata,
         "ganoderma_applanatum" to R.drawable.plate_ganoderma_applanatum,
         "gymnopus_dryophilus" to R.drawable.plate_gymnopus_dryophilus,

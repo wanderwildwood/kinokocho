@@ -36,6 +36,14 @@ PACK = Path(__file__).resolve().parent.parent / (
     "app/src/main/assets/packs/southern-appalachia-v1.json"
 )
 UA = "kinokocho-name-check (https://github.com/wanderwildwood/kinokocho)"
+PLACE = 30  # North Carolina, which is what this pack is for.
+
+# Below this many records here, a name is worth a second look — but only alongside the
+# sibling test in displaced_by_sibling, never on its own.
+PRESENT = 3
+
+# ...and a congener needs at least this many before its abundance means anything.
+SIBLING = 200
 
 
 def get(url):
@@ -70,6 +78,76 @@ def gbif(name):
     return None, None
 
 
+def displaced_by_sibling(name, common):
+    """Is a mushroom in the same genus far commoner here, under a different epithet?
+
+    Absence on its own says very little. Plenty of real, correctly named species have no
+    records in one state — Amanita phalloides has none here and is in this pack on
+    purpose, as a warning about something that would matter enormously if it turned up.
+    Reporting every one of those buries the case that matters in a list nobody reads.
+
+    The case that matters has a shape: the pack's name has no records here *and* a
+    congener has thousands. That is what a species split looks like from the outside.
+    Desarmillaria tabescens has none in this state and Desarmillaria caespitosa has three
+    and a half thousand, because the ringless honey mushrooms growing here were separated
+    off under the second name. Following a synonym chain gives the current name for a
+    taxon; it does not tell you the taxon is the one that grows where the pack is about.
+    """
+    wanted = name.replace(" var. ", " ")
+    found = get(
+        "https://api.inaturalist.org/v1/taxa?"
+        + urllib.parse.urlencode({"q": wanted, "per_page": 5})
+    ).get("results", [])
+    exact = [t for t in found if t.get("name", "").lower() == wanted.lower()]
+    if not exact:
+        return None
+    mine = inat_records_here(exact[0]["id"])
+    if mine >= PRESENT:
+        return None
+
+    genus = wanted.split()[0]
+    time.sleep(1.1)
+    genus_hit = get(
+        "https://api.inaturalist.org/v1/taxa?"
+        + urllib.parse.urlencode({"q": genus, "rank": "genus", "per_page": 5})
+    ).get("results", [])
+    genus_hit = [t for t in genus_hit if t.get("name") == genus]
+    if not genus_hit:
+        return None
+    time.sleep(1.1)
+    counts = get(
+        "https://api.inaturalist.org/v1/observations/species_counts?"
+        + urllib.parse.urlencode(
+            {"taxon_id": genus_hit[0]["id"], "place_id": PLACE,
+             "quality_grade": "research", "per_page": 5}
+        )
+    ).get("results", [])
+    # And the sibling has to be the *same mushroom* under another name, not merely
+    # another member of a large genus. Amanita parcivolvata being everywhere says nothing
+    # about Amanita citrina; they are two species and both belong here. What says
+    # something is a congener carrying the same common name, which is what a population
+    # separated off under a new epithet looks like: Desarmillaria caespitosa and
+    # D. tabescens are both the ringless honey mushroom, and only one of them grows here.
+    ours = (common or "").strip().lower()
+    if not ours:
+        return None
+    for row in counts:
+        sibling, seen = row["taxon"]["name"], row["count"]
+        theirs = (row["taxon"].get("preferred_common_name") or "").strip().lower()
+        if sibling.lower() != wanted.lower() and seen >= SIBLING and theirs == ours:
+            return mine, sibling, seen
+    return None
+
+
+def inat_records_here(taxon_id):
+    """Research-grade observations of this taxon in the pack's own region."""
+    time.sleep(1.1)
+    query = urllib.parse.urlencode(
+        {"taxon_id": taxon_id, "place_id": PLACE, "quality_grade": "research", "per_page": 0}
+    )
+    return get(f"https://api.inaturalist.org/v1/observations?{query}").get("total_results", 0)
+
+
 def inat(name):
     """What iNaturalist calls it, which is what an identifier there will recognise."""
     # Varieties are written "Amanita muscaria guessowii" there, without the "var.".
@@ -86,7 +164,7 @@ def inat(name):
 
 def main():
     taxa = json.loads(PACK.read_text())["taxa"]
-    nowhere, synonyms, elsewhere = [], [], []
+    nowhere, synonyms, elsewhere, absentees = [], [], [], []
 
     for taxon in taxa:
         name = taxon["scientificName"]
@@ -111,8 +189,25 @@ def main():
             synonyms.append((name, accepted))
         if other:
             elsewhere.append((name, other))
+        else:
+            try:
+                displaced = displaced_by_sibling(name, taxon.get("commonName"))
+            except Exception:  # noqa: BLE001
+                displaced = None
+            if displaced:
+                absentees.append((name, *displaced))
 
     print(f"\n{len(taxa)} names checked.\n")
+
+    if absentees:
+        print("Possibly the wrong species for this region. Each of these has almost no")
+        print("records here while a mushroom in the same genus has a great many, which")
+        print("is what a species split looks like from outside — the pack may be naming")
+        print("the population that grows somewhere else.")
+        for name, mine, sibling, seen in absentees:
+            print(f"    {name:<34} {mine:>5} here")
+            print(f"    {'':<34} {seen:>5} for {sibling}")
+        print()
 
     if nowhere:
         print("NOT A PUBLISHED NAME — GBIF cannot match the binomial at all:")

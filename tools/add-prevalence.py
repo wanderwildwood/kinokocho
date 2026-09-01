@@ -31,7 +31,7 @@ PACK = os.path.join(HERE, "..", "app", "src", "main", "assets", "packs",
 COMMON = {
     "agaricus_campestris", "amanita_bisporigera", "amanita_flavoconia",
     "amanita_muscaria_guessowii", "amanita_rubescens", "amanita_vaginata",
-    "armillaria_mellea", "desarmillaria_tabescens", "auricularia_americana",
+    "armillaria_mellea", "desarmillaria_caespitosa", "auricularia_americana",
     "cantharellus_appalachiensis", "cantharellus_cinnabarinus",
     "cantharellus_lateritius", "chlorophyllum_molybdites", "coprinus_comatus",
     "craterellus_fallax", "daldinia_childiae", "galerina_marginata",
