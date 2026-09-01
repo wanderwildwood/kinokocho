@@ -3649,9 +3649,10 @@
       "season": {
         "months": [
           9,
-          10
+          10,
+          11
         ],
-        "note": "A sharp two-month window in this region."
+        "note": "A sharp window either side of October, with a tail into November."
       },
       "lookalikes": [
         {
@@ -3865,8 +3866,14 @@
       },
       "season": {
         "months": [
-          7
-        ]
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "note": "Summer into autumn, overlapping the whole hen of the woods season."
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",

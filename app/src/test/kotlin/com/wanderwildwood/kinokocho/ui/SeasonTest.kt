@@ -160,6 +160,51 @@ class SeasonTest {
     }
 
     /**
+     * A mushroom people go looking for can always be warned about.
+     *
+     * A confusion in the pack is only ever shown on a month page where both are in
+     * season, so a pair whose months do not touch is a warning that exists in the data
+     * and cannot reach anybody. Two were like that. Galerina was listed December to
+     * March against a honey mushroom in September and October. And Meripilus sumstinei
+     * was listed **for July alone** — the hen of the woods is picked in September and
+     * October, so the one thing it is confused with was never named beside it. Records
+     * put Meripilus from May to October, three hundred of them in July and a hundred and
+     * fifty in September; the single month was simply wrong.
+     *
+     * Restricted to the sought-after ones on purpose. Two taxa nobody hunts may genuinely
+     * not overlap — Sarcoscypha dudleyi and Legaliana badia do not, and both match their
+     * records — and that is a fact about mushrooms rather than a fault in the pack. The
+     * ones somebody carries a basket for are the ones where silence costs something.
+     */
+    @Test
+    fun `anything sought after shares a month with what it is taken for`() {
+        val unreachable = pack.taxa.filter { it.sought }.mapNotNull { sought ->
+            val partners = pack.taxa.filter { other ->
+                other.id != sought.id &&
+                    (sought.lookalikes.any { it.taxon == other.id } ||
+                        other.lookalikes.any { it.taxon == sought.id })
+            }
+            val harmful = partners.filter {
+                it.hazard.severity.ordinal > Hazard.Severity.UNKNOWN.ordinal
+            }
+            val overlapping = harmful.filter { partner ->
+                sought.seasonMonths.isEmpty() || partner.seasonMonths.isEmpty() ||
+                    (sought.seasonMonths intersect partner.seasonMonths).isNotEmpty()
+            }
+            if (harmful.isNotEmpty() && overlapping.isEmpty()) {
+                "${sought.scientificName} ${sought.seasonMonths.sorted()} is taken for " +
+                    harmful.joinToString { "${it.scientificName} ${it.seasonMonths.sorted()}" }
+            } else {
+                null
+            }
+        }
+        assertTrue(
+            "a warning the pack holds can never be shown:\n" + unreachable.joinToString("\n"),
+            unreachable.isEmpty(),
+        )
+    }
+
+    /**
      * The deadly galerina is in season in every month, because it is found in every
      * month.
      *
