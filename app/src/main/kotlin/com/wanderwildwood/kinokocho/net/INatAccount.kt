@@ -73,6 +73,20 @@ class INatAccount(context: Context) {
         return if (now - fetched < API_TOKEN_LIFETIME) token else null
     }
 
+    /**
+     * Throws away the cached JWT while keeping the sign-in.
+     *
+     * For the case where the day-long token stops being accepted before this phone
+     * thinks it has expired — a clock that moved, a secret rotated at the other end. The
+     * access token behind it is usually still perfectly good, so signing the reader out
+     * would be an overreaction to something that fixes itself: drop the JWT, and the
+     * next attempt mints a fresh one. "Press it again" is already how everything else
+     * here recovers.
+     */
+    fun forgetApiToken() {
+        prefs.edit().remove(API_TOKEN).remove(API_TOKEN_AT).apply()
+    }
+
     fun rememberApiToken(token: String, now: Long = System.currentTimeMillis()) {
         prefs.edit().putString(API_TOKEN, token).putLong(API_TOKEN_AT, now).apply()
     }

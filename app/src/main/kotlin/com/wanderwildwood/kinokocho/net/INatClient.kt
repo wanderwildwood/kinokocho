@@ -22,7 +22,22 @@ import kotlinx.coroutines.withContext
  * an account that revoked this app last week — so nothing throws. [Result] is what
  * comes back, and the screen says what it says.
  */
-class INatClient(private val account: INatAccount) : INatApi {
+class INatClient(
+    private val account: INatAccount,
+    /**
+     * Where iNaturalist is. Parameters rather than constants only so that the tests can
+     * stand a real HTTP server in front of this and read what it actually sends — the
+     * headers, the multipart body, the handling of a redirect. Nothing in the app ever
+     * passes anything but the defaults.
+     */
+    private val site: String = INatAuth.SITE,
+    private val api: String = API,
+    /**
+     * How long to wait before each call. Only ever moved by the tests, which would
+     * otherwise spend a second of real time proving each thing they prove.
+     */
+    private val courtesyPause: Long = COURTESY_PAUSE,
+) : INatApi {
 
     sealed interface Result<out T> {
         data class Ok<T>(val value: T) : Result<T>
@@ -39,7 +54,7 @@ class INatClient(private val account: INatAccount) : INatApi {
             code = code,
             verifier = verifier,
         )
-        return when (val r = post("${INatAuth.SITE}/oauth/token", body, FORM, auth = null)) {
+        return when (val r = post("$site/oauth/token", body, FORM, auth = null)) {
             is Result.Failed -> r
             is Result.Ok -> {
                 val token = runCatching { org.json.JSONObject(r.value).optString("access_token") }
@@ -68,7 +83,7 @@ class INatClient(private val account: INatAccount) : INatApi {
         val access = account.accessToken
             ?: return Result.Failed("Not signed in to iNaturalist.", signedOut = true)
 
-        return when (val r = get("${INatAuth.SITE}/users/api_token", auth = "Bearer $access")) {
+        return when (val r = get("$site/users/api_token", auth = "Bearer $access")) {
             is Result.Failed -> {
                 if (r.signedOut) account.signOut()
                 r
@@ -89,7 +104,7 @@ class INatClient(private val account: INatAccount) : INatApi {
 
     /** Who this phone is signed in as, for showing on the button. */
     suspend fun me(jwt: String): Result<String> =
-        when (val r = get("$API/users/me", auth = jwt)) {
+        when (val r = get("$api/users/me", auth = jwt)) {
             is Result.Failed -> r
             is Result.Ok -> {
                 val login = runCatching {
@@ -102,7 +117,7 @@ class INatClient(private val account: INatAccount) : INatApi {
         }
 
     override suspend fun createObservation(jwt: String, body: String): Result<INatPayload.Created> =
-        when (val r = post("$API/observations", body, JSON, auth = jwt)) {
+        when (val r = post("$api/observations", body, JSON, auth = jwt).also(::noteIfRefused)) {
             is Result.Failed -> r
             is Result.Ok -> INatPayload.created(r.value)
                 ?.let { Result.Ok(it) }
@@ -136,11 +151,11 @@ class INatClient(private val account: INatAccount) : INatApi {
         )
         return when (
             val r = post(
-                "$API/observation_photos",
+                "$api/observation_photos",
                 body,
                 "multipart/form-data; boundary=$boundary",
                 auth = jwt,
-            )
+            ).also(::noteIfRefused)
         ) {
             is Result.Failed -> r
             is Result.Ok -> Result.Ok(INatPayload.photoId(r.value))
@@ -156,7 +171,20 @@ class INatClient(private val account: INatAccount) : INatApi {
      * app to see less than the reader does.
      */
     override suspend fun fetchObservation(jwt: String, uuid: String): Result<String> =
-        get("$API/observations/$uuid", auth = jwt)
+        get("$api/observations/$uuid", auth = jwt).also(::noteIfRefused)
+
+    /**
+     * A day-long token refused before this phone thought it had a day left.
+     *
+     * A clock that moved, a secret rotated at the other end — the sign-in behind it is
+     * usually still good, so this drops the cached JWT rather than signing anybody out.
+     * The next attempt mints a fresh one, which makes "press it again" the recovery here
+     * too. Without it the app would refuse every push until the cache aged out on its
+     * own, with nothing the reader could do about it and nothing telling them why.
+     */
+    private fun noteIfRefused(result: Result<*>) {
+        if (result is Result.Failed && result.signedOut) account.forgetApiToken()
+    }
 
     // ---- the plumbing -------------------------------------------------------------
 
@@ -180,7 +208,7 @@ class INatClient(private val account: INatAccount) : INatApi {
         // iNaturalist asks for about one request a second and says they may block an
         // address that ignores it. A push is a handful of calls made once by one person,
         // so the polite thing costs nothing worth having.
-        delay(COURTESY_PAUSE)
+        delay(courtesyPause)
 
         var connection: HttpURLConnection? = null
         try {
@@ -188,6 +216,22 @@ class INatClient(private val account: INatAccount) : INatApi {
                 requestMethod = method
                 connectTimeout = 20_000
                 readTimeout = 60_000
+                /*
+                 * Do not follow redirects, which is the difference between a useful
+                 * failure and a dead end.
+                 *
+                 * `/users/api_token` answers an unauthenticated request with
+                 * `redirect_to login_path` rather than a 401 — their own comment above
+                 * it says they are not sure why current_user is sometimes nil. Followed,
+                 * that arrives here as **200 and a page of HTML**, the JSON parse fails,
+                 * and the app reports a vague "did not return a token" while quietly
+                 * keeping the access token that has just been proved dead. There is then
+                 * no way back short of reinstalling, because nothing ever concludes the
+                 * sign-in is gone.
+                 *
+                 * Unfollowed, it is a 302, which is the truth and is handled below.
+                 */
+                instanceFollowRedirects = false
                 setRequestProperty("User-Agent", USER_AGENT)
                 setRequestProperty("Accept", "application/json")
                 auth?.let { setRequestProperty("Authorization", it) }
@@ -210,6 +254,12 @@ class INatClient(private val account: INatAccount) : INatApi {
 
             when {
                 code in 200..299 -> Result.Ok(text)
+                // Being sent to a login page is being told to sign in again. See the
+                // note on instanceFollowRedirects above.
+                code in 300..399 -> Result.Failed(
+                    "iNaturalist asked for a sign-in. Sign in again.",
+                    signedOut = true,
+                )
                 code == 401 || code == 403 -> Result.Failed(
                     INatPayload.errorFrom(text)
                         ?: "iNaturalist would not accept the sign-in. Sign in again.",
