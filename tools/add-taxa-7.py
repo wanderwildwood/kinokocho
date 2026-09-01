@@ -296,7 +296,7 @@ TAXA = [
                                "and milk that stays white.")],
          sources=GBIF + MORPH, reviewed=False),
 
-    dict(id="lactarius_subvellereus", scientificName="Lactarius subvellereus",
+    dict(id="lactifluus_subvellereus", scientificName="Lactifluus subvellereus",
          commonName="white acrid milkcap", prevalence="common", sought=False,
          hazard=hz("unknown", "GI", "1-3 hours",
                    "Acrid enough to make people ill. The taste says so at once.",

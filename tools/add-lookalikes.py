@@ -141,19 +141,19 @@ PAIRS = [
      "ring zone. Porcini is dry, brown and heavy."),
 
     # Small brown things in grass.
-    ("marasmius_oreades", "inocybe_rimosa",
+    ("marasmius_oreades", "pseudosperma_rimosum",
      ["spore_print", "odour", "cap_shape", "cap_surface"],
      "Fibrecaps have a radially split, silky-fibrous cap, an umbo, a dull earthy or "
      "spermatic smell, and a dull brown print. The fairy ring champignon is smooth, "
      "smells faintly of almonds and prints white. Fibrecaps are muscarine poisonings."),
-    ("clitocybe_gibba", "paxillus_involutus",
+    ("infundibulicybe_gibba", "paxillus_involutus",
      ["cap_margin", "bruising", "bruising_colour", "spore_print"],
      "The brown roll-rim has a margin rolled tightly under, gills that bruise rust-brown "
      "to the touch and lift away from the cap, and a brown print. The common funnel does "
      "none of that."),
 
     # Cups, jellies, crusts, brackets.
-    ("sarcoscypha_dudleyi", "peziza_badia",
+    ("sarcoscypha_dudleyi", "legaliana_badia",
      ["cap_colour", "substrate", "flesh_consistency"],
      "The scarlet elf cup is bright red inside and sits on wet fallen wood in late "
      "winter. The bay cup is brown, on soil, and later in the year."),
@@ -184,7 +184,7 @@ PAIRS = [
      "it can be confused with once it is cut."),
 
     # A big white acrid milkcap against a big pale mild one.
-    ("lactarius_subvellereus", "lactifluus_hygrophoroides",
+    ("lactifluus_subvellereus", "lactifluus_hygrophoroides",
      ["gill_spacing", "taste", "cap_colour"],
      "Both are pale milkcaps of much the same size. The hygrophorus milkcap has gills "
      "you can count at arm's length and mild milk; this one has crowded gills and milk "

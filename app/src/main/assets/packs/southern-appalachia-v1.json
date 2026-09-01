@@ -2395,8 +2395,8 @@
       "sought": false
     },
     {
-      "id": "gyromitra_caroliniana",
-      "scientificName": "Gyromitra caroliniana",
+      "id": "neogyromitra_caroliniana",
+      "scientificName": "Neogyromitra caroliniana",
       "commonName": "false morel",
       "hazard": {
         "toxinClass": "gyromitrin",
@@ -4020,7 +4020,7 @@
       },
       "lookalikes": [
         {
-          "taxon": "gyromitra_caroliniana",
+          "taxon": "neogyromitra_caroliniana",
           "discriminators": [
             "stipe_flesh",
             "cap_colour"
@@ -4181,7 +4181,7 @@
       },
       "lookalikes": [
         {
-          "taxon": "gyromitra_caroliniana",
+          "taxon": "neogyromitra_caroliniana",
           "discriminators": [
             "stipe_flesh",
             "cap_colour"
@@ -6596,7 +6596,7 @@
       },
       "lookalikes": [
         {
-          "taxon": "peziza_badia",
+          "taxon": "legaliana_badia",
           "discriminators": [
             "cap_colour",
             "substrate",
@@ -9577,7 +9577,7 @@
       },
       "lookalikes": [
         {
-          "taxon": "inocybe_rimosa",
+          "taxon": "pseudosperma_rimosum",
           "discriminators": [
             "spore_print",
             "odour",
@@ -11013,8 +11013,8 @@
       "sought": false
     },
     {
-      "id": "clitocybe_gibba",
-      "scientificName": "Clitocybe gibba",
+      "id": "infundibulicybe_gibba",
+      "scientificName": "Infundibulicybe gibba",
       "commonName": "common funnel",
       "hazard": {
         "toxinClass": "unknown",
@@ -13724,8 +13724,8 @@
       "sought": false
     },
     {
-      "id": "peziza_badia",
-      "scientificName": "Peziza badia",
+      "id": "legaliana_badia",
+      "scientificName": "Legaliana badia",
       "commonName": "bay cup",
       "hazard": {
         "toxinClass": "gastrointestinal",
@@ -14901,8 +14901,8 @@
       "sought": false
     },
     {
-      "id": "inocybe_rimosa",
-      "scientificName": "Inocybe rimosa",
+      "id": "pseudosperma_rimosum",
+      "scientificName": "Pseudosperma rimosum",
       "commonName": "split fibrecap",
       "hazard": {
         "toxinClass": "muscarine",
@@ -16953,8 +16953,8 @@
       "sought": true
     },
     {
-      "id": "armillaria_tabescens",
-      "scientificName": "Armillaria tabescens",
+      "id": "desarmillaria_tabescens",
+      "scientificName": "Desarmillaria tabescens",
       "commonName": "ringless honey mushroom",
       "hazard": {
         "toxinClass": "gastrointestinal",
@@ -17952,8 +17952,8 @@
       "sought": false
     },
     {
-      "id": "clitocybe_nuda",
-      "scientificName": "Clitocybe nuda",
+      "id": "collybia_nuda",
+      "scientificName": "Collybia nuda",
       "commonName": "blewit",
       "hazard": {
         "toxinClass": "unknown",
@@ -20523,7 +20523,7 @@
       },
       "lookalikes": [
         {
-          "taxon": "clitocybe_nuda",
+          "taxon": "collybia_nuda",
           "discriminators": [
             "spore_print",
             "ring",
@@ -20768,8 +20768,8 @@
       "reviewed": false
     },
     {
-      "id": "clavulina_cristata",
-      "scientificName": "Clavulina cristata",
+      "id": "clavulina_coralloides",
+      "scientificName": "Clavulina coralloides",
       "commonName": "crested coral",
       "prevalence": "common",
       "sought": false,
@@ -21503,8 +21503,8 @@
       "reviewed": false
     },
     {
-      "id": "psathyrella_candolleana",
-      "scientificName": "Psathyrella candolleana",
+      "id": "candolleomyces_candolleanus",
+      "scientificName": "Candolleomyces candolleanus",
       "commonName": "pale brittlestem",
       "prevalence": "common",
       "sought": false,
@@ -23334,8 +23334,8 @@
       "reviewed": false
     },
     {
-      "id": "lactarius_subvellereus",
-      "scientificName": "Lactarius subvellereus",
+      "id": "lactifluus_subvellereus",
+      "scientificName": "Lactifluus subvellereus",
       "commonName": "white acrid milkcap",
       "prevalence": "common",
       "sought": false,

@@ -331,7 +331,7 @@ TAXA = [
              growth_habit={"few": "usually", "single": "usually"}),
          measurements=dict(cap_width_mm=[20, 70], stipe_height_mm=[40, 90]),
          season=dict(months=[6, 7, 8, 9, 10]),
-         lookalikes=[dict(taxon="clitocybe_nuda",
+         lookalikes=[dict(taxon="collybia_nuda",
                           discriminators=["spore_print", "ring", "cap_surface"],
                           note="A blewit prints pale pink and has no veil at all. Any "
                                "purple mushroom printing rust-brown is a webcap, and "
@@ -372,7 +372,7 @@ TAXA = [
                                "across on a twig.")],
          sources=GBIF, reviewed=False),
 
-    dict(id="clavulina_cristata", scientificName="Clavulina cristata",
+    dict(id="clavulina_coralloides", scientificName="Clavulina coralloides",
          commonName="crested coral", prevalence="common", sought=False,
          hazard=hz(),
          note="White coral with flattened tips finely crested like antlers. Often half "
@@ -491,7 +491,7 @@ TAXA = [
          season=dict(months=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
          lookalikes=[], sources=GBIF, reviewed=False),
 
-    dict(id="psathyrella_candolleana", scientificName="Psathyrella candolleana",
+    dict(id="candolleomyces_candolleanus", scientificName="Candolleomyces candolleanus",
          commonName="pale brittlestem", prevalence="common", sought=False,
          hazard=hz("unknown", "UNKNOWN", "—",
                    "A large genus of small brown mushrooms, several of them unpleasant "

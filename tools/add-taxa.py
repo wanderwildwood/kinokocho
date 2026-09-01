@@ -80,7 +80,7 @@ TAXA = [
         ),
         measurements=dict(cap_width_mm=[30, 90], stipe_height_mm=[30, 90]),
         season=dict(months=[3, 4, 5]),
-        lookalikes=[dict(taxon="gyromitra_caroliniana",
+        lookalikes=[dict(taxon="neogyromitra_caroliniana",
                          discriminators=["stipe_flesh", "cap_surface"],
                          note="A false morel is chambered or cottony inside, not one "
                               "hollow space, and its head is folded like a brain rather "
@@ -118,7 +118,7 @@ TAXA = [
         ),
         measurements=dict(cap_width_mm=[25, 70], stipe_height_mm=[30, 80]),
         season=dict(months=[3, 4, 5]),
-        lookalikes=[dict(taxon="gyromitra_caroliniana",
+        lookalikes=[dict(taxon="neogyromitra_caroliniana",
                          discriminators=["stipe_flesh", "cap_surface"],
                          note="Chambered inside rather than hollow, and folded rather "
                               "than pitted.")],
@@ -365,7 +365,7 @@ def main():
     # there is, and it is the same state as the thing it is confused with — which is
     # the point: they must be told apart by the knife test, not by the first question.
     for t in pack["taxa"]:
-        if t["id"] == "gyromitra_caroliniana":
+        if t["id"] == "neogyromitra_caroliniana":
             t["characters"]["fruitbody_type"] = [
                 collections.OrderedDict([("value", "morel_like"), ("frequency", "always")])
             ]
@@ -385,7 +385,7 @@ def main():
                              "and folded like a brain."),
                 ])
             ]
-            print("  re-typed gyromitra_caroliniana as morel_like")
+            print("  re-typed neogyromitra_caroliniana as morel_like")
 
     with open(PACK, "w") as f:
         json.dump(pack, f, indent=2, ensure_ascii=False)

@@ -12,7 +12,7 @@ Three pairs here exist to be told apart from something already in the pack:
 
 - **Amanita vaginata** has a sac volva and *no ring*; jacksonii has both. Between them
   and bisporigera, the reader sees that "sac at the base" is not by itself an answer.
-- **Armillaria tabescens** is the honey mushroom without a ring, beside *A. mellea*
+- **Desarmillaria tabescens** is the honey mushroom without a ring, beside *A. mellea*
   which has one — and both grow in the same clusters on the same wood as the deadly
   Galerina.
 - **Agaricus xanthodermus** stains yellow and smells of phenol, next to
@@ -234,7 +234,7 @@ TAXA = [
          season=dict(months=[4, 5, 6, 9, 10]),
          lookalikes=[], sources=GBIF, reviewed=False),
 
-    dict(id="armillaria_tabescens", scientificName="Armillaria tabescens",
+    dict(id="desarmillaria_tabescens", scientificName="Desarmillaria tabescens",
          commonName="ringless honey mushroom",
          hazard=hz("gastrointestinal", "GI", "1-3 hours",
                    "Upsets a good many people, and always when undercooked.", NAMA[0]),
@@ -382,7 +382,7 @@ TAXA = [
          season=dict(months=[4, 5, 6, 7, 8, 9, 10]),
          lookalikes=[], sources=GBIF, reviewed=False),
 
-    dict(id="clitocybe_nuda", scientificName="Clitocybe nuda", commonName="blewit",
+    dict(id="collybia_nuda", scientificName="Collybia nuda", commonName="blewit",
          hazard=hz("unknown", "UNKNOWN", "—",
                    "Upsets some people, and raw it upsets most.", NAMA[0]),
          note="Violet all over when young — cap, gills and stem — fading to tan. Pale "

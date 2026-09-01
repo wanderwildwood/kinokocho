@@ -426,7 +426,7 @@ def fruitbody_type():
 )
 
     write(f"art_{c}_cup_disc",
-          "Peziza badia",
+          "Legaliana badia",
           "An ascomycete cup, sessile, hymenium on the inner face.",
           path("M18,40 Q18,74 48,74 Q78,74 78,40"),
           path("M18,40 Q48,28 78,40 Q48,50 18,40 Z"),
@@ -706,7 +706,7 @@ def cap_shape():
           path("M12,46 Q26,38 40,50 Q48,55 56,50 Q70,38 84,46 Q48,60 12,46 Z"),
           stem(58))
 
-    write(f"art_{c}_funnel", "Clitocybe gibba",
+    write(f"art_{c}_funnel", "Infundibulicybe gibba",
           "The whole cap slopes down into the stem — a funnel, not a dish.",
           path("M10,28 L42,62 L54,62 L86,28 Q84,40 58,72 L38,72 Q12,40 10,28 Z"),
           stem(76, half=5.5))
@@ -891,7 +891,7 @@ def cap_margin():
     write(f"art_{c}_straight", "Russula virescens",
           "Meeting the cap surface at a straight edge.",
           body, path("M14,50 L14,64 M82,50 L82,64"))
-    write(f"art_{c}_uplifted", "Clitocybe gibba",
+    write(f"art_{c}_uplifted", "Infundibulicybe gibba",
           "Turned up with age, exposing the gills from the side.",
           path("M14,42 Q34,60 48,42 Q62,60 82,42"),
           path("M44,44 L44,82 M52,44 L52,82"))
@@ -1426,7 +1426,7 @@ def cap_surface():
           swatch(),
           path("M32,40 L36,40 M46,36 L50,36 M60,42 L64,42 M36,56 L40,56 "
                "M52,58 L56,58 M44,68 L48,68", width=HAIR))
-    write(f"art_{c}_silky", "Inocybe rimosa", "Fine parallel fibres, like brushed silk.",
+    write(f"art_{c}_silky", "Pseudosperma rimosum", "Fine parallel fibres, like brushed silk.",
           swatch(),
           path("M24,30 Q48,26 72,32 M22,42 Q48,38 74,44 M22,54 Q48,50 74,56 "
                "M24,66 Q48,62 72,68", width=HAIR))
@@ -1453,7 +1453,7 @@ def cap_surface():
           swatch(),
           path("M26,28 Q22,18 28,12 M38,24 Q34,14 40,8 M50,23 Q48,12 54,8 "
                "M62,26 Q60,16 68,12 M72,34 Q72,24 80,20", width=FINE))
-    write(f"art_{c}_wrinkled", "Gyromitra caroliniana",
+    write(f"art_{c}_wrinkled", "Neogyromitra caroliniana",
           "Folded into ridges and hollows, like a brain.",
           swatch(),
           path("M24,34 Q34,26 42,36 Q50,46 60,36 Q68,28 74,38 "

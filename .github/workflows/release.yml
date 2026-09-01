@@ -64,12 +64,18 @@ jobs:
       # Every drawing and the whole taxon pack are generated, and a generated file that
       # has been hand-edited is a file that will be overwritten one day without anyone
       # noticing. Regenerate and require the tree to come back unchanged.
+      # Both of the generator's outputs, not just one. make-art.py writes the drawables
+      # *and* CharacterArt.kt, which carries the exemplar species named under each
+      # drawing — and only the drawables were checked, so the Kotlin was a generated file
+      # with nothing watching it, which is the exact thing this step exists to prevent.
+      # It went stale the first time a taxon was renamed.
       - name: Check the generated art is what the generator produces
         run: |
           python3 tools/make-art.py
-          if ! git diff --quiet -- app/src/main/res; then
+          generated="app/src/main/res app/src/main/kotlin/com/wanderwildwood/kinokocho/ui/CharacterArt.kt"
+          if ! git diff --quiet -- $generated; then
             echo "::error::The checked-in drawings differ from what tools/make-art.py produces."
-            git diff --stat -- app/src/main/res
+            git diff --stat -- $generated
             exit 1
           fi
 

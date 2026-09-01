@@ -520,8 +520,8 @@ TAXA = [
         lookalikes=[], sources=GBIF, reviewed=False,
     ),
     dict(
-        id="clitocybe_gibba",
-        scientificName="Clitocybe gibba",
+        id="infundibulicybe_gibba",
+        scientificName="Infundibulicybe gibba",
         commonName="common funnel",
         hazard=hz("unknown", "UNKNOWN", "—",
                   "The genus contains species with muscarine; not a genus to eat from "

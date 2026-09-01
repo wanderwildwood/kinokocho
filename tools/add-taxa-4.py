@@ -336,7 +336,7 @@ TAXA = [
          season=dict(months=[5, 6, 7, 8, 9, 10]),
          lookalikes=[], sources=GBIF, reviewed=False),
 
-    dict(id="peziza_badia", scientificName="Peziza badia", commonName="bay cup",
+    dict(id="legaliana_badia", scientificName="Legaliana badia", commonName="bay cup",
          hazard=hz("gastrointestinal", "GI", "1-3 hours",
                    "Raw Peziza upsets people.", NAMA[0]),
          note="A brown cup sitting straight on the soil, often on a bank or a path "
@@ -495,7 +495,7 @@ TAXA = [
          season=dict(months=[5, 6, 7, 8, 9, 10, 11]),
          lookalikes=[], sources=GBIF, reviewed=False),
 
-    dict(id="inocybe_rimosa", scientificName="Inocybe rimosa",
+    dict(id="pseudosperma_rimosum", scientificName="Pseudosperma rimosum",
          commonName="split fibrecap",
          hazard=hz("muscarine", "SEVERE", "15 minutes to 2 hours",
                    "Muscarine: sweating, tears, salivation, slowed heart. Treatable "

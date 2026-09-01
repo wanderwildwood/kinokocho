@@ -87,7 +87,7 @@ FILL = {
         "odour": mixed(usually=["none"], sometimes=["mushroomy"]),
         "taste": mixed(usually=["mild"]),
     },
-    "gyromitra_caroliniana": {
+    "neogyromitra_caroliniana": {
         "flesh_colour": mixed(usually=["white", "cream"]),
         "growth_habit": mixed(usually=["single", "few"]),
         "habitat": mixed(usually=["broadleaf_wood"], sometimes=["mixed_wood", "disturbed"]),

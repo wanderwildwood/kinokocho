@@ -260,10 +260,31 @@ class KeyEngineTest {
             "substrate" to "wood",
             "growth_habit" to "caespitose",
         )
-        // In the field they are genuinely confusable, so both stay near the top.
-        val fieldOnly = engine.rank(shared).candidates.map { it.taxon.id }.take(4)
-        assertTrue(fieldOnly.contains("galerina_marginata"))
-        assertTrue(fieldOnly.contains("armillaria_mellea"))
+        /*
+         * In the field they are genuinely confusable, so neither is ruled out.
+         *
+         * This used to assert that both were in the top four, which was never a property
+         * of the engine — those three answers leave **eight taxa tied at exactly the same
+         * score**, and the order among them is the alphabetical tiebreak and nothing else.
+         * It passed until a taxon was renamed: Psathyrella candolleana became
+         * Candolleomyces candolleanus, moved from P to C, and pushed Galerina off the
+         * front of a list it had only ever been on by alphabet.
+         *
+         * What matters is that neither has been ruled out. Which of eight equal
+         * candidates appears first is not a fact worth freezing in a test, and freezing
+         * it hid that the tie was there at all.
+         */
+        val ranking = engine.rank(shared)
+        val stillFit = ranking.live.map { it.taxon.id }
+        assertTrue("the honey mushroom was ruled out", stillFit.contains("armillaria_mellea"))
+        assertTrue("Galerina was ruled out", stillFit.contains("galerina_marginata"))
+
+        // And the deadly one is carried whatever the alphabet does, which is the
+        // arrangement that makes the tie safe.
+        assertTrue(
+            "a lethal candidate must not depend on sorting to stay in view",
+            ranking.hazards.any { it.taxon.id == "galerina_marginata" },
+        )
 
         // The print settles it, and it settles it both ways.
         val rusty = shared.with("spore_print", setOf("brown"))

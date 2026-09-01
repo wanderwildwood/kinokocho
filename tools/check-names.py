@@ -45,12 +45,29 @@ def get(url):
 
 
 def gbif(name):
-    """ACCEPTED, a synonym's target, or None when the binomial does not exist."""
+    """ACCEPTED, a synonym's target, or None when the binomial does not exist.
+
+    Two lookups, because one is not enough. `species/match` in strict mode answers "is
+    this a name in GBIF's backbone", and it says NONE for perfectly real combinations
+    the backbone has not adopted — it did so for Neoboletus subvelutipes and Collybia
+    nuda, which are what iNaturalist calls those two mushrooms. A checker that reports
+    those as fictional is a checker somebody stops reading, and then it is worth less
+    than nothing, because the one real case is buried among its false alarms.
+
+    So a strict miss falls through to the name index, which knows published names the
+    backbone has not ranked.
+    """
     query = urllib.parse.urlencode({"name": name, "kingdom": "Fungi", "strict": "true"})
     found = get(f"https://api.gbif.org/v1/species/match?{query}")
-    if found.get("matchType") == "NONE":
-        return None, None
-    return found.get("status"), found.get("species") or found.get("scientificName")
+    if found.get("matchType") != "NONE":
+        return found.get("status"), found.get("species") or found.get("scientificName")
+
+    search = urllib.parse.urlencode({"q": name, "rank": "SPECIES", "limit": 20})
+    for result in get(f"https://api.gbif.org/v1/species/search?{search}").get("results", []):
+        published = (result.get("species") or result.get("scientificName") or "")
+        if published.lower().startswith(name.lower()) and result.get("kingdom") == "Fungi":
+            return result.get("taxonomicStatus"), None
+    return None, None
 
 
 def inat(name):
@@ -79,15 +96,19 @@ def main():
             print(f"  ? {name}: could not ask GBIF ({exc})")
             continue
 
-        if status is None:
-            nowhere.append(name)
-        elif status == "SYNONYM":
-            synonyms.append((name, accepted))
-
         try:
             other = inat(name)
         except Exception:  # noqa: BLE001
             other = None
+
+        # "Exists nowhere" means both authorities have never heard of it, not that one
+        # of them prefers another name. iNaturalist carrying it as an active taxon is
+        # proof enough that somebody published it — and iNaturalist is where a reader
+        # of this app will go looking.
+        if status is None and other is not None:
+            nowhere.append(name)
+        elif status == "SYNONYM" and accepted:
+            synonyms.append((name, accepted))
         if other:
             elsewhere.append((name, other))
 
