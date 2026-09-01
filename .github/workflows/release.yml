@@ -73,8 +73,24 @@ jobs:
             exit 1
           fi
 
+      # The iNaturalist application id is not in this repository and has no default, so
+      # a build without it produces an app with no publishing button at all. That is the
+      # right outcome for a fork and the wrong one to ship by accident, so which of the
+      # two happened is said out loud in the log rather than left to be discovered by
+      # installing it. Set INAT_CLIENT_ID as a repository secret to turn publishing on.
+      # It is not a secret in the cryptographic sense - a PKCE client id cannot be - it
+      # is kept out of the tree because it is an identity.
       - name: Build release APK
-        run: ./gradlew :app:assembleRelease
+        env:
+          INAT_CLIENT_ID: ${{ secrets.INAT_CLIENT_ID }}
+        run: |
+          if [ -n "$INAT_CLIENT_ID" ]; then
+            echo "Building with iNaturalist publishing enabled."
+            ./gradlew :app:assembleRelease -PinatClientId="$INAT_CLIENT_ID"
+          else
+            echo "::warning::INAT_CLIENT_ID is not set - this release cannot publish to iNaturalist."
+            ./gradlew :app:assembleRelease
+          fi
 
       # Signed with the wrong key is not something that can be taken back once people have
       # installed it, and gradle prints BUILD SUCCESSFUL for an unsigned APK just as

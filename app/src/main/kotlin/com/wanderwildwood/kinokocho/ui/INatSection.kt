@@ -178,7 +178,14 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
                 "iNaturalist is told where it was and shows the public a random point " +
                     "within about twenty kilometres. The place you typed is kept, not shown."
             else ->
-                "The map pin is where you found it, for anyone."
+                // The words too, and this is the only setting where that is true.
+                // `obscure_place_guess` only moves a typed note into a private field
+                // when there is a geoprivacy to apply; with none, "the big oak below the
+                // spring" is on the page. Saying only "the map pin" here would be
+                // accurate about coordinates and quietly wrong about the sentence next
+                // to them.
+                "The map pin is where you found it, and the place you typed is shown " +
+                    "beside it. For anyone."
         },
         style = MaterialTheme.typography.bodySmall,
     )
