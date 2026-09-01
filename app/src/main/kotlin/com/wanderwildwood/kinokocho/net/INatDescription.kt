@@ -41,7 +41,10 @@ object INatDescription {
             appendLine()
         }
 
-        appendLine("What I could see")
+        // The heading only when there is something under it. A find published straight
+        // off the journal with nothing but a photograph is a real thing to do, and
+        // "What I could see" followed by nothing is a heading that says nothing.
+        if (draft.answers.values.isNotEmpty()) appendLine("What I could see")
         draft.answers.values.forEach { (characterId, chosen) ->
             val character = schema.character(characterId) ?: return@forEach
             val labels = chosen.mapNotNull { c ->

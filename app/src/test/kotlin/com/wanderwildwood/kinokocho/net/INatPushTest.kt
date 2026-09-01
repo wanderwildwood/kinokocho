@@ -210,6 +210,30 @@ class INatPushTest {
     }
 
     /**
+     * Finishing an interrupted push does not move the date it was published.
+     *
+     * "Send the rest" comes back through the same path, so a naive stamp of "now" would
+     * have an entry published in August claim September as soon as its last photograph
+     * caught up — a date quietly moving in a record whose whole value is when and where.
+     */
+    @Test
+    fun `sending the rest of the photographs keeps the day it was first published`() = runTest {
+        val draft = aFindWithPhotos("a.jpg", "b.jpg")
+        val pusher = push(Notebook(failFromPhoto = 2))
+        pusher.push(schema, engine, draft, INatAccount.OBSCURED)
+
+        val id = draft.observationId!!
+        val firstTime = dao.findOne(id)!!.observation.inat.pushedAt
+        assertNotNull(firstTime)
+
+        // Some days later, the rest of the photographs go up.
+        push(Notebook()).push(schema, engine, dao.findOne(id)!!.let { draft }, INatAccount.OBSCURED)
+
+        assertEquals(firstTime, dao.findOne(id)!!.observation.inat.pushedAt)
+        assertEquals(0, dao.photosOf(id).count { it.inatPhotoId == null })
+    }
+
+    /**
      * The community's name, and never the app's own opinion, written where the reader's
      * own answer cannot be overwritten by it.
      */

@@ -87,7 +87,16 @@ class INatPush(
         }
 
         // Written down before a single picture goes up. See the note on the class.
-        dao.recordPush(observationId, created.uuid, System.currentTimeMillis())
+        //
+        // The date is the *first* time this went up, not this attempt. "Send the rest"
+        // comes back through here to finish an interrupted push, and stamping today over
+        // it would have the entry claim it was published on the day the photographs
+        // caught up — quietly moving a date in a record whose whole value is when.
+        dao.recordPush(
+            observationId,
+            created.uuid,
+            stored.observation.inat.pushedAt ?: System.currentTimeMillis(),
+        )
 
         val photos = stored.photos
         var sent = 0
