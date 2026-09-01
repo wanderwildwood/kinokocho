@@ -4,6 +4,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.wanderwildwood.kinokocho.schema.CharacterValue
 
@@ -37,11 +40,12 @@ import com.wanderwildwood.kinokocho.schema.CharacterValue
  * Two per row, not three: at three the drawing is 44dp on this panel and the volva
  * stops being legible, which is the one drawing that must never stop being legible.
  */
-@Composable
-fun ChoiceGrid(
+fun LazyListScope.choiceGrid(
     characterId: String,
     values: List<CharacterValue>,
     picked: Set<String>,
+    /** How tall the list's viewport is, so whole rows can be made to fill it. */
+    viewport: Dp,
     onPick: (String) -> Unit,
 ) {
     /*
@@ -60,10 +64,42 @@ fun ChoiceGrid(
      * nothing is padded for the sake of a value that is not there.
      */
     val lines = linesFor(values.map { it.label })
+    val rows = values.chunked(2)
 
-    values.chunked(2).forEach { pair ->
+    /*
+     * One list item per row of tiles, not one item for the whole grid.
+     *
+     * The grid used to go into the list as a single item, which took the list's own
+     * paging away from it: there was nothing between the top of the grid and the bottom
+     * of it for a page to stop at, so a swipe left off wherever the pixels fell and the
+     * bottom row was sliced through the middle of its drawings. On a screen that turns
+     * pages rather than scrolling, a half-drawn mushroom at the fold reads as damage.
+     *
+     * A row per item gives the list the edges it snaps to, and the fold lands between
+     * tiles.
+     */
+    /*
+     * And a whole number of rows to the page, so none is ever cut through.
+     *
+     * A row per item gave the list edges to snap to when it turns a page, and that alone
+     * was not enough: the viewport is whatever height is left after the question and the
+     * footer, which is no particular number of rows, so the first screenful still ended
+     * part-way down a tile. What a reader sees is the top third of two drawings under the
+     * fold, which on a panel that turns pages reads as damage rather than as "more below".
+     *
+     * So the rows are stretched a little to divide the viewport exactly. Only stretched:
+     * where every row already fits there is nothing to divide and they keep their natural
+     * height, and a character with two choices does not get one tile half a screen tall.
+     */
+    val rowHeight = heightToFill(viewport, ROW_MIN + LINE * lines, rows.size, GAP)
+
+    items(rows.size, key = { rows[it].first().id }) { i ->
+        val pair = rows[i]
         Row(
-            Modifier.fillMaxWidth().height(IntrinsicSize.Max).padding(bottom = 8.dp),
+            Modifier
+                .fillMaxWidth()
+                .then(rowHeight?.let { Modifier.height(it) } ?: Modifier.height(IntrinsicSize.Max))
+                .padding(bottom = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             pair.forEach { value ->
@@ -103,6 +139,35 @@ private fun linesFor(labels: List<String>): Int {
 
 /** Characters of `bodySmall` that fit across one tile on a 480px, 210dpi panel. */
 private const val PER_LINE = 25
+
+/**
+ * How tall to make each of [count] choices so that a whole number of them fills
+ * [viewport], or null when they all fit already and should keep their own height.
+ *
+ * ⚠ [gap] is the list's own spacing between items and is not optional arithmetic. Four
+ * choices in a viewport do not get a quarter of it each — they get a quarter of what is
+ * left after three gaps. Dividing the whole height and hoping produced a list overflowing
+ * by exactly the three gaps, which is one more sliced row and looks identical to the
+ * fault being fixed.
+ *
+ * [natural] must not be *under* what a choice really needs either, or the division comes
+ * out too many and the content is squeezed into less room than it takes — the same
+ * clipping, moved inside the box instead of under the fold.
+ */
+internal fun heightToFill(viewport: Dp, natural: Dp, count: Int, gap: Dp): Dp? {
+    var fits = count
+    while (fits > 1 && natural * fits + gap * (fits - 1) > viewport) fits--
+    return if (count <= fits) null else (viewport - gap * (fits - 1)) / fits
+}
+
+/** A tile with no words at all: the drawing, its padding, and the gap under the row. */
+private val ROW_MIN = 96.dp
+
+/** One line of `bodySmall`, near enough to divide a viewport by. */
+private val LINE = 16.dp
+
+/** What the question list puts between two items. Must match `verticalArrangement`. */
+internal val GAP = 6.dp
 
 /**
  * One choice: the drawing, and the words under it.

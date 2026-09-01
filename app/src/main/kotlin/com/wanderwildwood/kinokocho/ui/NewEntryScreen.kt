@@ -3,10 +3,12 @@ package com.wanderwildwood.kinokocho.ui
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
@@ -113,20 +115,40 @@ fun NewEntryScreen(
         // stands in for one would be worse than the word.
         val drawn = CharacterArt.coversAll(questionId, values.map { it.id })
 
+        // Measured rather than assumed: the list gets whatever is left between the
+        // question and the footer, and the tiles need to know how much that is if they
+        // are to divide it into whole rows.
+        BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
+        val viewport = maxHeight
         LazyColumnMMD(
-            Modifier.weight(1f).fillMaxWidth().padding(top = 8.dp),
+            Modifier.fillMaxSize().padding(top = 8.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             if (drawn) {
-                item {
-                    ChoiceGrid(
-                        characterId = questionId,
-                        values = values,
-                        picked = picked,
-                        onPick = choose,
-                    )
-                }
+                choiceGrid(
+                    characterId = questionId,
+                    values = values,
+                    picked = picked,
+                    viewport = viewport - 8.dp,
+                    onPick = choose,
+                )
             } else {
+                /*
+                 * The same whole-rows-to-a-page rule as the picture tiles.
+                 *
+                 * These are the questions with no drawings — colour, smell, taste — and
+                 * they are the longest lists in the app, so they were the worst for it:
+                 * sixteen smells with the fifth sliced through by the fold. The natural
+                 * height is deliberately generous, because guessing it low would squeeze
+                 * a gloss out of its own box and move the clipping inside the button.
+                 */
+                val tall = values.any { it.gloss != null }
+                val optionHeight = heightToFill(
+                    viewport = viewport - 8.dp,
+                    natural = if (tall) 55.dp else 42.dp,
+                    count = values.size,
+                    gap = GAP,
+                )
                 items(values, key = { it.id }) { value ->
                     val selected = value.id in picked
                     // The gloss where there is one. Colour is the character with no
@@ -145,16 +167,12 @@ fun NewEntryScreen(
                             }
                         }
                     }
+                    val shape = Modifier.fillMaxWidth()
+                        .then(optionHeight?.let { Modifier.height(it) } ?: Modifier)
                     if (selected) {
-                        ButtonMMD(
-                            onClick = { choose(value.id) },
-                            modifier = Modifier.fillMaxWidth(),
-                        ) { face() }
+                        ButtonMMD(onClick = { choose(value.id) }, modifier = shape) { face() }
                     } else {
-                        OutlinedButtonMMD(
-                            onClick = { choose(value.id) },
-                            modifier = Modifier.fillMaxWidth(),
-                        ) { face() }
+                        OutlinedButtonMMD(onClick = { choose(value.id) }, modifier = shape) { face() }
                     }
                 }
             }
@@ -171,6 +189,7 @@ fun NewEntryScreen(
             }
 
 
+        }
         }
 
         Footer(
