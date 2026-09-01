@@ -184,7 +184,25 @@ fun EntryScreen(
                     },
                     style = MaterialTheme.typography.bodySmall,
                 )
-                ranking.candidates.take(4).forEach { c ->
+                /*
+                 * The ones that fit, under a heading that says they fit.
+                 *
+                 * This listed `ranking.candidates` — everything, in score order — while
+                 * the line above it counted only those with no mismatches. The two
+                 * disagreed, because the sort is on score alone and a mismatch is worth
+                 * -2.0 against a full match's +1.0: three good matches and one
+                 * contradiction still outranks two partial matches and none. Found by
+                 * searching the real pack, where "1 of 110 still fit" printed four names
+                 * of which three were ruled out, the live one being a puffball and the
+                 * first ruled-out one Agaricus campestris.
+                 *
+                 * The empty case still shows the nearest, which is deliberate and is
+                 * what the wording above promises — a contradiction between answers is
+                 * ordinary, and the useful response is the nearest few rather than a
+                 * blank space.
+                 */
+                val listed = if (live.isEmpty()) ranking.candidates else live
+                listed.take(4).forEach { c ->
                     Text(
                         c.taxon.commonName?.let { "${c.taxon.scientificName} — $it" }
                             ?: c.taxon.scientificName,
@@ -293,16 +311,32 @@ fun EntryScreen(
                         Modifier.fillMaxWidth().padding(top = 6.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        // The first drawn state of the character, as a reminder of what
-                        // the question even looks like.
-                        vm.schema.valuesOf(character).firstNotNullOfOrNull {
+                        /*
+                         * The first drawn state of the character, as a reminder of what
+                         * the question even looks like.
+                         *
+                         * The gutter is kept when there is no drawing, which is not
+                         * padding for its own sake. The characters with no art are
+                         * exactly the ones that cannot be drawn — smell, taste, the
+                         * spore print, the KOH reaction — so they turn up in this list
+                         * often, and without the space they started at the margin while
+                         * their neighbours were indented behind an icon. Three advisory
+                         * rows in three different places is not a list, it is a fault
+                         * somebody has to decide to ignore.
+                         */
+                        val art = vm.schema.valuesOf(character).firstNotNullOfOrNull {
                             CharacterArt.of(characterId, it.id)
-                        }?.let { art ->
+                        }
+                        if (art != null) {
                             Icon(
                                 painter = painterResource(art.drawable),
                                 contentDescription = null,
                                 tint = MaterialTheme.colorScheme.onSurface,
                                 modifier = Modifier.size(32.dp).padding(end = 8.dp),
+                            )
+                        } else {
+                            androidx.compose.foundation.layout.Spacer(
+                                Modifier.size(32.dp).padding(end = 8.dp)
                             )
                         }
                         Column {
@@ -525,7 +559,12 @@ fun EntryScreen(
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(top = 4.dp),
                 )
-                ranking.candidates.take(3).forEach { c ->
+                // The same correction as above, for the same reason: a name offered to
+                // be written down as what this turned out to be should not be one the
+                // answers have already ruled out.
+                val suggestable = ranking.candidates.filter { it.mismatched == 0 }
+                    .ifEmpty { ranking.candidates }
+                suggestable.take(3).forEach { c ->
                     Text(
                         c.taxon.scientificName,
                         style = MaterialTheme.typography.bodySmall,

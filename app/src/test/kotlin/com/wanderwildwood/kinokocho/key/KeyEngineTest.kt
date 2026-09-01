@@ -863,4 +863,41 @@ class KeyEngineTest {
         assertFalse("size was asked: $asked", asked.contains("size"))
         assertFalse(engine.mostValuableMissing(KeyEngine.Answers()).any { it.first == "size" })
     }
+
+    /**
+     * The ranking is ordered by score alone, so a ruled-out taxon can outrank a live one.
+     *
+     * This is not a defect in the ranking — the nearest few are exactly what a screen
+     * should show when nothing fits — but it is a trap for anything that takes the top
+     * of the list and calls it "still possible". The entry screen did: it counted taxa
+     * with no mismatches and then listed the top four regardless, so "1 of 110 still fit"
+     * appeared above four names of which three were ruled out.
+     *
+     * A mismatch is worth -2.0 against a full match's +1.0, so three good matches and one
+     * contradiction beats two partial matches and none. The case below is from the real
+     * pack. **Anything that means "not ruled out" must filter on `mismatched == 0`
+     * itself**, and this test exists to say so where the next person will find it.
+     */
+    @Test
+    fun `the top of the ranking is not the same as what has not been ruled out`() {
+        val answers = KeyEngine.Answers(
+            values = mapOf(
+                "ring" to setOf("absent"),
+                "bruising_colour" to setOf("olive"),
+                "fruitbody_type" to setOf("jelly"),
+                "cap_margin" to setOf("translucent_striate"),
+                "stipe_flesh" to setOf("chambered"),
+            ),
+            month = 9,
+        )
+        val ranking = engine.rank(answers)
+        val live = ranking.candidates.filter { it.mismatched == 0 }
+
+        assertTrue("expected something to still fit", live.isNotEmpty())
+        assertTrue(
+            "the top of the list is now all live - if the scoring changed, this test's " +
+                "example needs replacing rather than deleting",
+            ranking.candidates.take(4).any { it.mismatched > 0 },
+        )
+    }
 }
