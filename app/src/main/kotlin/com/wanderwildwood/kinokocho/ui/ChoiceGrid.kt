@@ -44,8 +44,11 @@ fun LazyListScope.choiceGrid(
     characterId: String,
     values: List<CharacterValue>,
     picked: Set<String>,
-    /** How tall the list's viewport is, so whole rows can be made to fill it. */
-    viewport: Dp,
+    /**
+     * The height each row must take to divide the page, or null to keep its own.
+     * Worked out by the caller, which needs the same number to pad the end of the list.
+     */
+    rowHeight: Dp?,
     onPick: (String) -> Unit,
 ) {
     /*
@@ -91,7 +94,6 @@ fun LazyListScope.choiceGrid(
      * where every row already fits there is nothing to divide and they keep their natural
      * height, and a character with two choices does not get one tile half a screen tall.
      */
-    val rowHeight = heightToFill(viewport, ROW_MIN + LINE * lines, rows.size, GAP)
 
     items(rows.size, key = { rows[it].first().id }) { i ->
         val pair = rows[i]
@@ -132,7 +134,7 @@ fun LazyListScope.choiceGrid(
  * rest stay put — which is the ragged patchwork this exists to avoid, but only for the
  * one row rather than all of them.
  */
-private fun linesFor(labels: List<String>): Int {
+internal fun linesFor(labels: List<String>): Int {
     val longest = labels.maxOfOrNull { it.length } ?: 0
     return ((longest + PER_LINE - 1) / PER_LINE).coerceIn(1, 4)
 }
@@ -161,10 +163,10 @@ internal fun heightToFill(viewport: Dp, natural: Dp, count: Int, gap: Dp): Dp? {
 }
 
 /** A tile with no words at all: the drawing, its padding, and the gap under the row. */
-private val ROW_MIN = 96.dp
+internal val ROW_MIN = 96.dp
 
 /** One line of `bodySmall`, near enough to divide a viewport by. */
-private val LINE = 16.dp
+internal val LINE = 16.dp
 
 /** What the question list puts between two items. Must match `verticalArrangement`. */
 internal val GAP = 6.dp

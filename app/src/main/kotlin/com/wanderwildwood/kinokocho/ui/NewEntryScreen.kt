@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
@@ -119,9 +120,53 @@ fun NewEntryScreen(
         // question and the footer, and the tiles need to know how much that is if they
         // are to divide it into whole rows.
         BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
-        val viewport = maxHeight
+        val viewport = maxHeight - 8.dp
+        val glossed = values.any { it.gloss != null }
+
+        // What one choice occupies, worked out here rather than inside the list, because
+        // the list needs the same number twice: once to size the choices and once to say
+        // how far past the last of them it may scroll.
+        val unit = if (drawn) {
+            heightToFill(
+                viewport = viewport,
+                natural = ROW_MIN + LINE * linesFor(values.map { it.label }),
+                count = (values.size + 1) / 2,
+                gap = GAP,
+            )
+        } else {
+            heightToFill(
+                viewport = viewport,
+                natural = if (glossed) 55.dp else 42.dp,
+                count = values.size,
+                gap = GAP,
+            )
+        }
+
+        /*
+         * Enough blank items to make the list a whole number of pages.
+         *
+         * Sizing the choices to divide the page is not enough on its own, and padding the
+         * end by a loose amount is worse: it lets the list stop anywhere at all. What cuts
+         * the last page is the *clamp* — at the bottom there is nothing further to scroll,
+         * so the list rests against its own end, and whatever lands under the top edge is
+         * wherever the remainder happened to fall.
+         *
+         * If every item is the same height and the count is a multiple of a page, the end
+         * of the list is itself a page boundary, and resting against it puts a choice's
+         * top edge at the top of the screen like every other stopping place. So the skip
+         * button takes a choice's height too, and blank items make up the difference.
+         */
+        val perPage = unit?.let { u ->
+            var n = 1
+            while (u * (n + 1) + GAP * n <= viewport) n++
+            n
+        }
+        val realItems = (if (drawn) (values.size + 1) / 2 else values.size) + 1  // + skip
+        val blanks = perPage?.let { (it - realItems % it) % it } ?: 0
+
         LazyColumnMMD(
             Modifier.fillMaxSize().padding(top = 8.dp),
+            contentPadding = PaddingValues(bottom = 0.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             if (drawn) {
@@ -129,7 +174,7 @@ fun NewEntryScreen(
                     characterId = questionId,
                     values = values,
                     picked = picked,
-                    viewport = viewport - 8.dp,
+                    rowHeight = unit,
                     onPick = choose,
                 )
             } else {
@@ -142,13 +187,6 @@ fun NewEntryScreen(
                  * height is deliberately generous, because guessing it low would squeeze
                  * a gloss out of its own box and move the clipping inside the button.
                  */
-                val tall = values.any { it.gloss != null }
-                val optionHeight = heightToFill(
-                    viewport = viewport - 8.dp,
-                    natural = if (tall) 55.dp else 42.dp,
-                    count = values.size,
-                    gap = GAP,
-                )
                 items(values, key = { it.id }) { value ->
                     val selected = value.id in picked
                     // The gloss where there is one. Colour is the character with no
@@ -168,7 +206,7 @@ fun NewEntryScreen(
                         }
                     }
                     val shape = Modifier.fillMaxWidth()
-                        .then(optionHeight?.let { Modifier.height(it) } ?: Modifier)
+                        .then(unit?.let { Modifier.height(it) } ?: Modifier)
                     if (selected) {
                         ButtonMMD(onClick = { choose(value.id) }, modifier = shape) { face() }
                     } else {
@@ -180,13 +218,21 @@ fun NewEntryScreen(
             item {
                 // Not a state of the mushroom. A state of the person looking at it, and
                 // it must never be scored as though they had answered.
+                //
+                // A choice's height, so the list is one uniform column and any position
+                // it rests at is the top of something.
                 OutlinedButtonMMD(
                     onClick = { vm.skip(questionId) },
-                    modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                    modifier = Modifier.fillMaxWidth()
+                        .then(unit?.let { Modifier.height(it) } ?: Modifier),
                 ) {
                     Text(if (character.notTested) "I looked and cannot say" else "Skip this")
                 }
             }
+
+            // The blank tail that makes the count a whole number of pages. Nothing to
+            // read, and it is what the end of a list looks like.
+            items(blanks) { Box(Modifier.fillMaxWidth().height(unit ?: 0.dp)) }
 
 
         }
