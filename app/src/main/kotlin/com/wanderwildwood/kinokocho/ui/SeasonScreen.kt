@@ -305,8 +305,31 @@ private fun harmOf(taxon: Taxon): String = when (taxon.hazard.severity) {
  */
 fun confusedWith(taxon: Taxon, inSeason: List<Taxon>): Taxon? {
     val out = inSeason.associateBy { it.id }
-    return taxon.lookalikes
-        .mapNotNull { out[it.taxon] }
+
+    /*
+     * Both directions, because confusion is mutual and the pack records it once.
+     *
+     * This read only the taxon's own lookalike list, so a warning could appear only on
+     * the row of whichever of the pair happened to be written up first — and that is
+     * usually the dangerous one, whose page already says it. The row that needs the
+     * sentence is the *other* one: the mushroom somebody is out looking for.
+     *
+     * The honey mushroom is the case that shows it. Galerina marginata lists Armillaria
+     * mellea as a lookalike and its own note says people have died from a small quantity
+     * picked among honey mushrooms. Armillaria mellea does not list Galerina back — so
+     * the sought-after row, the one a person reads before going out, said only "Sought
+     * after." while the pack held exactly the sentence it needed.
+     *
+     * An edge is a claim that two mushrooms get mistaken for one another. Which end it
+     * was written from is an accident of how the pack was filled in.
+     */
+    val named = taxon.lookalikes.mapNotNull { out[it.taxon] }
+    val naming = inSeason.filter { other ->
+        other.id != taxon.id && other.lookalikes.any { it.taxon == taxon.id }
+    }
+
+    return (named + naming)
+        .distinctBy { it.id }
         .filter { it.hazard.severity.ordinal > Hazard.Severity.UNKNOWN.ordinal }
         .maxByOrNull { it.hazard.severity.ordinal }
 }

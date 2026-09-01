@@ -868,6 +868,45 @@ class KeyEngineTest {
         assertTrue("median was ${steps.sorted()[steps.size / 2]}", steps.sorted()[steps.size / 2] <= 6)
     }
 
+    /**
+     * The key never asks something no taxon in the pack could answer.
+     *
+     * `age` and `condition` are in the schema and **no taxon carries either** — they
+     * describe the specimen rather than the species, which is why the entry screen asks
+     * for them beside the place and the photographs instead of letting the key ask. A
+     * question like that cannot narrow anything: every taxon scores unscored, the
+     * candidate list is exactly as long afterwards, and the reader has been made to stand
+     * in a wood answering it.
+     *
+     * Nothing enforces that today beyond information gain happening to come out at zero.
+     * That is probably enough and it is not obviously enough, and the failure would be
+     * quiet — a wasted question rather than a wrong answer.
+     */
+    @Test
+    fun `the key never asks a question no taxon in the pack can answer`() {
+        val carried = pack.taxa.flatMap { it.characters.keys }.toSet()
+        val unanswerable = schema.characters.map { it.id }.filterNot { it in carried }
+        assertTrue("expected age and condition to be among these", unanswerable.contains("age"))
+
+        // Walk several different keys out, not one, so a question that only appears
+        // after some particular answer is still reached.
+        val starts = listOf(
+            "gilled_stemmed", "bolete", "polypore", "puffball", "coral", "jelly", "cup",
+        )
+        val asked = mutableSetOf<String>()
+        for (start in starts) {
+            var a = KeyEngine.Answers(values = mapOf("fruitbody_type" to setOf(start)), month = 9)
+            repeat(25) {
+                val q = engine.nextQuestion(a) ?: return@repeat
+                asked += q
+                val value = pack.taxa.firstNotNullOfOrNull { it.characters[q]?.firstOrNull()?.value }
+                a = if (value != null) a.with(q, setOf(value)) else a.markNotTested(q)
+            }
+        }
+        val wasted = asked.intersect(unanswerable.toSet())
+        assertTrue("the key asked questions nothing can answer: $wasted", wasted.isEmpty())
+    }
+
     @Test
     fun `size is never offered as a question`() {
         // Not an oversight. A measurement cannot leave one taxon standing, so it would

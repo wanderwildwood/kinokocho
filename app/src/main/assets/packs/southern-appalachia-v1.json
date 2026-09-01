@@ -400,6 +400,7 @@
     {
       "id": "amanita_parcivolvata",
       "scientificName": "Amanita parcivolvata",
+      "commonName": "false Caesar's mushroom",
       "hazard": {
         "toxinClass": "unknown",
         "severity": "UNKNOWN",
@@ -947,12 +948,20 @@
       },
       "season": {
         "months": [
-          12,
           1,
           2,
-          3
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
         ],
-        "note": "Regional peak December to March; found year-round."
+        "note": "Found year-round, with a regional peak December to March. Listed in every month because it is lethal and it is here in every month."
       },
       "lookalikes": [
         {
@@ -1611,6 +1620,7 @@
     {
       "id": "cantharellus_cinnabarinus",
       "scientificName": "Cantharellus cinnabarinus",
+      "commonName": "red chanterelle",
       "hazard": {
         "toxinClass": "none",
         "severity": "NONE_KNOWN"

@@ -5,6 +5,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.wanderwildwood.kinokocho.key.Hazard
 import com.wanderwildwood.kinokocho.key.PackLoader
 import com.wanderwildwood.kinokocho.key.Prevalence
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -127,5 +128,55 @@ class SeasonTest {
                 }
             }
         }
+    }
+
+    /**
+     * The warning reaches the row somebody is actually reading.
+     *
+     * Galerina marginata lists Armillaria mellea as a lookalike and its own note says
+     * people have died from a small quantity picked among honey mushrooms. The honey
+     * mushroom does not list Galerina back — the pack records the pair once, from
+     * whichever end got written up first.
+     *
+     * [confusedWith] used to read only a taxon's own list, so the sentence could only
+     * appear on the deadly one's row, whose page already says it at length. The row that
+     * needs it is the sought-after one, which is what a person reads before going out.
+     */
+    @Test
+    fun `a sought-after mushroom is told what it is taken for, whichever end the pack recorded`() {
+        val out = inMonth(10)
+        val honey = out.single { it.id == "armillaria_mellea" }
+        val galerina = out.singleOrNull { it.id == "galerina_marginata" }
+
+        assertTrue(
+            "the deadly galerina must be in season when honey mushrooms are picked",
+            galerina != null,
+        )
+        assertEquals(
+            "the honey mushroom's row should name what it is taken for",
+            "galerina_marginata",
+            confusedWith(honey, out)?.id,
+        )
+    }
+
+    /**
+     * The deadly galerina is in season in every month, because it is found in every
+     * month.
+     *
+     * The pack's own season note said "found year-round" while its months listed four —
+     * and the app reads the months, so a mushroom the data itself described as
+     * year-round was absent from the month page for two thirds of the year, including
+     * every month its lookalike is collected in. The note is not parsed into the model
+     * at all, so nothing could have noticed the two disagreeing.
+     */
+    @Test
+    fun `the deadly galerina is in season in every month`() {
+        val galerina = pack.taxa.single { it.id == "galerina_marginata" }
+        assertEquals(Hazard.Severity.LETHAL, galerina.hazard.severity)
+        assertEquals(
+            "it is found year-round and the month page reads these",
+            (1..12).toSet(),
+            galerina.seasonMonths,
+        )
     }
 }
