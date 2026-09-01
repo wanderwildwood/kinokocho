@@ -54,14 +54,20 @@ class INatClientTest {
     // ---- the bug this file was written for ----------------------------------------
 
     /**
-     * `/users/api_token` answers an unauthenticated request with a **redirect to the
-     * login page**, not a 401 — their source does `redirect_to login_path if
-     * !current_user`.
+     * A redirect is a signed-out, not a puzzling success.
      *
-     * `HttpURLConnection` follows redirects by default, so that arrived as 200 and a page
-     * of HTML. The client would find no JSON in it, report a vague "did not return an API
-     * token", and *keep the access token that had just been proved dead* — leaving no way
-     * back short of reinstalling, because nothing ever concluded the sign-in was gone.
+     * ⚠ This does not reproduce something the live server was seen doing. It came from
+     * `users_controller.rb`, where `api_token` opens `redirect_to login_path if
+     * !current_user` — but the running API returns **401** for a bad Bearer, a malformed
+     * one and no header at all, because Doorkeeper answers first. Checked, after the
+     * guard was written, rather than assumed either way.
+     *
+     * It is worth holding regardless, because the failure it describes is silent:
+     * followed, a redirect arrives as 200 and a page of HTML, the JSON parse finds
+     * nothing, and the app reports a vague "did not return an API token" while keeping a
+     * sign-in that has just been proved dead. And `HttpURLConnection` re-issues a
+     * redirected POST as a GET with no body, so the same setting is what stops a publish
+     * from quietly becoming a request that did nothing.
      */
     @Test
     fun `a redirect to the login page is a signed-out, not a puzzling success`() = runBlocking {

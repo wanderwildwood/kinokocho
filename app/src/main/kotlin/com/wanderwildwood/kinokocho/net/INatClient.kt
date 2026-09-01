@@ -217,19 +217,29 @@ class INatClient(
                 connectTimeout = 20_000
                 readTimeout = 60_000
                 /*
-                 * Do not follow redirects, which is the difference between a useful
-                 * failure and a dead end.
+                 * Do not follow redirects.
                  *
-                 * `/users/api_token` answers an unauthenticated request with
-                 * `redirect_to login_path` rather than a 401 — their own comment above
-                 * it says they are not sure why current_user is sometimes nil. Followed,
-                 * that arrives here as **200 and a page of HTML**, the JSON parse fails,
-                 * and the app reports a vague "did not return a token" while quietly
-                 * keeping the access token that has just been proved dead. There is then
-                 * no way back short of reinstalling, because nothing ever concludes the
-                 * sign-in is gone.
+                 * ⚠ Read the second paragraph before believing the first. This started
+                 * from `users_controller.rb`, where `api_token` opens with
+                 * `redirect_to login_path if !current_user` — which, followed, would
+                 * arrive here as **200 and a page of HTML**: the JSON parse fails, the
+                 * app reports a vague "did not return a token", and the sign-in that has
+                 * just been proved dead is quietly kept, because nothing ever concludes
+                 * it is gone.
                  *
-                 * Unfollowed, it is a 302, which is the truth and is handled below.
+                 * **That is not what the live server does, and it was checked rather
+                 * than assumed.** A bad Bearer token, a malformed one and no header at
+                 * all all return **401**: Doorkeeper answers before that controller
+                 * line is reached, and 401 is handled below as a signed-out. The
+                 * redirect is a branch of their code rather than a thing anybody has
+                 * seen.
+                 *
+                 * This stays anyway, on two grounds that do not depend on it. A followed
+                 * redirect turns any meaningful status into a 200 carrying something
+                 * this code did not ask for, which is a whole class of confusing failure
+                 * for no gain. And `HttpURLConnection` re-issues a redirected POST as a
+                 * GET, silently dropping the body — so a publish that met a redirect
+                 * would look like a request that simply did nothing.
                  */
                 instanceFollowRedirects = false
                 setRequestProperty("User-Agent", USER_AGENT)
