@@ -94,8 +94,21 @@ object JournalExport {
                 put("characters", characters)
                 put("measurements", measurements)
                 put("lookedAtCouldNotSay", notTested)
+                // Where it went, if it went. A restored journal that did not know this
+                // would offer to publish a find that is already published — harmless for
+                // the observation, which iNaturalist matches on its uuid, but it would
+                // upload every photograph a second time.
+                o.inat.uuid?.let { put("inatUuid", it) }
+                o.inat.pushedAt?.let { put("inatPushedAt", it) }
+                o.inat.taxonName?.let { put("inatTaxonName", it) }
+                o.inat.taxonId?.let { put("inatTaxonId", it) }
                 put("photos", JSONArray().apply {
-                    entry.photos.forEach { put(JSONObject().put("slot", it.slot).put("file", it.fileName)) }
+                    entry.photos.forEach {
+                        put(
+                            JSONObject().put("slot", it.slot).put("file", it.fileName)
+                                .apply { if (it.uuid.isNotBlank()) put("uuid", it.uuid) }
+                        )
+                    }
                 })
             })
         }

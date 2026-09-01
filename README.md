@@ -74,6 +74,14 @@ from the data is worse than none.
 - **Measurements, age and condition.** Facts about the specimen rather than the species,
   so they are recorded rather than asked. Age earns its place: a ring or a veil that is
   missing from an old mushroom proves nothing, and the key stops ruling things out on it.
+- **Publishing to iNaturalist**, one find at a time, from the bottom of that find's own
+  page. It goes up with its photographs, the characters you recorded, and — the part an
+  identifier actually wants — what you looked at and could not say, and the three
+  characters that would have narrowed it most. The shortlist stays on the phone. What the
+  community calls it comes back into the entry, kept apart from what you wrote down
+  yourself, so the two can disagree. Coordinates are obscured by default; see
+  [PRIVACY.md](PRIVACY.md), which is worth reading on what "obscured" does and does not
+  mean.
 
 ## Status
 
@@ -84,6 +92,9 @@ mushrooms, and a key that reaches the right taxon in about four questions when t
 are true.
 
 Nothing in the pack has been checked by a mycologist. Every row says so on its own page.
+Publishing to iNaturalist is the answer to that: it puts the find in front of people who
+can say, which is the whole shape of this app — narrow it in the field, let a person
+decide in colour, later.
 
 The launcher mark is a drawing of a chanterelle by the author, traced rather than
 imitated. The rest of the drawings are worked to the same hand — thin, few lines, no
@@ -110,6 +121,29 @@ something installable.
 first install of any variant fixes the signer for good, so a debug build put on a phone is
 not a throwaway — install one signed with the Android debug key and the real one will not
 go over the top of it.
+
+### The iNaturalist application id
+
+Publishing needs an iNaturalist OAuth application, and its id is not in this repository.
+Supply it at build time:
+
+```sh
+./gradlew assembleRelease -PinatClientId=<the id>
+```
+
+or put `inatClientId=<the id>` in `local.properties`, which is gitignored.
+
+**A build without one has no publishing button at all** and cannot reach the network.
+That is the intended state for anyone who is not the person the application is registered
+to. A PKCE client id is not a secret — it is in every copy of the APK by necessity — but
+it *is* an identity: everything posted with it is attributed to that application on
+iNaturalist's records. A fork should be posting as itself, and the surest way to make
+that happen is for the source to carry no id to inherit.
+
+Registering one is at <https://www.inaturalist.org/oauth/applications>, and reaching that
+page needs the **APP_OWNER** role, which iNaturalist staff grant on a written request and
+expect to see some identifications behind. It is a wait rather than a form. Set the
+redirect URI to `kinokocho://oauth`, exactly as it reads in `INatConfig`.
 
 ## Licence
 

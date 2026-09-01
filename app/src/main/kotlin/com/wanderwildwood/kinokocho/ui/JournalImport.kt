@@ -92,6 +92,15 @@ object JournalImport {
                     // a backup any more than it survives a walk.
                     kept = true,
                     schemaVersion = find.optInt("schemaVersion", 1),
+                    // Carried across so a restored journal knows what is already
+                    // published. Absent from any backup written before there was
+                    // anything to publish to, which reads as "never pushed" — true.
+                    inat = com.wanderwildwood.kinokocho.data.INatLink(
+                        uuid = find.optString("inatUuid").takeIf { it.isNotBlank() },
+                        pushedAt = find.optLong("inatPushedAt").takeIf { it != 0L },
+                        taxonId = find.optLong("inatTaxonId").takeIf { it != 0L },
+                        taxonName = find.optString("inatTaxonName").takeIf { it.isNotBlank() },
+                    ),
                 )
             )
             val now = System.currentTimeMillis()
@@ -144,6 +153,7 @@ object JournalImport {
                             slot = photo.optString("slot"),
                             fileName = name,
                             capturedAt = find.optLong("recordedAt", now),
+                            uuid = photo.optString("uuid"),
                         )
                     )
                 }

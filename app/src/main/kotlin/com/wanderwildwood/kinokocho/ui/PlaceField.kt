@@ -42,8 +42,39 @@ import kotlin.math.roundToInt
 @Composable
 fun PlaceField(
     place: String,
+    /**
+     * The position already on this find, if one was ever taken. Shown under the button
+     * so that a person can see what is held without it being written into their words.
+     */
+    latitude: Double? = null,
+    longitude: Double? = null,
     onPlaceChange: (String) -> Unit,
+    /**
+     * The position as numbers, which for a long time went nowhere.
+     *
+     * The button used to format the fix into the place *text* and stop there, so
+     * `Observation.latitude` and `longitude` were columns nothing ever wrote — dead
+     * since the day they were added, and invisible because the coordinates were on the
+     * screen the whole time, in the sentence next to them. It stopped being invisible
+     * when publishing was built: iNaturalist cannot make an observation research grade
+     * without a location, so every find would have gone up destined to be ignored, and
+     * the app would have looked like it was working.
+     */
+    onPositionTaken: (Double, Double) -> Unit = { _, _ -> },
 ) {
+    /*
+     * The numbers are no longer written into the place note.
+     *
+     * They used to be appended to it — "the big oak below the spring · 35.89, -82.83" —
+     * which was the only place they were kept at all, and it made a field documented as
+     * "where it was, in the reader's own words" hold something that is not words. Now
+     * the position is a position and the note is a sentence, and the map location is
+     * enough on its own.
+     *
+     * Nothing migrates. Entries written before this keep their coordinates in the text,
+     * because that is what somebody typed and had, and rewriting a person's own note
+     * afterwards is not a thing this app does.
+     */
     val context = LocalContext.current
     var text by remember { mutableStateOf(place) }
     var message by remember { mutableStateOf<String?>(null) }
@@ -53,8 +84,7 @@ fun PlaceField(
         if (where == null) {
             message = "No recent position. Move outside, or type the place instead."
         } else {
-            text = if (text.isBlank()) where else "$text · $where"
-            onPlaceChange(text)
+            onPositionTaken(where.latitude, where.longitude)
             message = null
         }
     }
@@ -84,7 +114,16 @@ fun PlaceField(
                     else ask.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
                 },
                 modifier = Modifier.fillMaxWidth(),
-            ) { Text("Add roughly where I am") }
+            ) { Text(if (latitude == null) "Add roughly where I am" else "Take it again") }
+        }
+        // What is held, said once, where the numbers used to be typed. Without this the
+        // button would be the only evidence it had ever worked.
+        if (latitude != null && longitude != null) {
+            Text(
+                "Roughly ${format(latitude)}, ${format(longitude)}",
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(top = 4.dp),
+            )
         }
         message?.let {
             Text(
@@ -107,7 +146,10 @@ private fun hasCoarse(context: Context): Boolean =
  * standing in the rain does not want to give, and buys precision this app has decided
  * not to keep. If nothing is cached the honest answer is that there is no position.
  */
-private fun coarsePosition(context: Context): String? {
+/** Rounded to two decimal places before it is ever handed on. See [round2]. */
+data class Position(val latitude: Double, val longitude: Double)
+
+private fun coarsePosition(context: Context): Position? {
     if (!hasCoarse(context)) return null
     val manager = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
         ?: return null
@@ -127,11 +169,13 @@ private fun coarsePosition(context: Context): String? {
         null
     } ?: return null
 
-    return "${round2(location.latitude)}, ${round2(location.longitude)}"
+    // Rounded here, once, before anything else in the app can see the finer number.
+    // Rounding at the point of display would leave the precise value sitting in a field
+    // somewhere, which is the arrangement this app has said it does not have.
+    return Position(round2(location.latitude), round2(location.longitude))
 }
 
 /** Two decimal places: a bit over a kilometre, which is which-hillside and no finer. */
-private fun round2(value: Double): String {
-    val r = (value * 100.0).roundToInt() / 100.0
-    return String.format("%.2f", r)
-}
+private fun round2(value: Double): Double = (value * 100.0).roundToInt() / 100.0
+
+private fun format(value: Double): String = String.format("%.2f", value)

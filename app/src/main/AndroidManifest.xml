@@ -11,10 +11,26 @@
 
         Typing the place by hand remains the default and needs no permission at all;
         this is the shortcut, not the mechanism. CAMERA is still not here and does not
-        need to be - the system camera is handed a FileProvider URI instead. INTERNET
-        will arrive with iNaturalist, and not before.
+        need to be - the system camera is handed a FileProvider URI instead.
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!--
+        INTERNET, which arrived with iNaturalist and in the commit that first needed it,
+        exactly as PRIVACY.md said it would.
+
+        It is used in one place: publishing a find you pressed a button to publish, and
+        reading back what the community called it afterwards. There is no background
+        sync, no analytics, no crash reporting and no telemetry, and a build made
+        without an iNaturalist application id cannot reach the network at all because
+        the button that would is not drawn.
+
+        Unlike the two above, this one is not a runtime permission - Android grants it
+        at install and never asks. So it is worth saying plainly, here and in the About,
+        that the app can reach the network: nothing on the phone is going to ask on its
+        behalf.
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="false"
@@ -32,6 +48,38 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            Catches the browser coming back from iNaturalist.
+
+            A separate activity rather than a second intent-filter on MainActivity,
+            which would have meant giving the launcher activity a singleTask launch mode
+            and changing how the whole app behaves on every ordinary start for the sake
+            of one redirect a fortnight.
+
+            No exported surface worth attacking: it reads the code out of the URI, hands
+            it to the sign-in in progress and finishes. A code without the verifier that
+            was minted alongside it - which never leaves this process - is worth
+            nothing, which is the entire point of PKCE.
+
+            android:taskAffinity="" and excludeFromRecents keep it out of the task
+            switcher, so the browser bounce does not leave a stray card behind.
+        -->
+        <activity
+            android:name=".net.INatRedirectActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="kinokocho" android:host="oauth" />
             </intent-filter>
         </activity>
 

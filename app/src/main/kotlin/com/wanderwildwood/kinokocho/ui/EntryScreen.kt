@@ -76,6 +76,9 @@ fun EntryScreen(
      * keystroke on a laptop, which is not two milliseconds on the phone this is for.
      * Typing a name is not a reason to work out what the mushroom might be again.
      */
+    // A message about the last find is worse than no message on this one.
+    LaunchedEffect(draft.observationId) { vm.clearINatState() }
+
     val ranking = remember(draft.answers) { vm.engine.rank(draft.answers) }
     val missing = remember(draft.answers) { vm.engine.mostValuableMissing(draft.answers) }
     val safety = remember(draft.answers) { vm.engine.safetyNotes(draft.answers) }
@@ -545,7 +548,10 @@ fun EntryScreen(
             Section("Where, and anything else")
             PlaceField(
                 place = draft.placeNote,
+                latitude = draft.latitude,
+                longitude = draft.longitude,
                 onPlaceChange = vm::setPlaceNote,
+                onPositionTaken = vm::setPosition,
             )
             var note by remember(draft.uuid) { mutableStateOf(draft.note) }
             TextFieldMMD(
@@ -585,6 +591,12 @@ fun EntryScreen(
                 },
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
             ) { Text("Ask someone about this") }
+
+            // The other way of asking somebody: a queue of strangers rather than one
+            // person you chose. Below the share sheet on purpose - handing it to a
+            // person who knows the wood is the better answer more often than not.
+            Section("iNaturalist")
+            INatSection(vm, draft)
 
             OutlinedButtonMMD(
                 onClick = onClose,

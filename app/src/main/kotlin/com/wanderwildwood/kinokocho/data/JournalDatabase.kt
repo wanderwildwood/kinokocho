@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [Observation::class, ObservationCharacter::class, ObservationPhoto::class],
-    version = 3,
+    version = 4,
     exportSchema = true,
 )
 abstract class JournalDatabase : RoomDatabase() {
@@ -50,6 +50,25 @@ abstract class JournalDatabase : RoomDatabase() {
             }
         }
 
+        /**
+         * v3 to v4: photographs gain a `uuid`.
+         *
+         * Empty for everything already on the phone, and that is the honest value:
+         * these rows were written before anything could be pushed, so none of them has
+         * ever been anywhere. A uuid is minted for one the first time it is sent — see
+         * [ObservationPhoto.uuid], which explains why iNaturalist needs it.
+         *
+         * No index. A uuid here is a token carried to another server and matched there;
+         * nothing on this phone ever looks a photograph up by it.
+         */
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    "ALTER TABLE observation_photos ADD COLUMN uuid TEXT NOT NULL DEFAULT ''"
+                )
+            }
+        }
+
         @Volatile
         private var instance: JournalDatabase? = null
 
@@ -63,7 +82,7 @@ abstract class JournalDatabase : RoomDatabase() {
                 // No fallbackToDestructiveMigration, ever. This database holds notes that
                 // cannot be taken again - the mushroom is gone and the season is over. A
                 // missing migration must fail loudly in a build, not quietly wipe a journal.
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .addCallback(object : Callback() {
                     override fun onOpen(db: SupportSQLiteDatabase) {
                         // Room declares the foreign keys but SQLite does not enforce them

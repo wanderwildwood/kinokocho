@@ -219,6 +219,23 @@ data class ObservationPhoto(
     @ColumnInfo(name = "captured_at")
     val capturedAt: Long,
 
+    /**
+     * Minted here, once, so that a half-finished upload can be finished.
+     *
+     * The same arrangement as [Observation.uuid] and for the same reason, which is
+     * written down in iNaturalist's own source rather than inferred: their
+     * `ObservationPhotosController#create` looks for an existing observation photo with
+     * this uuid belonging to this user before it makes a new one. Without it, a push
+     * that dies after three of five photographs and is run again leaves eight
+     * photographs on a find that has five.
+     *
+     * Empty for every row written before there was anywhere to put one; those are given
+     * a uuid the first time they are pushed. Nullable would have said the same thing and
+     * cost a nullable column for a value that is never absent after its first use.
+     */
+    @ColumnInfo(name = "uuid", defaultValue = "")
+    val uuid: String = "",
+
     @ColumnInfo(name = "inat_photo_id")
     val inatPhotoId: Long? = null,
 )

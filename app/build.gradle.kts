@@ -18,6 +18,22 @@ android {
         targetSdk = 31
         versionCode = 1
         versionName = "0.1.0"
+
+        /*
+         * The iNaturalist application id, which is not in this repository.
+         *
+         * Supplied at build time as `-PinatClientId=...` or as a line in the gitignored
+         * local.properties. A build without one produces an app with no iNaturalist
+         * button at all, which is the intended state for anyone who is not the person
+         * the application is registered to: a PKCE client id is not a secret, but it is
+         * an identity, and a fork should be posting as itself. See INatConfig.
+         */
+        val inatClientId = (project.findProperty("inatClientId") as String?)
+            ?: rootProject.file("local.properties").takeIf { it.isFile }?.let { file ->
+                Properties().apply { file.inputStream().use(::load) }
+                    .getProperty("inatClientId")
+            }
+        buildConfigField("String", "INAT_CLIENT_ID", "\"${inatClientId.orEmpty()}\"")
     }
 
     // A real keystore in signing/ signs every build type when it is present, so the
