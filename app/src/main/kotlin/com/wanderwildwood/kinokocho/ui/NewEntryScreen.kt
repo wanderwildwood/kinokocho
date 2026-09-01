@@ -59,7 +59,10 @@ fun NewEntryScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                if (journalCount == 0) "Journal" else "Journal · $journalCount",
+                // The app's name, not a bare noun. This is the only heading on the
+                // question screen, and "Journal" left the one screen somebody spends a
+                // walk inside unnamed.
+                if (journalCount == 0) "Mushroom Journal" else "Mushroom Journal · $journalCount",
                 style = MaterialThemeTypography().bodySmall,
                 modifier = Modifier.weight(1f).clickable(onClick = onJournal),
             )
