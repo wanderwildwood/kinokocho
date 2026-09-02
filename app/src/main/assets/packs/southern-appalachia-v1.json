@@ -8987,6 +8987,364 @@
       "sought": false
     },
     {
+      "id": "dacrymyces_chrysospermus",
+      "scientificName": "Dacrymyces chrysospermus",
+      "commonName": "orange jelly spot",
+      "prevalence": "common",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "Nothing documented against it. Small and watery, and not collected.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "Orange gelatinous cushions on dead conifer wood, usually bursting out along the seams where the bark has gone. Pull one off and the point it was attached by is white, which witch's butter does not do.",
+      "characters": {
+        "substrate": [
+          {
+            "value": "wood",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "absent_attached",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "fruitbody_type": [
+          {
+            "value": "jelly",
+            "frequency": "always"
+          }
+        ],
+        "substrate_wood": [
+          {
+            "value": "conifer",
+            "frequency": "always"
+          },
+          {
+            "value": "dead",
+            "frequency": "always"
+          },
+          {
+            "value": "bare_wood",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "wrinkled",
+            "frequency": "usually"
+          },
+          {
+            "value": "smooth",
+            "frequency": "usually"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "orange",
+            "frequency": "always"
+          },
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "gelatinous",
+            "frequency": "always"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "usually"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "troop",
+            "frequency": "always"
+          },
+          {
+            "value": "fused",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "conifer_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "conifer",
+            "frequency": "always"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          3,
+          20
+        ]
+      },
+      "season": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "note": "Recorded here in every month: it persists rather than fruits and passes."
+      },
+      "lookalikes": [
+        {
+          "taxon": "tremella_mesenterica",
+          "discriminators": [
+            "associated_tree"
+          ],
+          "note": "Witch's butter is the same orange and grows on dead hardwood; this one is on conifer, and has a white patch where it was attached."
+        }
+      ],
+      "sources": [
+        "iNaturalist occurrence records, southern Blue Ridge",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "daedaleopsis_confragosa",
+      "scientificName": "Daedaleopsis confragosa",
+      "commonName": "thin-walled maze polypore",
+      "prevalence": "common",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "Tough and not eaten. Nothing documented against it.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "A reddish-brown bracket, most often on willow and birch, whose underside is a maze of stretched pores rather than round holes. Press the underside of a fresh one and the mark goes red.",
+      "characters": {
+        "substrate": [
+          {
+            "value": "wood",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "absent_attached",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "fruitbody_type": [
+          {
+            "value": "polypore",
+            "frequency": "always"
+          }
+        ],
+        "substrate_wood": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          },
+          {
+            "value": "dead",
+            "frequency": "always"
+          },
+          {
+            "value": "living",
+            "frequency": "sometimes"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "zoned",
+            "frequency": "usually"
+          },
+          {
+            "value": "wrinkled",
+            "frequency": "usually"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "red_brown",
+            "frequency": "always"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "yes",
+            "frequency": "always"
+          }
+        ],
+        "bruising_where": [
+          {
+            "value": "hymenophore",
+            "frequency": "always"
+          }
+        ],
+        "bruising_colour": [
+          {
+            "value": "red",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "leathery",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "single",
+            "frequency": "usually"
+          },
+          {
+            "value": "tiered",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "wetland",
+            "frequency": "sometimes"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          40,
+          150
+        ]
+      },
+      "season": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "note": "Recorded here in every month: it persists rather than fruits and passes."
+      },
+      "lookalikes": [
+        {
+          "taxon": "trametes_versicolor",
+          "discriminators": [
+            "cap_colour"
+          ],
+          "note": "Turkey tail is banded in greys and buff with fine round pores. This is reddish-brown with a maze underneath that bruises red."
+        }
+      ],
+      "sources": [
+        "iNaturalist occurrence records, southern Blue Ridge",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
       "id": "daldinia_childiae",
       "scientificName": "Daldinia childiae",
       "commonName": "carbon balls",
@@ -9628,6 +9986,162 @@
       "reviewed": false,
       "prevalence": "occasional",
       "sought": true
+    },
+    {
+      "id": "exidia_crenata",
+      "scientificName": "Exidia crenata",
+      "commonName": "amber jelly roll",
+      "prevalence": "common",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "Eaten in places for texture rather than flavour. Nothing documented against it.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "Dark brown gelatinous folds on fallen hardwood, firm and rubbery when wet and shrunk to a thin varnish-like crust when dry. It comes back with rain, which is why it is a winter fungus here.",
+      "characters": {
+        "substrate": [
+          {
+            "value": "wood",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "absent_attached",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "fruitbody_type": [
+          {
+            "value": "jelly",
+            "frequency": "always"
+          }
+        ],
+        "substrate_wood": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          },
+          {
+            "value": "dead",
+            "frequency": "always"
+          },
+          {
+            "value": "bare_wood",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "wrinkled",
+            "frequency": "usually"
+          },
+          {
+            "value": "smooth",
+            "frequency": "usually"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "dark_brown",
+            "frequency": "always"
+          },
+          {
+            "value": "black",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "gelatinous",
+            "frequency": "always"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "dark_brown",
+            "frequency": "usually"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "fused",
+            "frequency": "usually"
+          },
+          {
+            "value": "troop",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          10,
+          60
+        ]
+      },
+      "season": {
+        "months": [
+          11,
+          12,
+          1,
+          2,
+          3,
+          4
+        ],
+        "note": "A wet-season jelly: it disappears through the summer and returns with the winter rain."
+      },
+      "lookalikes": [
+        {
+          "taxon": "tremella_mesenterica",
+          "discriminators": [
+            "cap_colour"
+          ],
+          "note": "Witch's butter is yellow to orange. This is brown to nearly black. Both are folded jellies on dead hardwood and neither has any other shape to go on."
+        }
+      ],
+      "sources": [
+        "iNaturalist occurrence records, southern Blue Ridge",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
     },
     {
       "id": "galerina_marginata",
@@ -10300,6 +10814,180 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "gloeophyllum_sepiarium",
+      "scientificName": "Gloeophyllum sepiarium",
+      "commonName": "conifer mazegill",
+      "prevalence": "occasional",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "Tough and not eaten. Nothing documented against it.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "A rusty-brown bracket on cut conifer — stacked timber, rails, stumps — with a hairy top and an underside of blades and slots rather than round pores. The growing edge is usually a brighter orange than the rest.",
+      "characters": {
+        "substrate": [
+          {
+            "value": "wood",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "absent_attached",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "fruitbody_type": [
+          {
+            "value": "polypore",
+            "frequency": "always"
+          }
+        ],
+        "substrate_wood": [
+          {
+            "value": "conifer",
+            "frequency": "always"
+          },
+          {
+            "value": "dead",
+            "frequency": "always"
+          },
+          {
+            "value": "bare_wood",
+            "frequency": "usually"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "yellow_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "hairy",
+            "frequency": "always"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "red_brown",
+            "frequency": "always"
+          },
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "leathery",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "tiered",
+            "frequency": "usually"
+          },
+          {
+            "value": "troop",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "conifer_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "disturbed",
+            "frequency": "sometimes"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "conifer",
+            "frequency": "always"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          20,
+          100
+        ]
+      },
+      "season": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "note": "Recorded here in every month: it persists rather than fruits and passes."
+      },
+      "lookalikes": [
+        {
+          "taxon": "daedaleopsis_confragosa",
+          "discriminators": [
+            "associated_tree"
+          ],
+          "note": "Both have a maze underneath. This is on conifer and rusty brown; the other is on hardwood and greyer, and bruises red."
+        }
+      ],
+      "sources": [
+        "iNaturalist occurrence records, southern Blue Ridge",
         "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
@@ -22633,6 +23321,179 @@
       "reviewed": false
     },
     {
+      "id": "stereum_complicatum",
+      "scientificName": "Stereum complicatum",
+      "commonName": "crowded parchment",
+      "prevalence": "common",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "Far too thin and tough to be eaten. Nothing documented against it.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "Small tan-orange brackets fused edge to edge in dense sheets along fallen hardwood branches, often running for a foot or more. Smooth underneath like the other parchments, and crowded together in a way the larger ones are not.",
+      "characters": {
+        "substrate": [
+          {
+            "value": "wood",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "absent_attached",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "fruitbody_type": [
+          {
+            "value": "chanterelle_like",
+            "frequency": "always"
+          }
+        ],
+        "substrate_wood": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          },
+          {
+            "value": "dead",
+            "frequency": "always"
+          },
+          {
+            "value": "bark",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "zoned",
+            "frequency": "usually"
+          },
+          {
+            "value": "velvety",
+            "frequency": "usually"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "orange",
+            "frequency": "always"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_margin": [
+          {
+            "value": "wavy",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "leathery",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "fused",
+            "frequency": "always"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          5,
+          25
+        ]
+      },
+      "season": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "note": "Recorded here in every month: it persists rather than fruits and passes."
+      },
+      "lookalikes": [
+        {
+          "taxon": "trametes_versicolor",
+          "discriminators": [
+            "fruitbody_type"
+          ],
+          "note": "Turkey tail has pores underneath. This is smooth, and much smaller."
+        },
+        {
+          "taxon": "stereum_lobatum",
+          "discriminators": [
+            "growth_habit"
+          ],
+          "note": "The same smooth underside on both. This one grows fused into crowded sheets; the other makes separate lobed brackets."
+        }
+      ],
+      "sources": [
+        "iNaturalist occurrence records, southern Blue Ridge",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
       "id": "stereum_lobatum",
       "scientificName": "Stereum lobatum",
       "commonName": "false turkey-tail",
@@ -23915,6 +24776,346 @@
             "fruitbody_type"
           ],
           "note": "Turkey tail has fine pores; this has blades wide enough to count. Otherwise they are the same banded bracket on the same dead hardwood."
+        }
+      ],
+      "sources": [
+        "iNaturalist occurrence records, southern Blue Ridge",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "trametes_conchifer",
+      "scientificName": "Trametes conchifer",
+      "commonName": "little nest polypore",
+      "prevalence": "common",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "Far too small and tough to be eaten. Nothing documented against it.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "A small white bracket that grows out of the rim of a shallow cup it made first, so a twig carries what looks like a little nest with a shelf coming off it. Once seen it is not mistaken for anything.",
+      "characters": {
+        "substrate": [
+          {
+            "value": "wood",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "absent_attached",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "fruitbody_type": [
+          {
+            "value": "polypore",
+            "frequency": "always"
+          }
+        ],
+        "substrate_wood": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          },
+          {
+            "value": "dead",
+            "frequency": "always"
+          },
+          {
+            "value": "bare_wood",
+            "frequency": "usually"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "zoned",
+            "frequency": "usually"
+          },
+          {
+            "value": "smooth",
+            "frequency": "usually"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "leathery",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "troop",
+            "frequency": "usually"
+          },
+          {
+            "value": "single",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          5,
+          30
+        ]
+      },
+      "season": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "note": "Recorded here in every month: it persists rather than fruits and passes."
+      },
+      "lookalikes": [
+        {
+          "taxon": "trametes_versicolor",
+          "discriminators": [
+            "cap_colour"
+          ],
+          "note": "Both are small zoned brackets on fallen hardwood. This one is white and sits on a cup it grew from; turkey tail is banded in colour and has no cup."
+        }
+      ],
+      "sources": [
+        "iNaturalist occurrence records, southern Blue Ridge",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "trametes_gibbosa",
+      "scientificName": "Trametes gibbosa",
+      "commonName": "lumpy bracket",
+      "prevalence": "common",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "Tough and not eaten. Nothing documented against it.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "A thick whitish bracket, often lumpy where it meets the wood and commonly green with algae across the top by the end of a wet winter. The pores are stretched into slots running outwards rather than round.",
+      "characters": {
+        "substrate": [
+          {
+            "value": "wood",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "absent_attached",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "fruitbody_type": [
+          {
+            "value": "polypore",
+            "frequency": "always"
+          }
+        ],
+        "substrate_wood": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          },
+          {
+            "value": "dead",
+            "frequency": "always"
+          },
+          {
+            "value": "bare_wood",
+            "frequency": "usually"
+          }
+        ],
+        "hymenophore_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "velvety",
+            "frequency": "usually"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          },
+          {
+            "value": "zoned",
+            "frequency": "sometimes"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "green",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "leathery",
+            "frequency": "always"
+          },
+          {
+            "value": "woody",
+            "frequency": "sometimes"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "single",
+            "frequency": "usually"
+          },
+          {
+            "value": "few",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          50,
+          200
+        ]
+      },
+      "season": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "note": "Recorded here in every month: it persists rather than fruits and passes."
+      },
+      "lookalikes": [
+        {
+          "taxon": "trametes_versicolor",
+          "discriminators": [
+            "cap_colour"
+          ],
+          "note": "Turkey tail is banded in browns, greys and buff and is thin. This is thick, white, and goes green with algae rather than banded."
         }
       ],
       "sources": [
@@ -25759,6 +26960,158 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+      ],
+      "reviewed": false
+    },
+    {
+      "id": "xylobolus_frustulatus",
+      "scientificName": "Xylobolus frustulatus",
+      "commonName": "ceramic parchment",
+      "prevalence": "occasional",
+      "sought": false,
+      "hazard": {
+        "toxinClass": "none_known",
+        "severity": "NONE_KNOWN",
+        "onset": "—",
+        "note": "A hard crust on old wood. Nothing documented against it.",
+        "source": "North American Mycological Association poisoning references"
+      },
+      "note": "A hard pale crust on long-dead bare oak, cracked into small tiles with dark lines between them, like crazed glaze. It is stuck fast and does not peel; the tiles are the whole identification.",
+      "characters": {
+        "substrate": [
+          {
+            "value": "wood",
+            "frequency": "always"
+          }
+        ],
+        "stipe_presence": [
+          {
+            "value": "absent_attached",
+            "frequency": "always"
+          }
+        ],
+        "latex": [
+          {
+            "value": "none",
+            "frequency": "always"
+          }
+        ],
+        "spore_print": [
+          {
+            "value": "pale",
+            "frequency": "always"
+          }
+        ],
+        "fruitbody_type": [
+          {
+            "value": "resupinate",
+            "frequency": "always"
+          }
+        ],
+        "substrate_wood": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          },
+          {
+            "value": "dead",
+            "frequency": "always"
+          },
+          {
+            "value": "bare_wood",
+            "frequency": "always"
+          }
+        ],
+        "cap_surface": [
+          {
+            "value": "cracked",
+            "frequency": "always"
+          },
+          {
+            "value": "dry",
+            "frequency": "always"
+          }
+        ],
+        "cap_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "grey",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "woody",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "fused",
+            "frequency": "always"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "always"
+          }
+        ]
+      },
+      "measurements": {
+        "cap_width_mm": [
+          20,
+          300
+        ]
+      },
+      "season": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "note": "Recorded here in every month: it persists rather than fruits and passes."
+      },
+      "lookalikes": [
+        {
+          "taxon": "stereum_complicatum",
+          "discriminators": [
+            "fruitbody_type"
+          ],
+          "note": "The parchments make thin brackets with a free edge. This is flat against the wood and cracked into tiles."
+        }
+      ],
+      "sources": [
+        "iNaturalist occurrence records, southern Blue Ridge",
         "Macromorphology as standard North American field guides agree it — written out, not reproduced"
       ],
       "reviewed": false
