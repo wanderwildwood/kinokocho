@@ -109,6 +109,16 @@
     "id": "2552027",
     "checked": "2026-09-01"
   },
+  "Calostoma cinnabarinum": {
+    "authority": "gbif",
+    "id": "8023186",
+    "checked": "2026-09-02"
+  },
+  "Calostoma lutescens": {
+    "authority": "gbif",
+    "id": "9674121",
+    "checked": "2026-09-02"
+  },
   "Calvatia craniiformis": {
     "authority": "gbif",
     "id": "7242423",
@@ -154,6 +164,11 @@
     "id": "5243168",
     "checked": "2026-09-01"
   },
+  "Clathrus columnatus": {
+    "authority": "gbif",
+    "id": "5239478",
+    "checked": "2026-09-02"
+  },
   "Clavulina coralloides": {
     "authority": "gbif",
     "id": "5249883",
@@ -193,6 +208,11 @@
     "authority": "gbif",
     "id": "3367713",
     "checked": "2026-09-01"
+  },
+  "Cyathus striatus": {
+    "authority": "gbif",
+    "id": "5243151",
+    "checked": "2026-09-02"
   },
   "Cystoderma amianthinum": {
     "authority": "gbif",
@@ -399,6 +419,11 @@
     "id": "2594624",
     "checked": "2026-09-01"
   },
+  "Mutinus elegans": {
+    "authority": "gbif",
+    "id": "5239471",
+    "checked": "2026-09-02"
+  },
   "Mycena galericulata": {
     "authority": "gbif",
     "id": "2526880",
@@ -474,6 +499,11 @@
     "id": "5241275",
     "checked": "2026-09-01"
   },
+  "Pseudocolus fusiformis": {
+    "authority": "gbif",
+    "id": "2524071",
+    "checked": "2026-09-02"
+  },
   "Pseudosperma rimosum": {
     "authority": "gbif",
     "id": "10846389",
@@ -513,6 +543,11 @@
     "authority": "gbif",
     "id": "2594972",
     "checked": "2026-09-01"
+  },
+  "Satyrus rugulosus": {
+    "authority": "gbif-index",
+    "id": "293970670",
+    "checked": "2026-09-02"
   },
   "Schizophyllum commune": {
     "authority": "gbif",
