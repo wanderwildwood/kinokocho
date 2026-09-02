@@ -369,16 +369,37 @@ class KeyEngineTest {
         // The taxon is found rather than named: this test used to point at Bondarzewia,
         // which then had its odour written down, and the test went on asserting
         // something about a row that no longer said nothing.
+        //
+        // The character is found the same way now, and for the same reason. Naming odour
+        // outlived the last polypore that was silent about it — filling in what the
+        // hazardous rows were missing wrote odour onto every one of them, and a test
+        // looking for a silence that no longer exists does not fail loudly, it throws
+        // from a `first` with nothing to find. What is being asserted is about silence,
+        // whichever character happens to be keeping it.
         val before = answers("fruitbody_type" to "polypore", "substrate" to "wood")
-        val silent = engine.rank(before).candidates
-            .first { it.mismatched == 0 && "odour" !in it.taxon.characters }
-            .taxon.id
-        val after = before.with("odour", setOf("almond"))
+        val (silent, character) = engine.rank(before).candidates
+            .filter { it.mismatched == 0 }
+            .firstNotNullOf { candidate ->
+                SILENCEABLE.firstOrNull { it !in candidate.taxon.characters }
+                    ?.let { candidate.taxon.id to it }
+            }
+        val value = schema.valuesOf(schema.character(character)!!).first { !it.uncertain }.id
+        val after = before.with(character, setOf(value))
         val b = engine.rank(before).candidates.first { it.taxon.id == silent }
         val a = engine.rank(after).candidates.first { it.taxon.id == silent }
-        assertTrue("saying nothing cost $silent score", a.score >= b.score - 1e-9)
+        assertTrue("saying nothing about $character cost $silent score", a.score >= b.score - 1e-9)
         assertEquals(1, a.unscored)
     }
+
+    /**
+     * Characters a row may reasonably say nothing about, for the test above to search.
+     *
+     * Every one of them offers a fixed list of values, so a value can be picked to answer
+     * with. Colour characters are no good here — they draw on the shared colour list.
+     */
+    private val SILENCEABLE = listOf(
+        "odour", "cap_margin", "flesh_consistency", "growth_habit", "bruising",
+    )
 
     @Test
     fun `standing in for silence is damped, so one lucky match proves nothing`() {

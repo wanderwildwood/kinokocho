@@ -764,6 +764,32 @@
             "value": "white",
             "frequency": "always"
           }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "always"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "single",
+            "frequency": "usually"
+          },
+          {
+            "value": "few",
+            "frequency": "usually"
+          }
         ]
       },
       "measurements": {
@@ -1409,6 +1435,62 @@
             "value": "no_change",
             "frequency": "always"
           }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "usually"
+          },
+          {
+            "value": "flat",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "conifer_wood",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "single",
+            "frequency": "usually"
+          },
+          {
+            "value": "few",
+            "frequency": "usually"
+          }
         ]
       },
       "measurements": {
@@ -1829,6 +1911,58 @@
         "associated_tree": [
           {
             "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ],
+        "cap_shape": [
+          {
+            "value": "convex",
+            "frequency": "usually"
+          },
+          {
+            "value": "flat",
+            "frequency": "usually"
+          },
+          {
+            "value": "umbonate",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "single",
+            "frequency": "usually"
+          },
+          {
+            "value": "few",
             "frequency": "usually"
           }
         ]
@@ -2275,6 +2409,44 @@
             "value": "yellow",
             "frequency": "always"
           }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "single",
+            "frequency": "usually"
+          },
+          {
+            "value": "few",
+            "frequency": "usually"
+          }
         ]
       },
       "measurements": {
@@ -2507,6 +2679,12 @@
           {
             "value": "broadleaf",
             "frequency": "sometimes"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
+            "frequency": "usually"
           }
         ]
       },
@@ -3441,6 +3619,12 @@
             "value": "mixed_wood",
             "frequency": "usually"
           }
+        ],
+        "bruising": [
+          {
+            "value": "no",
+            "frequency": "usually"
+          }
         ]
       },
       "measurements": {
@@ -3630,6 +3814,26 @@
           {
             "value": "cream",
             "frequency": "sometimes"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "fibrous",
+            "frequency": "usually"
+          },
+          {
+            "value": "soft",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "always"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
           }
         ]
       },
@@ -6177,6 +6381,36 @@
             "value": "cream",
             "frequency": "sometimes"
           }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "fibrous",
+            "frequency": "usually"
+          },
+          {
+            "value": "soft",
+            "frequency": "usually"
+          }
+        ],
+        "associated_tree": [
+          {
+            "value": "broadleaf",
+            "frequency": "usually"
+          },
+          {
+            "value": "unknown",
+            "frequency": "sometimes"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "usually"
+          },
+          {
+            "value": "troop",
+            "frequency": "usually"
+          }
         ]
       },
       "measurements": {
@@ -7250,6 +7484,48 @@
           {
             "value": "no_change",
             "frequency": "always"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "bulbous",
+            "frequency": "usually"
+          },
+          {
+            "value": "equal",
+            "frequency": "sometimes"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "improved_grass",
+            "frequency": "always"
+          },
+          {
+            "value": "urban",
+            "frequency": "usually"
+          },
+          {
+            "value": "garden",
+            "frequency": "usually"
           }
         ]
       },
@@ -8445,6 +8721,12 @@
           {
             "value": "few",
             "frequency": "sometimes"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
           }
         ]
       },
@@ -11072,6 +11354,26 @@
             "value": "yellow_brown",
             "frequency": "sometimes"
           }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "always"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "conifer_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "broadleaf_wood",
+            "frequency": "usually"
+          }
         ]
       },
       "measurements": {
@@ -11697,6 +11999,12 @@
             "value": "conifer",
             "frequency": "always"
           }
+        ],
+        "bruising": [
+          {
+            "value": "no",
+            "frequency": "usually"
+          }
         ]
       },
       "measurements": {
@@ -11864,6 +12172,26 @@
           {
             "value": "broadleaf",
             "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "fibrous",
+            "frequency": "usually"
+          },
+          {
+            "value": "soft",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "always"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
           }
         ]
       },
@@ -12457,11 +12785,11 @@
         ],
         "substrate_wood": [
           {
-            "value": "broadleaf",
+            "value": "dead",
             "frequency": "always"
           },
           {
-            "value": "dead",
+            "value": "broadleaf",
             "frequency": "always"
           }
         ],
@@ -12626,12 +12954,12 @@
         ],
         "substrate_wood": [
           {
-            "value": "broadleaf",
-            "frequency": "always"
-          },
-          {
             "value": "living",
             "frequency": "usually"
+          },
+          {
+            "value": "broadleaf",
+            "frequency": "always"
           },
           {
             "value": "dead",
@@ -12736,6 +13064,12 @@
           {
             "value": "single",
             "frequency": "usually"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
           }
         ]
       },
@@ -13394,6 +13728,54 @@
           {
             "value": "orange",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          },
+          {
+            "value": "tapering",
+            "frequency": "sometimes"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "conifer_wood",
+            "frequency": "usually"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "few",
+            "frequency": "usually"
+          },
+          {
+            "value": "troop",
+            "frequency": "usually"
           }
         ]
       },
@@ -15238,6 +15620,22 @@
             "value": "blue",
             "frequency": "usually"
           }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          },
+          {
+            "value": "tapering",
+            "frequency": "sometimes"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
         ]
       },
       "measurements": {
@@ -16012,6 +16410,22 @@
             "value": "cream",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "usually"
+          },
+          {
+            "value": "tapering",
+            "frequency": "sometimes"
+          }
+        ],
+        "ring": [
+          {
+            "value": "absent",
+            "frequency": "always"
+          }
         ]
       },
       "measurements": {
@@ -16345,6 +16759,32 @@
           },
           {
             "value": "cream",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "usually"
+          },
+          {
+            "value": "fibrous",
+            "frequency": "usually"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "always"
+          },
+          {
+            "value": "mixed_wood",
             "frequency": "usually"
           }
         ]
@@ -16933,6 +17373,48 @@
           {
             "value": "bright_red",
             "frequency": "always"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
+        ],
+        "flesh_consistency": [
+          {
+            "value": "soft",
+            "frequency": "always"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "disturbed",
+            "frequency": "usually"
+          },
+          {
+            "value": "garden",
+            "frequency": "usually"
+          },
+          {
+            "value": "urban",
+            "frequency": "usually"
+          }
+        ],
+        "growth_habit": [
+          {
+            "value": "caespitose",
+            "frequency": "usually"
+          },
+          {
+            "value": "few",
+            "frequency": "usually"
           }
         ]
       },
@@ -19230,6 +19712,32 @@
             "value": "orange",
             "frequency": "always"
           }
+        ],
+        "stipe_base": [
+          {
+            "value": "tapering",
+            "frequency": "usually"
+          },
+          {
+            "value": "equal",
+            "frequency": "sometimes"
+          }
+        ],
+        "odour": [
+          {
+            "value": "none",
+            "frequency": "usually"
+          }
+        ],
+        "habitat": [
+          {
+            "value": "broadleaf_wood",
+            "frequency": "always"
+          },
+          {
+            "value": "mixed_wood",
+            "frequency": "usually"
+          }
         ]
       },
       "measurements": {
@@ -20856,6 +21364,22 @@
           },
           {
             "value": "mixed_wood",
+            "frequency": "usually"
+          }
+        ],
+        "flesh_colour": [
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
             "frequency": "usually"
           }
         ]
@@ -23699,6 +24223,12 @@
             "value": "white",
             "frequency": "always"
           }
+        ],
+        "stipe_base": [
+          {
+            "value": "equal",
+            "frequency": "always"
+          }
         ]
       },
       "measurements": {
@@ -24679,6 +25209,18 @@
           {
             "value": "urban",
             "frequency": "sometimes"
+          }
+        ],
+        "odour": [
+          {
+            "value": "unpleasant_other",
+            "frequency": "usually"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "yes",
+            "frequency": "usually"
           }
         ]
       },
@@ -25958,6 +26500,16 @@
             "value": "conifer",
             "frequency": "always"
           }
+        ],
+        "stipe_flesh": [
+          {
+            "value": "solid",
+            "frequency": "usually"
+          },
+          {
+            "value": "stuffed",
+            "frequency": "sometimes"
+          }
         ]
       },
       "measurements": {
@@ -26138,6 +26690,22 @@
             "value": "broadleaf",
             "frequency": "usually"
           }
+        ],
+        "flesh_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
+            "frequency": "usually"
+          }
         ]
       },
       "measurements": {
@@ -26302,6 +26870,12 @@
         "associated_tree": [
           {
             "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
             "frequency": "usually"
           }
         ]
@@ -26476,6 +27050,12 @@
         "associated_tree": [
           {
             "value": "broadleaf",
+            "frequency": "usually"
+          }
+        ],
+        "bruising": [
+          {
+            "value": "no",
             "frequency": "usually"
           }
         ]
