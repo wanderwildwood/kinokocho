@@ -238,14 +238,24 @@ fun NewEntryScreen(
                 // Not a state of the mushroom. A state of the person looking at it, and
                 // it must never be scored as though they had answered.
                 //
-                // A choice's height, so the list is one uniform column and any position
-                // it rests at is the top of something.
-                OutlinedButtonMMD(
-                    onClick = { vm.skip(questionId) },
-                    modifier = Modifier.fillMaxWidth()
-                        .then(unit?.let { Modifier.height(it) } ?: Modifier),
+                // The *row* keeps a choice's height, because that is what makes the list
+                // one uniform column so any position it rests at is the top of something.
+                // The button inside it does not. Given the row's full height it became a
+                // slab across both columns, half again the size of any real choice and
+                // the largest thing on the page — which is backwards: it is the answer
+                // for when there is nothing to see, and it was shouting.
+                Box(
+                    Modifier.fillMaxWidth().then(unit?.let { Modifier.height(it) } ?: Modifier),
+                    contentAlignment = Alignment.Center,
                 ) {
-                    Text(if (character.notTested) "I looked and cannot say" else "Skip this")
+                    OutlinedButtonMMD(
+                        onClick = { vm.skip(questionId) },
+                        modifier = Modifier.fillMaxWidth()
+                            .then(unit?.let { Modifier.height(it.coerceAtMost(SKIP_MAX)) }
+                                ?: Modifier),
+                    ) {
+                        Text(if (character.notTested) "I looked and cannot say" else "Skip this")
+                    }
                 }
             }
 

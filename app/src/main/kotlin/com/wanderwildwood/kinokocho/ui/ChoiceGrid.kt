@@ -172,6 +172,18 @@ internal val LINE = 16.dp
 internal val GAP = 6.dp
 
 /**
+ * As tall as the skip button is allowed to get.
+ *
+ * Its row still takes a whole choice's height, because uniform rows are what let the list
+ * rest at a page boundary instead of halfway through a tile. The button in that row does
+ * not need to fill it, and filling it made "Skip this" a slab across both columns and the
+ * largest thing on the page. It is the answer for when there is nothing to see; it should
+ * not be the loudest thing on the screen. On the text questions a row is already about
+ * this tall, so nothing changes there.
+ */
+internal val SKIP_MAX = 56.dp
+
+/**
  * One choice: the drawing, and the words under it.
  *
  * The words stay even when there is a picture. A drawing narrows what a term could
