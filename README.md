@@ -65,6 +65,14 @@ from the data is worse than none.
 Two checks live outside the test suite because they need the network and depend on other
 people's databases moving under them. Run both when the pack changes.
 
+`tools/verify-names.py` records, for every name in the pack, which outside authority says
+the mushroom exists — and `PackIntegrityTest` refuses any taxon missing from that record.
+This is the one guard that matters most here. A fabricated species has a perfect shape:
+correct Latin, real genus, real epithet, and every other test in the suite green. The only
+thing that catches it is somebody outside this repository having heard of it. The network
+stays in the tool, where a flaky lookup delays a change; the rule stays in the test, where
+it always runs.
+
 `tools/check-names.py` asks GBIF and iNaturalist whether every name exists. The tests can
 see that a name is a well-formed binomial, that its id agrees with it, that its lookalikes
 resolve — and all of that passes for a name that is well-formed, consistent, and not real.

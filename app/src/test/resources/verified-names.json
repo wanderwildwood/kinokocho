@@ -1,0 +1,627 @@
+{
+  "Agaricus campestris": {
+    "authority": "gbif",
+    "id": "5243458",
+    "checked": "2026-09-01"
+  },
+  "Agaricus xanthodermus": {
+    "authority": "gbif",
+    "id": "5243412",
+    "checked": "2026-09-01"
+  },
+  "Amanita bisporigera": {
+    "authority": "gbif",
+    "id": "5452051",
+    "checked": "2026-09-01"
+  },
+  "Amanita brunnescens": {
+    "authority": "gbif",
+    "id": "5240302",
+    "checked": "2026-09-01"
+  },
+  "Amanita citrina": {
+    "authority": "gbif",
+    "id": "3328320",
+    "checked": "2026-09-01"
+  },
+  "Amanita flavoconia": {
+    "authority": "gbif",
+    "id": "5240273",
+    "checked": "2026-09-01"
+  },
+  "Amanita jacksonii": {
+    "authority": "gbif",
+    "id": "5452395",
+    "checked": "2026-09-01"
+  },
+  "Amanita multisquamosa": {
+    "authority": "gbif",
+    "id": "5452421",
+    "checked": "2026-09-01"
+  },
+  "Amanita muscaria var. guessowii": {
+    "authority": "gbif",
+    "id": "7698695",
+    "checked": "2026-09-01"
+  },
+  "Amanita parcivolvata": {
+    "authority": "gbif",
+    "id": "8338709",
+    "checked": "2026-09-01"
+  },
+  "Amanita persicina": {
+    "authority": "gbif",
+    "id": "9661781",
+    "checked": "2026-09-01"
+  },
+  "Amanita phalloides": {
+    "authority": "gbif",
+    "id": "5240325",
+    "checked": "2026-09-01"
+  },
+  "Amanita rubescens": {
+    "authority": "gbif",
+    "id": "7496350",
+    "checked": "2026-09-01"
+  },
+  "Amanita vaginata": {
+    "authority": "gbif",
+    "id": "5240306",
+    "checked": "2026-09-01"
+  },
+  "Apioperdon pyriforme": {
+    "authority": "gbif",
+    "id": "10852503",
+    "checked": "2026-09-01"
+  },
+  "Armillaria mellea": {
+    "authority": "gbif",
+    "id": "2536891",
+    "checked": "2026-09-01"
+  },
+  "Arrhenia epichysium": {
+    "authority": "gbif",
+    "id": "2532835",
+    "checked": "2026-09-01"
+  },
+  "Artomyces pyxidatus": {
+    "authority": "gbif",
+    "id": "2550493",
+    "checked": "2026-09-01"
+  },
+  "Auricularia americana": {
+    "authority": "gbif",
+    "id": "5249296",
+    "checked": "2026-09-01"
+  },
+  "Baorangia bicolor": {
+    "authority": "gbif",
+    "id": "7621292",
+    "checked": "2026-09-01"
+  },
+  "Boletus edulis": {
+    "authority": "gbif",
+    "id": "5954958",
+    "checked": "2026-09-01"
+  },
+  "Bondarzewia berkeleyi": {
+    "authority": "gbif",
+    "id": "2552027",
+    "checked": "2026-09-01"
+  },
+  "Calvatia craniiformis": {
+    "authority": "gbif",
+    "id": "7242423",
+    "checked": "2026-09-01"
+  },
+  "Candolleomyces candolleanus": {
+    "authority": "gbif",
+    "id": "12008655",
+    "checked": "2026-09-01"
+  },
+  "Cantharellus appalachiensis": {
+    "authority": "gbif",
+    "id": "5467036",
+    "checked": "2026-09-01"
+  },
+  "Cantharellus cinnabarinus": {
+    "authority": "gbif",
+    "id": "5249599",
+    "checked": "2026-09-01"
+  },
+  "Cantharellus lateritius": {
+    "authority": "gbif",
+    "id": "7241861",
+    "checked": "2026-09-01"
+  },
+  "Cantharellus minor": {
+    "authority": "gbif",
+    "id": "5249564",
+    "checked": "2026-09-01"
+  },
+  "Cerioporus squamosus": {
+    "authority": "gbif",
+    "id": "2547092",
+    "checked": "2026-09-01"
+  },
+  "Chlorociboria aeruginascens": {
+    "authority": "gbif",
+    "id": "8411734",
+    "checked": "2026-09-01"
+  },
+  "Chlorophyllum molybdites": {
+    "authority": "gbif",
+    "id": "5243168",
+    "checked": "2026-09-01"
+  },
+  "Clavulina coralloides": {
+    "authority": "gbif",
+    "id": "5249883",
+    "checked": "2026-09-01"
+  },
+  "Collybia nuda": {
+    "authority": "gbif-index",
+    "id": "178759553",
+    "checked": "2026-09-01"
+  },
+  "Coprinellus micaceus": {
+    "authority": "gbif",
+    "id": "2534578",
+    "checked": "2026-09-01"
+  },
+  "Coprinus comatus": {
+    "authority": "gbif",
+    "id": "7987658",
+    "checked": "2026-09-01"
+  },
+  "Cortinarius alboviolaceus": {
+    "authority": "gbif",
+    "id": "7844497",
+    "checked": "2026-09-01"
+  },
+  "Cortinarius armillatus": {
+    "authority": "gbif",
+    "id": "8802917",
+    "checked": "2026-09-01"
+  },
+  "Cortinarius iodes": {
+    "authority": "gbif",
+    "id": "3350173",
+    "checked": "2026-09-01"
+  },
+  "Craterellus fallax": {
+    "authority": "gbif",
+    "id": "3367713",
+    "checked": "2026-09-01"
+  },
+  "Cystoderma amianthinum": {
+    "authority": "gbif",
+    "id": "5243525",
+    "checked": "2026-09-01"
+  },
+  "Dacrymyces chrysospermus": {
+    "authority": "gbif",
+    "id": "2512921",
+    "checked": "2026-09-01"
+  },
+  "Daedaleopsis confragosa": {
+    "authority": "gbif",
+    "id": "2545670",
+    "checked": "2026-09-01"
+  },
+  "Daldinia childiae": {
+    "authority": "gbif",
+    "id": "2576941",
+    "checked": "2026-09-01"
+  },
+  "Desarmillaria caespitosa": {
+    "authority": "gbif",
+    "id": "12258431",
+    "checked": "2026-09-01"
+  },
+  "Entoloma abortivum": {
+    "authority": "gbif",
+    "id": "2539731",
+    "checked": "2026-09-01"
+  },
+  "Exidia crenata": {
+    "authority": "gbif-index",
+    "id": "103767619",
+    "checked": "2026-09-01"
+  },
+  "Galerina marginata": {
+    "authority": "gbif",
+    "id": "8118872",
+    "checked": "2026-09-01"
+  },
+  "Ganoderma applanatum": {
+    "authority": "gbif",
+    "id": "2549834",
+    "checked": "2026-09-01"
+  },
+  "Ganoderma tsugae": {
+    "authority": "gbif",
+    "id": "7241318",
+    "checked": "2026-09-01"
+  },
+  "Gloeophyllum sepiarium": {
+    "authority": "gbif",
+    "id": "5249253",
+    "checked": "2026-09-01"
+  },
+  "Grifola frondosa": {
+    "authority": "gbif",
+    "id": "2540800",
+    "checked": "2026-09-01"
+  },
+  "Gymnopilus luteofolius": {
+    "authority": "gbif",
+    "id": "3343100",
+    "checked": "2026-09-01"
+  },
+  "Gymnopus dryophilus": {
+    "authority": "gbif",
+    "id": "5243756",
+    "checked": "2026-09-01"
+  },
+  "Hericium coralloides": {
+    "authority": "gbif",
+    "id": "5248532",
+    "checked": "2026-09-01"
+  },
+  "Hericium erinaceus": {
+    "authority": "gbif",
+    "id": "5248508",
+    "checked": "2026-09-01"
+  },
+  "Hydnum repandum": {
+    "authority": "gbif",
+    "id": "2554716",
+    "checked": "2026-09-01"
+  },
+  "Hygrocybe conica": {
+    "authority": "gbif",
+    "id": "2538524",
+    "checked": "2026-09-01"
+  },
+  "Hygrophoropsis aurantiaca": {
+    "authority": "gbif",
+    "id": "2525710",
+    "checked": "2026-09-01"
+  },
+  "Hymenopellis radicata": {
+    "authority": "gbif",
+    "id": "8031042",
+    "checked": "2026-09-01"
+  },
+  "Hypholoma fasciculare": {
+    "authority": "gbif",
+    "id": "3293632",
+    "checked": "2026-09-01"
+  },
+  "Hypomyces lactifluorum": {
+    "authority": "gbif",
+    "id": "2561802",
+    "checked": "2026-09-01"
+  },
+  "Hypoxylon fragiforme": {
+    "authority": "gbif",
+    "id": "5254672",
+    "checked": "2026-09-01"
+  },
+  "Infundibulicybe gibba": {
+    "authority": "gbif",
+    "id": "2531146",
+    "checked": "2026-09-01"
+  },
+  "Lactarius corrugis": {
+    "authority": "gbif",
+    "id": "5462830",
+    "checked": "2026-09-01"
+  },
+  "Lactarius deliciosus": {
+    "authority": "gbif",
+    "id": "5248629",
+    "checked": "2026-09-01"
+  },
+  "Lactarius indigo": {
+    "authority": "gbif",
+    "id": "7240044",
+    "checked": "2026-09-01"
+  },
+  "Lactifluus hygrophoroides": {
+    "authority": "gbif",
+    "id": "3552956",
+    "checked": "2026-09-01"
+  },
+  "Lactifluus subvellereus": {
+    "authority": "gbif",
+    "id": "8240323",
+    "checked": "2026-09-01"
+  },
+  "Lactifluus volemus": {
+    "authority": "gbif",
+    "id": "2551150",
+    "checked": "2026-09-01"
+  },
+  "Laetiporus cincinnatus": {
+    "authority": "gbif",
+    "id": "2542235",
+    "checked": "2026-09-01"
+  },
+  "Laetiporus sulphureus": {
+    "authority": "gbif",
+    "id": "9072021",
+    "checked": "2026-09-01"
+  },
+  "Legaliana badia": {
+    "authority": "gbif",
+    "id": "12081600",
+    "checked": "2026-09-01"
+  },
+  "Lentinellus ursinus": {
+    "authority": "gbif",
+    "id": "9044184",
+    "checked": "2026-09-01"
+  },
+  "Leucoagaricus americanus": {
+    "authority": "gbif",
+    "id": "2535839",
+    "checked": "2026-09-01"
+  },
+  "Lycoperdon perlatum": {
+    "authority": "gbif",
+    "id": "5243258",
+    "checked": "2026-09-01"
+  },
+  "Marasmius oreades": {
+    "authority": "gbif",
+    "id": "2537250",
+    "checked": "2026-09-01"
+  },
+  "Marasmius rotula": {
+    "authority": "gbif",
+    "id": "8908488",
+    "checked": "2026-09-01"
+  },
+  "Meripilus sumstinei": {
+    "authority": "gbif",
+    "id": "2540787",
+    "checked": "2026-09-01"
+  },
+  "Morchella americana": {
+    "authority": "gbif",
+    "id": "7904574",
+    "checked": "2026-09-01"
+  },
+  "Morchella angusticeps": {
+    "authority": "gbif",
+    "id": "2594624",
+    "checked": "2026-09-01"
+  },
+  "Mycena galericulata": {
+    "authority": "gbif",
+    "id": "2526880",
+    "checked": "2026-09-01"
+  },
+  "Neoboletus subvelutipes": {
+    "authority": "gbif-index",
+    "id": "166259803",
+    "checked": "2026-09-01"
+  },
+  "Neogyromitra caroliniana": {
+    "authority": "gbif",
+    "id": "3291287",
+    "checked": "2026-09-01"
+  },
+  "Omphalotus illudens": {
+    "authority": "gbif",
+    "id": "2538084",
+    "checked": "2026-09-01"
+  },
+  "Panaeolus papilionaceus": {
+    "authority": "gbif",
+    "id": "3317061",
+    "checked": "2026-09-01"
+  },
+  "Panellus stipticus": {
+    "authority": "gbif",
+    "id": "9118025",
+    "checked": "2026-09-01"
+  },
+  "Paxillus involutus": {
+    "authority": "gbif",
+    "id": "5240002",
+    "checked": "2026-09-01"
+  },
+  "Phallus ravenelii": {
+    "authority": "gbif",
+    "id": "6014309",
+    "checked": "2026-09-01"
+  },
+  "Pholiota highlandensis": {
+    "authority": "gbif",
+    "id": "2534232",
+    "checked": "2026-09-01"
+  },
+  "Pholiota squarrosa": {
+    "authority": "gbif",
+    "id": "2534205",
+    "checked": "2026-09-01"
+  },
+  "Phyllotopsis nidulans": {
+    "authority": "gbif",
+    "id": "2531625",
+    "checked": "2026-09-01"
+  },
+  "Pleurocybella porrigens": {
+    "authority": "gbif",
+    "id": "2538000",
+    "checked": "2026-09-01"
+  },
+  "Pleurotus ostreatus": {
+    "authority": "gbif",
+    "id": "2526530",
+    "checked": "2026-09-01"
+  },
+  "Pluteus cervinus": {
+    "authority": "gbif",
+    "id": "7446067",
+    "checked": "2026-09-01"
+  },
+  "Pluteus petasatus": {
+    "authority": "gbif",
+    "id": "5241275",
+    "checked": "2026-09-01"
+  },
+  "Pseudosperma rimosum": {
+    "authority": "gbif",
+    "id": "10846389",
+    "checked": "2026-09-01"
+  },
+  "Ramaria stricta": {
+    "authority": "gbif",
+    "id": "8869949",
+    "checked": "2026-09-01"
+  },
+  "Russula compacta": {
+    "authority": "gbif",
+    "id": "3359287",
+    "checked": "2026-09-01"
+  },
+  "Russula mariae": {
+    "authority": "gbif",
+    "id": "9547019",
+    "checked": "2026-09-01"
+  },
+  "Russula silvicola": {
+    "authority": "gbif",
+    "id": "3360448",
+    "checked": "2026-09-01"
+  },
+  "Russula variata": {
+    "authority": "gbif",
+    "id": "3360301",
+    "checked": "2026-09-01"
+  },
+  "Russula virescens": {
+    "authority": "gbif",
+    "id": "2551423",
+    "checked": "2026-09-01"
+  },
+  "Sarcoscypha dudleyi": {
+    "authority": "gbif",
+    "id": "2594972",
+    "checked": "2026-09-01"
+  },
+  "Schizophyllum commune": {
+    "authority": "gbif",
+    "id": "5241128",
+    "checked": "2026-09-01"
+  },
+  "Scleroderma citrinum": {
+    "authority": "gbif",
+    "id": "5239982",
+    "checked": "2026-09-01"
+  },
+  "Scleroderma polyrhizum": {
+    "authority": "gbif",
+    "id": "5239950",
+    "checked": "2026-09-01"
+  },
+  "Stereum complicatum": {
+    "authority": "gbif",
+    "id": "2553087",
+    "checked": "2026-09-01"
+  },
+  "Stereum lobatum": {
+    "authority": "gbif",
+    "id": "2553040",
+    "checked": "2026-09-01"
+  },
+  "Stereum ostrea": {
+    "authority": "gbif",
+    "id": "2553044",
+    "checked": "2026-09-01"
+  },
+  "Strobilomyces strobilaceus": {
+    "authority": "gbif",
+    "id": "9225326",
+    "checked": "2026-09-01"
+  },
+  "Suillus americanus": {
+    "authority": "gbif",
+    "id": "5239915",
+    "checked": "2026-09-01"
+  },
+  "Suillus spraguei": {
+    "authority": "gbif",
+    "id": "7596307",
+    "checked": "2026-09-01"
+  },
+  "Trametes betulina": {
+    "authority": "gbif",
+    "id": "5954508",
+    "checked": "2026-09-01"
+  },
+  "Trametes conchifer": {
+    "authority": "gbif",
+    "id": "2547301",
+    "checked": "2026-09-01"
+  },
+  "Trametes gibbosa": {
+    "authority": "gbif",
+    "id": "9208081",
+    "checked": "2026-09-01"
+  },
+  "Trametes hirsuta": {
+    "authority": "gbif",
+    "id": "8032257",
+    "checked": "2026-09-01"
+  },
+  "Trametes versicolor": {
+    "authority": "gbif",
+    "id": "2548311",
+    "checked": "2026-09-01"
+  },
+  "Tremella mesenterica": {
+    "authority": "gbif",
+    "id": "11945016",
+    "checked": "2026-09-01"
+  },
+  "Trichaptum biforme": {
+    "authority": "gbif",
+    "id": "5247228",
+    "checked": "2026-09-01"
+  },
+  "Tricholoma sejunctum": {
+    "authority": "gbif",
+    "id": "5241729",
+    "checked": "2026-09-01"
+  },
+  "Tylopilus felleus": {
+    "authority": "gbif",
+    "id": "2524910",
+    "checked": "2026-09-01"
+  },
+  "Tylopilus plumbeoviolaceus": {
+    "authority": "gbif",
+    "id": "3354645",
+    "checked": "2026-09-01"
+  },
+  "Xerocomellus chrysenteron": {
+    "authority": "gbif",
+    "id": "2519413",
+    "checked": "2026-09-01"
+  },
+  "Xylaria polymorpha": {
+    "authority": "gbif",
+    "id": "8956209",
+    "checked": "2026-09-01"
+  },
+  "Xylobolus frustulatus": {
+    "authority": "gbif",
+    "id": "7819032",
+    "checked": "2026-09-01"
+  }
+}

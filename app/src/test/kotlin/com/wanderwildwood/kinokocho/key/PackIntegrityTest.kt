@@ -26,6 +26,68 @@ class PackIntegrityTest {
     /** Genus, species, and at most one infraspecific rank. Nothing else is a name. */
     private val binomial = Regex("""[A-Z][a-z]+ [a-z-]+( (var\.|subsp\.|f\.) [a-z-]+)?""")
 
+    /**
+     * Every mushroom in the pack, with the outside authority that says it exists.
+     *
+     * Written by `tools/verify-names.py` and checked in. See the test below for why this
+     * is a file rather than a lookup.
+     */
+    private val verified: Map<String, String> by lazy {
+        val json = javaClass.getResourceAsStream("/verified-names.json")
+            ?.bufferedReader()?.use { it.readText() }
+            ?: error("verified-names.json is missing; run tools/verify-names.py")
+        val root = org.json.JSONObject(json)
+        root.keys().asSequence().associateWith { name ->
+            val row = root.getJSONObject(name)
+            "${row.getString("authority")}:${row.getString("id")}"
+        }
+    }
+
+    /**
+     * Nothing reaches the app under a name no outside authority has heard of.
+     *
+     * This is the failure that would matter more than any other here. The characteristic
+     * mistake of the thing that wrote this file is not a typo — it is a confident,
+     * well-formed, entirely plausible species that does not exist. `Suillellus
+     * subvelutipes` sat in the pack for weeks: correct Latin, real genus, real epithet, a
+     * combination nobody ever published. Every test above was green for it, because every
+     * test above asks whether a name has the right *shape*, and a fabricated name has a
+     * perfect shape. The porcini's page warned a reader about a mushroom they could not
+     * have looked up.
+     *
+     * `tools/check-names.py` finds those, and only when somebody remembers to run it.
+     * Remembering is not a control. So the answer is written down: verify-names.py asks
+     * GBIF and iNaturalist and records who vouched for each name, and this refuses any
+     * taxon missing from that record. A name nobody outside this repository has confirmed
+     * cannot reach a reader, whether or not anyone thought to check.
+     *
+     * The network stays in the tool, where a flaky lookup delays a change. The rule stays
+     * here, offline, where it always runs.
+     */
+    @Test
+    fun `every name has been confirmed by someone outside this repository`() {
+        val unconfirmed = pack.taxa.map { it.scientificName }.filterNot { it in verified }
+        assertTrue(
+            "no outside authority has vouched for these — run tools/verify-names.py, and " +
+                "if it cannot find one, the mushroom does not exist and must come out: " +
+                unconfirmed,
+            unconfirmed.isEmpty(),
+        )
+    }
+
+    /**
+     * And nothing lingers in the record for a taxon the pack no longer has.
+     *
+     * A stale blessing is how a name creeps back in unchecked: delete a taxon, add one
+     * later with the same name, and the record still says an authority vouched for it.
+     */
+    @Test
+    fun `the record of confirmed names has nothing in it the pack does not carry`() {
+        val names = pack.taxa.map { it.scientificName }.toSet()
+        assertEquals("stale entries in verified-names.json", emptySet<String>(),
+                     verified.keys - names)
+    }
+
     /** The id a name must produce: lowercased, ranks dropped, spaces to underscores. */
     private fun slug(name: String) = name
         .replace(Regex("""\b(var|subsp|f)\.\s*"""), "")
