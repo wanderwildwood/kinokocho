@@ -30,6 +30,7 @@ import com.wanderwildwood.kinokocho.key.Hazard
 import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.schema.Character
 import com.mudita.mmd.components.lazy.LazyColumnMMD
+import com.mudita.mmd.components.lazy.LazyDefaultsMMD
 
 /**
  * One question at a time, with what it has narrowed to underneath.
@@ -164,10 +165,28 @@ fun NewEntryScreen(
         val realItems = (if (drawn) (values.size + 1) / 2 else values.size) + 1  // + skip
         val blanks = perPage?.let { (it - realItems % it) % it } ?: 0
 
+        /*
+         * The arrows move exactly one screen, which they did not.
+         *
+         * LazyColumnMMD pages by a fixed number of *items* — LazyDefaultsMMD.SCROLL_STEP
+         * is 4 — and the picture tiles put two choices in one item, so a page of items
+         * was two screens of tiles. Tapping down from the top of "What kind of fungus is
+         * it?" jumped from the gilled row to the crust row, straight past veined, coral,
+         * cup and *gasteroid*: every puffball, earthstar and stinkhorn in the pack, on
+         * the one question that has to be answered before any of them can be reached.
+         *
+         * It was reachable only by luck. Paging down skipped it and paging up from the
+         * bottom happened to land on it, because both steps overshoot and the ends clamp.
+         * Nothing about the screen said a page had been missed.
+         *
+         * So the step is what actually fits, which is already worked out above to size
+         * the tiles and pad the list to whole pages.
+         */
         LazyColumnMMD(
             Modifier.fillMaxSize().padding(top = 8.dp),
             contentPadding = PaddingValues(bottom = 0.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
+            scrollStep = perPage ?: LazyDefaultsMMD.SCROLL_STEP,
         ) {
             if (drawn) {
                 choiceGrid(
