@@ -44,6 +44,7 @@ None of that is licence to be vague. A drawing is still of a named species doing
 thing it is there to show, and thrift that costs accuracy is just a worse drawing.
 """
 
+import json
 import os
 import re
 
@@ -656,6 +657,28 @@ def stipe_base():
 
 # ---------------------------------------------------------------------------
 # cap_shape — the standard series, each on a species that holds that shape.
+
+def cap_presence():
+    c = "cap_presence"
+
+    # The two stinkhorns that forced this character into the schema, which makes them the
+    # honest pair to draw it with: both come out of a volva, and one has a cap on top and
+    # the other has nothing but the spike. Drawn as the same mushroom twice so that the
+    # cap is the only thing that changes, because the cap is the only thing being asked
+    # about.
+    write(f"art_{c}_present", "Phallus ravenelii",
+          "Something sits on top of the stem, overhanging it.",
+          path("M37,16 Q49,7 59,17 Q61,33 48,36 Q36,33 37,16 Z"),
+          path(stem_sides(x=48, top=35, bottom=78, half=5)),
+          path("M39,76 Q38,86 48,86 Q58,86 57,76"),
+          ground())
+
+    write(f"art_{c}_absent", "Mutinus elegans",
+          "The stem runs to a point with nothing on top of it.",
+          path("M42,78 Q40,44 47,13 Q54,44 54,78"),
+          path("M38,74 Q37,86 48,86 Q59,86 58,74"),
+          ground())
+
 
 def cap_shape():
     """
@@ -1950,14 +1973,20 @@ def emit_kotlin():
         f.write("\n".join(lines))
 
 
-CHARACTERS = [
-    "fruitbody_type", "gill_attachment", "stipe_base", "cap_shape", "ring",
-    "stipe_presence", "gill_spacing", "growth_habit", "cap_margin", "veil_remnants",
-    "gill_edge", "stipe_flesh", "gill_extras", "cap_colour_pattern",
-    "substrate", "latex", "bruising", "associated_tree",
-    "cap_surface", "stipe_surface", "flesh_consistency", "bruising_where", "habitat",
-    "latex_change", "substrate_wood", "bruising_speed",
-]
+# Taken from the schema rather than written out here. This was a hand-kept list of the
+# characters that have drawings, and a hand-kept copy of something is a copy that drifts:
+# adding cap_presence to the schema and drawing it did not add it here, so the generator
+# stopped with "cannot split cap_presence_absent" and wrote no Kotlin at all. It failed
+# loudly, which is the good version of that bug, and it should not have been possible.
+# Every id here is a real character; the ones with no drawing simply never come up.
+def _character_ids():
+    schema = os.path.join(HERE, "..", "app", "src", "main", "assets", "schema",
+                          "characters-v1.json")
+    with open(schema, encoding="utf-8") as handle:
+        return [c["id"] for c in json.load(handle)["characters"]]
+
+
+CHARACTERS = _character_ids()
 
 if __name__ == "__main__":
     fruitbody_type()
@@ -1973,6 +2002,7 @@ if __name__ == "__main__":
     gill_edge()
     stipe_flesh()
     gill_extras()
+    cap_presence()
     cap_colour_pattern()
     substrate()
     latex()

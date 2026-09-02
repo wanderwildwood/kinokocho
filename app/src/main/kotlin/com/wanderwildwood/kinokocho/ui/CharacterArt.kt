@@ -41,6 +41,8 @@ object CharacterArt {
         "cap_margin/translucent_striate" to Art(R.drawable.art_cap_margin_translucent_striate, "Mycena galericulata", "Flesh thin enough that the gills show through as lines."),
         "cap_margin/uplifted" to Art(R.drawable.art_cap_margin_uplifted, "Infundibulicybe gibba", "Turned up with age, exposing the gills from the side."),
         "cap_margin/wavy" to Art(R.drawable.art_cap_margin_wavy, "Cantharellus lateritius", "Irregularly lobed and waved rather than circular."),
+        "cap_presence/absent" to Art(R.drawable.art_cap_presence_absent, "Mutinus elegans", "The stem runs to a point with nothing on top of it."),
+        "cap_presence/present" to Art(R.drawable.art_cap_presence_present, "Phallus ravenelii", "Something sits on top of the stem, overhanging it."),
         "cap_shape/bell" to Art(R.drawable.art_cap_shape_bell, "Panaeolus papilionaceus", "Sides curve out and hang down: a bell, not a cone."),
         "cap_shape/conical" to Art(R.drawable.art_cap_shape_conical, "Hygrocybe conica", "Straight sides meeting at a point; never flattening with age."),
         "cap_shape/convex" to Art(R.drawable.art_cap_shape_convex, "Agaricus campestris", "An even dome, the margin still turned down."),

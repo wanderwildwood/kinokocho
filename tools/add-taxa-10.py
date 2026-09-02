@@ -147,8 +147,11 @@ TAXA = [
                        cap_shape={"conical": "usually", "bell": "usually"},
                        cap_surface={"wrinkled": "always", "viscid": "always"},
                        cap_colour={"dark_brown": "usually", "olive": "usually"},
-                       flesh_colour={"pink": "always", "red": "usually",
-                                     "white": "usually"},
+                       # Pink stalk, and no white. That is the whole difference from
+                       # Ravenel's stinkhorn, which is the other capped one here and is
+                       # white — claiming white too left the two of them with nothing
+                       # that separated them.
+                       flesh_colour={"pink": "always", "red": "usually"},
                        flesh_consistency={"soft": "usually", "gelatinous": "usually"},
                        odour={"foetid": "always"},
                        bruising={"no": "always"},
@@ -354,8 +357,10 @@ SHAPE = {
 # information gain, so a reader is sent to look at the one thing that cannot tell them
 # apart. So the pair is asked of the data, under the same always-or-usually rule the test
 # uses, and only characters that genuinely settle it are named.
-SHAPE_CANDIDATES = ["stipe_surface", "flesh_colour", "cap_shape", "cap_surface",
-                    "cap_colour", "growth_habit", "fruitbody_type"]
+# cap_presence leads, because for these five it is the difference a reader sees first:
+# three of them are a bare spike, columns or arms, and two have a real cap on top.
+SHAPE_CANDIDATES = ["cap_presence", "stipe_surface", "flesh_colour", "cap_shape",
+                    "cap_surface", "cap_colour", "growth_habit", "fruitbody_type"]
 
 
 def definite(taxon, character_id):

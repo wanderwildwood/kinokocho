@@ -164,6 +164,10 @@ REWRITE = {
     "hericium_erinaceus": dict(
         substrate_wood={"living": "usually", "broadleaf": "always", "dead": "sometimes"},
         flesh_colour={"white": "always"}),
+    # The two capped stinkhorns had nothing separating them either. This one has a pink
+    # to reddish stalk and Phallus ravenelii is white; saying it was also usually white
+    # gave away the one character that tells them apart.
+    "satyrus_rugulosus": dict(flesh_colour={"pink": "always", "red": "usually"}),
     "hericium_coralloides": dict(
         substrate_wood={"dead": "always", "broadleaf": "always"}),
 }

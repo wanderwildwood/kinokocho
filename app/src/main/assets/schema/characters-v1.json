@@ -623,6 +623,27 @@
       "valuesFrom": "colours"
     },
     {
+      "id": "cap_presence",
+      "label": "Is there a cap?",
+      "noun": "Cap",
+      "group": "cap",
+      "hint": "A shelf or a bracket counts as a cap. A ball, a coral, a crust, a cup or a stinkhorn's bare spike does not.",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 4,
+      "values": [
+        {
+          "id": "present",
+          "label": "A cap or a shelf"
+        },
+        {
+          "id": "absent",
+          "label": "No cap"
+        }
+      ]
+    },
+    {
       "id": "cap_shape",
       "label": "What shape is the cap?",
       "noun": "Shape",
