@@ -12,8 +12,8 @@ and 野帳 (a surveyor's field book): a plain book you fill by going places.
 
 | | |
 |---|---|
-| ![The journal](docs/screenshots/journal.png) | ![A question in the key](docs/screenshots/key.png) |
-| ![What is about this month](docs/screenshots/month.png) | ![One mushroom's page](docs/screenshots/candidate.png) |
+| ![The journal](screenshots/1-journal.png) | ![A question in the key](screenshots/2-key.png) |
+| ![What is about this month](screenshots/3-month.png) | ![One mushroom's page](screenshots/4-candidate.png) |
 
 ## What it is, and what it is not
 
