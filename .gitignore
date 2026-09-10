@@ -21,3 +21,7 @@ tools/reference/plates/
 
 # Local instructions for tooling; not part of the published project.
 CLAUDE.md
+
+# Python bytecode from the tools directory.
+__pycache__/
+*.pyc
