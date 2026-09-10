@@ -1,0 +1,52 @@
+name: Pack correction
+description: Something in the taxon pack is wrong — a name, a lookalike, a season, a way of telling two apart.
+title: "[pack] "
+labels: ["pack"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is the part of the app that can hurt somebody if it is wrong, so thank you for
+        taking the time. Please say where you are getting it from — every taxon in the pack
+        has to be vouched for by an outside authority, and a correction needs the same
+        footing as the thing it corrects.
+  - type: input
+    id: taxon
+    attributes:
+      label: Which mushroom
+      description: The scientific name as the app shows it.
+      placeholder: Amanita bisporigera
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong
+      options:
+        - The name is out of date or misapplied
+        - A lookalike is missing
+        - A lookalike is wrong, or the "tells them apart" is not diagnostic
+        - The season is too narrow or too wide
+        - The description or "what to look for" is wrong
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What it says now, and what it should say
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Where this comes from
+      description: A reference, a flora, a herbarium record, a GBIF or iNaturalist link — whatever you are going on.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      description: On the journal screen, the ⓘ button.
+      placeholder: "0.3.2"

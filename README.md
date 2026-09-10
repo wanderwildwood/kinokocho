@@ -104,6 +104,55 @@ already says of every row on it. `--write` applies the widenings.
   [PRIVACY.md](PRIVACY.md), which is worth reading on what "obscured" does and does not
   mean.
 
+## Installing it
+
+The APK is on the [releases page](https://github.com/wanderwildwood/kinokocho/releases/latest).
+It is signed, and it installs on the Kompakt without anything else on the phone.
+
+```sh
+# The fixed name always points at the newest release; the versioned one does not.
+curl -LO https://github.com/wanderwildwood/kinokocho/releases/latest/download/kinokocho.apk
+curl -LO https://github.com/wanderwildwood/kinokocho/releases/latest/download/kinokocho.apk.sha256
+sha256sum -c kinokocho.apk.sha256
+adb install kinokocho.apk
+```
+
+Or point [Obtainium](https://github.com/ImranR98/Obtainium) at this repository and let it
+track releases. Choose `kinokocho.apk` rather than `kinokocho-v*.apk` when it asks which
+one: the fixed name keeps working after the next release.
+
+Every release is built by CI and its certificate is checked against
+`d08ec862513896a11d962c283dfb7c004c4fbfff3382bba4aaea1411c2c5b6e7` before it is published,
+so an APK that installs over a previous one is the same key and your journal survives the
+upgrade. If Android refuses the install with a signature error, the file did not come from
+here.
+
+Android 12 (API 31) or newer. It asks for no accessibility service and reads no
+notifications.
+
+## Taking it into the field
+
+It works with the radio off, and it is meant to. Nothing it does in the field needs the
+network — the pack, the drawings and the key are all on the phone.
+
+A few things worth knowing before the first walk:
+
+- **Answer what you can see and leave the rest.** Not knowing is a real answer and the key
+  treats it as one; it never eliminates a mushroom on a character you did not record.
+- **Dig the base out.** A volva is underground, and it is the character that separates the
+  deadly *Amanita* from nearly everything else. It is the single most useful thing you can
+  do while standing over a mushroom.
+- **Set the spore print before you sleep.** Cap gills-down on paper overnight. It settles
+  more than any other character and it cannot be got in the field, which is why an entry
+  says *spore print pending* until you add it.
+- **Take the photographs anyway**, even when the shortlist is already short. Colour is what
+  you will want at home, and it is the thing the screen cannot give you.
+- **An out-of-season find is worth writing down precisely because it is one.** Seasons in
+  the pack are a guide; fungi do not read calendars.
+
+The shortlist is not an answer. When it is short enough to be worth somebody's time, send
+the find to a person who can actually say — that is what it is for.
+
 ## Status
 
 Working and in daily use, and not finished. A hundred and thirty-two taxa in the Southern
