@@ -18,3 +18,6 @@ local.properties
 # Cut from a generated sheet by tools/cut-grid.py. Working files, looked at and then
 # either used or thrown away — not the app's art, which is generated from make-art.py.
 tools/reference/plates/
+
+# Local instructions for tooling; not part of the published project.
+CLAUDE.md
