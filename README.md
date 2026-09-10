@@ -215,6 +215,12 @@ page needs the **APP_OWNER** role, which iNaturalist staff grant on a written re
 expect to see some identifications behind. It is a wait rather than a form. Set the
 redirect URI to `kinokocho://oauth`, exactly as it reads in `INatConfig`.
 
+## Support
+
+This is free software and it stays free; there is nothing here to buy. If you would like to
+send something somewhere anyway, there are some llamas in Hot Springs, North Carolina who go
+through a great deal of hay: <https://hotspringsllamas.org/donate/>
+
 ## Licence
 
 GPL-3.0-only. See [LICENSE](LICENSE).
