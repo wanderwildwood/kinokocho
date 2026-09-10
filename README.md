@@ -106,11 +106,11 @@ already says of every row on it. `--write` applies the widenings.
 
 ## Status
 
-Working and in daily use, and not finished. A hundred and ten taxa in the Southern
-Appalachia pack across forty characters, eighty-three pairs that get confused for one
-another, a hundred and seventy-four drawings of single characters and thirty-two of whole
-mushrooms, and a key that reaches the right taxon in about four questions when the answers
-are true.
+Working and in daily use, and not finished. A hundred and thirty-two taxa in the Southern
+Appalachia pack across forty-one characters, a hundred and twenty-five pairs that get
+confused for one another, a hundred and sixty-nine drawings of single characters and
+thirty-two of whole mushrooms, and a key that reaches the right taxon in about four
+questions when the answers are true.
 
 Nothing in the pack has been checked by a mycologist. Every row says so on its own page.
 Publishing to iNaturalist is the answer to that: it puts the find in front of people who
