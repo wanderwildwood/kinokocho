@@ -1,0 +1,57 @@
+name: Check
+
+# The release workflow already runs these two, but only when a tag is pushed — which is
+# after the mistake is written down permanently. This runs them on the way in instead.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A second push to the same branch makes the first run's answer irrelevant.
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      # No signing key is restored here on purpose. Nothing this job does needs one, and
+      # a pull request from a fork cannot read the secrets anyway — asking for them would
+      # only mean every outside contribution failed on a step that was never about them.
+      - name: Test
+        run: ./gradlew :app:testDebugUnitTest
+
+      # Same check as the release build, and for the same reason: every drawing and the
+      # taxon pack are generated, and a generated file that has been hand-edited is a file
+      # that will be overwritten one day without anyone noticing. Both outputs, not just
+      # the drawables — CharacterArt.kt is generated too and went stale once already.
+      - name: Check the generated art is what the generator produces
+        run: |
+          python3 tools/make-art.py
+          generated="app/src/main/res app/src/main/kotlin/com/wanderwildwood/kinokocho/ui/CharacterArt.kt"
+          if ! git diff --quiet -- $generated; then
+            echo "::error::The checked-in drawings differ from what tools/make-art.py produces."
+            git diff --stat -- $generated
+            exit 1
+          fi
