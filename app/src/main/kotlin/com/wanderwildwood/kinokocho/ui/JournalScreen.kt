@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -61,7 +61,7 @@ fun JournalScreen(
                 Modifier.fillMaxWidth().padding(start = 16.dp, end = 12.dp, top = 12.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(
+                TextMMD(
                     "Mushroom Journal",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
@@ -101,7 +101,7 @@ fun JournalScreen(
                     onValueChange = { query = it },
                     modifier = Modifier.fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 6.dp),
-                    placeholder = { Text("A name, a place, a month") },
+                    placeholder = { TextMMD("A name, a place, a month") },
                     singleLine = true,
                 )
             }
@@ -114,7 +114,7 @@ fun JournalScreen(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Text(
+                    TextMMD(
                         "Nothing here matches that.",
                         style = MaterialTheme.typography.bodySmall,
                     )
@@ -167,7 +167,7 @@ fun JournalScreen(
             ButtonMMD(
                 onClick = onNew,
                 modifier = Modifier.fillMaxWidth().padding(16.dp),
-            ) { Text("Record a find") }
+            ) { TextMMD("Record a find") }
         }
     }
 }
@@ -185,13 +185,13 @@ private fun Empty(modifier: Modifier = Modifier) {
             tint = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.size(72.dp),
         )
-        Text(
+        TextMMD(
             "Nothing recorded yet.",
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 12.dp),
         )
-        Text(
+        TextMMD(
             "A find is worth recording even when you never learn what it was. " +
                 "Answer whatever you can see and leave the rest.",
             style = MaterialTheme.typography.bodySmall,
@@ -228,7 +228,7 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
             // The name leads once there is one. A journal you can read back is a list
             // of what things were, and the date is what it falls back to.
             val named = entry.observation.identifiedAs.takeIf { it.isNotBlank() }
-            Text(
+            TextMMD(
                 when {
                     armed -> "Delete this find — tap again"
                     named != null -> named
@@ -244,7 +244,7 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
                 .filterNot { it.valueId == MeasurementRow.NOT_TESTED }
                 .map { it.characterId }.distinct().size
             val place = entry.observation.placeNote.takeIf { it.isNotBlank() }
-            Text(
+            TextMMD(
                 listOfNotNull(
                     named?.let { dateOf(entry.observation.recordedAt) },
                     place,

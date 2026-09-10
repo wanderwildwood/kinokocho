@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -255,7 +255,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
                     .border(BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface))
                     .padding(20.dp),
             ) {
-                Text(
+                TextMMD(
                     result.failed ?: when {
                         result.added == 0 && result.alreadyHere > 0 ->
                             "Everything in that copy was already here."
@@ -272,7 +272,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
                 OutlinedButtonMMD(
                     onClick = { imported = null },
                     modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
-                ) { Text("Close") }
+                ) { TextMMD("Close") }
             }
         }
     }

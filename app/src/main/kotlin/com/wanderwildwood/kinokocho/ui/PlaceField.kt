@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -117,7 +117,7 @@ fun PlaceField(
             value = text,
             onValueChange = { text = it; onPlaceChange(it) },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text("The place, in your own words") },
+            placeholder = { TextMMD("The place, in your own words") },
         )
         Row(
             Modifier.fillMaxWidth().padding(top = 6.dp),
@@ -129,19 +129,19 @@ fun PlaceField(
                     else ask.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
                 },
                 modifier = Modifier.fillMaxWidth(),
-            ) { Text(if (latitude == null) "Add roughly where I am" else "Take it again") }
+            ) { TextMMD(if (latitude == null) "Add roughly where I am" else "Take it again") }
         }
         // What is held, said once, where the numbers used to be typed. Without this the
         // button would be the only evidence it had ever worked.
         if (latitude != null && longitude != null) {
-            Text(
+            TextMMD(
                 "Roughly ${format(latitude)}, ${format(longitude)}",
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 4.dp),
             )
         }
         message?.let {
-            Text(
+            TextMMD(
                 it,
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 4.dp),

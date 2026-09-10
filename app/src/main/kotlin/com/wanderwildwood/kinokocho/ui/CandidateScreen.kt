@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -72,14 +72,14 @@ fun CandidateScreen(
             .padding(horizontal = 16.dp),
     ) {
         item {
-            Text(
+            TextMMD(
                 taxon.scientificName,
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 12.dp),
             )
             taxon.commonName?.let {
-                Text(it, style = MaterialTheme.typography.bodyMedium)
+                TextMMD(it, style = MaterialTheme.typography.bodyMedium)
             }
         }
 
@@ -105,7 +105,7 @@ fun CandidateScreen(
                 // and so it is written once, here, rather than eleven times in the
                 // data.
                 if (taxon.hazard.severity == Hazard.Severity.UNKNOWN) {
-                    Text(
+                    TextMMD(
                         "Nobody has written down what this one does, either way. That " +
                             "is not the same as safe — it is the absence of anyone " +
                             "having looked.",
@@ -116,7 +116,7 @@ fun CandidateScreen(
                     Row(it, "Comes on")
                 }
                 taxon.hazard.note?.takeIf { it.isNotBlank() }?.let {
-                    Text(it, style = MaterialTheme.typography.bodySmall)
+                    TextMMD(it, style = MaterialTheme.typography.bodySmall)
                 }
             }
         }
@@ -146,7 +146,7 @@ fun CandidateScreen(
         taxon.note?.takeIf { it.isNotBlank() }?.let { note ->
             item {
                 Section("What to look for")
-                Text(note, style = MaterialTheme.typography.bodySmall)
+                TextMMD(note, style = MaterialTheme.typography.bodySmall)
             }
         }
 
@@ -220,7 +220,7 @@ fun CandidateScreen(
                 Section("Confused with")
                 confusedWith.distinctBy { it.first }.forEach { (otherId, look) ->
                     val other = vm.pack.taxon(otherId)
-                    Text(
+                    TextMMD(
                         other?.commonName?.let { "${other.scientificName} — $it" }
                             ?: other?.scientificName ?: otherId,
                         style = MaterialTheme.typography.bodySmall,
@@ -228,16 +228,16 @@ fun CandidateScreen(
                         modifier = Modifier.padding(top = 8.dp),
                     )
                     other?.hazard?.severity?.takeIf { it.alwaysShow }?.let {
-                        Text(
+                        TextMMD(
                             if (it == Hazard.Severity.LETHAL) "Can kill."
                             else "Can cause serious harm.",
                             style = MaterialTheme.typography.bodySmall,
                             fontWeight = FontWeight.Bold,
                         )
                     }
-                    Text(look.note, style = MaterialTheme.typography.bodySmall)
+                    TextMMD(look.note, style = MaterialTheme.typography.bodySmall)
                     if (look.discriminators.isNotEmpty()) {
-                        Text(
+                        TextMMD(
                             "Tells them apart: " + look.discriminators
                                 .mapNotNull { vm.schema.character(it)?.inFull() }
                                 .distinct()
@@ -255,7 +255,7 @@ fun CandidateScreen(
             // not ask a question it cannot answer — it just describes the mushroom.
             Section(if (answered.isEmpty()) "What it is like" else "Does it match?")
             if (answered.isNotEmpty()) {
-                Text(
+                TextMMD(
                     // A single disagreement does not remove a candidate, it only moves
                     // it down, and the reader is the one who decides which it was.
                     if (differ == 0) "Everything you recorded agrees."
@@ -272,7 +272,7 @@ fun CandidateScreen(
                 .mapNotNull { c -> statesOf(vm, taxon, c)?.let { c to it } }
             if (rows.isEmpty()) return@forEach
             item(key = "g${group.name}") {
-                Text(
+                TextMMD(
                     group.heading,
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
@@ -289,10 +289,10 @@ fun CandidateScreen(
             // who would know, and a reader deciding from it deserves to be told.
             Section("Where this comes from")
             taxon.sources.forEach {
-                Text(it, style = MaterialTheme.typography.bodySmall)
+                TextMMD(it, style = MaterialTheme.typography.bodySmall)
             }
             if (!taxon.reviewed) {
-                Text(
+                TextMMD(
                     "Not checked by a mycologist. Written from published descriptions, " +
                         "and no substitute for asking someone.",
                     style = MaterialTheme.typography.bodySmall,
@@ -304,7 +304,7 @@ fun CandidateScreen(
             OutlinedButtonMMD(
                 onClick = onClose,
                 modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 24.dp),
-            ) { Text("Back") }
+            ) { TextMMD("Back") }
         }
     }
 }
@@ -368,15 +368,15 @@ private fun marked(
 @Composable
 private fun Row(value: String, label: String, note: String? = null) {
     Row(Modifier.fillMaxWidth().padding(top = 3.dp)) {
-        Text(
+        TextMMD(
             label,
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.width(96.dp).padding(end = 6.dp),
         )
         Column(Modifier.weight(1f)) {
-            Text(value, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
+            TextMMD(value, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
             note?.let {
-                Text(it, style = MaterialTheme.typography.bodySmall)
+                TextMMD(it, style = MaterialTheme.typography.bodySmall)
             }
         }
     }
@@ -385,7 +385,7 @@ private fun Row(value: String, label: String, note: String? = null) {
 @Composable
 private fun Section(title: String) {
     HorizontalDividerMMD(Modifier.padding(top = 14.dp))
-    Text(
+    TextMMD(
         title,
         style = MaterialTheme.typography.titleMedium,
         fontWeight = FontWeight.Bold,

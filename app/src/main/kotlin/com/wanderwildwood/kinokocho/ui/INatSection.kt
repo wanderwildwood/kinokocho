@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -48,7 +48,7 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
     if (!INatConfig.configured) {
         // Says what it cannot do rather than showing a button that fails when pressed.
         // Self-eliminating: a build with an application id never draws this.
-        Text(
+        TextMMD(
             "This build has no iNaturalist application id, so it cannot publish.",
             style = MaterialTheme.typography.bodySmall,
         )
@@ -59,7 +59,7 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
 
     when {
         !vm.inat.signedIn -> {
-            Text(
+            TextMMD(
                 "Publishing a find puts it, its photographs and its characters on a " +
                     "public website, under your own account.",
                 style = MaterialTheme.typography.bodySmall,
@@ -67,7 +67,7 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
             OutlinedButtonMMD(
                 onClick = { openOrSay(context, vm, vm.signInIntent(), "sign in") },
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-            ) { Text("Sign in to iNaturalist") }
+            ) { TextMMD("Sign in to iNaturalist") }
         }
 
         published -> Published(vm, draft, context)
@@ -80,9 +80,9 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
     when (val s = state) {
         is JournalViewModel.INatState.Idle -> Unit
         is JournalViewModel.INatState.Working ->
-            Text(s.said, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 8.dp))
+            TextMMD(s.said, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 8.dp))
         is JournalViewModel.INatState.Said -> Column(Modifier.padding(top = 8.dp)) {
-            Text(s.said, style = MaterialTheme.typography.bodySmall)
+            TextMMD(s.said, style = MaterialTheme.typography.bodySmall)
         }
     }
 
@@ -97,7 +97,7 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
      */
     if (vm.inat.signedIn) {
         vm.inat.login?.let {
-            Text(
+            TextMMD(
                 "Signed in as $it",
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 10.dp),
@@ -106,7 +106,7 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
         OutlinedButtonMMD(
             onClick = vm::signOutOfINat,
             modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-        ) { Text("Sign out") }
+        ) { TextMMD("Sign out") }
     }
 
 }
@@ -135,13 +135,13 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
      * weeks of silence.
      */
     if (draft.latitude == null || draft.longitude == null) {
-        Text(
+        TextMMD(
             "No coordinates on this find",
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 4.dp),
         )
-        Text(
+        TextMMD(
             "It will go up with the place in your own words and no map pin. iNaturalist " +
                 "cannot verify a find it cannot place, so it will sit outside the lists " +
                 "most identifiers work through. \"Add roughly where I am\", further up, " +
@@ -159,7 +159,7 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
      * Somebody deciding whether to publish a foraging patch deserves the true version
      * of that sentence rather than the reassuring one.
      */
-    Text(
+    TextMMD(
         when (geoprivacy) {
             INatAccount.PRIVATE -> "Location: hidden"
             INatAccount.OBSCURED -> "Location: obscured"
@@ -169,7 +169,7 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
         fontWeight = FontWeight.Bold,
         modifier = Modifier.padding(top = 4.dp),
     )
-    Text(
+    TextMMD(
         when (geoprivacy) {
             INatAccount.PRIVATE ->
                 "iNaturalist is told where it was and shows nobody, including on the map. " +
@@ -195,7 +195,7 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
             vm.inat.geoprivacy = geoprivacy
         },
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-    ) { Text("Change") }
+    ) { TextMMD("Change") }
     }
 
     /*
@@ -232,7 +232,7 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
         },
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
     ) {
-        Text(if (armed) "Publish — this is public; tap again" else "Publish to iNaturalist")
+        TextMMD(if (armed) "Publish — this is public; tap again" else "Publish to iNaturalist")
     }
 
 }
@@ -246,7 +246,7 @@ private fun Published(
 ) {
     val url = "https://www.inaturalist.org/observations/${draft.inat.uuid}"
 
-    Text(
+    TextMMD(
         draft.inat.pushedAt?.let { "Published ${dateOnly(it)}" } ?: "Published",
         style = MaterialTheme.typography.bodyMedium,
         fontWeight = FontWeight.Bold,
@@ -261,12 +261,12 @@ private fun Published(
      */
     val name = draft.inat.taxonName
     if (name != null) {
-        Text("iNaturalist says: $name", style = MaterialTheme.typography.bodySmall)
+        TextMMD("iNaturalist says: $name", style = MaterialTheme.typography.bodySmall)
         draft.inat.identificationFetchedAt?.let {
-            Text("Read ${dateOnly(it)}", style = MaterialTheme.typography.bodySmall)
+            TextMMD("Read ${dateOnly(it)}", style = MaterialTheme.typography.bodySmall)
         }
     } else {
-        Text(
+        TextMMD(
             "Nobody has named it yet. Fungi wait longer than most things there.",
             style = MaterialTheme.typography.bodySmall,
         )
@@ -288,7 +288,7 @@ private fun Published(
      */
     val unsent = draft.photos.count { it.inatPhotoId == null }
     if (unsent > 0) {
-        Text(
+        TextMMD(
             "$unsent photograph${if (unsent == 1) "" else "s"} did not go up.",
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(top = 4.dp),
@@ -296,7 +296,7 @@ private fun Published(
         OutlinedButtonMMD(
             onClick = { vm.publish(draft) },
             modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-        ) { Text("Send the rest") }
+        ) { TextMMD("Send the rest") }
     }
 
     OutlinedButtonMMD(
@@ -304,7 +304,7 @@ private fun Published(
             openOrSay(context, vm, Intent(Intent.ACTION_VIEW, Uri.parse(url)), "open that")
         },
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-    ) { Text("Open on iNaturalist") }
+    ) { TextMMD("Open on iNaturalist") }
 
     // Asks about every find already published, not only this one - one call for the lot
     // rather than making somebody open twenty entries - so the label does not promise
@@ -312,7 +312,7 @@ private fun Published(
     OutlinedButtonMMD(
         onClick = vm::checkForNames,
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-    ) { Text("Check what has been named") }
+    ) { TextMMD("Check what has been named") }
 }
 
 /**

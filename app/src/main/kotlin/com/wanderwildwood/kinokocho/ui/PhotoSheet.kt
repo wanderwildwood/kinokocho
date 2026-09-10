@@ -18,7 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -127,13 +127,13 @@ fun PhotoSheet(
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 16.dp),
     ) {
-        Text(
+        TextMMD(
             "Photographs",
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 12.dp),
         )
-        Text(
+        TextMMD(
             "Whoever you ask will want the underside and the base. The rest is optional.",
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(top = 2.dp, bottom = 10.dp),
@@ -166,12 +166,12 @@ fun PhotoSheet(
                         .border(BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface))
                         .padding(20.dp),
                 ) {
-                    Text(
+                    TextMMD(
                         slot.label,
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                     )
-                    Text(
+                    TextMMD(
                         slot.why,
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(top = 4.dp, bottom = 14.dp),
@@ -185,7 +185,7 @@ fun PhotoSheet(
                             camera.launch(uriFor(context, file))
                         },
                         modifier = Modifier.fillMaxWidth(),
-                    ) { Text("Take one now") }
+                    ) { TextMMD("Take one now") }
                     OutlinedButtonMMD(
                         onClick = {
                             picker.launch(
@@ -195,16 +195,16 @@ fun PhotoSheet(
                             )
                         },
                         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-                    ) { Text("Choose one already on the phone") }
+                    ) { TextMMD("Choose one already on the phone") }
                     OutlinedButtonMMD(
                         onClick = { choosing = null },
                         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-                    ) { Text("Back") }
+                    ) { TextMMD("Back") }
                 }
             }
         }
 
-        Text(
+        TextMMD(
             "Done",
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
@@ -246,13 +246,13 @@ private fun SlotTile(
                     modifier = Modifier.size(40.dp),
                 )
             }
-        Text(
+        TextMMD(
             slot.label,
             style = MaterialTheme.typography.bodySmall,
             fontWeight = if (taken) FontWeight.Bold else FontWeight.Normal,
             textAlign = TextAlign.Center,
         )
-        Text(
+        TextMMD(
             if (taken) "taken" else slot.why,
             style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center,

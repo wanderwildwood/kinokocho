@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -96,7 +96,7 @@ fun SeasonScreen(
             .padding(horizontal = 16.dp),
     ) {
         item {
-            Text(
+            TextMMD(
                 if (looking) "Looking one up" else "About in $monthName",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
@@ -106,10 +106,10 @@ fun SeasonScreen(
                 value = query,
                 onValueChange = { query = it },
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-                placeholder = { Text("Look one up, any month") },
+                placeholder = { TextMMD("Look one up, any month") },
                 singleLine = true,
             )
-            Text(
+            TextMMD(
                 if (looking) {
                     "${found.size} of ${taxa.size} match, whatever month they are out in."
                 } else {
@@ -126,13 +126,13 @@ fun SeasonScreen(
         if (worthKnowing.isNotEmpty()) {
             item {
                 HorizontalDividerMMD(Modifier.padding(top = 10.dp))
-                Text(
+                TextMMD(
                     "Worth knowing this month",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
                 )
-                Text(
+                TextMMD(
                     "The ones people go looking for and the ones that hurt people, " +
                         "which are often out at the same time. Sought after means people " +
                         "look for it, not that this app has told you anything is safe.",
@@ -148,7 +148,7 @@ fun SeasonScreen(
 
         item {
             HorizontalDividerMMD(Modifier.padding(top = 10.dp))
-            Text(
+            TextMMD(
                 if (looking) "Found" else "Also about",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
@@ -181,7 +181,7 @@ fun SeasonScreen(
             OutlinedButtonMMD(
                 onClick = onClose,
                 modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 24.dp),
-            ) { Text("Close") }
+            ) { TextMMD("Close") }
         }
     }
 }
@@ -234,14 +234,14 @@ private fun TaxonLine(
             }
         }
         Column(Modifier.weight(1f)) {
-        Text(
+        TextMMD(
             taxon.commonName?.let { "${taxon.scientificName} — $it" }
                 ?: taxon.scientificName,
             style = MaterialTheme.typography.bodySmall,
             fontWeight = if (danger) FontWeight.Bold else FontWeight.Normal,
         )
         when {
-            danger -> Text(
+            danger -> TextMMD(
                 when (taxon.hazard.severity) {
                     Hazard.Severity.LETHAL -> "Can kill."
                     Hazard.Severity.SEVERE -> "Can cause serious harm."
@@ -249,7 +249,7 @@ private fun TaxonLine(
                 } + (taxon.hazard.note?.takeIf { it.isNotBlank() }?.let { " $it" } ?: ""),
                 style = MaterialTheme.typography.bodySmall,
             )
-            taxon.sought -> Text(
+            taxon.sought -> TextMMD(
                 // What it is taken for, in preference to saying "Sought after" a fifth
                 // time. The heading has already explained the word; five rows repeating
                 // it say nothing a person could act on, and the mushroom standing next
@@ -269,11 +269,11 @@ private fun TaxonLine(
             // common cause of mushroom poisoning in North America — appeared down the
             // long list as a bare name with nothing beside it, because it is neither
             // lethal nor looked for. Twenty-one rows were silent that way.
-            taxon.hazard.severity == Hazard.Severity.GI -> Text(
+            taxon.hazard.severity == Hazard.Severity.GI -> TextMMD(
                 "Makes people ill.",
                 style = MaterialTheme.typography.bodySmall,
             )
-            taxon.hazard.severity == Hazard.Severity.INTOXICATION -> Text(
+            taxon.hazard.severity == Hazard.Severity.INTOXICATION -> TextMMD(
                 "Intoxicating.",
                 style = MaterialTheme.typography.bodySmall,
             )
@@ -405,7 +405,7 @@ fun SeasonRow(month: Int, count: Int, onOpen: () -> Unit) {
             tint = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.size(22.dp).padding(end = 8.dp),
         )
-        Text(
+        TextMMD(
             "$count about in $monthName",
             style = MaterialTheme.typography.bodySmall,
         )

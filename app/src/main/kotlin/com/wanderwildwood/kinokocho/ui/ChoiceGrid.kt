@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -221,7 +221,7 @@ private fun PictureChoice(
                 modifier = Modifier.size(64.dp),
             )
         }
-        Text(
+        TextMMD(
             text = label,
             style = MaterialTheme.typography.bodySmall,
             fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,

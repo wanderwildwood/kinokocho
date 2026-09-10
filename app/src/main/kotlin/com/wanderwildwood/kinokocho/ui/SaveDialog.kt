@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -43,12 +43,12 @@ fun SaveDialog(
                 .border(BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface))
                 .padding(20.dp),
         ) {
-            Text(
+            TextMMD(
                 "Save in the journal?",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
             )
-            Text(
+            TextMMD(
                 buildString {
                     append("$answered character")
                     if (answered != 1) append("s")
@@ -61,7 +61,7 @@ fun SaveDialog(
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 6.dp),
             )
-            Text(
+            TextMMD(
                 "Worth keeping if you want to add a spore print in the morning, or ask " +
                     "someone about it later.",
                 style = MaterialTheme.typography.bodySmall,
@@ -69,16 +69,16 @@ fun SaveDialog(
             )
 
             ButtonMMD(onClick = onSave, modifier = Modifier.fillMaxWidth()) {
-                Text("Save it")
+                TextMMD("Save it")
             }
             OutlinedButtonMMD(
                 onClick = onDiscard,
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-            ) { Text("No, throw it away") }
+            ) { TextMMD("No, throw it away") }
             OutlinedButtonMMD(
                 onClick = onBack,
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-            ) { Text("Keep answering") }
+            ) { TextMMD("Keep answering") }
         }
     }
 }

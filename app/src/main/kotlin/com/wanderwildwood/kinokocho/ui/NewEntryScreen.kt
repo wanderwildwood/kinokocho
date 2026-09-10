@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -62,7 +62,7 @@ fun NewEntryScreen(
             Modifier.fillMaxWidth().padding(top = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(
+            TextMMD(
                 // The app's name, not a bare noun. This is the only heading on the
                 // question screen, and "Journal" left the one screen somebody spends a
                 // walk inside unnamed.
@@ -83,19 +83,19 @@ fun NewEntryScreen(
         val already = draft.answers.values[questionId].orEmpty()
         var picked by remember(questionId) { mutableStateOf(already) }
 
-        Text(
+        TextMMD(
             character.label,
             style = MaterialThemeTypography().titleMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 12.dp),
         )
         character.hint?.let {
-            Text(it, style = MaterialThemeTypography().bodySmall, modifier = Modifier.padding(top = 4.dp))
+            TextMMD(it, style = MaterialThemeTypography().bodySmall, modifier = Modifier.padding(top = 4.dp))
         }
 
         val multi = character.cardinality == Character.Cardinality.MULTI
         if (multi) {
-            Text(
+            TextMMD(
                 "Choose as many as apply.",
                 style = MaterialThemeTypography().bodySmall,
                 modifier = Modifier.padding(top = 2.dp),
@@ -213,11 +213,11 @@ fun NewEntryScreen(
                     // facts are the same fact.
                     val face: @Composable () -> Unit = {
                         if (value.gloss == null) {
-                            Text(value.label)
+                            TextMMD(value.label)
                         } else {
                             Column {
-                                Text(value.label)
-                                Text(
+                                TextMMD(value.label)
+                                TextMMD(
                                     value.gloss!!,
                                     style = MaterialThemeTypography().bodySmall,
                                 )
@@ -254,7 +254,7 @@ fun NewEntryScreen(
                             .then(unit?.let { Modifier.height(it.coerceAtMost(SKIP_MAX)) }
                                 ?: Modifier),
                     ) {
-                        Text(if (character.notTested) "I looked and cannot say" else "Skip this")
+                        TextMMD(if (character.notTested) "I looked and cannot say" else "Skip this")
                     }
                 }
             }
@@ -310,8 +310,8 @@ private fun NothingLeftToAsk(
     val shortlist = ranking.shortlist(3)
 
     Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
-        Text("Nothing more to ask", fontWeight = FontWeight.Bold)
-        Text(
+        TextMMD("Nothing more to ask", fontWeight = FontWeight.Bold)
+        TextMMD(
             if (live.isEmpty()) {
                 "Nothing fits everything you wrote down — a real mushroom against a " +
                     "description of a typical one. These come nearest, and one of the " +
@@ -323,13 +323,13 @@ private fun NothingLeftToAsk(
             modifier = Modifier.padding(top = 4.dp),
         )
         shortlist.forEach {
-            Text("· ${it.taxon.scientificName}", modifier = Modifier.padding(top = 6.dp))
+            TextMMD("· ${it.taxon.scientificName}", modifier = Modifier.padding(top = 6.dp))
         }
         ButtonMMD(onClick = onAddPhoto, modifier = Modifier.fillMaxWidth().padding(top = 16.dp)) {
-            Text("Add a photograph")
+            TextMMD("Add a photograph")
         }
         OutlinedButtonMMD(onClick = onDone, modifier = Modifier.fillMaxWidth().padding(top = 6.dp)) {
-            Text("Done")
+            TextMMD("Done")
         }
     }
 }
@@ -353,14 +353,14 @@ private fun Footer(
     HorizontalDividerMMD(Modifier.padding(top = 4.dp))
 
     if (draft.answers.answeredCount == 0) {
-        Text(
+        TextMMD(
             "Answer anything to start narrowing.",
             style = MaterialThemeTypography().bodySmall,
             modifier = Modifier.padding(vertical = 6.dp),
         )
     } else {
         val live = ranking.live
-        Text(
+        TextMMD(
             // "of 0 still possible" printed directly above two named candidates, which
             // is what the screen said whenever the answers contradicted each other —
             // and answers contradict each other often, because a person is looking at a
@@ -380,7 +380,7 @@ private fun Footer(
         // a mismatch is -2.0 against a full match's +1.0.
         val shown = ranking.shortlist(2)
         shown.forEach { c ->
-            Text(
+            TextMMD(
                 c.taxon.commonName?.let { n -> "${c.taxon.scientificName} — $n" }
                     ?: c.taxon.scientificName,
                 style = MaterialThemeTypography().bodySmall,
@@ -408,7 +408,7 @@ private fun Footer(
             .filter { it.taxon.hazard.severity == Hazard.Severity.LETHAL }
             .filter { it.taxon.id !in visible }
         if (hazards.isNotEmpty()) {
-            Text(
+            TextMMD(
                 "Still not ruled out: " + hazards.joinToString(", ") { it.taxon.scientificName },
                 style = MaterialThemeTypography().bodySmall,
                 fontWeight = FontWeight.Bold,
@@ -423,14 +423,14 @@ private fun Footer(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         OutlinedButtonMMD(onClick = onAddPhoto, modifier = Modifier.weight(1f)) {
-            Text(if (draft.photos.isEmpty()) "Photo" else "Photo (${draft.photos.size})")
+            TextMMD(if (draft.photos.isEmpty()) "Photo" else "Photo (${draft.photos.size})")
         }
         if (onNext != null) {
             // Answering the question in front of you beats ending the whole entry, so
             // while there is something chosen this is what the solid button does.
-            ButtonMMD(onClick = onNext, modifier = Modifier.weight(1f)) { Text("Next") }
+            ButtonMMD(onClick = onNext, modifier = Modifier.weight(1f)) { TextMMD("Next") }
         } else {
-            ButtonMMD(onClick = onDone, modifier = Modifier.weight(1f)) { Text("Done") }
+            ButtonMMD(onClick = onDone, modifier = Modifier.weight(1f)) { TextMMD("Done") }
         }
     }
 }

@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -113,7 +113,7 @@ fun AboutDialog(
              * Here rather than on the journal itself, because it is a thing done twice a
              * year and the journal screen is for the finds.
              */
-            Text(
+            TextMMD(
                 "Keep a copy of everything",
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Bold,
@@ -125,7 +125,7 @@ fun AboutDialog(
             )
 
             Spacer(10)
-            Text(
+            TextMMD(
                 "Read a copy back in",
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Bold,
@@ -140,7 +140,7 @@ fun AboutDialog(
             Line("github.com/wanderwildwood/kinokocho")
 
             Spacer(20)
-            Text(
+            TextMMD(
                 "Close",
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.End,
@@ -152,7 +152,7 @@ fun AboutDialog(
 
 @Composable
 private fun Line(text: String, bold: Boolean = false) {
-    Text(
+    TextMMD(
         text = text,
         style = MaterialTheme.typography.bodySmall,
         fontWeight = if (bold) FontWeight.Bold else FontWeight.Normal,
