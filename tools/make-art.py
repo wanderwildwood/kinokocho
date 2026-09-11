@@ -1234,7 +1234,7 @@ def bruising():
                width=FINE),
           path("M30,66 L40,58 M66,66 L56,58", width=HAIR))
 
-    write(f"art_{c}_yes", "Neoboletus subvelutipes",
+    write(f"art_{c}_yes", "Boletus subvelutipes",
           "A dark stain spreads where the thumb was.",
           cap_above(),
           path("M38,40 Q38,30 48,30 Q58,30 58,40 Q58,54 48,58 Q38,54 38,40 Z",
@@ -1541,7 +1541,7 @@ def stipe_surface():
           band(),
           path("M32,26 L64,26 M32,42 L64,42 M32,58 L64,58 M32,74 L64,74", width=HAIR),
           path("M40,12 L40,84 M48,12 L48,84 M56,12 L56,84", width=HAIR))
-    write(f"art_{c}_punctate", "Neoboletus subvelutipes", "Scattered granular dots.",
+    write(f"art_{c}_punctate", "Boletus subvelutipes", "Scattered granular dots.",
           band(),
           path("M38,22 L39,22 M50,20 L51,20 M58,26 L59,26 M40,36 L41,36 M52,34 L53,34 "
                "M60,42 L61,42 M38,50 L39,50 M50,48 L51,48 M58,58 L59,58 M42,64 L43,64 "
@@ -1771,7 +1771,7 @@ def bruising_speed():
     def dial():
         return path("M48,16 Q80,16 80,48 Q80,80 48,80 Q16,80 16,48 Q16,16 48,16 Z")
 
-    write(f"art_{c}_instant", "Neoboletus subvelutipes",
+    write(f"art_{c}_instant", "Boletus subvelutipes",
           "The colour is already moving as the knife leaves.",
           dial(),
           path("M48,26 L48,48 L58,54", width=FINE),

@@ -105,6 +105,11 @@
     "id": "MCH9",
     "checked": "2026-09-11"
   },
+  "Boletus subvelutipes": {
+    "authority": "col",
+    "id": "M8MCD",
+    "checked": "2026-09-11"
+  },
   "Bondarzewia berkeleyi": {
     "authority": "col",
     "id": "MH82",
@@ -435,11 +440,6 @@
     "id": "44T6F",
     "checked": "2026-09-11"
   },
-  "Neoboletus subvelutipes": {
-    "authority": "inaturalist",
-    "id": "1560597",
-    "checked": "2026-09-11"
-  },
   "Neogyromitra caroliniana": {
     "authority": "col",
     "id": "46HXZ",
@@ -469,6 +469,11 @@
   "Phallus ravenelii": {
     "authority": "col",
     "id": "4FS3L",
+    "checked": "2026-09-11"
+  },
+  "Phallus rugulosus": {
+    "authority": "col",
+    "id": "4FS3S",
     "checked": "2026-09-11"
   },
   "Pholiota highlandensis": {
@@ -551,11 +556,6 @@
   "Sarcoscypha dudleyi": {
     "authority": "col",
     "id": "79N7W",
-    "checked": "2026-09-11"
-  },
-  "Satyrus rugulosus": {
-    "authority": "inaturalist",
-    "id": "1649482",
     "checked": "2026-09-11"
   },
   "Schizophyllum commune": {

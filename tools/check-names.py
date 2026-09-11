@@ -10,8 +10,10 @@ does not exist.
 That is not hypothetical. This found "Suillellus subvelutipes" in the pack: a real
 species under a genus it was never combined with. GBIF matched only the genus and
 iNaturalist had nothing at all, while every test in the suite was green. It is
-Neoboletus subvelutipes, and the porcini's own page warned a reader about a mushroom
-they could not have looked up.
+Boletus subvelutipes, and the porcini's own page warned a reader about a mushroom they
+could not have looked up. It was corrected to Neoboletus subvelutipes first, which is
+what iNaturalist calls it and what no nomenclator carries — a second lesson, learned
+later: the fix for an unpublished name can be another one.
 
 Not a unit test, deliberately. It needs the network, it depends on other people's
 databases changing under it, and a suite that fails because somebody else published a
@@ -57,8 +59,8 @@ def gbif(name):
 
     Two lookups, because one is not enough. `species/match` in strict mode answers "is
     this a name in GBIF's backbone", and it says NONE for perfectly real combinations
-    the backbone has not adopted — it did so for Neoboletus subvelutipes and Collybia
-    nuda, which are what iNaturalist calls those two mushrooms. A checker that reports
+    the backbone has not adopted — it did so for Collybia nuda, which is what
+    iNaturalist calls that mushroom and what the backbone files under Lepista nuda. A checker that reports
     those as fictional is a checker somebody stops reading, and then it is worth less
     than nothing, because the one real case is buried among its false alarms.
 

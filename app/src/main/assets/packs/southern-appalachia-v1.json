@@ -4823,7 +4823,7 @@
       },
       "lookalikes": [
         {
-          "taxon": "neoboletus_subvelutipes",
+          "taxon": "boletus_subvelutipes",
           "discriminators": [
             "hymenophore_colour",
             "bruising_speed",
@@ -5045,7 +5045,7 @@
           "note": "The bitter bolete has a dark coarse net and pores that age pink, and one touch on the tongue settles it."
         },
         {
-          "taxon": "neoboletus_subvelutipes",
+          "taxon": "boletus_subvelutipes",
           "discriminators": [
             "bruising",
             "hymenophore_colour",
@@ -7969,11 +7969,11 @@
           "note": "Both come out of a white egg and both stink. This one is two to five columns joined at the top into an arch; Mutinus elegans is a single unbranched spike with no separate cap, the slime smeared over its upper third."
         },
         {
-          "taxon": "satyrus_rugulosus",
+          "taxon": "phallus_rugulosus",
           "discriminators": [
             "stipe_surface"
           ],
-          "note": "Both come out of a white egg and both stink. This one is two to five columns joined at the top into an arch; Satyrus rugulosus is a distinct wrinkled cap on a slender stalk."
+          "note": "Both come out of a white egg and both stink. This one is two to five columns joined at the top into an arch; Phallus rugulosus is a distinct wrinkled cap on a slender stalk."
         },
         {
           "taxon": "pseudocolus_fusiformis",
@@ -19365,11 +19365,11 @@
           "note": "Both come out of a white egg and both stink. This one is a single unbranched spike with no separate cap, the slime smeared over its upper third; Pseudocolus fusiformis is three or four arms joined at their tips, like a claw."
         },
         {
-          "taxon": "satyrus_rugulosus",
+          "taxon": "phallus_rugulosus",
           "discriminators": [
             "cap_presence"
           ],
-          "note": "Both come out of a white egg and both stink. This one is a single unbranched spike with no separate cap, the slime smeared over its upper third; Satyrus rugulosus is a distinct wrinkled cap on a slender stalk."
+          "note": "Both come out of a white egg and both stink. This one is a single unbranched spike with no separate cap, the slime smeared over its upper third; Phallus rugulosus is a distinct wrinkled cap on a slender stalk."
         },
         {
           "taxon": "phallus_ravenelii",
@@ -19669,8 +19669,8 @@
       "sought": false
     },
     {
-      "id": "neoboletus_subvelutipes",
-      "scientificName": "Neoboletus subvelutipes",
+      "id": "boletus_subvelutipes",
+      "scientificName": "Boletus subvelutipes",
       "commonName": "red-mouth bolete",
       "hazard": {
         "toxinClass": "gastrointestinal",
@@ -21328,11 +21328,11 @@
           "note": "Both come out of a white egg and both stink. This one is a thimble-shaped cap with a smooth, unpitted surface; Mutinus elegans is a single unbranched spike with no separate cap, the slime smeared over its upper third."
         },
         {
-          "taxon": "satyrus_rugulosus",
+          "taxon": "phallus_rugulosus",
           "discriminators": [
             "flesh_colour"
           ],
-          "note": "Both come out of a white egg and both stink. This one is a thimble-shaped cap with a smooth, unpitted surface; Satyrus rugulosus is a distinct wrinkled cap on a slender stalk."
+          "note": "Both come out of a white egg and both stink. This one is a thimble-shaped cap with a smooth, unpitted surface; Phallus rugulosus is a distinct wrinkled cap on a slender stalk."
         }
       ],
       "sources": [
@@ -23211,11 +23211,11 @@
           "note": "Both come out of a white egg and both stink. This one is three or four arms joined at their tips, like a claw; Phallus ravenelii is a thimble-shaped cap with a smooth, unpitted surface."
         },
         {
-          "taxon": "satyrus_rugulosus",
+          "taxon": "phallus_rugulosus",
           "discriminators": [
             "cap_presence"
           ],
-          "note": "Both come out of a white egg and both stink. This one is three or four arms joined at their tips, like a claw; Satyrus rugulosus is a distinct wrinkled cap on a slender stalk."
+          "note": "Both come out of a white egg and both stink. This one is three or four arms joined at their tips, like a claw; Phallus rugulosus is a distinct wrinkled cap on a slender stalk."
         }
       ],
       "sources": [
@@ -25126,8 +25126,8 @@
       "sought": false
     },
     {
-      "id": "satyrus_rugulosus",
-      "scientificName": "Satyrus rugulosus",
+      "id": "phallus_rugulosus",
+      "scientificName": "Phallus rugulosus",
       "commonName": "wrinkly stinkhorn",
       "prevalence": "common",
       "sought": false,
