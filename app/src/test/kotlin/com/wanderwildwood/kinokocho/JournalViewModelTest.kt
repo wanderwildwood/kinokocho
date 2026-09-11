@@ -59,9 +59,19 @@ class JournalViewModelTest {
         JournalDatabase.get(ApplicationProvider.getApplicationContext<Application>())
             .journalDao().findOne(vm.draft.value!!.observationId!!)!!.observation
 
-    /** Waits for the write the view model started, rather than assuming it landed. */
+    /**
+     * Waits for the write the view model started, rather than assuming it landed.
+     *
+     * The wait is real seconds, not virtual ones, for the reason in the class comment:
+     * Room writes on its own threads and virtual time runs straight past them. That makes
+     * the budget a statement about the slowest machine this is allowed to run on rather
+     * than about the code, so it is generous. Five seconds was not: the first insert opens
+     * the database, and on a workstation busy with another build it missed, failing a test
+     * about coordinates for reasons that had nothing to do with coordinates. The loop exits
+     * as soon as the row lands, so a larger number costs nothing when things are well.
+     */
     private suspend fun settled(until: () -> Boolean = { vm.draft.value?.observationId != null }) {
-        withTimeout(5_000) {
+        withTimeout(30_000) {
             while (!until()) delay(10)
         }
         // The id appears on the draft before the row is finished being filled in, so one
