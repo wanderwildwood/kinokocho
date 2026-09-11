@@ -207,7 +207,7 @@ private fun Llama() {
             contentDescription = null,
             modifier = Modifier.size(22.dp),
         )
-        androidx.compose.foundation.layout.Spacer(Modifier.width(10.dp))
+        androidx.compose.foundation.layout.Spacer(Modifier.width(6.dp))
         Line("Feed the llamas")
     }
 }
