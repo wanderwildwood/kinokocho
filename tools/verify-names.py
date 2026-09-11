@@ -21,7 +21,7 @@ flaky lookup delays a change rather than breaking a build.
     python3 tools/verify-names.py --new    # only names not already recorded
 
 A name is recorded only when the Catalogue of Life matches it at species rank, GBIF's
-backbone accepts it, GBIF's name index has it published, or iNaturalist carries it as an
+backbone accepts it, Index Fungorum has it published, or iNaturalist carries it as an
 active taxon. Any of those is somebody outside this repository saying the mushroom
 exists. None of them is this repository agreeing with itself.
 
@@ -94,12 +94,24 @@ def gbif_backbone(name):
     return found.get("usageKey")
 
 
+# Species Fungorum Plus on GBIF — the Index Fungorum data, and the only GBIF checklist
+# asked here. See gbif_index below for why it is one dataset rather than all of them.
+SPECIES_FUNGORUM = "bf3db7c9-5e5d-4fd0-bd5b-94539eaf9598"
+
+
 def gbif_index(name):
-    """The name index knows published names the backbone has not ranked."""
-    query = urllib.parse.urlencode({"q": name, "rank": "SPECIES", "limit": 20})
+    """Index Fungorum, via GBIF: published fungal names the backbone has not ranked.
+
+    Restricted to one dataset on purpose. Searching every GBIF checklist accepted a hit
+    from **NCBI Taxonomy**, which indexes whatever name a sequence was deposited under
+    and registers nothing — it is not a nomenclator, and two names in this pack rested on
+    it alone. Index Fungorum is one of the three repositories where a fungal name is
+    actually published, so a hit here means somebody registered the name.
+    """
+    query = urllib.parse.urlencode({"q": name, "datasetKey": SPECIES_FUNGORUM, "limit": 20})
     for row in get(f"https://api.gbif.org/v1/species/search?{query}").get("results", []):
         published = row.get("species") or row.get("scientificName") or ""
-        if published.lower().startswith(name.lower()) and row.get("kingdom") == "Fungi":
+        if published.lower().startswith(name.lower()):
             return row.get("key")
     return None
 
@@ -117,7 +129,7 @@ def verify(name):
     """Who says this mushroom exists, and under what identifier."""
     for authority, lookup in (("col", col),
                               ("gbif", gbif_backbone),
-                              ("gbif-index", gbif_index),
+                              ("index-fungorum", gbif_index),
                               ("inaturalist", inat)):
         time.sleep(1.1)  # iNaturalist asks for about one request a second.
         try:
