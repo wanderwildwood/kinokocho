@@ -20,10 +20,20 @@ flaky lookup delays a change rather than breaking a build.
     python3 tools/verify-names.py          # check every name, rewrite the record
     python3 tools/verify-names.py --new    # only names not already recorded
 
-A name is recorded only when GBIF's backbone accepts it, GBIF's name index has it
-published, or iNaturalist carries it as an active taxon. Any of those is somebody outside
-this repository saying the mushroom exists. None of them is this repository agreeing with
-itself.
+A name is recorded only when the Catalogue of Life matches it at species rank, GBIF's
+backbone accepts it, GBIF's name index has it published, or iNaturalist carries it as an
+active taxon. Any of those is somebody outside this repository saying the mushroom
+exists. None of them is this repository agreeing with itself.
+
+The Catalogue of Life is asked first because GBIF has stopped building its backbone: it
+is kept for backwards compatibility and its identifiers still resolve, but it no longer
+takes in new names, and GBIF now points at COL's eXtended release instead. A frozen
+authority fails in the one direction that matters here — a genuinely new combination
+would come back unknown and read exactly like a fabricated one.
+
+Where COL says a name is a synonym the accepted name is written down beside it. That is
+a note, not an instruction: which name to print is a judgment about readers, and the
+field guides are behind the databases on purpose.
 """
 
 import json
@@ -44,6 +54,36 @@ def get(url):
     request = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(request, timeout=30) as response:
         return json.load(response)
+
+
+COL = "3LXR"  # Catalogue of Life, latest eXtended release — the dataset GBIF now defers to
+
+
+def col(name):
+    """The Catalogue of Life, matched at species rank.
+
+    A match that lands on a higher rank is the failure this whole file exists for. It is
+    what a fabricated binomial does: `Suillellus subvelutipes` matches the genus
+    Suillellus perfectly well and stops there.
+    """
+    # Asking for species rank on `Amanita muscaria var. guessowii` throws away the only
+    # answer there is: COL has it, as a variety. Infraspecific names are matched without
+    # the filter and accepted at whatever rank below genus they land on.
+    below_genus = {"species", "subspecies", "variety", "form", "subvariety", "subform"}
+    infraspecific = any(marker in name for marker in (" var. ", " subsp. ", " f. "))
+    fields = {"q": name} if infraspecific else {"q": name, "rank": "species"}
+    found = get(f"https://api.checklistbank.org/dataset/{COL}/match/nameusage?"
+                + urllib.parse.urlencode(fields))
+    usage = found.get("usage") or {}
+    if usage.get("rank") not in below_genus or not usage.get("id"):
+        return None
+    row = {"id": usage["id"]}
+    if usage.get("status") == "synonym":
+        # For a synonym COL returns the accepted name at the head of the classification.
+        accepted = (usage.get("classification") or [{}])[0].get("name")
+        if accepted and accepted != name:
+            row["synonymOf"] = accepted
+    return row
 
 
 def gbif_backbone(name):
@@ -75,7 +115,8 @@ def inat(name):
 
 def verify(name):
     """Who says this mushroom exists, and under what identifier."""
-    for authority, lookup in (("gbif", gbif_backbone),
+    for authority, lookup in (("col", col),
+                              ("gbif", gbif_backbone),
                               ("gbif-index", gbif_index),
                               ("inaturalist", inat)):
         time.sleep(1.1)  # iNaturalist asks for about one request a second.
@@ -84,7 +125,11 @@ def verify(name):
         except Exception:  # noqa: BLE001 - one authority being down is not a verdict
             continue
         if key:
-            return {"authority": authority, "id": str(key), "checked": str(date.today())}
+            found = key if isinstance(key, dict) else {"id": key}
+            row = {"authority": authority, "id": str(found["id"]), "checked": str(date.today())}
+            if found.get("synonymOf"):
+                row["synonymOf"] = found["synonymOf"]
+            return row
     return None
 
 
@@ -116,7 +161,7 @@ def main():
 
     print(f"\n{len(known)} of {len(taxa)} names verified.")
     if unverified:
-        print("\nNOT VERIFIED — these do not exist as far as GBIF or iNaturalist know:")
+        print("\nNOT VERIFIED — no authority of the four knows these as a species:")
         for name in unverified:
             print(f"    {name}")
         return 1
