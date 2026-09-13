@@ -16,8 +16,8 @@ android {
         // The Kompakt runs Android 12 (API 31); nothing here needs anything newer.
         minSdk = 31
         targetSdk = 31
-        versionCode = 13
-        versionName = "0.3.4"
+        versionCode = 14
+        versionName = "0.3.5"
 
         /*
          * The iNaturalist application id, which is not in this repository.
@@ -64,6 +64,14 @@ android {
             realSigningConfig?.let { signingConfig = it }
         }
         getByName("release") {
+            // The one thing that differs between a release built here and the one GitHub
+            // publishes: AGP stamps the git revision into META-INF, and the build box works
+            // from an rsync with no .git, so it writes NO_SUPPORTED_VCS_FOUND where the CI
+            // runner writes the commit. Off, so the two have identical contents.
+            vcsInfo {
+                include = false
+            }
+
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
