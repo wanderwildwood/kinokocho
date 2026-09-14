@@ -1853,7 +1853,7 @@ def interface_icons():
 # the artwork: re-running potrace on the photograph would give a slightly different line
 # every time, and this is the one he approved.
 #
-#   tools/reference/chanterelle-david.png   the drawing
+#   tools/reference/chanterelle.png         the drawing
 #   potrace, --tight -W 72pt -H 72pt        how it was traced
 #   -morphology Dilate Disk:2               a little weight, so a hairline pen
 #                                           line survives being shown at 48dp
