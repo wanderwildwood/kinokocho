@@ -21,12 +21,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mudita.mmd.ThemeMMD
@@ -34,6 +31,7 @@ import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.wanderwildwood.kinokocho.key.KeyEngine
 import androidx.compose.ui.platform.LocalContext
 import com.wanderwildwood.kinokocho.ui.AboutDialog
+import com.wanderwildwood.kinokocho.ui.EInkDialog
 import com.wanderwildwood.kinokocho.ui.JournalExport
 import com.wanderwildwood.kinokocho.ui.JournalImport
 import com.wanderwildwood.kinokocho.ui.CandidateScreen
@@ -43,6 +41,7 @@ import com.wanderwildwood.kinokocho.ui.PhotoSheet
 import com.wanderwildwood.kinokocho.ui.SaveDialog
 import com.wanderwildwood.kinokocho.ui.SeasonRow
 import com.wanderwildwood.kinokocho.ui.SeasonScreen
+import com.wanderwildwood.kinokocho.ui.monochrome
 import java.util.Calendar
 import com.wanderwildwood.kinokocho.ui.NewEntryScreen
 
@@ -50,7 +49,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ThemeMMD {
+            ThemeMMD(colorScheme = monochrome) {
                 Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
                     Journal()
                 }
@@ -248,49 +247,36 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     }
 
     imported?.let { result ->
-        Dialog(onDismissRequest = { imported = null }) {
-            Column(
-                Modifier
-                    .background(MaterialTheme.colorScheme.surface)
-                    .border(BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface))
-                    .padding(20.dp),
-            ) {
-                TextMMD(
-                    result.failed ?: when {
-                        result.added == 0 && result.alreadyHere > 0 ->
-                            "Everything in that copy was already here."
-                        result.added == 0 -> "Nothing in that file to read."
-                        else -> "${result.added} find" +
-                            (if (result.added == 1) "" else "s") + " added" +
-                            (if (result.photos > 0) ", with ${result.photos} photograph" +
-                                (if (result.photos == 1) "" else "s") else "") + "." +
-                            (if (result.alreadyHere > 0)
-                                " ${result.alreadyHere} were already here." else "")
-                    },
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-                OutlinedButtonMMD(
-                    onClick = { imported = null },
-                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
-                ) { TextMMD("Close") }
-            }
+        EInkDialog(onDismiss = { imported = null }) {
+            TextMMD(
+                result.failed ?: when {
+                    result.added == 0 && result.alreadyHere > 0 ->
+                        "Everything in that copy was already here."
+                    result.added == 0 -> "Nothing in that file to read."
+                    else -> "${result.added} find" +
+                        (if (result.added == 1) "" else "s") + " added" +
+                        (if (result.photos > 0) ", with ${result.photos} photograph" +
+                            (if (result.photos == 1) "" else "s") else "") + "." +
+                        (if (result.alreadyHere > 0)
+                            " ${result.alreadyHere} were already here." else "")
+                },
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            OutlinedButtonMMD(
+                onClick = { imported = null },
+                modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+            ) { TextMMD("Close") }
         }
     }
 
     val forPhotos = draft
     if (photographing && forPhotos != null) {
-        Dialog(onDismissRequest = { photographing = false }) {
-            Column(
-                Modifier
-                    .background(MaterialTheme.colorScheme.surface)
-                    .border(BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface)),
-            ) {
-                PhotoSheet(
-                    filled = forPhotos.photos.map { it.slot }.toSet(),
-                    onCaptured = vm::addPhoto,
-                    onClose = { photographing = false },
-                )
-            }
+        EInkDialog(onDismiss = { photographing = false }) {
+            PhotoSheet(
+                filled = forPhotos.photos.map { it.slot }.toSet(),
+                onCaptured = vm::addPhoto,
+                onClose = { photographing = false },
+            )
         }
     }
 }

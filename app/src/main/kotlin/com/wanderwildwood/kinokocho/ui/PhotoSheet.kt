@@ -5,17 +5,16 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import com.mudita.mmd.components.text.TextMMD
@@ -31,7 +30,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import androidx.core.content.FileProvider
 import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
@@ -159,48 +157,41 @@ fun PhotoSheet(
         // Camera or gallery, asked once the slot is known — the slot is the useful
         // question and "where from" is an afterthought.
         choosing?.let { slot ->
-            Dialog(onDismissRequest = { choosing = null }) {
-                Column(
-                    Modifier
-                        .background(MaterialTheme.colorScheme.surface)
-                        .border(BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface))
-                        .padding(20.dp),
-                ) {
-                    TextMMD(
-                        slot.label,
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    TextMMD(
-                        slot.why,
-                        style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.padding(top = 4.dp, bottom = 14.dp),
-                    )
-                    ButtonMMD(
-                        onClick = {
-                            val fileName = "${UUID.randomUUID()}.jpg"
-                            val file = File(photoDir(context), fileName)
-                            pending = slot to fileName
-                            choosing = null
-                            camera.launch(uriFor(context, file))
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                    ) { TextMMD("Take one now") }
-                    OutlinedButtonMMD(
-                        onClick = {
-                            picker.launch(
-                                PickVisualMediaRequest(
-                                    ActivityResultContracts.PickVisualMedia.ImageOnly
-                                )
+            EInkDialog(onDismiss = { choosing = null }) {
+                TextMMD(
+                    slot.label,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                )
+                TextMMD(
+                    slot.why,
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = 4.dp, bottom = 14.dp),
+                )
+                ButtonMMD(
+                    onClick = {
+                        val fileName = "${UUID.randomUUID()}.jpg"
+                        val file = File(photoDir(context), fileName)
+                        pending = slot to fileName
+                        choosing = null
+                        camera.launch(uriFor(context, file))
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                ) { TextMMD("Take one now") }
+                OutlinedButtonMMD(
+                    onClick = {
+                        picker.launch(
+                            PickVisualMediaRequest(
+                                ActivityResultContracts.PickVisualMedia.ImageOnly
                             )
-                        },
-                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-                    ) { TextMMD("Choose one already on the phone") }
-                    OutlinedButtonMMD(
-                        onClick = { choosing = null },
-                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-                    ) { TextMMD("Back") }
-                }
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                ) { TextMMD("Choose one already on the phone") }
+                OutlinedButtonMMD(
+                    onClick = { choosing = null },
+                    modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                ) { TextMMD("Back") }
             }
         }
 
