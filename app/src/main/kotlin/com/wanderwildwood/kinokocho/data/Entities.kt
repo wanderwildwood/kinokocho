@@ -72,11 +72,6 @@ data class Observation(
     val kept: Boolean = false,
 
     /**
-     * Which vocabulary the character rows below were written against. Region packs may
-     * rename or retire a character; without this, an entry from two years ago cannot be
-     * read correctly by a later pack.
-     */
-    /**
      * What it turned out to be, once somebody said.
      *
      * The point of keeping a record is that the answer arrives later — from a forum, a
@@ -94,6 +89,11 @@ data class Observation(
     @ColumnInfo(name = "identified_as")
     val identifiedAs: String = "",
 
+    /**
+     * Which vocabulary the character rows below were written against. Region packs may
+     * rename or retire a character; without this, an entry from two years ago cannot be
+     * read correctly by a later pack.
+     */
     @ColumnInfo(name = "schema_version")
     val schemaVersion: Int,
 
