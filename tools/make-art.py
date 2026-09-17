@@ -64,6 +64,12 @@ KT = os.path.join(HERE, "..", "app", "src", "main", "kotlin", "com",
 # where the lines go, not how heavy they are. A weight hierarchy is a way of rescuing a
 # drawing that has too much in it.
 STROKE = 1.2          # the silhouette
+# The launcher mark only. The traced line is his own pen at his own weight, which rule 1
+# puts at 0.014 of the width - right for a drawing on a page, and a grey thread at 48px,
+# where the whole shop is ink. This grows the traced path by half of this on each side
+# without redrawing it: at the launcher group's scale, 65 path units is about one unit of
+# the 108 canvas. Enough to land as black, not enough to close the gills or fill the cap.
+LAUNCHER_DILATE = 65
 FINE = 1.0            # gills, tubes, cross-veins: things meant to read as many
 HAIR = 0.8            # texture that must not compete with the silhouette
 GROUND = 86.0
@@ -1891,12 +1897,22 @@ def launcher_icon():
     drawing's own smallest enclosing circle, centred and scaled to radius 34: it earns
     back most of the size a square fit throws away, because the corners a chanterelle
     leaves empty are exactly the corners the mask cuts.
+
+    Weight, 2026-09-17: at his own pen weight this was the palest mark in the shop at
+    launcher size - measured, a quarter of the black that any geometric icon here carries,
+    and it read as a ghost on the home screen next to them. LAUNCHER_DILATE grows the same
+    traced path rather than redrawing it, so the nick in the cap and the open foot survive.
+    The art plates are unaffected; they are seen at page size, where the thin line is right.
     """
     body = (
         '    <group android:scaleX="0.016055" android:scaleY="-0.016712"\n'
         '        android:translateX="22.201739" android:translateY="91.439579">\n'
         '        <path\n'
         '            android:fillColor="#FF000000"\n'
+        f'            android:strokeColor="#FF000000"\n'
+        f'            android:strokeWidth="{LAUNCHER_DILATE}"\n'
+        '            android:strokeLineJoin="round"\n'
+        '            android:strokeLineCap="round"\n'
         f'            android:pathData="{TRACED_CHANTERELLE}" />\n'
         '    </group>\n'
     )
