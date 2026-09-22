@@ -22,7 +22,8 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class ShareFindTest {
 
-    private val assets = ApplicationProvider.getApplicationContext<Context>().assets
+    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val assets = context.assets
     private val schema = SchemaLoader.load(assets)
     private val pack = PackLoader.load(assets, "packs/southern-appalachia-v1.json")
     private val engine = KeyEngine(schema, pack)
@@ -49,7 +50,7 @@ class ShareFindTest {
 
     @Test
     fun `it reads as a description and not as an identification`() {
-        val text = ShareFind.summary(schema, engine, aFind())
+        val text = ShareFind.summary(context.resources, schema, engine, aFind())
         println("\n----- shared find -----\n$text-----------------------")
 
         assertTrue("no place", text.contains("the big oak below the spring"))
@@ -76,7 +77,7 @@ class ShareFindTest {
             placeNote = "",
             identifiedAs = "",
         )
-        val text = ShareFind.summary(schema, engine, bare)
+        val text = ShareFind.summary(context.resources, schema, engine, bare)
         assertTrue(text.contains("A mushroom"))
         assertTrue(text.contains("Nothing here is an identification"))
         assertFalse("an empty find should claim no shortlist", text.contains("Not ruled out"))

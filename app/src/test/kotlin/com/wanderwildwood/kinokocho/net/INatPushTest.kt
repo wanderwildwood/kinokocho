@@ -89,7 +89,7 @@ class INatPushTest {
             // it meant to send and the row is what would survive the process dying here.
             val stored = dao.photosOf(1).firstOrNull { it.fileName == file.name }?.uuid
             log += "photo:$photoUuid stored=$stored"
-            if (photos >= failFromPhoto) return INatClient.Result.Failed("no signal")
+            if (photos >= failFromPhoto) return INatClient.Result.Failed(INatClient.Failure.UNREACHABLE)
             return INatClient.Result.Ok(900L + photos)
         }
 

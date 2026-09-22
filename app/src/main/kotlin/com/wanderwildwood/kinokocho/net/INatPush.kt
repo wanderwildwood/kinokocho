@@ -61,7 +61,7 @@ class INatPush(
 
         val jwt = when (val r = client.apiToken()) {
             is INatClient.Result.Failed -> return if (r.signedOut) Outcome.NeedsSignIn
-            else Outcome.Failed(r.said)
+            else Outcome.Failed(r.said(context.resources))
             is INatClient.Result.Ok -> r.value
         }
 
@@ -83,7 +83,7 @@ class INatPush(
         )
 
         val created = when (val r = client.createObservation(jwt, body)) {
-            is INatClient.Result.Failed -> return Outcome.Failed(r.said)
+            is INatClient.Result.Failed -> return Outcome.Failed(r.said(context.resources))
             is INatClient.Result.Ok -> r.value
         }
 

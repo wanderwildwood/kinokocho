@@ -14,6 +14,7 @@ import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -68,6 +69,7 @@ fun CandidateScreen(
     val answered = described.filter { answers.values[it.id].orEmpty().isNotEmpty() }
     val agree = answered.count { agrees(vm, taxon, it, answers) }
     val differ = answered.size - agree
+    val resources = LocalContext.current.resources
 
     LazyColumnMMD(
         Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
@@ -158,7 +160,7 @@ fun CandidateScreen(
          * things out that no amount of squinting at gills will.
          */
         item {
-            Section(Character.Group.WHERE.heading)
+            Section(stringResource(Character.Group.WHERE.headingRes))
             vm.schema.characters
                 .filter { it.group == Character.Group.WHERE }
                 .forEach { character ->
@@ -241,7 +243,7 @@ fun CandidateScreen(
                             stringResource(
                                 R.string.candidate_tells_apart,
                                 look.discriminators
-                                    .mapNotNull { vm.schema.character(it)?.inFull() }
+                                    .mapNotNull { vm.schema.character(it)?.inFull(resources) }
                                     .distinct()
                                     .asPhrases(),
                             ),
@@ -276,7 +278,7 @@ fun CandidateScreen(
             if (rows.isEmpty()) return@forEach
             item(key = "g${group.name}") {
                 TextMMD(
-                    group.heading,
+                    stringResource(group.headingRes),
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 10.dp, bottom = 2.dp),

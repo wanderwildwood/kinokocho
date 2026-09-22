@@ -80,6 +80,7 @@ class INatClientTest {
 
         assertTrue(result is INatClient.Result.Failed)
         assertTrue((result as INatClient.Result.Failed).signedOut)
+        assertEquals(INatClient.Failure.REDIRECTED_TO_SIGN_IN, result.why)
         // And the dead sign-in is actually let go of, which is what unsticks it.
         assertFalse(account.signedIn)
         // One request. Following the redirect would have made two.
@@ -202,7 +203,14 @@ class INatClientTest {
         server.status = 422
         server.response = """{"errors":{"observed_on":["is not a date"]}}"""
         val r = client().createObservation("jwt", "{}")
-        assertEquals("observed_on is not a date", (r as INatClient.Result.Failed).said)
+        val refused = r as INatClient.Result.Failed
+        assertEquals(INatClient.Failure.FIND_REFUSED, refused.why)
+        assertEquals("observed_on is not a date", refused.theirWords)
+        // And theirs is what is said, rather than ours.
+        assertEquals(
+            "observed_on is not a date",
+            refused.said(ApplicationProvider.getApplicationContext<Context>().resources),
+        )
     }
 
     @Test
@@ -210,12 +218,12 @@ class INatClientTest {
         server.status = 429
         server.response = ""
         val busy = client().createObservation("jwt", "{}") as INatClient.Result.Failed
-        assertTrue(busy.said, busy.said.contains("slower pace"))
+        assertEquals(INatClient.Failure.RATE_LIMITED, busy.why)
         assertFalse("a rate limit is not a signed-out", busy.signedOut)
 
         server.status = 503
         val down = client().createObservation("jwt", "{}") as INatClient.Result.Failed
-        assertTrue(down.said, down.said.contains("Nothing was lost"))
+        assertEquals(INatClient.Failure.SERVER_TROUBLE, down.why)
         assertFalse(down.signedOut)
     }
 
@@ -252,6 +260,6 @@ class INatClientTest {
         val gone = client()
         server.stop()
         val r = gone.createObservation("jwt", "{}")
-        assertTrue((r as INatClient.Result.Failed).said.contains("Could not reach"))
+        assertEquals(INatClient.Failure.UNREACHABLE, (r as INatClient.Result.Failed).why)
     }
 }

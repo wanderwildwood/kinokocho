@@ -1,6 +1,9 @@
 package com.wanderwildwood.kinokocho.net
 
+import android.content.res.Resources
+import androidx.annotation.StringRes
 import com.wanderwildwood.kinokocho.BuildConfig
+import com.wanderwildwood.kinokocho.R
 import java.io.File
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -20,7 +23,8 @@ import kotlinx.coroutines.withContext
  *
  * Every call here can fail in a way that is nobody's mistake — no signal in a valley,
  * an account that revoked this app last week — so nothing throws. [Result] is what
- * comes back, and the screen says what it says.
+ * comes back, and the screen says what it says: a failure is a [Failure] kind rather
+ * than a sentence, and whoever has a [Resources] words it.
  */
 class INatClient(
     private val account: INatAccount,
@@ -42,8 +46,42 @@ class INatClient(
     sealed interface Result<out T> {
         data class Ok<T>(val value: T) : Result<T>
 
-        /** Something a person can be told. Never a stack trace, never a status code alone. */
-        data class Failed(val said: String, val signedOut: Boolean = false) : Result<Nothing>
+        /**
+         * Something a person can be told. Never a stack trace, never a status code alone.
+         *
+         * [theirWords] is iNaturalist's own explanation when it gave one, and is said in
+         * place of ours; [code] is the HTTP status, kept only for
+         * [Failure.UNEXPECTED_STATUS]. [said] turns the lot into the sentence.
+         */
+        data class Failed(
+            val why: Failure,
+            val theirWords: String? = null,
+            val code: Int? = null,
+        ) : Result<Nothing> {
+            /** True when the sign-in is gone and the reader should be asked for it again. */
+            val signedOut: Boolean get() = why.signedOut
+
+            fun said(resources: Resources): String = theirWords
+                ?: if (why == Failure.UNEXPECTED_STATUS) resources.getString(why.saidRes, code ?: 0)
+                else resources.getString(why.saidRes)
+        }
+    }
+
+    /** What went wrong, as a kind. The words are in strings.xml. */
+    enum class Failure(@StringRes val saidRes: Int, val signedOut: Boolean = false) {
+        NO_SIGN_IN_TOKEN(R.string.inat_failed_no_sign_in_token),
+        NOT_SIGNED_IN(R.string.inat_failed_not_signed_in, signedOut = true),
+        NO_API_TOKEN(R.string.inat_failed_no_api_token),
+        NO_ACCOUNT_NAME(R.string.inat_failed_no_account_name),
+        NO_OBSERVATION_RETURNED(R.string.inat_failed_no_observation_returned),
+        /** A redirect, which is a login page. See the note on instanceFollowRedirects. */
+        REDIRECTED_TO_SIGN_IN(R.string.inat_failed_redirected_to_sign_in, signedOut = true),
+        SIGN_IN_REFUSED(R.string.inat_failed_sign_in_refused, signedOut = true),
+        FIND_REFUSED(R.string.inat_failed_find_refused),
+        RATE_LIMITED(R.string.inat_failed_rate_limited),
+        SERVER_TROUBLE(R.string.inat_failed_server_trouble),
+        UNEXPECTED_STATUS(R.string.inat_failed_unexpected_status),
+        UNREACHABLE(R.string.inat_failed_unreachable),
     }
 
     /** Turns the code the browser came back with into a token worth keeping. */
@@ -61,7 +99,7 @@ class INatClient(
                     .getOrNull()
                     ?.takeIf { it.isNotBlank() }
                 if (token == null) {
-                    Result.Failed("iNaturalist did not return a sign-in token.")
+                    Result.Failed(Failure.NO_SIGN_IN_TOKEN)
                 } else {
                     Result.Ok(token)
                 }
@@ -81,7 +119,7 @@ class INatClient(
     override suspend fun apiToken(): Result<String> {
         account.apiToken()?.let { return Result.Ok(it) }
         val access = account.accessToken
-            ?: return Result.Failed("Not signed in to iNaturalist.", signedOut = true)
+            ?: return Result.Failed(Failure.NOT_SIGNED_IN)
 
         return when (val r = get("$site/users/api_token", auth = "Bearer $access")) {
             is Result.Failed -> {
@@ -93,7 +131,7 @@ class INatClient(
                     .getOrNull()
                     ?.takeIf { it.isNotBlank() }
                 if (jwt == null) {
-                    Result.Failed("iNaturalist did not return an API token.")
+                    Result.Failed(Failure.NO_API_TOKEN)
                 } else {
                     account.rememberApiToken(jwt)
                     Result.Ok(jwt)
@@ -111,7 +149,7 @@ class INatClient(
                     org.json.JSONObject(r.value).optJSONArray("results")
                         ?.optJSONObject(0)?.optString("login")
                 }.getOrNull()?.takeIf { it.isNotBlank() }
-                if (login == null) Result.Failed("Could not read the account name.")
+                if (login == null) Result.Failed(Failure.NO_ACCOUNT_NAME)
                 else Result.Ok(login)
             }
         }
@@ -121,7 +159,7 @@ class INatClient(
             is Result.Failed -> r
             is Result.Ok -> INatPayload.created(r.value)
                 ?.let { Result.Ok(it) }
-                ?: Result.Failed("iNaturalist accepted the find but did not say where it went.")
+                ?: Result.Failed(Failure.NO_OBSERVATION_RETURNED)
         }
 
     /**
@@ -266,28 +304,20 @@ class INatClient(
                 code in 200..299 -> Result.Ok(text)
                 // Being sent to a login page is being told to sign in again. See the
                 // note on instanceFollowRedirects above.
-                code in 300..399 -> Result.Failed(
-                    "iNaturalist asked for a sign-in. Sign in again.",
-                    signedOut = true,
-                )
-                code == 401 || code == 403 -> Result.Failed(
-                    INatPayload.errorFrom(text)
-                        ?: "iNaturalist would not accept the sign-in. Sign in again.",
-                    signedOut = true,
-                )
-                code == 422 -> Result.Failed(
-                    INatPayload.errorFrom(text) ?: "iNaturalist would not take that find."
-                )
+                code in 300..399 -> Result.Failed(Failure.REDIRECTED_TO_SIGN_IN)
+                code == 401 || code == 403 ->
+                    Result.Failed(Failure.SIGN_IN_REFUSED, INatPayload.errorFrom(text))
+                code == 422 -> Result.Failed(Failure.FIND_REFUSED, INatPayload.errorFrom(text))
                 // Their own words for a rate limit, said as a thing to wait out rather
                 // than a thing that broke.
-                code == 429 -> Result.Failed("iNaturalist is asking for a slower pace. Try again in a few minutes.")
-                code >= 500 -> Result.Failed("iNaturalist is having trouble. Nothing was lost — try again later.")
-                else -> Result.Failed(INatPayload.errorFrom(text) ?: "iNaturalist answered with $code.")
+                code == 429 -> Result.Failed(Failure.RATE_LIMITED)
+                code >= 500 -> Result.Failed(Failure.SERVER_TROUBLE)
+                else -> Result.Failed(Failure.UNEXPECTED_STATUS, INatPayload.errorFrom(text), code)
             }
         } catch (e: IOException) {
             // The ordinary case, and not an error worth a stack trace: a phone indoors
             // on a hill.
-            Result.Failed("Could not reach iNaturalist. Nothing was sent.")
+            Result.Failed(Failure.UNREACHABLE)
         } finally {
             connection?.disconnect()
         }

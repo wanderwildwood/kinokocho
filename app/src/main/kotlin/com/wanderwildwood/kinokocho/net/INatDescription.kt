@@ -5,7 +5,7 @@ import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
 import com.wanderwildwood.kinokocho.ui.asPhrases
-import com.wanderwildwood.kinokocho.ui.inFull
+import com.wanderwildwood.kinokocho.ui.inFullInEnglish
 
 /**
  * The find, written for an identifier.
@@ -98,6 +98,8 @@ object INatDescription {
         )
     }
 
+    // In English whatever the phone is set to: this is written into a public record,
+    // and which language that should be in has not been decided.
     private fun named(character: Character): String =
-        character.inFull().replaceFirstChar { it.uppercase() }
+        character.inFullInEnglish().replaceFirstChar { it.uppercase() }
 }

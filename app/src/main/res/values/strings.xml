@@ -97,6 +97,27 @@
     <string name="entry_new_next">Next</string>
 
     <!-- ============================================================ -->
+    <!-- Parts of the mushroom: headings over the characters (features), in the order a person looks at one -->
+
+    <string name="group_whole">The whole thing</string>
+    <string name="group_cap">Cap</string>
+    <!-- The gills, pores or teeth under the cap -->
+    <string name="group_gills">Underneath</string>
+    <string name="group_stem">Stem</string>
+    <!-- The inside of the mushroom, seen when it is cut or broken -->
+    <string name="group_flesh">Flesh</string>
+    <string name="group_smell">Smell and taste</string>
+    <!-- Deliberately not "Spore print": the first row under it is the spore print, and a chemical spot test sits here too -->
+    <string name="group_spores">Spores</string>
+    <!-- Place, what it grew on, nearby trees and the season -->
+    <string name="group_where">Where and when</string>
+    <!-- A character named with its part of the mushroom, for a list with no heading over it ("tells them apart: cap colour, gill colour"). %1$s is the character's short name in lower case, e.g. "colour" or "edge". Lower case: it may be capitalised or run into a sentence -->
+    <string name="character_in_full_cap">cap %1$s</string>
+    <string name="character_in_full_gill">gill %1$s</string>
+    <string name="character_in_full_stem">stem %1$s</string>
+    <string name="character_in_full_flesh">flesh %1$s</string>
+
+    <!-- ============================================================ -->
     <!-- Season: what is about this month, and looking a species up -->
 
     <!-- Title while a search is typed -->
@@ -256,6 +277,23 @@
     <string name="photos_done">Done</string>
     <!-- On a tile whose photograph has already been taken (past participle) -->
     <string name="photos_slot_taken">taken</string>
+    <!-- The six photographs asked for. Each has a short label and, under it, why that picture is the one asked for -->
+    <string name="photos_slot_whole">The whole thing</string>
+    <!-- "habit" = how it grows: alone, in a cluster, on its side -->
+    <string name="photos_slot_whole_why">In proportion, so size and habit read.</string>
+    <string name="photos_slot_cap">The cap, from above</string>
+    <!-- "the edge" = the rim of the cap -->
+    <string name="photos_slot_cap_why">Surface, colour and how the edge sits.</string>
+    <string name="photos_slot_underside">Underneath</string>
+    <string name="photos_slot_underside_why">Gills, pores or teeth, and how they meet the stem.</string>
+    <string name="photos_slot_stipe_base">The base of the stem</string>
+    <!-- A volva is a cup or sac around the base of some deadly mushrooms; it stays in the ground if the stem is cut -->
+    <string name="photos_slot_stipe_base_why">Dug up, not cut. A volva or a bulb lives here and it is the commonest thing missed.</string>
+    <string name="photos_slot_in_situ">Where it was growing</string>
+    <!-- Substrate = what it grows on: soil, wood, leaf litter -->
+    <string name="photos_slot_in_situ_why">Substrate and what is around it.</string>
+    <string name="photos_slot_spore_print">The spore print</string>
+    <string name="photos_slot_spore_print_why">At home, on paper, the next morning.</string>
 
     <!-- ============================================================ -->
     <!-- iNaturalist: publishing a find, on the entry page -->
@@ -356,12 +394,48 @@
     </plurals>
     <string name="inat_push_nothing_to_send">Nothing to send yet.</string>
     <string name="inat_push_find_gone">That find is no longer in the journal.</string>
+    <!-- Why a call to iNaturalist failed. When iNaturalist explains a refusal in its own words, its explanation is shown instead, as sent -->
+    <!-- After signing in in the browser -->
+    <string name="inat_failed_no_sign_in_token">iNaturalist did not return a sign-in token.</string>
+    <string name="inat_failed_not_signed_in">Not signed in to iNaturalist.</string>
+    <string name="inat_failed_no_api_token">iNaturalist did not return an API token.</string>
+    <!-- The iNaturalist user name, read after signing in -->
+    <string name="inat_failed_no_account_name">Could not read the account name.</string>
+    <string name="inat_failed_no_observation_returned">iNaturalist accepted the find but did not say where it went.</string>
+    <string name="inat_failed_redirected_to_sign_in">iNaturalist asked for a sign-in. Sign in again.</string>
+    <string name="inat_failed_sign_in_refused">iNaturalist would not accept the sign-in. Sign in again.</string>
+    <string name="inat_failed_find_refused">iNaturalist would not take that find.</string>
+    <!-- A rate limit: said as something to wait out, not as a fault -->
+    <string name="inat_failed_rate_limited">iNaturalist is asking for a slower pace. Try again in a few minutes.</string>
+    <string name="inat_failed_server_trouble">iNaturalist is having trouble. Nothing was lost — try again later.</string>
+    <!-- %1$d is an HTTP status code, e.g. 418 -->
+    <string name="inat_failed_unexpected_status">iNaturalist answered with %1$d.</string>
+    <!-- No connection: nothing left the phone -->
+    <string name="inat_failed_unreachable">Could not reach iNaturalist. Nothing was sent.</string>
 
     <!-- ============================================================ -->
     <!-- Sharing, backup and restore -->
 
     <!-- Subject line when a find is shared. %1$s is the date and time it was recorded -->
     <string name="share_subject">A mushroom, %1$s</string>
+    <!-- The text of a shared find, written for someone who was not there. The character names and answers inside it are not in this file and stay as they are -->
+    <!-- First line. %1$s is the date and time it was recorded -->
+    <string name="share_first_line">A mushroom, %1$s</string>
+    <!-- %1$s is the name the reader already gave it, in their own words -->
+    <string name="share_recorded_as">Recorded as: %1$s</string>
+    <string name="share_what_i_could_see">What I could see</string>
+    <!-- One answer. %1$s is a character, e.g. "Cap colour"; %2$s what was seen, e.g. "White" -->
+    <string name="share_answer">%1$s: %2$s</string>
+    <!-- One measurement. %1$s is what was measured, e.g. "Cap width"; %2$d is millimetres -->
+    <string name="share_measurement">%1$s: %2$d mm</string>
+    <!-- Heading over characters the reader looked at and could not tell -->
+    <string name="share_could_not_say">Looked at and could not say</string>
+    <!-- Heading over the characters most worth recording that were not -->
+    <string name="share_not_recorded">Not recorded</string>
+    <!-- Heading over the species still possible: %1$d of %2$d in the region. Never phrase it as an identification -->
+    <string name="share_not_ruled_out">Not ruled out — %1$d of %2$d</string>
+    <!-- Last line. It must say plainly that nothing in the message is an identification -->
+    <string name="share_footer">Recorded with Mushroom Journal, which narrows and does not decide. Nothing here is an identification.</string>
     <!-- Title of the system share sheet when exporting a backup -->
     <string name="export_chooser_title">Keep a copy of the journal</string>
     <string name="import_could_not_read">That file could not be read.</string>

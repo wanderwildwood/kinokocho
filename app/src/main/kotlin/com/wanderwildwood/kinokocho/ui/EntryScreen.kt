@@ -86,6 +86,7 @@ fun EntryScreen(
     val missing = remember(draft.answers) { vm.engine.mostValuableMissing(draft.answers) }
     val safety = remember(draft.answers) { vm.engine.safetyNotes(draft.answers) }
     val sporePrintPending = "spore_print" !in draft.answers.values.keys
+    val resources = LocalContext.current.resources
 
     LazyColumnMMD(
         Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
@@ -276,7 +277,7 @@ fun EntryScreen(
                             stringResource(
                                 R.string.entry_would_settle,
                                 note.discriminators
-                                    .mapNotNull { vm.schema.character(it)?.inFull() }
+                                    .mapNotNull { vm.schema.character(it)?.inFull(resources) }
                                     .distinct()
                                     .take(4)
                                     .joinToString(", "),
@@ -421,7 +422,7 @@ fun EntryScreen(
                             TextMMD(
                                 if (armed) stringResource(R.string.entry_photo_remove)
                                 else PhotoSlot.entries.firstOrNull { it.id == photo.slot }
-                                    ?.label ?: photo.slot,
+                                    ?.let { stringResource(it.labelRes) } ?: photo.slot,
                                 style = MaterialTheme.typography.bodySmall,
                                 fontWeight = if (armed) FontWeight.Bold else FontWeight.Normal,
                             )

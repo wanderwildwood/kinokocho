@@ -1,5 +1,8 @@
 package com.wanderwildwood.kinokocho.schema
 
+import androidx.annotation.StringRes
+import com.wanderwildwood.kinokocho.R
+
 /**
  * The global character schema: what a person can be asked about a mushroom.
  *
@@ -128,19 +131,23 @@ data class Character(
      * Declared order is reading order, and it is the order a person looks at a mushroom
      * in: what it is, then the cap, underneath, the stem, what is inside, what it
      * smells of, what the print says, and last where it was standing.
+     *
+     * [headingRes] is the heading's words, which live in strings.xml so that they can
+     * be translated. The schema JSON names a group by its own lower-case key, never by
+     * the heading, so nothing stored depends on the wording.
      */
-    enum class Group(val heading: String) {
-        WHOLE("The whole thing"),
-        CAP("Cap"),
-        GILLS("Underneath"),
-        STEM("Stem"),
-        FLESH("Flesh"),
-        SMELL("Smell and taste"),
+    enum class Group(@StringRes val headingRes: Int) {
+        WHOLE(R.string.group_whole),
+        CAP(R.string.group_cap),
+        GILLS(R.string.group_gills),
+        STEM(R.string.group_stem),
+        FLESH(R.string.group_flesh),
+        SMELL(R.string.group_smell),
         // "Spores" and not "Spore print", so that the first row under it is not
         // "Spore print — Pink" beneath a heading reading "Spore print". The KOH
         // drop is not a print either.
-        SPORES("Spores"),
-        WHERE("Where and when"),
+        SPORES(R.string.group_spores),
+        WHERE(R.string.group_where),
     }
     enum class Cardinality { SINGLE, MULTI }
 

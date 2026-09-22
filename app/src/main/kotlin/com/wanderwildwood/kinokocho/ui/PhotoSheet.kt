@@ -1,6 +1,7 @@
 package com.wanderwildwood.kinokocho.ui
 
 import android.content.Context
+import androidx.annotation.StringRes
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -46,15 +47,17 @@ import java.util.UUID
  * underside and the base of the stem are what get asked for, every time. An empty
  * "base of the stem" slot is the app saying, without saying it, that the specimen was
  * probably not dug up.
+ *
+ * [id] is what is stored against a photograph and must not change; the words are in
+ * strings.xml.
  */
-enum class PhotoSlot(val id: String, val label: String, val why: String) {
-    WHOLE("whole", "The whole thing", "In proportion, so size and habit read."),
-    CAP("cap", "The cap, from above", "Surface, colour and how the edge sits."),
-    UNDERSIDE("underside", "Underneath", "Gills, pores or teeth, and how they meet the stem."),
-    STIPE_BASE("stipe_base", "The base of the stem",
-        "Dug up, not cut. A volva or a bulb lives here and it is the commonest thing missed."),
-    IN_SITU("in_situ", "Where it was growing", "Substrate and what is around it."),
-    SPORE_PRINT("spore_print", "The spore print", "At home, on paper, the next morning."),
+enum class PhotoSlot(val id: String, @StringRes val labelRes: Int, @StringRes val whyRes: Int) {
+    WHOLE("whole", R.string.photos_slot_whole, R.string.photos_slot_whole_why),
+    CAP("cap", R.string.photos_slot_cap, R.string.photos_slot_cap_why),
+    UNDERSIDE("underside", R.string.photos_slot_underside, R.string.photos_slot_underside_why),
+    STIPE_BASE("stipe_base", R.string.photos_slot_stipe_base, R.string.photos_slot_stipe_base_why),
+    IN_SITU("in_situ", R.string.photos_slot_in_situ, R.string.photos_slot_in_situ_why),
+    SPORE_PRINT("spore_print", R.string.photos_slot_spore_print, R.string.photos_slot_spore_print_why),
 }
 
 /**
@@ -161,12 +164,12 @@ fun PhotoSheet(
         choosing?.let { slot ->
             EInkDialog(onDismiss = { choosing = null }) {
                 TextMMD(
-                    slot.label,
+                    stringResource(slot.labelRes),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                 )
                 TextMMD(
-                    slot.why,
+                    stringResource(slot.whyRes),
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(top = 4.dp, bottom = 14.dp),
                 )
@@ -240,13 +243,13 @@ private fun SlotTile(
                 )
             }
         TextMMD(
-            slot.label,
+            stringResource(slot.labelRes),
             style = MaterialTheme.typography.bodySmall,
             fontWeight = if (taken) FontWeight.Bold else FontWeight.Normal,
             textAlign = TextAlign.Center,
         )
         TextMMD(
-            if (taken) stringResource(R.string.photos_slot_taken) else slot.why,
+            if (taken) stringResource(R.string.photos_slot_taken) else stringResource(slot.whyRes),
             style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 2.dp),

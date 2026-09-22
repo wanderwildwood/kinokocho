@@ -2,6 +2,7 @@ package com.wanderwildwood.kinokocho.ui
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import androidx.core.content.FileProvider
 import com.wanderwildwood.kinokocho.JournalViewModel
@@ -44,7 +45,7 @@ object ShareFind {
             }
         }
 
-        val text = summary(schema, engine, draft)
+        val text = summary(context.resources, schema, engine, draft)
 
         // SEND_MULTIPLE with no photos shows an empty chooser on some launchers, so a
         // find without pictures goes out as plain text instead.
@@ -75,22 +76,27 @@ object ShareFind {
      * and never as a claim, and what was not recorded is included — because the first
      * thing anyone experienced will ask is whether the base came up, and saying so
      * saves a round trip.
+     *
+     * Worded from [resources], so it goes out in the language the phone is set to. The
+     * character names and answers inside it come from the schema JSON and are English
+     * until that is translated too.
      */
     fun summary(
+        resources: Resources,
         schema: CharacterSchema,
         engine: KeyEngine,
         draft: JournalViewModel.Draft,
     ): String = buildString {
-        appendLine("A mushroom, ${dateOf(draft.recordedAt)}")
+        appendLine(resources.getString(R.string.share_first_line, dateOf(draft.recordedAt)))
         if (draft.placeNote.isNotBlank()) appendLine(draft.placeNote)
         // What the reader has already been told it is, if anything. Whoever is being
         // asked should know somebody has answered before them.
         if (draft.identifiedAs.isNotBlank()) {
-            appendLine("Recorded as: ${draft.identifiedAs}")
+            appendLine(resources.getString(R.string.share_recorded_as, draft.identifiedAs))
         }
         appendLine()
 
-        appendLine("What I could see")
+        appendLine(resources.getString(R.string.share_what_i_could_see))
         // Named rather than asked. Every line used to open with the whole question the
         // key would have put — "What is the base of the stem like? A bag-like sac around
         // the base" — which is the same prose problem the candidate page had, in a
@@ -101,7 +107,13 @@ object ShareFind {
                 schema.valuesOf(character).firstOrNull { it.id == c }?.label
             }
             if (labels.isNotEmpty()) {
-                appendLine("  ${character.inFull().replaceFirstChar { c -> c.uppercase() }}: ${labels.asPhrases()}")
+                appendLine(
+                    "  " + resources.getString(
+                        R.string.share_answer,
+                        character.inFull(resources).replaceFirstChar { c -> c.uppercase() },
+                        labels.asPhrases(),
+                    )
+                )
             }
         }
 
@@ -113,7 +125,13 @@ object ShareFind {
                 .forEach { character ->
                     schema.valuesOf(character).forEach { value ->
                         draft.answers.measurements[value.id]?.let { mm ->
-                            appendLine("  ${value.label.substringBefore(" (")}: $mm mm")
+                            appendLine(
+                                "  " + resources.getString(
+                                    R.string.share_measurement,
+                                    value.label.substringBefore(" ("),
+                                    mm,
+                                )
+                            )
                         }
                     }
                 }
@@ -121,18 +139,18 @@ object ShareFind {
 
         if (draft.answers.notTested.isNotEmpty()) {
             appendLine()
-            appendLine("Looked at and could not say")
+            appendLine(resources.getString(R.string.share_could_not_say))
             draft.answers.notTested.forEach { id ->
-                schema.character(id)?.let { appendLine("  ${it.inFull().replaceFirstChar { c -> c.uppercase() }}") }
+                schema.character(id)?.let { appendLine("  ${it.inFull(resources).replaceFirstChar { c -> c.uppercase() }}") }
             }
         }
 
         val missing = engine.mostValuableMissing(draft.answers).take(3)
         if (missing.isNotEmpty()) {
             appendLine()
-            appendLine("Not recorded")
+            appendLine(resources.getString(R.string.share_not_recorded))
             missing.forEach { (id, _) ->
-                schema.character(id)?.let { appendLine("  ${it.inFull().replaceFirstChar { c -> c.uppercase() }}") }
+                schema.character(id)?.let { appendLine("  ${it.inFull(resources).replaceFirstChar { c -> c.uppercase() }}") }
             }
         }
 
@@ -140,7 +158,7 @@ object ShareFind {
         val live = ranking.live
         if (draft.answers.answeredCount > 0 && live.isNotEmpty()) {
             appendLine()
-            appendLine("Not ruled out — ${live.size} of ${ranking.candidates.size}")
+            appendLine(resources.getString(R.string.share_not_ruled_out, live.size, ranking.candidates.size))
             live.take(6).forEach { c ->
                 appendLine(
                     "  " + (c.taxon.commonName?.let { "${c.taxon.scientificName} — $it" }
@@ -150,10 +168,7 @@ object ShareFind {
         }
 
         appendLine()
-        appendLine(
-            "Recorded with Mushroom Journal, which narrows and does not decide. " +
-                "Nothing here is an identification."
-        )
+        appendLine(resources.getString(R.string.share_footer))
     }
 
     private fun dateOf(millis: Long): String =

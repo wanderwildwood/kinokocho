@@ -473,7 +473,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
             when (val r = client.exchange(code, verifier)) {
                 is INatClient.Result.Failed -> {
                     inat.clearPending()
-                    _inatState.value = INatState.Said(r.said)
+                    _inatState.value = INatState.Said(r.said(getApplication<Application>().resources))
                 }
                 is INatClient.Result.Ok -> {
                     inat.clearPending()
