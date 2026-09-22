@@ -394,7 +394,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
     fun importJournal(uri: android.net.Uri, onDone: (JournalImport.Result) -> Unit) {
         viewModelScope.launch {
             val result = runCatching { JournalImport.read(getApplication(), uri, dao) }
-                .getOrElse { JournalImport.Result(failed = "That file could not be read.") }
+                .getOrElse { JournalImport.Result(failed = getApplication<Application>().getString(R.string.import_could_not_read)) }
             onDone(result)
         }
     }
@@ -464,10 +464,10 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
             // A code with no verifier cannot be exchanged and never will be. Saying so
             // beats leaving it on disk to fail again at every start.
             inat.clearPending()
-            _inatState.value = INatState.Said("That sign-in could not be finished. Try again.")
+            _inatState.value = INatState.Said(getApplication<Application>().getString(R.string.inat_state_sign_in_unfinished))
             return
         }
-        _inatState.value = INatState.Working("Signing in…")
+        _inatState.value = INatState.Working(getApplication<Application>().getString(R.string.inat_state_signing_in))
         viewModelScope.launch {
             val client = INatClient(inat)
             when (val r = client.exchange(code, verifier)) {
@@ -483,7 +483,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                         ?.let { (it as? INatClient.Result.Ok)?.value }
                     name?.let(inat::rememberLogin)
                     _inatState.value = INatState.Said(
-                        name?.let { "Signed in to iNaturalist as $it." } ?: "Signed in to iNaturalist."
+                        name?.let { getApplication<Application>().getString(R.string.inat_state_signed_in_as, it) } ?: getApplication<Application>().getString(R.string.inat_state_signed_in)
                     )
                 }
             }
@@ -492,7 +492,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
 
     fun signOutOfINat() {
         inat.signOut()
-        _inatState.value = INatState.Said("Signed out. Revoking this app's access is done on iNaturalist.")
+        _inatState.value = INatState.Said(getApplication<Application>().getString(R.string.inat_state_signed_out))
     }
 
     /**
@@ -503,11 +503,11 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      * button again to send the rest.
      */
     fun publish(draft: Draft) {
-        _inatState.value = INatState.Working("Sending to iNaturalist…")
+        _inatState.value = INatState.Working(getApplication<Application>().getString(R.string.inat_state_sending))
         viewModelScope.launch {
             when (val outcome = push.push(schema, engine, draft, inat.geoprivacy)) {
                 is INatPush.Outcome.NeedsSignIn ->
-                    _inatState.value = INatState.Said("Sign in to iNaturalist first.")
+                    _inatState.value = INatState.Said(getApplication<Application>().getString(R.string.inat_state_sign_in_first))
                 is INatPush.Outcome.Failed ->
                     _inatState.value = INatState.Said(outcome.said)
                 is INatPush.Outcome.Ok -> {
@@ -515,14 +515,19 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                     draft.observationId?.let { open(it) }
                     _inatState.value = INatState.Said(
                         when {
-                            outcome.photosTotal == 0 -> "Published."
+                            outcome.photosTotal == 0 -> getApplication<Application>().getString(R.string.inat_state_published)
                             outcome.photosSent == outcome.photosTotal ->
-                                "Published, with ${outcome.photosSent} photograph" +
-                                    (if (outcome.photosSent == 1) "" else "s") + "."
+                                getApplication<Application>().resources.getQuantityString(
+                                    R.plurals.inat_state_published_with_photographs,
+                                    outcome.photosSent,
+                                    outcome.photosSent,
+                                )
                             else ->
-                                "Published, but only ${outcome.photosSent} of " +
-                                    "${outcome.photosTotal} photographs went. " +
-                                    "Send it again to finish."
+                                getApplication<Application>().getString(
+                                    R.string.inat_state_published_partly,
+                                    outcome.photosSent,
+                                    outcome.photosTotal,
+                                )
                         },
                         url = outcome.url,
                     )
@@ -533,15 +538,14 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
 
     /** Asks iNaturalist what the community has called the finds already published. */
     fun checkForNames() {
-        _inatState.value = INatState.Working("Asking iNaturalist…")
+        _inatState.value = INatState.Working(getApplication<Application>().getString(R.string.inat_state_asking))
         viewModelScope.launch {
             val named = push.refreshIdentifications()
             _draft.value?.observationId?.let { open(it) }
             _inatState.value = INatState.Said(
                 when (named) {
-                    0 -> "Nobody has named anything yet."
-                    1 -> "One find has a name now."
-                    else -> "$named finds have names now."
+                    0 -> getApplication<Application>().getString(R.string.inat_state_none_named)
+                    else -> getApplication<Application>().resources.getQuantityString(R.plurals.inat_state_finds_named, named, named)
                 }
             )
         }

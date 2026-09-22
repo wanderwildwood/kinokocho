@@ -20,10 +20,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
+import com.wanderwildwood.kinokocho.R
 import kotlin.math.roundToInt
 
 /**
@@ -94,10 +96,12 @@ fun PlaceField(
     var text by remember { mutableStateOf(place) }
     var message by remember { mutableStateOf<String?>(null) }
 
+    val noPosition = stringResource(R.string.place_no_recent_position)
+    val notAllowed = stringResource(R.string.place_permission_refused)
     val take = {
         val where = coarsePosition(context)
         if (where == null) {
-            message = "No recent position. Move outside, or type the place instead."
+            message = noPosition
         } else {
             onPositionTaken(where.latitude, where.longitude)
             message = null
@@ -108,7 +112,7 @@ fun PlaceField(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) take() else {
-            message = "Not allowed. Type the place instead — it works just as well."
+            message = notAllowed
         }
     }
 
@@ -117,7 +121,7 @@ fun PlaceField(
             value = text,
             onValueChange = { text = it; onPlaceChange(it) },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { TextMMD("The place, in your own words") },
+            placeholder = { TextMMD(stringResource(R.string.place_placeholder)) },
         )
         Row(
             Modifier.fillMaxWidth().padding(top = 6.dp),
@@ -129,13 +133,13 @@ fun PlaceField(
                     else ask.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
                 },
                 modifier = Modifier.fillMaxWidth(),
-            ) { TextMMD(if (latitude == null) "Add roughly where I am" else "Take it again") }
+            ) { TextMMD(if (latitude == null) stringResource(R.string.place_take_position) else stringResource(R.string.place_take_again)) }
         }
         // What is held, said once, where the numbers used to be typed. Without this the
         // button would be the only evidence it had ever worked.
         if (latitude != null && longitude != null) {
             TextMMD(
-                "Roughly ${format(latitude)}, ${format(longitude)}",
+                stringResource(R.string.place_roughly, format(latitude), format(longitude)),
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 4.dp),
             )

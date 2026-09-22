@@ -20,12 +20,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import com.wanderwildwood.kinokocho.JournalViewModel
+import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.key.Hazard
 import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.schema.Character
@@ -66,7 +68,7 @@ fun NewEntryScreen(
                 // The app's name, not a bare noun. This is the only heading on the
                 // question screen, and "Journal" left the one screen somebody spends a
                 // walk inside unnamed.
-                if (journalCount == 0) "Mushroom Journal" else "Mushroom Journal · $journalCount",
+                if (journalCount == 0) stringResource(R.string.entry_new_journal_link) else stringResource(R.string.entry_new_journal_link_count, journalCount),
                 style = MaterialThemeTypography().bodySmall,
                 modifier = Modifier.weight(1f).clickable(onClick = onJournal),
             )
@@ -96,7 +98,7 @@ fun NewEntryScreen(
         val multi = character.cardinality == Character.Cardinality.MULTI
         if (multi) {
             TextMMD(
-                "Choose as many as apply.",
+                stringResource(R.string.entry_new_choose_many),
                 style = MaterialThemeTypography().bodySmall,
                 modifier = Modifier.padding(top = 2.dp),
             )
@@ -254,7 +256,7 @@ fun NewEntryScreen(
                             .then(unit?.let { Modifier.height(it.coerceAtMost(SKIP_MAX)) }
                                 ?: Modifier),
                     ) {
-                        TextMMD(if (character.notTested) "I looked and cannot say" else "Skip this")
+                        TextMMD(if (character.notTested) stringResource(R.string.entry_new_cannot_say) else stringResource(R.string.entry_new_skip))
                     }
                 }
             }
@@ -310,14 +312,12 @@ private fun NothingLeftToAsk(
     val shortlist = ranking.shortlist(3)
 
     Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
-        TextMMD("Nothing more to ask", fontWeight = FontWeight.Bold)
+        TextMMD(stringResource(R.string.entry_new_nothing_more), fontWeight = FontWeight.Bold)
         TextMMD(
             if (live.isEmpty()) {
-                "Nothing fits everything you wrote down — a real mushroom against a " +
-                    "description of a typical one. These come nearest, and one of the " +
-                    "answers may be worth looking at again."
+                stringResource(R.string.entry_new_nothing_fits_done)
             } else {
-                "Every question that would tell these apart has been answered or skipped."
+                stringResource(R.string.entry_new_all_answered)
             },
             style = MaterialThemeTypography().bodySmall,
             modifier = Modifier.padding(top = 4.dp),
@@ -326,10 +326,10 @@ private fun NothingLeftToAsk(
             TextMMD("· ${it.taxon.scientificName}", modifier = Modifier.padding(top = 6.dp))
         }
         ButtonMMD(onClick = onAddPhoto, modifier = Modifier.fillMaxWidth().padding(top = 16.dp)) {
-            TextMMD("Add a photograph")
+            TextMMD(stringResource(R.string.entry_new_add_photograph))
         }
         OutlinedButtonMMD(onClick = onDone, modifier = Modifier.fillMaxWidth().padding(top = 6.dp)) {
-            TextMMD("Done")
+            TextMMD(stringResource(R.string.entry_new_done))
         }
     }
 }
@@ -354,7 +354,7 @@ private fun Footer(
 
     if (draft.answers.answeredCount == 0) {
         TextMMD(
-            "Answer anything to start narrowing.",
+            stringResource(R.string.entry_new_start_narrowing),
             style = MaterialThemeTypography().bodySmall,
             modifier = Modifier.padding(vertical = 6.dp),
         )
@@ -367,9 +367,9 @@ private fun Footer(
             // real mushroom and the pack is a description of a typical one. Say that
             // plainly instead of printing a count that argues with the list under it.
             if (live.isEmpty()) {
-                "Nothing fits everything you have said. Nearest anyway:"
+                stringResource(R.string.entry_new_nothing_fits_nearest)
             } else {
-                "Closest so far, of ${live.size} still possible"
+                stringResource(R.string.entry_new_closest, live.size)
             },
             style = MaterialThemeTypography().bodySmall,
             modifier = Modifier.padding(top = 6.dp),
@@ -409,7 +409,7 @@ private fun Footer(
             .filter { it.taxon.id !in visible }
         if (hazards.isNotEmpty()) {
             TextMMD(
-                "Still not ruled out: " + hazards.joinToString(", ") { it.taxon.scientificName },
+                stringResource(R.string.entry_new_not_ruled_out, hazards.joinToString(", ") { it.taxon.scientificName }),
                 style = MaterialThemeTypography().bodySmall,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 4.dp),
@@ -423,14 +423,14 @@ private fun Footer(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         OutlinedButtonMMD(onClick = onAddPhoto, modifier = Modifier.weight(1f)) {
-            TextMMD(if (draft.photos.isEmpty()) "Photo" else "Photo (${draft.photos.size})")
+            TextMMD(if (draft.photos.isEmpty()) stringResource(R.string.entry_new_photo) else stringResource(R.string.entry_new_photo_count, draft.photos.size))
         }
         if (onNext != null) {
             // Answering the question in front of you beats ending the whole entry, so
             // while there is something chosen this is what the solid button does.
-            ButtonMMD(onClick = onNext, modifier = Modifier.weight(1f)) { TextMMD("Next") }
+            ButtonMMD(onClick = onNext, modifier = Modifier.weight(1f)) { TextMMD(stringResource(R.string.entry_new_next)) }
         } else {
-            ButtonMMD(onClick = onDone, modifier = Modifier.weight(1f)) { TextMMD("Done") }
+            ButtonMMD(onClick = onDone, modifier = Modifier.weight(1f)) { TextMMD(stringResource(R.string.entry_new_done)) }
         }
     }
 }

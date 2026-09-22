@@ -7,10 +7,13 @@ import androidx.compose.material3.MaterialTheme
 import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
+import com.wanderwildwood.kinokocho.R
 
 /**
  * Asked at the end of keying something out: is this one to keep?
@@ -34,40 +37,42 @@ fun SaveDialog(
 ) {
     EInkDialog(onDismiss = onBack) {
         TextMMD(
-            "Save in the journal?",
+            stringResource(R.string.save_title),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
         )
         TextMMD(
-            buildString {
-                append("$answered character")
-                if (answered != 1) append("s")
-                if (photos > 0) {
-                    append(" and $photos photograph")
-                    if (photos != 1) append("s")
-                }
-                append(".")
+            if (photos > 0) {
+                stringResource(
+                    R.string.save_counts_with_photographs,
+                    pluralStringResource(R.plurals.save_characters, answered, answered),
+                    pluralStringResource(R.plurals.save_photographs, photos, photos),
+                )
+            } else {
+                stringResource(
+                    R.string.save_counts,
+                    pluralStringResource(R.plurals.save_characters, answered, answered),
+                )
             },
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(top = 6.dp),
         )
         TextMMD(
-            "Worth keeping if you want to add a spore print in the morning, or ask " +
-                "someone about it later.",
+            stringResource(R.string.save_body),
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(top = 4.dp, bottom = 14.dp),
         )
 
         ButtonMMD(onClick = onSave, modifier = Modifier.fillMaxWidth()) {
-            TextMMD("Save it")
+            TextMMD(stringResource(R.string.save_confirm))
         }
         OutlinedButtonMMD(
             onClick = onDiscard,
             modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-        ) { TextMMD("No, throw it away") }
+        ) { TextMMD(stringResource(R.string.save_discard)) }
         OutlinedButtonMMD(
             onClick = onBack,
             modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-        ) { TextMMD("Keep answering") }
+        ) { TextMMD(stringResource(R.string.save_keep_answering)) }
     }
 }

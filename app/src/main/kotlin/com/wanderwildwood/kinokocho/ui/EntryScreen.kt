@@ -33,6 +33,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -41,6 +43,7 @@ import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.kinokocho.JournalViewModel
+import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.key.Hazard
 import com.wanderwildwood.kinokocho.schema.Character
 import java.text.SimpleDateFormat
@@ -101,8 +104,11 @@ fun EntryScreen(
             val n = draft.answers.answeredCount
             val p = draft.photos.size
             TextMMD(
-                "$n character${if (n == 1) "" else "s"} · " +
-                    "$p photograph${if (p == 1) "" else "s"}",
+                stringResource(
+                    R.string.entry_counts,
+                    pluralStringResource(R.plurals.entry_characters, n, n),
+                    pluralStringResource(R.plurals.entry_photographs, p, p),
+                ),
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 2.dp),
             )
@@ -123,12 +129,10 @@ fun EntryScreen(
 
         if (deferred.isNotEmpty()) {
             item {
-                Section("Still to do, at home")
+                Section(stringResource(R.string.entry_section_deferred))
                 if (sporePrintPending) {
                     TextMMD(
-                        "Leave the cap gills-down on paper overnight. The spore print " +
-                            "settles more than any other character and cannot be got " +
-                            "in the field.",
+                        stringResource(R.string.entry_spore_print_how),
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(bottom = 6.dp),
                     )
@@ -158,7 +162,7 @@ fun EntryScreen(
                         OutlinedButtonMMD(
                             onClick = { vm.skip(character.id); open = false },
                             modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
-                        ) { TextMMD("I tried and cannot say") }
+                        ) { TextMMD(stringResource(R.string.entry_deferred_cannot_say)) }
                     }
                 }
             }
@@ -168,7 +172,7 @@ fun EntryScreen(
         // ruled out, and the wording has to keep saying so.
         if (draft.answers.answeredCount > 0) {
             item {
-                Section("Not yet ruled out")
+                Section(stringResource(R.string.entry_section_not_ruled_out))
                 val live = ranking.live
                 TextMMD(
                     // Not "0 of 110 still fit", printed above four names. Answers
@@ -177,10 +181,9 @@ fun EntryScreen(
                     // thing is to say so and still show the nearest, rather than a
                     // count that argues with the list beneath it.
                     if (live.isEmpty()) {
-                        "Nothing fits everything you wrote down. These come nearest, " +
-                            "and one of the answers may be worth looking at again."
+                        stringResource(R.string.entry_nothing_fits)
                     } else {
-                        "${live.size} of ${ranking.candidates.size} still fit what you wrote down."
+                        stringResource(R.string.entry_still_fit, live.size, ranking.candidates.size)
                     },
                     style = MaterialTheme.typography.bodySmall,
                 )
@@ -231,9 +234,9 @@ fun EntryScreen(
         val lethal = safety.filter { it.taxon.hazard.severity == Hazard.Severity.LETHAL }
         if (lethal.isNotEmpty()) {
             item {
-                Section("Dangerous, and not ruled out")
+                Section(stringResource(R.string.entry_section_dangerous))
                 TextMMD(
-                    "Tap one to read it properly.",
+                    stringResource(R.string.entry_dangerous_tap),
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(bottom = 2.dp),
                 )
@@ -270,11 +273,14 @@ fun EntryScreen(
                     )
                     if (note.discriminators.isNotEmpty()) {
                         TextMMD(
-                            "Would settle it: " + note.discriminators
-                                .mapNotNull { vm.schema.character(it)?.inFull() }
-                                .distinct()
-                                .take(4)
-                                .joinToString(", "),
+                            stringResource(
+                                R.string.entry_would_settle,
+                                note.discriminators
+                                    .mapNotNull { vm.schema.character(it)?.inFull() }
+                                    .distinct()
+                                    .take(4)
+                                    .joinToString(", "),
+                            ),
                             style = MaterialTheme.typography.bodySmall,
                         )
                     }
@@ -284,8 +290,7 @@ fun EntryScreen(
             if (lethal.size > MOST_HAZARDS) {
                 item {
                     TextMMD(
-                        "…and ${lethal.size - MOST_HAZARDS} more, which answering " +
-                            "anything above will start to rule out.",
+                        stringResource(R.string.entry_dangerous_more, lethal.size - MOST_HAZARDS),
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.padding(top = 4.dp),
                     )
@@ -303,7 +308,7 @@ fun EntryScreen(
          */
         if (missing.isNotEmpty()) {
             item {
-                Section("What would have narrowed it most")
+                Section(stringResource(R.string.entry_section_missing))
                 missing.take(3).forEach { (characterId, _) ->
                     val character = vm.schema.character(characterId) ?: return@forEach
                     Row(
@@ -342,7 +347,7 @@ fun EntryScreen(
                             TextMMD(character.label, style = MaterialTheme.typography.bodySmall)
                             if (character.availability.name == "DEFERRED") {
                                 TextMMD(
-                                    "at home, not in the field",
+                                    stringResource(R.string.entry_missing_at_home),
                                     style = MaterialTheme.typography.bodySmall,
                                 )
                             }
@@ -365,7 +370,7 @@ fun EntryScreen(
          */
         if (draft.photos.isNotEmpty()) {
             item {
-                Section("Photographs")
+                Section(stringResource(R.string.entry_section_photographs))
                 var arming by remember(draft.uuid) { mutableStateOf<String?>(null) }
 
                 // A thumbnail armed by a stray tap used to stay armed for as long as the
@@ -411,10 +416,10 @@ fun EntryScreen(
                                     modifier = Modifier.size(96.dp),
                                 )
                             } else {
-                                TextMMD("(missing)", style = MaterialTheme.typography.bodySmall)
+                                TextMMD(stringResource(R.string.entry_photo_missing), style = MaterialTheme.typography.bodySmall)
                             }
                             TextMMD(
-                                if (armed) "Remove this"
+                                if (armed) stringResource(R.string.entry_photo_remove)
                                 else PhotoSlot.entries.firstOrNull { it.id == photo.slot }
                                     ?.label ?: photo.slot,
                                 style = MaterialTheme.typography.bodySmall,
@@ -422,7 +427,7 @@ fun EntryScreen(
                             )
                             if (armed) {
                                 TextMMD(
-                                    "tap again",
+                                    stringResource(R.string.entry_photo_tap_again),
                                     style = MaterialTheme.typography.bodySmall,
                                 )
                             }
@@ -487,8 +492,7 @@ fun EntryScreen(
                     }
                     if (character.id == "age" && "old" in chosen) {
                         TextMMD(
-                            "A ring or a veil that is not there proves nothing on an " +
-                                "old one, so nothing will be ruled out for missing them.",
+                            stringResource(R.string.entry_old_note),
                             style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.padding(top = 4.dp),
                         )
@@ -543,18 +547,18 @@ fun EntryScreen(
          * things it already knew.
          */
         item {
-            Section("What it turned out to be")
+            Section(stringResource(R.string.entry_section_identified))
             var name by remember(draft.uuid) { mutableStateOf(draft.identifiedAs) }
             TextFieldMMD(
                 value = name,
                 onValueChange = { name = it; vm.setIdentifiedAs(it) },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { TextMMD("A name, once somebody says") },
+                placeholder = { TextMMD(stringResource(R.string.entry_identified_placeholder)) },
                 singleLine = true,
             )
             if (name.isBlank() && draft.answers.answeredCount > 0) {
                 TextMMD(
-                    "Or take one from the list below.",
+                    stringResource(R.string.entry_identified_from_list),
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(top = 4.dp),
                 )
@@ -581,7 +585,7 @@ fun EntryScreen(
         // Where it was. Typing it is the default; the button asks for coarse location
         // only, because a foraging patch is not a thing to keep at metre precision.
         item {
-            Section("Where, and anything else")
+            Section(stringResource(R.string.entry_section_where))
             PlaceField(
                 place = draft.placeNote,
                 latitude = draft.latitude,
@@ -594,12 +598,12 @@ fun EntryScreen(
                 value = note,
                 onValueChange = { note = it; vm.setNote(it) },
                 modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
-                placeholder = { TextMMD("Anything the questions did not cover") },
+                placeholder = { TextMMD(stringResource(R.string.entry_note_placeholder)) },
             )
         }
 
         item {
-            Section("What you wrote down")
+            Section(stringResource(R.string.entry_section_answers))
         }
         items2(draft, vm, onContinue)
 
@@ -610,23 +614,24 @@ fun EntryScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 OutlinedButtonMMD(onClick = onAddPhoto, modifier = Modifier.weight(1f)) {
-                    TextMMD("Photo")
+                    TextMMD(stringResource(R.string.entry_photo))
                 }
                 ButtonMMD(onClick = onContinue, modifier = Modifier.weight(1f)) {
-                    TextMMD("Answer more")
+                    TextMMD(stringResource(R.string.entry_answer_more))
                 }
             }
             // The whole point of the record: handing it to someone who can look at it.
             val context = LocalContext.current
+            val askChooserTitle = stringResource(R.string.entry_ask_chooser_title)
             OutlinedButtonMMD(
                 onClick = {
                     val intent = ShareFind.intent(context, vm.schema, vm.engine, draft)
                     context.startActivity(
-                        Intent.createChooser(intent, "Ask someone about this find")
+                        Intent.createChooser(intent, askChooserTitle)
                     )
                 },
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-            ) { TextMMD("Ask someone about this") }
+            ) { TextMMD(stringResource(R.string.entry_ask_someone)) }
 
             // The other way of asking somebody: a queue of strangers rather than one
             // person you chose. Below the share sheet on purpose - handing it to a
@@ -637,7 +642,7 @@ fun EntryScreen(
             OutlinedButtonMMD(
                 onClick = onClose,
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 20.dp),
-            ) { TextMMD("Close") }
+            ) { TextMMD(stringResource(R.string.entry_close)) }
         }
     }
 }
@@ -671,7 +676,7 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items2(
     if (entries.isEmpty() && gaveUp.isEmpty()) {
         item {
             TextMMD(
-                "Nothing yet.",
+                stringResource(R.string.entry_answers_none),
                 style = MaterialTheme.typography.bodySmall,
             )
         }
@@ -739,7 +744,7 @@ private fun androidx.compose.foundation.lazy.LazyListScope.items2(
                     modifier = Modifier.weight(1f),
                 )
                 TextMMD(
-                    if (character.notTested) "looked, cannot say" else "skipped",
+                    if (character.notTested) stringResource(R.string.entry_answer_cannot_say) else stringResource(R.string.entry_answer_skipped),
                     style = MaterialTheme.typography.bodySmall,
                     textAlign = TextAlign.End,
                     modifier = Modifier.weight(1f),

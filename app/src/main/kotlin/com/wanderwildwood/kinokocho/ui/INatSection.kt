@@ -16,11 +16,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import com.wanderwildwood.kinokocho.JournalViewModel
+import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.net.INatAccount
 import com.wanderwildwood.kinokocho.net.INatConfig
 import kotlinx.coroutines.delay
@@ -49,7 +52,7 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
         // Says what it cannot do rather than showing a button that fails when pressed.
         // Self-eliminating: a build with an application id never draws this.
         TextMMD(
-            "This build has no iNaturalist application id, so it cannot publish.",
+            stringResource(R.string.inat_not_configured),
             style = MaterialTheme.typography.bodySmall,
         )
         return
@@ -60,14 +63,14 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
     when {
         !vm.inat.signedIn -> {
             TextMMD(
-                "Publishing a find puts it, its photographs and its characters on a " +
-                    "public website, under your own account.",
+                stringResource(R.string.inat_signed_out_body),
                 style = MaterialTheme.typography.bodySmall,
             )
+            val doingSignIn = stringResource(R.string.inat_doing_sign_in)
             OutlinedButtonMMD(
-                onClick = { openOrSay(context, vm, vm.signInIntent(), "sign in") },
+                onClick = { openOrSay(context, vm, vm.signInIntent(), doingSignIn) },
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-            ) { TextMMD("Sign in to iNaturalist") }
+            ) { TextMMD(stringResource(R.string.inat_sign_in)) }
         }
 
         published -> Published(vm, draft, context)
@@ -98,7 +101,7 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
     if (vm.inat.signedIn) {
         vm.inat.login?.let {
             TextMMD(
-                "Signed in as $it",
+                stringResource(R.string.inat_signed_in_as, it),
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 10.dp),
             )
@@ -106,7 +109,7 @@ fun INatSection(vm: JournalViewModel, draft: JournalViewModel.Draft) {
         OutlinedButtonMMD(
             onClick = vm::signOutOfINat,
             modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-        ) { TextMMD("Sign out") }
+        ) { TextMMD(stringResource(R.string.inat_sign_out)) }
     }
 
 }
@@ -136,16 +139,13 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
      */
     if (draft.latitude == null || draft.longitude == null) {
         TextMMD(
-            "No coordinates on this find",
+            stringResource(R.string.inat_no_coordinates),
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 4.dp),
         )
         TextMMD(
-            "It will go up with the place in your own words and no map pin. iNaturalist " +
-                "cannot verify a find it cannot place, so it will sit outside the lists " +
-                "most identifiers work through. \"Add roughly where I am\", further up, " +
-                "fixes that.",
+            stringResource(R.string.inat_no_coordinates_body),
             style = MaterialTheme.typography.bodySmall,
         )
     } else {
@@ -161,9 +161,9 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
      */
     TextMMD(
         when (geoprivacy) {
-            INatAccount.PRIVATE -> "Location: hidden"
-            INatAccount.OBSCURED -> "Location: obscured"
-            else -> "Location: exact"
+            INatAccount.PRIVATE -> stringResource(R.string.inat_location_hidden)
+            INatAccount.OBSCURED -> stringResource(R.string.inat_location_obscured)
+            else -> stringResource(R.string.inat_location_exact)
         },
         style = MaterialTheme.typography.bodyMedium,
         fontWeight = FontWeight.Bold,
@@ -172,11 +172,9 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
     TextMMD(
         when (geoprivacy) {
             INatAccount.PRIVATE ->
-                "iNaturalist is told where it was and shows nobody, including on the map. " +
-                    "Nobody can check the record against the place."
+                stringResource(R.string.inat_location_hidden_body)
             INatAccount.OBSCURED ->
-                "iNaturalist is told where it was and shows the public a random point " +
-                    "within about twenty kilometres. The place you typed is kept, not shown."
+                stringResource(R.string.inat_location_obscured_body)
             else ->
                 // The words too, and this is the only setting where that is true.
                 // `obscure_place_guess` only moves a typed note into a private field
@@ -184,8 +182,7 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
                 // spring" is on the page. Saying only "the map pin" here would be
                 // accurate about coordinates and quietly wrong about the sentence next
                 // to them.
-                "The map pin is where you found it, and the place you typed is shown " +
-                    "beside it. For anyone."
+                stringResource(R.string.inat_location_exact_body)
         },
         style = MaterialTheme.typography.bodySmall,
     )
@@ -195,7 +192,7 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
             vm.inat.geoprivacy = geoprivacy
         },
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-    ) { TextMMD("Change") }
+    ) { TextMMD(stringResource(R.string.inat_location_change)) }
     }
 
     /*
@@ -232,7 +229,7 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
         },
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
     ) {
-        TextMMD(if (armed) "Publish — this is public; tap again" else "Publish to iNaturalist")
+        TextMMD(if (armed) stringResource(R.string.inat_publish_armed) else stringResource(R.string.inat_publish))
     }
 
 }
@@ -247,7 +244,7 @@ private fun Published(
     val url = "https://www.inaturalist.org/observations/${draft.inat.uuid}"
 
     TextMMD(
-        draft.inat.pushedAt?.let { "Published ${dateOnly(it)}" } ?: "Published",
+        draft.inat.pushedAt?.let { stringResource(R.string.inat_published_on, dateOnly(it)) } ?: stringResource(R.string.inat_published),
         style = MaterialTheme.typography.bodyMedium,
         fontWeight = FontWeight.Bold,
     )
@@ -261,13 +258,13 @@ private fun Published(
      */
     val name = draft.inat.taxonName
     if (name != null) {
-        TextMMD("iNaturalist says: $name", style = MaterialTheme.typography.bodySmall)
+        TextMMD(stringResource(R.string.inat_says, name), style = MaterialTheme.typography.bodySmall)
         draft.inat.identificationFetchedAt?.let {
-            TextMMD("Read ${dateOnly(it)}", style = MaterialTheme.typography.bodySmall)
+            TextMMD(stringResource(R.string.inat_read_on, dateOnly(it)), style = MaterialTheme.typography.bodySmall)
         }
     } else {
         TextMMD(
-            "Nobody has named it yet. Fungi wait longer than most things there.",
+            stringResource(R.string.inat_not_named_yet),
             style = MaterialTheme.typography.bodySmall,
         )
     }
@@ -289,22 +286,23 @@ private fun Published(
     val unsent = draft.photos.count { it.inatPhotoId == null }
     if (unsent > 0) {
         TextMMD(
-            "$unsent photograph${if (unsent == 1) "" else "s"} did not go up.",
+            pluralStringResource(R.plurals.inat_photographs_not_sent, unsent, unsent),
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(top = 4.dp),
         )
         OutlinedButtonMMD(
             onClick = { vm.publish(draft) },
             modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-        ) { TextMMD("Send the rest") }
+        ) { TextMMD(stringResource(R.string.inat_send_rest)) }
     }
 
+    val doingOpen = stringResource(R.string.inat_doing_open)
     OutlinedButtonMMD(
         onClick = {
-            openOrSay(context, vm, Intent(Intent.ACTION_VIEW, Uri.parse(url)), "open that")
+            openOrSay(context, vm, Intent(Intent.ACTION_VIEW, Uri.parse(url)), doingOpen)
         },
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-    ) { TextMMD("Open on iNaturalist") }
+    ) { TextMMD(stringResource(R.string.inat_open)) }
 
     // Asks about every find already published, not only this one - one call for the lot
     // rather than making somebody open twenty entries - so the label does not promise
@@ -312,7 +310,7 @@ private fun Published(
     OutlinedButtonMMD(
         onClick = vm::checkForNames,
         modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-    ) { TextMMD("Check what has been named") }
+    ) { TextMMD(stringResource(R.string.inat_check_names)) }
 }
 
 /**
@@ -335,7 +333,7 @@ private fun openOrSay(
     doing: String,
 ) {
     runCatching { context.startActivity(intent) }.onFailure {
-        vm.sayINat("There is no browser on this phone to $doing with.")
+        vm.sayINat(context.getString(R.string.inat_no_browser, doing))
     }
 }
 

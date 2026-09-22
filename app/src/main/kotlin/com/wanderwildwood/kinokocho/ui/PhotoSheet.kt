@@ -27,12 +27,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
+import com.wanderwildwood.kinokocho.R
 import java.io.File
 import java.util.UUID
 
@@ -126,13 +128,13 @@ fun PhotoSheet(
             .padding(horizontal = 16.dp),
     ) {
         TextMMD(
-            "Photographs",
+            stringResource(R.string.photos_title),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 12.dp),
         )
         TextMMD(
-            "Whoever you ask will want the underside and the base. The rest is optional.",
+            stringResource(R.string.photos_body),
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(top = 2.dp, bottom = 10.dp),
         )
@@ -177,7 +179,7 @@ fun PhotoSheet(
                         camera.launch(uriFor(context, file))
                     },
                     modifier = Modifier.fillMaxWidth(),
-                ) { TextMMD("Take one now") }
+                ) { TextMMD(stringResource(R.string.photos_take_now)) }
                 OutlinedButtonMMD(
                     onClick = {
                         picker.launch(
@@ -187,16 +189,16 @@ fun PhotoSheet(
                         )
                     },
                     modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-                ) { TextMMD("Choose one already on the phone") }
+                ) { TextMMD(stringResource(R.string.photos_choose_existing)) }
                 OutlinedButtonMMD(
                     onClick = { choosing = null },
                     modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-                ) { TextMMD("Back") }
+                ) { TextMMD(stringResource(R.string.photos_back)) }
             }
         }
 
         TextMMD(
-            "Done",
+            stringResource(R.string.photos_done),
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -244,7 +246,7 @@ private fun SlotTile(
             textAlign = TextAlign.Center,
         )
         TextMMD(
-            if (taken) "taken" else slot.why,
+            if (taken) stringResource(R.string.photos_slot_taken) else slot.why,
             style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 2.dp),

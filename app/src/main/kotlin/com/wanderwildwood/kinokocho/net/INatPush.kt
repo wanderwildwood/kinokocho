@@ -2,6 +2,7 @@ package com.wanderwildwood.kinokocho.net
 
 import android.content.Context
 import com.wanderwildwood.kinokocho.JournalViewModel
+import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.data.JournalDao
 import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
@@ -56,7 +57,7 @@ class INatPush(
         draft: JournalViewModel.Draft,
         geoprivacy: String?,
     ): Outcome {
-        val observationId = draft.observationId ?: return Outcome.Failed("Nothing to send yet.")
+        val observationId = draft.observationId ?: return Outcome.Failed(context.getString(R.string.inat_push_nothing_to_send))
 
         val jwt = when (val r = client.apiToken()) {
             is INatClient.Result.Failed -> return if (r.signedOut) Outcome.NeedsSignIn
@@ -69,7 +70,7 @@ class INatPush(
         // until they are written; the rows are what have ids, uuids and a settled idea
         // of what is actually on this phone.
         val stored = dao.findOne(observationId)
-            ?: return Outcome.Failed("That find is no longer in the journal.")
+            ?: return Outcome.Failed(context.getString(R.string.inat_push_find_gone))
 
         val body = INatPayload.observation(
             uuid = stored.observation.uuid,

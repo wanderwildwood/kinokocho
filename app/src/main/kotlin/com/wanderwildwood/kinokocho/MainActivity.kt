@@ -23,6 +23,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -221,6 +223,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
 
     if (about) {
         val context = LocalContext.current
+        val exportChooserTitle = stringResource(R.string.export_chooser_title)
         AboutDialog(
             onDismiss = { about = false },
             onExport = {
@@ -229,7 +232,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
                         context.startActivity(
                             Intent.createChooser(
                                 JournalExport.intent(context, file),
-                                "Keep a copy of the journal",
+                                exportChooserTitle,
                             )
                         )
                     }
@@ -251,21 +254,22 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             TextMMD(
                 result.failed ?: when {
                     result.added == 0 && result.alreadyHere > 0 ->
-                        "Everything in that copy was already here."
-                    result.added == 0 -> "Nothing in that file to read."
-                    else -> "${result.added} find" +
-                        (if (result.added == 1) "" else "s") + " added" +
-                        (if (result.photos > 0) ", with ${result.photos} photograph" +
-                            (if (result.photos == 1) "" else "s") else "") + "." +
-                        (if (result.alreadyHere > 0)
-                            " ${result.alreadyHere} were already here." else "")
+                        stringResource(R.string.import_all_already_here)
+                    result.added == 0 -> stringResource(R.string.import_nothing_to_read)
+                    else -> stringResource(
+                        R.string.import_added_summary,
+                        pluralStringResource(R.plurals.import_finds_added, result.added, result.added),
+                        if (result.photos > 0) pluralStringResource(R.plurals.import_with_photographs, result.photos, result.photos) else "",
+                        if (result.alreadyHere > 0)
+                            stringResource(R.string.import_already_here, result.alreadyHere) else "",
+                    )
                 },
                 style = MaterialTheme.typography.bodyMedium,
             )
             OutlinedButtonMMD(
                 onClick = { imported = null },
                 modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
-            ) { TextMMD("Close") }
+            ) { TextMMD(stringResource(R.string.import_close)) }
         }
     }
 

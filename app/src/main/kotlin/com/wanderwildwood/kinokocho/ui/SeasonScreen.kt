@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
@@ -97,7 +98,7 @@ fun SeasonScreen(
     ) {
         item {
             TextMMD(
-                if (looking) "Looking one up" else "About in $monthName",
+                if (looking) stringResource(R.string.season_title_looking) else stringResource(R.string.season_title_month, monthName),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 12.dp),
@@ -106,17 +107,14 @@ fun SeasonScreen(
                 value = query,
                 onValueChange = { query = it },
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-                placeholder = { TextMMD("Look one up, any month") },
+                placeholder = { TextMMD(stringResource(R.string.season_search_placeholder)) },
                 singleLine = true,
             )
             TextMMD(
                 if (looking) {
-                    "${found.size} of ${taxa.size} match, whatever month they are out in."
+                    stringResource(R.string.season_search_count, found.size, taxa.size)
                 } else {
-                    "${inSeason.size} of ${taxa.size} in this region pack have been " +
-                        "recorded in $monthName. Seasons are a guide and nothing more — " +
-                        "fungi do not read calendars, and an out-of-season find is worth " +
-                        "writing down precisely because it is one."
+                    stringResource(R.string.season_month_count, inSeason.size, taxa.size, monthName)
                 },
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(top = 6.dp, bottom = 4.dp),
@@ -127,15 +125,13 @@ fun SeasonScreen(
             item {
                 HorizontalDividerMMD(Modifier.padding(top = 10.dp))
                 TextMMD(
-                    "Worth knowing this month",
+                    stringResource(R.string.season_worth_knowing),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
                 )
                 TextMMD(
-                    "The ones people go looking for and the ones that hurt people, " +
-                        "which are often out at the same time. Sought after means people " +
-                        "look for it, not that this app has told you anything is safe.",
+                    stringResource(R.string.season_worth_knowing_body),
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(bottom = 4.dp),
                 )
@@ -149,7 +145,7 @@ fun SeasonScreen(
         item {
             HorizontalDividerMMD(Modifier.padding(top = 10.dp))
             TextMMD(
-                if (looking) "Found" else "Also about",
+                if (looking) stringResource(R.string.season_heading_found) else stringResource(R.string.season_heading_also_about),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
@@ -181,7 +177,7 @@ fun SeasonScreen(
             OutlinedButtonMMD(
                 onClick = onClose,
                 modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 24.dp),
-            ) { TextMMD("Close") }
+            ) { TextMMD(stringResource(R.string.season_close)) }
         }
     }
 }
@@ -243,8 +239,8 @@ private fun TaxonLine(
         when {
             danger -> TextMMD(
                 when (taxon.hazard.severity) {
-                    Hazard.Severity.LETHAL -> "Can kill."
-                    Hazard.Severity.SEVERE -> "Can cause serious harm."
+                    Hazard.Severity.LETHAL -> stringResource(R.string.season_hazard_lethal)
+                    Hazard.Severity.SEVERE -> stringResource(R.string.season_hazard_severe)
                     else -> ""
                 } + (taxon.hazard.note?.takeIf { it.isNotBlank() }?.let { " $it" } ?: ""),
                 style = MaterialTheme.typography.bodySmall,
@@ -254,12 +250,12 @@ private fun TaxonLine(
                 // time. The heading has already explained the word; five rows repeating
                 // it say nothing a person could act on, and the mushroom standing next
                 // to this one in the same week is the thing they walked out needing.
-                (confusion?.let { "Taken for ${nameOf(it)}, which ${harmOf(it)}." }
-                    ?: "Sought after.") +
+                (confusion?.let { stringResource(R.string.season_taken_for, nameOf(it), harmOf(it)) }
+                    ?: stringResource(R.string.season_sought_after)) +
                     when (taxon.hazard.severity) {
-                        Hazard.Severity.GI -> " Makes some people ill in its own right."
-                        Hazard.Severity.INTOXICATION -> " Intoxicating in its own right."
-                        Hazard.Severity.UNKNOWN -> " Nothing documented either way."
+                        Hazard.Severity.GI -> " " + stringResource(R.string.season_sought_gi)
+                        Hazard.Severity.INTOXICATION -> " " + stringResource(R.string.season_sought_intoxicating)
+                        Hazard.Severity.UNKNOWN -> " " + stringResource(R.string.season_sought_unknown)
                         else -> ""
                     },
                 style = MaterialTheme.typography.bodySmall,
@@ -270,11 +266,11 @@ private fun TaxonLine(
             // long list as a bare name with nothing beside it, because it is neither
             // lethal nor looked for. Twenty-one rows were silent that way.
             taxon.hazard.severity == Hazard.Severity.GI -> TextMMD(
-                "Makes people ill.",
+                stringResource(R.string.season_hazard_gi),
                 style = MaterialTheme.typography.bodySmall,
             )
             taxon.hazard.severity == Hazard.Severity.INTOXICATION -> TextMMD(
-                "Intoxicating.",
+                stringResource(R.string.season_hazard_intoxicating),
                 style = MaterialTheme.typography.bodySmall,
             )
         }
@@ -283,16 +279,18 @@ private fun TaxonLine(
 }
 
 /** How a confused-with mushroom is best referred to in one clause. */
+@Composable
 private fun nameOf(taxon: Taxon): String =
-    taxon.commonName?.let { "the $it" } ?: taxon.scientificName
+    taxon.commonName?.let { stringResource(R.string.season_the_common_name, it) } ?: taxon.scientificName
 
 /** What it does to you, as the tail of that clause. */
+@Composable
 private fun harmOf(taxon: Taxon): String = when (taxon.hazard.severity) {
-    Hazard.Severity.LETHAL -> "can kill"
-    Hazard.Severity.SEVERE -> "can cause serious harm"
-    Hazard.Severity.GI -> "makes people ill"
-    Hazard.Severity.INTOXICATION -> "is intoxicating"
-    else -> "is not a mushroom to eat"
+    Hazard.Severity.LETHAL -> stringResource(R.string.season_harm_lethal)
+    Hazard.Severity.SEVERE -> stringResource(R.string.season_harm_severe)
+    Hazard.Severity.GI -> stringResource(R.string.season_harm_gi)
+    Hazard.Severity.INTOXICATION -> stringResource(R.string.season_harm_intoxicating)
+    else -> stringResource(R.string.season_harm_other)
 }
 
 /**
@@ -406,7 +404,7 @@ fun SeasonRow(month: Int, count: Int, onOpen: () -> Unit) {
             modifier = Modifier.size(22.dp).padding(end = 8.dp),
         )
         TextMMD(
-            "$count about in $monthName",
+            stringResource(R.string.season_row, count, monthName),
             style = MaterialTheme.typography.bodySmall,
         )
     }

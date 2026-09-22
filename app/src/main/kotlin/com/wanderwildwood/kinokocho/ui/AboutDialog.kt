@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.wanderwildwood.kinokocho.R
 
 /**
@@ -47,17 +48,14 @@ fun AboutDialog(
         // tappable at all. It pages now, four rows to a swipe, rather than coasting.
         LazyColumnMMD(modifier = Modifier.heightIn(max = 460.dp)) {
             item {
-                Line("茸帳 Mushroom Journal ${BuildConfig.VERSION_NAME}", bold = true)
+                Line(stringResource(R.string.about_title, BuildConfig.VERSION_NAME), bold = true)
             }
             item {
                 Spacer(14)
             }
             item {
                 Line(
-                    "A field journal. It records what you saw and narrows what it could " +
-                        "be — often far enough that someone more experienced can say. It " +
-                        "does not decide, it has no opinion about eating anything, and on " +
-                        "a screen with no colour it could not be the one to decide anyway."
+                    stringResource(R.string.about_what_it_is)
                 )
             }
             item {
@@ -65,9 +63,7 @@ fun AboutDialog(
             }
             item {
                 Line(
-                    "Nothing leaves this phone unless you send it. The only permission " +
-                        "asked for is a rough position, only when you press the button for " +
-                        "it, and only ever rough — never a precise fix."
+                    stringResource(R.string.about_privacy)
                 )
             }
             item {
@@ -88,16 +84,11 @@ fun AboutDialog(
                 if (INatConfig.configured) {
                     Spacer(14)
                     Line(
-                        "Publishing a find to iNaturalist is the one thing that reaches the " +
-                            "network. One find, when you press a button that says it is " +
-                            "public. Sign-in happens in your browser, so this app never sees " +
-                            "your password."
+                        stringResource(R.string.about_inat)
                     )
                     Spacer(10)
                     Line(
-                        "Obscured is not the same as not sent: iNaturalist is told where the " +
-                            "mushroom was and shows the public a point some twenty kilometres " +
-                            "off. The place you typed is kept there too, and not shown."
+                        stringResource(R.string.about_inat_obscured)
                     )
                 }
             }
@@ -105,13 +96,13 @@ fun AboutDialog(
                 Spacer(14)
             }
             item {
-                Line("GNU General Public License v3")
+                Line(stringResource(R.string.about_licence))
             }
             item {
-                Line("Character schema and drawings — original, this project.")
+                Line(stringResource(R.string.about_schema_credit))
             }
             item {
-                Line("Question order after Watson & Dallwitz, DELTA, 1974.")
+                Line(stringResource(R.string.about_delta_credit))
             }
             item {
                 Spacer(14)
@@ -130,7 +121,7 @@ fun AboutDialog(
                  * year and the journal screen is for the finds.
                  */
                 TextMMD(
-                    "Keep a copy of everything",
+                    stringResource(R.string.about_export),
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.fillMaxWidth().clickable(onClick = onExport),
@@ -138,8 +129,7 @@ fun AboutDialog(
             }
             item {
                 Line(
-                    "A zip of every find and every photograph, handed to whatever you keep " +
-                        "things in. Plain JSON inside, readable without this app."
+                    stringResource(R.string.about_export_body)
                 )
             }
             item {
@@ -147,7 +137,7 @@ fun AboutDialog(
             }
             item {
                 TextMMD(
-                    "Read a copy back in",
+                    stringResource(R.string.about_import),
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.fillMaxWidth().clickable(onClick = onImport),
@@ -155,8 +145,7 @@ fun AboutDialog(
             }
             item {
                 Line(
-                    "Adds whatever is not already here. Nothing is deleted and nothing is " +
-                        "overwritten, so an old copy read onto a full journal keeps both."
+                    stringResource(R.string.about_import_body)
                 )
             }
             item {
@@ -176,7 +165,7 @@ fun AboutDialog(
             }
             item {
                 TextMMD(
-                    "Close",
+                    stringResource(R.string.about_close),
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.End,
                     modifier = Modifier.fillMaxWidth().clickable(onClick = onDismiss),
@@ -228,7 +217,7 @@ private fun Llama() {
                         Intent(Intent.ACTION_VIEW, Uri.parse("https://square.link/u/AGu8oT10")),
                     )
                 }.onFailure {
-                    Toast.makeText(context, "There is no browser on this phone to open that with.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, context.getString(R.string.about_no_browser), Toast.LENGTH_SHORT).show()
                 }
             }
             .padding(vertical = 4.dp),
@@ -239,6 +228,6 @@ private fun Llama() {
             modifier = Modifier.size(22.dp),
         )
         androidx.compose.foundation.layout.Spacer(Modifier.width(6.dp))
-        Line("Feed the llamas")
+        Line(stringResource(R.string.about_feed_the_llamas))
     }
 }

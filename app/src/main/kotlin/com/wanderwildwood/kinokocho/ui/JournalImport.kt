@@ -2,6 +2,7 @@ package com.wanderwildwood.kinokocho.ui
 
 import android.content.Context
 import android.net.Uri
+import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.data.JournalDao
 import com.wanderwildwood.kinokocho.data.MeasurementRow
 import com.wanderwildwood.kinokocho.data.Observation
@@ -40,7 +41,7 @@ object JournalImport {
     suspend fun read(context: Context, uri: Uri, dao: JournalDao): Result {
         val bytes = runCatching {
             context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
-        }.getOrNull() ?: return Result(failed = "That file could not be opened.")
+        }.getOrNull() ?: return Result(failed = context.getString(R.string.import_could_not_open))
 
         // The whole zip is read before anything is written. A half-read archive must not
         // leave a half-restored journal.
@@ -61,10 +62,10 @@ object JournalImport {
                     zip.closeEntry()
                 }
             }
-        }.getOrElse { return Result(failed = "That does not look like a journal backup.") }
+        }.getOrElse { return Result(failed = context.getString(R.string.import_not_a_backup)) }
 
         val finds = journal?.optJSONArray("journal")
-            ?: return Result(failed = "No journal inside that file.")
+            ?: return Result(failed = context.getString(R.string.import_no_journal))
 
         var added = 0
         var already = 0

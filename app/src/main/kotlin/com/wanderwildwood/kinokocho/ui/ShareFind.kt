@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.content.FileProvider
 import com.wanderwildwood.kinokocho.JournalViewModel
+import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
@@ -61,7 +62,7 @@ object ShareFind {
                 else -> type = "text/plain"
             }
             putExtra(Intent.EXTRA_TEXT, text)
-            putExtra(Intent.EXTRA_SUBJECT, "A mushroom, ${dateOf(draft.recordedAt)}")
+            putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.share_subject, dateOf(draft.recordedAt)))
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
     }

@@ -15,11 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import com.wanderwildwood.kinokocho.JournalViewModel
+import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.key.Frequency
 import com.wanderwildwood.kinokocho.key.Hazard
 import com.wanderwildwood.kinokocho.key.Taxon
@@ -88,11 +90,11 @@ fun CandidateScreen(
             item {
                 Section(
                     when (taxon.hazard.severity) {
-                        Hazard.Severity.LETHAL -> "This one can kill"
-                        Hazard.Severity.SEVERE -> "This one can cause serious harm"
-                        Hazard.Severity.INTOXICATION -> "This one is intoxicating"
-                        Hazard.Severity.GI -> "This one makes people ill"
-                        else -> "Not known to be safe"
+                        Hazard.Severity.LETHAL -> stringResource(R.string.candidate_hazard_lethal)
+                        Hazard.Severity.SEVERE -> stringResource(R.string.candidate_hazard_severe)
+                        Hazard.Severity.INTOXICATION -> stringResource(R.string.candidate_hazard_intoxicating)
+                        Hazard.Severity.GI -> stringResource(R.string.candidate_hazard_gi)
+                        else -> stringResource(R.string.candidate_hazard_unknown)
                     }
                 )
                 // What "unknown" means, said rather than left to the heading.
@@ -106,14 +108,12 @@ fun CandidateScreen(
                 // data.
                 if (taxon.hazard.severity == Hazard.Severity.UNKNOWN) {
                     TextMMD(
-                        "Nobody has written down what this one does, either way. That " +
-                            "is not the same as safe — it is the absence of anyone " +
-                            "having looked.",
+                        stringResource(R.string.candidate_hazard_unknown_body),
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
                 taxon.hazard.onset?.takeIf { it.isNotBlank() && it != "—" }?.let {
-                    Row(it, "Comes on")
+                    Row(it, stringResource(R.string.candidate_label_onset))
                 }
                 taxon.hazard.note?.takeIf { it.isNotBlank() }?.let {
                     TextMMD(it, style = MaterialTheme.typography.bodySmall)
@@ -133,7 +133,7 @@ fun CandidateScreen(
             item {
                 Image(
                     painter = painterResource(plate),
-                    contentDescription = "A drawing of ${taxon.scientificName}",
+                    contentDescription = stringResource(R.string.candidate_cd_plate, taxon.scientificName),
                     colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -145,7 +145,7 @@ fun CandidateScreen(
 
         taxon.note?.takeIf { it.isNotBlank() }?.let { note ->
             item {
-                Section("What to look for")
+                Section(stringResource(R.string.candidate_section_look_for))
                 TextMMD(note, style = MaterialTheme.typography.bodySmall)
             }
         }
@@ -167,17 +167,17 @@ fun CandidateScreen(
                 }
             if (taxon.seasonMonths.isNotEmpty()) {
                 val names = DateFormatSymbols(Locale.getDefault()).shortMonths
-                Row(taxon.seasonMonths.sorted().joinToString(", ") { names[it - 1] }, "Season")
+                Row(taxon.seasonMonths.sorted().joinToString(", ") { names[it - 1] }, stringResource(R.string.candidate_label_season))
             }
             val cap = taxon.measurements["cap_width_mm"]
             val stem = taxon.measurements["stipe_height_mm"]
             if (cap != null || stem != null) {
                 Row(
                     listOfNotNull(
-                        cap?.let { "cap ${it.first}–${it.last} mm" },
-                        stem?.let { "stem ${it.first}–${it.last} mm" },
+                        cap?.let { stringResource(R.string.candidate_size_cap, it.first, it.last) },
+                        stem?.let { stringResource(R.string.candidate_size_stem, it.first, it.last) },
                     ).joinToString(", "),
-                    "Size",
+                    stringResource(R.string.candidate_label_size),
                 )
             }
             // What was measured, laid against those ranges. Said as "bigger than usual"
@@ -190,13 +190,13 @@ fun CandidateScreen(
                     ?.firstOrNull { it.id == key }?.label?.substringBefore(" (")?.lowercase()
                     ?: key
                 Row(
-                    "$mm mm — " + when {
-                        mm in range -> "within the usual range for $name"
+                    when {
+                        mm in range -> stringResource(R.string.candidate_measured_within, mm, name)
                         mm < range.first ->
-                            "smaller than usual for $name, which young ones often are"
-                        else -> "bigger than usual for $name"
+                            stringResource(R.string.candidate_measured_smaller, mm, name)
+                        else -> stringResource(R.string.candidate_measured_bigger, mm, name)
                     },
-                    "Measured",
+                    stringResource(R.string.candidate_label_measured),
                 )
             }
         }
@@ -217,7 +217,7 @@ fun CandidateScreen(
             }
         if (confusedWith.isNotEmpty()) {
             item {
-                Section("Confused with")
+                Section(stringResource(R.string.candidate_section_confused_with))
                 confusedWith.distinctBy { it.first }.forEach { (otherId, look) ->
                     val other = vm.pack.taxon(otherId)
                     TextMMD(
@@ -229,8 +229,8 @@ fun CandidateScreen(
                     )
                     other?.hazard?.severity?.takeIf { it.alwaysShow }?.let {
                         TextMMD(
-                            if (it == Hazard.Severity.LETHAL) "Can kill."
-                            else "Can cause serious harm.",
+                            if (it == Hazard.Severity.LETHAL) stringResource(R.string.candidate_lookalike_lethal)
+                            else stringResource(R.string.candidate_lookalike_severe),
                             style = MaterialTheme.typography.bodySmall,
                             fontWeight = FontWeight.Bold,
                         )
@@ -238,10 +238,13 @@ fun CandidateScreen(
                     TextMMD(look.note, style = MaterialTheme.typography.bodySmall)
                     if (look.discriminators.isNotEmpty()) {
                         TextMMD(
-                            "Tells them apart: " + look.discriminators
-                                .mapNotNull { vm.schema.character(it)?.inFull() }
-                                .distinct()
-                                .asPhrases(),
+                            stringResource(
+                                R.string.candidate_tells_apart,
+                                look.discriminators
+                                    .mapNotNull { vm.schema.character(it)?.inFull() }
+                                    .distinct()
+                                    .asPhrases(),
+                            ),
                             style = MaterialTheme.typography.bodySmall,
                             fontWeight = FontWeight.Bold,
                         )
@@ -253,13 +256,13 @@ fun CandidateScreen(
         item {
             // Reached from the month page there is nothing to match against, so it does
             // not ask a question it cannot answer — it just describes the mushroom.
-            Section(if (answered.isEmpty()) "What it is like" else "Does it match?")
+            Section(if (answered.isEmpty()) stringResource(R.string.candidate_section_like) else stringResource(R.string.candidate_section_match))
             if (answered.isNotEmpty()) {
                 TextMMD(
                     // A single disagreement does not remove a candidate, it only moves
                     // it down, and the reader is the one who decides which it was.
-                    if (differ == 0) "Everything you recorded agrees."
-                    else "$agree agree, $differ do not.",
+                    if (differ == 0) stringResource(R.string.candidate_all_agree)
+                    else stringResource(R.string.candidate_agree_differ, agree, differ),
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
@@ -287,14 +290,13 @@ fun CandidateScreen(
         item {
             // Said plainly rather than buried: none of this has been checked by anyone
             // who would know, and a reader deciding from it deserves to be told.
-            Section("Where this comes from")
+            Section(stringResource(R.string.candidate_section_sources))
             taxon.sources.forEach {
                 TextMMD(it, style = MaterialTheme.typography.bodySmall)
             }
             if (!taxon.reviewed) {
                 TextMMD(
-                    "Not checked by a mycologist. Written from published descriptions, " +
-                        "and no substitute for asking someone.",
+                    stringResource(R.string.candidate_not_reviewed),
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(top = 6.dp),
@@ -304,7 +306,7 @@ fun CandidateScreen(
             OutlinedButtonMMD(
                 onClick = onClose,
                 modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 24.dp),
-            ) { TextMMD("Back") }
+            ) { TextMMD(stringResource(R.string.candidate_back)) }
         }
     }
 }
@@ -346,7 +348,7 @@ private fun marked(
     val chosen = answers.values[character.id].orEmpty()
         .filterNot { vm.schema.isUncertainValue(character.id, it) }
     if (chosen.isEmpty()) return null
-    if (agrees(vm, taxon, character, answers)) return "you recorded this"
+    if (agrees(vm, taxon, character, answers)) return stringResource(R.string.candidate_marked_agrees)
     val mine = chosen.mapNotNull { c ->
         vm.schema.valuesOf(character).firstOrNull { it.id == c }?.label
     }
@@ -355,7 +357,7 @@ private fun marked(
     // smooth" — and a reader running down the page has no reason to notice which of
     // those two is the one that does not fit. The count above says how many disagree;
     // this is how you find them.
-    return "you recorded " + mine.asPhrases().lowercase() + ", which does not fit"
+    return stringResource(R.string.candidate_marked_differs, mine.asPhrases().lowercase())
 }
 
 /**

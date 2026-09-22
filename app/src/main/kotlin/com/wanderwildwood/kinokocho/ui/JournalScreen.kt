@@ -24,6 +24,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.ButtonMMD
@@ -62,7 +64,7 @@ fun JournalScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 TextMMD(
-                    "Mushroom Journal",
+                    stringResource(R.string.journal_title),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.weight(1f),
@@ -71,7 +73,7 @@ fun JournalScreen(
                 // a stranger looks for and it is not a setting.
                 Icon(
                     painter = painterResource(R.drawable.ic_about),
-                    contentDescription = "About",
+                    contentDescription = stringResource(R.string.journal_cd_about),
                     tint = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.size(28.dp).clickable(onClick = onAbout),
                 )
@@ -101,7 +103,7 @@ fun JournalScreen(
                     onValueChange = { query = it },
                     modifier = Modifier.fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 6.dp),
-                    placeholder = { TextMMD("A name, a place, a month") },
+                    placeholder = { TextMMD(stringResource(R.string.journal_search_placeholder)) },
                     singleLine = true,
                 )
             }
@@ -115,7 +117,7 @@ fun JournalScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     TextMMD(
-                        "Nothing here matches that.",
+                        stringResource(R.string.journal_search_no_match),
                         style = MaterialTheme.typography.bodySmall,
                     )
                 }
@@ -167,7 +169,7 @@ fun JournalScreen(
             ButtonMMD(
                 onClick = onNew,
                 modifier = Modifier.fillMaxWidth().padding(16.dp),
-            ) { TextMMD("Record a find") }
+            ) { TextMMD(stringResource(R.string.journal_record_a_find)) }
         }
     }
 }
@@ -186,14 +188,13 @@ private fun Empty(modifier: Modifier = Modifier) {
             modifier = Modifier.size(72.dp),
         )
         TextMMD(
-            "Nothing recorded yet.",
+            stringResource(R.string.journal_empty_title),
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 12.dp),
         )
         TextMMD(
-            "A find is worth recording even when you never learn what it was. " +
-                "Answer whatever you can see and leave the rest.",
+            stringResource(R.string.journal_empty_body),
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(top = 6.dp),
         )
@@ -230,7 +231,7 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
             val named = entry.observation.identifiedAs.takeIf { it.isNotBlank() }
             TextMMD(
                 when {
-                    armed -> "Delete this find — tap again"
+                    armed -> stringResource(R.string.journal_delete_armed)
                     named != null -> named
                     else -> dateOf(entry.observation.recordedAt)
                 },
@@ -248,15 +249,15 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
                 listOfNotNull(
                     named?.let { dateOf(entry.observation.recordedAt) },
                     place,
-                    "$counted character${if (counted == 1) "" else "s"}",
+                    pluralStringResource(R.plurals.journal_row_characters, counted, counted),
                     entry.photos.size.takeIf { it > 0 }
-                        ?.let { "$it photo${if (it == 1) "" else "s"}" },
+                        ?.let { pluralStringResource(R.plurals.journal_row_photos, it, it) },
                     // Spore print pending is the whole reason an entry stays open, so
                     // it is said on the row rather than found by opening it.
                     // Gone once the print is recorded — and also once the reader has
                     // said they tried and it never dropped, which is an answer and not
                     // a thing still to do.
-                    "spore print pending".takeIf {
+                    stringResource(R.string.journal_row_spore_print_pending).takeIf {
                         entry.characters.none { c -> c.characterId == "spore_print" }
                     },
                 ).joinToString(" · "),
@@ -265,7 +266,7 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
         }
         Icon(
             painter = painterResource(R.drawable.ic_remove),
-            contentDescription = if (armed) "Delete this find — tap again" else "Delete this find",
+            contentDescription = if (armed) stringResource(R.string.journal_delete_armed) else stringResource(R.string.journal_cd_delete),
             tint = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .size(24.dp)

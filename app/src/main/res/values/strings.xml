@@ -1,4 +1,387 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Mushroom Journal</string>
+
+    <!-- ============================================================ -->
+    <!-- Journal: the list of finds, the first screen -->
+
+    <!-- Heading at the top of the journal (the app's name) -->
+    <string name="journal_title">Mushroom Journal</string>
+    <string name="journal_cd_about">About</string>
+    <!-- Placeholder in the search field over the list: what can be searched for -->
+    <string name="journal_search_placeholder">A name, a place, a month</string>
+    <string name="journal_search_no_match">Nothing here matches that.</string>
+    <!-- The main button: start recording a new mushroom (verb) -->
+    <string name="journal_record_a_find">Record a find</string>
+    <string name="journal_empty_title">Nothing recorded yet.</string>
+    <string name="journal_empty_body">A find is worth recording even when you never learn what it was. Answer whatever you can see and leave the rest.</string>
+    <!-- Delete is a two-tap action; this replaces the row's title after the first tap -->
+    <string name="journal_delete_armed">Delete this find — tap again</string>
+    <string name="journal_cd_delete">Delete this find</string>
+    <!-- Row details, joined with " · ": how many characters (features) were answered -->
+    <plurals name="journal_row_characters">
+        <item quantity="one">%d character</item>
+        <item quantity="other">%d characters</item>
+    </plurals>
+    <plurals name="journal_row_photos">
+        <item quantity="one">%d photo</item>
+        <item quantity="other">%d photos</item>
+    </plurals>
+    <!-- Row detail: no spore print recorded yet ("pending" = still to come) -->
+    <string name="journal_row_spore_print_pending">spore print pending</string>
+
+    <!-- ============================================================ -->
+    <!-- Save dialog: asked at the end of keying out, whether to keep the find -->
+
+    <string name="save_title">Save in the journal?</string>
+    <!-- What was recorded. %1$s is the characters count below, %2$s the photographs count -->
+    <string name="save_counts_with_photographs">%1$s and %2$s.</string>
+    <!-- What was recorded, no photographs. %1$s is the characters count below -->
+    <string name="save_counts">%1$s.</string>
+    <!-- Characters = observed features of the mushroom that were answered -->
+    <plurals name="save_characters">
+        <item quantity="one">%d character</item>
+        <item quantity="other">%d characters</item>
+    </plurals>
+    <plurals name="save_photographs">
+        <item quantity="one">%d photograph</item>
+        <item quantity="other">%d photographs</item>
+    </plurals>
+    <string name="save_body">Worth keeping if you want to add a spore print in the morning, or ask someone about it later.</string>
+    <string name="save_confirm">Save it</string>
+    <string name="save_discard">No, throw it away</string>
+    <!-- Goes back to the questions without saving or discarding -->
+    <string name="save_keep_answering">Keep answering</string>
+
+    <!-- ============================================================ -->
+    <!-- Place field: where the find was, typed or taken from the phone -->
+
+    <string name="place_placeholder">The place, in your own words</string>
+    <!-- Button: fill in the phone's approximate (coarse) location -->
+    <string name="place_take_position">Add roughly where I am</string>
+    <!-- Button, once a position is held: take the location again -->
+    <string name="place_take_again">Take it again</string>
+    <!-- The held position. %1$s is latitude, %2$s longitude, two decimal places -->
+    <string name="place_roughly">Roughly %1$s, %2$s</string>
+    <string name="place_no_recent_position">No recent position. Move outside, or type the place instead.</string>
+    <!-- Shown when the location permission is refused -->
+    <string name="place_permission_refused">Not allowed. Type the place instead — it works just as well.</string>
+
+    <!-- ============================================================ -->
+    <!-- New entry: the questions asked while keying out a find -->
+
+    <!-- Tappable line at the top that goes back to the journal (the app's name) -->
+    <string name="entry_new_journal_link">Mushroom Journal</string>
+    <!-- The same, with how many finds the journal holds -->
+    <string name="entry_new_journal_link_count">Mushroom Journal · %1$d</string>
+    <string name="entry_new_choose_many">Choose as many as apply.</string>
+    <!-- Skip button for a character that could not be tested -->
+    <string name="entry_new_cannot_say">I looked and cannot say</string>
+    <string name="entry_new_skip">Skip this</string>
+    <string name="entry_new_nothing_more">Nothing more to ask</string>
+    <string name="entry_new_nothing_fits_done">Nothing fits everything you wrote down — a real mushroom against a description of a typical one. These come nearest, and one of the answers may be worth looking at again.</string>
+    <string name="entry_new_all_answered">Every question that would tell these apart has been answered or skipped.</string>
+    <string name="entry_new_add_photograph">Add a photograph</string>
+    <string name="entry_new_done">Done</string>
+    <!-- Footer before any answer: narrowing = narrowing down the candidates -->
+    <string name="entry_new_start_narrowing">Answer anything to start narrowing.</string>
+    <string name="entry_new_nothing_fits_nearest">Nothing fits everything you have said. Nearest anyway:</string>
+    <!-- %1$d is how many species are still possible -->
+    <string name="entry_new_closest">Closest so far, of %1$d still possible</string>
+    <!-- Deadly species not yet excluded. %1$s is a list of scientific names -->
+    <string name="entry_new_not_ruled_out">Still not ruled out: %1$s</string>
+    <!-- Button: take a photograph (noun) -->
+    <string name="entry_new_photo">Photo</string>
+    <!-- The same, with how many photographs are taken -->
+    <string name="entry_new_photo_count">Photo (%1$d)</string>
+    <string name="entry_new_next">Next</string>
+
+    <!-- ============================================================ -->
+    <!-- Season: what is about this month, and looking a species up -->
+
+    <!-- Title while a search is typed -->
+    <string name="season_title_looking">Looking one up</string>
+    <!-- Title. %1$s is the month name, e.g. "About in September" (about = around, out) -->
+    <string name="season_title_month">About in %1$s</string>
+    <string name="season_search_placeholder">Look one up, any month</string>
+    <!-- %1$d species match the search, of %2$d in the region pack -->
+    <string name="season_search_count">%1$d of %2$d match, whatever month they are out in.</string>
+    <!-- %1$d species of %2$d have been recorded in month %3$s -->
+    <string name="season_month_count">%1$d of %2$d in this region pack have been recorded in %3$s. Seasons are a guide and nothing more — fungi do not read calendars, and an out-of-season find is worth writing down precisely because it is one.</string>
+    <string name="season_worth_knowing">Worth knowing this month</string>
+    <string name="season_worth_knowing_body">The ones people go looking for and the ones that hurt people, which are often out at the same time. Sought after means people look for it, not that this app has told you anything is safe.</string>
+    <!-- Heading over search results -->
+    <string name="season_heading_found">Found</string>
+    <!-- Heading over the rest of this month's species (about = around, out) -->
+    <string name="season_heading_also_about">Also about</string>
+    <string name="season_close">Close</string>
+    <!-- Line under a dangerous species; its own note may follow after a space -->
+    <string name="season_hazard_lethal">Can kill.</string>
+    <string name="season_hazard_severe">Can cause serious harm.</string>
+    <string name="season_hazard_gi">Makes people ill.</string>
+    <string name="season_hazard_intoxicating">Intoxicating.</string>
+    <!-- A sought-after species' line. %1$s is season_the_common_name or a scientific name, %2$s one of the season_harm_ phrases -->
+    <string name="season_taken_for">Taken for %1$s, which %2$s.</string>
+    <!-- A mushroom referred to by its common name within a sentence, e.g. "the Death Cap" -->
+    <string name="season_the_common_name">the %1$s</string>
+    <!-- Tail of season_taken_for: what the lookalike does to you -->
+    <string name="season_harm_lethal">can kill</string>
+    <string name="season_harm_severe">can cause serious harm</string>
+    <string name="season_harm_gi">makes people ill</string>
+    <string name="season_harm_intoxicating">is intoxicating</string>
+    <string name="season_harm_other">is not a mushroom to eat</string>
+    <!-- A sought-after species' line when it is confused with nothing dangerous -->
+    <string name="season_sought_after">Sought after.</string>
+    <!-- Added after a sought-after species' line, following a space -->
+    <string name="season_sought_gi">Makes some people ill in its own right.</string>
+    <string name="season_sought_intoxicating">Intoxicating in its own right.</string>
+    <string name="season_sought_unknown">Nothing documented either way.</string>
+    <!-- Row on the journal screen. %1$d species are about in month %2$s -->
+    <string name="season_row">%1$d about in %2$s</string>
+
+    <!-- ============================================================ -->
+    <!-- Candidate: the page for one species, held up against the find -->
+
+    <!-- Section headings over a species' hazard -->
+    <string name="candidate_hazard_lethal">This one can kill</string>
+    <string name="candidate_hazard_severe">This one can cause serious harm</string>
+    <string name="candidate_hazard_intoxicating">This one is intoxicating</string>
+    <string name="candidate_hazard_gi">This one makes people ill</string>
+    <string name="candidate_hazard_unknown">Not known to be safe</string>
+    <string name="candidate_hazard_unknown_body">Nobody has written down what this one does, either way. That is not the same as safe — it is the absence of anyone having looked.</string>
+    <!-- Row label beside how long symptoms take to appear -->
+    <string name="candidate_label_onset">Comes on</string>
+    <!-- %1$s is the scientific name -->
+    <string name="candidate_cd_plate">A drawing of %1$s</string>
+    <string name="candidate_section_look_for">What to look for</string>
+    <!-- Row label beside the months it is found in -->
+    <string name="candidate_label_season">Season</string>
+    <!-- Row label beside typical sizes -->
+    <string name="candidate_label_size">Size</string>
+    <!-- %1$d to %2$d millimetres -->
+    <string name="candidate_size_cap">cap %1$d–%2$d mm</string>
+    <string name="candidate_size_stem">stem %1$d–%2$d mm</string>
+    <!-- Row label beside the reader's own measurement (past participle) -->
+    <string name="candidate_label_measured">Measured</string>
+    <!-- %1$d is the reader's measurement in mm, %2$s what was measured (e.g. cap width) -->
+    <string name="candidate_measured_within">%1$d mm — within the usual range for %2$s</string>
+    <string name="candidate_measured_smaller">%1$d mm — smaller than usual for %2$s, which young ones often are</string>
+    <string name="candidate_measured_bigger">%1$d mm — bigger than usual for %2$s</string>
+    <string name="candidate_section_confused_with">Confused with</string>
+    <!-- Line under a dangerous lookalike -->
+    <string name="candidate_lookalike_lethal">Can kill.</string>
+    <string name="candidate_lookalike_severe">Can cause serious harm.</string>
+    <!-- %1$s is a list of characters (features) that distinguish the two -->
+    <string name="candidate_tells_apart">Tells them apart: %1$s</string>
+    <!-- Section heading when the reader has answered nothing -->
+    <string name="candidate_section_like">What it is like</string>
+    <!-- Section heading when the reader's answers can be compared -->
+    <string name="candidate_section_match">Does it match?</string>
+    <string name="candidate_all_agree">Everything you recorded agrees.</string>
+    <!-- %1$d answers agree with the species, %2$d do not -->
+    <string name="candidate_agree_differ">%1$d agree, %2$d do not.</string>
+    <string name="candidate_section_sources">Where this comes from</string>
+    <string name="candidate_not_reviewed">Not checked by a mycologist. Written from published descriptions, and no substitute for asking someone.</string>
+    <string name="candidate_back">Back</string>
+    <!-- Note under a character row when the reader's answer matches -->
+    <string name="candidate_marked_agrees">you recorded this</string>
+    <!-- Note when it does not. %1$s is the reader's answer, in lower case -->
+    <string name="candidate_marked_differs">you recorded %1$s, which does not fit</string>
+
+    <!-- ============================================================ -->
+    <!-- Entry: one find in the journal, with everything recorded about it -->
+
+    <!-- Under the date. %1$s is the characters count, %2$s the photographs count -->
+    <string name="entry_counts">%1$s · %2$s</string>
+    <!-- Characters = observed features of the mushroom that were answered -->
+    <plurals name="entry_characters">
+        <item quantity="one">%d character</item>
+        <item quantity="other">%d characters</item>
+    </plurals>
+    <plurals name="entry_photographs">
+        <item quantity="one">%d photograph</item>
+        <item quantity="other">%d photographs</item>
+    </plurals>
+    <!-- Section: characters that can only be answered later, at home -->
+    <string name="entry_section_deferred">Still to do, at home</string>
+    <string name="entry_spore_print_how">Leave the cap gills-down on paper overnight. The spore print settles more than any other character and cannot be got in the field.</string>
+    <string name="entry_deferred_cannot_say">I tried and cannot say</string>
+    <string name="entry_section_not_ruled_out">Not yet ruled out</string>
+    <string name="entry_nothing_fits">Nothing fits everything you wrote down. These come nearest, and one of the answers may be worth looking at again.</string>
+    <!-- %1$d species still fit, of %2$d -->
+    <string name="entry_still_fit">%1$d of %2$d still fit what you wrote down.</string>
+    <string name="entry_section_dangerous">Dangerous, and not ruled out</string>
+    <string name="entry_dangerous_tap">Tap one to read it properly.</string>
+    <!-- %1$s is a list of characters (features) that would rule it in or out -->
+    <string name="entry_would_settle">Would settle it: %1$s</string>
+    <!-- %1$d more dangerous species not listed -->
+    <string name="entry_dangerous_more">…and %1$d more, which answering anything above will start to rule out.</string>
+    <string name="entry_section_missing">What would have narrowed it most</string>
+    <!-- Under a character that can only be answered later -->
+    <string name="entry_missing_at_home">at home, not in the field</string>
+    <string name="entry_section_photographs">Photographs</string>
+    <!-- In place of a photograph whose file is gone -->
+    <string name="entry_photo_missing">(missing)</string>
+    <!-- Remove is a two-tap action on a photograph: this, then entry_photo_tap_again under it -->
+    <string name="entry_photo_remove">Remove this</string>
+    <string name="entry_photo_tap_again">tap again</string>
+    <string name="entry_old_note">A ring or a veil that is not there proves nothing on an old one, so nothing will be ruled out for missing them.</string>
+    <string name="entry_section_identified">What it turned out to be</string>
+    <string name="entry_identified_placeholder">A name, once somebody says</string>
+    <string name="entry_identified_from_list">Or take one from the list below.</string>
+    <string name="entry_section_where">Where, and anything else</string>
+    <string name="entry_note_placeholder">Anything the questions did not cover</string>
+    <string name="entry_section_answers">What you wrote down</string>
+    <!-- Under entry_section_answers when nothing was answered -->
+    <string name="entry_answers_none">Nothing yet.</string>
+    <!-- Beside a character the reader looked at but could not tell -->
+    <string name="entry_answer_cannot_say">looked, cannot say</string>
+    <string name="entry_answer_skipped">skipped</string>
+    <!-- Button: take a photograph (noun) -->
+    <string name="entry_photo">Photo</string>
+    <string name="entry_answer_more">Answer more</string>
+    <!-- Title of the system share sheet -->
+    <string name="entry_ask_chooser_title">Ask someone about this find</string>
+    <string name="entry_ask_someone">Ask someone about this</string>
+    <string name="entry_close">Close</string>
+
+    <!-- ============================================================ -->
+    <!-- Photographs: the sheet for adding a photograph to a find -->
+
+    <string name="photos_title">Photographs</string>
+    <string name="photos_body">Whoever you ask will want the underside and the base. The rest is optional.</string>
+    <string name="photos_take_now">Take one now</string>
+    <string name="photos_choose_existing">Choose one already on the phone</string>
+    <string name="photos_back">Back</string>
+    <string name="photos_done">Done</string>
+    <!-- On a tile whose photograph has already been taken (past participle) -->
+    <string name="photos_slot_taken">taken</string>
+
+    <!-- ============================================================ -->
+    <!-- iNaturalist: publishing a find, on the entry page -->
+
+    <string name="inat_not_configured">This build has no iNaturalist application id, so it cannot publish.</string>
+    <string name="inat_signed_out_body">Publishing a find puts it, its photographs and its characters on a public website, under your own account.</string>
+    <string name="inat_sign_in">Sign in to iNaturalist</string>
+    <!-- %1$s is the iNaturalist user name -->
+    <string name="inat_signed_in_as">Signed in as %1$s</string>
+    <string name="inat_sign_out">Sign out</string>
+    <!-- When no browser can be opened. %1$s is inat_doing_sign_in or inat_doing_open -->
+    <string name="inat_no_browser">There is no browser on this phone to %1$s with.</string>
+    <string name="inat_doing_sign_in">sign in</string>
+    <!-- "open that" = open the observation's page -->
+    <string name="inat_doing_open">open that</string>
+    <string name="inat_no_coordinates">No coordinates on this find</string>
+    <!-- The quoted words are the button label place_take_position -->
+    <string name="inat_no_coordinates_body">It will go up with the place in your own words and no map pin. iNaturalist cannot verify a find it cannot place, so it will sit outside the lists most identifiers work through. \"Add roughly where I am\", further up, fixes that.</string>
+    <!-- The three location privacy settings; the Change button cycles them -->
+    <string name="inat_location_hidden">Location: hidden</string>
+    <string name="inat_location_obscured">Location: obscured</string>
+    <string name="inat_location_exact">Location: exact</string>
+    <string name="inat_location_hidden_body">iNaturalist is told where it was and shows nobody, including on the map. Nobody can check the record against the place.</string>
+    <string name="inat_location_obscured_body">iNaturalist is told where it was and shows the public a random point within about twenty kilometres. The place you typed is kept, not shown.</string>
+    <string name="inat_location_exact_body">The map pin is where you found it, and the place you typed is shown beside it. For anyone.</string>
+    <!-- Button: change the location setting (verb) -->
+    <string name="inat_location_change">Change</string>
+    <!-- Publish is a two-tap action; this is the label after the first tap -->
+    <string name="inat_publish_armed">Publish — this is public; tap again</string>
+    <string name="inat_publish">Publish to iNaturalist</string>
+    <!-- Heading once published (past participle). %1$s is a date -->
+    <string name="inat_published_on">Published %1$s</string>
+    <string name="inat_published">Published</string>
+    <!-- %1$s is the name the iNaturalist community gave the find -->
+    <string name="inat_says">iNaturalist says: %1$s</string>
+    <!-- When that name was fetched ("read", past tense). %1$s is a date -->
+    <string name="inat_read_on">Read %1$s</string>
+    <string name="inat_not_named_yet">Nobody has named it yet. Fungi wait longer than most things there.</string>
+    <plurals name="inat_photographs_not_sent">
+        <item quantity="one">%d photograph did not go up.</item>
+        <item quantity="other">%d photographs did not go up.</item>
+    </plurals>
+    <string name="inat_send_rest">Send the rest</string>
+    <string name="inat_open">Open on iNaturalist</string>
+    <string name="inat_check_names">Check what has been named</string>
+
+    <!-- ============================================================ -->
+    <!-- About dialog. Keep the names of the app, people, projects and licences as they are -->
+
+    <!-- %1$s is the version number. 茸帳 (kinokochō) is the app's Japanese name -->
+    <string name="about_title">茸帳 Mushroom Journal %1$s</string>
+    <string name="about_what_it_is">A field journal. It records what you saw and narrows what it could be — often far enough that someone more experienced can say. It does not decide, it has no opinion about eating anything, and on a screen with no colour it could not be the one to decide anyway.</string>
+    <string name="about_privacy">Nothing leaves this phone unless you send it. The only permission asked for is a rough position, only when you press the button for it, and only ever rough — never a precise fix.</string>
+    <string name="about_inat">Publishing a find to iNaturalist is the one thing that reaches the network. One find, when you press a button that says it is public. Sign-in happens in your browser, so this app never sees your password.</string>
+    <!-- "Obscured" is the location setting inat_location_obscured -->
+    <string name="about_inat_obscured">Obscured is not the same as not sent: iNaturalist is told where the mushroom was and shows the public a point some twenty kilometres off. The place you typed is kept there too, and not shown.</string>
+    <!-- The name of the app's licence -->
+    <string name="about_licence">GNU General Public License v3</string>
+    <string name="about_schema_credit">Character schema and drawings — original, this project.</string>
+    <!-- A citation: the DELTA system by Watson and Dallwitz, 1974 -->
+    <string name="about_delta_credit">Question order after Watson &amp; Dallwitz, DELTA, 1974.</string>
+    <!-- Tappable: export a backup of the journal -->
+    <string name="about_export">Keep a copy of everything</string>
+    <string name="about_export_body">A zip of every find and every photograph, handed to whatever you keep things in. Plain JSON inside, readable without this app.</string>
+    <!-- Tappable: import a backup -->
+    <string name="about_import">Read a copy back in</string>
+    <string name="about_import_body">Adds whatever is not already here. Nothing is deleted and nothing is overwritten, so an old copy read onto a full journal keeps both.</string>
+    <!-- The donation link label, beside a drawing of a llama. A fixed phrase: a verb and an object, so the reader knows what pressing it does -->
+    <string name="about_feed_the_llamas">Feed the llamas</string>
+    <string name="about_no_browser">There is no browser on this phone to open that with.</string>
+    <string name="about_close">Close</string>
+
+    <!-- ============================================================ -->
+    <!-- iNaturalist: the one-line status under the section, said after each step -->
+
+    <string name="inat_state_sign_in_unfinished">That sign-in could not be finished. Try again.</string>
+    <string name="inat_state_signing_in">Signing in…</string>
+    <!-- %1$s is the iNaturalist user name -->
+    <string name="inat_state_signed_in_as">Signed in to iNaturalist as %1$s.</string>
+    <string name="inat_state_signed_in">Signed in to iNaturalist.</string>
+    <string name="inat_state_signed_out">Signed out. Revoking this app\'s access is done on iNaturalist.</string>
+    <string name="inat_state_sending">Sending to iNaturalist…</string>
+    <string name="inat_state_sign_in_first">Sign in to iNaturalist first.</string>
+    <string name="inat_state_published">Published.</string>
+    <plurals name="inat_state_published_with_photographs">
+        <item quantity="one">Published, with %d photograph.</item>
+        <item quantity="other">Published, with %d photographs.</item>
+    </plurals>
+    <!-- %1$d photographs were sent of %2$d -->
+    <string name="inat_state_published_partly">Published, but only %1$d of %2$d photographs went. Send it again to finish.</string>
+    <string name="inat_state_asking">Asking iNaturalist…</string>
+    <!-- After checking what the iNaturalist community has named, when it has named none -->
+    <string name="inat_state_none_named">Nobody has named anything yet.</string>
+    <!-- How many published finds now have a name from the community -->
+    <plurals name="inat_state_finds_named">
+        <item quantity="one">One find has a name now.</item>
+        <item quantity="other">%d finds have names now.</item>
+    </plurals>
+    <string name="inat_push_nothing_to_send">Nothing to send yet.</string>
+    <string name="inat_push_find_gone">That find is no longer in the journal.</string>
+
+    <!-- ============================================================ -->
+    <!-- Sharing, backup and restore -->
+
+    <!-- Subject line when a find is shared. %1$s is the date and time it was recorded -->
+    <string name="share_subject">A mushroom, %1$s</string>
+    <!-- Title of the system share sheet when exporting a backup -->
+    <string name="export_chooser_title">Keep a copy of the journal</string>
+    <string name="import_could_not_read">That file could not be read.</string>
+    <string name="import_could_not_open">That file could not be opened.</string>
+    <string name="import_not_a_backup">That does not look like a journal backup.</string>
+    <string name="import_no_journal">No journal inside that file.</string>
+    <string name="import_all_already_here">Everything in that copy was already here.</string>
+    <string name="import_nothing_to_read">Nothing in that file to read.</string>
+    <!-- After reading a backup in. %1$s is import_finds_added, %2$s is import_with_photographs or empty, %3$s is import_already_here or empty -->
+    <string name="import_added_summary">%1$s%2$s.%3$s</string>
+    <plurals name="import_finds_added">
+        <item quantity="one">%d find added</item>
+        <item quantity="other">%d finds added</item>
+    </plurals>
+    <!-- Continues import_finds_added, so it starts with a comma -->
+    <plurals name="import_with_photographs">
+        <item quantity="one">, with %d photograph</item>
+        <item quantity="other">, with %d photographs</item>
+    </plurals>
+    <!-- Its own sentence after the first, so it starts with a space. %1$d finds in the backup were already in the journal -->
+    <string name="import_already_here">\u0020%1$d were already here.</string>
+    <string name="import_close">Close</string>
 </resources>
