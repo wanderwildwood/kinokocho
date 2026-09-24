@@ -152,7 +152,7 @@ fun AboutDialog(
                 Spacer(14)
             }
             item {
-                Line("github.com/wanderwildwood/kinokocho")
+                Line("wanderthe.dev")
             }
             item {
                 Spacer(14)
