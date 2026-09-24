@@ -21,7 +21,11 @@ import com.wanderwildwood.kinokocho.schema.CharacterSchema
  * comes from the schema JSON, which is data and has not been taken up for translation.
  */
 fun Character.inFull(resources: Resources): String =
-    part()?.let { resources.getString(it.inFull, noun.lowercase()) } ?: noun.lowercase()
+    part()?.let { resources.getString(it.inFull, midSentence()) } ?: midSentence()
+
+/** The noun as it reads inside a sentence: lower case, except an initialism like KOH. */
+private fun Character.midSentence(): String =
+    if (noun.length > 1 && noun.all { it.isUpperCase() }) noun else noun.lowercase()
 
 /**
  * [inFull], always in English, whatever the phone is set to.
