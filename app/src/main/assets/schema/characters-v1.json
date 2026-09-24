@@ -808,7 +808,7 @@
       "label": "What colour is the cap?",
       "noun": "Colour",
       "group": "cap",
-      "hint": "Notoriously unreliable — rain, age and sun all change it. It never eliminates on its own.",
+      "hint": "Notoriously unreliable — rain, age and sun all change it. Choose every colour it could be, because any colour you leave out rules out the mushrooms that only come in it.",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
