@@ -2,6 +2,7 @@ package com.wanderwildwood.kinokocho.key
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.SchemaLoader
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -376,19 +377,23 @@ class KeyEngineTest {
         // looking for a silence that no longer exists does not fail loudly, it throws
         // from a `first` with nothing to find. What is being asserted is about silence,
         // whichever character happens to be keeping it.
-        val before = answers("fruitbody_type" to "polypore", "substrate" to "wood")
-        val (silent, character) = engine.rank(before).candidates
-            .filter { it.mismatched == 0 }
-            .firstNotNullOf { candidate ->
-                SILENCEABLE.firstOrNull { it !in candidate.taxon.characters }
-                    ?.let { candidate.taxon.id to it }
-            }
+        // And now silence only exists where it was written down as such. The pack was
+        // completed, so the only characters a row still says nothing about are the ones
+        // the literature says nothing about, and those are in `unrecorded`.
+        val (taxon, character) = pack.taxa.firstNotNullOf { t ->
+            t.unrecorded.keys.firstOrNull { c ->
+                schema.character(c)?.let { !it.valuesFromColours && schema.dependencies.none { d -> d.character == c } } == true
+            }?.let { t to it }
+        }
+        val kind = taxon.characters.getValue("fruitbody_type").first().value
+        val before = answers("fruitbody_type" to kind)
         val value = schema.valuesOf(schema.character(character)!!).first { !it.uncertain }.id
         val after = before.with(character, setOf(value))
-        val b = engine.rank(before).candidates.first { it.taxon.id == silent }
-        val a = engine.rank(after).candidates.first { it.taxon.id == silent }
-        assertTrue("saying nothing about $character cost $silent score", a.score >= b.score - 1e-9)
+        val b = engine.rank(before).candidates.first { it.taxon.id == taxon.id }
+        val a = engine.rank(after).candidates.first { it.taxon.id == taxon.id }
+        assertTrue("saying nothing about $character cost ${taxon.id} score", a.score >= b.score - 1e-9)
         assertEquals(1, a.unscored)
+        assertEquals("and the list says it was not checked", listOf(character), a.unchecked)
     }
 
     /**
@@ -622,7 +627,10 @@ class KeyEngineTest {
         var a = KeyEngine.Answers(month = 9)
         val target = pack.taxon("amanita_bisporigera")!!
         val asked = mutableListOf<String>()
-        repeat(5) {
+        // Six, where it was five: once the veil had data the key asked about it, which
+        // is a fair question, and the base comes straight after the stem questions it
+        // depends on. The sac answer then leaves two candidates, both lethal.
+        repeat(6) {
             val q = engine.nextQuestion(a) ?: return@repeat
             asked += q
             val v = target.characters[q]?.firstOrNull()?.value
@@ -876,7 +884,12 @@ class KeyEngineTest {
                 val q = engine.nextQuestion(a) ?: break
                 val v = target.characters[q]?.firstOrNull()?.value
                 a = if (v != null) a.with(q, setOf(v)) else a.markNotTested(q)
-                if (engine.rank(a).candidates.first().taxon.id == target.id) {
+                // First place, or level with it. A tie is broken by the alphabet, and the
+                // alphabet is not evidence: with the pack complete, Meripilus and
+                // Bondarzewia agree on everything the key asks until the bruise.
+                val ranked = engine.rank(a).candidates
+                val mine = ranked.first { it.taxon.id == target.id }
+                if (mine.mismatched == 0 && mine.score >= ranked.first().score - 1e-9) {
                     reached++
                     steps += i
                     break
@@ -961,16 +974,23 @@ class KeyEngineTest {
      */
     @Test
     fun `the top of the ranking is not the same as what has not been ruled out`() {
-        val answers = KeyEngine.Answers(
-            values = mapOf(
-                "ring" to setOf("absent"),
-                "bruising_colour" to setOf("olive"),
-                "fruitbody_type" to setOf("jelly"),
-                "cap_margin" to setOf("translucent_striate"),
-                "stipe_flesh" to setOf("chambered"),
-            ),
-            month = 9,
-        )
+        // The example is found rather than written: the last hand-written one only worked
+        // because a jelly fungus said nothing about stems, and once the pack was complete
+        // nothing fitted it at all. Take a taxon's own description and contradict it once,
+        // and it scores well while being ruled out.
+        val answers = pack.taxa.asSequence().mapNotNull { t ->
+            val keys = t.characters.keys.filter { schema.character(it)?.let { c -> c.kind == Character.Kind.STATE && !c.valuesFromColours } == true }
+            if (keys.size < 6) return@mapNotNull null
+            val base = keys.take(5).associateWith { setOf(t.characters.getValue(it).first().value) }
+            val flip = keys[5]
+            val wrong = schema.valuesOf(schema.character(flip)!!).firstOrNull { v ->
+                !v.uncertain && t.characters.getValue(flip).none { it.value == v.id }
+            } ?: return@mapNotNull null
+            KeyEngine.Answers(values = base + (flip to setOf(wrong.id)), month = 9)
+        }.first { a ->
+            val r = engine.rank(a)
+            r.live.isNotEmpty() && r.candidates.take(4).any { it.mismatched > 0 }
+        }
         val ranking = engine.rank(answers)
 
         assertTrue("expected something to still fit", ranking.live.isNotEmpty())

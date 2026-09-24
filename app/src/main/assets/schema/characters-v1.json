@@ -1704,6 +1704,45 @@
           "chanterelle_like"
         ]
       }
+    },
+    {
+      "character": "hymenophore_colour",
+      "requires": {
+        "character": "fruitbody_type",
+        "anyOf": [
+          "gilled_stemmed",
+          "bolete",
+          "polypore",
+          "toothed",
+          "chanterelle_like"
+        ]
+      }
+    },
+    {
+      "character": "cap_shape",
+      "requires": {
+        "character": "fruitbody_type",
+        "anyOf": [
+          "gilled_stemmed",
+          "bolete",
+          "polypore",
+          "toothed",
+          "chanterelle_like"
+        ]
+      }
+    },
+    {
+      "character": "cap_margin",
+      "requires": {
+        "character": "fruitbody_type",
+        "anyOf": [
+          "gilled_stemmed",
+          "bolete",
+          "polypore",
+          "toothed",
+          "chanterelle_like"
+        ]
+      }
     }
   ]
 }

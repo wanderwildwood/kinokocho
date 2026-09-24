@@ -230,6 +230,21 @@ class PackIntegrityTest {
     }
 
     @Test
+    fun `nothing is called edible`() {
+        // The rule the app hangs off, and the one a sourced audit broke in thirty places:
+        // field guides say "edible", "choice", "not poisonous", and a note that copies
+        // them has made the decision this app refuses to make. What people do is fair to
+        // record — "eaten by some", "not eaten" — a verdict is not.
+        val verdict = Regex("""\b(edible|choice|delicious|good to eat|safe to eat|not poisonous)\b""", RegexOption.IGNORE_CASE)
+        pack.taxa.forEach { t ->
+            listOf(t.note, t.hazard.note, t.hazard.source).plus(t.lookalikes.map { it.note }).forEach {
+                val hit = it?.let { s -> verdict.find(s)?.value }
+                assertTrue("${t.id} says '$hit': $it", hit == null || it.contains("not safe to eat", ignoreCase = true))
+            }
+        }
+    }
+
+    @Test
     fun `a hyphen is not a dash`() {
         pack.taxa.forEach { t ->
             listOf(t.note, t.hazard.note).plus(t.lookalikes.map { it.note }).forEach {

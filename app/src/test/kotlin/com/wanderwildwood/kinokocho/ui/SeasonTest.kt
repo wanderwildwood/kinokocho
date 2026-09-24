@@ -97,10 +97,12 @@ class SeasonTest {
         val chanterelle = pack.taxon("cantharellus_appalachiensis")!!
         val taken = confusedWith(chanterelle, august)
         assertNotNull("the chanterelle is taken for something in August", taken)
-        assertTrue(
-            "it should name the worst of them, not the first",
-            taken!!.hazard.severity == Hazard.Severity.SEVERE,
-        )
+        // The worst of those out with it, whatever that is: this used to insist on
+        // SEVERE, which was the false chanterelle's grade until the audit found that the
+        // acromelic acid behind it belongs to another genus.
+        val worst = chanterelle.lookalikes.mapNotNull { pack.taxon(it.taxon) }
+            .filter { it in august }.maxOf { it.hazard.severity.ordinal }
+        assertTrue("it should name the worst of them, not the first", taken!!.hazard.severity.ordinal == worst)
     }
 
     @Test
