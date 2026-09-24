@@ -156,10 +156,17 @@ the find to a person who can actually say — that is what it is for.
 ## Status
 
 Working and in daily use, and not finished. A hundred and thirty-two taxa in the Southern
-Appalachia pack across forty-one characters, a hundred and twenty-five pairs that get
+Appalachia pack across forty-one characters, two hundred and sixteen pairs that get
 confused for one another, a hundred and sixty-nine drawings of single characters and
-thirty-two of whole mushrooms, and a key that reaches the right taxon in about four
-questions when the answers are true.
+ninety-eight of whole mushrooms, most of them traced from public-domain plates of the
+eighteenth to early twentieth centuries, and a key that reaches the right taxon in about
+four questions when the answers are true.
+
+Every question the key can ask has an answer for every mushroom it applies to, so a
+mushroom listed as fitting has not been contradicted by anything that was tapped. Where
+no published description records a character at all — the taste of most Amanitas, the
+KOH reaction of most boletes — the pack says so, and a mushroom that could not be
+checked on an answer is listed after those that were, with a line saying what is missing.
 
 Nothing in the pack has been checked by a mycologist. Every row says so on its own page.
 Publishing to iNaturalist is the answer to that: it puts the find in front of people who
@@ -169,6 +176,13 @@ decide in colour, later.
 The launcher mark is a drawing of a chanterelle by the author, traced rather than
 imitated. The rest of the drawings are worked to the same hand — thin, few lines, no
 solid black — which is written down at the top of `tools/make-art.py`.
+
+The whole-mushroom plates are a different thing. Most are traced from public-domain
+plates — C. H. Peck's New York State reports, Sowerby, Bresadola, Bulliard, Cooke, Walty
+and others — by `tools/trace-plate.py`, and each one's work, year, licence and file is
+in `tools/plate-sources.json`; the candidate page names whose drawing it is. The source
+images are not in the repository. A plate that shows a feature its mushroom lacks is
+worse than none, so where no honest drawing exists there is no plate.
 
 ## Building
 

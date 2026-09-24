@@ -202,6 +202,7 @@
     <!-- %1$d answers agree with the species, %2$d do not -->
     <string name="candidate_agree_differ">%1$d agree, %2$d do not.</string>
     <string name="candidate_section_sources">Where this comes from</string>
+    <string name="candidate_plate_credit">Drawing traced from %1$s, which is in the public domain.</string>
     <string name="candidate_not_reviewed">Not checked by a mycologist. Written from published descriptions, and no substitute for asking someone.</string>
     <string name="candidate_back">Back</string>
     <!-- Note under a character row when the reader's answer matches -->

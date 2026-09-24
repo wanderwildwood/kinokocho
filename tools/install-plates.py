@@ -58,6 +58,12 @@ object TaxonPlate {
     /** The drawing for a taxon, or null where there is none. */
     fun of(taxonId: String): Int? = PLATES[taxonId]
 
+    /**
+     * Whose drawing it is traced from, for the plates taken from old public-domain
+     * works ("C. H. Peck, 1900"), or null for the few drawn for this app.
+     */
+    fun creditOf(taxonId: String): String? = CREDITS[taxonId]
+
     /** Every taxon that has one, so a test can check they are all real. */
     val ids: Set<String> get() = PLATES.keys
 
@@ -65,8 +71,20 @@ object TaxonPlate {
 '''
 
 FOOT = '''    )
+'''
+
+CREDITS_HEAD = '''
+    private val CREDITS: Map<String, String> = mapOf(
+'''
+
+CREDITS_FOOT = '''    )
 }
 '''
+
+# Where each traced plate came from: tools/plate-sources.json, written when the plates
+# were traced (tools/trace-plate.py) and kept in the repository because the source
+# images in tools/reference/plates are not.
+SOURCES = os.path.join(HERE, "plate-sources.json")
 
 
 def main():
@@ -111,6 +129,12 @@ def main():
             for tid in installed:
                 f.write(f'        "{tid}" to R.drawable.plate_{tid},\n')
             f.write(FOOT)
+            credits = json.load(open(SOURCES)) if os.path.exists(SOURCES) else {}
+            f.write(CREDITS_HEAD)
+            for tid in installed:
+                if tid in credits:
+                    f.write(f'        "{tid}" to "{credits[tid]["credit"]}",\n')
+            f.write(CREDITS_FOOT)
 
     total = sum(os.path.getsize(os.path.join(RES, f"plate_{t}.png"))
                 for t in installed) if not args.dry_run else 0

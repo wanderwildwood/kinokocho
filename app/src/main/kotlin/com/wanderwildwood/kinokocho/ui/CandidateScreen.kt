@@ -296,6 +296,9 @@ fun CandidateScreen(
             taxon.sources.forEach {
                 TextMMD(it, style = MaterialTheme.typography.bodySmall)
             }
+            TaxonPlate.creditOf(taxon.id)?.let {
+                TextMMD(stringResource(R.string.candidate_plate_credit, it), style = MaterialTheme.typography.bodySmall)
+            }
             if (!taxon.reviewed) {
                 TextMMD(
                     stringResource(R.string.candidate_not_reviewed),
