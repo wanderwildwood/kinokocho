@@ -79,6 +79,35 @@ class KeyEngineTest {
             "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
             "Macromorphology as standard North American field guides agree it — " +
                 "written out, not reproduced",
+            // What the 2026 audit checked each record against, named once.
+            "Beaty Biodiversity Museum",
+            "Burke Herbarium",
+            "First Nature",
+            "Fungi Atlas",
+            "Lucidcentral keys",
+            "Maryland Biodiversity Project",
+            "Midwest American Mycological Information",
+            "Missouri Department of Conservation field guide",
+            "Mushrooms of Connecticut",
+            "MycoGuide",
+            "MykoWeb, California Fungi",
+            "Nebraska Mushrooms",
+            "North American Cortinarius",
+            "Ohio State University extension",
+            "Research-grade iNaturalist photographs",
+            "South Vancouver Island Mycological Society",
+            "Tulloss and Rodríguez Caycedo, Amanitaceae studies",
+            "US Centers for Disease Control",
+            "Wikipedia",
+            "eol.org",
+            "foragedfoodie.blogspot.com",
+            "hikersnotebook.blog",
+            "monaconatureencyclopedia.com",
+            "mushroom-appreciation.com",
+            "orb.binghamton.edu",
+            "umushroomer.com",
+            "uncpressblog.com",
+            "urbanmushrooms.com",
         )
         val used = pack.taxa.flatMap { it.sources }.toSet()
         assertEquals("undeclared citations", emptySet<String>(), used - known)
@@ -884,12 +913,15 @@ class KeyEngineTest {
                 val q = engine.nextQuestion(a) ?: break
                 val v = target.characters[q]?.firstOrNull()?.value
                 a = if (v != null) a.with(q, setOf(v)) else a.markNotTested(q)
-                // First place, or level with it. A tie is broken by the alphabet, and the
-                // alphabet is not evidence: with the pack complete, Meripilus and
-                // Bondarzewia agree on everything the key asks until the bruise.
+                // First place, or level with it among no more than three. A tie is broken
+                // by the alphabet, and the alphabet is not evidence: with the pack complete,
+                // Meripilus and Bondarzewia agree on everything the key asks until the
+                // bruise. But a tie with half the pack is not reaching anything — after the
+                // first answer dozens stand level — so the group at the top must be small.
                 val ranked = engine.rank(a).candidates
                 val mine = ranked.first { it.taxon.id == target.id }
-                if (mine.mismatched == 0 && mine.score >= ranked.first().score - 1e-9) {
+                val top = ranked.filter { it.score >= ranked.first().score - 1e-9 }
+                if (mine in top && top.size <= 3) {
                     reached++
                     steps += i
                     break

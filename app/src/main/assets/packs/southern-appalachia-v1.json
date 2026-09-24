@@ -413,7 +413,12 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "First Nature",
+        "MykoWeb, California Fungi",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "umushroomer.com"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -825,7 +830,12 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MykoWeb, California Fungi",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Lucidcentral keys",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -1219,7 +1229,9 @@
       ],
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "Tulloss and Rodríguez Caycedo, Amanitaceae studies",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -1627,7 +1639,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Tulloss and Rodríguez Caycedo, Amanitaceae studies",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -2030,7 +2045,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Tulloss and Rodríguez Caycedo, Amanitaceae studies",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -2353,7 +2371,10 @@
         ]
       },
       "sources": [
-        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Tulloss and Rodríguez Caycedo, Amanitaceae studies",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -2702,7 +2723,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Tulloss and Rodríguez Caycedo, Amanitaceae studies",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -2994,7 +3018,8 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "Tulloss and Rodríguez Caycedo, Amanitaceae studies"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -3368,7 +3393,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Tulloss and Rodríguez Caycedo, Amanitaceae studies",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -3698,7 +3726,9 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Tulloss and Rodríguez Caycedo, Amanitaceae studies",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -4106,7 +4136,11 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "Tulloss and Rodríguez Caycedo, Amanitaceae studies",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -4469,7 +4503,11 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "Tulloss and Rodríguez Caycedo, Amanitaceae studies",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -4858,7 +4896,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -5214,7 +5256,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "First Nature",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -5528,7 +5574,10 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MykoWeb, California Fungi",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature"
       ],
       "reviewed": false
     },
@@ -5923,7 +5972,12 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "MykoWeb, California Fungi",
+        "First Nature",
+        "Midwest American Mycological Information",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -6305,7 +6359,12 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MykoWeb, California Fungi",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "South Vancouver Island Mycological Society",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -6575,7 +6634,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -6592,7 +6653,7 @@
         "note": "",
         "source": "—"
       },
-      "note": "A rubbery brown ear on dead wood, smooth on one face and faintly veined on the other. Dries to a hard flake and comes back with rain.",
+      "note": "A rubbery brown ear on dead wood, smooth on one face and faintly veined on the other. Dries to a hard flake and comes back with rain. The name is used here for the wood ear on either kind of wood: strictly, A. americana is the one on conifers and A. angiospermarum the one on hardwoods, and only the wood tells them apart.",
       "characters": {
         "fruitbody_type": [
           {
@@ -6832,7 +6893,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -7162,7 +7225,8 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
       ],
       "reviewed": false
     },
@@ -7458,7 +7522,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "Wikipedia",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "monaconatureencyclopedia.com"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -7761,7 +7829,10 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs",
+        "orb.binghamton.edu"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -8027,7 +8098,9 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -8258,7 +8331,10 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -8522,7 +8598,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -8935,7 +9013,12 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "South Vancouver Island Mycological Society",
+        "First Nature",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -9260,7 +9343,8 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -9585,7 +9669,11 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Wikipedia",
+        "Mushrooms of Connecticut",
+        "Research-grade iNaturalist photographs",
+        "foragedfoodie.blogspot.com"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -9940,7 +10028,8 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -10276,7 +10365,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -10597,7 +10689,13 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Ohio State University extension",
+        "Research-grade iNaturalist photographs",
+        "Wikipedia",
+        "urbanmushrooms.com"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -10857,7 +10955,12 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Wikipedia",
+        "MykoWeb, California Fungi",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -11248,7 +11351,10 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "MykoWeb, California Fungi",
+        "Wikipedia",
+        "Ohio State University extension"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -11538,7 +11644,9 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -11808,7 +11916,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "MykoWeb, California Fungi"
       ],
       "reviewed": false
     },
@@ -12200,7 +12311,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "First Nature",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -12543,7 +12658,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs",
+        "MykoWeb, California Fungi"
       ],
       "reviewed": false
     },
@@ -12915,7 +13034,12 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Beaty Biodiversity Museum",
+        "MykoWeb, California Fungi",
+        "First Nature"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -13243,7 +13367,13 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "North American Cortinarius",
+        "MykoWeb, California Fungi",
+        "Research-grade iNaturalist photographs",
+        "Burke Herbarium"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -13556,7 +13686,11 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "First Nature",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -13878,7 +14012,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -14184,7 +14321,10 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -14437,7 +14577,11 @@
       "lookalikes": [],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "First Nature",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -14814,7 +14958,11 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "First Nature",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -15080,7 +15228,9 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MykoWeb, California Fungi",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -15424,7 +15574,11 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "First Nature",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -15655,7 +15809,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -16064,7 +16220,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Missouri Department of Conservation field guide",
+        "foragedfoodie.blogspot.com"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -16416,7 +16575,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "Midwest American Mycological Information",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -16661,7 +16824,9 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "Wikipedia",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
       ],
       "reviewed": false
     },
@@ -17081,7 +17246,9 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -17404,7 +17571,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Wikipedia",
+        "hikersnotebook.blog"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -17731,7 +17902,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Fungi Atlas",
+        "uncpressblog.com"
       ],
       "reviewed": false
     },
@@ -18084,7 +18258,10 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -18388,7 +18565,10 @@
       ],
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "First Nature",
+        "Research-grade iNaturalist photographs",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -18827,7 +19007,11 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "Research-grade iNaturalist photographs",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -19222,7 +19406,12 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "MykoWeb, California Fungi",
+        "Burke Herbarium",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -19450,7 +19639,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -19684,7 +19875,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -20067,7 +20261,12 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "First Nature",
+        "Research-grade iNaturalist photographs",
+        "mushroom-appreciation.com"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -20450,7 +20649,10 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -20814,7 +21016,11 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "Wikipedia",
+        "First Nature",
+        "MykoWeb, California Fungi",
+        "Beaty Biodiversity Museum"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -21192,7 +21398,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -21607,7 +21816,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "First Nature"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -21924,7 +22136,13 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "Midwest American Mycological Information",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs",
+        "Missouri Department of Conservation field guide"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -22138,7 +22356,9 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "First Nature",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -22477,7 +22697,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -22853,7 +23076,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -23224,7 +23450,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -23623,7 +23852,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -23999,7 +24231,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -24323,7 +24558,10 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "Research-grade iNaturalist photographs",
+        "Wikipedia",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
       ],
       "reviewed": false
     },
@@ -24744,7 +24982,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -25523,7 +25763,9 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "First Nature",
+        "Fungi Atlas"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -25830,7 +26072,8 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -26242,7 +26485,9 @@
         ]
       },
       "sources": [
-        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -26527,7 +26772,10 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Wikipedia",
+        "MykoWeb, California Fungi",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -26925,7 +27173,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "First Nature",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -27269,7 +27521,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "Wikipedia",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature"
       ],
       "reviewed": false
     },
@@ -27578,7 +27833,9 @@
       },
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Missouri Department of Conservation field guide",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -27910,7 +28167,13 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Missouri Department of Conservation field guide",
+        "Midwest American Mycological Information",
+        "Fungi Atlas",
+        "Nebraska Mushrooms",
+        "US Centers for Disease Control"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -28191,7 +28454,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Missouri Department of Conservation field guide",
+        "Midwest American Mycological Information",
+        "US Centers for Disease Control"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -28459,7 +28726,8 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
       ],
       "reviewed": false
     },
@@ -28887,7 +29155,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -29217,7 +29487,10 @@
         }
       ],
       "sources": [
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -29506,7 +29779,9 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "Missouri Department of Conservation field guide",
+        "Wikipedia"
       ],
       "reviewed": false,
       "lookalikes": [
@@ -29886,7 +30161,10 @@
       "sources": [
         "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
         "North American Mycological Association poisoning references",
-        "GBIF occurrence counts over a southern Blue Ridge polygon"
+        "GBIF occurrence counts over a southern Blue Ridge polygon",
+        "First Nature",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -30271,7 +30549,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "Wikipedia",
+        "First Nature"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -30639,7 +30921,12 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs",
+        "First Nature",
+        "MykoWeb, California Fungi"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -31087,7 +31374,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -31455,7 +31746,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -31844,7 +32138,10 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -32222,7 +32519,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -32605,7 +32906,11 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -32898,7 +33203,12 @@
       ],
       "sources": [
         "North American Mycological Association poisoning references",
-        "iNaturalist occurrence records, southern Blue Ridge, above 5,000 ft"
+        "iNaturalist occurrence records, southern Blue Ridge, above 5,000 ft",
+        "First Nature",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "Wikipedia",
+        "Beaty Biodiversity Museum"
       ],
       "reviewed": false,
       "prevalence": "uncommon",
@@ -33296,7 +33606,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "First Nature",
+        "eol.org"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -33671,7 +33985,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs",
+        "First Nature"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -34009,7 +34327,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -34264,7 +34585,9 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -34603,7 +34926,10 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "North American Mycological Association poisoning references"
+        "North American Mycological Association poisoning references",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -34925,7 +35251,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "MykoWeb, California Fungi",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -35324,7 +35653,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Maryland Biodiversity Project",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -35670,7 +36002,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "Maryland Biodiversity Project"
       ],
       "reviewed": false
     },
@@ -35996,7 +36331,11 @@
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
         "North American Mycological Association poisoning references",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MykoWeb, California Fungi",
+        "Maryland Biodiversity Project",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -36333,7 +36672,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -36681,7 +37022,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -36941,7 +37284,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "Wikipedia",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Missouri Department of Conservation field guide"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -37272,7 +37618,9 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -37610,7 +37958,12 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "First Nature",
+        "Wikipedia",
+        "MykoWeb, California Fungi"
       ],
       "reviewed": false
     },
@@ -37895,7 +38248,9 @@
         }
       ],
       "sources": [
-        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -38203,7 +38558,9 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -38511,7 +38868,11 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "South Vancouver Island Mycological Society",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -38831,7 +39192,12 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "Wikipedia",
+        "MycoGuide",
+        "Research-grade iNaturalist photographs",
+        "Mushrooms of Connecticut",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text"
       ],
       "reviewed": false
     },
@@ -39128,7 +39494,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -39433,7 +39801,10 @@
       "lookalikes": [],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -39765,7 +40136,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -40105,7 +40479,10 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -40453,7 +40830,11 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "First Nature",
+        "MykoWeb, California Fungi"
       ],
       "reviewed": false
     },
@@ -40766,7 +41147,9 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -41119,7 +41502,9 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -41409,7 +41794,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -41722,7 +42109,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -41971,7 +42360,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -42250,7 +42641,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia",
+        "mushroom-appreciation.com"
       ],
       "reviewed": false
     },
@@ -42534,7 +42928,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false,
       "prevalence": "occasional",
@@ -42911,7 +43307,11 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "Wikipedia",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs",
+        "First Nature"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -43227,7 +43627,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false
     },
@@ -43563,7 +43965,9 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Research-grade iNaturalist photographs"
       ],
       "reviewed": false,
       "prevalence": "common",
@@ -43836,7 +44240,10 @@
       ],
       "sources": [
         "GBIF occurrence counts over a southern Blue Ridge polygon",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "First Nature",
+        "Wikipedia"
       ],
       "reviewed": false
     },
@@ -44081,7 +44488,9 @@
       ],
       "sources": [
         "iNaturalist occurrence records, southern Blue Ridge",
-        "Macromorphology as standard North American field guides agree it — written out, not reproduced"
+        "Macromorphology as standard North American field guides agree it — written out, not reproduced",
+        "MushroomExpert.com (Michael Kuo) - facts only, not redistributed text",
+        "Wikipedia"
       ],
       "reviewed": false
     }
