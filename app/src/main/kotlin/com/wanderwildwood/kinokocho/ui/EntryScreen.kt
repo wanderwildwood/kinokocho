@@ -215,6 +215,9 @@ fun EntryScreen(
                             .clickable { onCandidate(c.taxon.id) }
                             .padding(top = 6.dp, bottom = 6.dp),
                     )
+                    c.uncheckedNote(vm.schema, resources)?.let {
+                        TextMMD(it, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(bottom = 6.dp))
+                    }
                 }
             }
         }

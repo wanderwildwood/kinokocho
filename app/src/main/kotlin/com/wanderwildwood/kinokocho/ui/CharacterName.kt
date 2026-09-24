@@ -3,7 +3,9 @@ package com.wanderwildwood.kinokocho.ui
 import android.content.res.Resources
 import androidx.annotation.StringRes
 import com.wanderwildwood.kinokocho.R
+import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.schema.Character
+import com.wanderwildwood.kinokocho.schema.CharacterSchema
 
 /**
  * A character named for a list that has no heading over it.
@@ -63,5 +65,14 @@ private fun Character.part(): Part? = when (group) {
  * contains one, which is what semicolons have always been for. Nothing is rewritten and
  * no label has to be shortened to fit a punctuation mark.
  */
+/**
+ * What a candidate could not be checked on, for the row that names it — or null when it
+ * was checked on everything answered. See [KeyEngine.Candidate.unchecked].
+ */
+fun KeyEngine.Candidate.uncheckedNote(schema: CharacterSchema, resources: Resources): String? =
+    unchecked.takeIf { it.isNotEmpty() }
+        ?.mapNotNull { schema.character(it)?.inFull(resources) }
+        ?.let { resources.getString(R.string.candidate_unchecked, it.asPhrases()) }
+
 fun List<String>.asPhrases(): String =
     joinToString(if (any { it.contains(',') }) "; " else ", ")

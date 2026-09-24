@@ -230,6 +230,7 @@
     <string name="entry_section_not_ruled_out">Not yet ruled out</string>
     <string name="entry_nothing_fits">Nothing fits everything you wrote down. These come nearest, and one of the answers may be worth looking at again.</string>
     <!-- %1$d species still fit, of %2$d -->
+    <string name="candidate_unchecked">Nothing is recorded on its %1$s, so that was not checked.</string>
     <string name="entry_still_fit">%1$d of %2$d still fit what you wrote down.</string>
     <string name="entry_section_dangerous">Dangerous, and not ruled out</string>
     <string name="entry_dangerous_tap">Tap one to read it properly.</string>

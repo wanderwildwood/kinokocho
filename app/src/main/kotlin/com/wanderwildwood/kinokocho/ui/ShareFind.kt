@@ -164,6 +164,7 @@ object ShareFind {
                     "  " + (c.taxon.commonName?.let { "${c.taxon.scientificName} — $it" }
                         ?: c.taxon.scientificName)
                 )
+                c.uncheckedNote(schema, resources)?.let { appendLine("    $it") }
             }
         }
 

@@ -57,6 +57,12 @@ class KeyEngine(
         val mismatched: Int,
         /** Characters where this taxon says nothing, so nothing could be concluded. */
         val unscored: Int,
+        /**
+         * Of what was answered, the characters the literature says nothing about for this
+         * taxon ([Taxon.unrecorded]). It has not been contradicted on them and it has not
+         * been checked either, and a list headed "these fit" has to say which.
+         */
+        val unchecked: List<String> = emptyList(),
     )
 
     data class Ranking(
@@ -78,6 +84,9 @@ class KeyEngine(
          * had not been ruled out.
          */
         val live: List<Candidate> get() = candidates.filter { it.mismatched == 0 }
+            // Checked on everything answered before those the literature is silent on.
+            // A stable sort, so each half keeps its score order.
+            .sortedBy { it.unchecked.isNotEmpty() }
 
         /**
          * What to put in front of somebody: the ones that fit, or the nearest few when
@@ -110,6 +119,7 @@ class KeyEngine(
         var matched = 0
         var mismatched = 0
         var unscored = 0
+        val unchecked = mutableListOf<String>()
 
         answers.values.forEach { (characterId, chosen) ->
             if (chosen.isEmpty()) return@forEach
@@ -130,6 +140,7 @@ class KeyEngine(
             val states = taxon.characters[characterId]
             if (states == null) {
                 unscored++
+                if (characterId in taxon.unrecorded) unchecked += characterId
                 return@forEach
             }
             /*
@@ -243,7 +254,7 @@ class KeyEngine(
             score += if (month in taxon.seasonMonths) SEASON_BONUS else SEASON_PENALTY
         }
 
-        return Candidate(taxon, score, matched, mismatched, unscored)
+        return Candidate(taxon, score, matched, mismatched, unscored, unchecked)
     }
 
     /**

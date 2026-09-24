@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -33,6 +34,7 @@ import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.schema.Character
 import com.mudita.mmd.components.lazy.LazyColumnMMD
 import com.mudita.mmd.components.lazy.LazyDefaultsMMD
+import com.wanderwildwood.kinokocho.schema.CharacterSchema
 
 /**
  * One question at a time, with what it has narrowed to underneath.
@@ -76,7 +78,7 @@ fun NewEntryScreen(
         HorizontalDividerMMD()
 
         if (questionId == null) {
-            NothingLeftToAsk(draft, ranking, onAddPhoto, onDone)
+            NothingLeftToAsk(draft, ranking, vm.schema, onAddPhoto, onDone)
             return@Column
         }
 
@@ -293,6 +295,7 @@ fun NewEntryScreen(
 private fun NothingLeftToAsk(
     draft: JournalViewModel.Draft,
     ranking: KeyEngine.Ranking,
+    schema: CharacterSchema,
     onAddPhoto: () -> Unit,
     onDone: () -> Unit,
 ) {
@@ -324,6 +327,9 @@ private fun NothingLeftToAsk(
         )
         shortlist.forEach {
             TextMMD("· ${it.taxon.scientificName}", modifier = Modifier.padding(top = 6.dp))
+            it.uncheckedNote(schema, LocalContext.current.resources)?.let { note ->
+                TextMMD(note, style = MaterialThemeTypography().bodySmall)
+            }
         }
         ButtonMMD(onClick = onAddPhoto, modifier = Modifier.fillMaxWidth().padding(top = 16.dp)) {
             TextMMD(stringResource(R.string.entry_new_add_photograph))
@@ -398,6 +404,9 @@ private fun Footer(
                     .clickable { onCandidate(c.taxon.id) }
                     .padding(vertical = 3.dp),
             )
+            c.uncheckedNote(vm.schema, LocalContext.current.resources)?.let {
+                TextMMD(it, style = MaterialThemeTypography().bodySmall)
+            }
         }
 
         // And the line below names only what is not already on the screen. Nothing is

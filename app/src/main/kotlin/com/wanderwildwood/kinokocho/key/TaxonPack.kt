@@ -26,6 +26,12 @@ data class Taxon(
     /** characterId -> the states this taxon can show, each with how often. */
     val characters: Map<String, List<ScoredState>>,
     val measurements: Map<String, IntRange> = emptyMap(),
+    /**
+     * characterId -> why nothing is recorded for it: the literature was searched and says
+     * nothing. A tap on one of these cannot contradict the taxon, so the key must say it
+     * was not checked rather than count it as agreeing.
+     */
+    val unrecorded: Map<String, String> = emptyMap(),
     val seasonMonths: Set<Int> = emptySet(),
     /**
      * How often a walker actually meets it here. The month view needs this: a calendar
@@ -154,6 +160,9 @@ object PackLoader {
                 note = o.optString("note").ifEmpty { null },
                 characters = characters,
                 measurements = measurements,
+                unrecorded = o.optJSONObject("unrecorded")?.let { u ->
+                    u.keys().asSequence().associateWith { u.getString(it) }
+                }.orEmpty(),
                 prevalence = when (val p = o.optString("prevalence", "uncommon")) {
                     "common" -> Prevalence.COMMON
                     "occasional" -> Prevalence.OCCASIONAL
