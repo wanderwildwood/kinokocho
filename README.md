@@ -91,7 +91,9 @@ already says of every row on it. `--write` applies the widenings.
   the app saying anything is safe.
 - **A page per mushroom.** What it looks like, where and when, what it is confused with and
   how to tell them apart, and how what you recorded lines up against it. Reachable from a
-  shortlist, from the month view, or by looking a name up in any month.
+  shortlist, from the month view, or by looking a name up in any month. Its text can be
+  selected, and a word in it sent to a dictionary app such as Define (the menu's ⋮ holds what
+  the Kompakt's selection bar has no room for).
 - **Measurements, age and condition.** Facts about the specimen rather than the species,
   so they are recorded rather than asked. Age earns its place: a ring or a veil that is
   missing from an old mushroom proves nothing, and the key stops ruling things out on it.

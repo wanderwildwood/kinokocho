@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
 import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
@@ -71,6 +72,9 @@ fun CandidateScreen(
     val differ = answered.size - agree
     val resources = LocalContext.current.resources
 
+    // Selectable, so a word in a description (decurrent, volva, reticulate) can be taken to
+    // Define. The menu over a selection is the shop's, with its ⋮ given back (TextActions.kt).
+    SelectionContainer(Modifier.textActions()) {
     LazyColumnMMD(
         Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 16.dp),
@@ -313,6 +317,7 @@ fun CandidateScreen(
                 modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 24.dp),
             ) { TextMMD(stringResource(R.string.candidate_back)) }
         }
+    }
     }
 }
 

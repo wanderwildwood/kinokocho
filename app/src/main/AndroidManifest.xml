@@ -32,6 +32,14 @@
     -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- The apps that act on selected text, Define among them, for the menu over a selection. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT" />
+            <data android:mimeType="text/plain" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
