@@ -462,6 +462,10 @@
         {
           "id": "grooved",
           "label": "Ridged or grooved"
+        },
+        {
+          "id": "scrobiculate",
+          "label": "Spotted with shallow pits"
         }
       ]
     },
@@ -493,6 +497,19 @@
           "label": "Chambered"
         }
       ]
+    },
+    {
+      "id": "stipe_colour",
+      "label": "What colour is the stem?",
+      "noun": "Colour",
+      "group": "stem",
+      "hint": "Away from the very base, and look at the top too: many are paler near the gills. Choose every colour it could be.",
+      "kind": "state",
+      "cardinality": "multi",
+      "availability": "field",
+      "power": 3,
+      "valuesFrom": "colours",
+      "note": "Added 2026-09 because the best field characters of several taxa were stems — the purple stem of Tylopilus plumbeoviolaceus, the red stem of Xerocomellus chrysenteron, the pink flush of Russula mariae — and nothing could record them."
     },
     {
       "id": "gill_attachment",
@@ -607,6 +624,14 @@
         {
           "id": "different_colour",
           "label": "A different colour from the face"
+        },
+        {
+          "id": "fringed",
+          "label": "Fringed or cottony, under a lens"
+        },
+        {
+          "id": "split",
+          "label": "Split down the edge, the halves rolled back"
         }
       ]
     },
@@ -836,6 +861,22 @@
         {
           "id": "paler_margin",
           "label": "Paler at the margin"
+        },
+        {
+          "id": "darker_margin",
+          "label": "Darker at the margin"
+        },
+        {
+          "id": "paler_centre",
+          "label": "Paler at the centre"
+        },
+        {
+          "id": "mottled",
+          "label": "Mottled or blotched"
+        },
+        {
+          "id": "zoned",
+          "label": "In bands or zones"
         }
       ]
     },
@@ -1135,6 +1176,10 @@
         {
           "id": "unpleasant_other",
           "label": "Unpleasant, something else"
+        },
+        {
+          "id": "fishy",
+          "label": "Fishy"
         }
       ]
     },
@@ -1174,6 +1219,14 @@
         {
           "id": "unpleasant",
           "label": "Unpleasant"
+        },
+        {
+          "id": "sour",
+          "label": "Sour"
+        },
+        {
+          "id": "radish",
+          "label": "Of radish"
         }
       ]
     },
@@ -1233,6 +1286,10 @@
         {
           "id": "peeling_skin",
           "label": "A skin that peels"
+        },
+        {
+          "id": "granules",
+          "label": "Granules or powder that rub off"
         }
       ]
     },
@@ -1307,6 +1364,10 @@
           "label": "Clay or earth brown"
         },
         {
+          "id": "olive_brown",
+          "label": "Olive-brown"
+        },
+        {
           "id": "purple_brown",
           "label": "Purple-brown, chocolate"
         },
@@ -1376,6 +1437,14 @@
         {
           "id": "bleaching",
           "label": "Bleaching"
+        },
+        {
+          "id": "olive",
+          "label": "Olive"
+        },
+        {
+          "id": "grey",
+          "label": "Grey"
         }
       ]
     },
@@ -1733,6 +1802,30 @@
     },
     {
       "character": "cap_margin",
+      "requires": {
+        "character": "fruitbody_type",
+        "anyOf": [
+          "gilled_stemmed",
+          "bolete",
+          "polypore",
+          "toothed",
+          "chanterelle_like"
+        ]
+      }
+    },
+    {
+      "character": "stipe_colour",
+      "requires": {
+        "character": "stipe_presence",
+        "anyOf": [
+          "central",
+          "off_centre",
+          "lateral"
+        ]
+      }
+    },
+    {
+      "character": "veil_remnants",
       "requires": {
         "character": "fruitbody_type",
         "anyOf": [

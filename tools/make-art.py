@@ -202,6 +202,36 @@ def hatch_ellipse(cx, cy, rx, ry, step=5.0):
     return path(" ".join(out), width=HAIR)
 
 
+def hatch_ring(cx, cy, r_out, r_in, step=4.5):
+    """Diagonal hatching between two circles: a band of tone round a pale disc."""
+    import math
+    lines = []
+    k = -2 * r_out
+    while k <= 2 * r_out:
+        # the line x - y = k, clipped to the outer circle, minus the inner one
+        pts = []
+        for r in (r_out, r_in):
+            # solve (x-cx)^2 + (y-cy)^2 = r^2 with x = y + k (centred coordinates)
+            disc = 2 * r * r - k * k
+            if disc < 0:
+                pts.append(None)
+                continue
+            root = math.sqrt(disc)
+            ya, yb = (-k - root) / 2, (-k + root) / 2
+            pts.append((ya, yb))
+        outer, inner = pts
+        if outer is None:
+            k += step
+            continue
+        spans = [outer] if inner is None else [(outer[0], inner[0]), (inner[1], outer[1])]
+        for ya, yb in spans:
+            if yb - ya < 0.8:
+                continue
+            lines.append(f"M{cx + ya + k:.1f},{cy + ya:.1f} L{cx + yb + k:.1f},{cy + yb:.1f}")
+        k += step
+    return path(" ".join(lines), width=HAIR)
+
+
 def hatch_band(x1, y1, x2, y2, step=5.0):
     """The same tone on a rectangle - a bruised patch on a stem, a zone on a cap."""
     out = []
@@ -973,6 +1003,16 @@ def veil_remnants():
           path("M26,50 Q30,42 34,46 M38,44 Q42,35 46,40 M52,38 Q56,33 58,42 "
                "M62,42 Q67,36 70,46 M32,54 Q36,48 40,52 M56,52 Q60,46 64,53",
                width=HAIR))
+    # Powder, not warts: many tiny grains rather than a few patches, the whole cap
+    # dusted. The warts picture has five bold patches, so the two stay apart at 64px.
+    write(f"art_{c}_granules", "Cystoderma amianthinum",
+          "A granular, powdery coating of veil that rubs off.",
+          body, st,
+          path("M26,48 L27,48 M32,44 L33,44 M38,41 L39,41 M44,38 L45,38 M50,37 L51,37 "
+               "M56,39 L57,39 M62,42 L63,42 M68,46 L69,46 M30,52 L31,52 M36,48 L37,48 "
+               "M42,45 L43,45 M48,43 L49,43 M54,44 L55,44 M60,47 L61,47 M66,51 L67,51 "
+               "M22,53 L23,53 M74,52 L75,52 M40,51 L41,51 M52,50 L53,50 M46,48 L47,48",
+               width=2.4))
     write(f"art_{c}_peeling_skin", "Pluteus petasatus",
           "A cuticle lifting and peeling back from the margin.",
           body, st,
@@ -1016,6 +1056,22 @@ def gill_edge():
           "The edge is pigmented differently from the gill face.",
           *face(), path("M16,60 L80,60 L80,68 L16,68 Z", width=FINE),
           hatch_shape([(16, 60), (80, 60), (80, 68), (16, 68)], 3.5))
+    # Soft hairs hanging off a straight edge. Serrate is a hard zigzag cut into the edge
+    # itself; a fringe is something growing off it, so the edge line stays straight and
+    # the hairs are fine, crowded and uneven.
+    write(f"art_{c}_fringed", "Amanita bisporigera",
+          "A minutely fringed, cottony edge, seen under a lens.",
+          *face(), path("M16,60 L80,60"),
+          path(" ".join(f"M{x},60 Q{x + (1 if i % 2 else -1)},{65 + (i % 3)} {x + (2 if i % 2 else -1)},{67 + (i % 3) * 2}"
+                        for i, x in enumerate(range(18, 80, 4))), width=HAIR))
+    # The split gill: each gill edge splits lengthwise and the two halves roll back, so
+    # what the eye meets is a doubled edge with curls turning outward along it.
+    write(f"art_{c}_split", "Schizophyllum commune",
+          "The edge split lengthwise, its two halves rolled back.",
+          *face(),
+          path("M16,58 L80,58"),
+          path(" ".join(f"M{x},58 Q{x - 5},62 {x - 3},67 Q{x},70 {x + 2},66 M{x},58 Q{x + 5},62 {x + 3},67 Q{x},70 {x - 2},66"
+                        for x in range(24, 80, 16)), width=FINE))
 
 
 def stipe_flesh():
@@ -1094,6 +1150,39 @@ def cap_colour_pattern():
           rim(),
           path("M48,22 Q73,22 73,48 Q73,74 48,74 Q23,74 23,48 Q23,22 48,22 Z", width=FINE),
           hatch_ellipse(48, 48, 25, 26, 4.5))
+    # The reverse of paler_margin: the tone is a band at the edge and the middle is pale.
+    write(f"art_{c}_darker_margin", "Meripilus sumstinei",
+          "A pale cap with a dark band at the edge, as a margin that blackens with age.",
+          rim(),
+          path("M48,23 Q73,23 73,48 Q73,73 48,73 Q23,73 23,48 Q23,23 48,23 Z", width=FINE),
+          hatch_ring(48, 48, 32, 25))
+    # Dark all over but for a small pale disc — kept small so it cannot be read as the
+    # dark-margin picture, whose pale area is most of the cap.
+    write(f"art_{c}_paler_centre", "Suillus spraguei",
+          "Dark over the cap, paler at the very centre where the scales thin.",
+          rim(),
+          path("M48,38 Q58,38 58,48 Q58,58 48,58 Q38,58 38,48 Q38,38 48,38 Z", width=FINE),
+          hatch_ring(48, 48, 32, 10))
+    write(f"art_{c}_mottled", "Russula mariae",
+          "Irregular blotches of a darker shade across the cap.",
+          rim(),
+          path("M30,30 Q40,26 42,34 Q40,42 32,40 Q26,36 30,30 Z "
+               "M54,24 Q64,24 64,32 Q60,38 54,34 Q50,28 54,24 Z "
+               "M52,50 Q64,46 68,56 Q64,66 54,62 Q48,56 52,50 Z "
+               "M28,54 Q36,52 38,60 Q34,68 28,64 Q24,58 28,54 Z", width=FINE),
+          hatch_shape([(30, 30), (42, 34), (32, 40)], 3.2),
+          hatch_shape([(54, 24), (64, 32), (54, 34)], 3.2),
+          hatch_shape([(52, 50), (68, 56), (54, 62)], 3.2),
+          hatch_shape([(28, 54), (38, 60), (28, 64)], 3.2))
+    # Concentric bands, alternately toned, as on a turkey tail seen from above.
+    write(f"art_{c}_zoned", "Trametes versicolor",
+          "Concentric bands of colour, alternating light and dark.",
+          rim(),
+          path("M48,24 Q72,24 72,48 Q72,72 48,72 Q24,72 24,48 Q24,24 48,24 Z "
+               "M48,32 Q64,32 64,48 Q64,64 48,64 Q32,64 32,48 Q32,32 48,32 Z "
+               "M48,40 Q56,40 56,48 Q56,56 48,56 Q40,56 40,48 Q40,40 48,40 Z", width=FINE),
+          hatch_ring(48, 48, 32, 24, 4.0),
+          hatch_ring(48, 48, 16, 8, 4.0))
 
 
 def substrate():
@@ -1570,6 +1659,16 @@ def stipe_surface():
           path("M38,20 Q46,16 54,22 M40,40 Q48,36 58,42 M38,60 Q46,56 56,62 "
                "M42,76 Q50,72 58,78", width=FINE),
           path("M54,30 Q58,28 60,32", width=HAIR))
+    # Pits in the surface, each an outline with a shadow on one side — a hollow, where
+    # punctate is raised dots. Larger and fewer, so the two do not merge at 64px.
+    write(f"art_{c}_scrobiculate", "Lactarius indigo",
+          "Shallow, round pits spotted over the stem.",
+          band(),
+          path("M38,22 Q44,18 50,22 Q44,28 38,22 Z M48,40 Q55,36 60,41 Q54,46 48,40 Z "
+               "M36,56 Q42,52 48,56 Q42,62 36,56 Z M48,70 Q54,66 60,70 Q54,76 48,70 Z",
+               width=FINE),
+          path("M40,24 Q44,26 48,24 M50,42 Q54,44 58,42 M38,58 Q42,60 46,58 M50,72 Q54,74 58,72",
+               width=HAIR))
     # A groove changes the silhouette and a fibre does not — that is the difference, and
     # drawing both as vertical lines made them one picture at 64px. So the edges are
     # fluted here and the channels are heavy.

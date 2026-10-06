@@ -747,6 +747,24 @@ class KeyEngineTest {
     }
 
     @Test
+    fun `it never asks what a possible false morel tastes like`() {
+        // Severe, not lethal, and the gate used to stop at lethal: a spring walk that had
+        // narrowed to the morels and the false morel could be asked for a taste.
+        var a = KeyEngine.Answers(month = 4)
+        val target = pack.taxon("neogyromitra_caroliniana")!!
+        repeat(14) {
+            val q = engine.nextQuestion(a) ?: return@repeat
+            val harmful = engine.rank(a).hazards
+            assertTrue(
+                "asked for a taste while ${harmful.map { it.taxon.id }} was live",
+                q != "taste" || harmful.isEmpty(),
+            )
+            val v = target.characters[q]?.firstOrNull()?.value
+            a = if (v != null) a.with(q, setOf(v)) else a.markNotTested(q)
+        }
+    }
+
+    @Test
     fun `taste comes back once nothing deadly is left`() {
         // Held back, not removed. Every guide uses it, and it is one of the better
         // characters once the dangerous ones are gone.

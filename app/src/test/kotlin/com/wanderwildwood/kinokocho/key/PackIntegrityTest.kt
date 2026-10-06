@@ -208,6 +208,16 @@ class PackIntegrityTest {
         }
     }
     @Test
+    fun `anything that can kill or seriously harm has a name a person would say`() {
+        // Galerina marginata went out with no common name at all — the deadly galerina,
+        // the one mushroom on the month page a reader most needs to be able to repeat to
+        // somebody else. A Latin binomial is not what anybody shouts across a wood.
+        pack.taxa.filter { it.hazard.severity.alwaysShow }.forEach {
+            assertTrue("${it.id} can do serious harm and has no common name", !it.commonName.isNullOrBlank())
+        }
+    }
+
+    @Test
     fun `the pack does not shout`() {
         // Fourteen notes carried emphasis in capitals — "Margin NOT lined", "FALSE
         // gills", "DULL GREYISH GREEN". Sentence case everywhere is the house rule, and

@@ -845,5 +845,170 @@
     "depicted": "Xylaria polymorpha, spathulata (Pers.) (Tab. XIX fig. 15)",
     "trace": "0.412 0.715 0.524 0.878 --edge 80 --ink 34",
     "masked": false
+  },
+  "agaricus_campestris": {
+    "credit": "C. H. Peck, 1894",
+    "creator": "Charles H. Peck (drawing); C. Fausel (lithograph)",
+    "work": "C.H. Peck, Annual Report of the State Botanist of the State of New York (48th report, for 1894), coloured plate of Agaricus campestris, fig. 4. Signed 'C.H. Peck del.' and 'C. Fausel lith.' The same plate was reprinted in the 1897 report, Commons file 19341406896.",
+    "year": "1894 (report year; New York State publication)",
+    "licence": "Public domain: published in the US before 1929 (PD-US / PD-old). Commons tag 'No restrictions' (Internet Archive Book Images).",
+    "file": "https://commons.wikimedia.org/wiki/File:Annual_report_of_the_State_Botanist_of_the_State_of_New_York%22_(1889-1897.)_(19341405816).jpg",
+    "depicted": "Agaricus campestris L. (common mushroom)",
+    "trace": "0 0 1 1 --ink 12 (the source is src/agaricus_campestris/fig4_bgb.png, already cropped from peck1894.jpg at 0.3654 0.2694 0.8945 0.6349)",
+    "same_species": "Peck drew this from New York material under A. campestris. It is the eastern North American field-mushroom group the record covers: it says this name is used here for a complex of grassland species, and true A. campestris is not confirmed in the region. It shows no feature the record rules out: the gills are free and brown, there is no volva, and the ring is a thin zone or band."
+  },
+  "apioperdon_pyriforme": {
+    "credit": "Léon Dufour, 1891",
+    "creator": "Dufour, L. (Léon Dufour, 1862-1942)",
+    "work": "Léon Dufour, Atlas des champignons comestibles et vénéneux (Paris, Klincksieck), Planche 74, fig. No 170 'Lycoperdon piriforme / Lycoperdon en forme de poire'",
+    "year": "1891",
+    "licence": "Public domain: Commons {{PD-scan|PD-old-70-1923}}; BHL permissions NOT_IN_COPYRIGHT; published 1891 so PD-US too",
+    "file": "https://commons.wikimedia.org/wiki/File:Atlas_des_champignons_comestibles_et_v%C3%A9n%C3%A9neux_(Planche_74)_BHL3270622.jpg (BHL page https://www.biodiversitylibrary.org/page/3270622)",
+    "depicted": "Lycoperdon piriforme (= Lycoperdon pyriforme Schaeff.)",
+    "trace": "0 0 1 1 --ink 8   (run on src/apioperdon_pyriforme/masked.png. That file is an exact crop of dufour74.jpg, fractions 0.1796 0.6398 0.5000 0.8000 (pixels 411,2082 to 1144,2603), with the paper painted flat grey (170,170,170) and the figure pixels left unchanged, which I checked with a 0.0 mean difference. The other figures and the 'N° 170' caption are outside the crop.)",
+    "same_species": "Lycoperdon pyriforme Schaeff. is the basionym of Apioperdon pyriforme (Schaeff.) Vizzini. The stump puffball is the same species on both sides of the Atlantic, and Commons files this plate under Category:Apioperdon pyriforme. Dufour's figure shows the defining features: a smooth, pear-shaped head that narrows to a sterile base, with a tuft of basal cords."
+  },
+  "lactarius_corrugis": {
+    "credit": "Mary E. Eaton, 1928",
+    "creator": "Pen drawing signed with the monogram 'M.E.E.' (Mary E. Eaton, who signed the book's colour plates); text by William Sturgis Thomas",
+    "work": "W.S. Thomas, Field Book of Common Gilled Mushrooms (G.P. Putnam's Sons, New York), p. 210, fig. 24",
+    "year": "1928",
+    "licence": "PD-US: published in the US in 1928, before 1929. The Internet Archive rights field reads 'public domain (copyright either not claimed or not renewed)' (UConn digital collections).",
+    "file": "https://archive.org/details/fieldbookofcommo01thom/page/n281",
+    "depicted": "Lactarius corrugis (Fig. 24, Species No. 72)",
+    "trace": "Not traced with trace-plate.py. The drawing is a one-ink pen drawing, and the tracer's colour-boundary and outline passes drew both sides of every pen stroke, which doubled the lines on the stem and cap. I tried --edge 80/120/200/1000 with --ink 20-60, with and without thickening, and every run doubled the lines. I used a direct threshold instead: src/lactarius_corrugis/threshold.py n281_masked.png out.png .17 .445 .82 .836 0.6 (crop fractions, then dark where the pixel is below 0.6 of the median paper lightness; Lanczos resize to 420 wide). The masking is src/lactarius_corrugis/mask.py, which paints the '72' label, the 'M.E.E.' monogram and the '1 inch' scale bar in paper colour. None of them touches the figure.",
+    "same_species": "The caption names Lactarius corrugis Peck, an American species under its original name (now Lactifluus corrugis). The drawing matches it: a wrinkled, velvety-looking cap, close gills and no ring."
+  },
+  "lactarius_indigo": {
+    "credit": "Farlow and Burt, 1929",
+    "creator": "W.G. Farlow (d. 1919); plates by Joseph Bridgham; text by E.A. Burt",
+    "work": "W.G. Farlow & E.A. Burt, Icones Farlowianae: illustrations of the larger fungi of eastern North America (Farlow Library and Herbarium, Harvard), plate 34",
+    "year": "1929 (plates printed from 1891)",
+    "licence": "PD-US: published in the US in 1929, and US works of 1929 entered the public domain on 1 Jan 2025. Farlow died in 1919. The Internet Archive/BHL item's rights field reads 'Permission to digitize granted by rights holder', not NOT_IN_COPYRIGHT. The Commons copy is tagged CC BY 2.0, which is why the earlier attempt skipped it; the IA scan used here does not carry that tag.",
+    "file": "https://archive.org/details/mobot31753000797503/page/n81",
+    "depicted": "Lactarius indigo Schweinitz (Plate 34, upper-left figure of the lower group)",
+    "trace": "Kept from the interrupted earlier run, which did not record its exact command. The source is src/lactarius_indigo/n81_masked.png, made by src/lactarius_indigo/mask.py (run from pd2/), which paints over the two lower-left specimens, the large lower-right specimen and a stray dot. The crop is about .26 .45 .67 .74 (re-running trace-plate.py with that crop gives the same size, 420x383). Re-runs with defaults and --ink 20-50 / --edge 45-80 / --no-thicken came out close but not byte-identical, and none was cleaner, so I kept the earlier file.",
+    "same_species": "The facing text page (n80, p. 38) reads 'PLATE 34 Lactarius indigo Schweinitz'. The page order is plate 33 = n78 with its text on n79, then plate 34 text on n80 with the plate on n81, then plate 35 (fuliginosus/lignyotus, brown) on n82. I checked this against the neighbouring scans. The plate's vertical section shows the blue flesh rim that Burt's text points to ('as intense as that of the flesh in these figures'). This is the American species under its original name."
+  },
+  "lentinellus_ursinus": {
+    "credit": "C.-C. Gillet, 1878",
+    "creator": "C.-C. Gillet (1806-1896)",
+    "work": "C.-C. Gillet, Les champignons (fungi, hyménomycètes) qui croissent en France, Atlas (Pls.) vol. 3, unnumbered plate 'Agaricinées - Lentinus ursinus Fr.' (IA leschampignonsfu03gill, MBLWHOI / Biodiversity Heritage Library scan)",
+    "year": "1878 (IA date of the atlas; plates were issued 1874-1898)",
+    "licence": "Public domain: PD-old (author died 1896) and PD-US (published in Paris before 1929); Internet Archive biodiversity collection scan with no rights restriction",
+    "file": "https://archive.org/details/leschampignonsfu03gill/page/n138",
+    "depicted": "Lentinus ursinus Fr. (legit L. Rolland)",
+    "trace": "src/lentinellus_ursinus/gillet_masked_med_or2.png out/lentinellus_ursinus.png 0.2415 0.2104 0.7025 0.4319 --edge 60 --ink 14",
+    "same_species": "Lentinellus ursinus (Fr.) Kühner is based on Agaricus/Lentinus ursinus Fr., described from Europe. North American field guides, including Kuo (the record's source), use the same name for North American collections, so this is the type concept, not a misapplied name. Gillet's figure is a sessile shelf on wood with no stem or pseudostem, which excludes the look-alike L. vulpinus."
+  },
+  "scleroderma_polyrhizum": {
+    "credit": "Émile Boudier, 1905",
+    "creator": "Émile Boudier (del.), A. Lesne (lith.)",
+    "work": "Boudier, Icones Mycologicae, tome II, pl. 186 (no. 309)",
+    "year": "1905 (Commons date October 1905; series 1905-1910)",
+    "licence": "Public domain (Commons LicenseShortName 'Public domain'; BHL Flickr scan, Boudier d. 1920, published Paris 1905-1910 = PD-old)",
+    "file": "https://commons.wikimedia.org/wiki/File:Icones_mycologic%C3%A6,_ou_Iconographie_des_champignons_de_France_principalement_Discomycetes_(Pl._186)_(9801401706).jpg",
+    "depicted": "Scleroderma geaster Fr.",
+    "trace": "0.02 0.06 0.98 0.845 --ink 18 --edge 28",
+    "same_species": "Scleroderma geaster Fr. is a later synonym of S. polyrhizum (J.F.Gmel.) Pers. (basionym Lycoperdon polyrrhizon Gmelin, a European name, so European plates are the type concept). Coker & Couch 1928 (Gasteromycetes of the Eastern US and Canada, p.161) treat the eastern American plant as S. geaster with Sclerangium polyrhizon as synonym and cite exactly this plate ('Boudier, Icon. Myc., pl. 186') as an illustration of it."
+  },
+  "suillus_americanus": {
+    "credit": "Farlow and Burt, 1929",
+    "creator": "W.G. Farlow (paintings); descriptive text by E.A. Burt",
+    "work": "Farlow & Burt, Icones Farlowianae: illustrations of the larger fungi of eastern North America, Harvard University, Plate 73",
+    "year": "1929",
+    "licence": "PD-US. Published in the US in 1929, so its 95-year term ran out on 31 Dec 2024. Farlow, who made the paintings, died in 1919. The Commons file carries a CC BY 2.0 tag inherited from the BHL Flickr upload. That tag is on a faithful scan of a public-domain 2D work and adds no new copyright in the US. The IA copy (mobot31753000797503) says 'Permission to digitize granted by rights holder' rather than NOT_IN_COPYRIGHT.",
+    "file": "https://commons.wikimedia.org/wiki/File:Icones_Farlowianae_(Pl._73)_(8488397119).jpg (same plate in the IA scan of the book: https://archive.org/details/mobot31753000797503)",
+    "depicted": "Boletus americanus Peck (Plate 73; the text of the plate is confirmed in the IA OCR: 'PLATE 73 / Boletus americanus Peck, N. Y. State Mus. Bull. 1: 62. 1887')",
+    "trace": "0.14 0.545 0.375 0.80",
+    "same_species": "Boletus americanus Peck (1888, NY State Mus. Bull. 1) is the basionym of Suillus americanus (Peck) Snell. The plate is of the American species from New England pine woods, as the text says, so no European name is involved. Burt's text matches the record: viscid yellow cap, margin fringed with veil when young, large angular yellow pores, no ring, stem gland-dotted from base to apex, under pines."
+  },
+  "stereum_lobatum": {
+    "credit": "P. Hennings, 1900",
+    "creator": "P. Hennings (section author; the caption says the figures are original drawings: 'Alles Original')",
+    "work": "Engler & Prantl, Die natürlichen Pflanzenfamilien, Teil I Abt. 1**, p. 124, Fig. 69 A-B (Hennings, Hymenomycetineae)",
+    "year": "1900 (part issued 1897-1900)",
+    "licence": "Public domain. PD-old: published in Germany in 1897-1900, and Hennings died in 1908. Internet Archive status is NOT_IN_COPYRIGHT.",
+    "file": "https://archive.org/details/dienatrlichenp11engl/page/n137",
+    "depicted": "Stereum lobatum Fr. (Fig. 69 A-B: 'A Habitus nat. Gr.; B Hymenium nat. Gr.')",
+    "trace": "0.107 0.111 0.818 0.322 --edge 80 --ink 15 --bgtol 10",
+    "same_species": "The drawing is labelled Stereum lobatum (Kunze) Fr., the same name as the record. Burt 1920 (Ann. Missouri Bot. Gard. 7: 164), treating North American Stereum, cites this figure, 'Engl. & Prantl, Nat. Pflanzenfam. (1: 1**): 124. text f. 69, A-B', as an illustration of S. lobatum. The name is not misapplied: S. lobatum is an American species described from Surinam, and Hennings gives its range as South America, the West Indies and other places."
+  },
+  "trametes_conchifer": {
+    "credit": "Farlow and Burt, 1929",
+    "creator": "William Gilson Farlow (plates); text by Edward Angus Burt",
+    "work": "Icones Farlowianae: illustrations of the larger fungi of eastern North America, Plate 94 (bottom), Farlow Library and Herbarium of Harvard University",
+    "year": "1929",
+    "licence": "PD-US: published in the US in 1929, so its 95-year term ran out on 1 Jan 2025. I used the Internet Archive scan. I did not use the Commons/Flickr BHL copy (File:Icones Farlowianae (Pl. 94) (8489503160).jpg), which is tagged CC BY 2.0. IA lists the item as 'Permission to digitize granted by rights holder', but that predates the expiry.",
+    "file": "https://archive.org/details/mobot31753000797503/page/n203",
+    "depicted": "Polystictus conchifer Schweinitz (Plate 94, bottom figure)",
+    "trace": "(custom cups.py, not trace-plate.py) if_pl94.jpg out.png 0.222 0.706 0.797 0.855 420 150 5 20  [args: crop x0 y0 x1 y1, width, cup lightness threshold, zone ink, bark ink]",
+    "same_species": "Plate 94 bottom is labelled Polystictus conchifer Schweinitz, the basionym lineage (Boletus conchifer Schwein. 1822 -> Polystictus conchifer (Schwein.) Sacc.) that Species Fungorum lists under Poronidulus conchifer (= Trametes conchifer). It is a North American work by North American authors, and the text describes the zoned sterile cups."
+  },
+  "trametes_versicolor": {
+    "credit": "Léon Dufour, 1891",
+    "creator": "Léon Dufour",
+    "work": "Dufour, Atlas des champignons comestibles et vénéneux (Paris, Klincksieck), Planche 50, No. 119; BHL pageimage 3270844",
+    "year": "1891",
+    "licence": "Public domain (PD-old, 1891; Commons LicenseShortName 'Public domain')",
+    "file": "https://commons.wikimedia.org/wiki/File:Atlas_des_champignons_comestibles_et_v%C3%A9n%C3%A9neux_(Planche_50)_BHL3270844.jpg",
+    "depicted": "Polyporus versicolor (No. 119, 'Polypore de couleurs variées')",
+    "trace": "0.15 0.485 0.85 0.865 --edge 35 --ink 12",
+    "same_species": "Polyporus versicolor (L.) Fr. is a direct synonym of Trametes versicolor (basionym Boletus versicolor L.). This is the same cosmopolitan species, not a misapplied European name."
+  },
+  "tremella_mesenterica": {
+    "credit": "Charles McIlvaine & Robert K. Macadam, 1902",
+    "creator": "Charles McIlvaine & Robert K. Macadam (pen-and-ink line cut; engraver's initials 'YS.')",
+    "work": "McIlvaine & Macadam, Toadstools, mushrooms, fungi, edible and poisonous; One thousand American fungi (Indianapolis, Bowen-Merrill), Internet Archive toadstoolsmushro00mcil",
+    "year": "1902",
+    "licence": "PD-US (US publication 1902)",
+    "file": "https://archive.org/details/toadstoolsmushro00mcil/page/n695",
+    "depicted": "Tremella mesenterica (Plate CXLIV, p. 530, 'natural size')",
+    "trace": "(direct threshold via pd2/thresh.py, not trace-plate.py) masked.png out.png 0.15 0.575 0.49 0.812 420 125",
+    "same_species": "Captioned Tremella mesenterica Retz., the same name in use today. The description ('bright orange-yellow, variously contorted; lobes short, smooth'; on dead branches) matches. The one caveat is the possible inclusion of T. aurantia, noted under concerns."
+  },
+  "xylobolus_frustulatus": {
+    "credit": "George Massee, 1899",
+    "creator": "George Massee (1850-1917)",
+    "work": "George Massee, A Text-Book of Plant Diseases Caused by Cryptogamic Parasites (London: Duckworth / New York: Macmillan), p. 173, Fig. 37 part 1: 'a dense group of individuals growing on a piece of oak wood, rather smaller than nat. size'",
+    "year": "1899",
+    "licence": "Public domain: PD-old (author died 1917) and PD-US (published 1899). Internet Archive marks it NOT_IN_COPYRIGHT.",
+    "file": "https://archive.org/details/textbookofplantd00massrich/page/n188/mode/1up",
+    "depicted": "Stereum frustulosum (Pers.) Fr.",
+    "trace": "Not traced with trace-plate.py. The source is a black-and-white engraving, and the tracer turned its hatching into speckle at every setting tried (--edge 60-120, --ink 10-60). I used my own script instead: /tmp/claude-1000/-home-wander/e82b6827-1d12-44c7-98dc-eed8033bf2a5/scratchpad/audit/pd2/src/xylobolus_frustulatus/build2.py 155 1.0 15. It works on the pixel box (394,843)-(1066,2308) of the masked page, which is fractions 0.200 0.2415 0.5417 0.661. The page is blurred 1 px, cut at threshold 155 and kept inside the figure's silhouette; ink specks under 15 px are dropped, a silhouette outline is added, and the result is 420 px wide. Ink is 27% of the bounding box.",
+    "same_species": "Stereum frustulosum (Pers.) Fr. (basionym Thelephora frustulosa Pers. 1801) is the basionym and synonym of Xylobolus frustulatus (Pers.) P. Karst. per Index Fungorum and MycoBank. It is one Holarctic species. Burt (1920) treats the North American material as this same species, with the same European illustrations. Massee's caption and text agree with it: a woody crust on oak, cracked into separate tiles, stuck fast with no free edge, causing 'partridge wood' rot."
+  },
+  "russula_mariae": {
+    "credit": "C. H. Peck, 1904",
+    "creator": "C. H. Peck (author); New York State Museum plate",
+    "work": "C. H. Peck, Report of the State Botanist 1903, New York State Museum Bulletin 75 (Botany 6), 'Edible Fungi' Plate 85, fig. 5 (text p. 29-31, explanation of plate p. 62)",
+    "year": "1904",
+    "licence": "Public domain (PD-US: New York State publication, 1904). Scan from Internet Archive item bulletinnewyork751904newy (BHL / MBG).",
+    "file": "https://archive.org/details/bulletinnewyork751904newy/page/n86/mode/1up",
+    "depicted": "Russula mariae Pk. (Mary's Russula), the species Peck himself described",
+    "trace": "src/russula_mariae/ny75_n86_masked.png out/russula_mariae.png 0.640 0.053 0.880 0.2825 (defaults; ink 0.111). Masked copy: the paper colour (189,158,129) painted over the fig. 8 spores and numeral at px (1560,560)-(1720,780) and over the numeral '5' at (1975,455)-(2020,500). The figure itself was not touched.",
+    "same_species": "Peck named Russula mariae (24th Report, 1872) and drew this plate of New York material himself, so the name is used in its original sense."
+  },
+  "mutinus_elegans": {
+    "credit": "Joseph F. James, 1888",
+    "creator": "Joseph F. James (author and draughtsman, signed 'J.F.J. Del.')",
+    "work": "Joseph F. James, 'Notes on the Development of Corynites Curtissii, B.', Bulletin of the Torrey Botanical Club 15: 314-316, Plate LXXXVI, fig. 10",
+    "year": "1888",
+    "licence": "Public domain (PD-US, published 1888). IA item mobot31753002261490 (MBG/BHL scan; the 'permission to digitize' flag is about the scan, and the 1888 work is out of copyright).",
+    "file": "https://archive.org/details/mobot31753002261490/page/n317/mode/1up",
+    "depicted": "Corynites curtisii Berk. (as 'Corynites Curtissii'), a synonym of Mutinus elegans",
+    "trace": "Not trace-plate.py. The source is a real pen-and-ink engraving, and the tracer's colour outline doubled every line and broke the pits up (tried with --edge 80 --ink 20). Instead a plain greyscale threshold of the plate's own lines was used: crop 0.639 0.331 0.834 0.819 of src/mutinus_elegans/torrey15_n317_masked.png, Lanczos resize to 420 px wide, threshold <150 -> black (420x1738). The masked copy has the paper colour (251,242,199) painted over the neighbouring fig. 6 and its cord at px (1080,1000)-(1226,2150), the numeral '10' at (1478,1895)-(1545,1952), and the 'J.F.J. Del.' monogram at (1464,2425)-(1532,2462) and (1464,2462)-(1506,2474). None of these overlap the figure.",
+    "same_species": "Corynites curtisii Berk. (1873) is a listed synonym of Mutinus elegans (Index Fungorum / MycoBank). Burt (Bot. Gaz. 22, 1896) treated C. curtisii, Morgan's M. bovinus and Montagne's Corynites elegans as one species, now Mutinus elegans. James collected his specimens at Cambridge, Massachusetts, inside the eastern North American range of M. elegans."
+  },
+  "hypoxylon_fragiforme": {
+    "credit": "L.-R. and C. Tulasne, 1863",
+    "creator": "L.-R. & C. Tulasne (drawn by Charles Tulasne; printed by J. Geny-Gros, Paris)",
+    "work": "L.-R. Tulasne & C. Tulasne, Selecta Fungorum Carpologia, vol. 2, Tab. IV, fig. 4",
+    "year": "1863",
+    "licence": "Public domain: PD-old. Published in Paris in 1863, and the Tulasne brothers died in 1885 and 1884. The IA/BHL scan by the Missouri Botanical Garden carries no added rights.",
+    "file": "https://archive.org/details/mobot31753000797784/page/n345 (BHL item https://www.biodiversitylibrary.org/item/107088)",
+    "depicted": "Hypoxylon coccineum Bull.",
+    "trace": "0.1351 0.131 0.3273 0.2456 --ink 5   (source: src/hypoxylon_fragiforme/tulasne_t4_mask4f_b3.png)",
+    "same_species": "Hypoxylon coccineum Bull. (1791) is a listed synonym of H. fragiforme (Pers.) J. Kickx f. in Index Fungorum and MycoBank. Ellis & Everhart (N. Am. Pyrenomycetes 1892, p. 630) treat H. coccineum as the same brick-red, globose, beech-bark species, with Sphaeria fragiformis Pers. among its synonyms. Tulasne's material was European, but this is a European species that also occurs in North America, so this is not a European name misapplied to an American species."
   }
 }

@@ -363,6 +363,16 @@
             "value": "minute",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          }
         ]
       },
       "measurements": {
@@ -788,6 +798,24 @@
             "value": "broadleaf",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "rarely"
+          },
+          {
+            "value": "yellow",
+            "frequency": "rarely"
+          }
         ]
       },
       "measurements": {
@@ -1164,6 +1192,12 @@
           {
             "value": "single_patch",
             "frequency": "rarely"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
           }
         ]
       },
@@ -1570,6 +1604,10 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "usually"
           }
         ],
         "gill_edge": [
@@ -1592,6 +1630,24 @@
           {
             "value": "yellow",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
+            "frequency": "rarely"
+          },
+          {
+            "value": "tan",
+            "frequency": "rarely"
           }
         ]
       },
@@ -1990,6 +2046,24 @@
             "value": "grey",
             "frequency": "rarely"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "rarely"
+          },
+          {
+            "value": "purple",
+            "frequency": "rarely"
+          }
         ]
       },
       "unrecorded": {
@@ -2057,6 +2131,7 @@
     {
       "id": "amanita_flavoconia",
       "scientificName": "Amanita flavoconia",
+      "commonName": "yellow patches",
       "hazard": {
         "toxinClass": "unknown",
         "severity": "UNKNOWN",
@@ -2171,6 +2246,10 @@
           },
           {
             "value": "none",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "granules",
             "frequency": "sometimes"
           }
         ],
@@ -2340,6 +2419,24 @@
           {
             "value": "striate",
             "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "rarely"
+          },
+          {
+            "value": "orange",
+            "frequency": "rarely"
           }
         ]
       },
@@ -2665,6 +2762,20 @@
             "value": "bleaching",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "always"
+          },
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "red",
+            "frequency": "rarely"
+          }
         ]
       },
       "unrecorded": {
@@ -2735,7 +2846,7 @@
     {
       "id": "amanita_multisquamosa",
       "scientificName": "Amanita multisquamosa",
-      "commonName": "panther group",
+      "commonName": "small funnel-veil amanita",
       "hazard": {
         "toxinClass": "ibotenic_acid_muscimol",
         "severity": "INTOXICATION",
@@ -2988,6 +3099,16 @@
             "value": "pink",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          }
         ]
       },
       "unrecorded": {
@@ -3040,7 +3161,7 @@
     {
       "id": "amanita_muscaria_guessowii",
       "scientificName": "Amanita muscaria var. guessowii",
-      "commonName": "fly agaric",
+      "commonName": "American yellow fly agaric",
       "hazard": {
         "toxinClass": "ibotenic_acid_muscimol",
         "severity": "INTOXICATION",
@@ -3332,6 +3453,20 @@
           {
             "value": "yellow",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -3683,6 +3818,10 @@
           {
             "value": "none",
             "frequency": "sometimes"
+          },
+          {
+            "value": "granules",
+            "frequency": "sometimes"
           }
         ],
         "associated_tree": [
@@ -3693,6 +3832,20 @@
           {
             "value": "conifer",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "rarely"
           }
         ]
       },
@@ -4067,6 +4220,10 @@
           {
             "value": "serrate",
             "frequency": "sometimes"
+          },
+          {
+            "value": "fringed",
+            "frequency": "usually"
           }
         ],
         "spore_print_fine": [
@@ -4096,6 +4253,20 @@
           },
           {
             "value": "yellow_brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
             "frequency": "sometimes"
           }
         ]
@@ -4301,6 +4472,10 @@
           {
             "value": "darker_centre",
             "frequency": "usually"
+          },
+          {
+            "value": "paler_margin",
+            "frequency": "usually"
           }
         ],
         "veil_remnants": [
@@ -4459,6 +4634,24 @@
           {
             "value": "white",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "green",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow",
+            "frequency": "rarely"
           }
         ]
       },
@@ -4861,6 +5054,32 @@
             "value": "no_change",
             "frequency": "always"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "pink",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red",
+            "frequency": "sometimes"
+          }
         ]
       },
       "measurements": {
@@ -5183,6 +5402,10 @@
           {
             "value": "different_colour",
             "frequency": "sometimes"
+          },
+          {
+            "value": "fringed",
+            "frequency": "usually"
           }
         ],
         "cap_colour_pattern": [
@@ -5218,6 +5441,24 @@
           },
           {
             "value": "yellow",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
             "frequency": "sometimes"
           }
         ]
@@ -5518,11 +5759,37 @@
             "value": "no_change",
             "frequency": "always"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "spore_print_fine": [
+          {
+            "value": "olive_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "clay",
+            "frequency": "sometimes"
+          }
         ]
       },
-      "unrecorded": {
-        "spore_print_fine": "No published description found that records it (audit of September 2026)."
-      },
+      "unrecorded": {},
       "measurements": {
         "cap_width_mm": [
           15,
@@ -5917,6 +6184,10 @@
           {
             "value": "acrid",
             "frequency": "sometimes"
+          },
+          {
+            "value": "sour",
+            "frequency": "sometimes"
           }
         ],
         "veil_remnants": [
@@ -5943,6 +6214,44 @@
           {
             "value": "even",
             "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -6329,6 +6638,24 @@
             "value": "white",
             "frequency": "always"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "grey",
+            "frequency": "usually"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "olive",
+            "frequency": "sometimes"
+          }
         ]
       },
       "unrecorded": {
@@ -6589,6 +6916,28 @@
           {
             "value": "white",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "rarely"
           }
         ]
       },
@@ -7136,6 +7485,10 @@
         ],
         "spore_print_fine": [
           {
+            "value": "olive_brown",
+            "frequency": "usually"
+          },
+          {
             "value": "ochre",
             "frequency": "usually"
           },
@@ -7178,6 +7531,10 @@
           {
             "value": "mild",
             "frequency": "usually"
+          },
+          {
+            "value": "sour",
+            "frequency": "sometimes"
           }
         ],
         "veil_remnants": [
@@ -7190,6 +7547,24 @@
           {
             "value": "orange_brown",
             "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "red",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "purple",
+            "frequency": "rarely"
           }
         ]
       },
@@ -7461,11 +7836,29 @@
         ],
         "spore_print_fine": [
           {
+            "value": "olive_brown",
+            "frequency": "usually"
+          },
+          {
             "value": "ochre",
             "frequency": "usually"
           },
           {
             "value": "clay",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
             "frequency": "sometimes"
           }
         ]
@@ -7789,6 +8182,10 @@
           {
             "value": "darker_centre",
             "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "sometimes"
           }
         ],
         "stipe_surface": [
@@ -7805,6 +8202,20 @@
           {
             "value": "white",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -8058,6 +8469,24 @@
             "value": "white",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "red",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          }
         ]
       },
       "unrecorded": {
@@ -8288,6 +8717,20 @@
           },
           {
             "value": "white",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
             "frequency": "sometimes"
           }
         ]
@@ -8553,6 +8996,10 @@
           {
             "value": "clay",
             "frequency": "sometimes"
+          },
+          {
+            "value": "olive_brown",
+            "frequency": "usually"
           }
         ]
       },
@@ -8949,6 +9396,22 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "paler_centre",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "darker_margin",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "rarely"
+          },
+          {
+            "value": "mottled",
+            "frequency": "rarely"
           }
         ],
         "taste": [
@@ -8974,6 +9437,20 @@
           },
           {
             "value": "brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "cream",
             "frequency": "sometimes"
           }
         ]
@@ -9295,6 +9772,24 @@
           {
             "value": "cream",
             "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "orange",
+            "frequency": "rarely"
           }
         ]
       },
@@ -9639,6 +10134,20 @@
             "value": "pink_salmon",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "red",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          }
         ]
       },
       "unrecorded": {
@@ -9961,6 +10470,10 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "darker_margin",
+            "frequency": "rarely"
           }
         ],
         "taste": [
@@ -9996,6 +10509,20 @@
           },
           {
             "value": "pink_salmon",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
             "frequency": "sometimes"
           }
         ]
@@ -10326,6 +10853,16 @@
             "value": "uniform",
             "frequency": "usually"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "usually"
+          }
         ]
       },
       "unrecorded": {
@@ -10635,6 +11172,10 @@
           {
             "value": "darker_centre",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "usually"
           }
         ],
         "veil_remnants": [
@@ -10661,6 +11202,28 @@
           {
             "value": "white",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "black",
+            "frequency": "usually"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -10923,6 +11486,16 @@
             "value": "white",
             "frequency": "always"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "green",
+            "frequency": "always"
+          },
+          {
+            "value": "blue",
+            "frequency": "usually"
+          }
         ]
       },
       "unrecorded": {
@@ -11162,6 +11735,10 @@
           {
             "value": "ochre",
             "frequency": "rarely"
+          },
+          {
+            "value": "olive_brown",
+            "frequency": "rarely"
           }
         ],
         "koh": [
@@ -11236,6 +11813,10 @@
           {
             "value": "darker_centre",
             "frequency": "usually"
+          },
+          {
+            "value": "mottled",
+            "frequency": "usually"
           }
         ],
         "taste": [
@@ -11300,6 +11881,24 @@
           {
             "value": "broadleaf",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "rarely"
           }
         ]
       },
@@ -11572,6 +12171,24 @@
           {
             "value": "broadleaf",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "orange",
+            "frequency": "always"
+          },
+          {
+            "value": "red",
+            "frequency": "usually"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow",
+            "frequency": "rarely"
           }
         ]
       },
@@ -11873,6 +12490,32 @@
           {
             "value": "grooved",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "black",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "pink",
+            "frequency": "rarely"
           }
         ]
       },
@@ -12265,6 +12908,24 @@
             "value": "no_change",
             "frequency": "always"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "purple",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "blue",
+            "frequency": "rarely"
+          }
         ]
       },
       "measurements": {
@@ -12502,6 +13163,10 @@
           {
             "value": "none",
             "frequency": "sometimes"
+          },
+          {
+            "value": "granules",
+            "frequency": "usually"
           }
         ],
         "flesh_colour": [
@@ -12611,6 +13276,16 @@
           },
           {
             "value": "different_colour",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
             "frequency": "sometimes"
           }
         ]
@@ -12955,6 +13630,10 @@
           {
             "value": "darker_centre",
             "frequency": "usually"
+          },
+          {
+            "value": "darker_margin",
+            "frequency": "sometimes"
           }
         ],
         "substrate_wood": [
@@ -12977,6 +13656,12 @@
           {
             "value": "broadleaf",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
           }
         ]
       },
@@ -13343,6 +14028,16 @@
             "value": "no_change",
             "frequency": "usually"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "purple",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "usually"
+          }
         ]
       },
       "measurements": {
@@ -13659,6 +14354,28 @@
             "value": "purple",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "red",
+            "frequency": "sometimes"
+          }
         ]
       },
       "unrecorded": {
@@ -13843,11 +14560,15 @@
         ],
         "cap_colour_pattern": [
           {
+            "value": "uniform",
+            "frequency": "usually"
+          },
+          {
             "value": "darker_centre",
             "frequency": "sometimes"
           },
           {
-            "value": "uniform",
+            "value": "mottled",
             "frequency": "usually"
           }
         ],
@@ -13949,6 +14670,10 @@
           {
             "value": "mild",
             "frequency": "usually"
+          },
+          {
+            "value": "sour",
+            "frequency": "sometimes"
           }
         ],
         "veil_remnants": [
@@ -13975,6 +14700,16 @@
           {
             "value": "brown",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "purple",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "usually"
           }
         ]
       },
@@ -14274,6 +15009,10 @@
           {
             "value": "darker_centre",
             "frequency": "sometimes"
+          },
+          {
+            "value": "darker_margin",
+            "frequency": "sometimes"
           }
         ],
         "spore_print_fine": [
@@ -14294,6 +15033,24 @@
           {
             "value": "no_change",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "grey",
+            "frequency": "usually"
+          },
+          {
+            "value": "black",
+            "frequency": "usually"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "rarely"
           }
         ]
       },
@@ -14904,6 +15661,10 @@
         ],
         "veil_remnants": [
           {
+            "value": "granules",
+            "frequency": "usually"
+          },
+          {
             "value": "warts",
             "frequency": "usually"
           },
@@ -14933,6 +15694,36 @@
           },
           {
             "value": "brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
             "frequency": "sometimes"
           }
         ]
@@ -15187,6 +15978,24 @@
           {
             "value": "cream",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -15469,6 +16278,10 @@
         ],
         "cap_colour_pattern": [
           {
+            "value": "zoned",
+            "frequency": "usually"
+          },
+          {
             "value": "paler_margin",
             "frequency": "sometimes"
           },
@@ -15527,6 +16340,10 @@
           {
             "value": "black",
             "frequency": "usually"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -15774,7 +16591,8 @@
         "stipe_base": "No published description found that records it (audit of September 2026).",
         "stipe_surface": "No published description found that records it (audit of September 2026).",
         "stipe_flesh": "No published description found that records it (audit of September 2026).",
-        "taste": "No source gives a taste. Kuo gives only 'Odor: Not distinctive'."
+        "taste": "No source gives a taste. Kuo gives only 'Odor: Not distinctive'.",
+        "stipe_colour": "The stalk is rare (stipe_presence central/rarely). Kuo says only 'sometimes featuring a poorly defined pseudostem' and gives no colour for it. No other source describes it, and 12 research-grade photos would almost certainly not include a stalked one. Not guessed."
       },
       "measurements": {
         "cap_width_mm": [
@@ -16165,6 +16983,32 @@
             "value": "wine_red",
             "frequency": "rarely"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "sometimes"
+          }
         ]
       },
       "unrecorded": {
@@ -16531,6 +17375,24 @@
             "value": "pink_salmon",
             "frequency": "always"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          }
         ]
       },
       "unrecorded": {
@@ -16833,6 +17695,7 @@
     {
       "id": "galerina_marginata",
       "scientificName": "Galerina marginata",
+      "commonName": "deadly galerina",
       "hazard": {
         "toxinClass": "amatoxin",
         "severity": "LETHAL",
@@ -17062,7 +17925,11 @@
         "koh": [
           {
             "value": "bright_red",
-            "frequency": "always"
+            "frequency": "usually"
+          },
+          {
+            "value": "wine_red",
+            "frequency": "sometimes"
           }
         ],
         "flesh_colour": [
@@ -17143,6 +18010,22 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "paler_centre",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "darker_margin",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "rarely"
+          },
+          {
+            "value": "mottled",
+            "frequency": "rarely"
           }
         ],
         "taste": [
@@ -17178,6 +18061,40 @@
           },
           {
             "value": "different_colour",
+            "frequency": "rarely"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow",
             "frequency": "rarely"
           }
         ]
@@ -17490,6 +18407,10 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
           }
         ],
         "taste": [
@@ -17533,7 +18454,8 @@
       },
       "unrecorded": {
         "stipe_base": "The stem is 'usually absent; if present, lateral and very stubby'. No source describes the base of that rare stub, and a stub gives no honest single answer.",
-        "stipe_surface": "No source describes the surface of the rare stubby lateral stem."
+        "stipe_surface": "No source describes the surface of the rare stubby lateral stem.",
+        "stipe_colour": "Kuo: 'Stem: Usually absent; if present, lateral and very stubby' — no source gives a stem colour, and none of 16 iNat research-grade photos show a stem. Not guessed."
       },
       "measurements": {
         "cap_width_mm": [
@@ -17828,6 +18750,14 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
+          },
+          {
+            "value": "darker_centre",
+            "frequency": "usually"
           }
         ],
         "bruising_speed": [
@@ -17868,6 +18798,24 @@
           {
             "value": "black",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "red",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow",
+            "frequency": "rarely"
           }
         ]
       },
@@ -18134,6 +19082,10 @@
           {
             "value": "darker_centre",
             "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
           }
         ],
         "flesh_colour": [
@@ -18504,6 +19456,10 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
           }
         ],
         "cap_shape": [
@@ -18523,6 +19479,16 @@
         "stipe_flesh": [
           {
             "value": "solid",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
             "frequency": "usually"
           }
         ]
@@ -18954,6 +19920,10 @@
           {
             "value": "paler_margin",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "koh": [
@@ -18964,6 +19934,48 @@
           {
             "value": "green",
             "frequency": "sometimes"
+          },
+          {
+            "value": "olive",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "pink",
+            "frequency": "usually"
+          },
+          {
+            "value": "purple",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red",
+            "frequency": "rarely"
           }
         ]
       },
@@ -19366,6 +20378,40 @@
           {
             "value": "green",
             "frequency": "rarely"
+          },
+          {
+            "value": "olive",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -20218,6 +21264,20 @@
             "value": "cream",
             "frequency": "usually"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "rarely"
+          }
         ]
       },
       "unrecorded": {
@@ -20583,6 +21643,10 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "taste": [
@@ -20623,6 +21687,28 @@
           {
             "value": "no_change",
             "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "black",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red",
+            "frequency": "rarely"
+          },
+          {
+            "value": "olive",
+            "frequency": "rarely"
           }
         ]
       },
@@ -20998,6 +22084,28 @@
             "value": "wine_red",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "rarely"
+          },
+          {
+            "value": "cream",
+            "frequency": "rarely"
+          }
         ]
       },
       "measurements": {
@@ -21362,6 +22470,28 @@
           {
             "value": "no_change",
             "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "rarely"
           }
         ]
       },
@@ -21759,6 +22889,28 @@
             "value": "purple_brown",
             "frequency": "always"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "always"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "orange",
+            "frequency": "rarely"
+          }
         ]
       },
       "unrecorded": {
@@ -21948,6 +23100,10 @@
           {
             "value": "unpleasant_other",
             "frequency": "sometimes"
+          },
+          {
+            "value": "fishy",
+            "frequency": "sometimes"
           }
         ],
         "habitat": [
@@ -22084,6 +23240,10 @@
           {
             "value": "uniform",
             "frequency": "usually"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "koh": [
@@ -22100,6 +23260,28 @@
           {
             "value": "cream",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "orange",
+            "frequency": "always"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "purple",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "rarely"
           }
         ]
       },
@@ -22662,6 +23844,20 @@
             "value": "green",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          }
         ]
       },
       "measurements": {
@@ -22943,6 +24139,10 @@
           {
             "value": "unpleasant_other",
             "frequency": "sometimes"
+          },
+          {
+            "value": "fishy",
+            "frequency": "sometimes"
           }
         ],
         "taste": [
@@ -23041,6 +24241,32 @@
           {
             "value": "green",
             "frequency": "sometimes"
+          },
+          {
+            "value": "olive",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "rarely"
           }
         ]
       },
@@ -23131,6 +24357,10 @@
           },
           {
             "value": "punctate",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "scrobiculate",
             "frequency": "sometimes"
           }
         ],
@@ -23404,6 +24634,14 @@
           {
             "value": "darker_centre",
             "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "spore_print_fine": [
@@ -23411,11 +24649,41 @@
             "value": "cream",
             "frequency": "always"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "rarely"
+          },
+          {
+            "value": "green",
+            "frequency": "rarely"
+          },
+          {
+            "value": "white",
+            "frequency": "rarely"
+          }
+        ],
+        "koh": [
+          {
+            "value": "no_change",
+            "frequency": "usually"
+          }
         ]
       },
-      "unrecorded": {
-        "koh": "Neither of Kuo's North American deliciosus-group pages nor Wikipedia gives a KOH reaction."
-      },
+      "unrecorded": {},
       "measurements": {
         "cap_width_mm": [
           30,
@@ -23564,6 +24832,14 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "hymenophore_colour": [
@@ -23648,6 +24924,10 @@
           {
             "value": "slimy",
             "frequency": "sometimes"
+          },
+          {
+            "value": "scrobiculate",
+            "frequency": "usually"
           }
         ],
         "odour": [
@@ -23815,6 +25095,24 @@
           },
           {
             "value": "yellow",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "blue",
+            "frequency": "usually"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "green",
             "frequency": "sometimes"
           }
         ]
@@ -24118,6 +25416,10 @@
           {
             "value": "uniform",
             "frequency": "usually"
+          },
+          {
+            "value": "darker_centre",
+            "frequency": "sometimes"
           }
         ],
         "veil_remnants": [
@@ -24194,6 +25496,36 @@
           {
             "value": "yellow",
             "frequency": "sometimes"
+          },
+          {
+            "value": "olive",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "rarely"
+          },
+          {
+            "value": "pink",
+            "frequency": "rarely"
           }
         ]
       },
@@ -24518,11 +25850,26 @@
             "value": "darker_centre",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          }
+        ],
+        "spore_print_fine": [
+          {
+            "value": "white",
+            "frequency": "always"
+          }
         ]
       },
       "unrecorded": {
         "bruising_speed": "No readable species description. MushroomExpert has no page, JGI MycoCosm returns 403 or a Cloudflare challenge, Wikipedia has no article, and texasmushrooms.org was rejected in round one as AI-generated.",
-        "spore_print_fine": "No readable source gives the print colour. Section Albati in Wikipedia is described without it.",
         "koh": "No readable source. Hesler & Smith (quod.lib.umich.edu) and JGI are behind bot checks, which were not bypassed."
       },
       "measurements": {
@@ -24750,6 +26097,10 @@
         ],
         "odour": [
           {
+            "value": "fishy",
+            "frequency": "usually"
+          },
+          {
             "value": "foetid",
             "frequency": "usually"
           },
@@ -24932,12 +26283,42 @@
         ],
         "koh": [
           {
+            "value": "olive",
+            "frequency": "usually"
+          },
+          {
             "value": "green",
             "frequency": "usually"
           },
           {
             "value": "brown",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "rarely"
           }
         ]
       },
@@ -25196,6 +26577,10 @@
             "frequency": "usually"
           },
           {
+            "value": "zoned",
+            "frequency": "usually"
+          },
+          {
             "value": "uniform",
             "frequency": "sometimes"
           }
@@ -25228,6 +26613,16 @@
           {
             "value": "no_change",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -25495,6 +26890,10 @@
           },
           {
             "value": "uniform",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
             "frequency": "sometimes"
           }
         ],
@@ -26082,6 +27481,7 @@
     {
       "id": "leucoagaricus_americanus",
       "scientificName": "Leucoagaricus americanus",
+      "commonName": "American parasol",
       "hazard": {
         "toxinClass": "unknown",
         "severity": "UNKNOWN",
@@ -26459,6 +27859,28 @@
             "value": "broadleaf",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          }
         ]
       },
       "measurements": {
@@ -26743,10 +28165,33 @@
             "value": "brown",
             "frequency": "usually"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "spore_print_fine": [
+          {
+            "value": "olive_brown",
+            "frequency": "usually"
+          }
         ]
       },
       "unrecorded": {
-        "spore_print_fine": "No published description found that records it (audit of September 2026).",
         "koh": "Kuo gives KOH only for spores under the microscope ('greenish yellow in KOH'), not as a macroscopic reaction on the surface. Wikipedia gives none."
       },
       "measurements": {
@@ -27107,6 +28552,10 @@
           {
             "value": "paler_margin",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "rarely"
           }
         ],
         "spore_print_fine": [
@@ -27123,6 +28572,24 @@
           {
             "value": "broadleaf",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "rarely"
           }
         ]
       },
@@ -27485,6 +28952,24 @@
             "value": "no_change",
             "frequency": "always"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "black",
+            "frequency": "usually"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          }
         ]
       },
       "measurements": {
@@ -27800,12 +29285,38 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
           }
         ],
         "spore_print_fine": [
           {
             "value": "white",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "black",
+            "frequency": "rarely"
           }
         ]
       },
@@ -28124,6 +29635,24 @@
             "value": "white",
             "frequency": "rarely"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          }
         ]
       },
       "unrecorded": {
@@ -28411,6 +29940,24 @@
             "value": "white",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          }
         ]
       },
       "unrecorded": {
@@ -28543,6 +30090,10 @@
             "frequency": "always"
           },
           {
+            "value": "scrobiculate",
+            "frequency": "usually"
+          },
+          {
             "value": "smooth",
             "frequency": "sometimes"
           }
@@ -28659,6 +30210,36 @@
           {
             "value": "broadleaf",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "orange",
+            "frequency": "always"
+          },
+          {
+            "value": "olive",
+            "frequency": "usually"
+          },
+          {
+            "value": "red",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "rarely"
+          },
+          {
+            "value": "white",
+            "frequency": "rarely"
           }
         ]
       },
@@ -29078,6 +30659,10 @@
           {
             "value": "mild",
             "frequency": "sometimes"
+          },
+          {
+            "value": "radish",
+            "frequency": "sometimes"
           }
         ],
         "veil_remnants": [
@@ -29106,6 +30691,28 @@
           {
             "value": "no_change",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "rarely"
           }
         ]
       },
@@ -29406,6 +31013,10 @@
           {
             "value": "paler_margin",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "taste": [
@@ -29453,11 +31064,41 @@
             "value": "bright_red",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "red",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          }
+        ],
+        "spore_print_fine": [
+          {
+            "value": "olive_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "green",
+            "frequency": "sometimes"
+          }
         ]
       },
-      "unrecorded": {
-        "spore_print_fine": "The print is olive / dark olive-brown. No spore_print_fine value is olive or olive-brown (ochre, rust, clay and purple_brown are all wrong), so any fill would be a guess."
-      },
+      "unrecorded": {},
       "measurements": {
         "cap_width_mm": [
           20,
@@ -29499,7 +31140,7 @@
     {
       "id": "neogyromitra_caroliniana",
       "scientificName": "Neogyromitra caroliniana",
-      "commonName": "false morel",
+      "commonName": "Carolina false morel",
       "hazard": {
         "toxinClass": "gyromitrin",
         "severity": "SEVERE",
@@ -29746,6 +31387,20 @@
           },
           {
             "value": "dark_brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "grey",
             "frequency": "sometimes"
           }
         ]
@@ -30102,6 +31757,20 @@
             "value": "darker_centre",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "orange",
+            "frequency": "always"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "rarely"
+          }
         ]
       },
       "measurements": {
@@ -30345,6 +32014,10 @@
           {
             "value": "paler_margin",
             "frequency": "usually"
+          },
+          {
+            "value": "darker_centre",
+            "frequency": "sometimes"
           }
         ],
         "veil_remnants": [
@@ -30507,6 +32180,32 @@
           {
             "value": "broadleaf",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "dark_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "rarely"
           }
         ]
       },
@@ -30794,6 +32493,10 @@
           {
             "value": "mild",
             "frequency": "sometimes"
+          },
+          {
+            "value": "sour",
+            "frequency": "sometimes"
           }
         ],
         "habitat": [
@@ -30856,6 +32559,10 @@
           {
             "value": "uniform",
             "frequency": "usually"
+          },
+          {
+            "value": "zoned",
+            "frequency": "sometimes"
           }
         ],
         "spore_print_fine": [
@@ -30868,6 +32575,28 @@
           {
             "value": "no_change",
             "frequency": "usually"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "rarely"
           }
         ]
       },
@@ -31263,6 +32992,10 @@
           {
             "value": "mild",
             "frequency": "usually"
+          },
+          {
+            "value": "sour",
+            "frequency": "sometimes"
           }
         ],
         "veil_remnants": [
@@ -31328,11 +33061,45 @@
             "value": "purple_brown",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "olive",
+            "frequency": "rarely"
+          }
+        ],
+        "koh": [
+          {
+            "value": "grey",
+            "frequency": "usually"
+          }
         ]
       },
-      "unrecorded": {
-        "koh": "The only published reaction is 'KOH on cap surface gray' (Kuo). The schema has no grey KOH state, and neither no_change nor black is honest."
-      },
+      "unrecorded": {},
       "measurements": {
         "cap_width_mm": [
           40,
@@ -31387,7 +33154,7 @@
     {
       "id": "phallus_ravenelii",
       "scientificName": "Phallus ravenelii",
-      "commonName": "stinkhorn",
+      "commonName": "Ravenel's stinkhorn",
       "hazard": {
         "toxinClass": "unknown",
         "severity": "UNKNOWN",
@@ -31459,6 +33226,10 @@
           {
             "value": "smooth",
             "frequency": "sometimes"
+          },
+          {
+            "value": "scrobiculate",
+            "frequency": "usually"
           }
         ],
         "stipe_flesh": [
@@ -31673,6 +33444,24 @@
           {
             "value": "mild",
             "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "always"
+          },
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "rarely"
           }
         ]
       },
@@ -32018,6 +33807,10 @@
           {
             "value": "unpleasant",
             "frequency": "sometimes"
+          },
+          {
+            "value": "radish",
+            "frequency": "sometimes"
           }
         ],
         "gill_edge": [
@@ -32105,6 +33898,32 @@
           },
           {
             "value": "ochre",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
             "frequency": "sometimes"
           }
         ]
@@ -32384,6 +34203,10 @@
           {
             "value": "bitter",
             "frequency": "rarely"
+          },
+          {
+            "value": "radish",
+            "frequency": "sometimes"
           }
         ],
         "habitat": [
@@ -32483,6 +34306,28 @@
             "value": "ochre",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          }
         ]
       },
       "measurements": {
@@ -32532,7 +34377,7 @@
     {
       "id": "phyllotopsis_nidulans",
       "scientificName": "Phyllotopsis nidulans",
-      "commonName": "stinking orange oyster",
+      "commonName": "orange mock oyster",
       "prevalence": "occasional",
       "sought": false,
       "hazard": {
@@ -32859,7 +34704,8 @@
         "stipe_base": "The stem is 'Absent or very poorly developed and lateral' (Kuo), and 'stipe and veil absent' (MykoWeb). No source or photo describes the base of the stub.",
         "stipe_surface": "Same as stipe_base. Only one photo (iNat 401682528) shows a stub, and it is not resolvable.",
         "stipe_flesh": "No description of the inside of a rudimentary stub.",
-        "bruising_speed": "Kuo says only 'sometimes bruising brownish when handled', with no timing."
+        "bruising_speed": "Kuo says only 'sometimes bruising brownish when handled', with no timing.",
+        "stipe_colour": "Stem is 'Absent or very poorly developed and lateral' (Kuo); Wikipedia 'very short or nonexistent'. No source gives a stem colour. In 12 iNat observations only the whitish hairy attachment point is visible (405358158, 405374984, 405402810), not a stem, so too few to set a colour without guessing."
       },
       "measurements": {
         "cap_width_mm": [
@@ -33167,6 +35013,16 @@
           {
             "value": "white",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -33495,6 +35351,14 @@
           {
             "value": "uniform",
             "frequency": "usually"
+          },
+          {
+            "value": "darker_margin",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "paler_centre",
+            "frequency": "sometimes"
           }
         ],
         "taste": [
@@ -33529,6 +35393,16 @@
           {
             "value": "no_change",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -33883,6 +35757,10 @@
           {
             "value": "bitter",
             "frequency": "sometimes"
+          },
+          {
+            "value": "radish",
+            "frequency": "usually"
           }
         ],
         "veil_remnants": [
@@ -33943,6 +35821,20 @@
           {
             "value": "orange_brown",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "rarely"
           }
         ]
       },
@@ -34293,11 +36185,29 @@
             "value": "no_change",
             "frequency": "usually"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "rarely"
+          }
+        ],
+        "taste": [
+          {
+            "value": "radish",
+            "frequency": "usually"
+          }
         ]
       },
-      "unrecorded": {
-        "taste": "The only source giving a taste says radish, and the taste character has no radish value. Filling mild or unpleasant would be a guess, and would eliminate on a radish answer."
-      },
+      "unrecorded": {},
       "measurements": {
         "cap_width_mm": [
           40,
@@ -34413,6 +36323,10 @@
           {
             "value": "reticulate",
             "frequency": "usually"
+          },
+          {
+            "value": "scrobiculate",
+            "frequency": "sometimes"
           }
         ],
         "stipe_flesh": [
@@ -34519,6 +36433,24 @@
           {
             "value": "broadleaf",
             "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "rarely"
           }
         ]
       },
@@ -34899,6 +36831,20 @@
             "value": "clay",
             "frequency": "usually"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
+          }
         ]
       },
       "unrecorded": {
@@ -35213,11 +37159,42 @@
             "value": "cream",
             "frequency": "rarely"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "pink",
+            "frequency": "rarely"
+          }
+        ],
+        "stipe_surface": [
+          {
+            "value": "hairy",
+            "frequency": "usually"
+          }
         ]
       },
       "unrecorded": {
         "stipe_base": "No published description found that records it (audit of September 2026).",
-        "stipe_surface": "No published description found that records it (audit of September 2026).",
         "stipe_flesh": "No published description found that records it (audit of September 2026).",
         "cap_surface": "STRUCTURAL: no cap; needs a cap_presence gate. (The branches are 'smooth' per Kuo, but filling a cap character with branch texture would be inconsistent across corals.)",
         "bruising_speed": "Every source gives the colour but not the speed: Kuo 'bruising and discoloring purplish brown', MykoWeb 'vinaceous-brown where bruised', Wikipedia 'All parts of the mushroom bruise when handled'. Photos cannot show speed."
@@ -35509,6 +37486,10 @@
           {
             "value": "unpleasant_other",
             "frequency": "usually"
+          },
+          {
+            "value": "fishy",
+            "frequency": "usually"
           }
         ],
         "taste": [
@@ -35597,6 +37578,10 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "spore_print_fine": [
@@ -35609,6 +37594,28 @@
           {
             "value": "green",
             "frequency": "usually"
+          },
+          {
+            "value": "olive",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -35941,6 +37948,10 @@
           {
             "value": "peeling_skin",
             "frequency": "usually"
+          },
+          {
+            "value": "granules",
+            "frequency": "sometimes"
           }
         ],
         "cap_colour_pattern": [
@@ -35955,6 +37966,10 @@
           {
             "value": "paler_margin",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "spore_print_fine": [
@@ -35967,6 +37982,20 @@
           {
             "value": "orange_brown",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "pink",
+            "frequency": "usually"
+          },
+          {
+            "value": "purple",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -36284,12 +38313,30 @@
           {
             "value": "darker_centre",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "paler_centre",
+            "frequency": "rarely"
           }
         ],
         "spore_print_fine": [
           {
             "value": "white",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "cream",
+            "frequency": "rarely"
           }
         ]
       },
@@ -36536,6 +38583,10 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "usually"
           }
         ],
         "flesh_colour": [
@@ -36637,6 +38688,16 @@
           },
           {
             "value": "orange_brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "tan",
             "frequency": "sometimes"
           }
         ]
@@ -36784,6 +38845,18 @@
           },
           {
             "value": "uniform",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "usually"
+          },
+          {
+            "value": "paler_centre",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "darker_margin",
             "frequency": "sometimes"
           }
         ],
@@ -36983,6 +39056,16 @@
           {
             "value": "slow",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "always"
+          },
+          {
+            "value": "tan",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -37238,6 +39321,24 @@
             "value": "solid",
             "frequency": "usually"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "pink",
+            "frequency": "usually"
+          },
+          {
+            "value": "orange",
+            "frequency": "rarely"
+          }
         ]
       },
       "unrecorded": {
@@ -37377,6 +39478,10 @@
           },
           {
             "value": "smooth",
+            "frequency": "usually"
+          },
+          {
+            "value": "scrobiculate",
             "frequency": "usually"
           }
         ],
@@ -37551,6 +39656,28 @@
             "value": "wavy",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "orange",
+            "frequency": "always"
+          },
+          {
+            "value": "pink",
+            "frequency": "usually"
+          },
+          {
+            "value": "red",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "rarely"
+          }
         ]
       },
       "unrecorded": {
@@ -37690,6 +39817,10 @@
           }
         ],
         "gill_edge": [
+          {
+            "value": "split",
+            "frequency": "always"
+          },
           {
             "value": "serrate",
             "frequency": "usually"
@@ -37914,6 +40045,10 @@
           },
           {
             "value": "paler_margin",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
             "frequency": "sometimes"
           }
         ]
@@ -38769,6 +40904,10 @@
           {
             "value": "paler_margin",
             "frequency": "usually"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
           }
         ],
         "bruising": [
@@ -39113,6 +41252,10 @@
         ],
         "cap_colour_pattern": [
           {
+            "value": "zoned",
+            "frequency": "always"
+          },
+          {
             "value": "paler_margin",
             "frequency": "usually"
           },
@@ -39323,6 +41466,10 @@
           }
         ],
         "cap_colour_pattern": [
+          {
+            "value": "zoned",
+            "frequency": "always"
+          },
           {
             "value": "paler_margin",
             "frequency": "usually"
@@ -39773,6 +41920,28 @@
           {
             "value": "paler_margin",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "grey",
+            "frequency": "usually"
+          },
+          {
+            "value": "black",
+            "frequency": "usually"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "white",
+            "frequency": "rarely"
           }
         ]
       },
@@ -40055,6 +42224,10 @@
           {
             "value": "mild",
             "frequency": "usually"
+          },
+          {
+            "value": "sour",
+            "frequency": "sometimes"
           }
         ],
         "veil_remnants": [
@@ -40071,6 +42244,10 @@
           {
             "value": "uniform",
             "frequency": "usually"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           },
           {
             "value": "darker_centre",
@@ -40091,6 +42268,20 @@
           {
             "value": "black",
             "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "always"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -40416,6 +42607,10 @@
           {
             "value": "uniform",
             "frequency": "usually"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "bruising_speed": [
@@ -40436,12 +42631,50 @@
           {
             "value": "rust",
             "frequency": "sometimes"
+          },
+          {
+            "value": "olive_brown",
+            "frequency": "sometimes"
           }
         ],
         "koh": [
           {
             "value": "black",
             "frequency": "usually"
+          },
+          {
+            "value": "grey",
+            "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "red",
+            "frequency": "usually"
+          },
+          {
+            "value": "red_brown",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "usually"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "rarely"
           }
         ]
       },
@@ -40753,6 +42986,10 @@
         ],
         "cap_colour_pattern": [
           {
+            "value": "zoned",
+            "frequency": "always"
+          },
+          {
             "value": "paler_margin",
             "frequency": "usually"
           },
@@ -41047,6 +43284,10 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
           }
         ],
         "cap_shape": [
@@ -41098,6 +43339,20 @@
           },
           {
             "value": "yellow",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
             "frequency": "sometimes"
           }
         ]
@@ -41416,6 +43671,18 @@
           {
             "value": "paler_margin",
             "frequency": "rarely"
+          },
+          {
+            "value": "zoned",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "darker_margin",
+            "frequency": "usually"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "bruising_where": [
@@ -41459,6 +43726,24 @@
           },
           {
             "value": "orange_brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "tan",
             "frequency": "sometimes"
           }
         ]
@@ -41721,6 +44006,14 @@
           {
             "value": "uniform",
             "frequency": "sometimes"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
+          },
+          {
+            "value": "darker_margin",
+            "frequency": "usually"
           }
         ],
         "taste": [
@@ -41939,6 +44232,10 @@
           {
             "value": "paler_margin",
             "frequency": "usually"
+          },
+          {
+            "value": "zoned",
+            "frequency": "always"
           }
         ],
         "hymenophore_colour": [
@@ -42577,6 +44874,10 @@
           {
             "value": "uniform",
             "frequency": "usually"
+          },
+          {
+            "value": "zoned",
+            "frequency": "usually"
           }
         ],
         "taste": [
@@ -42893,6 +45194,20 @@
           {
             "value": "no_change",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "white",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
           }
         ]
       },
@@ -43262,6 +45577,28 @@
             "value": "yellow",
             "frequency": "sometimes"
           }
+        ],
+        "stipe_colour": [
+          {
+            "value": "tan",
+            "frequency": "usually"
+          },
+          {
+            "value": "cream",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "yellow_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "rarely"
+          },
+          {
+            "value": "olive",
+            "frequency": "rarely"
+          }
         ]
       },
       "measurements": {
@@ -43562,6 +45899,10 @@
           {
             "value": "darker_centre",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "bruising_where": [
@@ -43588,6 +45929,24 @@
           {
             "value": "no_change",
             "frequency": "usually"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "purple",
+            "frequency": "usually"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "rarely"
+          },
+          {
+            "value": "cream",
+            "frequency": "rarely"
           }
         ]
       },
@@ -43916,11 +46275,19 @@
           {
             "value": "darker_centre",
             "frequency": "sometimes"
+          },
+          {
+            "value": "mottled",
+            "frequency": "sometimes"
           }
         ],
         "spore_print_fine": [
           {
             "value": "clay",
+            "frequency": "usually"
+          },
+          {
+            "value": "olive_brown",
             "frequency": "usually"
           }
         ],
@@ -43931,6 +46298,32 @@
           },
           {
             "value": "brown",
+            "frequency": "sometimes"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "red",
+            "frequency": "usually"
+          },
+          {
+            "value": "yellow",
+            "frequency": "usually"
+          },
+          {
+            "value": "pink",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "purple",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "orange",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "red_brown",
             "frequency": "sometimes"
           }
         ]
@@ -44194,6 +46587,20 @@
           {
             "value": "dark",
             "frequency": "always"
+          }
+        ],
+        "stipe_colour": [
+          {
+            "value": "black",
+            "frequency": "usually"
+          },
+          {
+            "value": "dark_brown",
+            "frequency": "sometimes"
+          },
+          {
+            "value": "grey",
+            "frequency": "sometimes"
           }
         ]
       },

@@ -289,9 +289,9 @@ class KeyEngine(
         val live = (if (noRanking) ranking.candidates else leading).map { it.taxon }
         if (live.isEmpty()) return null
 
-        val lethalInPlay = ranking.hazards.any {
-            it.taxon.hazard.severity == Hazard.Severity.LETHAL
-        }
+        // Anything that can kill or seriously harm: the hazards list holds exactly those,
+        // and only while nothing has contradicted them.
+        val harmInPlay = ranking.hazards.isNotEmpty()
         val settling = charactersThatSettleAHazard(ranking)
         val declared = withGatingQuestions(settling.declared, answers)
         val disagreeing = withGatingQuestions(settling.disagreeing, answers)
@@ -317,7 +317,8 @@ class KeyEngine(
              */
             .filter { it.kind != Character.Kind.MEASUREMENT }
             /*
-             * And never asks for a taste while something lethal is still in play.
+             * And never asks for a taste while something that can kill or seriously
+             * harm is still in play.
              *
              * Tasting is a real field method — a small piece chewed and spat out — and
              * the schema explains how. But an app that has just told a reader it cannot
@@ -326,10 +327,15 @@ class KeyEngine(
              * invites you to put a possible Amanita in your mouth has stopped being
              * careful, and being careful is the entire argument for this app existing.
              *
-             * It comes back the moment the deadly ones are ruled out, which is when
-             * every guide says to use it.
+             * The same goes for the severe ones, which is where this used to stop short:
+             * a false morel is severe rather than lethal, so a key that had narrowed to
+             * the spring morels could ask for a taste of a Gyromitra — and raw morels
+             * make people ill besides.
+             *
+             * It comes back the moment those are ruled out, which is when every guide
+             * says to use it.
              */
-            .filterNot { it.id == "taste" && lethalInPlay }
+            .filterNot { it.id == "taste" && harmInPlay }
             .map { it to askingValue(it, live) }
             // Never ask something that cannot separate anything. Once one candidate
             // stands alone there is no next question, and the honest answer is none.
