@@ -95,6 +95,7 @@ fun SeasonScreen(
     LazyColumnMMD(
         Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 16.dp),
+        isScrollbarVisible = false,
     ) {
         item {
             TextMMD(

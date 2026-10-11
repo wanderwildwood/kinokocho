@@ -46,7 +46,7 @@ fun AboutDialog(
         // This outgrew the panel once already: with the two backup rows on it the last
         // one landed in the system's gesture strip on a 480x800 screen and stopped being
         // tappable at all. It pages now, four rows to a swipe, rather than coasting.
-        LazyColumnMMD(modifier = Modifier.heightIn(max = 460.dp)) {
+        LazyColumnMMD(modifier = Modifier.heightIn(max = 460.dp), isScrollbarVisible = false) {
             item {
                 Line(stringResource(R.string.about_title, BuildConfig.VERSION_NAME), bold = true)
             }

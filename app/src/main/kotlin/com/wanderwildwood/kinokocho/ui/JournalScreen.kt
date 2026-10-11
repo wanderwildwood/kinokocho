@@ -156,6 +156,7 @@ fun JournalScreen(
                         Modifier.weight(1f).padding(top = 8.dp),
                         state = listState,
                         scrollStep = visible,
+                        isScrollbarVisible = false,
                     ) {
                         items(shown, key = { it.observation.id }) { entry ->
                             EntryRow(entry, onOpen = { onOpen(entry.observation.id) },

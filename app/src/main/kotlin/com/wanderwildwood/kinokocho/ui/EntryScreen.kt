@@ -91,6 +91,7 @@ fun EntryScreen(
     LazyColumnMMD(
         Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 16.dp),
+        isScrollbarVisible = false,
     ) {
         item {
             TextMMD(
@@ -386,7 +387,7 @@ fun EntryScreen(
                     arming = null
                 }
                 val context = LocalContext.current
-                LazyRowMMD(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                LazyRowMMD(horizontalArrangement = Arrangement.spacedBy(8.dp), isScrollbarVisible = false) {
                     items3(draft.photos.size) { i ->
                         val photo = draft.photos[i]
                         val file = File(photoDir(context), photo.fileName)

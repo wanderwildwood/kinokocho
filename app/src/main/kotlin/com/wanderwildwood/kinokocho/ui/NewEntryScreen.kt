@@ -191,6 +191,7 @@ fun NewEntryScreen(
             contentPadding = PaddingValues(bottom = 0.dp),
             verticalArrangement = Arrangement.spacedBy(6.dp),
             scrollStep = perPage ?: LazyDefaultsMMD.SCROLL_STEP,
+            isScrollbarVisible = false,
         ) {
             if (drawn) {
                 choiceGrid(
