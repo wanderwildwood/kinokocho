@@ -18,7 +18,6 @@ import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,7 +39,6 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import kotlinx.coroutines.delay
-import com.mudita.mmd.components.lazy.LazyColumnMMD
 
 /**
  * Everything recorded, newest first.
@@ -125,42 +123,9 @@ fun JournalScreen(
                     )
                 }
                 else -> {
-                    /*
-                     * The arrows move by however many entries are actually on screen.
-                     *
-                     * LazyColumnMMD pages by a fixed four items, which is fine only while
-                     * at least four fit. On the picture questions they did not and a whole
-                     * page of choices was skipped. This list is measured rather than
-                     * argued about: the viewport is 564px on the Kompakt and a one-name,
-                     * two-line entry is 124px, so 4.55 fit and four is just inside it.
-                     *
-                     * Seventeen pixels of headroom is not a margin. That detail line
-                     * already wraps to two, and it gains "· 3 photographs" the first time
-                     * somebody photographs a find — a third wrapped line puts the row near
-                     * 148px, at which point fewer than four fit and the arrows start
-                     * stepping over entries. A journal that silently hides what you wrote
-                     * down is worse than one that scrolls awkwardly.
-                     *
-                     * So the step is counted from what is fully in view, which cannot go
-                     * stale the way a constant does. Never zero: an entry taller than the
-                     * screen still has to be scrollable.
-                     */
                     val listState = rememberLazyListState()
-                    val visible by remember {
-                        derivedStateOf {
-                            val info = listState.layoutInfo
-                            info.visibleItemsInfo.count {
-                                it.offset >= info.viewportStartOffset &&
-                                    it.offset + it.size <= info.viewportEndOffset
-                            }.coerceAtLeast(1)
-                        }
-                    }
                     ListJumpBox(listState, ListJump.Pages, Modifier.weight(1f).padding(top = 8.dp)) {
-                        LazyColumnMMD(
-                            state = listState,
-                            scrollStep = visible,
-                            isScrollbarVisible = false,
-                        ) {
+                        PagedColumn(state = listState) {
                             items(shown, key = { it.observation.id }) { entry ->
                                 EntryRow(entry, onOpen = { onOpen(entry.observation.id) },
                                     onDelete = { onDelete(entry.observation.id) })

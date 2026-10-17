@@ -51,7 +51,6 @@ import com.wanderwildwood.kinokocho.schema.Character
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import com.mudita.mmd.components.lazy.LazyColumnMMD
 import com.mudita.mmd.components.lazy.LazyRowMMD
 
 /**
@@ -93,9 +92,8 @@ fun EntryScreen(
 
     Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
     TopAppBarMMD(title = { TextMMD(dateOf(draft.recordedAt)) })
-    LazyColumnMMD(
+    PagedColumn(
         Modifier.weight(1f).padding(horizontal = 16.dp),
-        isScrollbarVisible = false,
     ) {
         item {
             if (draft.placeNote.isNotBlank()) {
@@ -385,7 +383,7 @@ fun EntryScreen(
                     arming = null
                 }
                 val context = LocalContext.current
-                LazyRowMMD(horizontalArrangement = Arrangement.spacedBy(8.dp), isScrollbarVisible = false) {
+                LazyRowMMD(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     items3(draft.photos.size) { i ->
                         val photo = draft.photos[i]
                         val file = File(photoDir(context), photo.fileName)

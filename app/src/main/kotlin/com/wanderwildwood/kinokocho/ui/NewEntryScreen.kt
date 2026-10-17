@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
 import com.mudita.mmd.components.text.TextMMD
@@ -34,8 +33,6 @@ import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.key.Hazard
 import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.schema.Character
-import com.mudita.mmd.components.lazy.LazyColumnMMD
-import com.mudita.mmd.components.lazy.LazyDefaultsMMD
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
 
 /**
@@ -126,8 +123,7 @@ fun NewEntryScreen(
             val glossed = values.any { it.gloss != null }
 
             // What one choice occupies, worked out here rather than inside the list, because
-            // the list needs the same number twice: once to size the choices and once to say
-            // how far past the last of them it may scroll.
+            // the choices are sized to divide the list into whole rows.
             val unit = if (drawn) {
                 heightToFill(
                     viewport = viewport,
@@ -144,51 +140,9 @@ fun NewEntryScreen(
                 )
             }
 
-            /*
-             * Enough blank items to make the list a whole number of pages.
-             *
-             * Sizing the choices to divide the page is not enough on its own, and padding the
-             * end by a loose amount is worse: it lets the list stop anywhere at all. What cuts
-             * the last page is the *clamp* — at the bottom there is nothing further to scroll,
-             * so the list rests against its own end, and whatever lands under the top edge is
-             * wherever the remainder happened to fall.
-             *
-             * If every item is the same height and the count is a multiple of a page, the end
-             * of the list is itself a page boundary, and resting against it puts a choice's
-             * top edge at the top of the screen like every other stopping place. So the skip
-             * button takes a choice's height too, and blank items make up the difference.
-             */
-            val perPage = unit?.let { u ->
-                var n = 1
-                while (u * (n + 1) + GAP * n <= viewport) n++
-                n
-            }
-            val realItems = (if (drawn) (values.size + 1) / 2 else values.size) + 1  // + skip
-            val blanks = perPage?.let { (it - realItems % it) % it } ?: 0
-
-            /*
-             * The arrows move exactly one screen, which they did not.
-             *
-             * LazyColumnMMD pages by a fixed number of *items* — LazyDefaultsMMD.SCROLL_STEP
-             * is 4 — and the picture tiles put two choices in one item, so a page of items
-             * was two screens of tiles. Tapping down from the top of "What kind of fungus is
-             * it?" jumped from the gilled row to the crust row, straight past veined, coral,
-             * cup and *gasteroid*: every puffball, earthstar and stinkhorn in the pack, on
-             * the one question that has to be answered before any of them can be reached.
-             *
-             * It was reachable only by luck. Paging down skipped it and paging up from the
-             * bottom happened to land on it, because both steps overshoot and the ends clamp.
-             * Nothing about the screen said a page had been missed.
-             *
-             * So the step is what actually fits, which is already worked out above to size
-             * the tiles and pad the list to whole pages.
-             */
-            LazyColumnMMD(
+            PagedColumn(
                 Modifier.fillMaxSize().padding(top = 8.dp),
-                contentPadding = PaddingValues(bottom = 0.dp),
                 verticalArrangement = Arrangement.spacedBy(6.dp),
-                scrollStep = perPage ?: LazyDefaultsMMD.SCROLL_STEP,
-                isScrollbarVisible = false,
             ) {
                 if (drawn) {
                     choiceGrid(
@@ -261,9 +215,6 @@ fun NewEntryScreen(
                     }
                 }
 
-                // The blank tail that makes the count a whole number of pages. Nothing to
-                // read, and it is what the end of a list looks like.
-                items(blanks) { Box(Modifier.fillMaxWidth().height(unit ?: 0.dp)) }
 
 
             }

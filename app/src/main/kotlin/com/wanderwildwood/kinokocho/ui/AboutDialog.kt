@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import com.mudita.mmd.components.lazy.LazyColumnMMD
 import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -46,7 +45,7 @@ fun AboutDialog(
         // This outgrew the panel once already: with the two backup rows on it the last
         // one landed in the system's gesture strip on a 480x800 screen and stopped being
         // tappable at all. It pages now, four rows to a swipe, rather than coasting.
-        LazyColumnMMD(modifier = Modifier.heightIn(max = 460.dp), isScrollbarVisible = false) {
+        PagedColumn(modifier = Modifier.heightIn(max = 460.dp)) {
             item {
                 Line(stringResource(R.string.about_title, BuildConfig.VERSION_NAME), bold = true)
             }

@@ -32,7 +32,6 @@ import com.wanderwildwood.kinokocho.key.Taxon
 import com.wanderwildwood.kinokocho.schema.Character
 import java.text.DateFormatSymbols
 import java.util.Locale
-import com.mudita.mmd.components.lazy.LazyColumnMMD
 
 /**
  * One candidate, read properly.
@@ -80,9 +79,8 @@ fun CandidateScreen(
     Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
     TopAppBarMMD(title = { TextMMD(taxon.scientificName) })
     SelectionContainer(Modifier.weight(1f).textActions()) {
-    LazyColumnMMD(
+    PagedColumn(
         Modifier.fillMaxSize().padding(horizontal = 16.dp),
-        isScrollbarVisible = false,
     ) {
         taxon.commonName?.let {
             item {

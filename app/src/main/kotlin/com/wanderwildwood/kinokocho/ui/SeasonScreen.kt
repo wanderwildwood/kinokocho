@@ -37,7 +37,6 @@ import com.wanderwildwood.kinokocho.key.Prevalence
 import com.wanderwildwood.kinokocho.key.Taxon
 import java.text.DateFormatSymbols
 import java.util.Locale
-import com.mudita.mmd.components.lazy.LazyColumnMMD
 
 /**
  * What the pack expects to be about this month.
@@ -111,10 +110,9 @@ fun SeasonScreen(
             jump = remember(rest, firstOfRest) { ListJump.Letters(rest.map { it.scientificName }, firstOfRest) },
             modifier = Modifier.weight(1f),
         ) {
-            LazyColumnMMD(
+            PagedColumn(
                 Modifier.padding(horizontal = 16.dp),
                 state = listState,
-                isScrollbarVisible = false,
             ) {
                 item {
                     TextFieldMMD(
