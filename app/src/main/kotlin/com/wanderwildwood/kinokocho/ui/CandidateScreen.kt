@@ -1,5 +1,7 @@
 package com.wanderwildwood.kinokocho.ui
 
+import androidx.compose.material3.ExperimentalMaterial3Api
+import com.mudita.mmd.components.top_app_bar.TopAppBarMMD
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -59,6 +61,7 @@ import com.mudita.mmd.components.lazy.LazyColumnMMD
  * A separate block of agreements is a second thing to read; a tick against the row is
  * not.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CandidateScreen(
     vm: JournalViewModel,
@@ -74,21 +77,16 @@ fun CandidateScreen(
 
     // Selectable, so a word in a description (decurrent, volva, reticulate) can be taken to
     // Define. The menu over a selection is the shop's, with its ⋮ given back (TextActions.kt).
-    SelectionContainer(Modifier.textActions()) {
+    Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
+    TopAppBarMMD(title = { TextMMD(taxon.scientificName) })
+    SelectionContainer(Modifier.weight(1f).textActions()) {
     LazyColumnMMD(
-        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
-            .padding(horizontal = 16.dp),
+        Modifier.fillMaxSize().padding(horizontal = 16.dp),
         isScrollbarVisible = false,
     ) {
-        item {
-            TextMMD(
-                taxon.scientificName,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 12.dp),
-            )
-            taxon.commonName?.let {
-                TextMMD(it, style = MaterialTheme.typography.bodyMedium)
+        taxon.commonName?.let {
+            item {
+                TextMMD(it, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(top = 12.dp))
             }
         }
 
@@ -318,6 +316,7 @@ fun CandidateScreen(
                 modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 24.dp),
             ) { TextMMD(stringResource(R.string.candidate_back)) }
         }
+    }
     }
     }
 }

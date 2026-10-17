@@ -1,5 +1,7 @@
 package com.wanderwildwood.kinokocho.ui
 
+import androidx.compose.material3.ExperimentalMaterial3Api
+import com.mudita.mmd.components.top_app_bar.TopAppBarMMD
 import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -60,6 +62,7 @@ import com.mudita.mmd.components.lazy.LazyRowMMD
  * at a table, when the spore print has dropped and there is time to see what was
  * missed. This is that screen.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EntryScreen(
     vm: JournalViewModel,
@@ -88,20 +91,15 @@ fun EntryScreen(
     val sporePrintPending = "spore_print" !in draft.answers.values.keys
     val resources = LocalContext.current.resources
 
+    Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
+    TopAppBarMMD(title = { TextMMD(dateOf(draft.recordedAt)) })
     LazyColumnMMD(
-        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
-            .padding(horizontal = 16.dp),
+        Modifier.weight(1f).padding(horizontal = 16.dp),
         isScrollbarVisible = false,
     ) {
         item {
-            TextMMD(
-                dateOf(draft.recordedAt),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 14.dp),
-            )
             if (draft.placeNote.isNotBlank()) {
-                TextMMD(draft.placeNote, style = MaterialTheme.typography.bodySmall)
+                TextMMD(draft.placeNote, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 12.dp))
             }
             val n = draft.answers.answeredCount
             val p = draft.photos.size
@@ -649,6 +647,7 @@ fun EntryScreen(
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 20.dp),
             ) { TextMMD(stringResource(R.string.entry_close)) }
         }
+    }
     }
 }
 

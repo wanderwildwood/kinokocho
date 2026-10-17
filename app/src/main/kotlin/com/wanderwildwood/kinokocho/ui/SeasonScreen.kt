@@ -1,5 +1,8 @@
 package com.wanderwildwood.kinokocho.ui
 
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import com.mudita.mmd.components.top_app_bar.TopAppBarMMD
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -69,6 +72,7 @@ import com.mudita.mmd.components.lazy.LazyColumnMMD
  * the ones a walker actually meets, except that anything lethal is here however rarely
  * it turns up. Dropping a death cap for being uncommon is not a trade this app makes.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SeasonScreen(
     taxa: List<Taxon>,
@@ -92,93 +96,104 @@ fun SeasonScreen(
         .sortedBy { it.scientificName }
     val monthName = DateFormatSymbols(Locale.getDefault()).months[month - 1]
 
-    LazyColumnMMD(
-        Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)
-            .padding(horizontal = 16.dp),
-        isScrollbarVisible = false,
-    ) {
-        item {
-            TextMMD(
-                if (looking) stringResource(R.string.season_title_looking) else stringResource(R.string.season_title_month, monthName),
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 12.dp),
-            )
-            TextFieldMMD(
-                value = query,
-                onValueChange = { query = it },
-                modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
-                placeholder = { TextMMD(stringResource(R.string.season_search_placeholder)) },
-                singleLine = true,
-            )
-            TextMMD(
-                if (looking) {
-                    stringResource(R.string.season_search_count, found.size, taxa.size)
-                } else {
-                    stringResource(R.string.season_month_count, inSeason.size, taxa.size, monthName)
-                },
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(top = 6.dp, bottom = 4.dp),
-            )
-        }
+    // The long list is in order of scientific name, so letters down its edge; it starts after
+    // the search, the short list and its heading.
+    val listState = rememberLazyListState()
+    val firstOfRest = 1 + (if (worthKnowing.isNotEmpty()) 1 + worthKnowing.size else 0) + 1
+    Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
+        TopAppBarMMD(
+            title = {
+                TextMMD(if (looking) stringResource(R.string.season_title_looking) else stringResource(R.string.season_title_month, monthName))
+            },
+        )
+        ListJumpBox(
+            state = listState,
+            jump = remember(rest, firstOfRest) { ListJump.Letters(rest.map { it.scientificName }, firstOfRest) },
+            modifier = Modifier.weight(1f),
+        ) {
+            LazyColumnMMD(
+                Modifier.padding(horizontal = 16.dp),
+                state = listState,
+                isScrollbarVisible = false,
+            ) {
+                item {
+                    TextFieldMMD(
+                        value = query,
+                        onValueChange = { query = it },
+                        modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                        placeholder = { TextMMD(stringResource(R.string.season_search_placeholder)) },
+                        singleLine = true,
+                    )
+                    TextMMD(
+                        if (looking) {
+                            stringResource(R.string.season_search_count, found.size, taxa.size)
+                        } else {
+                            stringResource(R.string.season_month_count, inSeason.size, taxa.size, monthName)
+                        },
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 6.dp, bottom = 4.dp),
+                    )
+                }
 
-        if (worthKnowing.isNotEmpty()) {
-            item {
-                HorizontalDividerMMD(Modifier.padding(top = 10.dp))
-                TextMMD(
-                    stringResource(R.string.season_worth_knowing),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
-                )
-                TextMMD(
-                    stringResource(R.string.season_worth_knowing_body),
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(bottom = 4.dp),
-                )
+                if (worthKnowing.isNotEmpty()) {
+                    item {
+                        HorizontalDividerMMD(Modifier.padding(top = 10.dp))
+                        TextMMD(
+                            stringResource(R.string.season_worth_knowing),
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
+                        )
+                        TextMMD(
+                            stringResource(R.string.season_worth_knowing_body),
+                            style = MaterialTheme.typography.bodySmall,
+                            modifier = Modifier.padding(bottom = 4.dp),
+                        )
+                    }
+                    items(worthKnowing.size) { i ->
+                        val t = worthKnowing[i]
+                        TaxonLine(t, onOpen, plate = true, confusion = confusedWith(t, inSeason))
+                    }
+                }
+
+                item {
+                    HorizontalDividerMMD(Modifier.padding(top = 10.dp))
+                    TextMMD(
+                        if (looking) stringResource(R.string.season_heading_found) else stringResource(R.string.season_heading_also_about),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
+                    )
+                }
+                /*
+                 * The same sentence the top of the page gets, for the rest of the list and for
+                 * search results.
+                 *
+                 * The fix that stopped five rows all reading "Sought after." was applied to the
+                 * short list at the top and nowhere else, so the long list under it and every
+                 * search result still carried the bare label — which restates the heading and
+                 * says nothing anyone can act on. Searching "morel" printed the false morel with
+                 * its harm and then two morels reading only "Sought after.", when what those two
+                 * rows most needed to say was that they are taken for the mushroom listed
+                 * immediately above them.
+                 *
+                 * Against the whole pack while looking one up, because a search is explicitly
+                 * "whatever month they are out in" and a confusion that only holds in season is
+                 * the wrong answer to a question that has left the calendar behind. Against what
+                 * is in season while browsing the month, which is what the top of the page does.
+                 */
+                val against = if (looking) taxa else inSeason
+                items(rest.size) { i ->
+                    TaxonLine(rest[i], onOpen, confusion = confusedWith(rest[i], against))
+                }
+
+                item {
+                    OutlinedButtonMMD(
+                        onClick = onClose,
+                        modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 24.dp),
+                    ) { TextMMD(stringResource(R.string.season_close)) }
+                }
             }
-            items(worthKnowing.size) { i ->
-                val t = worthKnowing[i]
-                TaxonLine(t, onOpen, plate = true, confusion = confusedWith(t, inSeason))
-            }
-        }
-
-        item {
-            HorizontalDividerMMD(Modifier.padding(top = 10.dp))
-            TextMMD(
-                if (looking) stringResource(R.string.season_heading_found) else stringResource(R.string.season_heading_also_about),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
-            )
-        }
-        /*
-         * The same sentence the top of the page gets, for the rest of the list and for
-         * search results.
-         *
-         * The fix that stopped five rows all reading "Sought after." was applied to the
-         * short list at the top and nowhere else, so the long list under it and every
-         * search result still carried the bare label — which restates the heading and
-         * says nothing anyone can act on. Searching "morel" printed the false morel with
-         * its harm and then two morels reading only "Sought after.", when what those two
-         * rows most needed to say was that they are taken for the mushroom listed
-         * immediately above them.
-         *
-         * Against the whole pack while looking one up, because a search is explicitly
-         * "whatever month they are out in" and a confusion that only holds in season is
-         * the wrong answer to a question that has left the calendar behind. Against what
-         * is in season while browsing the month, which is what the top of the page does.
-         */
-        val against = if (looking) taxa else inSeason
-        items(rest.size) { i ->
-            TaxonLine(rest[i], onOpen, confusion = confusedWith(rest[i], against))
-        }
-
-        item {
-            OutlinedButtonMMD(
-                onClick = onClose,
-                modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 24.dp),
-            ) { TextMMD(stringResource(R.string.season_close)) }
         }
     }
 }

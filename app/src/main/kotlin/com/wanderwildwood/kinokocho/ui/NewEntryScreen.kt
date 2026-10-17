@@ -1,5 +1,7 @@
 package com.wanderwildwood.kinokocho.ui
 
+import androidx.compose.material3.ExperimentalMaterial3Api
+import com.mudita.mmd.components.top_app_bar.TopAppBarMMD
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -43,6 +45,7 @@ import com.wanderwildwood.kinokocho.schema.CharacterSchema
  * the candidates change. Every question is skippable: an entry with three characters
  * is a real entry, and a key that insists on answers gets false ones.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewEntryScreen(
     vm: JournalViewModel,
@@ -58,237 +61,232 @@ fun NewEntryScreen(
     val questionId = remember(draft.answers, draft.revisiting) { vm.currentQuestion(draft) }
     val ranking = remember(draft.answers) { vm.engine.rank(draft.answers) }
 
-    Column(Modifier.fillMaxSize().padding(horizontal = 16.dp)) {
-
-        // The way to the journal, from the screen the app opens on. A row rather than a
-        // hamburger: it goes to one place and says which.
-        Row(
-            Modifier.fillMaxWidth().padding(top = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            TextMMD(
-                // The app's name, not a bare noun. This is the only heading on the
-                // question screen, and "Journal" left the one screen somebody spends a
-                // walk inside unnamed.
-                if (journalCount == 0) stringResource(R.string.entry_new_journal_link) else stringResource(R.string.entry_new_journal_link_count, journalCount),
-                style = MaterialThemeTypography().bodySmall,
-                modifier = Modifier.weight(1f).clickable(onClick = onJournal),
-            )
-        }
-        HorizontalDividerMMD()
-
-        if (questionId == null) {
-            NothingLeftToAsk(draft, ranking, vm.schema, onAddPhoto, onDone)
-            return@Column
-        }
-
-        val character = vm.schema.character(questionId)!!
-        val values = vm.schema.valuesOf(character)
-        val already = draft.answers.values[questionId].orEmpty()
-        var picked by remember(questionId) { mutableStateOf(already) }
-
-        TextMMD(
-            character.label,
-            style = MaterialThemeTypography().titleMedium,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(top = 12.dp),
-        )
-        character.hint?.let {
-            TextMMD(it, style = MaterialThemeTypography().bodySmall, modifier = Modifier.padding(top = 4.dp))
-        }
-
-        val multi = character.cardinality == Character.Cardinality.MULTI
-        if (multi) {
-            TextMMD(
-                stringResource(R.string.entry_new_choose_many),
-                style = MaterialThemeTypography().bodySmall,
-                modifier = Modifier.padding(top = 2.dp),
-            )
-        }
-
-        val choose = { valueId: String ->
-            val selected = valueId in picked
-            picked = when {
-                !multi -> setOf(valueId)
-                selected -> picked - valueId
-                else -> picked + valueId
-            }
-            if (!multi) vm.answer(questionId, picked)
-        }
-
-        // Pictures where there are pictures. Colour and smell get none — a monochrome
-        // panel cannot draw a brown spore print or an almond smell, and a drawing that
-        // stands in for one would be worse than the word.
-        val drawn = CharacterArt.coversAll(questionId, values.map { it.id })
-
-        // Measured rather than assumed: the list gets whatever is left between the
-        // question and the footer, and the tiles need to know how much that is if they
-        // are to divide it into whole rows.
-        BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
-        val viewport = maxHeight - 8.dp
-        val glossed = values.any { it.gloss != null }
-
-        // What one choice occupies, worked out here rather than inside the list, because
-        // the list needs the same number twice: once to size the choices and once to say
-        // how far past the last of them it may scroll.
-        val unit = if (drawn) {
-            heightToFill(
-                viewport = viewport,
-                natural = ROW_MIN + LINE * linesFor(values.map { it.label }),
-                count = (values.size + 1) / 2,
-                gap = GAP,
-            )
-        } else {
-            heightToFill(
-                viewport = viewport,
-                natural = if (glossed) 55.dp else 42.dp,
-                count = values.size,
-                gap = GAP,
-            )
-        }
-
-        /*
-         * Enough blank items to make the list a whole number of pages.
-         *
-         * Sizing the choices to divide the page is not enough on its own, and padding the
-         * end by a loose amount is worse: it lets the list stop anywhere at all. What cuts
-         * the last page is the *clamp* — at the bottom there is nothing further to scroll,
-         * so the list rests against its own end, and whatever lands under the top edge is
-         * wherever the remainder happened to fall.
-         *
-         * If every item is the same height and the count is a multiple of a page, the end
-         * of the list is itself a page boundary, and resting against it puts a choice's
-         * top edge at the top of the screen like every other stopping place. So the skip
-         * button takes a choice's height too, and blank items make up the difference.
-         */
-        val perPage = unit?.let { u ->
-            var n = 1
-            while (u * (n + 1) + GAP * n <= viewport) n++
-            n
-        }
-        val realItems = (if (drawn) (values.size + 1) / 2 else values.size) + 1  // + skip
-        val blanks = perPage?.let { (it - realItems % it) % it } ?: 0
-
-        /*
-         * The arrows move exactly one screen, which they did not.
-         *
-         * LazyColumnMMD pages by a fixed number of *items* — LazyDefaultsMMD.SCROLL_STEP
-         * is 4 — and the picture tiles put two choices in one item, so a page of items
-         * was two screens of tiles. Tapping down from the top of "What kind of fungus is
-         * it?" jumped from the gilled row to the crust row, straight past veined, coral,
-         * cup and *gasteroid*: every puffball, earthstar and stinkhorn in the pack, on
-         * the one question that has to be answered before any of them can be reached.
-         *
-         * It was reachable only by luck. Paging down skipped it and paging up from the
-         * bottom happened to land on it, because both steps overshoot and the ends clamp.
-         * Nothing about the screen said a page had been missed.
-         *
-         * So the step is what actually fits, which is already worked out above to size
-         * the tiles and pad the list to whole pages.
-         */
-        LazyColumnMMD(
-            Modifier.fillMaxSize().padding(top = 8.dp),
-            contentPadding = PaddingValues(bottom = 0.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp),
-            scrollStep = perPage ?: LazyDefaultsMMD.SCROLL_STEP,
-            isScrollbarVisible = false,
-        ) {
-            if (drawn) {
-                choiceGrid(
-                    characterId = questionId,
-                    values = values,
-                    picked = picked,
-                    rowHeight = unit,
-                    onPick = choose,
+    Column(Modifier.fillMaxSize()) {
+        // The way to the journal, from the screen the app opens on: the bar's title, which
+        // says the app's name and goes to one place. A row rather than a hamburger.
+        TopAppBarMMD(
+            title = {
+                TextMMD(
+                    if (journalCount == 0) stringResource(R.string.entry_new_journal_link) else stringResource(R.string.entry_new_journal_link_count, journalCount),
+                    modifier = Modifier.clickable(onClick = onJournal),
                 )
-            } else {
-                /*
-                 * The same whole-rows-to-a-page rule as the picture tiles.
-                 *
-                 * These are the questions with no drawings — colour, smell, taste — and
-                 * they are the longest lists in the app, so they were the worst for it:
-                 * sixteen smells with the fifth sliced through by the fold. The natural
-                 * height is deliberately generous, because guessing it low would squeeze
-                 * a gloss out of its own box and move the clipping inside the button.
-                 */
-                items(values, key = { it.id }) { value ->
-                    val selected = value.id in picked
-                    // The gloss where there is one. Colour is the character with no
-                    // drawings and the most words that need explaining, and these two
-                    // facts are the same fact.
-                    val face: @Composable () -> Unit = {
-                        if (value.gloss == null) {
-                            TextMMD(value.label)
-                        } else {
-                            Column {
-                                TextMMD(value.label)
-                                TextMMD(
-                                    value.gloss!!,
-                                    style = MaterialThemeTypography().bodySmall,
-                                )
-                            }
-                        }
-                    }
-                    val shape = Modifier.fillMaxWidth()
-                        .then(unit?.let { Modifier.height(it) } ?: Modifier)
-                    if (selected) {
-                        ButtonMMD(onClick = { choose(value.id) }, modifier = shape) { face() }
-                    } else {
-                        OutlinedButtonMMD(onClick = { choose(value.id) }, modifier = shape) { face() }
-                    }
-                }
-            }
-
-            item {
-                // Not a state of the mushroom. A state of the person looking at it, and
-                // it must never be scored as though they had answered.
-                //
-                // The *row* keeps a choice's height, because that is what makes the list
-                // one uniform column so any position it rests at is the top of something.
-                // The button inside it does not. Given the row's full height it became a
-                // slab across both columns, half again the size of any real choice and
-                // the largest thing on the page — which is backwards: it is the answer
-                // for when there is nothing to see, and it was shouting.
-                Box(
-                    Modifier.fillMaxWidth().then(unit?.let { Modifier.height(it) } ?: Modifier),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    OutlinedButtonMMD(
-                        onClick = { vm.skip(questionId) },
-                        modifier = Modifier.fillMaxWidth()
-                            .then(unit?.let { Modifier.height(it.coerceAtMost(SKIP_MAX)) }
-                                ?: Modifier),
-                    ) {
-                        TextMMD(if (character.notTested) stringResource(R.string.entry_new_cannot_say) else stringResource(R.string.entry_new_skip))
-                    }
-                }
-            }
-
-            // The blank tail that makes the count a whole number of pages. Nothing to
-            // read, and it is what the end of a list looks like.
-            items(blanks) { Box(Modifier.fillMaxWidth().height(unit ?: 0.dp)) }
-
-
-        }
-        }
-
-        Footer(
-            draft = draft,
-            ranking = ranking,
-            vm = vm,
-            onAddPhoto = onAddPhoto,
-            onDone = onDone,
-            // Almost every character is multi-select now, so a question is committed by
-            // pressing on rather than by tapping a choice. That button was at the end of
-            // the list, which on a twelve-state question meant scrolling past everything
-            // to answer it. It belongs where the eye already is.
-            onCandidate = onCandidate,
-            onNext = if (multi && picked.isNotEmpty()) {
-                { vm.answer(questionId, picked) }
-            } else {
-                null
             },
         )
+        Column(Modifier.weight(1f).padding(horizontal = 16.dp)) {
+
+            if (questionId == null) {
+                NothingLeftToAsk(draft, ranking, vm.schema, onAddPhoto, onDone)
+                return@Column
+            }
+
+            val character = vm.schema.character(questionId)!!
+            val values = vm.schema.valuesOf(character)
+            val already = draft.answers.values[questionId].orEmpty()
+            var picked by remember(questionId) { mutableStateOf(already) }
+
+            TextMMD(
+                character.label,
+                style = MaterialThemeTypography().titleMedium,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(top = 12.dp),
+            )
+            character.hint?.let {
+                TextMMD(it, style = MaterialThemeTypography().bodySmall, modifier = Modifier.padding(top = 4.dp))
+            }
+
+            val multi = character.cardinality == Character.Cardinality.MULTI
+            if (multi) {
+                TextMMD(
+                    stringResource(R.string.entry_new_choose_many),
+                    style = MaterialThemeTypography().bodySmall,
+                    modifier = Modifier.padding(top = 2.dp),
+                )
+            }
+
+            val choose = { valueId: String ->
+                val selected = valueId in picked
+                picked = when {
+                    !multi -> setOf(valueId)
+                    selected -> picked - valueId
+                    else -> picked + valueId
+                }
+                if (!multi) vm.answer(questionId, picked)
+            }
+
+            // Pictures where there are pictures. Colour and smell get none — a monochrome
+            // panel cannot draw a brown spore print or an almond smell, and a drawing that
+            // stands in for one would be worse than the word.
+            val drawn = CharacterArt.coversAll(questionId, values.map { it.id })
+
+            // Measured rather than assumed: the list gets whatever is left between the
+            // question and the footer, and the tiles need to know how much that is if they
+            // are to divide it into whole rows.
+            BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
+            val viewport = maxHeight - 8.dp
+            val glossed = values.any { it.gloss != null }
+
+            // What one choice occupies, worked out here rather than inside the list, because
+            // the list needs the same number twice: once to size the choices and once to say
+            // how far past the last of them it may scroll.
+            val unit = if (drawn) {
+                heightToFill(
+                    viewport = viewport,
+                    natural = ROW_MIN + LINE * linesFor(values.map { it.label }),
+                    count = (values.size + 1) / 2,
+                    gap = GAP,
+                )
+            } else {
+                heightToFill(
+                    viewport = viewport,
+                    natural = if (glossed) 55.dp else 42.dp,
+                    count = values.size,
+                    gap = GAP,
+                )
+            }
+
+            /*
+             * Enough blank items to make the list a whole number of pages.
+             *
+             * Sizing the choices to divide the page is not enough on its own, and padding the
+             * end by a loose amount is worse: it lets the list stop anywhere at all. What cuts
+             * the last page is the *clamp* — at the bottom there is nothing further to scroll,
+             * so the list rests against its own end, and whatever lands under the top edge is
+             * wherever the remainder happened to fall.
+             *
+             * If every item is the same height and the count is a multiple of a page, the end
+             * of the list is itself a page boundary, and resting against it puts a choice's
+             * top edge at the top of the screen like every other stopping place. So the skip
+             * button takes a choice's height too, and blank items make up the difference.
+             */
+            val perPage = unit?.let { u ->
+                var n = 1
+                while (u * (n + 1) + GAP * n <= viewport) n++
+                n
+            }
+            val realItems = (if (drawn) (values.size + 1) / 2 else values.size) + 1  // + skip
+            val blanks = perPage?.let { (it - realItems % it) % it } ?: 0
+
+            /*
+             * The arrows move exactly one screen, which they did not.
+             *
+             * LazyColumnMMD pages by a fixed number of *items* — LazyDefaultsMMD.SCROLL_STEP
+             * is 4 — and the picture tiles put two choices in one item, so a page of items
+             * was two screens of tiles. Tapping down from the top of "What kind of fungus is
+             * it?" jumped from the gilled row to the crust row, straight past veined, coral,
+             * cup and *gasteroid*: every puffball, earthstar and stinkhorn in the pack, on
+             * the one question that has to be answered before any of them can be reached.
+             *
+             * It was reachable only by luck. Paging down skipped it and paging up from the
+             * bottom happened to land on it, because both steps overshoot and the ends clamp.
+             * Nothing about the screen said a page had been missed.
+             *
+             * So the step is what actually fits, which is already worked out above to size
+             * the tiles and pad the list to whole pages.
+             */
+            LazyColumnMMD(
+                Modifier.fillMaxSize().padding(top = 8.dp),
+                contentPadding = PaddingValues(bottom = 0.dp),
+                verticalArrangement = Arrangement.spacedBy(6.dp),
+                scrollStep = perPage ?: LazyDefaultsMMD.SCROLL_STEP,
+                isScrollbarVisible = false,
+            ) {
+                if (drawn) {
+                    choiceGrid(
+                        characterId = questionId,
+                        values = values,
+                        picked = picked,
+                        rowHeight = unit,
+                        onPick = choose,
+                    )
+                } else {
+                    /*
+                     * The same whole-rows-to-a-page rule as the picture tiles.
+                     *
+                     * These are the questions with no drawings — colour, smell, taste — and
+                     * they are the longest lists in the app, so they were the worst for it:
+                     * sixteen smells with the fifth sliced through by the fold. The natural
+                     * height is deliberately generous, because guessing it low would squeeze
+                     * a gloss out of its own box and move the clipping inside the button.
+                     */
+                    items(values, key = { it.id }) { value ->
+                        val selected = value.id in picked
+                        // The gloss where there is one. Colour is the character with no
+                        // drawings and the most words that need explaining, and these two
+                        // facts are the same fact.
+                        val face: @Composable () -> Unit = {
+                            if (value.gloss == null) {
+                                TextMMD(value.label)
+                            } else {
+                                Column {
+                                    TextMMD(value.label)
+                                    TextMMD(
+                                        value.gloss!!,
+                                        style = MaterialThemeTypography().bodySmall,
+                                    )
+                                }
+                            }
+                        }
+                        val shape = Modifier.fillMaxWidth()
+                            .then(unit?.let { Modifier.height(it) } ?: Modifier)
+                        if (selected) {
+                            ButtonMMD(onClick = { choose(value.id) }, modifier = shape) { face() }
+                        } else {
+                            OutlinedButtonMMD(onClick = { choose(value.id) }, modifier = shape) { face() }
+                        }
+                    }
+                }
+
+                item {
+                    // Not a state of the mushroom. A state of the person looking at it, and
+                    // it must never be scored as though they had answered.
+                    //
+                    // The *row* keeps a choice's height, because that is what makes the list
+                    // one uniform column so any position it rests at is the top of something.
+                    // The button inside it does not. Given the row's full height it became a
+                    // slab across both columns, half again the size of any real choice and
+                    // the largest thing on the page — which is backwards: it is the answer
+                    // for when there is nothing to see, and it was shouting.
+                    Box(
+                        Modifier.fillMaxWidth().then(unit?.let { Modifier.height(it) } ?: Modifier),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        OutlinedButtonMMD(
+                            onClick = { vm.skip(questionId) },
+                            modifier = Modifier.fillMaxWidth()
+                                .then(unit?.let { Modifier.height(it.coerceAtMost(SKIP_MAX)) }
+                                    ?: Modifier),
+                        ) {
+                            TextMMD(if (character.notTested) stringResource(R.string.entry_new_cannot_say) else stringResource(R.string.entry_new_skip))
+                        }
+                    }
+                }
+
+                // The blank tail that makes the count a whole number of pages. Nothing to
+                // read, and it is what the end of a list looks like.
+                items(blanks) { Box(Modifier.fillMaxWidth().height(unit ?: 0.dp)) }
+
+
+            }
+            }
+
+            Footer(
+                draft = draft,
+                ranking = ranking,
+                vm = vm,
+                onAddPhoto = onAddPhoto,
+                onDone = onDone,
+                // Almost every character is multi-select now, so a question is committed by
+                // pressing on rather than by tapping a choice. That button was at the end of
+                // the list, which on a twelve-state question meant scrolling past everything
+                // to answer it. It belongs where the eye already is.
+                onCandidate = onCandidate,
+                onNext = if (multi && picked.isNotEmpty()) {
+                    { vm.answer(questionId, picked) }
+                } else {
+                    null
+                },
+            )
+        }
     }
 }
 

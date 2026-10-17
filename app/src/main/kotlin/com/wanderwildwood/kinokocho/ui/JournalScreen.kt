@@ -1,5 +1,7 @@
 package com.wanderwildwood.kinokocho.ui
 
+import androidx.compose.material3.ExperimentalMaterial3Api
+import com.mudita.mmd.components.top_app_bar.TopAppBarMMD
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -47,6 +49,7 @@ import com.mudita.mmd.components.lazy.LazyColumnMMD
  * what you have already found is a journal, and the reason to carry it is that the
  * last three walks are in your hand.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun JournalScreen(
     entries: List<FullObservation>,
@@ -59,25 +62,25 @@ fun JournalScreen(
     Box(Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxSize()) {
 
-            Row(
-                Modifier.fillMaxWidth().padding(start = 16.dp, end = 12.dp, top = 12.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                TextMMD(
-                    stringResource(R.string.journal_title),
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.weight(1f),
-                )
-                // About lives behind an i, not in a settings list: it is the first thing
-                // a stranger looks for and it is not a setting.
-                Icon(
-                    painter = painterResource(R.drawable.ic_about),
-                    contentDescription = stringResource(R.string.journal_cd_about),
-                    tint = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.size(28.dp).clickable(onClick = onAbout),
-                )
-            }
+            TopAppBarMMD(
+                title = { TextMMD(stringResource(R.string.journal_title)) },
+                actions = {
+                    // About lives behind an i, not in a settings list: it is the first thing
+                    // a stranger looks for and it is not a setting. A 22dp mark in a 48dp
+                    // target, the same three numbers as every other app of this shop.
+                    Box(
+                        Modifier.size(48.dp).clickable(onClick = onAbout),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_about),
+                            contentDescription = stringResource(R.string.journal_cd_about),
+                            tint = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.size(22.dp),
+                        )
+                    }
+                },
+            )
 
             // What is about this month, before anything has been found. It is the one
             // thing a journal can say when it is still empty.
@@ -152,16 +155,17 @@ fun JournalScreen(
                             }.coerceAtLeast(1)
                         }
                     }
-                    LazyColumnMMD(
-                        Modifier.weight(1f).padding(top = 8.dp),
-                        state = listState,
-                        scrollStep = visible,
-                        isScrollbarVisible = false,
-                    ) {
-                        items(shown, key = { it.observation.id }) { entry ->
-                            EntryRow(entry, onOpen = { onOpen(entry.observation.id) },
-                                onDelete = { onDelete(entry.observation.id) })
-                            HorizontalDividerMMD()
+                    ListJumpBox(listState, ListJump.Pages, Modifier.weight(1f).padding(top = 8.dp)) {
+                        LazyColumnMMD(
+                            state = listState,
+                            scrollStep = visible,
+                            isScrollbarVisible = false,
+                        ) {
+                            items(shown, key = { it.observation.id }) { entry ->
+                                EntryRow(entry, onOpen = { onOpen(entry.observation.id) },
+                                    onDelete = { onDelete(entry.observation.id) })
+                                HorizontalDividerMMD()
+                            }
                         }
                     }
                 }
