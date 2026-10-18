@@ -460,4 +460,7 @@
     <!-- Its own sentence after the first, so it starts with a space. %1$d finds in the backup were already in the journal -->
     <string name="import_already_here">\u0020%1$d were already here.</string>
     <string name="import_close">Close</string>
+    <string name="list_jump_setting">Letters and page dots</string>
+    <string name="list_jump_shown">Shown</string>
+    <string name="list_jump_hidden">Hidden</string>
 </resources>

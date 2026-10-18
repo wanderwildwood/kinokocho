@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -146,6 +147,23 @@ fun AboutDialog(
                 Line(
                     stringResource(R.string.about_import_body)
                 )
+            }
+            item {
+                Spacer(10)
+            }
+            item {
+                // The app has no settings screen, so the one switch its lists have sits with
+                // the other things done once in a while.
+                val context = LocalContext.current
+                val jumpShown by rememberListJumpShown()
+                Column(Modifier.fillMaxWidth().clickable { ListJumpPrefs.setShown(context, !jumpShown) }) {
+                    TextMMD(
+                        stringResource(R.string.list_jump_setting),
+                        style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Line(stringResource(if (jumpShown) R.string.list_jump_shown else R.string.list_jump_hidden))
+                }
             }
             item {
                 Spacer(14)
