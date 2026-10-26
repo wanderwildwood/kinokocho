@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mudita.mmd.ThemeMMD
+import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.wanderwildwood.kinokocho.key.KeyEngine
 import androidx.compose.ui.platform.LocalContext
@@ -219,6 +220,26 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
         ActivityResultContracts.OpenDocument()
     ) { uri ->
         if (uri != null) vm.importJournal(uri) { imported = it }
+    }
+
+    // Said once, on the first start, before anything else: what the guide covers and what
+    // it does not. Dismissing it is remembered; About carries the same words for good.
+    val context0 = LocalContext.current
+    val coverageSeen = remember {
+        context0.getSharedPreferences("first_start", android.content.Context.MODE_PRIVATE)
+    }
+    var coverage by remember { mutableStateOf(!coverageSeen.getBoolean("coverage_seen", false)) }
+    if (coverage) {
+        EInkDialog(onDismiss = {}) {
+            TextMMD(stringResource(R.string.coverage_statement))
+            ButtonMMD(
+                onClick = {
+                    coverageSeen.edit().putBoolean("coverage_seen", true).apply()
+                    coverage = false
+                },
+                modifier = Modifier.fillMaxWidth().padding(top = 14.dp),
+            ) { TextMMD(stringResource(R.string.coverage_ok)) }
+        }
     }
 
     if (about) {

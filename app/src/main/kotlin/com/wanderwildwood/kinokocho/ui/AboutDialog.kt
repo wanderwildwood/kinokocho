@@ -59,12 +59,24 @@ fun AboutDialog(
                 )
             }
             item {
+                Spacer(10)
+            }
+            item {
+                Line(stringResource(R.string.coverage_statement))
+            }
+            item {
                 Spacer(14)
             }
             item {
                 Line(
                     stringResource(R.string.about_privacy)
                 )
+            }
+            item {
+                Spacer(10)
+            }
+            item {
+                Line(stringResource(R.string.about_terms))
             }
             item {
                 /*

@@ -274,6 +274,7 @@
     <string name="photos_title">Photographs</string>
     <string name="photos_body">Whoever you ask will want the underside and the base. The rest is optional.</string>
     <string name="photos_take_now">Take one now</string>
+    <string name="photos_no_camera">No camera app is installed.</string>
     <string name="photos_choose_existing">Choose one already on the phone</string>
     <string name="photos_back">Back</string>
     <string name="photos_done">Done</string>
@@ -348,7 +349,10 @@
     <!-- %1$s is the version number. 茸帳 (kinokochō) is the app's Japanese name -->
     <string name="about_title">茸帳 Mushroom Journal %1$s</string>
     <string name="about_what_it_is">A field journal. It records what you saw and narrows what it could be — often far enough that someone more experienced can say. It does not decide, it has no opinion about eating anything, and on a screen with no colour it could not be the one to decide anyway.</string>
+    <string name="coverage_statement">This guide covers the southern Appalachian mountains of the USA only. A mushroom not listed may still be found where you are, and some are deadly. Never eat a mushroom because of this app.</string>
+    <string name="coverage_ok">I understand</string>
     <string name="about_privacy">Nothing leaves this phone unless you send it. The only permission asked for is a rough position, only when you press the button for it, and only ever rough — never a precise fix.</string>
+    <string name="about_terms">Terms: this guide is information, not advice. It narrows a list; you decide, and you are responsible for what you do with it.</string>
     <string name="about_inat">Publishing a find to iNaturalist is the one thing that reaches the network. One find, when you press a button that says it is public. Sign-in happens in your browser, so this app never sees your password.</string>
     <!-- "Obscured" is the location setting inat_location_obscured -->
     <string name="about_inat_obscured">Obscured is not the same as not sent: iNaturalist is told where the mushroom was and shows the public a point some twenty kilometres off. The place you typed is kept there too, and not shown.</string>

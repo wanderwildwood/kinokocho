@@ -1,6 +1,8 @@
 package com.wanderwildwood.kinokocho.ui
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -58,6 +60,11 @@ enum class PhotoSlot(val id: String, @StringRes val labelRes: Int, @StringRes va
     STIPE_BASE("stipe_base", R.string.photos_slot_stipe_base, R.string.photos_slot_stipe_base_why),
     IN_SITU("in_situ", R.string.photos_slot_in_situ, R.string.photos_slot_in_situ_why),
     SPORE_PRINT("spore_print", R.string.photos_slot_spore_print, R.string.photos_slot_spore_print_why),
+}
+
+private fun noCamera(context: Context, file: File) {
+    file.delete()
+    Toast.makeText(context, context.getString(R.string.photos_no_camera), Toast.LENGTH_LONG).show()
 }
 
 /**
@@ -179,7 +186,20 @@ fun PhotoSheet(
                         val file = File(photoDir(context), fileName)
                         pending = slot to fileName
                         choosing = null
-                        camera.launch(uriFor(context, file))
+                        // No camera app, or one that will not start, is said in words and
+                        // costs nothing: the empty file goes and the sheet stays open.
+                        try {
+                            camera.launch(uriFor(context, file))
+                        } catch (_: ActivityNotFoundException) {
+                            noCamera(context, file)
+                            pending = null
+                        } catch (_: SecurityException) {
+                            noCamera(context, file)
+                            pending = null
+                        } catch (_: IllegalArgumentException) {
+                            noCamera(context, file)
+                            pending = null
+                        }
                     },
                     modifier = Modifier.fillMaxWidth(),
                 ) { TextMMD(stringResource(R.string.photos_take_now)) }

@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.runtime.LaunchedEffect
 import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -140,8 +142,12 @@ fun NewEntryScreen(
                 )
             }
 
+            // The next question starts at its first row, not wherever the last one was left.
+            val listState = rememberLazyListState()
+            LaunchedEffect(questionId) { listState.scrollToItem(0) }
             PagedColumn(
                 Modifier.fillMaxSize().padding(top = 8.dp),
+                state = listState,
                 verticalArrangement = Arrangement.spacedBy(6.dp),
             ) {
                 if (drawn) {
