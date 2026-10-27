@@ -351,8 +351,12 @@
     <string name="about_what_it_is">A field journal. It records what you saw and narrows what it could be — often far enough that someone more experienced can say. It does not decide, it has no opinion about eating anything, and on a screen with no colour it could not be the one to decide anyway.</string>
     <string name="coverage_statement">This guide covers the southern Appalachian mountains of the USA only. A mushroom not listed may still be found where you are, and some are deadly. Never eat a mushroom because of this app.</string>
     <string name="coverage_ok">I understand</string>
-    <string name="about_privacy">Nothing leaves this phone unless you send it. The only permission asked for is a rough position, only when you press the button for it, and only ever rough — never a precise fix.</string>
-    <string name="about_terms">Terms: this guide is information, not advice. It narrows a list; you decide, and you are responsible for what you do with it.</string>
+    <string name="about_privacy_heading">Privacy</string>
+    <string name="about_privacy">Your finds and photographs stay on this phone. The only permission asked for is a rough position, only when you press the button for it, and only ever rough, never a precise fix.</string>
+    <string name="about_privacy_close">There are no ads, no analytics and no tracking. Copies of the journal and finds you share go only where you choose to save or send them.</string>
+    <string name="about_terms_heading">Terms</string>
+    <string name="about_terms_licence">This app is free software under the GNU General Public License v3. It comes with no warranty: use it at your own risk.</string>
+    <string name="about_terms">This guide is information, not advice. It narrows a list; you decide, and you are responsible for what you do with it.</string>
     <string name="about_inat">Publishing a find to iNaturalist is the one thing that reaches the network. One find, when you press a button that says it is public. Sign-in happens in your browser, so this app never sees your password.</string>
     <!-- "Obscured" is the location setting inat_location_obscured -->
     <string name="about_inat_obscured">Obscured is not the same as not sent: iNaturalist is told where the mushroom was and shows the public a point some twenty kilometres off. The place you typed is kept there too, and not shown.</string>
@@ -363,7 +367,7 @@
     <string name="about_delta_credit">Question order after Watson &amp; Dallwitz, DELTA, 1974.</string>
     <!-- Tappable: export a backup of the journal -->
     <string name="about_export">Keep a copy of everything</string>
-    <string name="about_export_body">A zip of every find and every photograph, handed to whatever you keep things in. Plain JSON inside, readable without this app.</string>
+    <string name="about_export_body">A zip of every find and every photograph, saved where you choose. Plain JSON inside, readable without this app.</string>
     <!-- Tappable: import a backup -->
     <string name="about_import">Read a copy back in</string>
     <string name="about_import_body">Adds whatever is not already here. Nothing is deleted and nothing is overwritten, so an old copy read onto a full journal keeps both.</string>
@@ -442,8 +446,8 @@
     <string name="share_not_ruled_out">Not ruled out — %1$d of %2$d</string>
     <!-- Last line. It must say plainly that nothing in the message is an identification -->
     <string name="share_footer">Recorded with Mushroom Journal, which narrows and does not decide. Nothing here is an identification.</string>
-    <!-- Title of the system share sheet when exporting a backup -->
-    <string name="export_chooser_title">Keep a copy of the journal</string>
+        <string name="export_saved">The copy is saved.</string>
+    <string name="export_failed">The copy could not be saved.</string>
     <string name="import_could_not_read">That file could not be read.</string>
     <string name="import_could_not_open">That file could not be opened.</string>
     <string name="import_not_a_backup">That does not look like a journal backup.</string>
@@ -464,7 +468,4 @@
     <!-- Its own sentence after the first, so it starts with a space. %1$d finds in the backup were already in the journal -->
     <string name="import_already_here">\u0020%1$d were already here.</string>
     <string name="import_close">Close</string>
-    <string name="list_jump_setting">Letters and page dots</string>
-    <string name="list_jump_shown">Shown</string>
-    <string name="list_jump_hidden">Hidden</string>
 </resources>

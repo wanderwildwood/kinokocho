@@ -153,13 +153,13 @@ publishing button at all and cannot reach the network. See the README.
 ## Keeping a copy
 
 Under the (i) there is "Keep a copy of everything", which writes the whole journal — every
-kept find and every photograph — into a zip and hands it to the share sheet. Where it goes
-from there is entirely your choice: a cable, a drive, a message to yourself. The app never
+kept find and every photograph — into a zip and opens the system's save screen. Where it goes
+from there is entirely your choice: a folder on the phone, a card, a drive app. The app never
 sends a backup anywhere itself — the only thing it uploads is a find you pressed publish
 on.
 
-The file is written into the app's cache, which the system may clear whenever it likes, and
-is handed out one URI at a time through the same `FileProvider` the camera uses. Inside is
+The zip is built in the app's cache, copied into the place you picked and then deleted from
+the cache. Inside is
 plain JSON with the schema's own names, so the notes are readable with a text editor and no
 app at all.
 

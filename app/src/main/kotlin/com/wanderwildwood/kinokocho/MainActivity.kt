@@ -1,6 +1,5 @@
 package com.wanderwildwood.kinokocho
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -15,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalCursorBlinkEnabled
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -53,8 +54,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ThemeMMD(colorScheme = monochrome) {
-                Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
-                    Journal()
+                // A blinking caret repaints the e-ink panel twice a second for nothing.
+                CompositionLocalProvider(LocalCursorBlinkEnabled provides false) {
+                    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
+                        Journal()
+                    }
                 }
             }
         }
@@ -242,23 +246,33 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
         }
     }
 
+    // Where the copy goes is the person's choice, made in the system's own save screen, so
+    // it can be a folder on the phone or a card as well as an app. Nothing here is shared.
+    var saved by remember { mutableStateOf<Boolean?>(null) }
+    val saveCopy = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("application/zip")
+    ) { uri ->
+        if (uri != null) vm.exportJournalTo(uri) { saved = it }
+    }
+    saved?.let { ok ->
+        EInkDialog(onDismiss = { saved = null }) {
+            TextMMD(
+                stringResource(if (ok) R.string.export_saved else R.string.export_failed),
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            OutlinedButtonMMD(
+                onClick = { saved = null },
+                modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+            ) { TextMMD(stringResource(R.string.import_close)) }
+        }
+    }
+
     if (about) {
-        val context = LocalContext.current
-        val exportChooserTitle = stringResource(R.string.export_chooser_title)
         AboutDialog(
             onDismiss = { about = false },
             onExport = {
-                vm.exportJournal { file ->
-                    if (file != null) {
-                        context.startActivity(
-                            Intent.createChooser(
-                                JournalExport.intent(context, file),
-                                exportChooserTitle,
-                            )
-                        )
-                    }
-                }
                 about = false
+                saveCopy.launch(JournalExport.fileName())
             },
             onImport = {
                 about = false

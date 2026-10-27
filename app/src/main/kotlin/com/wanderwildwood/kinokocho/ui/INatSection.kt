@@ -201,20 +201,20 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
      * Publishing is not destructive in the way deleting is - it can be undone on
      * iNaturalist - but it is outward-facing and it cannot be taken back from anybody
      * who already read it, which is the same reason for asking. The row disarms itself
-     * after four seconds so a stray tap does not leave a live trigger.
+     * after six seconds so a stray tap does not leave a live trigger.
      */
     /*
      * ⚠ Keyed on the find. Without the key this is the photograph bug again, which this
      * repo has already fixed once ("The armed photograph never put its own question
      * down"): Compose keeps the state in the slot, not with the data, so arming Publish
-     * on one find and then opening another within four seconds left the second one armed
+     * on one find and then opening another within six seconds left the second one armed
      * — and a single tap published a mushroom nobody had been asked about. Four seconds
      * is a narrow window and it is somebody's observation going public.
      */
     var armed by remember(draft.uuid) { mutableStateOf(false) }
     LaunchedEffect(armed) {
         if (armed) {
-            delay(4000)
+            delay(6000)
             armed = false
         }
     }

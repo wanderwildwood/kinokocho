@@ -376,12 +376,20 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      * sheet. Nothing here can alter the journal — the property that matters most in a
      * thing somebody reaches for when something has already gone wrong.
      */
-    fun exportJournal(onReady: (java.io.File?) -> Unit) {
+    /** Writes the whole journal as a zip into the place the person picked. */
+    fun exportJournalTo(uri: android.net.Uri, onDone: (Boolean) -> Unit) {
         viewModelScope.launch {
-            val file = runCatching {
-                JournalExport.write(getApplication(), dao.allKept())
-            }.getOrNull()
-            onReady(file)
+            val ok = runCatching {
+                val app = getApplication<Application>()
+                val file = JournalExport.write(app, dao.allKept())
+                try {
+                    val out = app.contentResolver.openOutputStream(uri) ?: error("no stream")
+                    out.use { o -> file.inputStream().use { it.copyTo(o) } }
+                } finally {
+                    file.delete()
+                }
+            }.isSuccess
+            onDone(ok)
         }
     }
 

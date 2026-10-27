@@ -44,6 +44,7 @@ import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
+import com.wanderwildwood.kinokocho.net.INatConfig
 import com.wanderwildwood.kinokocho.JournalViewModel
 import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.key.Hazard
@@ -379,7 +380,7 @@ fun EntryScreen(
                 // Every other question in these apps withdraws itself; this one did not.
                 LaunchedEffect(arming) {
                     if (arming == null) return@LaunchedEffect
-                    delay(4000)
+                    delay(6000)
                     arming = null
                 }
                 val context = LocalContext.current
@@ -637,8 +638,12 @@ fun EntryScreen(
             // The other way of asking somebody: a queue of strangers rather than one
             // person you chose. Below the share sheet on purpose - handing it to a
             // person who knows the wood is the better answer more often than not.
-            Section("iNaturalist")
-            INatSection(vm, draft)
+            // Nothing to show on a build with no application id: a heading over a sentence
+            // about what it cannot do is noise.
+            if (INatConfig.configured) {
+                Section("iNaturalist")
+                INatSection(vm, draft)
+            }
 
             OutlinedButtonMMD(
                 onClick = onClose,

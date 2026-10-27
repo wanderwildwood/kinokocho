@@ -95,21 +95,14 @@ fun SeasonScreen(
         .sortedBy { it.scientificName }
     val monthName = DateFormatSymbols(Locale.getDefault()).months[month - 1]
 
-    // The long list is in order of scientific name, so letters down its edge; it starts after
-    // the search, the short list and its heading.
     val listState = rememberLazyListState()
-    val firstOfRest = 1 + (if (worthKnowing.isNotEmpty()) 1 + worthKnowing.size else 0) + 1
     Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
         TopAppBarMMD(
             title = {
                 TextMMD(if (looking) stringResource(R.string.season_title_looking) else stringResource(R.string.season_title_month, monthName))
             },
         )
-        ListJumpBox(
-            state = listState,
-            jump = remember(rest, firstOfRest) { ListJump.Letters(rest.map { it.scientificName }, firstOfRest) },
-            modifier = Modifier.weight(1f),
-        ) {
+        Box(Modifier.weight(1f)) {
             PagedColumn(
                 Modifier.padding(horizontal = 16.dp),
                 state = listState,

@@ -124,7 +124,7 @@ fun JournalScreen(
                 }
                 else -> {
                     val listState = rememberLazyListState()
-                    ListJumpBox(listState, ListJump.Pages, Modifier.weight(1f).padding(top = 8.dp)) {
+                    Box(Modifier.weight(1f).padding(top = 8.dp)) {
                         PagedColumn(state = listState) {
                             items(shown, key = { it.observation.id }) { entry ->
                                 EntryRow(entry, onOpen = { onOpen(entry.observation.id) },
@@ -183,7 +183,7 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
     var armed by remember { mutableStateOf(false) }
     LaunchedEffect(armed) {
         if (armed) {
-            delay(4000)
+            delay(6000)
             armed = false
         }
     }
@@ -239,8 +239,9 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
             contentDescription = if (armed) stringResource(R.string.journal_delete_armed) else stringResource(R.string.journal_cd_delete),
             tint = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
-                .size(24.dp)
-                .clickable { if (armed) onDelete() else armed = true },
+                .clickable { if (armed) onDelete() else armed = true }
+                .padding(12.dp)
+                .size(24.dp),
         )
     }
 }

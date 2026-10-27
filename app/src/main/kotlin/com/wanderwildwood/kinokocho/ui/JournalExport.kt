@@ -1,8 +1,6 @@
 package com.wanderwildwood.kinokocho.ui
 
 import android.content.Context
-import android.content.Intent
-import androidx.core.content.FileProvider
 import com.wanderwildwood.kinokocho.data.FullObservation
 import com.wanderwildwood.kinokocho.data.MeasurementRow
 import org.json.JSONArray
@@ -36,8 +34,7 @@ object JournalExport {
 
     /** The file, written into the cache so the system can clear it when it likes. */
     fun write(context: Context, entries: List<FullObservation>): File {
-        val stamp = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
-        val out = File(context.cacheDir, "mushroom-journal-$stamp.zip")
+        val out = File(context.cacheDir, fileName())
         val photos = photoDir(context)
 
         ZipOutputStream(out.outputStream().buffered()).use { zip ->
@@ -119,16 +116,9 @@ object JournalExport {
             .put("journal", array)
     }
 
-    /** Hands the file to whatever the person wants to keep it in. */
-    fun intent(context: Context, file: File): Intent {
-        val uri = FileProvider.getUriForFile(context, "${context.packageName}.photos", file)
-        return Intent(Intent.ACTION_SEND).apply {
-            type = "application/zip"
-            putExtra(Intent.EXTRA_STREAM, uri)
-            putExtra(Intent.EXTRA_SUBJECT, file.name)
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        }
-    }
+    /** The name offered in the save screen. */
+    fun fileName(): String =
+        "mushroom-journal-${SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())}.zip"
 
     private val DATE = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US)
 }

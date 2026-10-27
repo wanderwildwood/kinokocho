@@ -68,15 +68,10 @@ fun AboutDialog(
                 Spacer(14)
             }
             item {
-                Line(
-                    stringResource(R.string.about_privacy)
-                )
+                Line(stringResource(R.string.about_privacy_heading), bold = true)
             }
             item {
-                Spacer(10)
-            }
-            item {
-                Line(stringResource(R.string.about_terms))
+                Line(stringResource(R.string.about_privacy))
             }
             item {
                 /*
@@ -94,7 +89,7 @@ fun AboutDialog(
                  * of untrue.
                  */
                 if (INatConfig.configured) {
-                    Spacer(14)
+                    Spacer(10)
                     Line(
                         stringResource(R.string.about_inat)
                     )
@@ -103,6 +98,27 @@ fun AboutDialog(
                         stringResource(R.string.about_inat_obscured)
                     )
                 }
+            }
+            item {
+                Spacer(10)
+            }
+            item {
+                Line(stringResource(R.string.about_privacy_close))
+            }
+            item {
+                Spacer(14)
+            }
+            item {
+                Line(stringResource(R.string.about_terms_heading), bold = true)
+            }
+            item {
+                Line(stringResource(R.string.about_terms_licence))
+            }
+            item {
+                Spacer(10)
+            }
+            item {
+                Line(stringResource(R.string.about_terms))
             }
             item {
                 Spacer(14)
@@ -162,20 +178,6 @@ fun AboutDialog(
             }
             item {
                 Spacer(10)
-            }
-            item {
-                // The app has no settings screen, so the one switch its lists have sits with
-                // the other things done once in a while.
-                val context = LocalContext.current
-                val jumpShown by rememberListJumpShown()
-                Column(Modifier.fillMaxWidth().clickable { ListJumpPrefs.setShown(context, !jumpShown) }) {
-                    TextMMD(
-                        stringResource(R.string.list_jump_setting),
-                        style = MaterialTheme.typography.bodySmall,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Line(stringResource(if (jumpShown) R.string.list_jump_shown else R.string.list_jump_hidden))
-                }
             }
             item {
                 Spacer(14)

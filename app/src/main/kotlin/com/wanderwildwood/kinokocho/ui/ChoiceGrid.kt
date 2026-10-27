@@ -159,8 +159,16 @@ private const val PER_LINE = 25
 internal fun heightToFill(viewport: Dp, natural: Dp, count: Int, gap: Dp): Dp? {
     var fits = count
     while (fits > 1 && natural * fits + gap * (fits - 1) > viewport) fits--
-    return if (count <= fits) null else (viewport - gap * (fits - 1)) / fits
+    if (count <= fits) return null
+    val stretched = (viewport - gap * (fits - 1)) / fits
+    // Never stretched past one and a half times its own height: a row that grows to fill
+    // the page leaves one option per page, which reads as a broken list. Past the cap the
+    // rows keep their own height and the fold may land inside one.
+    return if (stretched > natural * MAX_STRETCH) null else stretched
 }
+
+/** The most a row may be stretched to divide the page, as a multiple of its own height. */
+internal const val MAX_STRETCH = 1.5f
 
 /** A tile with no words at all: the drawing, its padding, and the gap under the row. */
 internal val ROW_MIN = 96.dp

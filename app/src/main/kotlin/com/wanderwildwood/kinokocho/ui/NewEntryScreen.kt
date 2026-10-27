@@ -136,7 +136,7 @@ fun NewEntryScreen(
             } else {
                 heightToFill(
                     viewport = viewport,
-                    natural = if (glossed) 55.dp else 42.dp,
+                    natural = if (glossed) 70.dp else 48.dp,
                     count = values.size,
                     gap = GAP,
                 )
