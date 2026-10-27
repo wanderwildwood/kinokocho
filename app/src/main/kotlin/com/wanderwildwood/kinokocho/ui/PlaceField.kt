@@ -67,7 +67,7 @@ fun PlaceField(
     /*
      * The numbers are no longer written into the place note.
      *
-     * They used to be appended to it — "the big oak below the spring · 35.89, -82.83" —
+     * They used to be appended to it — "the big oak below the spring · 35.61, -83.43" —
      * which was the only place they were kept at all, and it made a field documented as
      * "where it was, in the reader's own words" hold something that is not words. Now
      * the position is a position and the note is a sentence, and the map location is

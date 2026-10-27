@@ -105,8 +105,8 @@ class INatPushTest {
                 recordedAt = 1_756_000_000_000L,
                 updatedAt = 1_756_000_000_000L,
                 placeNote = "the big oak below the spring",
-                latitude = 35.89,
-                longitude = -82.83,
+                latitude = 35.61,
+                longitude = -83.43,
                 kept = true,
                 schemaVersion = schema.version,
             )

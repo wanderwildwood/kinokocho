@@ -85,12 +85,12 @@ class JournalViewModelTest {
         vm.answer("fruitbody_type", setOf("gilled_stemmed"))
         settled()
 
-        vm.setPosition(35.89, -82.83)
+        vm.setPosition(35.61, -83.43)
         settled()
 
         val stored = storedDraft()
-        assertEquals(35.89, stored.latitude!!, 0.0001)
-        assertEquals(-82.83, stored.longitude!!, 0.0001)
+        assertEquals(35.61, stored.latitude!!, 0.0001)
+        assertEquals(-83.43, stored.longitude!!, 0.0001)
     }
 
     /**
@@ -113,7 +113,7 @@ class JournalViewModelTest {
     @Test
     fun `coordinates survive the entry being closed and opened again`() = runBlocking {
         vm.startNewEntry()
-        vm.setPosition(35.89, -82.83)
+        vm.setPosition(35.61, -83.43)
         settled()
         val id = vm.draft.value!!.observationId!!
 
@@ -121,12 +121,12 @@ class JournalViewModelTest {
         vm.open(id)
         settled()
 
-        assertEquals(35.89, vm.draft.value!!.latitude!!, 0.0001)
+        assertEquals(35.61, vm.draft.value!!.latitude!!, 0.0001)
 
         // And an unrelated edit afterwards does not quietly blank them, which is what
         // would happen if the draft carried them and persist did not.
         vm.setNote("smelled of aniseed")
         settled()
-        assertEquals(35.89, storedDraft().latitude!!, 0.0001)
+        assertEquals(35.61, storedDraft().latitude!!, 0.0001)
     }
 }

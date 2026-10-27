@@ -21,8 +21,8 @@ class INatPayloadTest {
 
     private fun body(
         uuid: String = "AAAA1111-2222-3333-4444-555555555555",
-        latitude: Double? = 35.89,
-        longitude: Double? = -82.83,
+        latitude: Double? = 35.61,
+        longitude: Double? = -83.43,
         geoprivacy: String? = "obscured",
         placeNote: String = "the big oak below the spring",
     ) = JSONObject(
