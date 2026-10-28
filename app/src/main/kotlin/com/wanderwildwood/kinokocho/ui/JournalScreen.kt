@@ -71,7 +71,7 @@ fun JournalScreen(
                         contentAlignment = Alignment.Center,
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.ic_about),
+                            imageVector = Icons.Info,
                             contentDescription = stringResource(R.string.journal_cd_about),
                             tint = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.size(22.dp),
