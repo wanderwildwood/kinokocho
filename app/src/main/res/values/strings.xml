@@ -88,8 +88,8 @@
     <!-- Footer before any answer: narrowing = narrowing down the candidates -->
     <string name="entry_new_start_narrowing">Answer anything to start narrowing.</string>
     <string name="entry_new_nothing_fits_nearest">Nothing fits everything you have said. Nearest anyway:</string>
-    <!-- %1$d is how many species are still possible -->
-    <string name="entry_new_closest">Closest so far, of %1$d still possible</string>
+    <!-- %1$d is how many species are still possible, %2$s the closest one -->
+    <string name="entry_new_closest_of">Closest of %1$d: %2$s</string>
     <!-- Deadly species not yet excluded. %1$s is a list of scientific names -->
     <string name="entry_new_not_ruled_out">Still not ruled out: %1$s</string>
     <!-- Button: take a photograph (noun) -->

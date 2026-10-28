@@ -86,10 +86,10 @@ fun NewEntryScreen(
                 character.label,
                 style = MaterialThemeTypography().titleMedium,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 12.dp),
+                modifier = Modifier.padding(top = 6.dp),
             )
             character.hint?.let {
-                TextMMD(it, style = MaterialThemeTypography().bodySmall, modifier = Modifier.padding(top = 4.dp))
+                TextMMD(it, style = MaterialThemeTypography().bodySmall, modifier = Modifier.padding(top = 2.dp))
             }
 
             val multi = character.cardinality == Character.Cardinality.MULTI
@@ -135,7 +135,7 @@ fun NewEntryScreen(
             } else {
                 heightToFill(
                     viewport = viewport,
-                    natural = if (glossed) 70.dp else 48.dp,
+                    natural = if (glossed) 96.dp else 48.dp,
                     count = values.size,
                     gap = GAP,
                 )
@@ -323,34 +323,31 @@ private fun Footer(
         )
     } else {
         val live = ranking.live
-        TextMMD(
-            // "of 0 still possible" printed directly above two named candidates, which
-            // is what the screen said whenever the answers contradicted each other —
-            // and answers contradict each other often, because a person is looking at a
-            // real mushroom and the pack is a description of a typical one. Say that
-            // plainly instead of printing a count that argues with the list under it.
-            if (live.isEmpty()) {
-                stringResource(R.string.entry_new_nothing_fits_nearest)
-            } else {
-                stringResource(R.string.entry_new_closest, live.size)
-            },
-            style = MaterialThemeTypography().bodySmall,
-            modifier = Modifier.padding(top = 6.dp),
-        )
-        // The ones that still fit, so that "closest" means closest among those the line
-        // above has just counted. Showing the top two by score could put a contradicted
-        // taxon under "of 2 still possible", because the ranking sorts on score alone and
-        // a mismatch is -2.0 against a full match's +1.0.
+        // The ones that still fit, so that "closest" means closest among those counted.
+        // Showing the top by score could put a contradicted taxon under "of 2 still
+        // possible", because the ranking sorts on score alone and a mismatch is -2.0
+        // against a full match's +1.0.
         val shown = ranking.shortlist(1)
-        shown.forEach { c ->
+        if (live.isEmpty()) {
+            // "of 0 still possible" printed above two named candidates is what the screen
+            // said whenever the answers contradicted each other, and they often do: a
+            // person is looking at a real mushroom and the pack describes a typical one.
             TextMMD(
-                c.taxon.commonName?.let { n -> "${c.taxon.scientificName} — $n" }
-                    ?: c.taxon.scientificName,
+                stringResource(R.string.entry_new_nothing_fits_nearest),
                 style = MaterialThemeTypography().bodySmall,
-                // Bold where it can kill. A lethal taxon that is also the closest match
-                // used to be printed plain here and then again, bold, on the line below
-                // — the same name twice, two lines apart, which reads as a fault rather
-                // than as a warning. It is marked where it stands instead.
+                modifier = Modifier.padding(top = 6.dp),
+            )
+        }
+        shown.forEach { c ->
+            val name = c.taxon.commonName?.let { n -> "${c.taxon.scientificName} — $n" }
+                ?: c.taxon.scientificName
+            TextMMD(
+                // The count and the closest name share one line: two lines of footer left
+                // the question room for one option on the colour page.
+                if (live.isEmpty()) name else stringResource(R.string.entry_new_closest_of, live.size, name),
+                style = MaterialThemeTypography().bodySmall,
+                // Bold where it can kill. A lethal taxon that is also the closest match is
+                // marked where it stands rather than named twice.
                 fontWeight = if (c.taxon.hazard.severity == Hazard.Severity.LETHAL) {
                     FontWeight.Bold
                 } else {
@@ -359,7 +356,7 @@ private fun Footer(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onCandidate(c.taxon.id) }
-                    .padding(vertical = 3.dp),
+                    .padding(vertical = 2.dp),
             )
         }
 
@@ -375,13 +372,13 @@ private fun Footer(
                 stringResource(R.string.entry_new_not_ruled_out, hazards.joinToString(", ") { it.taxon.scientificName }),
                 style = MaterialThemeTypography().bodySmall,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 2.dp),
+                modifier = Modifier.padding(top = 0.dp),
             )
         }
     }
 
     Row(
-        Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 8.dp),
+        Modifier.fillMaxWidth().padding(top = 4.dp, bottom = 6.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
