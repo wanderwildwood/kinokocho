@@ -86,6 +86,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun open(observationId: Long) {
+        commitTrash()
         viewModelScope.launch {
             val full = dao.findOne(observationId) ?: return@launch
             _draft.value = Draft(
@@ -138,6 +139,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      * waiting where they were left.
      */
     fun resumeOrStart() {
+        commitTrash()
         viewModelScope.launch {
             val unclaimed = dao.findUnclaimed()
             if (unclaimed == null) {
@@ -360,6 +362,32 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
             }
             dao.deleteObservation(observationId)
         }
+    }
+
+    /**
+     * The find just deleted from the journal, hidden but still whole until it is let go.
+     *
+     * Deleting from the journal hides the row and offers Undo; nothing is removed from disk
+     * until the person moves on (opens or starts a find, or deletes another). If the process
+     * dies first the find simply comes back, which is the safe way to fail.
+     */
+    private val _trashed = MutableStateFlow<Long?>(null)
+    val trashed: StateFlow<Long?> = _trashed.asStateFlow()
+
+    fun trash(observationId: Long) {
+        commitTrash()
+        _trashed.value = observationId
+    }
+
+    fun undoTrash() {
+        _trashed.value = null
+    }
+
+    /** Makes a pending delete final: the row and its photographs go. */
+    fun commitTrash() {
+        val id = _trashed.value ?: return
+        _trashed.value = null
+        delete(id)
     }
 
     private val measurementCharacters

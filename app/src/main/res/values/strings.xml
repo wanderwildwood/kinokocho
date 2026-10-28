@@ -17,6 +17,8 @@
     <string name="journal_empty_body">A find is worth recording even when you never learn what it was. Answer whatever you can see and leave the rest.</string>
     <!-- Delete is a two-tap action; this replaces the row's title after the first tap -->
     <string name="journal_delete_armed">Delete this find — tap again</string>
+    <string name="journal_deleted">The find was deleted.</string>
+    <string name="journal_undo">Undo</string>
     <string name="journal_cd_delete">Delete this find</string>
     <!-- Row details, joined with " · ": how many characters (features) were answered -->
     <plurals name="journal_row_characters">

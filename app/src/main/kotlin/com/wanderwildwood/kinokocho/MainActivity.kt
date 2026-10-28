@@ -138,7 +138,8 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
 
     // `entries` is already only what was kept — the DAO filters on it — so the find
     // being keyed out right now never appears here however the app is left.
-    val kept = entries
+    val trashed by vm.trashed.collectAsState()
+    val kept = if (trashed == null) entries else entries.filter { it.observation.id != trashed }
 
     when {
         // Reachable from the month page as well as from a shortlist, which is why the
@@ -167,7 +168,9 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             onOpen = { id -> reading = true; vm.open(id) },
             onNew = { reading = false; vm.resumeOrStart() },
             onAbout = { about = true },
-            onDelete = vm::delete,
+            onDelete = vm::trash,
+            deleted = trashed != null,
+            onUndo = vm::undoTrash,
             seasonRow = {
                 val m = thisMonth()
                 SeasonRow(

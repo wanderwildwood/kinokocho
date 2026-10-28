@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.platform.testTag
+import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.items
@@ -55,6 +58,8 @@ fun JournalScreen(
     onNew: () -> Unit,
     onAbout: () -> Unit,
     onDelete: (Long) -> Unit,
+    deleted: Boolean = false,
+    onUndo: () -> Unit = {},
     seasonRow: (@Composable () -> Unit)? = null,
 ) {
     Box(Modifier.fillMaxSize()) {
@@ -133,6 +138,17 @@ fun JournalScreen(
                             }
                         }
                     }
+                }
+            }
+
+            // After a delete, until the person moves on: the way to put the find back.
+            if (deleted) {
+                Column(Modifier.padding(horizontal = 16.dp, vertical = 6.dp).testTag("undo_bar")) {
+                    TextMMD(stringResource(R.string.journal_deleted), style = MaterialTheme.typography.bodyMedium)
+                    OutlinedButtonMMD(
+                        onClick = onUndo,
+                        modifier = Modifier.fillMaxWidth().padding(top = 4.dp).height(48.dp),
+                    ) { TextMMD(stringResource(R.string.journal_undo)) }
                 }
             }
 

@@ -29,7 +29,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
-import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import com.wanderwildwood.kinokocho.JournalViewModel
 import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.key.Hazard
@@ -312,8 +311,10 @@ private fun Footer(
     onCandidate: (String) -> Unit = {},
     onNext: (() -> Unit)? = null,
 ) {
-    HorizontalDividerMMD(Modifier.padding(top = 4.dp))
-
+    // No rule above the footer (STYLE.md: space, not lines), and it is kept short: it used
+    // to take a divider, a count, two names with their notes and the lethal line, which left
+    // the question room for one option per page (Mudita, 25 Oct). The count and the single
+    // closest name stay; the full list is one tap away on the entry screen.
     if (draft.answers.answeredCount == 0) {
         TextMMD(
             stringResource(R.string.entry_new_start_narrowing),
@@ -340,7 +341,7 @@ private fun Footer(
         // above has just counted. Showing the top two by score could put a contradicted
         // taxon under "of 2 still possible", because the ranking sorts on score alone and
         // a mismatch is -2.0 against a full match's +1.0.
-        val shown = ranking.shortlist(2)
+        val shown = ranking.shortlist(1)
         shown.forEach { c ->
             TextMMD(
                 c.taxon.commonName?.let { n -> "${c.taxon.scientificName} — $n" }
@@ -360,9 +361,6 @@ private fun Footer(
                     .clickable { onCandidate(c.taxon.id) }
                     .padding(vertical = 3.dp),
             )
-            c.uncheckedNote(vm.schema, LocalContext.current.resources)?.let {
-                TextMMD(it, style = MaterialThemeTypography().bodySmall)
-            }
         }
 
         // And the line below names only what is not already on the screen. Nothing is
@@ -377,13 +375,13 @@ private fun Footer(
                 stringResource(R.string.entry_new_not_ruled_out, hazards.joinToString(", ") { it.taxon.scientificName }),
                 style = MaterialThemeTypography().bodySmall,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(top = 4.dp),
+                modifier = Modifier.padding(top = 2.dp),
             )
         }
     }
 
     Row(
-        Modifier.fillMaxWidth().padding(vertical = 8.dp),
+        Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
