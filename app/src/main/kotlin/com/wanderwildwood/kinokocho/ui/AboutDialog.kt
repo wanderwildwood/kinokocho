@@ -41,6 +41,7 @@ fun AboutDialog(
     onDismiss: () -> Unit,
     onExport: () -> Unit = {},
     onImport: () -> Unit = {},
+    onLicences: () -> Unit = {},
 ) {
     EInkDialog(onDismiss = onDismiss) {
         // This outgrew the panel once already: with the two backup rows on it the last
@@ -63,6 +64,15 @@ fun AboutDialog(
             }
             item {
                 Line(stringResource(R.string.coverage_statement))
+            }
+            item {
+                Spacer(14)
+            }
+            item {
+                Line(stringResource(R.string.about_safety_heading), bold = true)
+            }
+            item {
+                Line(stringResource(R.string.safety_disclaimer))
             }
             item {
                 Spacer(14)
@@ -124,7 +134,13 @@ fun AboutDialog(
                 Spacer(14)
             }
             item {
-                Line(stringResource(R.string.about_licence))
+                TextMMD(
+                    stringResource(R.string.about_licences),
+                    style = MaterialTheme.typography.bodySmall,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).clickable(onClick = onLicences)
+                        .padding(vertical = 12.dp),
+                )
             }
             item {
                 Line(stringResource(R.string.about_schema_credit))

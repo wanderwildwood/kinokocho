@@ -41,6 +41,7 @@ import com.wanderwildwood.kinokocho.ui.JournalImport
 import com.wanderwildwood.kinokocho.ui.CandidateScreen
 import com.wanderwildwood.kinokocho.ui.EntryScreen
 import com.wanderwildwood.kinokocho.ui.JournalScreen
+import com.wanderwildwood.kinokocho.ui.LicencesScreen
 import com.wanderwildwood.kinokocho.ui.PhotoSheet
 import com.wanderwildwood.kinokocho.ui.SaveDialog
 import com.wanderwildwood.kinokocho.ui.SeasonRow
@@ -79,6 +80,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     val entries by vm.entries.collectAsState()
     val draft by vm.draft.collectAsState()
     var about by remember { mutableStateOf(false) }
+    var licences by remember { mutableStateOf(false) }
 
     /*
      * Finishes a sign-in the browser has come back from.
@@ -121,8 +123,9 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
 
     // Back closes what is open rather than leaving the app, so a mis-tap on a find
     // costs nothing. Nothing here is destructive, so nothing here asks.
-    BackHandler(enabled = draft != null || about || photographing || season || candidate != null) {
+    BackHandler(enabled = draft != null || about || licences || photographing || season || candidate != null) {
         when {
+            licences -> licences = false
             season -> season = false
             photographing -> photographing = false
             about -> about = false
@@ -142,6 +145,8 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     val kept = if (trashed == null) entries else entries.filter { it.observation.id != trashed }
 
     when {
+        licences -> LicencesScreen(onClose = { licences = false })
+
         // Reachable from the month page as well as from a shortlist, which is why the
         // answers are optional: read about a mushroom before you have found one, and
         // there is nothing to lay the description against yet.
@@ -239,6 +244,10 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     if (coverage) {
         EInkDialog(onDismiss = {}) {
             TextMMD(stringResource(R.string.coverage_statement))
+            TextMMD(
+                stringResource(R.string.safety_disclaimer),
+                modifier = Modifier.padding(top = 10.dp),
+            )
             ButtonMMD(
                 onClick = {
                     coverageSeen.edit().putBoolean("coverage_seen", true).apply()
@@ -273,6 +282,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     if (about) {
         AboutDialog(
             onDismiss = { about = false },
+            onLicences = { about = false; licences = true },
             onExport = {
                 about = false
                 saveCopy.launch(JournalExport.fileName())

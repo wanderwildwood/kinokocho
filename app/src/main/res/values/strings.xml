@@ -352,6 +352,14 @@
     <string name="about_title">茸帳 Mushroom Journal %1$s</string>
     <string name="about_what_it_is">A field journal. It records what you saw and narrows what it could be — often far enough that someone more experienced can say. It does not decide, it has no opinion about eating anything, and on a screen with no colour it could not be the one to decide anyway.</string>
     <string name="coverage_statement">This guide covers the southern Appalachian mountains of the USA only. A mushroom not listed may still be found where you are, and some are deadly. Never eat a mushroom because of this app.</string>
+    <string name="about_safety_heading">Safety</string>
+    <string name="safety_disclaimer">This app is a field journal, not an identification service and not medical advice. It narrows a list and cannot tell you that a mushroom is safe to eat. Never eat a wild mushroom because of this app: some kill, and look-alikes are common. If anyone has eaten a mushroom you are unsure of, call your poison control centre or local emergency number at once.</string>
+    <string name="about_licences">Licences</string>
+    <string name="licences_title">Licences</string>
+    <string name="licences_source">Source code</string>
+    <string name="licences_licence">Licence</string>
+    <string name="licences_licence_body">This app is free software under the GNU General Public License, version 3 only. Copyright wander wildwood. The full text follows.</string>
+    <string name="licences_built_with">Built with</string>
     <string name="coverage_ok">I understand</string>
     <string name="about_privacy_heading">Privacy</string>
     <string name="about_privacy">Your finds and photographs stay on this phone. The only permission asked for is a rough position, only when you press the button for it, and only ever rough, never a precise fix.</string>

@@ -233,6 +233,8 @@ redirect URI to `kinokocho://oauth`, exactly as it reads in `INatConfig`.
 
 ## Licence
 
-GPL-3.0-only. See [LICENSE](LICENSE).
+GPL-3.0-only. See [LICENSE](LICENSE). In the app, About > Licences shows the source address,
+the full licence text and everything the app is built with; About also carries Privacy, Terms
+and a safety note, and the same safety note is on the first-run notice.
 
 Copyright (C) 2026 wander wildwood.
