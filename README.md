@@ -55,7 +55,9 @@ else on it.
 ## Structure
 
 The character schema is global; the taxon data is a swappable region pack. Southern
-Appalachia is pack one.
+Appalachia is pack one, for now: other regions are very welcome, and I would be glad to
+work with others to bring the guide to them. Write to email@wanderthe.dev or open an
+issue.
 
 Everything generated is generated: the drawings from `tools/make-art.py`, the pack from
 the `tools/add-*.py` batches, the illustrator's brief from the pack itself. A file that

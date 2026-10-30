@@ -66,6 +66,12 @@ fun AboutDialog(
                 Line(stringResource(R.string.coverage_statement))
             }
             item {
+                Spacer(10)
+            }
+            item {
+                Line(stringResource(R.string.coverage_collaborate))
+            }
+            item {
                 Spacer(14)
             }
             item {

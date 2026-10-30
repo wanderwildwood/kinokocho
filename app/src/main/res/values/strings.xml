@@ -351,7 +351,8 @@
     <!-- %1$s is the version number. 茸帳 (kinokochō) is the app's Japanese name -->
     <string name="about_title">茸帳 Mushroom Journal %1$s</string>
     <string name="about_what_it_is">A field journal. It records what you saw and narrows what it could be — often far enough that someone more experienced can say. It does not decide, it has no opinion about eating anything, and on a screen with no colour it could not be the one to decide anyway.</string>
-    <string name="coverage_statement">This guide covers the southern Appalachian mountains of the USA only. A mushroom not listed may still be found where you are, and some are deadly. Never eat a mushroom because of this app.</string>
+    <string name="coverage_collaborate">Other regions are very welcome. If you would like to help bring this guide to your part of the world, write to email@wanderthe.dev or open an issue on GitHub (wanderwildwood/kinokocho).</string>
+    <string name="coverage_statement">For now, this guide covers only the southern Appalachian mountains of the USA. A mushroom not listed may still be found where you are, and some are deadly. Never eat a mushroom because of this app.</string>
     <string name="about_safety_heading">Safety</string>
     <string name="safety_disclaimer">This app is a field journal, not an identification service and not medical advice. It narrows a list and cannot tell you that a mushroom is safe to eat. Never eat a wild mushroom because of this app: some kill, and look-alikes are common. If anyone has eaten a mushroom you are unsure of, call your poison control centre or local emergency number at once.</string>
     <string name="about_licences">Licences</string>
