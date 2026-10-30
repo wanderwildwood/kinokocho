@@ -478,4 +478,10 @@
     <!-- Its own sentence after the first, so it starts with a space. %1$d finds in the backup were already in the journal -->
     <string name="import_already_here">\u0020%1$d were already here.</string>
     <string name="import_close">Close</string>
+    <!-- The folio at the foot of a paged list, "2 / 6"; a tap on it asks for a page -->
+    <string name="folio_of">%1$d / %2$d</string>
+    <string name="folio_go_title">Go to page</string>
+    <string name="folio_page">Page %1$d of %2$d</string>
+    <string name="folio_go">Go</string>
+    <string name="folio_cancel">Cancel</string>
 </resources>
