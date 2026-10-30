@@ -49,7 +49,7 @@ val components: List<Component> = listOf(
     Component("Lato typeface, inside MMD", "OFL-1.1", "https://www.latofonts.com"),
     Component("Region pack: southern Appalachia (characters, hazards, seasons)", "CC0-1.0", "https://creativecommons.org/publicdomain/zero/1.0/"),
     Component("Whole-mushroom plates, traced from public-domain plates (Peck, Sowerby, Bresadola, Bulliard, Cooke and others)", "Public domain", "https://github.com/wanderwildwood/kinokocho/blob/master/tools/plate-sources.json"),
-    Component("Season counts from GBIF occurrence records", "CC0-1.0 and CC BY", "https://www.gbif.org"),
+    Component("Season counts from GBIF occurrence records (GBIF.org; the publishers of each dataset keep the credit for their records)", "CC0-1.0 and CC-BY-4.0", "https://www.gbif.org"),
     Component("Question order after Watson and Dallwitz, DELTA, 1974", "Citation", "https://www.delta-intkey.com"),
 )
 
@@ -59,6 +59,7 @@ data class LicenceText(val name: String, @RawRes val raw: Int)
 val licenceTexts: List<LicenceText> = listOf(
     LicenceText("Apache-2.0", R.raw.apache_2_0),
     LicenceText("OFL-1.1 (Lato)", R.raw.ofl_1_1),
+    LicenceText("CC-BY-4.0 (GBIF records)", R.raw.cc_by_4_0),
 )
 
 /** Hard-wrapped licence text as paragraphs: blank lines break, single line breaks are spaces. */
@@ -71,13 +72,8 @@ private fun rawText(context: Context, @RawRes id: Int): List<String> =
     licenceParagraphs(context.resources.openRawResource(id).bufferedReader().use { it.readText() })
 
 /** Opens an address; with no browser installed it says so in words instead of failing. */
-fun openLink(context: Context, address: String) {
-    try {
-        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(address)))
-    } catch (_: Exception) {
-        Toast.makeText(context, context.getString(R.string.about_no_browser), Toast.LENGTH_LONG).show()
-    }
-}
+fun openLink(context: Context, address: String) =
+    openLink(context, address, context.getString(R.string.about_no_browser_address, address.removePrefix("https://")))
 
 /**
  * Where the source is, which licence the app is under with its full text, and what it is built

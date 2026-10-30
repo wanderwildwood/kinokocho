@@ -332,7 +332,16 @@ private fun openOrSay(
     intent: Intent,
     doing: String,
 ) {
-    runCatching { context.startActivity(intent) }.onFailure {
+    // Only a real browser answers: the system's bare WebView shell crashes on a web address.
+    val handler = context.packageManager.resolveActivity(
+        Intent(intent).addCategory(Intent.CATEGORY_BROWSABLE),
+        android.content.pm.PackageManager.MATCH_DEFAULT_ONLY,
+    )
+    if (!isRealBrowser(handler?.activityInfo?.packageName)) {
+        vm.sayINat(context.getString(R.string.inat_no_browser, doing))
+        return
+    }
+    runCatching { context.startActivity(intent.addCategory(Intent.CATEGORY_BROWSABLE)) }.onFailure {
         vm.sayINat(context.getString(R.string.inat_no_browser, doing))
     }
 }
