@@ -303,7 +303,7 @@
     <!-- ============================================================ -->
     <!-- iNaturalist: publishing a find, on the entry page -->
 
-    <string name="inat_not_configured">This build has no iNaturalist application id, so it cannot publish.</string>
+    <string name="inat_not_configured">Publishing a find to iNaturalist is not available in this version of the app. Your finds stay on this phone.</string>
     <string name="inat_signed_out_body">Publishing a find puts it, its photographs and its characters on a public website, under your own account.</string>
     <string name="inat_sign_in">Sign in to iNaturalist</string>
     <!-- %1$s is the iNaturalist user name -->
