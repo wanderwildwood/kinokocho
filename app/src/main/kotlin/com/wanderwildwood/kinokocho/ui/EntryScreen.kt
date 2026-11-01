@@ -94,7 +94,8 @@ fun EntryScreen(
     Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
     TopAppBarMMD(title = { TextMMD(dateOf(draft.recordedAt)) })
     PagedColumn(
-        Modifier.weight(1f).padding(horizontal = 16.dp),
+        Modifier.weight(1f),
+        contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 16.dp, end = 12.dp),
     ) {
         item {
             if (draft.placeNote.isNotBlank()) {

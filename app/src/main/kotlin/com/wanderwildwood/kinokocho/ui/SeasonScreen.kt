@@ -104,8 +104,9 @@ fun SeasonScreen(
         )
         Box(Modifier.weight(1f)) {
             PagedColumn(
-                Modifier.padding(horizontal = 16.dp),
+                Modifier,
                 state = listState,
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 16.dp, end = 12.dp),
             ) {
                 item {
                     TextFieldMMD(

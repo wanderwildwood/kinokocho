@@ -80,7 +80,8 @@ fun CandidateScreen(
     TopAppBarMMD(title = { TextMMD(taxon.scientificName) })
     SelectionContainer(Modifier.weight(1f).textActions()) {
     PagedColumn(
-        Modifier.fillMaxSize().padding(horizontal = 16.dp),
+        Modifier.fillMaxSize(),
+        contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 16.dp, end = 12.dp),
     ) {
         taxon.commonName?.let {
             item {
