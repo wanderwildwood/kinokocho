@@ -57,6 +57,7 @@ fun JournalScreen(
     onOpen: (Long) -> Unit,
     onNew: () -> Unit,
     onAbout: () -> Unit,
+    onBackup: () -> Unit = {},
     onDelete: (Long) -> Unit,
     deleted: Boolean = false,
     onUndo: () -> Unit = {},
@@ -88,6 +89,7 @@ fun JournalScreen(
             // What is about this month, before anything has been found. It is the one
             // thing a journal can say when it is still empty.
             seasonRow?.invoke()
+            BackupRow(onOpen = onBackup)
             HorizontalDividerMMD()
 
             /*

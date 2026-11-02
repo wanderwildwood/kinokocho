@@ -355,12 +355,6 @@
     <string name="coverage_statement">For now, this guide covers only the southern Appalachian mountains of the USA. A mushroom not listed may still be found where you are, and some are deadly. Never eat a mushroom because of this app.</string>
     <string name="about_safety_heading">Safety</string>
     <string name="safety_disclaimer">This app is a field journal, not an identification service and not medical advice. It narrows a list and cannot tell you that a mushroom is safe to eat. Never eat a wild mushroom because of this app: some kill, and look-alikes are common. If anyone has eaten a mushroom you are unsure of, call your poison control centre or local emergency number at once.</string>
-    <string name="about_licences">Licences</string>
-    <string name="licences_title">Licences</string>
-    <string name="licences_source">Source code</string>
-    <string name="licences_licence">Licence</string>
-    <string name="licences_licence_body">This app is free software under the GNU General Public License, version 3 only. Copyright wander wildwood. The full text follows.</string>
-    <string name="licences_built_with">Built with</string>
     <string name="coverage_ok">I understand</string>
     <string name="about_privacy_heading">Privacy</string>
     <string name="about_privacy">Your finds and photographs stay on this phone, except a find you choose to publish to iNaturalist (the app has the internet permission for that and for nothing else). The only other permission asked for is a rough position, only when you press the button for it, and only ever rough, never a precise fix.</string>
@@ -376,17 +370,30 @@
     <string name="about_schema_credit">Character schema and drawings — original, this project.</string>
     <!-- A citation: the DELTA system by Watson and Dallwitz, 1974 -->
     <string name="about_delta_credit">Question order after Watson &amp; Dallwitz, DELTA, 1974.</string>
+    <!-- Backup dialog, opened from the row under the journal title: the copy of everything and reading it back -->
+    <string name="backup_row">Back up or restore the journal</string>
+    <string name="backup_title">Backup</string>
     <!-- Tappable: export a backup of the journal -->
-    <string name="about_export">Keep a copy of everything</string>
-    <string name="about_export_body">A zip of every find and every photograph, saved where you choose. Plain JSON inside, readable without this app.</string>
+    <string name="backup_export">Keep a copy of everything</string>
+    <string name="backup_export_body">A zip of every find and every photograph, saved where you choose. Plain JSON inside, readable without this app.</string>
     <!-- Tappable: import a backup -->
-    <string name="about_import">Read a copy back in</string>
-    <string name="about_import_body">Adds whatever is not already here. Nothing is deleted and nothing is overwritten, so an old copy read onto a full journal keeps both.</string>
+    <string name="backup_import">Read a copy back in</string>
+    <string name="backup_import_body">Adds whatever is not already here. Nothing is deleted and nothing is overwritten, so an old copy read onto a full journal keeps both.</string>
     <!-- The donation link label, beside a drawing of a llama. A fixed phrase: a verb and an object, so the reader knows what pressing it does -->
     <string name="about_feed_the_llamas">Feed the llamas</string>
     <string name="about_no_browser_address">No browser is installed. The address is %1$s.</string>
-    <string name="about_no_browser">There is no browser on this phone to open that with.</string>
     <string name="about_close">Close</string>
+    <!-- Licences: the list and each library's page (shared screen) -->
+    <string name="licences_title">Licences</string>
+    <string name="licences_back">Back</string>
+    <string name="licences_source_head">Source code</string>
+    <string name="licences_no_text">%s needs no licence text here.</string>
+    <string name="licences_licence">Mushroom Journal is free software: GPL-3.0-only, copyright wander wildwood. What it is built on keeps its own licences, each on its own page.</string>
+    <string name="licences_full_head">Full texts</string>
+    <string name="licences_full_gpl">GNU General Public License v3 (full text)</string>
+    <string name="licences_full_apache">Apache License 2.0 (full text)</string>
+    <string name="licences_full_ofl">SIL Open Font Licence 1.1 (full text)</string>
+    <string name="licences_full_ccby">Creative Commons Attribution 4.0 (full text)</string>
 
     <!-- ============================================================ -->
     <!-- iNaturalist: the one-line status under the section, said after each step -->
