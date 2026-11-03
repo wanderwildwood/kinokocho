@@ -145,6 +145,7 @@ fun SeasonScreen(
                     items(worthKnowing.size) { i ->
                         val t = worthKnowing[i]
                         TaxonLine(t, onOpen, plate = true, confusion = confusedWith(t, inSeason))
+                        if (i < worthKnowing.lastIndex) DottedRule(start = 56.dp, end = 0.dp)
                     }
                 }
 
@@ -177,6 +178,7 @@ fun SeasonScreen(
                 val against = if (looking) taxa else inSeason
                 items(rest.size) { i ->
                     TaxonLine(rest[i], onOpen, confusion = confusedWith(rest[i], against))
+                    if (i < rest.lastIndex) DottedRule(start = 0.dp, end = 0.dp)
                 }
 
                 item {
