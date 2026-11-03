@@ -90,7 +90,7 @@ fun JournalScreen(
             // thing a journal can say when it is still empty.
             seasonRow?.invoke()
             BackupRow(onOpen = onBackup)
-            HorizontalDividerMMD()
+            DottedRule()
 
             /*
              * A way to find one again.
