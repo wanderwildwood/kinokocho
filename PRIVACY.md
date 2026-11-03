@@ -62,7 +62,7 @@ moment you press it, not at startup, and never if you do not press it.
 What it asks for is **`ACCESS_COARSE_LOCATION` only**. Fine location is not declared, so the
 app cannot receive a precise fix — this is a property of the manifest, not a promise about
 what the code does with a precise fix it is holding. What gets stored is rounded further, to
-two decimal places, which is a bit over a kilometre. The journal wants to know which
+two decimal places, which is a bit over a kilometer. The journal wants to know which
 hillside, not which log.
 
 It reads the position the phone already has rather than requesting a fresh one: no radio is
@@ -115,7 +115,7 @@ like.
 When geoprivacy is **obscured**, iNaturalist *is told where the mushroom was*. They
 store the true coordinates, and they store the place note you typed. What obscuring
 changes is what **the public** sees: a random point inside a cell about twenty
-kilometres across, and a place name generated from that rather than the one you wrote.
+kilometers across, and a place name generated from that rather than the one you wrote.
 So "the big oak below the spring" is on their server and not on the page.
 
 When it is **private**, they are still told, and they show nobody at all.

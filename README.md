@@ -26,9 +26,9 @@ and then help you work out what you are looking at once you get home.
 
 - **In the field:** record the characters you can actually see — substrate, hymenophore,
   gills, cap, stipe, flesh — in any order and however few of them. Add a note. Take
-  photographs into labelled slots. The candidate list narrows as you go, and is always
+  photographs into labeled slots. The candidate list narrows as you go, and is always
   presented as *not yet ruled out*, never as an answer.
-- **At home:** review the entry on a real screen with the photographs in colour, add the
+- **At home:** review the entry on a real screen with the photographs in color, add the
   spore print you set overnight, and see which unrecorded character would have narrowed
   things most — the part that trains the next walk.
 - **Then ask someone:** send the find out as plain text and photographs through whatever
@@ -46,8 +46,8 @@ and then help you work out what you are looking at once you get home.
 
 ## Why E Ink is the right screen for this
 
-Colour is diagnostic in mushroom identification and E Ink cannot show it. That would be
-fatal for an identification app — but this is a *recording* app. Colour matters when you
+Color is diagnostic in mushroom identification and E Ink cannot show it. That would be
+fatal for an identification app — but this is a *recording* app. Color matters when you
 decide, and deciding happens at home, on a screen that has it. In the field what you want
 is a notebook that lasts days on a charge, reads in direct sun, and does not have anything
 else on it.
@@ -149,7 +149,7 @@ A few things worth knowing before the first walk:
 - **Set the spore print before you sleep.** Cap gills-down on paper overnight. It settles
   more than any other character and it cannot be got in the field, which is why an entry
   says *spore print pending* until you add it.
-- **Take the photographs anyway**, even when the shortlist is already short. Colour is what
+- **Take the photographs anyway**, even when the shortlist is already short. Color is what
   you will want at home, and it is the thing the screen cannot give you.
 - **An out-of-season find is worth writing down precisely because it is one.** Seasons in
   the pack are a guide; fungi do not read calendars.
@@ -175,7 +175,7 @@ checked on an answer is listed after those that were, with a line saying what is
 Nothing in the pack has been checked by a mycologist. Every row says so on its own page.
 Publishing to iNaturalist is the answer to that: it puts the find in front of people who
 can say, which is the whole shape of this app — narrow it in the field, let a person
-decide in colour, later.
+decide in color, later.
 
 The launcher mark is a drawing of a chanterelle by the author, traced rather than
 imitated. The rest of the drawings are worked to the same hand — thin, few lines, no
@@ -183,7 +183,7 @@ solid black — which is written down at the top of `tools/make-art.py`.
 
 The whole-mushroom plates are a different thing. Most are traced from public-domain
 plates — C. H. Peck's New York State reports, Sowerby, Bresadola, Bulliard, Cooke, Walty
-and others — by `tools/trace-plate.py`, and each one's work, year, licence and file is
+and others — by `tools/trace-plate.py`, and each one's work, year, license and file is
 in `tools/plate-sources.json`; the candidate page names whose drawing it is. The source
 images are not in the repository. A plate that shows a feature its mushroom lacks is
 worse than none, so where no honest drawing exists there is no plate.
@@ -233,10 +233,10 @@ page needs the **APP_OWNER** role, which iNaturalist staff grant on a written re
 expect to see some identifications behind. It is a wait rather than a form. Set the
 redirect URI to `kinokocho://oauth`, exactly as it reads in `INatConfig`.
 
-## Licence
+## License
 
-GPL-3.0-only. See [LICENSE](LICENSE). In the app, About > Licences shows the source address,
-the full licence text and everything the app is built with; About also carries Privacy, Terms
+GPL-3.0-only. See [LICENSE](LICENSE). In the app, About > Licenses shows the source address,
+the full license text and everything the app is built with; About also carries Privacy, Terms
 and a safety note, and the same safety note is on the first-run notice.
 
 Copyright (C) 2026 wander wildwood.
