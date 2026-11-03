@@ -288,7 +288,7 @@
     <string name="photos_slot_whole_why">In proportion, so size and habit read.</string>
     <string name="photos_slot_cap">The cap, from above</string>
     <!-- "the edge" = the rim of the cap -->
-    <string name="photos_slot_cap_why">Surface, colour and how the edge sits.</string>
+    <string name="photos_slot_cap_why">Surface, color and how the edge sits.</string>
     <string name="photos_slot_underside">Underneath</string>
     <string name="photos_slot_underside_why">Gills, pores or teeth, and how they meet the stem.</string>
     <string name="photos_slot_stipe_base">The base of the stem</string>
@@ -322,7 +322,7 @@
     <string name="inat_location_obscured">Location: obscured</string>
     <string name="inat_location_exact">Location: exact</string>
     <string name="inat_location_hidden_body">iNaturalist is told where it was and shows nobody, including on the map. Nobody can check the record against the place.</string>
-    <string name="inat_location_obscured_body">iNaturalist is told where it was and shows the public a random point within about twenty kilometres. The place you typed is kept, not shown.</string>
+    <string name="inat_location_obscured_body">iNaturalist is told where it was and shows the public a random point within about twenty kilometers. The place you typed is kept, not shown.</string>
     <string name="inat_location_exact_body">The map pin is where you found it, and the place you typed is shown beside it. For anyone.</string>
     <!-- Button: change the location setting (verb) -->
     <string name="inat_location_change">Change</string>
@@ -350,11 +350,11 @@
 
     <!-- %1$s is the version number. 茸帳 (kinokochō) is the app's Japanese name -->
     <string name="about_title">茸帳 Mushroom Journal %1$s</string>
-    <string name="about_what_it_is">A field journal. It records what you saw and narrows what it could be — often far enough that someone more experienced can say. It does not decide, it has no opinion about eating anything, and on a screen with no colour it could not be the one to decide anyway.</string>
+    <string name="about_what_it_is">A field journal. It records what you saw and narrows what it could be — often far enough that someone more experienced can say. It does not decide, it has no opinion about eating anything, and on a screen with no color it could not be the one to decide anyway.</string>
     <string name="coverage_collaborate">Other regions are very welcome. If you would like to help bring this guide to your part of the world, write to email@wanderthe.dev or open an issue on GitHub (wanderwildwood/kinokocho).</string>
     <string name="coverage_statement">For now, this guide covers only the southern Appalachian mountains of the USA. A mushroom not listed may still be found where you are, and some are deadly. Never eat a mushroom because of this app.</string>
     <string name="about_safety_heading">Safety</string>
-    <string name="safety_disclaimer">This app is a field journal, not an identification service and not medical advice. It narrows a list and cannot tell you that a mushroom is safe to eat. Never eat a wild mushroom because of this app: some kill, and look-alikes are common. If anyone has eaten a mushroom you are unsure of, call your poison control centre or local emergency number at once.</string>
+    <string name="safety_disclaimer">This app is a field journal, not an identification service and not medical advice. It narrows a list and cannot tell you that a mushroom is safe to eat. Never eat a wild mushroom because of this app: some kill, and look-alikes are common. If anyone has eaten a mushroom you are unsure of, call your poison control center or local emergency number at once.</string>
     <string name="coverage_ok">I understand</string>
     <string name="about_privacy_heading">Privacy</string>
     <string name="about_privacy">Your finds and photographs stay on this phone, except a find you choose to publish to iNaturalist (the app has the internet permission for that and for nothing else). The only other permission asked for is a rough position, only when you press the button for it, and only ever rough, never a precise fix.</string>
@@ -364,7 +364,7 @@
     <string name="about_terms">This guide is information, not advice. It narrows a list; you decide, and you are responsible for what you do with it.</string>
     <string name="about_inat">Publishing a find to iNaturalist is the one thing that reaches the network. One find, when you press a button that says it is public. Sign-in happens in your browser, so this app never sees your password.</string>
     <!-- "Obscured" is the location setting inat_location_obscured -->
-    <string name="about_inat_obscured">Obscured is not the same as not sent: iNaturalist is told where the mushroom was and shows the public a point some twenty kilometres off. The place you typed is kept there too, and not shown.</string>
+    <string name="about_inat_obscured">Obscured is not the same as not sent: iNaturalist is told where the mushroom was and shows the public a point some twenty kilometers off. The place you typed is kept there too, and not shown.</string>
     <!-- The name of the app's licence -->
     <string name="about_licence">GNU General Public License v3</string>
     <string name="about_schema_credit">Character schema and drawings — original, this project.</string>
@@ -384,15 +384,15 @@
     <string name="about_no_browser_address">No browser is installed. The address is %1$s.</string>
     <string name="about_close">Close</string>
     <!-- Licences: the list and each library's page (shared screen) -->
-    <string name="licences_title">Licences</string>
+    <string name="licences_title">Licenses</string>
     <string name="licences_back">Back</string>
     <string name="licences_source_head">Source code</string>
-    <string name="licences_no_text">%s needs no licence text here.</string>
-    <string name="licences_licence">Mushroom Journal is free software: GPL-3.0-only, copyright wander wildwood. What it is built on keeps its own licences, each on its own page.</string>
+    <string name="licences_no_text">%s needs no license text here.</string>
+    <string name="licences_licence">Mushroom Journal is free software: GPL-3.0-only, copyright wander wildwood. What it is built on keeps its own licenses, each on its own page.</string>
     <string name="licences_full_head">Full texts</string>
     <string name="licences_full_gpl">GNU General Public License v3 (full text)</string>
     <string name="licences_full_apache">Apache License 2.0 (full text)</string>
-    <string name="licences_full_ofl">SIL Open Font Licence 1.1 (full text)</string>
+    <string name="licences_full_ofl">SIL Open Font License 1.1 (full text)</string>
     <string name="licences_full_ccby">Creative Commons Attribution 4.0 (full text)</string>
 
     <!-- ============================================================ -->
