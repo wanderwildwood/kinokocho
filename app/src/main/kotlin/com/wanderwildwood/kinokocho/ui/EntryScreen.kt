@@ -29,7 +29,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import kotlinx.coroutines.delay
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -374,16 +373,12 @@ fun EntryScreen(
         if (draft.photos.isNotEmpty()) {
             item {
                 Section(stringResource(R.string.entry_section_photographs))
-                var arming by remember(draft.uuid) { mutableStateOf<String?>(null) }
+                var arming by rememberArmedKey<String>(draft.uuid)
 
                 // A thumbnail armed by a stray tap used to stay armed for as long as the
                 // screen was open, so the next tap anywhere near it deleted a photograph.
-                // Every other question in these apps withdraws itself; this one did not.
-                LaunchedEffect(arming) {
-                    if (arming == null) return@LaunchedEffect
-                    delay(6000)
-                    arming = null
-                }
+                // Now it stays armed only until the next other touch, Back or leaving
+                // (shared Armed.kt), with no timer.
                 val context = LocalContext.current
                 LazyRowMMD(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     items3(draft.photos.size) { i ->

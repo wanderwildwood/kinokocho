@@ -16,7 +16,6 @@ import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalCursorBlinkEnabled
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -49,16 +48,19 @@ import com.wanderwildwood.kinokocho.ui.SeasonScreen
 import com.wanderwildwood.kinokocho.ui.monochrome
 import java.util.Calendar
 import com.wanderwildwood.kinokocho.ui.NewEntryScreen
+import com.wanderwildwood.kinokocho.ui.ArmedScope
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ThemeMMD(colorScheme = monochrome) {
-                // A blinking caret repaints the e-ink panel twice a second for nothing.
-                CompositionLocalProvider(LocalCursorBlinkEnabled provides false) {
-                    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
-                        Journal()
+                ArmedScope {
+                    // A blinking caret repaints the e-ink panel twice a second for nothing.
+                    CompositionLocalProvider(LocalCursorBlinkEnabled provides false) {
+                        Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
+                            Journal()
+                        }
                     }
                 }
             }

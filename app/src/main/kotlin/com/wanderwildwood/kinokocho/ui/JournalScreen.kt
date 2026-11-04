@@ -20,7 +20,6 @@ import androidx.compose.material3.MaterialTheme
 import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,7 +40,6 @@ import com.wanderwildwood.kinokocho.data.MeasurementRow
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import kotlinx.coroutines.delay
 
 /**
  * Everything recorded, newest first.
@@ -198,13 +196,7 @@ private fun Empty(modifier: Modifier = Modifier) {
  */
 @Composable
 private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () -> Unit) {
-    var armed by remember { mutableStateOf(false) }
-    LaunchedEffect(armed) {
-        if (armed) {
-            delay(6000)
-            armed = false
-        }
-    }
+    var armed by rememberArmedFlag()
 
     Row(
         Modifier

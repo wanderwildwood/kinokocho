@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,7 +25,6 @@ import com.wanderwildwood.kinokocho.JournalViewModel
 import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.net.INatAccount
 import com.wanderwildwood.kinokocho.net.INatConfig
-import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -200,24 +198,19 @@ private fun Publish(vm: JournalViewModel, draft: JournalViewModel.Draft) {
      *
      * Publishing is not destructive in the way deleting is - it can be undone on
      * iNaturalist - but it is outward-facing and it cannot be taken back from anybody
-     * who already read it, which is the same reason for asking. The row disarms itself
-     * after six seconds so a stray tap does not leave a live trigger.
+     * who already read it, which is the same reason for asking. The row stays armed until
+     * the next other touch, Back or leaving the screen (shared Armed.kt), so a stray tap
+     * elsewhere puts the question down; there is no timer.
      */
     /*
      * ⚠ Keyed on the find. Without the key this is the photograph bug again, which this
      * repo has already fixed once ("The armed photograph never put its own question
      * down"): Compose keeps the state in the slot, not with the data, so arming Publish
-     * on one find and then opening another within six seconds left the second one armed
-     * — and a single tap published a mushroom nobody had been asked about. Four seconds
-     * is a narrow window and it is somebody's observation going public.
+     * on one find and then opening another left the second one armed
+     * — and a single tap published a mushroom nobody had been asked about. It is
+     * somebody's observation going public.
      */
-    var armed by remember(draft.uuid) { mutableStateOf(false) }
-    LaunchedEffect(armed) {
-        if (armed) {
-            delay(6000)
-            armed = false
-        }
-    }
+    var armed by rememberArmedFlag(draft.uuid)
     OutlinedButtonMMD(
         onClick = {
             if (armed) {
