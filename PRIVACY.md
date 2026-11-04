@@ -196,7 +196,7 @@ strangers reads a list of names as a claim.
 <!-- shared-about privacy section -->
 ## Who we are
 
-Mushroom Journal is made by wander wildwood, an independent developer: one person, not a company. wander wildwood is the data controller for anything the app itself handles, and that is very little. Mushroom Journal keeps what you put in it on your phone, apart from what it sends to iNaturalist as described above, and sends nothing to the developer, so the developer holds no data about you.
+Mushroom Journal is made by wander wildwood, an independent developer: one person, not a company. wander wildwood is the data controller for anything the app itself handles, and that is very little. What you put in Mushroom Journal stays on your phone. The only things that go out are the requests to iNaturalist described above: signing in (the one-time code your browser hands back, swapped for a token, and a look-up of your iNaturalist user name), publishing a find you choose (its photographs, characters, note, date and place), and asking what the community called a find you published. The developer receives nothing, so the developer holds no data about you.
 
 ## How to contact us
 
