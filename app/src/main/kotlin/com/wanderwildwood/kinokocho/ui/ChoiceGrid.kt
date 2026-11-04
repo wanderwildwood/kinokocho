@@ -139,8 +139,11 @@ internal fun linesFor(labels: List<String>): Int {
     return ((longest + PER_LINE - 1) / PER_LINE).coerceIn(1, 4)
 }
 
-/** Characters of `bodySmall` that fit across one tile on a 480px, 210dpi panel. */
-private const val PER_LINE = 25
+/**
+ * Characters of `bodySmall` that fit across one tile on a 480px, 210dpi panel. 23 since
+ * bodySmall went from 15 to 16 sp (the house type floor); it was 25.
+ */
+private const val PER_LINE = 23
 
 /**
  * How tall to make each of [count] choices so that a whole number of them fills
@@ -173,8 +176,11 @@ internal const val MAX_STRETCH = 1.5f
 /** A tile with no words at all: the drawing, its padding, and the gap under the row. */
 internal val ROW_MIN = 96.dp
 
-/** One line of `bodySmall`, near enough to divide a viewport by. */
-internal val LINE = 16.dp
+/**
+ * One line of `bodySmall`, near enough to divide a viewport by. A 16 sp line of Lato is
+ * 19.2 dp, so 20 keeps [ROW_MIN] + lines from coming out under what a tile needs.
+ */
+internal val LINE = 20.dp
 
 /** What the question list puts between two items. Must match `verticalArrangement`. */
 internal val GAP = 6.dp

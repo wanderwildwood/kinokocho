@@ -45,6 +45,7 @@ import com.wanderwildwood.kinokocho.ui.PhotoSheet
 import com.wanderwildwood.kinokocho.ui.SaveDialog
 import com.wanderwildwood.kinokocho.ui.SeasonRow
 import com.wanderwildwood.kinokocho.ui.SeasonScreen
+import com.wanderwildwood.kinokocho.ui.houseTypography
 import com.wanderwildwood.kinokocho.ui.monochrome
 import java.util.Calendar
 import com.wanderwildwood.kinokocho.ui.NewEntryScreen
@@ -54,7 +55,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ThemeMMD(colorScheme = monochrome) {
+            ThemeMMD(colorScheme = monochrome, typography = houseTypography) {
                 ArmedScope {
                     // A blinking caret repaints the e-ink panel twice a second for nothing.
                     CompositionLocalProvider(LocalCursorBlinkEnabled provides false) {
