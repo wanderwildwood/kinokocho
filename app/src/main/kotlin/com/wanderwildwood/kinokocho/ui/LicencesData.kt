@@ -8,24 +8,11 @@ import com.wanderwildwood.kinokocho.R
 const val SOURCE_URL = "https://github.com/wanderwildwood/kinokocho"
 
 /**
- * Everything the APK contains that is not this project's own code, from its dependency tree
- * (androidx and Compose libraries all carry their licence in META-INF of the APK) and from the
- * data and drawings it ships. Libraries come in families: one row per family.
- */
-val LICENCE_COMPONENTS: List<LicenceComponent> = listOf(
-    LicenceComponent("Kotlin standard library 2.2", "JetBrains", "Apache-2.0", "https://kotlinlang.org"),
-    LicenceComponent("kotlinx.coroutines 1.10", "JetBrains", "Apache-2.0", "https://github.com/Kotlin/kotlinx.coroutines"),
-    LicenceComponent("AndroidX Core, Activity, Lifecycle, SavedState, Startup, Tracing, Emoji2, ProfileInstaller", "Google", "Apache-2.0", "https://developer.android.com/jetpack/androidx"),
-    LicenceComponent("AndroidX Room and SQLite", "Google", "Apache-2.0", "https://developer.android.com/jetpack/androidx/releases/room"),
-    LicenceComponent("Jetpack Compose (runtime, UI, foundation, animation, Material 3)", "Google", "Apache-2.0", "https://developer.android.com/jetpack/compose"),
-    LicenceComponent("MMD 1.0.2, Mudita's E Ink component library", "Mudita", "Apache-2.0", "https://github.com/mudita/MMD"),
-    LicenceComponent("Lato typeface, inside MMD", "Łukasz Dziedzic", "OFL-1.1", "https://www.latofonts.com"),
-    LicenceComponent("Region pack: southern Appalachia (characters, hazards, seasons)", "wander wildwood", "CC0-1.0", "https://creativecommons.org/publicdomain/zero/1.0/"),
-    LicenceComponent("Whole-mushroom plates, traced from public-domain plates (Peck, Sowerby, Bresadola, Bulliard, Cooke and others)", "wander wildwood", "Public domain", "https://github.com/wanderwildwood/kinokocho/blob/master/tools/plate-sources.json"),
-    LicenceComponent("Season counts from GBIF occurrence records (the publishers of each dataset keep the credit for their records)", "GBIF.org", "CC0-1.0 and CC-BY-4.0", "https://www.gbif.org"),
-)
-
-/** Each distinct licence text once: family id and the raw resource. */
+ * Everything the APK contains that is not this project's own code is listed by the build
+ * (AboutLibraries, one row per artifact, release libraries only); the data and drawings it ships
+ * are added in config/libraries.
+ *
+ * Each distinct licence text once: family id and the raw resource. */
 val LICENCE_RAW: List<Pair<String, Int>> = listOf(
     "gpl" to R.raw.gpl_3_0,
     "apache" to R.raw.apache_2_0,
@@ -38,7 +25,8 @@ fun rememberLicencesData(): LicencesData = LicencesData(
     appName = "Mushroom Journal",
     sourceUrl = SOURCE_URL,
     licenceLine = stringResource(R.string.licences_licence),
-    components = LICENCE_COMPONENTS,
+    // One row per artifact in the APK, listed by the build (config/libraries adds what Gradle cannot see).
+    components = rememberGeneratedComponents(R.raw.aboutlibraries),
     texts = LICENCE_RAW.map { (id, raw) ->
         LicenceText(id, stringResource(when (id) {
             "gpl" -> R.string.licences_full_gpl

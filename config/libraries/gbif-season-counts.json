@@ -1,0 +1,8 @@
+{
+  "uniqueId": "gbif-season-counts",
+  "name": "Season counts from GBIF occurrence records",
+  "description": "When each species is found, counted from GBIF.org occurrence records. The publishers of each dataset keep the credit for their records.",
+  "developers": [{ "name": "GBIF.org" }],
+  "website": "https://www.gbif.org",
+  "licenses": ["CC0-1.0", "CC-BY-4.0"]
+}

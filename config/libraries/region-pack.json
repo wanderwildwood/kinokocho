@@ -1,0 +1,8 @@
+{
+  "uniqueId": "region-pack-southern-appalachia",
+  "name": "Region pack: southern Appalachia",
+  "description": "The characters, hazards and seasons the journal asks about (assets/packs).",
+  "developers": [{ "name": "wander wildwood" }],
+  "website": "https://github.com/wanderwildwood/kinokocho",
+  "licenses": ["CC0-1.0"]
+}

@@ -1,0 +1,8 @@
+{
+  "uniqueId": "mushroom-plates",
+  "name": "Whole-mushroom plates",
+  "description": "Traced from public-domain plates (Peck, Sowerby, Bresadola, Bulliard, Cooke and others); the sources are listed in tools/plate-sources.json.",
+  "developers": [{ "name": "wander wildwood" }],
+  "website": "https://github.com/wanderwildwood/kinokocho/blob/main/tools/plate-sources.json",
+  "licenses": ["public-domain"]
+}
