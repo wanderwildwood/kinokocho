@@ -36,6 +36,9 @@ fun AboutDialog(onDismiss: () -> Unit) {
                 add(AboutSection(null, stringResource(R.string.about_inat_obscured)))
             }
             add(AboutSection(null, stringResource(R.string.about_privacy_close)))
+            add(AboutSection(stringResource(R.string.privacy_who_title), stringResource(R.string.privacy_who)))
+            add(AboutSection(stringResource(R.string.privacy_contact_title), stringResource(R.string.privacy_contact)))
+            add(AboutSection(stringResource(R.string.privacy_rights_title), stringResource(R.string.privacy_rights)))
             add(AboutSection(stringResource(R.string.about_terms_heading), stringResource(R.string.about_terms_licence)))
             add(AboutSection(null, stringResource(R.string.about_terms)))
             add(AboutSection(null, stringResource(R.string.about_schema_credit)))
@@ -48,6 +51,8 @@ fun AboutDialog(onDismiss: () -> Unit) {
         licences = stringResource(R.string.licences_title),
         feedTheLlamas = stringResource(R.string.about_feed_the_llamas),
         noBrowser = { address -> context.getString(R.string.about_no_browser_address, address) },
+        writeTo = { address -> context.getString(R.string.about_write_to, address) },
+        noMailApp = { address -> context.getString(R.string.about_no_mail_app, address) },
     )
     HouseAboutDialog(data, labels, R.drawable.llama, onDismiss) { modifier, back ->
         LicencesScreen(rememberLicencesData(), rememberLicencesLabels(), onBack = back, modifier = modifier)

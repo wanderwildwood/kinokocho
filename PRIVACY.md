@@ -152,7 +152,7 @@ publishing button at all and cannot reach the network. See the README.
 
 ## Keeping a copy
 
-Under the (i) there is "Keep a copy of everything", which writes the whole journal — every
+Under the Backup row beneath the journal title there is "Keep a copy of everything", which writes the whole journal — every
 kept find and every photograph — into a zip and opens the system's save screen. Where it goes
 from there is entirely your choice: a folder on the phone, a card, a drive app. The app never
 sends a backup anywhere itself — the only thing it uploads is a find you pressed publish
@@ -192,3 +192,31 @@ strangers reads a list of names as a claim.
 - Everything the app can send is built in `app/src/main/kotlin/.../net/`, and the only
   file in this repository that opens a socket is `INatClient.kt`. `grep -rn "URL(" app/src`
   finds it and finds nothing else.
+
+<!-- shared-about privacy section -->
+## Who we are
+
+Mushroom Journal is made by wander wildwood, an independent developer: one person, not a company. wander wildwood is the data controller for anything the app itself handles, and that is very little. Mushroom Journal keeps what you put in it on your phone, apart from what it sends to iNaturalist as described above, and sends nothing to the developer, so the developer holds no data about you.
+
+## How to contact us
+
+Write to email@wanderthe.dev about your data, this policy or anything else. The same address is in the app, under About.
+
+## Your rights
+
+If you are in the EU, the EEA or the UK, the GDPR gives you the right to:
+
+- see the personal data held about you (access)
+- have it corrected (rectification) or deleted (erasure)
+- limit how it is used (restriction)
+- object to its use (objection)
+- get a copy to take elsewhere (portability)
+- withdraw your consent at any time, where something rests on it
+- complain to a data protection supervisory authority, for example the one where you live
+
+Similar laws elsewhere, such as the CCPA in California, give you the right to know, delete and correct, and to opt out of the sale or sharing of your data. Nothing from Mushroom Journal is sold or shared.
+
+Since Mushroom Journal keeps what it stores only on your phone, you can exercise most of these rights yourself: edit or delete a find in the app, keep a copy of everything from the Backup row under the journal title, clear the app's data in Android's settings, or uninstall the app, which deletes all of it. For anything you cannot do yourself, write to the address above.
+
+Mushroom Journal connects to iNaturalist only when you sign in there, publish a find, or ask what a published find has been called. iNaturalist is separate from this app and from its developer, and what it receives is covered by its own privacy policy (https://www.inaturalist.org/pages/privacy); ask iNaturalist about what it holds.
+<!-- /shared-about privacy section -->

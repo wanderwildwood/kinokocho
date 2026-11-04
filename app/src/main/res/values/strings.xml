@@ -351,7 +351,7 @@
     <!-- %1$s is the version number. 茸帳 (kinokochō) is the app's Japanese name -->
     <string name="about_title">茸帳 Mushroom Journal %1$s</string>
     <string name="about_what_it_is">A field journal. It records what you saw and narrows what it could be — often far enough that someone more experienced can say. It does not decide, it has no opinion about eating anything, and on a screen with no color it could not be the one to decide anyway.</string>
-    <string name="coverage_collaborate">Other regions are very welcome. If you would like to help bring this guide to your part of the world, write to email@wanderthe.dev or open an issue on GitHub (wanderwildwood/kinokocho).</string>
+    <string name="coverage_collaborate">Other regions are very welcome. If you would like to help bring this guide to your part of the world, write to the address at the foot of this page or open an issue on GitHub (wanderwildwood/kinokocho).</string>
     <string name="coverage_statement">For now, this guide covers only the southern Appalachian mountains of the USA. A mushroom not listed may still be found where you are, and some are deadly. Never eat a mushroom because of this app.</string>
     <string name="about_safety_heading">Safety</string>
     <string name="safety_disclaimer">This app is a field journal, not an identification service and not medical advice. It narrows a list and cannot tell you that a mushroom is safe to eat. Never eat a wild mushroom because of this app: some kill, and look-alikes are common. If anyone has eaten a mushroom you are unsure of, call your poison control center or local emergency number at once.</string>
@@ -487,4 +487,14 @@
     <!-- Its own sentence after the first, so it starts with a space. %1$d finds in the backup were already in the journal -->
     <string name="import_already_here">\u0020%1$d were already here.</string>
     <string name="import_close">Close</string>
+    <!-- shared-about: contact row + privacy section (edit in /opt/projects/shared-about) -->
+    <string name="about_write_to">Write to %1$s</string>
+    <string name="about_no_mail_app">No email app is installed. The address is %1$s.</string>
+    <string name="privacy_who_title">Who we are</string>
+    <string name="privacy_who">This app is made by wander wildwood, an independent developer: one person, not a company. That makes wander wildwood the data controller for anything the app itself handles, and that is very little: what you put in stays on this phone unless you send it somewhere yourself, or the app sends it to iNaturalist as described above, and nothing comes to the developer.</string>
+    <string name="privacy_contact_title">How to contact us</string>
+    <string name="privacy_contact">Write to email@wanderthe.dev, about your data or anything else.</string>
+    <string name="privacy_rights_title">Your rights</string>
+    <string name="privacy_rights">Under the GDPR you can ask to see the data held about you, to have it corrected or deleted, to limit or object to its use, to take a copy with you, to withdraw consent, and to complain to a data protection authority. Since the app keeps what it stores only on your phone, you can do most of this yourself: edit or delete a find in the app, keep a copy of everything from the Backup row under the journal title, clear the app\'s data in Android\'s settings, or uninstall the app. What iNaturalist receives is covered by its own privacy policy, at inaturalist.org/pages/privacy.</string>
+    <!-- /shared-about -->
 </resources>
