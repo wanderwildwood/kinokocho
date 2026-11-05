@@ -11,8 +11,8 @@ import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.net.INatConfig
 
 /**
- * This app's About: only the words and the address. The dialog, its one Close button, the
- * Licences row, the links and the llama are the shared HouseAbout.kt, the same in every app.
+ * This app's About: only the words and the address. The dialog, its drawers, its one Close button,
+ * the Licenses drawer, the links and the llama are the shared HouseAbout.kt, the same in every app.
  *
  * The privacy lines stay because a record of where someone forages is worth more to a stranger
  * than a record of their games. The iNaturalist lines are there only in a build that has a
@@ -53,8 +53,11 @@ fun AboutDialog(onDismiss: () -> Unit) {
         noBrowser = { address -> context.getString(R.string.about_no_browser_address, address) },
         writeTo = { address -> context.getString(R.string.about_write_to, address) },
         noMailApp = { address -> context.getString(R.string.about_no_mail_app, address) },
+        openDrawer = { heading -> context.getString(R.string.about_open_drawer, heading) },
+        closeDrawer = { heading -> context.getString(R.string.about_close_drawer, heading) },
+        intro = stringResource(R.string.about_intro_head),
+        contact = stringResource(R.string.about_contact_head),
+        links = stringResource(R.string.about_links_head),
     )
-    HouseAboutDialog(data, labels, R.drawable.llama, onDismiss) { modifier, back ->
-        LicencesScreen(rememberLicencesData(), rememberLicencesLabels(), onBack = back, modifier = modifier)
-    }
+    HouseAboutDialog(data, labels, R.drawable.llama, onDismiss)
 }
