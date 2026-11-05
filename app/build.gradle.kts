@@ -18,8 +18,8 @@ android {
         // The Kompakt runs Android 12 (API 31); nothing here needs anything newer.
         minSdk = 31
         targetSdk = 31
-        versionCode = 42
-        versionName = "0.3.33"
+        versionCode = 43
+        versionName = "0.3.34"
 
         /*
          * The iNaturalist application id, which is not in this repository.
