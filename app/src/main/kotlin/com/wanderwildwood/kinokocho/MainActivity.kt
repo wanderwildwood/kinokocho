@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -231,7 +230,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     // person needs from a restore: how many came in, and how many were already here.
     var imported by remember { mutableStateOf<JournalImport.Result?>(null) }
     val pickBackup = rememberLauncherForActivityResult(
-        ActivityResultContracts.OpenDocument()
+        FilesOpenDocument(writable = false)
     ) { uri ->
         if (uri != null) vm.importJournal(uri) { imported = it }
     }
@@ -260,11 +259,12 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
         }
     }
 
-    // Where the copy goes is the person's choice, made in the system's own save screen, so
-    // it can be a folder on the phone or a card as well as an app. Nothing here is shared.
+    // Where the copy goes is the person's choice, made in a save screen (Cabinet's, or the
+    // system's), so it can be a folder on the phone or a card as well as an app. Nothing
+    // here is shared.
     var saved by remember { mutableStateOf<Boolean?>(null) }
     val saveCopy = rememberLauncherForActivityResult(
-        ActivityResultContracts.CreateDocument("application/zip")
+        FilesCreateDocument("application/zip")
     ) { uri ->
         if (uri != null) vm.exportJournalTo(uri) { saved = it }
     }
