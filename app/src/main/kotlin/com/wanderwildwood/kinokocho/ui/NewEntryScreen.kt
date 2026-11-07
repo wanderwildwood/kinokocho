@@ -148,6 +148,7 @@ fun NewEntryScreen(
                 Modifier.fillMaxSize().padding(top = 8.dp),
                 state = listState,
                 verticalArrangement = Arrangement.spacedBy(6.dp),
+                showCutRow = true,
             ) {
                 if (drawn) {
                     choiceGrid(

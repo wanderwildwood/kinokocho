@@ -95,6 +95,7 @@ fun EntryScreen(
     PagedColumn(
         Modifier.weight(1f),
         contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 16.dp, end = 12.dp),
+        showCutRow = true,
     ) {
         item {
             if (draft.placeNote.isNotBlank()) {

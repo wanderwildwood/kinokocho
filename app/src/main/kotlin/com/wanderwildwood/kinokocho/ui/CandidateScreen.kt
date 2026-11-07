@@ -82,6 +82,7 @@ fun CandidateScreen(
     PagedColumn(
         Modifier.fillMaxSize(),
         contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 16.dp, end = 12.dp),
+        showCutRow = true,
     ) {
         taxon.commonName?.let {
             item {

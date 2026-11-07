@@ -130,7 +130,7 @@ fun JournalScreen(
                 else -> {
                     val listState = rememberLazyListState()
                     Box(Modifier.weight(1f).padding(top = 8.dp)) {
-                        PagedColumn(state = listState) {
+                        PagedColumn(state = listState, showCutRow = true) {
                             items(shown, key = { it.observation.id }) { entry ->
                                 EntryRow(entry, onOpen = { onOpen(entry.observation.id) },
                                     onDelete = { onDelete(entry.observation.id) })

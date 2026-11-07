@@ -107,6 +107,7 @@ fun SeasonScreen(
                 Modifier,
                 state = listState,
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 16.dp, end = 12.dp),
+                showCutRow = true,
             ) {
                 item {
                     TextFieldMMD(
