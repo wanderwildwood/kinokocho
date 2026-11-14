@@ -412,7 +412,7 @@ fun EntryScreen(
                                     bitmap = bitmap,
                                     contentDescription = photo.slot,
                                     contentScale = ContentScale.Crop,
-                                    modifier = Modifier.size(96.dp),
+                                    modifier = Modifier.size(96.dp).keepColors(),
                                 )
                             } else {
                                 TextMMD(stringResource(R.string.entry_photo_missing), style = MaterialTheme.typography.bodySmall)
