@@ -34,6 +34,8 @@
 
     <!-- The apps that act on selected text, Define among them, for the menu over a selection. -->
     <queries>
+        <!-- Home, whose dark mode switch this app follows when Home is installed. -->
+        <package android:name="com.wanderwildwood.iori" />
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.BROWSABLE" />
@@ -56,6 +58,12 @@
         android:label="@string/app_name"
         android:supportsRtl="false"
         android:theme="@style/Theme.App">
+
+        <!-- Starts dark mode before the first screen is drawn. Holds no data. -->
+        <provider
+            android:name="com.wanderwildwood.kinokocho.ui.DarkModeInit"
+            android:authorities="${applicationId}.darkmodeinit"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
