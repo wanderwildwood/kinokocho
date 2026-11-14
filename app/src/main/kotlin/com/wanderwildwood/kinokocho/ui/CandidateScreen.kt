@@ -143,7 +143,8 @@ fun CandidateScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 14.dp)
-                        .height(200.dp),
+                        .height(200.dp)
+                        .keepPlate(),
                 )
             }
         }
