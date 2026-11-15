@@ -2,7 +2,6 @@ package com.wanderwildwood.kinokocho.ui
 
 import android.content.ActivityNotFoundException
 import android.content.Context
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -64,7 +63,8 @@ enum class PhotoSlot(val id: String, @StringRes val labelRes: Int, @StringRes va
 
 private fun noCamera(context: Context, file: File) {
     file.delete()
-    Toast.makeText(context, context.getString(R.string.photos_no_camera), Toast.LENGTH_LONG).show()
+    // Along the foot until the next press: a toast could be gone before it had been read.
+    FootNotice.say(context, context.getString(R.string.photos_no_camera))
 }
 
 /**
