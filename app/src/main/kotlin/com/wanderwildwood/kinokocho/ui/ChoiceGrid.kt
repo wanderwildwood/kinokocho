@@ -28,6 +28,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.wanderwildwood.kinokocho.schema.CharacterValue
+import androidx.compose.ui.semantics.selected
+import androidx.compose.ui.semantics.semantics
 
 /**
  * The states of a character, as pictures where there are pictures.
@@ -223,6 +225,7 @@ private fun PictureChoice(
                 BorderStroke(if (selected) 3.dp else 1.dp, MaterialTheme.colorScheme.onSurface),
                 shape = MaterialTheme.shapes.small,
             )
+            .semantics { this.selected = selected }
             .clickable(onClick = onClick)
             .padding(vertical = 8.dp, horizontal = 6.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
