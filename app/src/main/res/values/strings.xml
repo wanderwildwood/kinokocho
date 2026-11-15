@@ -360,7 +360,7 @@
     <string name="about_privacy">Your finds and photographs stay on this phone, except a find you choose to publish to iNaturalist (the app has the internet permission for that and for nothing else). The only other permission asked for is a rough position, only when you press the button for it, and only ever rough, never a precise fix. \"Feed the llamas\" in About opens a donation page (square.link) in your browser, only when you press it. The app sends nothing there; if you give, the payment is handled on that page by Square, not by this app.</string>
     <string name="about_privacy_close">There are no ads, no analytics and no tracking. Copies of the journal and finds you share go only where you choose to save or send them.</string>
     <string name="about_terms_heading">Terms</string>
-    <string name="about_terms_licence">This app is free software under the GNU General Public License v3. It comes with no warranty: use it at your own risk.</string>
+    <string name="about_terms_licence">This app is free software under the GNU General Public License, version 3 only. It comes with no warranty: use it at your own risk.</string>
     <string name="about_terms">This guide is information, not advice. It narrows a list; you decide, and you are responsible for what you do with it. A donation through \"Feed the llamas\" is voluntary and unlocks nothing: the app is the same with or without one.</string>
     <string name="about_inat">Publishing a find to iNaturalist is the one thing that reaches the network. One find, when you press a button that says it is public. Sign-in happens in your browser, so this app never sees your password.</string>
     <!-- "Obscured" is the location setting inat_location_obscured -->
