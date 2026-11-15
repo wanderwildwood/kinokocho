@@ -52,6 +52,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import com.mudita.mmd.components.lazy.LazyRowMMD
+import androidx.compose.foundation.lazy.rememberLazyListState
 
 /**
  * One find, read back.
@@ -90,10 +91,16 @@ fun EntryScreen(
     val sporePrintPending = "spore_print" !in draft.answers.values.keys
     val resources = LocalContext.current.resources
 
+    // The keyboard takes room from the list (adjustResize in the manifest) and the field being
+    // typed in is brought whole onto what is left, so the date stays at the top.
+    val list = rememberLazyListState()
+    val typing = rememberTypingIn(list)
+
     Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
     TopAppBarMMD(title = { TextMMD(dateOf(draft.recordedAt)) })
     PagedColumn(
-        Modifier.weight(1f),
+        Modifier.weight(1f).then(typing.listModifier()),
+        state = list,
         contentPadding = androidx.compose.foundation.layout.PaddingValues(start = 16.dp, end = 12.dp),
         showCutRow = true,
     ) {
@@ -521,7 +528,7 @@ fun EntryScreen(
                                 typed = entered.filter { it.isDigit() }.take(4)
                                 vm.measure(mapOf(value.id to typed.toIntOrNull()))
                             },
-                            modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
+                            modifier = Modifier.fillMaxWidth().padding(top = 6.dp).keptWhole(typing),
                             label = { TextMMD(value.label) },
                             keyboardOptions = KeyboardOptions(
                                 keyboardType = KeyboardType.Number,
@@ -551,7 +558,7 @@ fun EntryScreen(
             TextFieldMMD(
                 value = name,
                 onValueChange = { name = it; vm.setIdentifiedAs(it) },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().keptWhole(typing),
                 placeholder = { TextMMD(stringResource(R.string.entry_identified_placeholder)) },
                 singleLine = true,
             )
@@ -591,12 +598,13 @@ fun EntryScreen(
                 longitude = draft.longitude,
                 onPlaceChange = vm::setPlaceNote,
                 onPositionTaken = vm::setPosition,
+                fieldModifier = Modifier.keptWhole(typing),
             )
             var note by remember(draft.uuid) { mutableStateOf(draft.note) }
             TextFieldMMD(
                 value = note,
                 onValueChange = { note = it; vm.setNote(it) },
-                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 8.dp).keptWhole(typing),
                 placeholder = { TextMMD(stringResource(R.string.entry_note_placeholder)) },
             )
         }

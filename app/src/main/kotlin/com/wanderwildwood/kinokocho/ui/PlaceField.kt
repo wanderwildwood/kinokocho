@@ -63,6 +63,8 @@ fun PlaceField(
      * the app would have looked like it was working.
      */
     onPositionTaken: (Double, Double) -> Unit = { _, _ -> },
+    /** On the text field itself: the entry screen keeps it on the page while it is typed in. */
+    fieldModifier: Modifier = Modifier,
 ) {
     /*
      * The numbers are no longer written into the place note.
@@ -120,7 +122,7 @@ fun PlaceField(
         TextFieldMMD(
             value = text,
             onValueChange = { text = it; onPlaceChange(it) },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().then(fieldModifier),
             placeholder = { TextMMD(stringResource(R.string.place_placeholder)) },
         )
         Row(
