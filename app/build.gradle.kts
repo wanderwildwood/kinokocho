@@ -9,6 +9,17 @@ plugins {
     alias(libs.plugins.aboutlibraries.android)
 }
 
+/*
+ * The iNaturalist application id, which is not in this repository (see defaultConfig below).
+ * Read up here because it decides two things: the BuildConfig field, and whether the build
+ * gets INTERNET at all (sourceSets below).
+ */
+val inatClientId: String? = (project.findProperty("inatClientId") as String?)
+    ?: rootProject.file("local.properties").takeIf { it.isFile }?.let { file ->
+        Properties().apply { file.inputStream().use(::load) }
+            .getProperty("inatClientId")
+    }
+
 android {
     namespace = "com.wanderwildwood.kinokocho"
     compileSdk = 36
@@ -30,11 +41,6 @@ android {
          * the application is registered to: a PKCE client id is not a secret, but it is
          * an identity, and a fork should be posting as itself. See INatConfig.
          */
-        val inatClientId = (project.findProperty("inatClientId") as String?)
-            ?: rootProject.file("local.properties").takeIf { it.isFile }?.let { file ->
-                Properties().apply { file.inputStream().use(::load) }
-                    .getProperty("inatClientId")
-            }
         buildConfigField("String", "INAT_CLIENT_ID", "\"${inatClientId.orEmpty()}\"")
     }
 
@@ -113,6 +119,17 @@ android {
     sourceSets {
         named("main") {
             kotlin.srcDir("src/main/kotlin")
+        }
+        // INTERNET, the iNaturalist redirect activity and an https-only network security
+        // config, only in a build that can publish to iNaturalist. Without an application id
+        // the app has no use for the network, so it gets no permission to reach it.
+        if (!inatClientId.isNullOrBlank()) {
+            listOf("debug", "release").forEach { type ->
+                named(type) {
+                    manifest.srcFile("src/inat/AndroidManifest.xml")
+                    res.srcDir("src/inat/res")
+                }
+            }
         }
     }
 

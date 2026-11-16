@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    No cleartext anywhere. The only addresses a build with an iNaturalist application id ever
+    reaches are www.inaturalist.org and api.inaturalist.org, both over https (net/INatAuth.kt,
+    net/INatClient.kt). A build without one has no INTERNET permission and no copy of this file.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+</network-security-config>

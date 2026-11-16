@@ -357,7 +357,10 @@
     <string name="safety_disclaimer">This app is a field journal, not an identification service and not medical advice. It narrows a list and cannot tell you that a mushroom is safe to eat. Never eat a wild mushroom because of this app: some kill, and look-alikes are common. If anyone has eaten a mushroom you are unsure of, call your poison control center or local emergency number at once.</string>
     <string name="coverage_ok">I understand</string>
     <string name="about_privacy_heading">Privacy</string>
+    <!-- For a build that can publish to iNaturalist (one made with an application id). -->
     <string name="about_privacy">Your finds and photographs stay on this phone, except a find you choose to publish to iNaturalist (the app has the internet permission for that and for nothing else). The only other permission asked for is a rough position, only when you press the button for it, and only ever rough, never a precise fix. \"Feed the llamas\" in About opens a donation page (square.link) in your browser, only when you press it. The app sends nothing there; if you give, the payment is handled on that page by Square, not by this app.</string>
+    <!-- For a build without an iNaturalist application id, which has no INTERNET permission. -->
+    <string name="about_privacy_offline">Your finds and photographs stay on this phone. The app has no internet permission and cannot go online. The only permission it asks for is a rough position, only when you press the button for it, and only ever rough, never a precise fix. \"Feed the llamas\" in About opens a donation page (square.link) in your browser, only when you press it. The app sends nothing there; if you give, the payment is handled on that page by Square, not by this app.</string>
     <string name="about_privacy_close">There are no ads, no analytics and no tracking. Copies of the journal and finds you share go only where you choose to save or send them.</string>
     <string name="about_terms_heading">Terms</string>
     <string name="about_terms_licence">This app is free software under the GNU General Public License, version 3 only. It comes with no warranty: use it at your own risk.</string>
@@ -497,7 +500,10 @@
     <string name="about_contact_head">Contact</string>
     <string name="about_links_head">Links</string>
     <string name="privacy_who_title">Who we are</string>
+    <!-- For a build that can publish to iNaturalist. -->
     <string name="privacy_who">This app is made by wander wildwood, an independent developer: one person, not a company. That makes wander wildwood the data controller for anything the app itself handles, and that is very little: what you put in stays on this phone unless you send it somewhere yourself. The only things that go out are the requests to iNaturalist described above: signing in (a one-time code swapped for a token, and a look-up of your user name), publishing a find you choose (its photographs, characters, note, date and place), and asking what the community called a find you published. Nothing comes to the developer.</string>
+    <!-- For a build without an iNaturalist application id, which has no INTERNET permission. -->
+    <string name="privacy_who_offline">This app is made by wander wildwood, an independent developer: one person, not a company. That makes wander wildwood the data controller for anything the app itself handles, and that is very little: what you put in stays on this phone unless you send it somewhere yourself. The app sends nothing out: it has no internet permission. Nothing comes to the developer.</string>
     <string name="privacy_contact_title">How to contact us</string>
     <string name="privacy_contact">Write to email@wanderthe.dev, about your data or anything else.</string>
     <string name="privacy_rights_title">Your rights</string>

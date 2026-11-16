@@ -99,8 +99,8 @@ already says of every row on it. `--write` applies the widenings.
 - **Measurements, age and condition.** Facts about the specimen rather than the species,
   so they are recorded rather than asked. Age earns its place: a ring or a veil that is
   missing from an old mushroom proves nothing, and the key stops ruling things out on it.
-- **Publishing to iNaturalist**, one find at a time, from the bottom of that find's own
-  page. It goes up with its photographs, the characters you recorded, and — the part an
+- **Publishing to iNaturalist**, in a build made with an iNaturalist application id (see
+  below), one find at a time, from the bottom of that find's own page. It goes up with its photographs, the characters you recorded, and — the part an
   identifier actually wants — what you looked at and could not say, and the three
   characters that would have narrowed it most. The shortlist stays on the phone. What the
   community calls it comes back into the entry, kept apart from what you wrote down
@@ -221,7 +221,9 @@ Supply it at build time:
 
 or put `inatClientId=<the id>` in `local.properties`, which is gitignored.
 
-**A build without one has no publishing button at all** and cannot reach the network.
+**A build without one has no publishing button at all** and no `INTERNET` permission: the
+permission, the sign-in redirect activity and an https-only network security config live in
+`app/src/inat/`, which `app/build.gradle.kts` merges only when an id is supplied.
 That is the intended state for anyone who is not the person the application is registered
 to. A PKCE client id is not a secret — it is in every copy of the APK by necessity — but
 it *is* an identity: everything posted with it is attributed to that application on

@@ -30,13 +30,13 @@ fun AboutDialog(onDismiss: () -> Unit) {
             add(AboutSection(null, stringResource(R.string.coverage_statement)))
             add(AboutSection(null, stringResource(R.string.coverage_collaborate)))
             add(AboutSection(stringResource(R.string.about_safety_heading), stringResource(R.string.safety_disclaimer)))
-            add(AboutSection(stringResource(R.string.about_privacy_heading), stringResource(R.string.about_privacy)))
+            add(AboutSection(stringResource(R.string.about_privacy_heading), stringResource(if (INatConfig.configured) R.string.about_privacy else R.string.about_privacy_offline)))
             if (INatConfig.configured) {
                 add(AboutSection(null, stringResource(R.string.about_inat)))
                 add(AboutSection(null, stringResource(R.string.about_inat_obscured)))
             }
             add(AboutSection(null, stringResource(R.string.about_privacy_close)))
-            add(AboutSection(stringResource(R.string.privacy_who_title), stringResource(R.string.privacy_who)))
+            add(AboutSection(stringResource(R.string.privacy_who_title), stringResource(if (INatConfig.configured) R.string.privacy_who else R.string.privacy_who_offline)))
             add(AboutSection(stringResource(R.string.privacy_contact_title), stringResource(R.string.privacy_contact)))
             add(AboutSection(stringResource(R.string.privacy_rights_title), stringResource(R.string.privacy_rights)))
             add(AboutSection(stringResource(R.string.about_terms_heading), stringResource(R.string.about_terms_licence)))
