@@ -1,5 +1,6 @@
 package com.wanderwildwood.kinokocho
 
+import com.wanderwildwood.kinokocho.ui.DarkSelection
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -54,7 +55,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ThemeMMD(colorScheme = monochrome, typography = houseTypography) {
+            ThemeMMD(colorScheme = monochrome, typography = houseTypography) { DarkSelection {
                 ArmedScope {
                     // A blinking caret repaints the e-ink panel twice a second for nothing.
                     CompositionLocalProvider(LocalCursorBlinkEnabled provides false) {
@@ -63,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 }
-            }
+            } }
         }
     }
 }
