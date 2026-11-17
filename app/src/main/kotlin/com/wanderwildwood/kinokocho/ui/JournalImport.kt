@@ -8,8 +8,11 @@ import com.wanderwildwood.kinokocho.data.MeasurementRow
 import com.wanderwildwood.kinokocho.data.Observation
 import com.wanderwildwood.kinokocho.data.ObservationCharacter
 import com.wanderwildwood.kinokocho.data.ObservationPhoto
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.io.File
+import java.io.InputStream
 import java.util.zip.ZipInputStream
 
 /**
@@ -38,39 +41,67 @@ object JournalImport {
         val failed: String? = null,
     )
 
-    suspend fun read(context: Context, uri: Uri, dao: JournalDao): Result {
-        val bytes = runCatching {
-            context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
-        }.getOrNull() ?: return Result(failed = context.getString(R.string.import_could_not_open))
-
-        // The whole zip is read before anything is written. A half-read archive must not
-        // leave a half-restored journal.
-        var journal: JSONObject? = null
-        val pictures = mutableMapOf<String, ByteArray>()
-        runCatching {
-            ZipInputStream(bytes.inputStream()).use { zip ->
-                while (true) {
-                    val entry = zip.nextEntry ?: break
-                    when {
-                        entry.name == "journal.json" ->
-                            journal = JSONObject(zip.readBytes().decodeToString())
-                        entry.name.startsWith("photos/") && !entry.isDirectory ->
-                            entry.name.removePrefix("photos/")
-                                .takeIf(::isPlainFileName)
-                                ?.let { pictures[it] = zip.readBytes() }
-                    }
-                    zip.closeEntry()
-                }
+    /**
+     * Off the main thread, and never more than one buffer of the file in memory at once.
+     *
+     * A backup carries every photograph full size, so a season's journal is easily larger
+     * than the memory an app is given. Reading it whole failed exactly when it was needed
+     * — the app could not read back the copy it had written — and below that size it held
+     * the screen still for the whole restore. So the file is copied into the cache in
+     * pieces and read from there as a stream, twice: once to check all of it and take the
+     * journal, once to lay the photographs down one at a time.
+     */
+    suspend fun read(context: Context, uri: Uri, dao: JournalDao): Result =
+        withContext(Dispatchers.IO) {
+            val archive = copyToCache(context, uri)
+                ?: return@withContext Result(failed = context.getString(R.string.import_could_not_open))
+            try {
+                restore(context, archive, dao)
+            } finally {
+                archive.delete()
             }
-        }.getOrElse { return Result(failed = context.getString(R.string.import_not_a_backup)) }
+        }
+
+    /** The picked file, copied into the cache in pieces. Null when it cannot be read. */
+    private fun copyToCache(context: Context, uri: Uri): File? {
+        val copy = runCatching { File.createTempFile("restore", ".zip", context.cacheDir) }
+            .getOrNull() ?: return null
+        val ok = runCatching {
+            val input = context.contentResolver.openInputStream(uri) ?: error("no stream")
+            input.use { i -> copy.outputStream().use { i.copyTo(it) } }
+        }.isSuccess
+        if (!ok) copy.delete()
+        return copy.takeIf { ok }
+    }
+
+    private suspend fun restore(context: Context, archive: File, dao: JournalDao): Result {
+        // The whole zip is read through before anything is written, every entry inflated
+        // and its checksum tested, though only the journal is kept. A half-read archive
+        // must not leave a half-restored journal.
+        val journal = runCatching { readJournal(archive) }
+            .getOrElse { return Result(failed = context.getString(R.string.import_not_a_backup)) }
 
         val finds = journal?.optJSONArray("journal")
             ?: return Result(failed = context.getString(R.string.import_no_journal))
 
         var added = 0
         var already = 0
-        var photos = 0
         val dir = photoDir(context)
+
+        // The photographs the new finds will name, and that are not on disk already. They
+        // go down before the rows that point at them, as they always have.
+        val wanted = mutableSetOf<String>()
+        for (i in 0 until finds.length()) {
+            val find = finds.getJSONObject(i)
+            val uuid = find.optString("uuid").takeIf { it.isNotBlank() } ?: continue
+            if (dao.findByUuid(uuid) != null) continue
+            val list = find.optJSONArray("photos") ?: continue
+            for (p in 0 until list.length()) {
+                val name = list.getJSONObject(p).optString("file")
+                if (isPlainFileName(name) && !File(dir, name).exists()) wanted += name
+            }
+        }
+        val written = writePhotos(archive, dir, wanted)
 
         for (i in 0 until finds.length()) {
             val find = finds.getJSONObject(i)
@@ -152,15 +183,6 @@ object JournalImport {
                     // inspects a zip before opening it.
                     val name = photo.optString("file")
                         .takeIf { it.isNotBlank() && isPlainFileName(it) } ?: continue
-                    val file = File(dir, name)
-                    // A file already on disk is left alone: names are uuids, so one that
-                    // is there is the same picture, and rewriting it would be busywork at
-                    // best and a truncated photograph at worst.
-                    pictures[name]?.let { data ->
-                        if (!file.exists()) {
-                            runCatching { file.writeBytes(data) }.onSuccess { photos++ }
-                        }
-                    }
                     dao.addPhoto(
                         ObservationPhoto(
                             observationId = id,
@@ -174,7 +196,64 @@ object JournalImport {
             }
             added++
         }
-        return Result(added = added, alreadyHere = already, photos = photos)
+        return Result(added = added, alreadyHere = already, photos = written.size)
+    }
+
+    /** journal.json, after reading every entry of the archive through. */
+    private fun readJournal(archive: File): JSONObject? {
+        var journal: JSONObject? = null
+        ZipInputStream(archive.inputStream().buffered()).use { zip ->
+            while (true) {
+                val entry = zip.nextEntry ?: break
+                if (entry.name == "journal.json") {
+                    journal = JSONObject(zip.readBytes().decodeToString())
+                }
+                // Closing an entry reads the rest of it, so a damaged photograph is found
+                // here, before anything is written, as it was when the zip was read whole.
+                zip.closeEntry()
+            }
+        }
+        return journal
+    }
+
+    /**
+     * Copies each wanted photograph straight out of the archive onto disk, one at a time,
+     * and returns the names written.
+     *
+     * A file already on disk is left alone: names are uuids, so one that is there is the
+     * same picture, and rewriting it would be busywork at best and a truncated photograph
+     * at worst. For the same reason each one is written beside itself first and renamed
+     * into place only once it is whole.
+     */
+    private fun writePhotos(archive: File, dir: File, wanted: Set<String>): Set<String> {
+        val written = mutableSetOf<String>()
+        if (wanted.isEmpty()) return written
+        runCatching {
+            ZipInputStream(archive.inputStream().buffered()).use { zip ->
+                while (true) {
+                    val entry = zip.nextEntry ?: break
+                    val name = entry.name.removePrefix("photos/")
+                    if (entry.name.startsWith("photos/") && !entry.isDirectory &&
+                        isPlainFileName(name) && name in wanted && name !in written
+                    ) {
+                        val file = File(dir, name)
+                        if (!file.exists() && writeOne(zip, file)) written += name
+                    }
+                    zip.closeEntry()
+                }
+            }
+        }
+        return written
+    }
+
+    private fun writeOne(entry: InputStream, file: File): Boolean {
+        val part = File(file.parentFile, ".${file.name}.part")
+        val ok = runCatching {
+            part.outputStream().use { entry.copyTo(it) }
+            part.renameTo(file)
+        }.getOrDefault(false)
+        if (!ok) part.delete()
+        return ok
     }
 
     /**

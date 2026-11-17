@@ -181,6 +181,54 @@ class JournalImportTest {
         crafted.delete()
     }
 
+    /**
+     * Photographs are kept full size, so a season's backup is larger than the memory an app
+     * is given. Restore streams the file and lays the pictures down one at a time; what can
+     * be checked here is that they all arrive whole and nothing is left lying about.
+     */
+    @Test
+    fun `every photograph comes back whole and nothing is left in the cache`() = runTest {
+        val dir = photoDir(context)
+        val pictures = (1..6).associate { n ->
+            "big$n.jpg" to ByteArray(512 * 1024) { ((it * 31 + n) % 251).toByte() }
+        }
+        pictures.forEach { (name, data) -> File(dir, name).writeBytes(data) }
+        val find = aFind("u-big").let { full ->
+            full.copy(photos = pictures.keys.map { ObservationPhoto(0, 1, "cap", it, 1L) })
+        }
+        val backup = JournalExport.write(context, listOf(find))
+        pictures.keys.forEach { File(dir, it).delete() }
+        val cacheBefore = context.cacheDir.list()!!.toSet()
+
+        val result = JournalImport.read(context, Uri.fromFile(backup), dao)
+
+        assertNull(result.failed)
+        assertEquals(1, result.added)
+        assertEquals(6, result.photos)
+        pictures.forEach { (name, data) ->
+            assertTrue("$name should be back as it was", File(dir, name).readBytes().contentEquals(data))
+        }
+        assertEquals("no half-written photograph is left", emptyList<String>(),
+            dir.list()!!.filter { it.endsWith(".part") })
+        assertEquals("the copy read from is cleared away", cacheBefore, context.cacheDir.list()!!.toSet())
+        assertEquals(6, dao.findByUuid("u-big")!!.photos.size)
+        backup.delete()
+        pictures.keys.forEach { File(dir, it).delete() }
+    }
+
+    @Test
+    fun `a photograph already on disk is not rewritten`() = runTest {
+        val backup = backupOf(aFind("u1"))
+        val mine = File(photoDir(context), "one.jpg")
+        mine.writeBytes(byteArrayOf(7, 7))
+
+        val result = JournalImport.read(context, backup, dao)
+
+        assertEquals(1, result.added)
+        assertEquals(0, result.photos)
+        assertTrue(mine.readBytes().contentEquals(byteArrayOf(7, 7)))
+    }
+
     @Test
     fun `only a bare file name is accepted`() {
         assertTrue(JournalImport.isPlainFileName("3f2b-9c.jpg"))
