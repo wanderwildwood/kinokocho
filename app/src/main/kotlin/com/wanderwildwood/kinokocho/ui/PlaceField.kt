@@ -167,6 +167,9 @@ private fun hasCoarse(context: Context): Boolean =
 /** Rounded to two decimal places before it is ever handed on. See [round2]. */
 data class Position(val latitude: Double, val longitude: Double)
 
+/** How old a cached position may be and still be taken as where the reader is: 15 minutes. */
+private const val MAX_POSITION_AGE_NANOS = 15L * 60 * 1_000_000_000
+
 private fun coarsePosition(context: Context): Position? {
     if (!hasCoarse(context)) return null
     val manager = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
@@ -182,10 +185,14 @@ private fun coarsePosition(context: Context): Position? {
                     null
                 }
             }
-            .maxByOrNull { it.time }
+            .maxByOrNull { it.elapsedRealtimeNanos }
     } catch (_: SecurityException) {
         null
     } ?: return null
+    // A cached position from hours ago is likely somewhere else, home most of all: only a
+    // recent one is "roughly where I am". Otherwise the no-recent-position message says so.
+    val age = android.os.SystemClock.elapsedRealtimeNanos() - location.elapsedRealtimeNanos
+    if (age > MAX_POSITION_AGE_NANOS) return null
 
     // Rounded here, once, before anything else in the app can see the finer number.
     // Rounding at the point of display would leave the precise value sitting in a field
