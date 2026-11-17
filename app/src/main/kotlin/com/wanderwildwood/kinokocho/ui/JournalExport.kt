@@ -48,6 +48,7 @@ object JournalExport {
             entries.flatMap { it.photos }.map { it.fileName }.distinct().forEach { name ->
                 val file = File(photos, name)
                 if (!file.isFile) return@forEach
+                PhotoExif.stripLocation(file)
                 zip.putNextEntry(ZipEntry("photos/$name"))
                 file.inputStream().use { it.copyTo(zip) }
                 zip.closeEntry()

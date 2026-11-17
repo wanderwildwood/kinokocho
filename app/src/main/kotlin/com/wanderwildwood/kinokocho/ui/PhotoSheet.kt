@@ -91,6 +91,8 @@ fun PhotoSheet(
         val (slot, fileName) = pending ?: return@rememberLauncherForActivityResult
         pending = null
         if (ok) {
+            // A camera that geotags writes the exact spot into the picture.
+            PhotoExif.stripLocation(File(photoDir(context), fileName))
             onCaptured(slot.id, fileName)
         } else {
             // Cancelled: take the empty file back out rather than leaving a nought-byte
@@ -123,7 +125,10 @@ fun PhotoSheet(
                     File(photoDir(context), fileName).outputStream().use(input::copyTo)
                 } != null
             }.getOrDefault(false)
-            if (copied) onCaptured(slot.id, fileName)
+            if (copied) {
+                PhotoExif.stripLocation(File(photoDir(context), fileName))
+                onCaptured(slot.id, fileName)
+            }
         }
     }
 

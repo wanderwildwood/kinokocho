@@ -55,6 +55,11 @@ bird recording.)
 A `FileProvider` is declared for this. It is not a permission — it is the mechanism that
 lets exactly one file, once, be written by one other app.
 
+A camera app may write the exact spot a picture was taken into the file, and a picture
+picked from the gallery may carry one too. The app takes that out as each photograph comes
+in, along with any serial number or owner's name, and checks again before a photograph goes
+out in a share or a backup. The date and the camera's settings stay in the file.
+
 ## Location
 
 **Typing the place by hand is the default and asks for nothing.** That has not changed, and

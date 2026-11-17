@@ -39,6 +39,8 @@ object ShareFind {
         val photos = draft.photos.mapNotNull { photo ->
             val file = File(photoDir(context), photo.fileName)
             if (file.exists()) {
+                // Pictures kept before the place was taken out on the way in.
+                PhotoExif.stripLocation(file)
                 FileProvider.getUriForFile(context, "${context.packageName}.photos", file)
             } else {
                 null

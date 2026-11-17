@@ -237,7 +237,10 @@ object JournalImport {
                         isPlainFileName(name) && name in wanted && name !in written
                     ) {
                         val file = File(dir, name)
-                        if (!file.exists() && writeOne(zip, file)) written += name
+                        if (!file.exists() && writeOne(zip, file)) {
+                            PhotoExif.stripLocation(file)
+                            written += name
+                        }
                     }
                     zip.closeEntry()
                 }
