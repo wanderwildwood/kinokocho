@@ -744,7 +744,7 @@
     "licence": "Public domain (published 1826; artists long dead; Internet Archive scan, no added rights)",
     "file": "https://archive.org/details/novaactaphysicom13118kais/page/n100",
     "depicted": "Thelephora ostrea (plate caption \"Thelephora Ostrea\")",
-    "trace": "0 0 1 1 --edge 80 --ink 17 --bgtol 18   (run from /tmp/claude-1000/-home-wander/ffcec892-69bd-4e11-9be1-5f4cd7e0fc36/scratchpad/audit/pd)",
+    "trace": "0 0 1 1 --edge 80 --ink 17 --bgtol 18",
     "masked": false
   },
   "strobilomyces_strobilaceus": {
@@ -865,7 +865,7 @@
     "licence": "Public domain: Commons {{PD-scan|PD-old-70-1923}}; BHL permissions NOT_IN_COPYRIGHT; published 1891 so PD-US too",
     "file": "https://commons.wikimedia.org/wiki/File:Atlas_des_champignons_comestibles_et_v%C3%A9n%C3%A9neux_(Planche_74)_BHL3270622.jpg (BHL page https://www.biodiversitylibrary.org/page/3270622)",
     "depicted": "Lycoperdon piriforme (= Lycoperdon pyriforme Schaeff.)",
-    "trace": "0 0 1 1 --ink 8   (run on src/apioperdon_pyriforme/masked.png. That file is an exact crop of dufour74.jpg, fractions 0.1796 0.6398 0.5000 0.8000 (pixels 411,2082 to 1144,2603), with the paper painted flat grey (170,170,170) and the figure pixels left unchanged, which I checked with a 0.0 mean difference. The other figures and the 'N° 170' caption are outside the crop.)",
+    "trace": "0 0 1 1 --ink 8   (run on src/apioperdon_pyriforme/masked.png. That file is an exact crop of dufour74.jpg, fractions 0.1796 0.6398 0.5000 0.8000 (pixels 411,2082 to 1144,2603), with the paper painted flat grey (170,170,170) and the figure pixels left unchanged, checked with a 0.0 mean difference. The other figures and the 'N° 170' caption are outside the crop.)",
     "same_species": "Lycoperdon pyriforme Schaeff. is the basionym of Apioperdon pyriforme (Schaeff.) Vizzini. The stump puffball is the same species on both sides of the Atlantic, and Commons files this plate under Category:Apioperdon pyriforme. Dufour's figure shows the defining features: a smooth, pear-shaped head that narrows to a sterile base, with a tuft of basal cords."
   },
   "lactarius_corrugis": {
@@ -876,7 +876,7 @@
     "licence": "PD-US: published in the US in 1928, before 1929. The Internet Archive rights field reads 'public domain (copyright either not claimed or not renewed)' (UConn digital collections).",
     "file": "https://archive.org/details/fieldbookofcommo01thom/page/n281",
     "depicted": "Lactarius corrugis (Fig. 24, Species No. 72)",
-    "trace": "Not traced with trace-plate.py. The drawing is a one-ink pen drawing, and the tracer's colour-boundary and outline passes drew both sides of every pen stroke, which doubled the lines on the stem and cap. I tried --edge 80/120/200/1000 with --ink 20-60, with and without thickening, and every run doubled the lines. I used a direct threshold instead: src/lactarius_corrugis/threshold.py n281_masked.png out.png .17 .445 .82 .836 0.6 (crop fractions, then dark where the pixel is below 0.6 of the median paper lightness; Lanczos resize to 420 wide). The masking is src/lactarius_corrugis/mask.py, which paints the '72' label, the 'M.E.E.' monogram and the '1 inch' scale bar in paper colour. None of them touches the figure.",
+    "trace": "Not traced with trace-plate.py. The drawing is a one-ink pen drawing, and the tracer's colour-boundary and outline passes drew both sides of every pen stroke, which doubled the lines on the stem and cap. Tried: --edge 80/120/200/1000 with --ink 20-60, with and without thickening, and every run doubled the lines. A direct threshold was used instead: src/lactarius_corrugis/threshold.py n281_masked.png out.png .17 .445 .82 .836 0.6 (crop fractions, then dark where the pixel is below 0.6 of the median paper lightness; Lanczos resize to 420 wide). The masking is src/lactarius_corrugis/mask.py, which paints the '72' label, the 'M.E.E.' monogram and the '1 inch' scale bar in paper colour. None of them touches the figure.",
     "same_species": "The caption names Lactarius corrugis Peck, an American species under its original name (now Lactifluus corrugis). The drawing matches it: a wrinkled, velvety-looking cap, close gills and no ring."
   },
   "lactarius_indigo": {
@@ -888,7 +888,7 @@
     "file": "https://archive.org/details/mobot31753000797503/page/n81",
     "depicted": "Lactarius indigo Schweinitz (Plate 34, upper-left figure of the lower group)",
     "trace": "Kept from the interrupted earlier run, which did not record its exact command. The source is src/lactarius_indigo/n81_masked.png, made by src/lactarius_indigo/mask.py (run from pd2/), which paints over the two lower-left specimens, the large lower-right specimen and a stray dot. The crop is about .26 .45 .67 .74 (re-running trace-plate.py with that crop gives the same size, 420x383). Re-runs with defaults and --ink 20-50 / --edge 45-80 / --no-thicken came out close but not byte-identical, and none was cleaner, so I kept the earlier file.",
-    "same_species": "The facing text page (n80, p. 38) reads 'PLATE 34 Lactarius indigo Schweinitz'. The page order is plate 33 = n78 with its text on n79, then plate 34 text on n80 with the plate on n81, then plate 35 (fuliginosus/lignyotus, brown) on n82. I checked this against the neighbouring scans. The plate's vertical section shows the blue flesh rim that Burt's text points to ('as intense as that of the flesh in these figures'). This is the American species under its original name."
+    "same_species": "The facing text page (n80, p. 38) reads 'PLATE 34 Lactarius indigo Schweinitz'. The page order is plate 33 = n78 with its text on n79, then plate 34 text on n80 with the plate on n81, then plate 35 (fuliginosus/lignyotus, brown) on n82. Checked against the neighboring scans. The plate's vertical section shows the blue flesh rim that Burt's text points to ('as intense as that of the flesh in these figures'). This is the American species under its original name."
   },
   "lentinellus_ursinus": {
     "credit": "C.-C. Gillet, 1878",
@@ -939,7 +939,7 @@
     "creator": "William Gilson Farlow (plates); text by Edward Angus Burt",
     "work": "Icones Farlowianae: illustrations of the larger fungi of eastern North America, Plate 94 (bottom), Farlow Library and Herbarium of Harvard University",
     "year": "1929",
-    "licence": "PD-US: published in the US in 1929, so its 95-year term ran out on 1 Jan 2025. I used the Internet Archive scan. I did not use the Commons/Flickr BHL copy (File:Icones Farlowianae (Pl. 94) (8489503160).jpg), which is tagged CC BY 2.0. IA lists the item as 'Permission to digitize granted by rights holder', but that predates the expiry.",
+    "licence": "PD-US: published in the US in 1929, so its 95-year term ran out on 1 Jan 2025. The Internet Archive scan is used, not the Commons/Flickr BHL copy (File:Icones Farlowianae (Pl. 94) (8489503160).jpg), which is tagged CC BY 2.0. IA lists the item as 'Permission to digitize granted by rights holder', but that predates the expiry.",
     "file": "https://archive.org/details/mobot31753000797503/page/n203",
     "depicted": "Polystictus conchifer Schweinitz (Plate 94, bottom figure)",
     "trace": "(custom cups.py, not trace-plate.py) if_pl94.jpg out.png 0.222 0.706 0.797 0.855 420 150 5 20  [args: crop x0 y0 x1 y1, width, cup lightness threshold, zone ink, bark ink]",
@@ -975,7 +975,7 @@
     "licence": "Public domain: PD-old (author died 1917) and PD-US (published 1899). Internet Archive marks it NOT_IN_COPYRIGHT.",
     "file": "https://archive.org/details/textbookofplantd00massrich/page/n188/mode/1up",
     "depicted": "Stereum frustulosum (Pers.) Fr.",
-    "trace": "Not traced with trace-plate.py. The source is a black-and-white engraving, and the tracer turned its hatching into speckle at every setting tried (--edge 60-120, --ink 10-60). I used my own script instead: /tmp/claude-1000/-home-wander/e82b6827-1d12-44c7-98dc-eed8033bf2a5/scratchpad/audit/pd2/src/xylobolus_frustulatus/build2.py 155 1.0 15. It works on the pixel box (394,843)-(1066,2308) of the masked page, which is fractions 0.200 0.2415 0.5417 0.661. The page is blurred 1 px, cut at threshold 155 and kept inside the figure's silhouette; ink specks under 15 px are dropped, a silhouette outline is added, and the result is 420 px wide. Ink is 27% of the bounding box.",
+    "trace": "Not traced with trace-plate.py. The source is a black-and-white engraving, and the tracer turned its hatching into speckle at every setting tried (--edge 60-120, --ink 10-60). It was made instead with a one-off script, not kept, run as build2.py 155 1.0 15. It works on the pixel box (394,843)-(1066,2308) of the masked page, which is fractions 0.200 0.2415 0.5417 0.661. The page is blurred 1 px, cut at threshold 155 and kept inside the figure's silhouette; ink specks under 15 px are dropped, a silhouette outline is added, and the result is 420 px wide. Ink is 27% of the bounding box.",
     "same_species": "Stereum frustulosum (Pers.) Fr. (basionym Thelephora frustulosa Pers. 1801) is the basionym and synonym of Xylobolus frustulatus (Pers.) P. Karst. per Index Fungorum and MycoBank. It is one Holarctic species. Burt (1920) treats the North American material as this same species, with the same European illustrations. Massee's caption and text agree with it: a woody crust on oak, cracked into separate tiles, stuck fast with no free edge, causing 'partridge wood' rot."
   },
   "russula_mariae": {
