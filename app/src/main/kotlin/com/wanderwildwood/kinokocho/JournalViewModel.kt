@@ -27,6 +27,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -403,12 +405,19 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             val ok = runCatching {
                 val app = getApplication<Application>()
-                val file = JournalExport.write(app, dao.allKept())
-                try {
-                    val out = app.contentResolver.openOutputStream(uri) ?: error("no stream")
-                    out.use { o -> file.inputStream().use { it.copyTo(o) } }
-                } finally {
-                    file.delete()
+                val kept = dao.allKept()
+                // Zipping every photograph takes seconds: off the main thread, which it was not.
+                withContext(Dispatchers.IO) {
+                    val file = JournalExport.write(app, kept)
+                    try {
+                        // "wt": over an older backup, "w" alone can leave that file's tail behind.
+                        val out = runCatching { app.contentResolver.openOutputStream(uri, "wt") }.getOrNull()
+                            ?: app.contentResolver.openOutputStream(uri)
+                            ?: error("no stream")
+                        out.use { o -> file.inputStream().use { it.copyTo(o) } }
+                    } finally {
+                        file.delete()
+                    }
                 }
             }.isSuccess
             onDone(ok)
