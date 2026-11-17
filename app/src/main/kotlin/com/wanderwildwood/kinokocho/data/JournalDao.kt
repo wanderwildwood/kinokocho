@@ -126,4 +126,24 @@ interface JournalDao {
 
     @Query("SELECT COUNT(*) FROM observations")
     suspend fun count(): Int
+
+    /** Whether any find already has a photograph in this file. */
+    @Query("SELECT COUNT(*) FROM observation_photos WHERE file_name = :fileName")
+    suspend fun photoFileUsed(fileName: String): Int
+
+    /**
+     * A whole find from a backup, in one transaction: all of it is in, or none of it, so a
+     * restore cut off halfway never leaves a find that later restores skip as already here.
+     */
+    @Transaction
+    suspend fun importFind(
+        observation: Observation,
+        characters: List<ObservationCharacter>,
+        photos: List<ObservationPhoto>,
+    ): Long {
+        val id = insert(observation)
+        characters.forEach { addCharacter(it.copy(observationId = id)) }
+        photos.forEach { addPhoto(it.copy(observationId = id)) }
+        return id
+    }
 }

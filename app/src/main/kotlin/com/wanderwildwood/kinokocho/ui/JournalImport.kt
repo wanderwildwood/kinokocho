@@ -111,65 +111,59 @@ object JournalImport {
                 continue
             }
 
-            val id = dao.insert(
-                Observation(
-                    uuid = uuid,
-                    recordedAt = find.optLong("recordedAt", System.currentTimeMillis()),
-                    updatedAt = System.currentTimeMillis(),
-                    note = find.optString("note"),
-                    placeNote = find.optString("place"),
-                    identifiedAs = find.optString("identifiedAs"),
-                    latitude = if (find.has("latitude")) find.optDouble("latitude") else null,
-                    longitude = if (find.has("longitude")) find.optDouble("longitude") else null,
-                    // It was in somebody's journal, so it is kept. An unclaimed find is
-                    // one that was still being keyed out, and that state does not survive
-                    // a backup any more than it survives a walk.
-                    kept = true,
-                    schemaVersion = find.optInt("schemaVersion", 1),
-                    // Carried across from a backup of a find an older version published
-                    // to iNaturalist, so nothing in the backup is lost. Unused now.
-                    inat = com.wanderwildwood.kinokocho.data.INatLink(
-                        uuid = find.optString("inatUuid").takeIf { it.isNotBlank() },
-                        pushedAt = find.optLong("inatPushedAt").takeIf { it != 0L },
-                        taxonId = find.optLong("inatTaxonId").takeIf { it != 0L },
-                        taxonName = find.optString("inatTaxonName").takeIf { it.isNotBlank() },
-                    ),
-                )
+            val observation = Observation(
+                uuid = uuid,
+                recordedAt = find.optLong("recordedAt", System.currentTimeMillis()),
+                updatedAt = System.currentTimeMillis(),
+                note = find.optString("note"),
+                placeNote = find.optString("place"),
+                identifiedAs = find.optString("identifiedAs"),
+                latitude = if (find.has("latitude")) find.optDouble("latitude") else null,
+                longitude = if (find.has("longitude")) find.optDouble("longitude") else null,
+                // It was in somebody's journal, so it is kept. An unclaimed find is
+                // one that was still being keyed out, and that state does not survive
+                // a backup any more than it survives a walk.
+                kept = true,
+                schemaVersion = find.optInt("schemaVersion", 1),
+                // Carried across from a backup of a find an older version published
+                // to iNaturalist, so nothing in the backup is lost. Unused now.
+                inat = com.wanderwildwood.kinokocho.data.INatLink(
+                    uuid = find.optString("inatUuid").takeIf { it.isNotBlank() },
+                    pushedAt = find.optLong("inatPushedAt").takeIf { it != 0L },
+                    taxonId = find.optLong("inatTaxonId").takeIf { it != 0L },
+                    taxonName = find.optString("inatTaxonName").takeIf { it.isNotBlank() },
+                ),
             )
             val now = System.currentTimeMillis()
-
-            find.optJSONObject("characters")?.let { characters ->
-                characters.keys().forEach { characterId ->
-                    val values = characters.optJSONArray(characterId) ?: return@forEach
-                    for (v in 0 until values.length()) {
-                        dao.addCharacter(
-                            ObservationCharacter(0, id, characterId, values.getString(v), now)
-                        )
+            // Read whole before anything is written, with values that are not what this app
+            // writes left out rather than thrown on, so one odd value cannot stop a restore
+            // halfway through a find.
+            val characters = mutableListOf<ObservationCharacter>()
+            find.optJSONObject("characters")?.let { values ->
+                values.keys().forEach { characterId ->
+                    val list = values.optJSONArray(characterId) ?: return@forEach
+                    for (v in 0 until list.length()) {
+                        val value = list.optString(v).takeIf { it.isNotBlank() } ?: continue
+                        characters += ObservationCharacter(0, 0, characterId, value, now)
                     }
                 }
             }
             find.optJSONObject("measurements")?.let { measurements ->
                 measurements.keys().forEach { key ->
-                    dao.addCharacter(
-                        ObservationCharacter(
-                            0, id, "size",
-                            MeasurementRow.encode(key, measurements.getInt(key)), now,
-                        )
-                    )
+                    val size = measurements.optInt(key, Int.MIN_VALUE).takeIf { it != Int.MIN_VALUE } ?: return@forEach
+                    characters += ObservationCharacter(0, 0, "size", MeasurementRow.encode(key, size), now)
                 }
             }
             find.optJSONArray("lookedAtCouldNotSay")?.let { skipped ->
                 for (s in 0 until skipped.length()) {
-                    dao.addCharacter(
-                        ObservationCharacter(
-                            0, id, skipped.getString(s), MeasurementRow.NOT_TESTED, now,
-                        )
-                    )
+                    val characterId = skipped.optString(s).takeIf { it.isNotBlank() } ?: continue
+                    characters += ObservationCharacter(0, 0, characterId, MeasurementRow.NOT_TESTED, now)
                 }
             }
+            val photos = mutableListOf<ObservationPhoto>()
             find.optJSONArray("photos")?.let { list ->
                 for (p in 0 until list.length()) {
-                    val photo = list.getJSONObject(p)
+                    val photo = list.optJSONObject(p) ?: continue
                     // The name comes out of the JSON inside the archive, and it is used
                     // to build a path. A backup written by this app carries a uuid and
                     // ".jpg", but nothing about reading a file somebody handed you
@@ -183,17 +177,19 @@ object JournalImport {
                     // inspects a zip before opening it.
                     val name = photo.optString("file")
                         .takeIf { it.isNotBlank() && isPlainFileName(it) } ?: continue
-                    dao.addPhoto(
-                        ObservationPhoto(
-                            observationId = id,
-                            slot = photo.optString("slot"),
-                            fileName = name,
-                            capturedAt = find.optLong("recordedAt", now),
-                            uuid = photo.optString("uuid"),
-                        )
+                    // A file another find already shows is that find's photograph; a
+                    // backup cannot hand it to this one as well.
+                    if (dao.photoFileUsed(name) > 0) continue
+                    photos += ObservationPhoto(
+                        observationId = 0,
+                        slot = photo.optString("slot"),
+                        fileName = name,
+                        capturedAt = photo.optLong("capturedAt", find.optLong("recordedAt", now)),
+                        uuid = photo.optString("uuid"),
                     )
                 }
             }
+            dao.importFind(observation, characters, photos)
             added++
         }
         return Result(added = added, alreadyHere = already, photos = written.size)
@@ -206,7 +202,11 @@ object JournalImport {
             while (true) {
                 val entry = zip.nextEntry ?: break
                 if (entry.name == "journal.json") {
-                    journal = JSONObject(zip.readBytes().decodeToString())
+                    // Text only, so far below this however long the journal; a bigger one is
+                    // not a backup this app wrote.
+                    val bytes = readAtMost(zip, MAX_JOURNAL_BYTES + 1)
+                    if (bytes.size > MAX_JOURNAL_BYTES) error("journal.json is too big")
+                    journal = JSONObject(bytes.decodeToString())
                 }
                 // Closing an entry reads the rest of it, so a damaged photograph is found
                 // here, before anything is written, as it was when the zip was read whole.
@@ -247,6 +247,19 @@ object JournalImport {
             }
         }
         return written
+    }
+
+    private const val MAX_JOURNAL_BYTES = 32 * 1024 * 1024
+
+    private fun readAtMost(input: InputStream, limit: Int): ByteArray {
+        val out = java.io.ByteArrayOutputStream()
+        val buf = ByteArray(64 * 1024)
+        while (out.size() < limit) {
+            val n = input.read(buf, 0, minOf(buf.size, limit - out.size()))
+            if (n < 0) break
+            out.write(buf, 0, n)
+        }
+        return out.toByteArray()
     }
 
     private fun writeOne(entry: InputStream, file: File): Boolean {

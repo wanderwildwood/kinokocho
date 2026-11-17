@@ -102,6 +102,7 @@ object JournalExport {
                     entry.photos.forEach {
                         put(
                             JSONObject().put("slot", it.slot).put("file", it.fileName)
+                                .put("capturedAt", it.capturedAt)
                                 .apply { if (it.uuid.isNotBlank()) put("uuid", it.uuid) }
                         )
                     }
