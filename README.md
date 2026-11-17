@@ -105,9 +105,9 @@ already says of every row on it. `--write` applies the widenings.
 ## Status
 
 Working and in daily use, and not finished. A hundred and thirty-two taxa in the Southern
-Appalachia pack across forty-one characters, two hundred and sixteen pairs that get
-confused for one another, a hundred and sixty-nine drawings of single characters and
-ninety-eight of whole mushrooms, most of them traced from public-domain plates of the
+Appalachia pack across forty-two characters, two hundred and sixteen pairs that get
+confused for one another, a hundred and seventy-eight drawings of single characters and
+a hundred and twelve of whole mushrooms, most of them traced from public-domain plates of the
 eighteenth to early twentieth centuries, and a key that reaches the right taxon in about
 four questions when the answers are true.
 

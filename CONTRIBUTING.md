@@ -54,6 +54,6 @@ perfect shape and passes every other test.
 Commit messages here are plain sentences saying what changed and why, in the present tense.
 Have a look at `git log` before writing one.
 
-## Licence
+## License
 
 GPL-3.0-only. By contributing you agree your contribution is licensed under it.
