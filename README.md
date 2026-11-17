@@ -99,63 +99,8 @@ already says of every row on it. `--write` applies the widenings.
 - **Measurements, age and condition.** Facts about the specimen rather than the species,
   so they are recorded rather than asked. Age earns its place: a ring or a veil that is
   missing from an old mushroom proves nothing, and the key stops ruling things out on it.
-- **Publishing to iNaturalist**, in a build made with an iNaturalist application id (see
-  below), one find at a time, from the bottom of that find's own page. It goes up with its photographs, the characters you recorded, and — the part an
-  identifier actually wants — what you looked at and could not say, and the three
-  characters that would have narrowed it most. The shortlist stays on the phone. What the
-  community calls it comes back into the entry, kept apart from what you wrote down
-  yourself, so the two can disagree. Coordinates are obscured by default; see
-  [PRIVACY.md](PRIVACY.md), which is worth reading on what "obscured" does and does not
-  mean.
-
-## Installing it
-
-The APK is on the [releases page](https://github.com/wanderwildwood/kinokocho/releases/latest).
-It is signed, and it installs on the Kompakt without anything else on the phone.
-
-```sh
-# The fixed name always points at the newest release; the versioned one does not.
-curl -LO https://github.com/wanderwildwood/kinokocho/releases/latest/download/kinokocho.apk
-curl -LO https://github.com/wanderwildwood/kinokocho/releases/latest/download/kinokocho.apk.sha256
-sha256sum -c kinokocho.apk.sha256
-adb install kinokocho.apk
-```
-
-Or point [Obtainium](https://github.com/ImranR98/Obtainium) at this repository and let it
-track releases. Choose `kinokocho.apk` rather than `kinokocho-v*.apk` when it asks which
-one: the fixed name keeps working after the next release.
-
-Every release is built by CI and its certificate is checked against
-`d08ec862513896a11d962c283dfb7c004c4fbfff3382bba4aaea1411c2c5b6e7` before it is published,
-so an APK that installs over a previous one is the same key and your journal survives the
-upgrade. If Android refuses the install with a signature error, the file did not come from
-here.
-
-Android 12 (API 31) or newer. It asks for no accessibility service and reads no
-notifications.
-
-## Taking it into the field
-
-It works with the radio off, and it is meant to. Nothing it does in the field needs the
-network — the pack, the drawings and the key are all on the phone.
-
-A few things worth knowing before the first walk:
-
-- **Answer what you can see and leave the rest.** Not knowing is a real answer and the key
-  treats it as one; it never eliminates a mushroom on a character you did not record.
-- **Dig the base out.** A volva is underground, and it is the character that separates the
-  deadly *Amanita* from nearly everything else. It is the single most useful thing you can
-  do while standing over a mushroom.
-- **Set the spore print before you sleep.** Cap gills-down on paper overnight. It settles
-  more than any other character and it cannot be got in the field, which is why an entry
-  says *spore print pending* until you add it.
-- **Take the photographs anyway**, even when the shortlist is already short. Color is what
-  you will want at home, and it is the thing the screen cannot give you.
-- **An out-of-season find is worth writing down precisely because it is one.** Seasons in
-  the pack are a guide; fungi do not read calendars.
-
-The shortlist is not an answer. When it is short enough to be worth somebody's time, send
-the find to a person who can actually say — that is what it is for.
+- **Offline, entirely.** The app has no internet permission. A find leaves the phone only
+  when you send it to someone from the share sheet, or in a backup you save.
 
 ## Status
 
@@ -173,9 +118,8 @@ KOH reaction of most boletes — the pack says so, and a mushroom that could not
 checked on an answer is listed after those that were, with a line saying what is missing.
 
 Nothing in the pack has been checked by a mycologist. Every row says so on its own page.
-Publishing to iNaturalist is the answer to that: it puts the find in front of people who
-can say, which is the whole shape of this app — narrow it in the field, let a person
-decide in color, later.
+Handing the find to a person who knows fungi is the answer to that, which is the whole
+shape of this app — narrow it in the field, let a person decide in color, later.
 
 The launcher mark is a drawing of a chanterelle by the author, traced rather than
 imitated. The rest of the drawings are worked to the same hand — thin, few lines, no
@@ -209,31 +153,6 @@ something installable.
 first install of any variant fixes the signer for good, so a debug build put on a phone is
 not a throwaway — install one signed with the Android debug key and the real one will not
 go over the top of it.
-
-### The iNaturalist application id
-
-Publishing needs an iNaturalist OAuth application, and its id is not in this repository.
-Supply it at build time:
-
-```sh
-./gradlew assembleRelease -PinatClientId=<the id>
-```
-
-or put `inatClientId=<the id>` in `local.properties`, which is gitignored.
-
-**A build without one has no publishing button at all** and no `INTERNET` permission: the
-permission, the sign-in redirect activity and an https-only network security config live in
-`app/src/inat/`, which `app/build.gradle.kts` merges only when an id is supplied.
-That is the intended state for anyone who is not the person the application is registered
-to. A PKCE client id is not a secret — it is in every copy of the APK by necessity — but
-it *is* an identity: everything posted with it is attributed to that application on
-iNaturalist's records. A fork should be posting as itself, and the surest way to make
-that happen is for the source to carry no id to inherit.
-
-Registering one is at <https://www.inaturalist.org/oauth/applications>, and reaching that
-page needs the **APP_OWNER** role, which iNaturalist staff grant on a written request and
-expect to see some identifications behind. It is a wait rather than a form. Set the
-redirect URI to `kinokocho://oauth`, exactly as it reads in `INatConfig`.
 
 ## License
 

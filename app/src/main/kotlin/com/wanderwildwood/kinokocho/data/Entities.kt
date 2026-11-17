@@ -23,9 +23,8 @@ data class Observation(
     /**
      * Generated here, in the field, and never changed.
      *
-     * iNaturalist accepts a client-generated UUID on create and treats a repeat as an
-     * upsert rather than a second observation. Minting it at capture time is what makes
-     * a push retried days later on a bad connection safe.
+     * A find's identity across copies: reading a backup back in matches on it, so a
+     * find already on the phone is not added twice.
      */
     @ColumnInfo(name = "uuid")
     val uuid: String,
@@ -82,9 +81,8 @@ data class Observation(
      * *R. variata*", "some Cortinarius", a name that is not in this pack at all. Pinning
      * it to the pack would mean the app could only be told things it already knew.
      *
-     * Deliberately not [INatLink.taxonName]. That field is what iNaturalist's community
-     * said, fetched back and stamped with when it was read; this is what the reader
-     * wrote down. Keeping them apart is what lets the two disagree.
+     * Deliberately not [INatLink.taxonName], which is what iNaturalist's community said
+     * about a find published by an older version; this is what the reader wrote down.
      */
     @ColumnInfo(name = "identified_as")
     val identifiedAs: String = "",
@@ -102,10 +100,12 @@ data class Observation(
 )
 
 /**
- * What iNaturalist knows about this observation, if it has been pushed.
+ * What iNaturalist knew about this observation, for a find published by version 0.3.40 or
+ * earlier, when the app could still publish.
  *
- * [taxonName] is the community's identification, pulled back after the fact. The app
- * itself never writes a name here - that is the whole point of the arrangement.
+ * Nothing writes these columns any more and nothing shows them. They stay, unchanged, so
+ * that a journal from those versions keeps every byte it had (no migration drops them),
+ * and a backup still carries them out and back in (JournalExport, JournalImport).
  */
 data class INatLink(
     @ColumnInfo(name = "uuid")
@@ -220,22 +220,14 @@ data class ObservationPhoto(
     val capturedAt: Long,
 
     /**
-     * Minted here, once, so that a half-finished upload can be finished.
-     *
-     * The same arrangement as [Observation.uuid] and for the same reason, which is
-     * written down in iNaturalist's own source rather than inferred: their
-     * `ObservationPhotosController#create` looks for an existing observation photo with
-     * this uuid belonging to this user before it makes a new one. Without it, a push
-     * that dies after three of five photographs and is run again leaves eight
-     * photographs on a find that has five.
-     *
-     * Empty for every row written before there was anywhere to put one; those are given
-     * a uuid the first time they are pushed. Nullable would have said the same thing and
-     * cost a nullable column for a value that is never absent after its first use.
+     * Minted when an older version published the photograph to iNaturalist, which used it
+     * to recognize a retried upload. Empty for every other photograph. Nothing writes it
+     * now; it is kept so an older journal reads back as it was.
      */
     @ColumnInfo(name = "uuid", defaultValue = "")
     val uuid: String = "",
 
+    /** iNaturalist's id for the photograph, when an older version published it. Kept, not used. */
     @ColumnInfo(name = "inat_photo_id")
     val inatPhotoId: Long? = null,
 )

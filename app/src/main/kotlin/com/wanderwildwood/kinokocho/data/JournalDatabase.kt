@@ -56,7 +56,7 @@ abstract class JournalDatabase : RoomDatabase() {
          * Empty for everything already on the phone, and that is the honest value:
          * these rows were written before anything could be pushed, so none of them has
          * ever been anywhere. A uuid is minted for one the first time it is sent — see
-         * [ObservationPhoto.uuid], which explains why iNaturalist needs it.
+         * [ObservationPhoto.uuid], which explains why iNaturalist needed it.
          *
          * No index. A uuid here is a token carried to another server and matched there;
          * nothing on this phone ever looks a photograph up by it.

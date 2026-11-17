@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mudita.mmd.ThemeMMD
 import com.mudita.mmd.components.buttons.ButtonMMD
@@ -84,20 +83,6 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     val draft by vm.draft.collectAsState()
     var about by remember { mutableStateOf(false) }
     var backup by remember { mutableStateOf(false) }
-
-    /*
-     * Finishes a sign-in the browser has come back from.
-     *
-     * On resume rather than once, because the redirect arrives while this app is in the
-     * background and brings it forward without recreating anything - and because on a
-     * phone with little memory the process may have been killed and rebuilt in between,
-     * in which case there is no sign-in in progress to resume, only a code and a
-     * verifier on disk. Both paths land here.
-     */
-    LifecycleResumeEffect(Unit) {
-        vm.completeSignInIfPending()
-        onPauseOrDispose { }
-    }
 
     // Opening a find reads it back; starting one asks questions. The same draft serves
     // both, because an entry is amended far more often than it is finished — the spore

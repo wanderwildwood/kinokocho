@@ -16,11 +16,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!--
-        No INTERNET here. The app works with no network: the journal, the photographs, the
-        region pack and the key are all on the phone. Only a build made with an iNaturalist
-        application id can publish a find, and only that build gets INTERNET, from
-        src/inat/AndroidManifest.xml (see app/build.gradle.kts). A build without one, which
-        is every build made from this repository as it stands, cannot reach the network.
+        No INTERNET, and nothing in the app that would use it. The journal, the photographs,
+        the region pack and the key are all on the phone, and the app cannot reach the
+        network. (Publishing to iNaturalist, which needed it, was removed after 0.3.40.)
     -->
 
     <!-- The apps that act on selected text, Define among them, for the menu over a selection. -->

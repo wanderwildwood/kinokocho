@@ -124,55 +124,6 @@ interface JournalDao {
     @Query("SELECT * FROM observation_photos WHERE observation_id = :observationId")
     suspend fun photosOf(observationId: Long): List<ObservationPhoto>
 
-    /** Everything not yet pushed, oldest first, for the review-and-push screen at home. */
-    @Transaction
-    @Query("SELECT * FROM observations WHERE inat_uuid IS NULL ORDER BY recorded_at ASC")
-    suspend fun notYetPushed(): List<FullObservation>
-
-    /**
-     * Pushed but with no identification read back yet. This is the list the app asks
-     * iNaturalist about; it never asks about anything it has not published.
-     */
-    @Query("SELECT * FROM observations WHERE inat_uuid IS NOT NULL AND inat_taxon_id IS NULL")
-    suspend fun awaitingIdentification(): List<Observation>
-
-    /**
-     * Writes down that a find is now on iNaturalist, and nothing else about it.
-     *
-     * A targeted update rather than [update] with a whole row, because a push happens
-     * while the reader is looking at the entry and may be typing in it. Writing back a
-     * copy of the observation read before the upload started would quietly undo a note
-     * finished during it.
-     */
-    @Query(
-        "UPDATE observations SET inat_uuid = :uuid, inat_pushed_at = :pushedAt " +
-            "WHERE id = :observationId"
-    )
-    suspend fun recordPush(observationId: Long, uuid: String, pushedAt: Long)
-
-    /**
-     * What iNaturalist's community has settled on, and when that was read.
-     *
-     * The date is not decoration. An identification on iNaturalist can be revised, so a
-     * name without the date it was read is a name of unknown age — see [INatLink].
-     */
-    @Query(
-        "UPDATE observations SET inat_taxon_id = :taxonId, inat_taxon_name = :name, " +
-            "inat_identified_fetched_at = :fetchedAt WHERE id = :observationId"
-    )
-    suspend fun recordIdentification(
-        observationId: Long,
-        taxonId: Long,
-        name: String,
-        fetchedAt: Long,
-    )
-
-    @Query("UPDATE observation_photos SET uuid = :uuid WHERE id = :photoId")
-    suspend fun setPhotoUuid(photoId: Long, uuid: String)
-
-    @Query("UPDATE observation_photos SET inat_photo_id = :inatPhotoId WHERE id = :photoId")
-    suspend fun recordPhotoPush(photoId: Long, inatPhotoId: Long?)
-
     @Query("SELECT COUNT(*) FROM observations")
     suspend fun count(): Int
 }

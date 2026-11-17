@@ -24,7 +24,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,7 +42,6 @@ import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.divider.HorizontalDividerMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
-import com.wanderwildwood.kinokocho.net.INatConfig
 import com.wanderwildwood.kinokocho.JournalViewModel
 import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.key.Hazard
@@ -82,9 +80,6 @@ fun EntryScreen(
      * keystroke on a laptop, which is not two milliseconds on the phone this is for.
      * Typing a name is not a reason to work out what the mushroom might be again.
      */
-    // A message about the last find is worse than no message on this one.
-    LaunchedEffect(draft.observationId) { vm.clearINatState() }
-
     val ranking = remember(draft.answers) { vm.engine.rank(draft.answers) }
     val missing = remember(draft.answers) { vm.engine.mostValuableMissing(draft.answers) }
     val safety = remember(draft.answers) { vm.engine.safetyNotes(draft.answers) }
@@ -639,16 +634,6 @@ fun EntryScreen(
                 },
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
             ) { TextMMD(stringResource(R.string.entry_ask_someone)) }
-
-            // The other way of asking somebody: a queue of strangers rather than one
-            // person you chose. Below the share sheet on purpose - handing it to a
-            // person who knows the wood is the better answer more often than not.
-            // Nothing to show on a build with no application id: a heading over a sentence
-            // about what it cannot do is noise.
-            if (INatConfig.configured) {
-                Section("iNaturalist")
-                INatSection(vm, draft)
-            }
 
             OutlinedButtonMMD(
                 onClick = onClose,

@@ -129,4 +129,18 @@ class JournalViewModelTest {
         settled()
         assertEquals(35.61, storedDraft().latitude!!, 0.0001)
     }
+
+    /** An install that once signed in to iNaturalist keeps no trace of it once this version starts. */
+    @Test
+    fun `the old iNaturalist sign-in is deleted on start`() {
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        app.getSharedPreferences("inaturalist", android.content.Context.MODE_PRIVATE)
+            .edit().putString("access_token", "test-token").putString("login", "ada_whitlock").commit()
+
+        JournalViewModel(app)
+
+        val left = app.getSharedPreferences("inaturalist", android.content.Context.MODE_PRIVATE)
+        assertNull(left.getString("access_token", null))
+        assertNull(left.getString("login", null))
+    }
 }

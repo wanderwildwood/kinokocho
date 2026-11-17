@@ -27,23 +27,12 @@ fun Character.inFull(resources: Resources): String =
 private fun Character.midSentence(): String =
     if (noun.length > 1 && noun.all { it.isUpperCase() }) noun else noun.lowercase()
 
-/**
- * [inFull], always in English, whatever the phone is set to.
- *
- * For the description posted to iNaturalist, which goes into a public record rather
- * than onto this screen, and whose language is its own decision — see
- * [com.wanderwildwood.kinokocho.net.INatDescription]. It must read exactly as it did
- * before the interface text moved into strings.xml.
- */
-fun Character.inFullInEnglish(): String =
-    part()?.let { "${it.english} ${noun.lowercase()}" } ?: noun.lowercase()
-
 /** Which parts are named in front of the noun. Whole, smell, spores and where are not. */
-private enum class Part(@StringRes val inFull: Int, val english: String) {
-    CAP(R.string.character_in_full_cap, "cap"),
-    GILL(R.string.character_in_full_gill, "gill"),
-    STEM(R.string.character_in_full_stem, "stem"),
-    FLESH(R.string.character_in_full_flesh, "flesh"),
+private enum class Part(@StringRes val inFull: Int) {
+    CAP(R.string.character_in_full_cap),
+    GILL(R.string.character_in_full_gill),
+    STEM(R.string.character_in_full_stem),
+    FLESH(R.string.character_in_full_flesh),
 }
 
 private fun Character.part(): Part? = when (group) {

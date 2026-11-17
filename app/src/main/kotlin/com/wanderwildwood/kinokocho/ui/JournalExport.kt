@@ -91,10 +91,8 @@ object JournalExport {
                 put("characters", characters)
                 put("measurements", measurements)
                 put("lookedAtCouldNotSay", notTested)
-                // Where it went, if it went. A restored journal that did not know this
-                // would offer to publish a find that is already published — harmless for
-                // the observation, which iNaturalist matches on its uuid, but it would
-                // upload every photograph a second time.
+                // Where it went, for a find an older version published to iNaturalist.
+                // Nothing in the app uses it now; it is carried so a backup loses nothing.
                 o.inat.uuid?.let { put("inatUuid", it) }
                 o.inat.pushedAt?.let { put("inatPushedAt", it) }
                 o.inat.taxonName?.let { put("inatTaxonName", it) }

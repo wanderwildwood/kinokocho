@@ -301,51 +301,6 @@
     <string name="photos_slot_spore_print_why">At home, on paper, the next morning.</string>
 
     <!-- ============================================================ -->
-    <!-- iNaturalist: publishing a find, on the entry page -->
-
-    <string name="inat_not_configured">Publishing a find to iNaturalist is not available in this version of the app. Your finds stay on this phone.</string>
-    <string name="inat_signed_out_body">Publishing a find puts it, its photographs and its characters on a public website, under your own account.</string>
-    <string name="inat_sign_in">Sign in to iNaturalist</string>
-    <!-- %1$s is the iNaturalist user name -->
-    <string name="inat_signed_in_as">Signed in as %1$s</string>
-    <string name="inat_sign_out">Sign out</string>
-    <!-- When no browser can be opened. %1$s is inat_doing_sign_in or inat_doing_open -->
-    <string name="inat_no_browser">There is no browser on this phone to %1$s with.</string>
-    <string name="inat_doing_sign_in">sign in</string>
-    <!-- "open that" = open the observation's page -->
-    <string name="inat_doing_open">open that</string>
-    <string name="inat_no_coordinates">No coordinates on this find</string>
-    <!-- The quoted words are the button label place_take_position -->
-    <string name="inat_no_coordinates_body">It will go up with the place in your own words and no map pin. iNaturalist cannot verify a find it cannot place, so it will sit outside the lists most identifiers work through. \"Add roughly where I am\", further up, fixes that.</string>
-    <!-- The three location privacy settings; the Change button cycles them -->
-    <string name="inat_location_hidden">Location: hidden</string>
-    <string name="inat_location_obscured">Location: obscured</string>
-    <string name="inat_location_exact">Location: exact</string>
-    <string name="inat_location_hidden_body">iNaturalist is told where it was and shows nobody, including on the map. Nobody can check the record against the place.</string>
-    <string name="inat_location_obscured_body">iNaturalist is told where it was and shows the public a random point within about twenty kilometers. The place you typed is kept, not shown.</string>
-    <string name="inat_location_exact_body">The map pin is where you found it, and the place you typed is shown beside it. For anyone.</string>
-    <!-- Button: change the location setting (verb) -->
-    <string name="inat_location_change">Change</string>
-    <!-- Publish is a two-tap action; this is the label after the first tap -->
-    <string name="inat_publish_armed">Publish — this is public; tap again</string>
-    <string name="inat_publish">Publish to iNaturalist</string>
-    <!-- Heading once published (past participle). %1$s is a date -->
-    <string name="inat_published_on">Published %1$s</string>
-    <string name="inat_published">Published</string>
-    <!-- %1$s is the name the iNaturalist community gave the find -->
-    <string name="inat_says">iNaturalist says: %1$s</string>
-    <!-- When that name was fetched ("read", past tense). %1$s is a date -->
-    <string name="inat_read_on">Read %1$s</string>
-    <string name="inat_not_named_yet">Nobody has named it yet. Fungi wait longer than most things there.</string>
-    <plurals name="inat_photographs_not_sent">
-        <item quantity="one">%d photograph did not go up.</item>
-        <item quantity="other">%d photographs did not go up.</item>
-    </plurals>
-    <string name="inat_send_rest">Send the rest</string>
-    <string name="inat_open">Open on iNaturalist</string>
-    <string name="inat_check_names">Check what has been named</string>
-
-    <!-- ============================================================ -->
     <!-- About dialog. Keep the names of the app, people, projects and licences as they are -->
 
     <!-- %1$s is the version number. 茸帳 (kinokochō) is the app's Japanese name -->
@@ -357,17 +312,11 @@
     <string name="safety_disclaimer">This app is a field journal, not an identification service and not medical advice. It narrows a list and cannot tell you that a mushroom is safe to eat. Never eat a wild mushroom because of this app: some kill, and look-alikes are common. If anyone has eaten a mushroom you are unsure of, call your poison control center or local emergency number at once.</string>
     <string name="coverage_ok">I understand</string>
     <string name="about_privacy_heading">Privacy</string>
-    <!-- For a build that can publish to iNaturalist (one made with an application id). -->
-    <string name="about_privacy">Your finds and photographs stay on this phone, except a find you choose to publish to iNaturalist (the app has the internet permission for that and for nothing else). The only other permission asked for is a rough position, only when you press the button for it, and only ever rough, never a precise fix. \"Feed the llamas\" in About opens a donation page (square.link) in your browser, only when you press it. The app sends nothing there; if you give, the payment is handled on that page by Square, not by this app.</string>
-    <!-- For a build without an iNaturalist application id, which has no INTERNET permission. -->
-    <string name="about_privacy_offline">Your finds and photographs stay on this phone. The app has no internet permission and cannot go online. The only permission it asks for is a rough position, only when you press the button for it, and only ever rough, never a precise fix. \"Feed the llamas\" in About opens a donation page (square.link) in your browser, only when you press it. The app sends nothing there; if you give, the payment is handled on that page by Square, not by this app.</string>
+    <string name="about_privacy">Your finds and photographs stay on this phone. The app has no internet permission and cannot go online. The only permission it asks for is a rough position, only when you press the button for it, and only ever rough, never a precise fix. \"Feed the llamas\" in About opens a donation page (square.link) in your browser, only when you press it. The app sends nothing there; if you give, the payment is handled on that page by Square, not by this app.</string>
     <string name="about_privacy_close">There are no ads, no analytics and no tracking. Copies of the journal and finds you share go only where you choose to save or send them.</string>
     <string name="about_terms_heading">Terms</string>
     <string name="about_terms_licence">This app is free software under the GNU General Public License, version 3 only. It comes with no warranty: use it at your own risk.</string>
     <string name="about_terms">This guide is information, not advice. It narrows a list; you decide, and you are responsible for what you do with it. A donation through \"Feed the llamas\" is voluntary and unlocks nothing: the app is the same with or without one.</string>
-    <string name="about_inat">Publishing a find to iNaturalist is the one thing that reaches the network. One find, when you press a button that says it is public. Sign-in happens in your browser, so this app never sees your password.</string>
-    <!-- "Obscured" is the location setting inat_location_obscured -->
-    <string name="about_inat_obscured">Obscured is not the same as not sent: iNaturalist is told where the mushroom was and shows the public a point some twenty kilometers off. The place you typed is kept there too, and not shown.</string>
     <!-- The name of the app's licence -->
     <string name="about_licence">GNU General Public License v3</string>
     <string name="about_schema_credit">Character schema and drawings — original, this project.</string>
@@ -397,53 +346,6 @@
     <string name="licences_full_apache">Apache License 2.0 (full text)</string>
     <string name="licences_full_ofl">SIL Open Font License 1.1 (full text)</string>
     <string name="licences_full_ccby">Creative Commons Attribution 4.0 (full text)</string>
-
-    <!-- ============================================================ -->
-    <!-- iNaturalist: the one-line status under the section, said after each step -->
-
-    <string name="inat_state_sign_in_unfinished">That sign-in could not be finished. Try again.</string>
-    <string name="inat_state_signing_in">Signing in…</string>
-    <!-- %1$s is the iNaturalist user name -->
-    <string name="inat_state_signed_in_as">Signed in to iNaturalist as %1$s.</string>
-    <string name="inat_state_signed_in">Signed in to iNaturalist.</string>
-    <string name="inat_state_signed_out">Signed out. Revoking this app\'s access is done on iNaturalist.</string>
-    <string name="inat_state_sending">Sending to iNaturalist…</string>
-    <string name="inat_state_sign_in_first">Sign in to iNaturalist first.</string>
-    <string name="inat_state_published">Published.</string>
-    <plurals name="inat_state_published_with_photographs">
-        <item quantity="one">Published, with %d photograph.</item>
-        <item quantity="other">Published, with %d photographs.</item>
-    </plurals>
-    <!-- %1$d photographs were sent of %2$d -->
-    <string name="inat_state_published_partly">Published, but only %1$d of %2$d photographs went. Send it again to finish.</string>
-    <string name="inat_state_asking">Asking iNaturalist…</string>
-    <!-- After checking what the iNaturalist community has named, when it has named none -->
-    <string name="inat_state_none_named">Nobody has named anything yet.</string>
-    <!-- How many published finds now have a name from the community -->
-    <plurals name="inat_state_finds_named">
-        <item quantity="one">One find has a name now.</item>
-        <item quantity="other">%d finds have names now.</item>
-    </plurals>
-    <string name="inat_push_nothing_to_send">Nothing to send yet.</string>
-    <string name="inat_push_find_gone">That find is no longer in the journal.</string>
-    <!-- Why a call to iNaturalist failed. When iNaturalist explains a refusal in its own words, its explanation is shown instead, as sent -->
-    <!-- After signing in in the browser -->
-    <string name="inat_failed_no_sign_in_token">iNaturalist did not return a sign-in token.</string>
-    <string name="inat_failed_not_signed_in">Not signed in to iNaturalist.</string>
-    <string name="inat_failed_no_api_token">iNaturalist did not return an API token.</string>
-    <!-- The iNaturalist user name, read after signing in -->
-    <string name="inat_failed_no_account_name">Could not read the account name.</string>
-    <string name="inat_failed_no_observation_returned">iNaturalist accepted the find but did not say where it went.</string>
-    <string name="inat_failed_redirected_to_sign_in">iNaturalist asked for a sign-in. Sign in again.</string>
-    <string name="inat_failed_sign_in_refused">iNaturalist would not accept the sign-in. Sign in again.</string>
-    <string name="inat_failed_find_refused">iNaturalist would not take that find.</string>
-    <!-- A rate limit: said as something to wait out, not as a fault -->
-    <string name="inat_failed_rate_limited">iNaturalist is asking for a slower pace. Try again in a few minutes.</string>
-    <string name="inat_failed_server_trouble">iNaturalist is having trouble. Nothing was lost — try again later.</string>
-    <!-- %1$d is an HTTP status code, e.g. 418 -->
-    <string name="inat_failed_unexpected_status">iNaturalist answered with %1$d.</string>
-    <!-- No connection: nothing left the phone -->
-    <string name="inat_failed_unreachable">Could not reach iNaturalist. Nothing was sent.</string>
 
     <!-- ============================================================ -->
     <!-- Sharing, backup and restore -->
@@ -500,14 +402,11 @@
     <string name="about_contact_head">Contact</string>
     <string name="about_links_head">Links</string>
     <string name="privacy_who_title">Who we are</string>
-    <!-- For a build that can publish to iNaturalist. -->
-    <string name="privacy_who">This app is made by wander wildwood, an independent developer: one person, not a company. That makes wander wildwood the data controller for anything the app itself handles, and that is very little: what you put in stays on this phone unless you send it somewhere yourself. The only things that go out are the requests to iNaturalist described above: signing in (a one-time code swapped for a token, and a look-up of your user name), publishing a find you choose (its photographs, characters, note, date and place), and asking what the community called a find you published. Nothing comes to the developer.</string>
-    <!-- For a build without an iNaturalist application id, which has no INTERNET permission. -->
-    <string name="privacy_who_offline">This app is made by wander wildwood, an independent developer: one person, not a company. That makes wander wildwood the data controller for anything the app itself handles, and that is very little: what you put in stays on this phone unless you send it somewhere yourself. The app sends nothing out: it has no internet permission. Nothing comes to the developer.</string>
+    <string name="privacy_who">This app is made by wander wildwood, an independent developer: one person, not a company. That makes wander wildwood the data controller for anything the app itself handles, and that is very little: what you put in stays on this phone unless you send it somewhere yourself. The app sends nothing out: it has no internet permission. Nothing comes to the developer.</string>
     <string name="privacy_contact_title">How to contact us</string>
     <string name="privacy_contact">Write to email@wanderthe.dev, about your data or anything else.</string>
     <string name="privacy_rights_title">Your rights</string>
-    <string name="privacy_rights">Under the GDPR you can ask to see the data held about you, to have it corrected or deleted, to limit or object to its use, to take a copy with you, to withdraw consent, and to complain to a data protection authority. Since the app keeps what it stores only on your phone, you can do most of this yourself: edit or delete a find in the app, keep a copy of everything from the Backup row under the journal title, clear the app\'s data in Android\'s settings, or uninstall the app. What iNaturalist receives is covered by its own privacy policy, at inaturalist.org/pages/privacy.</string>
+    <string name="privacy_rights">Under the GDPR you can ask to see the data held about you, to have it corrected or deleted, to limit or object to its use, to take a copy with you, to withdraw consent, and to complain to a data protection authority. Since the app keeps what it stores only on your phone, you can do most of this yourself: edit or delete a find in the app, keep a copy of everything from the Backup row under the journal title, clear the app\'s data in Android\'s settings, or uninstall the app.</string>
     <!-- /shared-about -->
     <string name="settings_dark">Dark mode</string>
     <string name="page_arrow_previous">Previous page</string>

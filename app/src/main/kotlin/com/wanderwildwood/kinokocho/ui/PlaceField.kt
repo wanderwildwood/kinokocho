@@ -57,10 +57,7 @@ fun PlaceField(
      * The button used to format the fix into the place *text* and stop there, so
      * `Observation.latitude` and `longitude` were columns nothing ever wrote — dead
      * since the day they were added, and invisible because the coordinates were on the
-     * screen the whole time, in the sentence next to them. It stopped being invisible
-     * when publishing was built: iNaturalist cannot make an observation research grade
-     * without a location, so every find would have gone up destined to be ignored, and
-     * the app would have looked like it was working.
+     * screen the whole time, in the sentence next to them.
      */
     onPositionTaken: (Double, Double) -> Unit = { _, _ -> },
     /** On the text field itself: the entry screen keeps it on the page while it is typed in. */

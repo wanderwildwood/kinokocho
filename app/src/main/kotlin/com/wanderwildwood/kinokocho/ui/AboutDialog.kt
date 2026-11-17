@@ -8,15 +8,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.wanderwildwood.kinokocho.BuildConfig
 import com.wanderwildwood.kinokocho.R
-import com.wanderwildwood.kinokocho.net.INatConfig
 
 /**
  * This app's About: only the words and the address. The dialog, its drawers, its one Close button,
  * the Licenses drawer, the links and the llama are the shared HouseAbout.kt, the same in every app.
  *
  * The privacy lines stay because a record of where someone forages is worth more to a stranger
- * than a record of their games. The iNaturalist lines are there only in a build that has a
- * publishing button: telling the reader of a build without one about it would be untrue. Backup
+ * than a record of their games. Backup
  * (copy of everything, reading one back) is no longer here: it lives in the journal's own Backup
  * dialog.
  */
@@ -30,13 +28,9 @@ fun AboutDialog(onDismiss: () -> Unit) {
             add(AboutSection(null, stringResource(R.string.coverage_statement)))
             add(AboutSection(null, stringResource(R.string.coverage_collaborate)))
             add(AboutSection(stringResource(R.string.about_safety_heading), stringResource(R.string.safety_disclaimer)))
-            add(AboutSection(stringResource(R.string.about_privacy_heading), stringResource(if (INatConfig.configured) R.string.about_privacy else R.string.about_privacy_offline)))
-            if (INatConfig.configured) {
-                add(AboutSection(null, stringResource(R.string.about_inat)))
-                add(AboutSection(null, stringResource(R.string.about_inat_obscured)))
-            }
+            add(AboutSection(stringResource(R.string.about_privacy_heading), stringResource(R.string.about_privacy)))
             add(AboutSection(null, stringResource(R.string.about_privacy_close)))
-            add(AboutSection(stringResource(R.string.privacy_who_title), stringResource(if (INatConfig.configured) R.string.privacy_who else R.string.privacy_who_offline)))
+            add(AboutSection(stringResource(R.string.privacy_who_title), stringResource(R.string.privacy_who)))
             add(AboutSection(stringResource(R.string.privacy_contact_title), stringResource(R.string.privacy_contact)))
             add(AboutSection(stringResource(R.string.privacy_rights_title), stringResource(R.string.privacy_rights)))
             add(AboutSection(stringResource(R.string.about_terms_heading), stringResource(R.string.about_terms_licence)))

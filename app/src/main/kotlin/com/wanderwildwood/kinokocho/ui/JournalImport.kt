@@ -95,9 +95,8 @@ object JournalImport {
                     // a backup any more than it survives a walk.
                     kept = true,
                     schemaVersion = find.optInt("schemaVersion", 1),
-                    // Carried across so a restored journal knows what is already
-                    // published. Absent from any backup written before there was
-                    // anything to publish to, which reads as "never pushed" — true.
+                    // Carried across from a backup of a find an older version published
+                    // to iNaturalist, so nothing in the backup is lost. Unused now.
                     inat = com.wanderwildwood.kinokocho.data.INatLink(
                         uuid = find.optString("inatUuid").takeIf { it.isNotBlank() },
                         pushedAt = find.optLong("inatPushedAt").takeIf { it != 0L },

@@ -113,49 +113,24 @@ class JournalDatabaseTest {
     }
 
     @Test
-    fun `the push queue holds only what has not been published`() = runTest {
-        val unpushed = anObservation("u1")
-        val pushed = anObservation("u2")
-        dao.update(
-            dao.findOne(pushed)!!.observation.copy(
-                inat = INatLink(uuid = "inat-uuid", pushedAt = 5_000L)
-            )
+    fun `what an older version published to iNaturalist survives an edit`() = runTest {
+        // Versions up to 0.3.40 could publish; this one cannot, but keeps what they wrote.
+        val id = anObservation()
+        val row = dao.findOne(id)!!.observation
+        val link = INatLink(
+            uuid = "inat-uuid",
+            pushedAt = 5_000L,
+            taxonId = 47347,
+            taxonName = "Amanita bisporigera",
+            identificationFetchedAt = 6_000L,
         )
-
-        val queue = dao.notYetPushed()
-        assertEquals(listOf(unpushed), queue.map { it.observation.id })
+        dao.update(row.copy(inat = link))
+        dao.update(dao.findOne(id)!!.observation.copy(note = "by the creek"))
+        assertEquals(link, dao.findOne(id)!!.observation.inat)
     }
 
     @Test
-    fun `only published observations are asked about`() = runTest {
-        anObservation("u1")
-        val pushed = anObservation("u2")
-        dao.update(
-            dao.findOne(pushed)!!.observation.copy(
-                inat = INatLink(uuid = "inat-uuid", pushedAt = 5_000L)
-            )
-        )
-
-        val waiting = dao.awaitingIdentification()
-        assertEquals(listOf(pushed), waiting.map { it.id })
-
-        // Once the community has named it, it drops out of the asking list.
-        dao.update(
-            dao.findOne(pushed)!!.observation.copy(
-                inat = INatLink(
-                    uuid = "inat-uuid",
-                    pushedAt = 5_000L,
-                    taxonId = 47347,
-                    taxonName = "Amanita bisporigera",
-                    identificationFetchedAt = 6_000L,
-                )
-            )
-        )
-        assertTrue(dao.awaitingIdentification().isEmpty())
-    }
-
-    @Test
-    fun `the uuid minted in the field is what a retried push looks itself up by`() = runTest {
+    fun `a find is found again by the uuid minted in the field`() = runTest {
         anObservation("field-uuid")
         assertNotNull(dao.findByUuid("field-uuid"))
         assertNull(dao.findByUuid("never-written"))
