@@ -27,6 +27,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 class JournalViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -73,6 +75,8 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         val photos: List<ObservationPhoto> = emptyList(),
         /** Set when the reader has stepped back to revisit a question already answered. */
         val revisiting: String? = null,
+        /** Already in the journal: changes to it are saved as they are made, nothing to ask. */
+        val kept: Boolean = false,
     )
 
     fun startNewEntry() {
@@ -112,6 +116,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                 latitude = full.observation.latitude,
                 longitude = full.observation.longitude,
                 photos = full.photos,
+                kept = full.observation.kept,
             )
         }
     }
@@ -122,8 +127,11 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
 
     /** The reader has said to keep this one. Until now it was only written down. */
     fun keep() {
-        val id = _draft.value?.observationId ?: return
+        _draft.value?.let { _draft.value = it.copy(kept = true) }
         viewModelScope.launch {
+            // A find with nothing answered yet has no row: it is written down first, so what
+            // is added after "Save it" goes into the journal with it.
+            val id = persistNow() ?: return@launch
             dao.keep(id)
             // Anything else still unclaimed is a leftover from a crash older than this
             // one, and resuming two finds at once is not a thing a person can do.
@@ -246,76 +254,63 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      * same row rather than making a second mushroom.
      */
     private fun persist() {
-        val d = _draft.value ?: return
-        viewModelScope.launch {
-            val now = System.currentTimeMillis()
-            val id = d.observationId ?: dao.insert(
-                Observation(
-                    uuid = d.uuid,
-                    recordedAt = d.recordedAt,
-                    updatedAt = now,
-                    note = d.note,
-                    placeNote = d.placeNote,
-                    identifiedAs = d.identifiedAs,
-                    latitude = d.latitude,
-                    longitude = d.longitude,
-                    schemaVersion = schema.version,
-                )
-            ).also { newId -> _draft.value = _draft.value?.copy(observationId = newId) }
+        viewModelScope.launch { persistNow() }
+    }
 
-            dao.findOne(id)?.let { existing ->
-                dao.update(
-                    existing.observation.copy(
-                        note = d.note,
-                        placeNote = d.placeNote,
-                        identifiedAs = d.identifiedAs,
-                        latitude = d.latitude,
-                        longitude = d.longitude,
-                        updatedAt = now,
-                    )
-                )
-            }
+    /** One save at a time; each one writes the draft as it stands when its turn comes. */
+    private val saving = Mutex()
 
-            // Replace the character rows wholesale. There are a few dozen at most, and
-            // reconciling them individually would be more code for no gain.
-            dao.charactersOf(id).map { it.characterId }.distinct().forEach {
-                dao.clearCharacter(id, it)
-            }
-            d.answers.values.forEach { (characterId, values) ->
-                values.forEach { value ->
-                    dao.addCharacter(ObservationCharacter(0, id, characterId, value, now))
-                }
-            }
+    /** Writes the draft down and returns its row's id, or null with no draft. */
+    private suspend fun persistNow(): Long? = saving.withLock {
+        val d = _draft.value ?: return@withLock null
+        val now = System.currentTimeMillis()
+        val id = d.observationId ?: dao.insert(
+            Observation(
+                uuid = d.uuid,
+                recordedAt = d.recordedAt,
+                updatedAt = now,
+                note = d.note,
+                placeNote = d.placeNote,
+                identifiedAs = d.identifiedAs,
+                latitude = d.latitude,
+                longitude = d.longitude,
+                kept = d.kept,
+                schemaVersion = schema.version,
+            )
+        ).also { newId -> _draft.value = _draft.value?.copy(observationId = newId) }
 
-            // Written down, not just remembered. See [MeasurementRow.NOT_TESTED].
-            d.answers.notTested.forEach { characterId ->
-                dao.addCharacter(
-                    ObservationCharacter(
-                        0, id, characterId, MeasurementRow.NOT_TESTED, now,
-                    )
-                )
-            }
-
-            // Measurements go down the same rows, as `cap_width_mm=45`. Not a column,
-            // for the reason the character rows are not columns either: a region pack
-            // has to be able to introduce one without a database migration, and a
-            // number is no more special than a state in that respect.
-            measurementCharacters.forEach { character ->
-                val ids = schema.valuesOf(character).map { it.id }
-                d.answers.measurements.filterKeys { it in ids }.forEach { (key, mm) ->
-                    dao.addCharacter(
-                        ObservationCharacter(
-                            0, id, character.id, MeasurementRow.encode(key, mm), now,
-                        )
-                    )
-                }
-            }
-
-            val known = dao.photosOf(id).map { it.fileName }.toSet()
-            d.photos.filter { it.fileName !in known }.forEach {
-                dao.addPhoto(it.copy(observationId = id))
+        val rows = mutableListOf<ObservationCharacter>()
+        // Replace the character rows wholesale. There are a few dozen at most, and
+        // reconciling them individually would be more code for no gain.
+        d.answers.values.forEach { (characterId, values) ->
+            values.forEach { value -> rows += ObservationCharacter(0, id, characterId, value, now) }
+        }
+        // Written down, not just remembered. See [MeasurementRow.NOT_TESTED].
+        d.answers.notTested.forEach { characterId ->
+            rows += ObservationCharacter(0, id, characterId, MeasurementRow.NOT_TESTED, now)
+        }
+        // Measurements go down the same rows, as `cap_width_mm=45`. Not a column,
+        // for the reason the character rows are not columns either: a region pack
+        // has to be able to introduce one without a database migration, and a
+        // number is no more special than a state in that respect.
+        measurementCharacters.forEach { character ->
+            val ids = schema.valuesOf(character).map { it.id }
+            d.answers.measurements.filterKeys { it in ids }.forEach { (key, mm) ->
+                rows += ObservationCharacter(0, id, character.id, MeasurementRow.encode(key, mm), now)
             }
         }
+        dao.saveFind(
+            observationId = id,
+            note = d.note,
+            placeNote = d.placeNote,
+            identifiedAs = d.identifiedAs,
+            latitude = d.latitude,
+            longitude = d.longitude,
+            updatedAt = now,
+            characters = rows,
+            photos = d.photos,
+        )
+        id
     }
 
     /**

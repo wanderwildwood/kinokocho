@@ -121,8 +121,9 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             asking -> asking = false
             // Reading a saved find: back goes to the journal it came from.
             reading -> { reading = false; vm.close() }
-            // Mid-key: back asks whether to keep it rather than losing it silently.
-            open != null -> asking = true
+            // Mid-key: back asks whether to keep it rather than losing it silently. A find
+            // already in the journal is saved as it changes; back returns to it.
+            open != null -> if (open.kept) reading = true else asking = true
             else -> Unit
         }
     }
@@ -189,7 +190,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             vm = vm,
             draft = open,
             onAddPhoto = { photographing = true },
-            onDone = { asking = true },
+            onDone = { if (open.kept) reading = true else asking = true },
             onJournal = { vm.close() },
             journalCount = kept.size,
             onCandidate = { candidate = it },
@@ -205,7 +206,9 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
                 // The photographs stay on the phone: the owner's call. Only the entry goes,
                 // so a mis-tap costs the record and not the pictures.
                 asking = false
-                open.observationId?.let(vm::delete)
+                // Never a find already in the journal: that is deleted from the journal, armed
+                // and with Undo.
+                if (!open.kept) open.observationId?.let(vm::delete)
                 vm.close()
             },
             onBack = { asking = false },

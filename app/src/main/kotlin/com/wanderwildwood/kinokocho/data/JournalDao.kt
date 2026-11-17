@@ -127,6 +127,42 @@ interface JournalDao {
     @Query("SELECT COUNT(*) FROM observations")
     suspend fun count(): Int
 
+    /**
+     * A find's answers and words written down, in one transaction: a battery dying halfway
+     * leaves the find as it was before, never with its answers cleared and not yet put back.
+     */
+    @Transaction
+    suspend fun saveFind(
+        observationId: Long,
+        note: String,
+        placeNote: String,
+        identifiedAs: String,
+        latitude: Double?,
+        longitude: Double?,
+        updatedAt: Long,
+        characters: List<ObservationCharacter>,
+        photos: List<ObservationPhoto>,
+    ) {
+        findOne(observationId)?.let { existing ->
+            update(
+                existing.observation.copy(
+                    note = note,
+                    placeNote = placeNote,
+                    identifiedAs = identifiedAs,
+                    latitude = latitude,
+                    longitude = longitude,
+                    updatedAt = updatedAt,
+                )
+            )
+        }
+        charactersOf(observationId).map { it.characterId }.distinct().forEach {
+            clearCharacter(observationId, it)
+        }
+        characters.forEach { addCharacter(it.copy(observationId = observationId)) }
+        val known = photosOf(observationId).map { it.fileName }.toSet()
+        photos.filter { it.fileName !in known }.forEach { addPhoto(it.copy(observationId = observationId)) }
+    }
+
     /** Whether any find already has a photograph in this file. */
     @Query("SELECT COUNT(*) FROM observation_photos WHERE file_name = :fileName")
     suspend fun photoFileUsed(fileName: String): Int
