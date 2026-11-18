@@ -88,6 +88,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
     )
 
     fun startNewEntry() {
+        commitDiscard()
         val now = System.currentTimeMillis()
         _draft.value = Draft(
             observationId = null,
@@ -99,6 +100,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
 
     fun open(observationId: Long) {
         commitTrash()
+        commitDiscard()
         viewModelScope.launch {
             val full = dao.findOne(observationId) ?: return@launch
             _draft.value = Draft(
@@ -157,8 +159,10 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      */
     fun resumeOrStart() {
         commitTrash()
+        commitDiscard()
         viewModelScope.launch {
-            val unclaimed = dao.findUnclaimed()
+            // Behind the discard just let go, so the find thrown away is not the one resumed.
+            val unclaimed = saving.withLock { dao.findUnclaimed() }
             if (unclaimed == null) {
                 startNewEntry()
             } else {
@@ -420,10 +424,10 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      * PRIVACY.md said they went with it. A promise about where somebody forages is not a
      * promise to be approximately true.
      *
-     * This is deletion, not discard. Throwing away a find that was never kept leaves its
-     * photographs alone on purpose, so that a mis-tap at the end of a walk costs the
-     * record and not the pictures; deleting one from the journal is a thing a person did
-     * on purpose, twice.
+     * Throwing away a find that was never kept ends here too, photographs and all: a
+     * picture whose find is gone could not be seen anywhere, nor go into a backup, so
+     * keeping the file would only be keeping it out of reach. A mis-tap is answered by
+     * the Undo both offer, not by leaving files behind.
      */
     fun delete(observationId: Long) {
         // Not in viewModelScope. Back from the journal stops the activity, which lets a
@@ -437,21 +441,52 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Throws away the find being keyed, one that was never kept, and closes it.
+     * The find just thrown away, closed but still whole until the person moves on.
      *
-     * Behind any save already queued for it, and marked so that none queued later writes
-     * it back: a find answered and then thrown away at once must not come back as the
-     * find being keyed on the next start.
+     * Like a delete from the journal: Undo puts it back as it was, and nothing is removed
+     * from disk until another find is started or opened, one is deleted, or the app is
+     * left. Only if the process dies before any of those does it come back, as the find
+     * being keyed.
      */
+    private val _thrownAway = MutableStateFlow<Draft?>(null)
+    val thrownAway: StateFlow<Draft?> = _thrownAway.asStateFlow()
+
+    /** Throws away the find being keyed, one that was never kept, and closes it. */
     fun discard() {
         val d = _draft.value ?: return
         _draft.value = null
         if (d.kept) return
-        viewModelScope.launch {
+        commitTrash()
+        commitDiscard()
+        _thrownAway.value = d
+    }
+
+    /** Opens the find just thrown away again, answers, words and photographs. */
+    fun undoDiscard() {
+        val d = _thrownAway.value ?: return
+        _thrownAway.value = null
+        _draft.value = d
+    }
+
+    /**
+     * Makes a discard final: the row and every photograph go.
+     *
+     * Behind any save already queued for it, and marked so that none queued later writes
+     * it back: a find answered and then thrown away at once must not come back as the
+     * find being keyed on the next start. In [lasting], like [delete], so a view model
+     * cleared straight after does not cut it off.
+     */
+    fun commitDiscard() {
+        val d = _thrownAway.value ?: return
+        _thrownAway.value = null
+        lasting.launch(start = CoroutineStart.UNDISPATCHED) {
             saving.withLock {
                 discarded += d.uuid
-                val id = d.observationId ?: rowIds[d.uuid] ?: return@withLock
-                deleteRow(id)
+                val id = d.observationId ?: rowIds[d.uuid]
+                if (id != null) deleteRow(id)
+                // And any picture the find held that no row named yet.
+                val dir = photoDir(getApplication())
+                d.photos.forEach { runCatching { File(dir, it.fileName).delete() } }
             }
         }
     }
@@ -478,6 +513,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
 
     fun trash(observationId: Long) {
         commitTrash()
+        commitDiscard()
         _trashed.value = observationId
     }
 
@@ -499,6 +535,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      */
     override fun onCleared() {
         commitTrash()
+        commitDiscard()
     }
 
     private companion object {

@@ -182,6 +182,50 @@ class JournalViewModelTest {
         assertEquals("the right one", dao.findUnclaimed()!!.observation.note)
     }
 
+    /** Undo after "No, throw it away" brings the find back as it was, still being keyed. */
+    @Test
+    fun `a find thrown away comes back whole on Undo`() = runBlocking {
+        vm.startNewEntry()
+        val uuid = vm.draft.value!!.uuid
+        vm.answer("fruitbody_type", setOf("gilled_stemmed"))
+        vm.setNote("the wrong mushroom after all")
+        settled()
+
+        vm.discard()
+        assertNull(vm.draft.value)
+        assertEquals(uuid, vm.thrownAway.value!!.uuid)
+
+        vm.undoDiscard()
+        assertNull(vm.thrownAway.value)
+        assertEquals(uuid, vm.draft.value!!.uuid)
+        assertEquals("the wrong mushroom after all", vm.draft.value!!.note)
+        // Nothing was removed while Undo showed.
+        delay(150)
+        assertEquals(1, dao.count())
+    }
+
+    /** Thrown away and the app left at once: the find still goes when the view model is cleared. */
+    @Test
+    fun `a find thrown away is gone once the view model is cleared`() = runBlocking {
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        val store = ViewModelStore()
+        val journal = ViewModelProvider(store, ViewModelProvider.AndroidViewModelFactory.getInstance(app))[JournalViewModel::class.java]
+        journal.startNewEntry()
+        val uuid = journal.draft.value!!.uuid
+        journal.setNote("not this one")
+        withTimeout(30_000) {
+            while (dao.findByUuid(uuid) == null) delay(10)
+        }
+
+        journal.discard()
+        store.clear()
+
+        withTimeout(30_000) {
+            while (dao.findByUuid(uuid) != null) delay(10)
+        }
+        assertEquals(0, dao.count())
+    }
+
     /**
      * Back from the journal with Undo showing: the stop lets the delete go, and the view
      * model is cleared straight after, which must not cut the delete off.

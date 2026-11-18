@@ -148,6 +148,8 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     // being keyed out right now never appears here however the app is left.
     val trashed by vm.trashed.collectAsState()
     val kept = if (trashed == null) entries else entries.filter { it.observation.id != trashed }
+    // A find thrown away is never in the journal, but its Undo is shown there all the same.
+    val thrownAway by vm.thrownAway.collectAsState()
 
     // Leaving the app is moving on too: a find deleted from the journal goes when the app
     // is put away, not only when another is opened, or Back or a swipe from Recents
@@ -155,7 +157,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     val lifecycleOwner = LocalView.current.findViewTreeLifecycleOwner()
     DisposableEffect(lifecycleOwner, vm) {
         val watcher = LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_STOP) vm.commitTrash()
+            if (event == Lifecycle.Event.ON_STOP) { vm.commitTrash(); vm.commitDiscard() }
         }
         lifecycleOwner?.lifecycle?.addObserver(watcher)
         onDispose { lifecycleOwner?.lifecycle?.removeObserver(watcher) }
@@ -190,8 +192,9 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             onAbout = { about = true },
             onBackup = { backup = true },
             onDelete = vm::trash,
-            deleted = trashed != null,
-            onUndo = vm::undoTrash,
+            deleted = trashed != null || thrownAway != null,
+            deletedText = if (thrownAway != null) R.string.journal_thrown_away else R.string.journal_deleted,
+            onUndo = { if (thrownAway != null) vm.undoDiscard() else vm.undoTrash() },
             seasonRow = {
                 val m = thisMonth()
                 SeasonRow(
@@ -231,8 +234,8 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
             photos = open.photos.size,
             onSave = { asking = false; vm.keep(); reading = true },
             onDiscard = {
-                // The photographs stay on the phone: the owner's call. Only the entry goes,
-                // so a mis-tap costs the record and not the pictures.
+                // The find and its photographs go, with the journal's Undo for a mis-tap: a
+                // picture kept without its find could not be reached from anywhere.
                 asking = false
                 // Never a find already in the journal: that is deleted from the journal, armed
                 // and with Undo.

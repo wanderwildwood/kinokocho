@@ -1,5 +1,6 @@
 package com.wanderwildwood.kinokocho.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.material3.ExperimentalMaterial3Api
 import com.mudita.mmd.components.top_app_bar.TopAppBarMMD
 import androidx.compose.foundation.clickable
@@ -58,6 +59,8 @@ fun JournalScreen(
     onBackup: () -> Unit = {},
     onDelete: (Long) -> Unit,
     deleted: Boolean = false,
+    /** What the Undo bar says: a find deleted from the journal, or one thrown away. */
+    @StringRes deletedText: Int = R.string.journal_deleted,
     onUndo: () -> Unit = {},
     seasonRow: (@Composable () -> Unit)? = null,
 ) {
@@ -141,10 +144,10 @@ fun JournalScreen(
                 }
             }
 
-            // After a delete, until the person moves on: the way to put the find back.
+            // After a delete or a discard, until the person moves on: the way to put the find back.
             if (deleted) {
                 Column(Modifier.padding(horizontal = 16.dp, vertical = 6.dp).testTag("undo_bar")) {
-                    TextMMD(stringResource(R.string.journal_deleted), style = MaterialTheme.typography.bodyMedium)
+                    TextMMD(stringResource(deletedText), style = MaterialTheme.typography.bodyMedium)
                     OutlinedButtonMMD(
                         onClick = onUndo,
                         modifier = Modifier.fillMaxWidth().padding(top = 4.dp).height(48.dp),

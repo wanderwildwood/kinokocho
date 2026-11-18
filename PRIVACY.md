@@ -45,8 +45,9 @@ stays empty.
 Pictures are written to the app's own private storage, not the shared Pictures folder,
 and are deleted from disk when you delete the find they belong to — which for a while
 this file claimed and the code did not do. Throwing away a find you were part-way
-through is the one exception, and it is deliberate: the photographs are left alone so
-that a mis-tap at the end of a walk costs the record and not the pictures. A photograph
+through deletes its photographs too: a picture whose find is gone could not be seen
+anywhere in the app or go into a backup. Both offer Undo, and nothing leaves the disk
+until you start or open another find or leave the app. A photograph
 can also be removed on its own, by tapping it twice. (Birding wrote its recordings into
 shared `Music/` and every media scanner on the phone picked them up. That mistake is not
 being repeated, and where you forage is a worse thing to scatter about a phone than a
