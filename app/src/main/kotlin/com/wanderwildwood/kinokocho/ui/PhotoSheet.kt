@@ -80,6 +80,7 @@ private fun noCamera(context: Context, file: File) {
 fun PhotoSheet(
     filled: Set<String>,
     onCaptured: (slot: String, fileName: String) -> Unit,
+    onPicked: (slot: String, uri: android.net.Uri) -> Unit,
     onClose: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -91,8 +92,8 @@ fun PhotoSheet(
         val (slot, fileName) = pending ?: return@rememberLauncherForActivityResult
         pending = null
         if (ok) {
-            // A camera that geotags writes the exact spot into the picture.
-            PhotoExif.stripLocation(File(photoDir(context), fileName))
+            // A camera that geotags writes the exact spot into the picture; the view model
+            // takes it out, off the main thread.
             onCaptured(slot.id, fileName)
         } else {
             // Cancelled: take the empty file back out rather than leaving a nought-byte
@@ -118,18 +119,8 @@ fun PhotoSheet(
     ) { uri ->
         val slot = choosing
         choosing = null
-        if (uri != null && slot != null) {
-            val fileName = "${UUID.randomUUID()}.jpg"
-            val copied = runCatching {
-                context.contentResolver.openInputStream(uri)?.use { input ->
-                    File(photoDir(context), fileName).outputStream().use(input::copyTo)
-                } != null
-            }.getOrDefault(false)
-            if (copied) {
-                PhotoExif.stripLocation(File(photoDir(context), fileName))
-                onCaptured(slot.id, fileName)
-            }
-        }
+        // Copied in and its place taken out by the view model, off the main thread.
+        if (uri != null && slot != null) onPicked(slot.id, uri)
     }
 
     // Scrolls. Six slots and the Done row fit a 480x800 panel with nothing to spare, and

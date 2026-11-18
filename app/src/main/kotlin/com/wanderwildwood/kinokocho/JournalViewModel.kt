@@ -17,6 +17,7 @@ import com.wanderwildwood.kinokocho.schema.CharacterSchema
 import com.wanderwildwood.kinokocho.schema.SchemaLoader
 import com.wanderwildwood.kinokocho.ui.JournalExport
 import com.wanderwildwood.kinokocho.ui.JournalImport
+import com.wanderwildwood.kinokocho.ui.PhotoExif
 import com.wanderwildwood.kinokocho.ui.photoDir
 import java.io.File
 import java.util.Calendar
@@ -237,8 +238,47 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         persist()
     }
 
-    fun addPhoto(slot: String, fileName: String) {
-        val d = _draft.value ?: return
+    /**
+     * A photograph the camera has just written: its place taken out, off the main thread,
+     * then added to the find it was taken for. One that cannot be made clean is kept all
+     * the same, since it cannot be taken again; a share leaves it out.
+     */
+    fun takeInPhoto(slot: String, fileName: String) {
+        val uuid = _draft.value?.uuid ?: return
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) { PhotoExif.strip(File(photoDir(getApplication()), fileName)) }
+            addPhoto(slot, fileName, uuid)
+        }
+    }
+
+    /**
+     * A picture picked from the gallery: copied into the app's own folder and its place
+     * taken out, off the main thread. One that cannot be read, or cannot be made clean, is
+     * not taken: the person still has it where it came from, and [onRefused] says so.
+     */
+    fun takeInPicked(slot: String, uri: android.net.Uri, onRefused: () -> Unit) {
+        val uuid = _draft.value?.uuid ?: return
+        viewModelScope.launch {
+            val app = getApplication<Application>()
+            val fileName = "${UUID.randomUUID()}.jpg"
+            val taken = withContext(Dispatchers.IO) {
+                val file = File(photoDir(app), fileName)
+                val copied = runCatching {
+                    app.contentResolver.openInputStream(uri)?.use { input ->
+                        file.outputStream().use(input::copyTo)
+                    } != null
+                }.getOrDefault(false)
+                val ok = copied && PhotoExif.strip(file) != PhotoExif.Outcome.FAILED
+                if (!ok) file.delete()
+                ok
+            }
+            if (taken) addPhoto(slot, fileName, uuid) else onRefused()
+        }
+    }
+
+    /** Only onto the find it was taken for, if that is still the one open. */
+    private fun addPhoto(slot: String, fileName: String, uuid: String) {
+        val d = _draft.value?.takeIf { it.uuid == uuid } ?: return
         val photo = ObservationPhoto(
             observationId = d.observationId ?: 0,
             slot = slot,

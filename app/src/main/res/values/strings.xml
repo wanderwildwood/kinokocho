@@ -277,6 +277,7 @@
     <string name="photos_body">Whoever you ask will want the underside and the base. The rest is optional.</string>
     <string name="photos_take_now">Take one now</string>
     <string name="photos_no_camera">No camera app is installed.</string>
+    <string name="photos_not_readable">That picture could not be read, so it was not added. It is still where it was.</string>
     <string name="photos_choose_existing">Choose one already on the phone</string>
     <string name="photos_back">Back</string>
     <string name="photos_done">Done</string>

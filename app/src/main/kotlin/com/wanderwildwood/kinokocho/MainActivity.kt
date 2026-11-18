@@ -46,6 +46,7 @@ import com.wanderwildwood.kinokocho.ui.EntryScreen
 import com.wanderwildwood.kinokocho.ui.JournalScreen
 import com.wanderwildwood.kinokocho.ui.BackupDialog
 import com.wanderwildwood.kinokocho.ui.PhotoSheet
+import com.wanderwildwood.kinokocho.ui.FootNotice
 import com.wanderwildwood.kinokocho.ui.SaveDialog
 import com.wanderwildwood.kinokocho.ui.SeasonRow
 import com.wanderwildwood.kinokocho.ui.SeasonScreen
@@ -339,7 +340,12 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
         EInkDialog(onDismiss = { photographing = false }) {
             PhotoSheet(
                 filled = forPhotos.photos.map { it.slot }.toSet(),
-                onCaptured = vm::addPhoto,
+                onCaptured = vm::takeInPhoto,
+                onPicked = { slot, uri ->
+                    vm.takeInPicked(slot, uri) {
+                        FootNotice.say(context0, context0.getString(R.string.photos_not_readable))
+                    }
+                },
                 onClose = { photographing = false },
             )
         }

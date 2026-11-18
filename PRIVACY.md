@@ -58,7 +58,11 @@ lets exactly one file, once, be written by one other app.
 A camera app may write the exact spot a picture was taken into the file, and a picture
 picked from the gallery may carry one too. The app takes that out as each photograph comes
 in, along with any serial number or owner's name, and checks again before a photograph goes
-out in a share or a backup. The date and the camera's settings stay in the file.
+out in a share or a backup. The date and the camera's settings stay in the file. The place
+can also be written as text beside those tags (XMP), and that goes too. A picture in a form
+the phone cannot edit, such as HEIC, is saved again as a plain JPEG, which carries nothing
+but the picture; one from the gallery that cannot be read at all is not taken in, and a
+photograph that cannot be made clean is left out of a share.
 
 ## Location
 

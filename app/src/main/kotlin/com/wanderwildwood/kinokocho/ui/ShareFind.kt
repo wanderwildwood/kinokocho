@@ -30,6 +30,7 @@ import java.util.Locale
  */
 object ShareFind {
 
+    /** Rewrites photographs that still say where they were taken: not on the main thread. */
     fun intent(
         context: Context,
         schema: CharacterSchema,
@@ -38,9 +39,9 @@ object ShareFind {
     ): Intent {
         val photos = draft.photos.mapNotNull { photo ->
             val file = File(photoDir(context), photo.fileName)
-            if (file.exists()) {
-                // Pictures kept before the place was taken out on the way in.
-                PhotoExif.stripLocation(file)
+            // Pictures kept before the place was taken out on the way in. One that cannot
+            // be made clean stays out of the share rather than going with its place.
+            if (file.exists() && PhotoExif.strip(file) != PhotoExif.Outcome.FAILED) {
                 FileProvider.getUriForFile(context, "${context.packageName}.photos", file)
             } else {
                 null

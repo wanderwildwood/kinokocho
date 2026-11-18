@@ -27,6 +27,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -625,12 +629,19 @@ fun EntryScreen(
             // The whole point of the record: handing it to someone who can look at it.
             val context = LocalContext.current
             val askChooserTitle = stringResource(R.string.entry_ask_chooser_title)
+            val shareScope = rememberCoroutineScope()
             OutlinedButtonMMD(
                 onClick = {
-                    val intent = ShareFind.intent(context, vm.schema, vm.engine, draft)
-                    context.startActivity(
-                        Intent.createChooser(intent, askChooserTitle)
-                    )
+                    // Off the main thread: each photograph is checked, and perhaps rewritten,
+                    // before it goes.
+                    shareScope.launch {
+                        val intent = withContext(Dispatchers.IO) {
+                            ShareFind.intent(context, vm.schema, vm.engine, draft)
+                        }
+                        context.startActivity(
+                            Intent.createChooser(intent, askChooserTitle)
+                        )
+                    }
                 },
                 modifier = Modifier.fillMaxWidth().padding(top = 6.dp),
             ) { TextMMD(stringResource(R.string.entry_ask_someone)) }

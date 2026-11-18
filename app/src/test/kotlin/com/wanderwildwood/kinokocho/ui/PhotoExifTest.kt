@@ -61,4 +61,49 @@ class PhotoExifTest {
         assertFalse(PhotoExif.stripLocation(file))
         assertEquals("not a picture", file.readText())
     }
+
+    private fun segment(marker: Int, payload: ByteArray): ByteArray {
+        val length = payload.size + 2
+        return byteArrayOf(0xFF.toByte(), marker.toByte(), (length shr 8).toByte(), length.toByte()) + payload
+    }
+
+    private val xmpWithPlace = segment(
+        0xE1,
+        "http://ns.adobe.com/xap/1.0/\u0000<x:xmpmeta><exif:GPSLatitude>51,30.06N</exif:GPSLatitude></x:xmpmeta>"
+            .toByteArray(Charsets.US_ASCII),
+    )
+
+    @Test
+    fun aPlaceWrittenAsXmpIsTakenOutToo() {
+        val file = tmp.newFile("xmp.jpg")
+        file.writeBytes(
+            byteArrayOf(0xFF.toByte(), 0xD8.toByte()) + xmpWithPlace + byteArrayOf(0xFF.toByte(), 0xD9.toByte())
+        )
+        assertTrue(PhotoExif.mentionsPlace(file.readBytes()))
+        assertEquals(PhotoExif.Outcome.STRIPPED, PhotoExif.strip(file))
+        assertFalse(PhotoExif.mentionsPlace(file.readBytes()))
+    }
+
+    @Test
+    fun onlyTheXmpSegmentsGoAndEveryOtherByteStays() {
+        val start = byteArrayOf(0xFF.toByte(), 0xD8.toByte())
+        val exif = segment(0xE1, "Exif\u0000\u0000 the camera's settings".toByteArray(Charsets.US_ASCII))
+        val picture = byteArrayOf(0xFF.toByte(), 0xDA.toByte(), 0, 4, 1, 2, 3, 4, 0xFF.toByte(), 0xD9.toByte())
+        val out = PhotoExif.withoutXmp(start + exif + xmpWithPlace + picture)
+        assertTrue(out!!.contentEquals(start + exif + picture))
+    }
+
+    @Test
+    fun aFileThatIsNotLaidOutAsAJpegIsNotCut() {
+        assertNull(PhotoExif.withoutXmp("not a picture".toByteArray()))
+        // A segment that claims to run past the end of the file.
+        assertNull(PhotoExif.withoutXmp(byteArrayOf(0xFF.toByte(), 0xD8.toByte(), 0xFF.toByte(), 0xE1.toByte(), 0x7F, 0)))
+    }
+
+    @Test
+    fun aFileThatCannotBeMadeCleanSaysSo() {
+        val file = tmp.newFile("notes.bin").apply { writeText("not a picture") }
+        assertEquals(PhotoExif.Outcome.FAILED, PhotoExif.strip(file))
+        assertEquals("not a picture", file.readText())
+    }
 }
