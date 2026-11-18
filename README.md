@@ -101,6 +101,10 @@ already says of every row on it. `--write` applies the widenings.
   missing from an old mushroom proves nothing, and the key stops ruling things out on it.
 - **Offline, entirely.** The app has no internet permission. A find leaves the phone only
   when you send it to someone from the share sheet, or in a backup you save.
+- **One permission**, approximate location, asked for only when you press **Add roughly where I
+  am** on a find: the phone's last known position, to two decimal places, goes into the place.
+  The place a camera wrote into a photograph is taken out as the photograph comes in, and again
+  before a share or a backup.
 
 ## Status
 
