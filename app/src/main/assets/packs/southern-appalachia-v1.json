@@ -880,7 +880,7 @@
         "note": "Around 50% fatality untreated.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "The margin is not lined. White throughout, and it does not change colour when cut or bruised. The cap centre can tint straw yellow, tan or pink in age or strong sun, so a tinted centre does not rule it out.",
+      "note": "The margin is not lined. White throughout, and it does not change color when cut or bruised. The cap center can tint straw yellow, tan or pink in age or strong sun, so a tinted center does not rule it out.",
       "characters": {
         "fruitbody_type": [
           {
@@ -1284,7 +1284,7 @@
         "note": "Its effects are not documented and it may be poisonous. Treated as poisonous, as every Amanita should be.",
         "source": "Wikipedia, Amanita brunnescens (Toxicity)"
       },
-      "note": "The bulb at the base is usually abrupt and rimmed, and split vertically as though cleft with a knife, though not every collection shows it. The stem and bulb discolour reddish brown where handled or where a slug has been; the cap and flesh only sometimes. The cap runs from grey-brown to nearly white.",
+      "note": "The bulb at the base is usually abrupt and rimmed, and split vertically as though cleft with a knife, though not every collection shows it. The stem and bulb discolor reddish brown where handled or where a slug has been; the cap and flesh only sometimes. The cap runs from gray-brown to nearly white.",
       "characters": {
         "fruitbody_type": [
           {
@@ -1682,7 +1682,7 @@
             "cap_surface",
             "veil_remnants"
           ],
-          "note": "A destroying angel is white throughout, never stains, and its cap is usually bare. This is grey to brown with scattered warts and browns where handled. Both can have a bulb, so dig up the base: a loose white sac around it means destroying angel."
+          "note": "A destroying angel is white throughout, never stains, and its cap is usually bare. This is gray to brown with scattered warts and browns where handled. Both can have a bulb, so dig up the base: a loose white sac around it means destroying angel."
         },
         {
           "taxon": "amanita_citrina",
@@ -1690,7 +1690,7 @@
             "bruising",
             "cap_colour"
           ],
-          "note": "The false death cap is pale greenish yellow fading to whitish. Its cut flesh does not change, though the cap and stem sometimes stain purplish to brownish. This is grey to brown and stains reddish brown where handled, most of all near the base. Both have a rimmed bulb that can be split, both can be sticky, and both may smell faintly of raw potato, so none of those settles it."
+          "note": "The false death cap is pale greenish yellow fading to whitish. Its cut flesh does not change, though the cap and stem sometimes stain purplish to brownish. This is gray to brown and stains reddish brown where handled, most of all near the base. Both have a rimmed bulb that can be split, both can be sticky, and both may smell faintly of raw potato, so none of those settles it."
         }
       ],
       "sources": [
@@ -2097,7 +2097,7 @@
             "bruising",
             "cap_colour"
           ],
-          "note": "Both have an abrupt rimmed bulb that can be split, and both can smell of raw potato. The cleft-foot browns on the stem and bulb when handled and has a grey-brown to whitish cap; this one is pale greenish yellow fading to white."
+          "note": "Both have an abrupt rimmed bulb that can be split, and both can smell of raw potato. The cleft-foot browns on the stem and bulb when handled and has a gray-brown to whitish cap; this one is pale greenish yellow fading to white."
         },
         {
           "taxon": "amanita_bisporigera",
@@ -2829,7 +2829,7 @@
             "stipe_base",
             "veil_remnants"
           ],
-          "note": "Amanita parcivolvata has no ring and no sac, only loose powdery volval bits at the base, and its cap usually carries scattered warts. Gill colour will not separate them: both are yellowish."
+          "note": "Amanita parcivolvata has no ring and no sac, only loose powdery volval bits at the base, and its cap usually carries scattered warts. Gill color will not separate them: both are yellowish."
         }
       ],
       "sources": [
@@ -3916,7 +3916,7 @@
     {
       "id": "amanita_persicina",
       "scientificName": "Amanita persicina",
-      "commonName": "peach-coloured fly agaric",
+      "commonName": "peach-colored fly agaric",
       "prevalence": "common",
       "sought": false,
       "hazard": {
@@ -4302,7 +4302,7 @@
         {
           "taxon": "amanita_muscaria_guessowii",
           "discriminators": [],
-          "note": "No field character in the schema reliably separates them, and both are toxic in the same way. Guessowii is lemon to egg-yolk yellow, usually has well-defined concentric veil rings on the bulb and a more persistent ring. Persicina is peach to melon with only scattered bulb patches. Caps overlap in orange and the line between them is geography as much as colour."
+          "note": "No field character in the schema reliably separates them, and both are toxic in the same way. Guessowii is lemon to egg-yolk yellow, usually has well-defined concentric veil rings on the bulb and a more persistent ring. Persicina is peach to melon with only scattered bulb patches. Caps overlap in orange and the line between them is geography as much as color."
         }
       ],
       "sources": [
@@ -5492,7 +5492,7 @@
             "ring",
             "stipe_surface"
           ],
-          "note": "Both stand in a sac, so the sac decides nothing. The grisette has a grey to brown cap with a deeply lined edge. A destroying angel is white with an unlined edge. The destroying angel's ring is fragile and can be lost or torn away, so no ring does not rule it out: trust the lined edge and the colour, never the missing ring."
+          "note": "Both stand in a sac, so the sac decides nothing. The grisette has a gray to brown cap with a deeply lined edge. A destroying angel is white with an unlined edge. The destroying angel's ring is fragile and can be lost or torn away, so no ring does not rule it out: trust the lined edge and the color, never the missing ring."
         }
       ],
       "sources": [
@@ -5829,7 +5829,7 @@
             "substrate",
             "bruising"
           ],
-          "note": "The common earthball is a hard, thick-skinned, scaly yellowish ball on soil or moss, rarely on wood. Cut it: its inside is grey to purple-black from early on, never uniform white like the stump puffball's. Some earthballs cause serious poisoning."
+          "note": "The common earthball is a hard, thick-skinned, scaly yellowish ball on soil or moss, rarely on wood. Cut it: its inside is gray to purple-black from early on, never uniform white like the stump puffball's. Some earthballs cause serious poisoning."
         },
         {
           "taxon": "lycoperdon_perlatum",
@@ -6351,7 +6351,7 @@
         "note": "",
         "source": "—"
       },
-      "note": "Small, grey-brown, with a sharp navel at the centre of the cap and gills running down the stem. On rotting wood and moss.",
+      "note": "Small, gray-brown, with a sharp navel at the center of the cap and gills running down the stem. On rotting wood and moss.",
       "characters": {
         "fruitbody_type": [
           {
@@ -6969,7 +6969,7 @@
             "bruising",
             "taste"
           ],
-          "note": "The straight-branched coral also grows on wood and is a similar buff colour, but its branch tips are simple points, never little crowns. It bruises purplish brown, tastes bitter and drops a rusty-yellowish print. The crown-tipped coral does not bruise and drops white."
+          "note": "The straight-branched coral also grows on wood and is a similar buff color, but its branch tips are simple points, never little crowns. It bruises purplish brown, tastes bitter and drops a rusty-yellowish print. The crown-tipped coral does not bruise and drops white."
         },
         {
           "taxon": "clavulina_coralloides",
@@ -7616,7 +7616,7 @@
         "note": "",
         "source": "—"
       },
-      "note": "Stout, pale net over the top of a fat stem, and white pores ageing yellow then olive. Mild, never bitter.",
+      "note": "Stout, pale net over the top of a fat stem, and white pores aging yellow then olive. Mild, never bitter.",
       "characters": {
         "fruitbody_type": [
           {
@@ -8254,7 +8254,7 @@
           "discriminators": [
             "cap_colour"
           ],
-          "note": "Hen of the woods is a mass of many small grey-brown spoon-shaped caps. Berkeley's polypore has fewer, much larger caps, white to cream."
+          "note": "Hen of the woods is a mass of many small gray-brown spoon-shaped caps. Berkeley's polypore has fewer, much larger caps, white to cream."
         },
         {
           "taxon": "meripilus_sumstinei",
@@ -10209,7 +10209,7 @@
           "note": "Clustered on wood with true crowded gills, against a few together from soil with blunt ridges."
         }
       ],
-      "note": "Small and vivid, flamingo pink to cinnabar red or reddish orange, with the ridges coloured like the cap. The flesh inside is whitish or tinged with the cap colour. It has well-spaced, blunt, forking ridges rather than true gills, and the colour washes out in the sun while staying pink in the shade."
+      "note": "Small and vivid, flamingo pink to cinnabar red or reddish orange, with the ridges colored like the cap. The flesh inside is whitish or tinged with the cap color. It has well-spaced, blunt, forking ridges rather than true gills, and the color washes out in the sun while staying pink in the shade."
     },
     {
       "id": "cantharellus_lateritius",
@@ -10598,7 +10598,7 @@
         "note": "",
         "source": "—"
       },
-      "note": "A chanterelle one or two centimetres across, egg-yolk yellow to orange, coming up alone or scattered through moss and leaf litter under hardwoods. It is not a young big one: its hollowing stem is very slender and longer than the cap is wide.",
+      "note": "A chanterelle one or two centimeters across, egg-yolk yellow to orange, coming up alone or scattered through moss and leaf litter under hardwoods. It is not a young big one: its hollowing stem is very slender and longer than the cap is wide.",
       "characters": {
         "fruitbody_type": [
           {
@@ -11935,7 +11935,7 @@
             "spore_print_fine",
             "hymenophore_colour"
           ],
-          "note": "Both come up in lawns at the same time. The meadow mushroom's gills are pink from the start and turn chocolate brown, with a dark brown print; these gills are white, then greyish green, and the print is green."
+          "note": "Both come up in lawns at the same time. The meadow mushroom's gills are pink from the start and turn chocolate brown, with a dark brown print; these gills are white, then grayish green, and the print is green."
         },
         {
           "taxon": "leucoagaricus_americanus",
@@ -11944,7 +11944,7 @@
             "spore_print_fine",
             "substrate"
           ],
-          "note": "The spore print is the whole answer: a dull greyish green here, white in the parasols. Gills only turn green with age, so a young one gives nothing away."
+          "note": "The spore print is the whole answer: a dull grayish green here, white in the parasols. Gills only turn green with age, so a young one gives nothing away."
         }
       ],
       "sources": [
@@ -12280,7 +12280,7 @@
         "note": "",
         "source": "—"
       },
-      "note": "White coral with flattened tips finely crested like antlers. Often half of it is greyed and blackened by a parasitic mould, which is normal and not decay.",
+      "note": "White coral with flattened tips finely crested like antlers. Often half of it is grayed and blackened by a parasitic mold, which is normal and not decay.",
       "characters": {
         "fruitbody_type": [
           {
@@ -13704,7 +13704,7 @@
             "hymenophore_colour",
             "cap_shape"
           ],
-          "note": "Both are white, scaly lawn mushrooms. The green-spored parasol opens flat, its gills go greyish green rather than pink then black, and they never turn to ink. It causes most mushroom poisonings in North America."
+          "note": "Both are white, scaly lawn mushrooms. The green-spored parasol opens flat, its gills go grayish green rather than pink then black, and they never turn to ink. It causes most mushroom poisonings in North America."
         },
         {
           "taxon": "coprinellus_micaceus",
@@ -14085,7 +14085,7 @@
         "note": "Contains orellanine, the kidney toxin of the deadly webcaps, though at much lower concentrations. Symptoms come days to two weeks after the meal, long after anyone links them to it. It is also confused with reddish webcaps that carry lethal doses.",
         "source": "Wikipedia: Cortinarius armillatus; Wikipedia: Orellanine; First Nature"
       },
-      "note": "A cortina, not a ring: a web of fibres that leaves only a rusty band where the spores caught on it. Red belts around the stem base.",
+      "note": "A cortina, not a ring: a web of fibers that leaves only a rusty band where the spores caught on it. Red belts around the stem base.",
       "characters": {
         "fruitbody_type": [
           {
@@ -15097,10 +15097,10 @@
         "toxinClass": "none_known",
         "severity": "NONE_KNOWN",
         "onset": "—",
-        "note": "A few millimetres across. Nothing documented against it.",
+        "note": "A few millimeters across. Nothing documented against it.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Tiny brown cups on twigs and woody debris in the woods, and sometimes on woodchip mulch, grooved down the inside, each holding a few flat grey discs like eggs in a nest. Rain knocks the discs out, which is the whole arrangement.",
+      "note": "Tiny brown cups on twigs and woody debris in the woods, and sometimes on woodchip mulch, grooved down the inside, each holding a few flat gray discs like eggs in a nest. Rain knocks the discs out, which is the whole arrangement.",
       "characters": {
         "fruitbody_type": [
           {
@@ -17081,7 +17081,7 @@
         "toxinClass": "unknown",
         "severity": "UNKNOWN",
         "onset": "—",
-        "note": "Eaten by some, in both forms. The grey gilled form looks like other Entoloma species, some of them poisonous (E. sinuatum), and the white aborted lumps can be mistaken for puffballs or Amanita eggs.",
+        "note": "Eaten by some, in both forms. The gray gilled form looks like other Entoloma species, some of them poisonous (E. sinuatum), and the white aborted lumps can be mistaken for puffballs or Amanita eggs.",
         "source": "https://en.wikipedia.org/wiki/Entoloma_abortivum"
       },
       "note": "Often found as pale lumpy masses beside the ordinary form — those are Armillaria that this fungus has overrun, which is why they turn up together.",
@@ -17457,7 +17457,7 @@
         "toxinClass": "none_known",
         "severity": "NONE_KNOWN",
         "onset": "—",
-        "note": "Eaten in places for texture rather than flavour. Nothing documented against it.",
+        "note": "Eaten in places for texture rather than flavor. Nothing documented against it.",
         "source": "North American Mycological Association poisoning references"
       },
       "note": "Amber to dark reddish-brown gelatinous, top-shaped lobes on dead hardwood twigs and branches, often still attached to the tree, especially oak, and on recently fallen sticks. Each lobe is fixed at a pinched central point. Firm and rubbery when wet, blackening at the edges and shrinking to a thin crust when dry. It comes back with rain, so it turns up in winter here as well as the rest of the year.",
@@ -18138,7 +18138,7 @@
             "hymenophore_colour",
             "flesh_colour"
           ],
-          "note": "Sulphur tuft also grows in clusters on wood. Its gills are yellow to greenish, its flesh yellow, and its print dark purple-brown. This one has rusty gills and a rusty brown print."
+          "note": "Sulfur tuft also grows in clusters on wood. Its gills are yellow to greenish, its flesh yellow, and its print dark purple-brown. This one has rusty gills and a rusty brown print."
         },
         {
           "taxon": "pholiota_squarrosa",
@@ -18488,7 +18488,7 @@
             "stipe_presence",
             "associated_tree"
           ],
-          "note": "Both have a white pore surface that bruises brown, so bruising does not separate them. The hemlock varnish shelf has a lacquered red cap, usually a stem, whitish flesh, and grows on hemlock. The artist's conk is dull grey-brown and unvarnished, without a stem, has brown flesh, and grows on hardwood."
+          "note": "Both have a white pore surface that bruises brown, so bruising does not separate them. The hemlock varnish shelf has a lacquered red cap, usually a stem, whitish flesh, and grows on hemlock. The artist's conk is dull gray-brown and unvarnished, without a stem, has brown flesh, and grows on hardwood."
         }
       ],
       "sources": [
@@ -18845,7 +18845,7 @@
             "stipe_presence",
             "associated_tree"
           ],
-          "note": "Both pore surfaces are white and bruise brown, so bruising does not separate them. The artist's conk is dull grey-brown and unvarnished, without a stem, has brown flesh, and grows on hardwood. This one is lacquered red, usually stalked, has whitish flesh, and grows on hemlock."
+          "note": "Both pore surfaces are white and bruise brown, so bruising does not separate them. The artist's conk is dull gray-brown and unvarnished, without a stem, has brown flesh, and grows on hardwood. This one is lacquered red, usually stalked, has whitish flesh, and grows on hemlock."
         }
       ],
       "sources": [
@@ -19195,7 +19195,7 @@
           "discriminators": [
             "associated_tree"
           ],
-          "note": "Both have a maze underneath. This is on conifer and rusty brown; the other is on hardwood and greyer, and bruises red."
+          "note": "Both have a maze underneath. This is on conifer and rusty brown; the other is on hardwood and grayer, and bruises red."
         },
         {
           "taxon": "trametes_betulina",
@@ -19205,7 +19205,7 @@
             "hymenophore_colour",
             "cap_colour"
           ],
-          "note": "Both are gilled polypores with hairy, zoned caps. The birch mazegill is grey to cream on hardwood, with white flesh and whitish gills. This one is rusty brown to orange on conifer, with rust-brown flesh and brownish gills."
+          "note": "Both are gilled polypores with hairy, zoned caps. The birch mazegill is gray to cream on hardwood, with white flesh and whitish gills. This one is rusty brown to orange on conifer, with rust-brown flesh and brownish gills."
         }
       ],
       "sources": [
@@ -19519,7 +19519,7 @@
           "discriminators": [
             "cap_colour"
           ],
-          "note": "Berkeley's polypore is much larger, with thick, tough, cream-coloured fronds and coarse pores. Hen of the woods is a mass of small grey-brown spoon-shaped caps."
+          "note": "Berkeley's polypore is much larger, with thick, tough, cream-colored fronds and coarse pores. Hen of the woods is a mass of small gray-brown spoon-shaped caps."
         },
         {
           "taxon": "meripilus_sumstinei",
@@ -19539,7 +19539,7 @@
       "reviewed": false,
       "prevalence": "common",
       "sought": true,
-      "note": "A dense clump of small grey-brown spoon-shaped caps at the foot of an oak, on branching pale stalks with the pores running down them. It returns to the same tree year after year, which is worth writing the place down for."
+      "note": "A dense clump of small gray-brown spoon-shaped caps at the foot of an oak, on branching pale stalks with the pores running down them. It returns to the same tree year after year, which is worth writing the place down for."
     },
     {
       "id": "gymnopilus_luteofolius",
@@ -20013,7 +20013,7 @@
             "cap_surface",
             "cap_margin"
           ],
-          "note": "Both cluster on dead wood and print rust-brown. Galerina is small, plain tawny-brown, smooth and lined at the margin. This one is larger and scaly with an unlined margin, purple-red to pinkish when young but fading to tan with age, so colour only helps on a fresh cap. Never use taste to separate them. Getting it wrong is fatal, so look at the scales and the margin first."
+          "note": "Both cluster on dead wood and print rust-brown. Galerina is small, plain tawny-brown, smooth and lined at the margin. This one is larger and scaly with an unlined margin, purple-red to pinkish when young but fading to tan with age, so color only helps on a fresh cap. Never use taste to separate them. Getting it wrong is fatal, so look at the scales and the margin first."
         }
       ],
       "sources": [
@@ -21343,7 +21343,7 @@
         "note": "",
         "source": "—"
       },
-      "note": "A sharp cone in bright colours that goes black wherever it is touched, and eventually all over. The name covers a group of similar species that DNA has not yet split.",
+      "note": "A sharp cone in bright colors that goes black wherever it is touched, and eventually all over. The name covers a group of similar species that DNA has not yet split.",
       "characters": {
         "fruitbody_type": [
           {
@@ -22540,7 +22540,7 @@
     {
       "id": "hypholoma_fasciculare",
       "scientificName": "Hypholoma fasciculare",
-      "commonName": "sulphur tuft",
+      "commonName": "sulfur tuft",
       "hazard": {
         "toxinClass": "gastrointestinal",
         "severity": "GI",
@@ -22548,7 +22548,7 @@
         "note": "Severe and long-lasting for a gastrointestinal poisoning.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Sulphur-yellow clumps on dead wood with a greenish tinge to the gills as they age, and very bitter. Grows in exactly the places the honey mushroom and Galerina do.",
+      "note": "Sulfur-yellow clumps on dead wood with a greenish tinge to the gills as they age, and very bitter. Grows in exactly the places the honey mushroom and Galerina do.",
       "characters": {
         "fruitbody_type": [
           {
@@ -22952,7 +22952,7 @@
             "spore_print",
             "spore_print_fine"
           ],
-          "note": "The deadly Galerina has rusty-brown gills and a rust-brown print, a lined cap edge, and a mealy taste. Sulphur tuft has sulphur-to-olive gills, yellow flesh, a purple-brown print and a bitter taste."
+          "note": "The deadly Galerina has rusty-brown gills and a rust-brown print, a lined cap edge, and a mealy taste. Sulfur tuft has sulfur-to-olive gills, yellow flesh, a purple-brown print and a bitter taste."
         },
         {
           "taxon": "armillaria_mellea",
@@ -22985,10 +22985,10 @@
         "toxinClass": "unknown",
         "severity": "UNKNOWN",
         "onset": "—",
-        "note": "The mould is harmless; what it has overrun is not always known, which is the whole of the risk.",
+        "note": "The mold is harmless; what it has overrun is not always known, which is the whole of the risk.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Not a mushroom but a mould covering one, so completely that the gills are gone and the surface is a hard orange crust. What is underneath cannot be told, and that is the reason for caution.",
+      "note": "Not a mushroom but a mold covering one, so completely that the gills are gone and the surface is a hard orange crust. What is underneath cannot be told, and that is the reason for caution.",
       "characters": {
         "fruitbody_type": [
           {
@@ -23313,7 +23313,7 @@
             "fruitbody_type",
             "stipe_presence"
           ],
-          "note": "Only the colour is shared. Chicken of the woods is a stemless bracket of pores on wood; the lobster is a stemmed, deformed mushroom on the ground."
+          "note": "Only the color is shared. Chicken of the woods is a stemless bracket of pores on wood; the lobster is a stemmed, deformed mushroom on the ground."
         }
       ],
       "sources": [
@@ -24297,7 +24297,7 @@
             "latex_change_colour",
             "odour"
           ],
-          "note": "Both bleed copious white milk that stains everything brown. The weeping milkcap has a smoother, paler brownish-orange cap, often darker at the centre, and a strong smell of fish. The corrugated milkcap is darker and redder, usually evenly coloured, and wrinkled at maturity. It can smell slightly fishy too, so smell alone does not settle it."
+          "note": "Both bleed copious white milk that stains everything brown. The weeping milkcap has a smoother, paler brownish-orange cap, often darker at the center, and a strong smell of fish. The corrugated milkcap is darker and redder, usually evenly colored, and wrinkled at maturity. It can smell slightly fishy too, so smell alone does not settle it."
         }
       ],
       "sources": [
@@ -25172,7 +25172,7 @@
         "note": "",
         "source": "—"
       },
-      "note": "Orange-brown and velvety, with gills so widely spaced you can count them at arm's length. White milk that does not change colour. The spacing is the character — nothing else here has gills like that.",
+      "note": "Orange-brown and velvety, with gills so widely spaced you can count them at arm's length. White milk that does not change color. The spacing is the character — nothing else here has gills like that.",
       "characters": {
         "fruitbody_type": [
           {
@@ -26349,7 +26349,7 @@
             "latex_change_colour",
             "bruising_colour"
           ],
-          "note": "Very close relative, with overlapping colours. The corrugated milkcap has a more wrinkled cap, darker gills and a weaker scent or none; certain separation needs spore size under a microscope."
+          "note": "Very close relative, with overlapping colors. The corrugated milkcap has a more wrinkled cap, darker gills and a weaker scent or none; certain separation needs spore size under a microscope."
         },
         {
           "taxon": "lactifluus_hygrophoroides",
@@ -26669,7 +26669,7 @@
             "cap_colour",
             "stipe_presence"
           ],
-          "note": "Hen of the woods is also a rosette at the base of an oak, but its many small caps are grey-brown and rise from a branched central stem; the white-pored chicken is pinkish orange, with larger, broader caps and usually no stem."
+          "note": "Hen of the woods is also a rosette at the base of an oak, but its many small caps are gray-brown and rise from a branched central stem; the white-pored chicken is pinkish orange, with larger, broader caps and usually no stem."
         },
         {
           "taxon": "meripilus_sumstinei",
@@ -26943,7 +26943,7 @@
       "reviewed": false,
       "prevalence": "common",
       "sought": true,
-      "note": "Overlapping sulphur shelves on standing hardwood: orange above, bright yellow pores below. Soft and damp while it is worth anything, chalky and tough within a week."
+      "note": "Overlapping sulfur shelves on standing hardwood: orange above, bright yellow pores below. Soft and damp while it is worth anything, chalky and tough within a week."
     },
     {
       "id": "legaliana_badia",
@@ -28635,7 +28635,7 @@
             "gill_spacing",
             "hymenophore_colour"
           ],
-          "note": "Fibrecaps have a radially split, silky-fibrous cap, an umbo, crowded greyish brown gills, a dull earthy or spermatic smell, and a dull brown print. The fairy ring champignon has well spaced pale gills, smells faintly of almonds and prints white. Fibrecaps are muscarine poisonings."
+          "note": "Fibercaps have a radially split, silky-fibrous cap, an umbo, crowded grayish brown gills, a dull earthy or spermatic smell, and a dull brown print. The fairy ring champignon has well spaced pale gills, smells faintly of almonds and prints white. Fibercaps are muscarine poisonings."
         }
       ],
       "sources": [
@@ -29001,7 +29001,7 @@
             "substrate",
             "gill_attachment"
           ],
-          "note": "The fairy ring champignon is far bigger, grows from grass rather than sticks, has a pale pliant stem, and its gills are usually attached to the stem (sometimes free). This is a few millimetres across on a twig, with a black wiry stem and gills joined to a collar that never touches the stem."
+          "note": "The fairy ring champignon is far bigger, grows from grass rather than sticks, has a pale pliant stem, and its gills are usually attached to the stem (sometimes free). This is a few millimeters across on a twig, with a black wiry stem and gills joined to a collar that never touches the stem."
         }
       ],
       "sources": [
@@ -29358,14 +29358,14 @@
           "discriminators": [
             "bruising"
           ],
-          "note": "Both are large brownish rosettes at the base of hardwoods in the same months. Hen of the woods has many small greyish-brown caps, and its pores do not blacken. Press the pore surface of the black-staining polypore and it goes dark brown to black within minutes."
+          "note": "Both are large brownish rosettes at the base of hardwoods in the same months. Hen of the woods has many small grayish-brown caps, and its pores do not blacken. Press the pore surface of the black-staining polypore and it goes dark brown to black within minutes."
         },
         {
           "taxon": "bondarzewia_berkeleyi",
           "discriminators": [
             "bruising"
           ],
-          "note": "Berkeley's polypore is a thick-fleshed, cream-coloured rosette at the base of oaks, and it does not blacken when handled. The black-staining polypore bruises dark brown to black on the pores and cap margin."
+          "note": "Berkeley's polypore is a thick-fleshed, cream-colored rosette at the base of oaks, and it does not blacken when handled. The black-staining polypore bruises dark brown to black on the pores and cap margin."
         }
       ]
     },
@@ -29377,7 +29377,7 @@
         "toxinClass": "gastrointestinal",
         "severity": "GI",
         "onset": "15 minutes to several hours (median about 1 hour)",
-        "note": "Raw or undercooked morels cause vomiting and diarrhoea. In the 2023 Montana restaurant outbreak (the morel served was Morchella sextelata, but the warning covers all true morels), 51 people fell ill and 3 were hospitalised; two with chronic illnesses died. Always cook them thoroughly, never eat them raw.",
+        "note": "Raw or undercooked morels cause vomiting and diarrhoea. In the 2023 Montana restaurant outbreak (the morel served was Morchella sextelata, but the warning covers all true morels), 51 people fell ill and 3 were hospitalized; two with chronic illnesses died. Always cook them thoroughly, never eat them raw.",
         "source": "CDC MMWR 73(10), 2024: Outbreak Linked to Morel Mushroom Exposure, Montana 2023; Midwest American Mycological Information"
       },
       "note": "Hollow from the top of the head to the bottom of the stem, in one continuous space. Cut it lengthwise and look: that is the test, and it is the only field character that settles this against a false morel.",
@@ -29716,7 +29716,7 @@
         "toxinClass": "gastrointestinal",
         "severity": "GI",
         "onset": "15 minutes to several hours (median about 1 hour)",
-        "note": "Raw or undercooked morels cause vomiting and diarrhoea. In the 2023 Montana restaurant outbreak (a black morel, Morchella sextelata), 51 fell ill, 3 were hospitalised and two with chronic illnesses died. The black morel is also reported to upset some people when eaten with alcohol. Always cook thoroughly, never eat raw.",
+        "note": "Raw or undercooked morels cause vomiting and diarrhoea. In the 2023 Montana restaurant outbreak (a black morel, Morchella sextelata), 51 fell ill, 3 were hospitalized and two with chronic illnesses died. The black morel is also reported to upset some people when eaten with alcohol. Always cook thoroughly, never eat raw.",
         "source": "CDC MMWR 73(10), 2024; Midwest American Mycological Information"
       },
       "note": "Ridges darken toward black as it ages while the pits stay paler. Hollow throughout, like all true morels.",
@@ -29996,7 +29996,7 @@
             "cap_shape",
             "stipe_base"
           ],
-          "note": "Both are hollow from tip to base. The black morel is usually narrow and conical with ridges that darken with age, and comes earlier. The yellow morel is rounder, often swollen at the base, with ridges no darker than its pits. Young ones of both can be the same colour."
+          "note": "Both are hollow from tip to base. The black morel is usually narrow and conical with ridges that darken with age, and comes earlier. The yellow morel is rounder, often swollen at the base, with ridges no darker than its pits. Young ones of both can be the same color."
         }
       ],
       "sources": [
@@ -30748,7 +30748,7 @@
             "hymenophore_colour",
             "cap_colour"
           ],
-          "note": "Galerina has a ring or a ring zone and a rust-brown print. The common bonnet has neither ring nor coloured print. Getting this one wrong is fatal, so take the print before deciding."
+          "note": "Galerina has a ring or a ring zone and a rust-brown print. The common bonnet has neither ring nor colored print. Getting this one wrong is fatal, so take the print before deciding."
         },
         {
           "taxon": "pluteus_cervinus",
@@ -31124,7 +31124,7 @@
             "hymenophore_colour",
             "stipe_surface"
           ],
-          "note": "Both are red-and-yellow boletes of eastern oak woods that stain blue. The two-coloured bolete has yellow pores and a smooth stem and blues more slowly; the red-mouth bolete has red pores, a dotted stem with dark red hairs at the base, and blues the instant it is touched."
+          "note": "Both are red-and-yellow boletes of eastern oak woods that stain blue. The two-colored bolete has yellow pores and a smooth stem and blues more slowly; the red-mouth bolete has red pores, a dotted stem with dark red hairs at the base, and blues the instant it is touched."
         }
       ],
       "sources": [
@@ -32243,7 +32243,7 @@
             "hymenophore_colour",
             "stipe_surface"
           ],
-          "note": "Both are small, fragile, pale-to-brown caps with white veil teeth hanging from the edge. The mottlegill's gills are mottled grey and black and its stem is powdered and finely hairy; the pale brittlestem's gills go from whitish to brown and its stem is smooth."
+          "note": "Both are small, fragile, pale-to-brown caps with white veil teeth hanging from the edge. The mottlegill's gills are mottled gray and black and its stem is powdered and finely hairy; the pale brittlestem's gills go from whitish to brown and its stem is smooth."
         }
       ],
       "sources": [
@@ -32636,7 +32636,7 @@
             "stipe_presence",
             "gill_attachment"
           ],
-          "note": "Both are small, hairy, tough shelves on dead hardwood. The split gill has no stem at all and its grey-white 'gills' are split down the edge; the bitter oyster has a short stub of a stem at one side and pale golden-tan gills with cross-veins."
+          "note": "Both are small, hairy, tough shelves on dead hardwood. The split gill has no stem at all and its gray-white 'gills' are split down the edge; the bitter oyster has a short stub of a stem at one side and pale golden-tan gills with cross-veins."
         },
         {
           "taxon": "phyllotopsis_nidulans",
@@ -32645,7 +32645,7 @@
             "hymenophore_colour",
             "odour"
           ],
-          "note": "The mock oyster is a hairy orange shelf on dead wood with a strong unpleasant smell and a pinkish print. The bitter oyster is tan, smaller, odourless, with a white print."
+          "note": "The mock oyster is a hairy orange shelf on dead wood with a strong unpleasant smell and a pinkish print. The bitter oyster is tan, smaller, odorless, with a white print."
         }
       ],
       "sources": [
@@ -32669,7 +32669,7 @@
         "toxinClass": "immune_haemolytic",
         "severity": "SEVERE",
         "onset": "hours, after repeated meals",
-        "note": "Sensitisation builds over repeated meals and then one meal destroys red blood cells. There is no safe preparation and no way to know who is sensitised.",
+        "note": "Sensitization builds over repeated meals and then one meal destroys red blood cells. There is no safe preparation and no way to know who is sensitized.",
         "source": "North American Mycological Association poisoning references"
       },
       "note": "The margin is rolled hard under, and everything bruises brown — cap, gills, stem. Gills can be pushed off the cap with a thumb, which no true gilled mushroom allows.",
@@ -34359,7 +34359,7 @@
             "stipe_surface",
             "hymenophore_colour"
           ],
-          "note": "Both come in big yellowish clusters at the foot of trees. The honey mushroom has a smoothish cap with at most fine dark hairs at the centre, whitish gills, a proper ring and a white print; this is covered cap and stem in coarse recurved scales, its gills go yellow to greenish to rusty, and the print is brown."
+          "note": "Both come in big yellowish clusters at the foot of trees. The honey mushroom has a smoothish cap with at most fine dark hairs at the center, whitish gills, a proper ring and a white print; this is covered cap and stem in coarse recurved scales, its gills go yellow to greenish to rusty, and the print is brown."
         }
       ],
       "sources": [
@@ -34738,7 +34738,7 @@
             "odour",
             "hymenophore_colour"
           ],
-          "note": "The oyster is white to grey-brown, smooth, and smells faintly of aniseed or of nothing. This is orange, felted with hair, and smells bad enough to settle it across the room."
+          "note": "The oyster is white to gray-brown, smooth, and smells faintly of aniseed or of nothing. This is orange, felted with hair, and smells bad enough to settle it across the room."
         },
         {
           "taxon": "lentinellus_ursinus",
@@ -35446,7 +35446,7 @@
             "habitat",
             "cap_colour"
           ],
-          "note": "Angel wings is thin-fleshed and pure white, on conifer wood in conifer woods. An oyster is thick-fleshed and usually brown to grey, mostly on broadleaf wood, though it does sometimes grow on conifers, so the wood alone does not settle it."
+          "note": "Angel wings is thin-fleshed and pure white, on conifer wood in conifer woods. An oyster is thick-fleshed and usually brown to gray, mostly on broadleaf wood, though it does sometimes grow on conifers, so the wood alone does not settle it."
         },
         {
           "taxon": "phyllotopsis_nidulans",
@@ -35455,7 +35455,7 @@
             "hymenophore_colour",
             "spore_print"
           ],
-          "note": "The mock oyster is orange throughout, with a hairy cap, orange gills, a pink spore print and often a foul smell. An oyster is brown to grey or white with white gills and a pale print."
+          "note": "The mock oyster is orange throughout, with a hairy cap, orange gills, a pink spore print and often a foul smell. An oyster is brown to gray or white with white gills and a pale print."
         },
         {
           "taxon": "panellus_stipticus",
@@ -35465,7 +35465,7 @@
             "hymenophore_colour",
             "taste"
           ],
-          "note": "The bitter oyster is small, thumbnail to a few centimetres, with a tough cinnamon cap, tan gills and a fiercely bitter taste. An oyster mushroom is broad, pale, soft and mild."
+          "note": "The bitter oyster is small, thumbnail to a few centimeters, with a tough cinnamon cap, tan gills and a fiercely bitter taste. An oyster mushroom is broad, pale, soft and mild."
         },
         {
           "taxon": "lentinellus_ursinus",
@@ -35863,7 +35863,7 @@
         {
           "taxon": "pluteus_petasatus",
           "discriminators": [],
-          "note": "No field character cleanly separates them: P. petasatus is usually paler, whitish with fine brown scales at the centre, and is the common woodchip and mulch Pluteus; P. cervinus is usually brown and in woodland on logs. Dark-capped petasatus exist, and even Kuo found one among his cervinus collections."
+          "note": "No field character cleanly separates them: P. petasatus is usually paler, whitish with fine brown scales at the center, and is the common woodchip and mulch Pluteus; P. cervinus is usually brown and in woodland on logs. Dark-capped petasatus exist, and even Kuo found one among his cervinus collections."
         },
         {
           "taxon": "entoloma_abortivum",
@@ -35898,7 +35898,7 @@
         "note": "",
         "source": "—"
       },
-      "note": "Free gills on woodchips, mulch, sawdust and buried wood, cap whitish with fine brown scales at the centre. The gills stay white a long while before turning pink, so a young one gives no pink print yet. Dig out the base: a white, free-gilled mushroom on mulch with a sac at the base is Volvariella or Amanita, not this.",
+      "note": "Free gills on woodchips, mulch, sawdust and buried wood, cap whitish with fine brown scales at the center. The gills stay white a long while before turning pink, so a young one gives no pink print yet. Dig out the base: a white, free-gilled mushroom on mulch with a sac at the base is Volvariella or Amanita, not this.",
       "characters": {
         "fruitbody_type": [
           {
@@ -36232,7 +36232,7 @@
         {
           "taxon": "pluteus_cervinus",
           "discriminators": [],
-          "note": "No field character cleanly separates them: P. cervinus usually has an entirely brown cap and grows on woodland logs; P. petasatus is usually paler, with fine brown scales concentrated at the centre, and is the common woodchip Pluteus. Dark-capped petasatus occur."
+          "note": "No field character cleanly separates them: P. cervinus usually has an entirely brown cap and grows on woodland logs; P. petasatus is usually paler, with fine brown scales concentrated at the center, and is the common woodchip Pluteus. Dark-capped petasatus occur."
         }
       ],
       "sources": [
@@ -36259,7 +36259,7 @@
         "note": "Not considered poisonous, but not recommended for eating, and not collected.",
         "source": "Wikipedia, Pseudocolus fusiformis"
       },
-      "note": "Three or four orange arms rising from a short whitish stem, joined at the tips so the whole thing stands like a claw out of a whitish to grey-brown egg. The dark spore slime is carried on the inner surfaces of the arms.",
+      "note": "Three or four orange arms rising from a short whitish stem, joined at the tips so the whole thing stands like a claw out of a whitish to gray-brown egg. The dark spore slime is carried on the inner surfaces of the arms.",
       "characters": {
         "fruitbody_type": [
           {
@@ -36484,35 +36484,35 @@
             "fruitbody_type",
             "spore_print"
           ],
-          "note": "Both begin as a ball half buried in the ground; this one's egg is whitish to grey-brown. Cut it lengthwise: this is a jelly layer around a dark core, and an Amanita egg is firm and white with the outline of a cap, gills and stem drawn small inside."
+          "note": "Both begin as a ball half buried in the ground; this one's egg is whitish to gray-brown. Cut it lengthwise: this is a jelly layer around a dark core, and an Amanita egg is firm and white with the outline of a cap, gills and stem drawn small inside."
         },
         {
           "taxon": "mutinus_elegans",
           "discriminators": [
             "stipe_surface"
           ],
-          "note": "Both come out of an egg in the ground and both stink. This one is three or four arms joined at their tips, like a claw, from a whitish to grey-brown egg; Mutinus elegans is a single unbranched spike with no separate cap, the slime smeared over its upper third."
+          "note": "Both come out of an egg in the ground and both stink. This one is three or four arms joined at their tips, like a claw, from a whitish to gray-brown egg; Mutinus elegans is a single unbranched spike with no separate cap, the slime smeared over its upper third."
         },
         {
           "taxon": "clathrus_columnatus",
           "discriminators": [
             "stipe_presence"
           ],
-          "note": "Both come out of an egg and both stink. This one's arms rise from a short common stem, and its egg is grey or grey-brown; Clathrus columnatus has columns rising separately straight out of the volva with no stem, always arched together at the top, from a white egg."
+          "note": "Both come out of an egg and both stink. This one's arms rise from a short common stem, and its egg is gray or gray-brown; Clathrus columnatus has columns rising separately straight out of the volva with no stem, always arched together at the top, from a white egg."
         },
         {
           "taxon": "phallus_ravenelii",
           "discriminators": [
             "cap_presence"
           ],
-          "note": "Both come out of an egg and both stink. This one is three or four arms joined at their tips, like a claw, from a whitish to grey-brown egg; Phallus ravenelii is a thimble-shaped cap with a smooth, unpitted surface on a tall stalk."
+          "note": "Both come out of an egg and both stink. This one is three or four arms joined at their tips, like a claw, from a whitish to gray-brown egg; Phallus ravenelii is a thimble-shaped cap with a smooth, unpitted surface on a tall stalk."
         },
         {
           "taxon": "phallus_rugulosus",
           "discriminators": [
             "cap_presence"
           ],
-          "note": "Both come out of an egg and both stink. This one is three or four arms joined at their tips, like a claw, from a whitish to grey-brown egg; Phallus rugulosus is a distinct wrinkled cap on a slender stalk."
+          "note": "Both come out of an egg and both stink. This one is three or four arms joined at their tips, like a claw, from a whitish to gray-brown egg; Phallus rugulosus is a distinct wrinkled cap on a slender stalk."
         }
       ],
       "sources": [
@@ -36526,7 +36526,7 @@
     {
       "id": "pseudosperma_rimosum",
       "scientificName": "Pseudosperma rimosum",
-      "commonName": "split fibrecap",
+      "commonName": "split fibercap",
       "hazard": {
         "toxinClass": "muscarine",
         "severity": "SEVERE",
@@ -36534,7 +36534,7 @@
         "note": "Muscarine: sweating, tears, salivation, slowed heart. Treatable with atropine, but it needs a hospital.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "A straw-coloured cone of radiating fibres that splits at the edge, usually with a sharp darker umbo, and a smell described as spermatic or mealy. Treat as P. rimosum in the broad sense: it looks like dozens of other fibrecaps. Inocybe and its segregates (Pseudosperma, Inosperma) are the muscarine genera, and almost nothing in them is safely told apart in the field.",
+      "note": "A straw-colored cone of radiating fibers that splits at the edge, usually with a sharp darker umbo, and a smell described as spermatic or mealy. Treat as P. rimosum in the broad sense: it looks like dozens of other fibercaps. Inocybe and its segregates (Pseudosperma, Inosperma) are the muscarine genera, and almost nothing in them is safely told apart in the field.",
       "characters": {
         "fruitbody_type": [
           {
@@ -37680,7 +37680,7 @@
         "note": "Eaten by some. In a genus told apart by taste, a russula nobody has tasted is a russula nobody knows.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Dry and frosted rather than sticky, usually deep purple-red with a whitish bloom, and the stem is flushed pink rather than white. Common under oaks. The cap can also run to olive, yellow or brown, or be mottled with several shades, so colour alone does not settle it.",
+      "note": "Dry and frosted rather than sticky, usually deep purple-red with a whitish bloom, and the stem is flushed pink rather than white. Common under oaks. The cap can also run to olive, yellow or brown, or be mottled with several shades, so color alone does not settle it.",
       "characters": {
         "fruitbody_type": [
           {
@@ -38051,7 +38051,7 @@
         "note": "Fiercely acrid, and it makes people vomit. The taste is the warning and it arrives long before you have swallowed anything.",
         "source": "https://www.mykoweb.com/CAF/species/Russula_silvicola.html"
       },
-      "note": "Bright scarlet cap, pure white stem and gills, and a taste like chewing a chilli — a fragment on the tongue is unmistakable within seconds. The red washes out in rain to pink or nearly white, so colour alone settles nothing.",
+      "note": "Bright scarlet cap, pure white stem and gills, and a taste like chewing a chilli — a fragment on the tongue is unmistakable within seconds. The red washes out in rain to pink or nearly white, so color alone settles nothing.",
       "characters": {
         "fruitbody_type": [
           {
@@ -38399,7 +38399,7 @@
         "note": "Eaten by some. Russula is a genus where the acrid ones are the trouble and taste is how they are told apart.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Gills that fork repeatedly from the stem outwards — run a finger across them and count the forks. The cap is mottled green, purple and buff in the same specimen, which is where the name comes from and why colour will not settle it.",
+      "note": "Gills that fork repeatedly from the stem outwards — run a finger across them and count the forks. The cap is mottled green, purple and buff in the same specimen, which is where the name comes from and why color will not settle it.",
       "characters": {
         "fruitbody_type": [
           {
@@ -39407,7 +39407,7 @@
         "note": "Nothing documented either way, and not collected.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "A slender stinkhorn with a distinct conic, wrinkled head on a skinny stalk, out of a whitish to slightly purplish egg. The stalk is reddish orange when fresh and fades from the base up to pale pinkish orange; very rarely it is white throughout, so stalk colour alone does not settle it. Phallus rubicundus, with a somewhat thicker red to pink stalk, is its southern counterpart (roughly south of a line from Oklahoma to Virginia) and is not separated here.",
+      "note": "A slender stinkhorn with a distinct conic, wrinkled head on a skinny stalk, out of a whitish to slightly purplish egg. The stalk is reddish orange when fresh and fades from the base up to pale pinkish orange; very rarely it is white throughout, so stalk color alone does not settle it. Phallus rubicundus, with a somewhat thicker red to pink stalk, is its southern counterpart (roughly south of a line from Oklahoma to Virginia) and is not separated here.",
       "characters": {
         "fruitbody_type": [
           {
@@ -39764,7 +39764,7 @@
         "note": "Tough and not eaten here. Rarely implicated in infection in people already seriously unwell.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Every gill edge is split down its length and rolls back in dry weather, which nothing else does. Small, grey, hairy, and on almost any dead hardwood.",
+      "note": "Every gill edge is split down its length and rolls back in dry weather, which nothing else does. Small, gray, hairy, and on almost any dead hardwood.",
       "characters": {
         "fruitbody_type": [
           {
@@ -40088,7 +40088,7 @@
             "cap_margin",
             "cap_colour"
           ],
-          "note": "The bitter oyster has a tiny side stem, crowded tan gills and a tan cap with an inrolled edge. Split gill has no stem, few grey gills that look split down the edge, and a whitish grey cap."
+          "note": "The bitter oyster has a tiny side stem, crowded tan gills and a tan cap with an inrolled edge. Split gill has no stem, few gray gills that look split down the edge, and a whitish gray cap."
         }
       ],
       "sources": [
@@ -40379,7 +40379,7 @@
             "cap_colour",
             "veil_remnants"
           ],
-          "note": "Cut it in half. The inside here is hard and purple-black to purple-grey even when young; a true puffball is pure white and soft. The rind is 1–3 mm thick and tough, not paper thin."
+          "note": "Cut it in half. The inside here is hard and purple-black to purple-gray even when young; a true puffball is pure white and soft. The rind is 1–3 mm thick and tough, not paper thin."
         }
       ],
       "sources": [
@@ -41330,7 +41330,7 @@
             "bruising",
             "cap_colour"
           ],
-          "note": "Both are thin, zoned, hairy brackets in tiers on dead hardwood. The violet-toothed polypore is whitish to grey on top with a violet edge, and has pores that break into teeth underneath; this is tan to brown on top and smooth underneath, staining yellow."
+          "note": "Both are thin, zoned, hairy brackets in tiers on dead hardwood. The violet-toothed polypore is whitish to gray on top with a violet edge, and has pores that break into teeth underneath; this is tan to brown on top and smooth underneath, staining yellow."
         }
       ],
       "sources": [
@@ -41662,7 +41662,7 @@
         "note": "Eaten by some when young. No poisoning documented.",
         "source": "Wikipedia, Strobilomyces strobilaceus"
       },
-      "note": "Shaggy black woolly scales over a whitish to grey cap, on a stem shaggy to match, often with veil tatters on the margin. Cut flesh turns pinkish to red, then slowly blackens over about an hour. In North America this is the 'floccopus' group, which includes S. confusus. Kuo says the North American old men do not match the European S. strobilaceus.",
+      "note": "Shaggy black woolly scales over a whitish to gray cap, on a stem shaggy to match, often with veil tatters on the margin. Cut flesh turns pinkish to red, then slowly blackens over about an hour. In North America this is the 'floccopus' group, which includes S. confusus. Kuo says the North American old men do not match the European S. strobilaceus.",
       "characters": {
         "fruitbody_type": [
           {
@@ -42349,7 +42349,7 @@
         "note": "Eaten by some. No poisoning documented.",
         "source": "Wikipedia, Suillus spraguei"
       },
-      "note": "A bolete shaggy with dark red fibres over a yellow ground, with a ring and yellow pores that stain brown where pressed. It goes with white pine and very little else, so the tree is half the identification.",
+      "note": "A bolete shaggy with dark red fibers over a yellow ground, with a ring and yellow pores that stain brown where pressed. It goes with white pine and very little else, so the tree is half the identification.",
       "characters": {
         "fruitbody_type": [
           {
@@ -43048,7 +43048,7 @@
           "discriminators": [
             "bruising"
           ],
-          "note": "Thin-walled maze polypore has slot-like gills that bruise red when fresh, and its flesh goes grey to black in KOH. The gilled polypore's gills are white and do not bruise."
+          "note": "Thin-walled maze polypore has slot-like gills that bruise red when fresh, and its flesh goes gray to black in KOH. The gilled polypore's gills are white and do not bruise."
         },
         {
           "taxon": "gloeophyllum_sepiarium",
@@ -43392,12 +43392,12 @@
             "stipe_presence",
             "fruitbody_type"
           ],
-          "note": "A young little nest polypore cup looks like a bird's nest fungus with no eggs. The bird's nest cup sits on the wood with no bracket growing from it, is hairy outside and has grey eggs inside. Poronidulus soon grows a pored shelf from the rim."
+          "note": "A young little nest polypore cup looks like a bird's nest fungus with no eggs. The bird's nest cup sits on the wood with no bracket growing from it, is hairy outside and has gray eggs inside. Poronidulus soon grows a pored shelf from the rim."
         },
         {
           "taxon": "trametes_versicolor",
           "discriminators": [],
-          "note": "No answer in the key cleanly separates these small zoned brackets on hardwood. Look for the little white cup this one grows from, and a bald, furrowed whitish cap; turkey tail is velvety, banded in many colours, and has no cup."
+          "note": "No answer in the key cleanly separates these small zoned brackets on hardwood. Look for the little white cup this one grows from, and a bald, furrowed whitish cap; turkey tail is velvety, banded in many colors, and has no cup."
         }
       ],
       "sources": [
@@ -43782,7 +43782,7 @@
             "cap_colour",
             "odour"
           ],
-          "note": "Turkey tail is thin (1-2 mm) and flexible, with sharply contrasting bands of brown, grey and cinnamon and tiny round pores. This is thick (1.5-5 cm), whitish to greyish with only vague zones, often fragrant, with slot-shaped pores."
+          "note": "Turkey tail is thin (1-2 mm) and flexible, with sharply contrasting bands of brown, gray and cinnamon and tiny round pores. This is thick (1.5-5 cm), whitish to grayish with only vague zones, often fragrant, with slot-shaped pores."
         }
       ],
       "sources": [
@@ -43804,7 +43804,7 @@
         "note": "Tough and corky, and not eaten. No poisoning documented.",
         "source": "https://en.wikipedia.org/wiki/Trametes_hirsuta; https://www.mushroomexpert.com/trametes_hirsuta.html (flesh 'tough and corky')"
       },
-      "note": "Like a turkey tail but shaggy with distinct hairs, and greyer.",
+      "note": "Like a turkey tail but shaggy with distinct hairs, and grayer.",
       "characters": {
         "fruitbody_type": [
           {
@@ -44082,7 +44082,7 @@
           "discriminators": [
             "cap_margin"
           ],
-          "note": "Kuo's turkey-tail test: a fresh cap that is whitish to greyish, very densely hairy, with zones that do not contrast much, is hirsuta. Turkey tail is thin and flexible with sharply contrasting brown, grey and cinnamon bands; hirsuta's margin is often brown to blackish."
+          "note": "Kuo's turkey-tail test: a fresh cap that is whitish to grayish, very densely hairy, with zones that do not contrast much, is hirsuta. Turkey tail is thin and flexible with sharply contrasting brown, gray and cinnamon bands; hirsuta's margin is often brown to blackish."
         }
       ],
       "sources": [
@@ -44394,7 +44394,7 @@
           "discriminators": [
             "cap_margin"
           ],
-          "note": "Kuo's test: if the fresh cap is whitish to greyish, very densely hairy, and its zones barely contrast, it is the hairy bracket. Turkey tail's bands contrast sharply in browns, greys and cinnamon."
+          "note": "Kuo's test: if the fresh cap is whitish to grayish, very densely hairy, and its zones barely contrast, it is the hairy bracket. Turkey tail's bands contrast sharply in browns, grays and cinnamon."
         },
         {
           "taxon": "trichaptum_biforme",
@@ -45639,7 +45639,7 @@
             "stipe_surface",
             "stipe_base"
           ],
-          "note": "The violet-grey bolete is also bitter, but its cap and bald stem are purple when young; the bitter bolete is brown with a coarse dark net on a club-shaped stem."
+          "note": "The violet-gray bolete is also bitter, but its cap and bald stem are purple when young; the bitter bolete is brown with a coarse dark net on a club-shaped stem."
         }
       ],
       "sources": [
@@ -45657,7 +45657,7 @@
     {
       "id": "tylopilus_plumbeoviolaceus",
       "scientificName": "Tylopilus plumbeoviolaceus",
-      "commonName": "violet-grey bolete",
+      "commonName": "violet-gray bolete",
       "prevalence": "occasional",
       "sought": false,
       "hazard": {
@@ -45667,7 +45667,7 @@
         "note": "Not eaten, on account of being inedibly bitter rather than toxic.",
         "source": "North American Mycological Association poisoning references"
       },
-      "note": "Deep violet fading to grey-brown, over pores that start white and go pink. Bitter enough that a fragment on the tongue ends the question. The stem keeps its violet longer than the cap does.",
+      "note": "Deep violet fading to gray-brown, over pores that start white and go pink. Bitter enough that a fragment on the tongue ends the question. The stem keeps its violet longer than the cap does.",
       "characters": {
         "fruitbody_type": [
           {
@@ -46353,7 +46353,7 @@
           "discriminators": [
             "cap_colour"
           ],
-          "note": "The two-coloured bolete also has a red stem and yellow blue-bruising pores, but its cap is rosy red and larger; the red cracking bolete is small, olive to red-brown, and cracks into a mosaic with pink in the splits."
+          "note": "The two-colored bolete also has a red stem and yellow blue-bruising pores, but its cap is rosy red and larger; the red cracking bolete is small, olive to red-brown, and cracks into a mosaic with pink in the splits."
         }
       ],
       "sources": [
@@ -46379,7 +46379,7 @@
         "note": "",
         "source": "—"
       },
-      "note": "Clubs standing out of rotting hardwood stumps, pale and dusted bluish-grey with a white tip in spring, dark brown to black and finely pimpled by late summer; the southern form is browner than the northern. Very tough and white inside when cut. Old ones persist, so some can be found in any month.",
+      "note": "Clubs standing out of rotting hardwood stumps, pale and dusted bluish-gray with a white tip in spring, dark brown to black and finely pimpled by late summer; the southern form is browner than the northern. Very tough and white inside when cut. Old ones persist, so some can be found in any month.",
       "characters": {
         "fruitbody_type": [
           {

@@ -14,7 +14,7 @@
     },
     {
       "id": "grey",
-      "label": "Grey",
+      "label": "Gray",
       "gloss": "Neutral, no warmth"
     },
     {
@@ -317,7 +317,7 @@
         },
         {
           "id": "off_centre",
-          "label": "An off-centre stem"
+          "label": "An off-center stem"
         },
         {
           "id": "lateral",
@@ -500,10 +500,10 @@
     },
     {
       "id": "stipe_colour",
-      "label": "What colour is the stem?",
-      "noun": "Colour",
+      "label": "What color is the stem?",
+      "noun": "Color",
       "group": "stem",
-      "hint": "Away from the very base, and look at the top too: many are paler near the gills. Choose every colour it could be.",
+      "hint": "Away from the very base, and look at the top too: many are paler near the gills. Choose every color it could be.",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -552,7 +552,7 @@
     {
       "id": "gill_spacing",
       "label": "How closely are the gills packed?",
-      "hint": "Count across a centimetre near the edge rather than judging the whole.",
+      "hint": "Count across a centimeter near the edge rather than judging the whole.",
       "noun": "Spacing",
       "group": "gills",
       "kind": "state",
@@ -623,7 +623,7 @@
         },
         {
           "id": "different_colour",
-          "label": "A different colour from the face"
+          "label": "A different color from the face"
         },
         {
           "id": "fringed",
@@ -637,10 +637,10 @@
     },
     {
       "id": "hymenophore_colour",
-      "label": "What colour are the gills, pores or teeth?",
-      "noun": "Colour",
+      "label": "What color are the gills, pores or teeth?",
+      "noun": "Color",
       "group": "gills",
-      "hint": "Underside colour changes as the spores ripen. Say what you see now.",
+      "hint": "Underside color changes as the spores ripen. Say what you see now.",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -702,7 +702,7 @@
         },
         {
           "id": "depressed",
-          "label": "Depressed in the centre"
+          "label": "Depressed in the center"
         },
         {
           "id": "funnel",
@@ -830,10 +830,10 @@
     },
     {
       "id": "cap_colour",
-      "label": "What colour is the cap?",
-      "noun": "Colour",
+      "label": "What color is the cap?",
+      "noun": "Color",
       "group": "cap",
-      "hint": "Notoriously unreliable — rain, age and sun all change it. Choose every colour it could be, because any colour you leave out rules out the mushrooms that only come in it.",
+      "hint": "Notoriously unreliable — rain, age and sun all change it. Choose every color it could be, because any color you leave out rules out the mushrooms that only come in it.",
       "kind": "state",
       "cardinality": "multi",
       "availability": "field",
@@ -842,7 +842,7 @@
     },
     {
       "id": "cap_colour_pattern",
-      "label": "How is the colour laid out?",
+      "label": "How is the color laid out?",
       "noun": "Pattern",
       "group": "cap",
       "kind": "state",
@@ -856,7 +856,7 @@
         },
         {
           "id": "darker_centre",
-          "label": "Darker at the centre"
+          "label": "Darker at the center"
         },
         {
           "id": "paler_margin",
@@ -868,7 +868,7 @@
         },
         {
           "id": "paler_centre",
-          "label": "Paler at the centre"
+          "label": "Paler at the center"
         },
         {
           "id": "mottled",
@@ -882,7 +882,7 @@
     },
     {
       "id": "bruising",
-      "label": "Does it change colour when cut or handled?",
+      "label": "Does it change color when cut or handled?",
       "noun": "Bruising",
       "group": "flesh",
       "hint": "Cut it and wait. 'Not tested' is a real answer and is not the same as 'no'.",
@@ -906,7 +906,7 @@
     {
       "id": "bruising_where",
       "label": "Where does it change?",
-      "hint": "Where the colour moved, which is often only one part of it.",
+      "hint": "Where the color moved, which is often only one part of it.",
       "noun": "Bruises where",
       "group": "flesh",
       "kind": "state",
@@ -938,7 +938,7 @@
     },
     {
       "id": "bruising_colour",
-      "label": "What colour does it turn?",
+      "label": "What color does it turn?",
       "noun": "Bruises to",
       "group": "flesh",
       "kind": "state",
@@ -999,14 +999,14 @@
         },
         {
           "id": "guttation",
-          "label": "Coloured droplets on the surface"
+          "label": "Colored droplets on the surface"
         }
       ]
     },
     {
       "id": "latex_colour",
-      "label": "What colour is it when it first appears?",
-      "noun": "Latex colour",
+      "label": "What color is it when it first appears?",
+      "noun": "Latex color",
       "group": "flesh",
       "kind": "state",
       "cardinality": "multi",
@@ -1016,7 +1016,7 @@
     },
     {
       "id": "latex_change",
-      "label": "Does the ooze change colour?",
+      "label": "Does the ooze change color?",
       "noun": "Latex changes",
       "group": "flesh",
       "kind": "state",
@@ -1089,8 +1089,8 @@
     },
     {
       "id": "flesh_colour",
-      "label": "What colour is the flesh inside?",
-      "noun": "Colour",
+      "label": "What color is the flesh inside?",
+      "noun": "Color",
       "group": "flesh",
       "hint": "Cut it through and look at once. This is what settles an orange chanterelle-like mushroom against a jack-o'-lantern, and it takes one cut.",
       "kind": "state",
@@ -1111,7 +1111,7 @@
       "availability": "field",
       "power": 4,
       "notTested": true,
-      "note": "The single biggest value-add available. Odour is the most-recorded fungal character on iNaturalist and none of it is machine-readable, because both fields there are free text.",
+      "note": "The single biggest value-add available. Odor is the most-recorded fungal character on iNaturalist and none of it is machine-readable, because both fields there are free text.",
       "values": [
         {
           "id": "none",
@@ -1171,7 +1171,7 @@
         },
         {
           "id": "foetid",
-          "label": "Foetid, of rot or carrion"
+          "label": "Fetid, of rot or carrion"
         },
         {
           "id": "unpleasant_other",
@@ -1235,7 +1235,7 @@
       "label": "How big is it?",
       "noun": "Size",
       "group": "whole",
-      "hint": "In millimetres. A rough number is enough, and leave blank anything you did not measure.",
+      "hint": "In millimeters. A rough number is enough, and leave blank anything you did not measure.",
       "kind": "measurement",
       "cardinality": "single",
       "availability": "field",
@@ -1295,7 +1295,7 @@
     },
     {
       "id": "spore_print",
-      "label": "What colour is the spore print?",
+      "label": "What color is the spore print?",
       "noun": "Spore print",
       "group": "spores",
       "hint": "Taken at home overnight. 'Not taken' is different from 'unknown' and the app keeps track of which.",
@@ -1444,7 +1444,7 @@
         },
         {
           "id": "grey",
-          "label": "Grey"
+          "label": "Gray"
         }
       ]
     },
@@ -1525,7 +1525,7 @@
     {
       "id": "associated_tree",
       "label": "What trees are nearby?",
-      "hint": "Within a few metres. Many fungi grow with one kind of tree and no other, so this is worth a look round.",
+      "hint": "Within a few meters. Many fungi grow with one kind of tree and no other, so this is worth a look round.",
       "noun": "Trees",
       "group": "where",
       "kind": "state",
@@ -1560,7 +1560,7 @@
       "cardinality": "single",
       "availability": "field",
       "power": 1,
-      "note": "A confidence modifier, not a character. An old specimen widens the tolerance on cap shape, gill colour and margin, and suppresses any inference from an absent veil - veils fall off. Never keyed on.",
+      "note": "A confidence modifier, not a character. An old specimen widens the tolerance on cap shape, gill color and margin, and suppresses any inference from an absent veil - veils fall off. Never keyed on.",
       "values": [
         {
           "id": "young",
