@@ -130,6 +130,56 @@ class JournalViewModelTest {
         assertEquals(35.61, storedDraft().latitude!!, 0.0001)
     }
 
+    private val dao
+        get() = JournalDatabase.get(ApplicationProvider.getApplicationContext<Application>()).journalDao()
+
+    /** Closing a find straight after typing keeps what was typed. */
+    @Test
+    fun `the last edit before a find is closed is written`() = runBlocking {
+        vm.startNewEntry()
+        val uuid = vm.draft.value!!.uuid
+        vm.answer("fruitbody_type", setOf("gilled_stemmed"))
+        vm.setNote("smelled of aniseed")
+        vm.close()
+
+        withTimeout(30_000) {
+            while (dao.findByUuid(uuid)?.observation?.note != "smelled of aniseed") delay(10)
+        }
+        assertEquals(1, dao.count())
+    }
+
+    /** Save it, then straight back to the journal: the find is in the journal. */
+    @Test
+    fun `a find kept and closed at once is kept`() = runBlocking {
+        vm.startNewEntry()
+        val uuid = vm.draft.value!!.uuid
+        vm.setNote("by the creek")
+        vm.keep()
+        vm.close()
+
+        withTimeout(30_000) {
+            while (dao.findByUuid(uuid)?.observation?.kept != true) delay(10)
+        }
+        assertEquals(1, dao.count())
+    }
+
+    /** Thrown away right after an answer, it does not come back as the find being keyed. */
+    @Test
+    fun `a find thrown away while its saves are queued stays gone`() = runBlocking {
+        vm.startNewEntry()
+        vm.answer("fruitbody_type", setOf("gilled_stemmed"))
+        vm.setNote("the wrong mushroom")
+        vm.discard()
+        assertNull(vm.draft.value)
+
+        // A later write goes through the same queue, so once it lands the discard has too.
+        vm.startNewEntry()
+        vm.setNote("the right one")
+        settled()
+        assertEquals(1, dao.count())
+        assertEquals("the right one", dao.findUnclaimed()!!.observation.note)
+    }
+
     /** An install that once signed in to iNaturalist keeps no trace of it once this version starts. */
     @Test
     fun `the old iNaturalist sign-in is deleted on start`() {

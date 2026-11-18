@@ -208,8 +208,7 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
                 asking = false
                 // Never a find already in the journal: that is deleted from the journal, armed
                 // and with Undo.
-                if (!open.kept) open.observationId?.let(vm::delete)
-                vm.close()
+                if (!open.kept) vm.discard() else vm.close()
             },
             onBack = { asking = false },
         )

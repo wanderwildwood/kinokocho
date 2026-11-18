@@ -26,6 +26,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.Dispatchers
@@ -129,11 +130,13 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
 
     /** The reader has said to keep this one. Until now it was only written down. */
     fun keep() {
-        _draft.value?.let { _draft.value = it.copy(kept = true) }
+        val d = _draft.value?.copy(kept = true) ?: return
+        _draft.value = d
         viewModelScope.launch {
             // A find with nothing answered yet has no row: it is written down first, so what
-            // is added after "Save it" goes into the journal with it.
-            val id = persistNow() ?: return@launch
+            // is added after "Save it" goes into the journal with it. From the find as it was
+            // when Save it was pressed, so closing it straight after still keeps it.
+            val id = persistNow(d) ?: return@launch
             dao.keep(id)
             // Anything else still unclaimed is a leftover from a crash older than this
             // one, and resuming two finds at once is not a thing a person can do.
@@ -256,17 +259,36 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      * same row rather than making a second mushroom.
      */
     private fun persist() {
-        viewModelScope.launch { persistNow() }
+        // The find as it is now, not as it is when this save's turn comes: a find closed
+        // while earlier saves are still being written keeps its last edit.
+        val d = _draft.value ?: return
+        viewModelScope.launch { persistNow(d) }
     }
 
-    /** One save at a time; each one writes the draft as it stands when its turn comes. */
+    /**
+     * One write to the journal at a time, in the order they were asked for: saves, and the
+     * deletes that could otherwise land in the middle of one.
+     */
     private val saving = Mutex()
 
-    /** Writes the draft down and returns its row's id, or null with no draft. */
-    private suspend fun persistNow(): Long? = saving.withLock {
-        val d = _draft.value ?: return@withLock null
+    /**
+     * The row each find got when it was first written, by uuid. A save queued before the
+     * first insert came back has no id in its copy of the find, and must not make a second
+     * row. Only touched under [saving].
+     */
+    private val rowIds = mutableMapOf<String, Long>()
+
+    /** Finds thrown away. A save still queued for one writes nothing. Under [saving]. */
+    private val discarded = mutableSetOf<String>()
+
+    /**
+     * Writes [d] down and returns its row's id, or null when there is nothing to write to:
+     * the find was thrown away or deleted while this save waited.
+     */
+    private suspend fun persistNow(d: Draft): Long? = saving.withLock {
+        if (d.uuid in discarded) return@withLock null
         val now = System.currentTimeMillis()
-        val id = d.observationId ?: dao.insert(
+        val id = d.observationId ?: rowIds[d.uuid] ?: dao.insert(
             Observation(
                 uuid = d.uuid,
                 recordedAt = d.recordedAt,
@@ -279,7 +301,13 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                 kept = d.kept,
                 schemaVersion = schema.version,
             )
-        ).also { newId -> _draft.value = _draft.value?.copy(observationId = newId) }
+        ).also { newId ->
+            rowIds[d.uuid] = newId
+            // Only onto the same find: another may have been opened while this was written.
+            _draft.update {
+                if (it != null && it.uuid == d.uuid && it.observationId == null) it.copy(observationId = newId) else it
+            }
+        }
 
         val rows = mutableListOf<ObservationCharacter>()
         // Replace the character rows wholesale. There are a few dozen at most, and
@@ -301,7 +329,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
                 rows += ObservationCharacter(0, id, character.id, MeasurementRow.encode(key, mm), now)
             }
         }
-        dao.saveFind(
+        val saved = dao.saveFind(
             observationId = id,
             note = d.note,
             placeNote = d.placeNote,
@@ -312,7 +340,7 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
             characters = rows,
             photos = d.photos,
         )
-        id
+        if (saved) id else null
     }
 
     /**
@@ -330,10 +358,13 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
     fun deletePhoto(photo: ObservationPhoto) {
         val d = _draft.value ?: return
         _draft.value = d.copy(photos = d.photos.filterNot { it.fileName == photo.fileName })
-        val observationId = d.observationId
         viewModelScope.launch {
-            if (observationId != null) dao.deletePhotoNamed(observationId, photo.fileName)
-            runCatching { File(photoDir(getApplication()), photo.fileName).delete() }
+            // Behind any save already queued, which may still carry this photograph.
+            saving.withLock {
+                val observationId = d.observationId ?: rowIds[d.uuid]
+                if (observationId != null) dao.deletePhotoNamed(observationId, photo.fileName)
+                runCatching { File(photoDir(getApplication()), photo.fileName).delete() }
+            }
         }
     }
 
@@ -351,13 +382,36 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      * on purpose, twice.
      */
     fun delete(observationId: Long) {
+        viewModelScope.launch { saving.withLock { deleteRow(observationId) } }
+    }
+
+    /**
+     * Throws away the find being keyed, one that was never kept, and closes it.
+     *
+     * Behind any save already queued for it, and marked so that none queued later writes
+     * it back: a find answered and then thrown away at once must not come back as the
+     * find being keyed on the next start.
+     */
+    fun discard() {
+        val d = _draft.value ?: return
+        _draft.value = null
+        if (d.kept) return
         viewModelScope.launch {
-            val dir = photoDir(getApplication())
-            dao.photosOf(observationId).forEach {
-                runCatching { File(dir, it.fileName).delete() }
+            saving.withLock {
+                discarded += d.uuid
+                val id = d.observationId ?: rowIds[d.uuid] ?: return@withLock
+                deleteRow(id)
             }
-            dao.deleteObservation(observationId)
         }
+    }
+
+    /** The row and its photographs. Only under [saving]. */
+    private suspend fun deleteRow(observationId: Long) {
+        val dir = photoDir(getApplication())
+        dao.photosOf(observationId).forEach {
+            runCatching { File(dir, it.fileName).delete() }
+        }
+        dao.deleteObservation(observationId)
     }
 
     /**

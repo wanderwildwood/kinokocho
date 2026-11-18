@@ -130,6 +130,9 @@ interface JournalDao {
     /**
      * A find's answers and words written down, in one transaction: a battery dying halfway
      * leaves the find as it was before, never with its answers cleared and not yet put back.
+     *
+     * False, with nothing written, when the find is no longer there: deleted while this save
+     * waited. Its answers and photographs would otherwise go in against a row that is gone.
      */
     @Transaction
     suspend fun saveFind(
@@ -142,25 +145,25 @@ interface JournalDao {
         updatedAt: Long,
         characters: List<ObservationCharacter>,
         photos: List<ObservationPhoto>,
-    ) {
-        findOne(observationId)?.let { existing ->
-            update(
-                existing.observation.copy(
-                    note = note,
-                    placeNote = placeNote,
-                    identifiedAs = identifiedAs,
-                    latitude = latitude,
-                    longitude = longitude,
-                    updatedAt = updatedAt,
-                )
+    ): Boolean {
+        val existing = findOne(observationId) ?: return false
+        update(
+            existing.observation.copy(
+                note = note,
+                placeNote = placeNote,
+                identifiedAs = identifiedAs,
+                latitude = latitude,
+                longitude = longitude,
+                updatedAt = updatedAt,
             )
-        }
+        )
         charactersOf(observationId).map { it.characterId }.distinct().forEach {
             clearCharacter(observationId, it)
         }
         characters.forEach { addCharacter(it.copy(observationId = observationId)) }
         val known = photosOf(observationId).map { it.fileName }.toSet()
         photos.filter { it.fileName !in known }.forEach { addPhoto(it.copy(observationId = observationId)) }
+        return true
     }
 
     /** Whether any find already has a photograph in this file. */
