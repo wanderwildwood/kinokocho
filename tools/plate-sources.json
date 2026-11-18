@@ -887,7 +887,7 @@
     "licence": "PD-US: published in the US in 1929, and US works of 1929 entered the public domain on 1 Jan 2025. Farlow died in 1919. The Internet Archive/BHL item's rights field reads 'Permission to digitize granted by rights holder', not NOT_IN_COPYRIGHT. The Commons copy is tagged CC BY 2.0, which is why the earlier attempt skipped it; the IA scan used here does not carry that tag.",
     "file": "https://archive.org/details/mobot31753000797503/page/n81",
     "depicted": "Lactarius indigo Schweinitz (Plate 34, upper-left figure of the lower group)",
-    "trace": "Kept from the interrupted earlier run, which did not record its exact command. The source is src/lactarius_indigo/n81_masked.png, made by src/lactarius_indigo/mask.py (run from pd2/), which paints over the two lower-left specimens, the large lower-right specimen and a stray dot. The crop is about .26 .45 .67 .74 (re-running trace-plate.py with that crop gives the same size, 420x383). Re-runs with defaults and --ink 20-50 / --edge 45-80 / --no-thicken came out close but not byte-identical, and none was cleaner, so I kept the earlier file.",
+    "trace": "The exact command was not recorded. The source is the n81 scan with the two lower-left specimens, the large lower-right specimen and a stray dot painted out by a small masking script. The crop is about .26 .45 .67 .74 (re-running trace-plate.py with that crop gives the same size, 420x383). Re-runs with defaults and --ink 20-50 / --edge 45-80 / --no-thicken came out close but not byte-identical, and none was cleaner, so the earlier file was kept.",
     "same_species": "The facing text page (n80, p. 38) reads 'PLATE 34 Lactarius indigo Schweinitz'. The page order is plate 33 = n78 with its text on n79, then plate 34 text on n80 with the plate on n81, then plate 35 (fuliginosus/lignyotus, brown) on n82. Checked against the neighboring scans. The plate's vertical section shows the blue flesh rim that Burt's text points to ('as intense as that of the flesh in these figures'). This is the American species under its original name."
   },
   "lentinellus_ursinus": {
@@ -964,7 +964,7 @@
     "licence": "PD-US (US publication 1902)",
     "file": "https://archive.org/details/toadstoolsmushro00mcil/page/n695",
     "depicted": "Tremella mesenterica (Plate CXLIV, p. 530, 'natural size')",
-    "trace": "(direct threshold via pd2/thresh.py, not trace-plate.py) masked.png out.png 0.15 0.575 0.49 0.812 420 125",
+    "trace": "(a direct threshold of the masked scan, not trace-plate.py) 0.15 0.575 0.49 0.812 420 125",
     "same_species": "Captioned Tremella mesenterica Retz., the same name in use today. The description ('bright orange-yellow, variously contorted; lobes short, smooth'; on dead branches) matches. The one caveat is the possible inclusion of T. aurantia, noted under concerns."
   },
   "xylobolus_frustulatus": {
