@@ -29,6 +29,9 @@ import androidx.core.content.ContextCompat
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.kinokocho.R
+import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.resume
 import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
@@ -230,35 +233,74 @@ private const val FRESH_POSITION_TIMEOUT_MS = 20_000L
 /**
  * A position asked for now, rounded, or null when none came within the timeout.
  *
- * The network provider first, which answers quickly from nearby cell towers and Wi-Fi,
- * then GPS when that is the only one on. With coarse permission alone the system blurs
- * whatever GPS finds before the app sees it, so this asks for nothing more precise than
- * the one permission allows.
+ * Every provider that is on is asked at once, the network provider and GPS, and the first
+ * one with an answer wins; the other request is cancelled. In a wood the network provider
+ * can be on and still find nothing, with no cell or Wi-Fi in reach, while GPS can. With
+ * coarse permission alone the system blurs whatever GPS finds before the app sees it, so
+ * this asks for nothing more precise than the one permission allows.
  */
 private suspend fun currentCoarsePosition(context: Context): Position? {
     if (!hasCoarse(context)) return null
     val manager = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
         ?: return null
-    val provider = listOf(LocationManager.NETWORK_PROVIDER, LocationManager.GPS_PROVIDER)
-        .firstOrNull { runCatching { manager.isProviderEnabled(it) }.getOrDefault(false) }
-        ?: return null
+    val providers = listOf(LocationManager.NETWORK_PROVIDER, LocationManager.GPS_PROVIDER)
+        .filter { runCatching { manager.isProviderEnabled(it) }.getOrDefault(false) }
+    if (providers.isEmpty()) return null
     val location = withTimeoutOrNull(FRESH_POSITION_TIMEOUT_MS) {
-        suspendCancellableCoroutine<Location?> { cont ->
+        firstAnswer<Location>(providers) { provider, answer ->
             val signal = CancellationSignal()
-            cont.invokeOnCancellation { signal.cancel() }
             try {
                 @Suppress("MissingPermission")
                 manager.getCurrentLocation(provider, signal, context.mainExecutor) { found ->
-                    if (cont.isActive) cont.resume(found)
+                    answer(found)
                 }
             } catch (_: SecurityException) {
-                if (cont.isActive) cont.resume(null)
+                answer(null)
             } catch (_: IllegalArgumentException) {
-                if (cont.isActive) cont.resume(null)
+                answer(null)
             }
+            return@firstAnswer { signal.cancel() }
         }
     } ?: return null
     return Position(round2(location.latitude), round2(location.longitude))
+}
+
+/**
+ * Asks every one of [sources] at once and gives back the first answer that is not null,
+ * or null once all of them have answered null. [ask] starts one request, hands its answer
+ * to the callback it is given, and returns a way to cancel that request. When one source
+ * answers, or when the caller is cancelled (the timeout, or the field being left), every
+ * request still out is cancelled. A source asked after the race is already over is not
+ * asked at all.
+ */
+internal suspend fun <T : Any> firstAnswer(
+    sources: List<String>,
+    ask: (source: String, answer: (T?) -> Unit) -> () -> Unit,
+): T? {
+    if (sources.isEmpty()) return null
+    return suspendCancellableCoroutine { cont ->
+        val over = AtomicBoolean(false)
+        val waiting = AtomicInteger(sources.size)
+        val cancels = CopyOnWriteArrayList<() -> Unit>()
+        fun cancelAll() = cancels.forEach { cancel -> runCatching { cancel() } }
+        cont.invokeOnCancellation {
+            over.set(true)
+            cancelAll()
+        }
+        for (source in sources) {
+            if (over.get()) break
+            val cancel = ask(source) { found ->
+                val last = waiting.decrementAndGet() == 0
+                if ((found != null || last) && over.compareAndSet(false, true)) {
+                    cancelAll()
+                    if (cont.isActive) cont.resume(found)
+                }
+            }
+            cancels.add(cancel)
+            // An answer that came back before its cancel was known: cancel this one too.
+            if (over.get()) runCatching { cancel() }
+        }
+    }
 }
 
 /** Two decimal places: a bit over a kilometre, which is which-hillside and no finer. */
