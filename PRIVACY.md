@@ -119,6 +119,13 @@ names nothing you have not seen — the description, what you looked at and coul
 and the shortlist of what has not been ruled out. Where it goes after that is between you
 and whoever you sent it to. No account, no network permission needed, nothing published.
 
+## The donation link
+
+"Feed the llamas" in About opens a donation page (square.link) in your browser, and only
+when you press it. The app hands the browser that one address and nothing else: no find,
+no position, nothing about you. If you give, the payment is handled on that page by
+Square, not by this app.
+
 ## Verifying this yourself
 
 - The source is at this repository, and each release is tagged.
