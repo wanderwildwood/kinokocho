@@ -32,9 +32,13 @@ import java.util.zip.ZipOutputStream
  */
 object JournalExport {
 
-    /** The file, written into the cache so the system can clear it when it likes. */
+    /**
+     * The file, written into the cache so the system can clear it when it likes. A name of
+     * its own each time, so a second backup started before the first is done never writes
+     * into, or deletes, the file the first is still copying out.
+     */
     fun write(context: Context, entries: List<FullObservation>): File {
-        val out = File(context.cacheDir, fileName())
+        val out = File.createTempFile("export", ".zip", context.cacheDir)
         val photos = photoDir(context)
 
         ZipOutputStream(out.outputStream().buffered()).use { zip ->

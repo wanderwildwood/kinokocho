@@ -502,6 +502,8 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
     private fun isMeasurement(characterId: String): Boolean =
         schema.character(characterId)?.kind == Character.Kind.MEASUREMENT
 
+    private val backingUp = Mutex()
+
     /**
      * Writes the whole journal out, and hands back the file to be shared.
      *
@@ -513,25 +515,29 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
     /** Writes the whole journal as a zip into the place the person picked. */
     fun exportJournalTo(uri: android.net.Uri, onDone: (Boolean) -> Unit) {
         viewModelScope.launch {
-            val ok = runCatching {
-                val app = getApplication<Application>()
-                // Not the find deleted a moment ago with its Undo still showing.
-                val trashed = _trashed.value
-                val kept = dao.allKept().filter { it.observation.id != trashed }
-                // Zipping every photograph takes seconds: off the main thread, which it was not.
-                withContext(Dispatchers.IO) {
-                    val file = JournalExport.write(app, kept)
-                    try {
-                        // "wt": over an older backup, "w" alone can leave that file's tail behind.
-                        val out = runCatching { app.contentResolver.openOutputStream(uri, "wt") }.getOrNull()
-                            ?: app.contentResolver.openOutputStream(uri)
-                            ?: error("no stream")
-                        out.use { o -> file.inputStream().use { it.copyTo(o) } }
-                    } finally {
-                        file.delete()
+            // One backup at a time: a second, to the same place or another, waits for the
+            // first rather than running beside it.
+            val ok = backingUp.withLock {
+                runCatching {
+                    val app = getApplication<Application>()
+                    // Not the find deleted a moment ago with its Undo still showing.
+                    val trashed = _trashed.value
+                    val kept = dao.allKept().filter { it.observation.id != trashed }
+                    // Zipping every photograph takes seconds: off the main thread, which it was not.
+                    withContext(Dispatchers.IO) {
+                        val file = JournalExport.write(app, kept)
+                        try {
+                            // "wt": over an older backup, "w" alone can leave that file's tail behind.
+                            val out = runCatching { app.contentResolver.openOutputStream(uri, "wt") }.getOrNull()
+                                ?: app.contentResolver.openOutputStream(uri)
+                                ?: error("no stream")
+                            out.use { o -> file.inputStream().use { it.copyTo(o) } }
+                        } finally {
+                            file.delete()
+                        }
                     }
-                }
-            }.isSuccess
+                }.isSuccess
+            }
             onDone(ok)
         }
     }

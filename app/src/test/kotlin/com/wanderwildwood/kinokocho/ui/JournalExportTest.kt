@@ -56,6 +56,17 @@ class JournalExportTest {
     }
 
     @Test
+    fun `two backups on one day are written to two files`() {
+        // Each deletes its file once copied out, so sharing one would cut the other short.
+        val first = JournalExport.write(context, listOf(aFind()))
+        val second = JournalExport.write(context, listOf(aFind()))
+        assertTrue(first.absolutePath != second.absolutePath)
+        first.delete()
+        assertTrue("the second is untouched by the first going", second.isFile)
+        second.delete()
+    }
+
+    @Test
     fun `a missing photograph does not fail the backup`() {
         File(photoDir(context), "one.jpg").delete()
         val zip = JournalExport.write(context, listOf(aFind()))
