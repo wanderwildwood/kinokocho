@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    The two directories that can be handed out, one URI at a time.
+    The one directory that can be handed out, one URI at a time.
 
-    `observation_photos` is where the camera app writes: one folder inside the app's own
-    files, granted for one picture. `backups` is where a journal export is written before
-    it is handed to whatever the person chose to keep it in.
+    `observation_photos` is where the camera app writes and where a shared find's
+    photographs are read from: one folder inside the app's own files, granted for one
+    picture at a time. A backup is written straight into the place the person chose, so
+    nothing in the cache, where a whole journal can lie for a moment, is reachable here.
 
     Scoped as narrowly as it goes. Nothing else in the app is reachable through this, and
     in particular the database is not.
 -->
 <paths>
     <files-path name="observation_photos" path="photos/" />
-    <cache-path name="backups" path="." />
 </paths>
