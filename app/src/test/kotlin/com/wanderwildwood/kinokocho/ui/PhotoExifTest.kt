@@ -47,6 +47,15 @@ class PhotoExifTest {
     }
 
     @Test
+    fun theRewriteIsMadeBesideTheFileAndNothingIsLeftBehind() {
+        // Rewritten in place, a process killed halfway would leave the only copy of the
+        // photograph cut short; it is written beside it and renamed over instead.
+        val file = geotagged()
+        assertTrue(PhotoExif.stripLocation(file))
+        assertEquals(listOf("find.jpg"), file.parentFile!!.list()!!.sorted())
+    }
+
+    @Test
     fun aCleanPhotoIsLeftAlone() {
         val file = geotagged()
         PhotoExif.stripLocation(file)

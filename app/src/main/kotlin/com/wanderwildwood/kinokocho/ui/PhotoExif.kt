@@ -82,15 +82,29 @@ object PhotoExif {
         return if (redraw(file)) Outcome.STRIPPED else Outcome.FAILED
     }
 
-    /** The EXIF tags taken out: true if any were there, false if none, null if it failed. */
-    private fun stripTags(file: File): Boolean? = runCatching {
-        val exif = ExifInterface(file)
-        val present = TAGS.filter { exif.getAttribute(it) != null }
-        if (present.isEmpty()) return@runCatching false
-        present.forEach { exif.setAttribute(it, null) }
-        exif.saveAttributes()
-        true
-    }.getOrNull()
+    /**
+     * The EXIF tags taken out: true if any were there, false if none, null if it failed.
+     *
+     * The rewrite is done on a copy beside the file and renamed over it, so a process
+     * killed halfway leaves the photograph whole: it may be the only one there is.
+     */
+    private fun stripTags(file: File): Boolean? {
+        val present = runCatching {
+            val exif = ExifInterface(file)
+            TAGS.filter { exif.getAttribute(it) != null }
+        }.getOrElse { return null }
+        if (present.isEmpty()) return false
+        val part = File(file.parentFile, ".${file.name}.exif")
+        val ok = runCatching {
+            file.copyTo(part, overwrite = true)
+            val exif = ExifInterface(part)
+            present.forEach { exif.setAttribute(it, null) }
+            exif.saveAttributes()
+            part.renameTo(file)
+        }.getOrDefault(false)
+        if (!ok) part.delete()
+        return if (ok) true else null
+    }
 
     /**
      * The picture drawn again as a JPEG with nothing else in it, in place of the file.
