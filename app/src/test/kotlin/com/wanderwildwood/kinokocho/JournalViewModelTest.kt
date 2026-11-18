@@ -54,6 +54,10 @@ class JournalViewModelTest {
     @After
     fun tearDown() {
         Dispatchers.resetMain()
+        // Let the last queued write land, then shut the shared database so its rows do not
+        // carry into the next test.
+        Thread.sleep(300)
+        JournalDatabase.closeForTests()
         ApplicationProvider.getApplicationContext<Application>().deleteDatabase("journal.db")
     }
 

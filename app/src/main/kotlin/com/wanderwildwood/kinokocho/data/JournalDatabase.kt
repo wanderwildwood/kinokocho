@@ -1,6 +1,7 @@
 package com.wanderwildwood.kinokocho.data
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -76,6 +77,13 @@ abstract class JournalDatabase : RoomDatabase() {
             instance ?: synchronized(this) {
                 instance ?: build(context.applicationContext).also { instance = it }
             }
+
+        /** Tests only: closes and forgets the open database, so the next test starts empty. */
+        @VisibleForTesting
+        internal fun closeForTests() = synchronized(this) {
+            instance?.close()
+            instance = null
+        }
 
         private fun build(context: Context): JournalDatabase =
             Room.databaseBuilder(context, JournalDatabase::class.java, NAME)
