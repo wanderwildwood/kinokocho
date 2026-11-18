@@ -391,6 +391,11 @@
     </plurals>
     <!-- Its own sentence after the first, so it starts with a space. %1$d finds in the backup were already in the journal -->
     <string name="import_already_here">\u0020%1$d were already here.</string>
+    <!-- Its own sentence after the others, so it starts with a space. %d finds in the backup not added because a photograph of theirs could not be written -->
+    <plurals name="import_held_back">
+        <item quantity="one">\u0020%d find was left out because a photograph of it could not be written, perhaps for want of room. Make some room and read the copy in again to bring it in.</item>
+        <item quantity="other">\u0020%d finds were left out because photographs of theirs could not be written, perhaps for want of room. Make some room and read the copy in again to bring them in.</item>
+    </plurals>
     <string name="import_close">Close</string>
     <!-- shared-about: contact row + privacy section (edit in /opt/projects/shared-about) -->
     <string name="about_write_to">Write to %1$s</string>

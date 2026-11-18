@@ -37,6 +37,12 @@ object JournalImport {
         val added: Int = 0,
         val alreadyHere: Int = 0,
         val photos: Int = 0,
+        /**
+         * Finds left out because a photograph of theirs that is in the backup could not be
+         * written, most likely for want of room. Not added, so a later restore brings them
+         * in whole rather than skipping them as already here.
+         */
+        val heldBack: Int = 0,
         /** Set when the file could not be read at all. Nothing was changed. */
         val failed: String? = null,
     )
@@ -78,7 +84,7 @@ object JournalImport {
         // The whole zip is read through before anything is written, every entry inflated
         // and its checksum tested, though only the journal is kept. A half-read archive
         // must not leave a half-restored journal.
-        val journal = runCatching { readJournal(archive) }
+        val (journal, inArchive) = runCatching { readJournal(archive) }
             .getOrElse { return Result(failed = context.getString(R.string.import_not_a_backup)) }
 
         val finds = journal?.optJSONArray("journal")
@@ -86,6 +92,7 @@ object JournalImport {
 
         var added = 0
         var already = 0
+        var heldBack = 0
         val dir = photoDir(context)
 
         // The photographs the new finds will name, and that are not on disk already. They
@@ -161,6 +168,7 @@ object JournalImport {
                 }
             }
             val photos = mutableListOf<ObservationPhoto>()
+            var unwritten = false
             find.optJSONArray("photos")?.let { list ->
                 for (p in 0 until list.length()) {
                     val photo = list.optJSONObject(p) ?: continue
@@ -180,6 +188,13 @@ object JournalImport {
                     // A file another find already shows is that find's photograph; a
                     // backup cannot hand it to this one as well.
                     if (dao.photoFileUsed(name) > 0) continue
+                    // In the backup but not on disk: its write failed. The find waits for a
+                    // restore that can lay the picture down, rather than going in with a
+                    // photograph missing for good.
+                    if (name in inArchive && !File(dir, name).isFile) {
+                        unwritten = true
+                        break
+                    }
                     photos += ObservationPhoto(
                         observationId = 0,
                         slot = photo.optString("slot"),
@@ -189,15 +204,26 @@ object JournalImport {
                     )
                 }
             }
+            if (unwritten) {
+                heldBack++
+                continue
+            }
             dao.importFind(observation, characters, photos)
             added++
         }
-        return Result(added = added, alreadyHere = already, photos = written.size)
+        // Only the pictures of finds that went in. One written for a find held back stays on
+        // disk under its uuid name, and the next restore finds it there.
+        val laid = written.count { dao.photoFileUsed(it) > 0 }
+        return Result(added = added, alreadyHere = already, photos = laid, heldBack = heldBack)
     }
 
-    /** journal.json, after reading every entry of the archive through. */
-    private fun readJournal(archive: File): JSONObject? {
+    /**
+     * journal.json, after reading every entry of the archive through, and the names of the
+     * photographs the archive holds.
+     */
+    private fun readJournal(archive: File): Pair<JSONObject?, Set<String>> {
         var journal: JSONObject? = null
+        val photos = mutableSetOf<String>()
         ZipInputStream(archive.inputStream().buffered()).use { zip ->
             while (true) {
                 val entry = zip.nextEntry ?: break
@@ -208,12 +234,15 @@ object JournalImport {
                     if (bytes.size > MAX_JOURNAL_BYTES) error("journal.json is too big")
                     journal = JSONObject(bytes.decodeToString())
                 }
+                if (entry.name.startsWith("photos/") && !entry.isDirectory) {
+                    photos += entry.name.removePrefix("photos/")
+                }
                 // Closing an entry reads the rest of it, so a damaged photograph is found
                 // here, before anything is written, as it was when the zip was read whole.
                 zip.closeEntry()
             }
         }
-        return journal
+        return journal to photos
     }
 
     /**

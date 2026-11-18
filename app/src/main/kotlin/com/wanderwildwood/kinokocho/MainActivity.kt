@@ -309,6 +309,10 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
         EInkDialog(onDismiss = { imported = null }) {
             TextMMD(
                 result.failed ?: when {
+                    // Said alone when it is all that happened, so it is not lost behind
+                    // "Nothing in that file to read".
+                    result.added == 0 && result.heldBack > 0 ->
+                        pluralStringResource(R.plurals.import_held_back, result.heldBack, result.heldBack).trim()
                     result.added == 0 && result.alreadyHere > 0 ->
                         stringResource(R.string.import_all_already_here)
                     result.added == 0 -> stringResource(R.string.import_nothing_to_read)
@@ -318,7 +322,8 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
                         if (result.photos > 0) pluralStringResource(R.plurals.import_with_photographs, result.photos, result.photos) else "",
                         if (result.alreadyHere > 0)
                             stringResource(R.string.import_already_here, result.alreadyHere) else "",
-                    )
+                    ) + if (result.heldBack > 0)
+                        pluralStringResource(R.plurals.import_held_back, result.heldBack, result.heldBack) else ""
                 },
                 style = MaterialTheme.typography.bodyMedium,
             )

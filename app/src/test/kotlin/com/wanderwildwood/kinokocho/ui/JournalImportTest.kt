@@ -216,6 +216,36 @@ class JournalImportTest {
         pictures.keys.forEach { File(dir, it).delete() }
     }
 
+    /**
+     * A photograph that could not be written (a full disk, most likely) holds its find back
+     * rather than letting it in with the picture missing, since a later restore would then
+     * skip it as already here and the picture could never come back.
+     */
+    @Test
+    fun `a find whose photograph could not be written comes in on the next restore`() = runTest {
+        val dir = photoDir(context)
+        File(dir, "two.jpg").writeBytes(byteArrayOf(4, 5, 6))
+        val find = aFind("u-room").copy(photos = listOf(ObservationPhoto(0, 1, "cap", "two.jpg", 1L)))
+        val backup = Uri.fromFile(JournalExport.write(context, listOf(find)))
+        File(dir, "two.jpg").delete()
+
+        // Where the picture is written first, so the write fails as it would on a full disk.
+        val blocker = File(dir, ".two.jpg.part").apply { mkdirs() }
+        val first = JournalImport.read(context, backup, dao)
+        assertNull(first.failed)
+        assertEquals(0, first.added)
+        assertEquals(1, first.heldBack)
+        assertNull("not in the journal with its picture missing", dao.findByUuid("u-room"))
+
+        blocker.delete()
+        val second = JournalImport.read(context, backup, dao)
+        assertEquals(1, second.added)
+        assertEquals(1, second.photos)
+        assertTrue(File(dir, "two.jpg").readBytes().contentEquals(byteArrayOf(4, 5, 6)))
+        assertEquals("two.jpg", dao.findByUuid("u-room")!!.photos.single().fileName)
+        File(dir, "two.jpg").delete()
+    }
+
     @Test
     fun `a photograph already on disk is not rewritten`() = runTest {
         val backup = backupOf(aFind("u1"))
