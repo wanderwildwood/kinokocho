@@ -10,11 +10,10 @@ import com.wanderwildwood.kinokocho.data.Observation
 import com.wanderwildwood.kinokocho.data.ObservationCharacter
 import com.wanderwildwood.kinokocho.data.ObservationPhoto
 import com.wanderwildwood.kinokocho.key.KeyEngine
-import com.wanderwildwood.kinokocho.key.PackLoader
+import com.wanderwildwood.kinokocho.key.KeyData
 import com.wanderwildwood.kinokocho.key.TaxonPack
 import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
-import com.wanderwildwood.kinokocho.schema.SchemaLoader
 import com.wanderwildwood.kinokocho.ui.JournalExport
 import com.wanderwildwood.kinokocho.ui.JournalImport
 import com.wanderwildwood.kinokocho.ui.PhotoExif
@@ -38,9 +37,11 @@ import kotlinx.coroutines.sync.withLock
 
 class JournalViewModel(app: Application) : AndroidViewModel(app) {
 
-    val schema: CharacterSchema = SchemaLoader.load(app.assets)
-    val pack: TaxonPack = PackLoader.load(app.assets, PACK)
-    val engine = KeyEngine(schema, pack)
+    // Read off the main thread by the activity before it builds this; see KeyData.
+    private val key = KeyData.get(app.assets)
+    val schema: CharacterSchema = key.schema
+    val pack: TaxonPack = key.pack
+    val engine: KeyEngine = key.engine
 
     private val dao = JournalDatabase.get(app).journalDao()
 
@@ -559,7 +560,4 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
     private fun monthOf(millis: Long): Int =
         Calendar.getInstance().apply { timeInMillis = millis }.get(Calendar.MONTH) + 1
 
-    private companion object {
-        const val PACK = "packs/southern-appalachia-v1.json"
-    }
 }

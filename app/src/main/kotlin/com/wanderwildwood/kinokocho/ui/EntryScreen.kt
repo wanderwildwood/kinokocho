@@ -18,6 +18,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.runtime.produceState
+import androidx.compose.foundation.layout.Spacer
 import android.graphics.BitmapFactory
 import java.io.File
 import androidx.compose.material3.Icon
@@ -391,16 +394,22 @@ fun EntryScreen(
                     items3(draft.photos.size) { i ->
                         val photo = draft.photos[i]
                         val file = File(photoDir(context), photo.fileName)
-                        val bitmap = remember(photo.fileName) {
-                            runCatching {
-                                BitmapFactory.decodeFile(
-                                    file.absolutePath,
-                                    // Sampled down: a phone camera JPEG decoded at full
-                                    // size to fill a 96dp box is megabytes for nothing.
-                                    BitmapFactory.Options().apply { inSampleSize = 8 },
-                                )?.asImageBitmap()
-                            }.getOrNull()
+                        // Read off the main thread, once per photograph: decoding in the
+                        // middle of drawing held the screen still for each picture. Null
+                        // until it has been read; then the picture, or a failure.
+                        val thumb by produceState<Result<ImageBitmap>?>(null, photo.fileName) {
+                            value = withContext(Dispatchers.IO) {
+                                runCatching {
+                                    BitmapFactory.decodeFile(
+                                        file.absolutePath,
+                                        // Sampled down: a phone camera JPEG decoded at full
+                                        // size to fill a 96dp box is megabytes for nothing.
+                                        BitmapFactory.Options().apply { inSampleSize = 8 },
+                                    )?.asImageBitmap() ?: error("unreadable")
+                                }
+                            }
                         }
+                        val bitmap = thumb?.getOrNull()
                         val armed = arming == photo.fileName
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -420,8 +429,11 @@ fun EntryScreen(
                                     contentScale = ContentScale.Crop,
                                     modifier = Modifier.size(96.dp).keepColors(),
                                 )
-                            } else {
+                            } else if (thumb != null) {
                                 TextMMD(stringResource(R.string.entry_photo_missing), style = MaterialTheme.typography.bodySmall)
+                            } else {
+                                // Still being read: its room kept, so nothing moves when it comes.
+                                Spacer(Modifier.size(96.dp))
                             }
                             TextMMD(
                                 if (armed) stringResource(R.string.entry_photo_remove)

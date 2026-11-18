@@ -18,6 +18,10 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalCursorBlinkEnabled
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
+import com.wanderwildwood.kinokocho.key.KeyData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -65,7 +69,13 @@ class MainActivity : ComponentActivity() {
                     // A blinking caret repaints the e-ink panel twice a second for nothing.
                     CompositionLocalProvider(LocalCursorBlinkEnabled provides false) {
                         Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
-                            Journal()
+                            // The key's data is read off the main thread first, so the
+                            // blank page is drawn at once and the journal follows it.
+                            val ready by produceState(false) {
+                                withContext(Dispatchers.Default) { KeyData.get(applicationContext.assets) }
+                                value = true
+                            }
+                            if (ready) Journal()
                         }
                     }
                 }
