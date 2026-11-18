@@ -28,7 +28,9 @@ android {
     // a fresh clone builds an unsigned release APK, which will not install anywhere.
     // A keystore committed to a public repo is not a signing key, it is a formality,
     // and a missing one should stop you rather than produce something installable.
-    // (Debug builds still get the ordinary Android debug key from AGP.)
+    // That includes debug builds: with signing/ present they carry the release
+    // certificate and are debuggable, so one installs over the released app with its
+    // data and run-as can read that data. Without signing/ they get AGP's debug key.
     val signingPropertiesFile = rootProject.file("signing/signing.properties")
     val realSigningConfig = if (signingPropertiesFile.isFile) {
         val signingProperties = Properties().apply {
