@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.sync.Mutex
@@ -425,7 +426,14 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      * on purpose, twice.
      */
     fun delete(observationId: Long) {
-        viewModelScope.launch { saving.withLock { deleteRow(observationId) } }
+        // Not in viewModelScope. Back from the journal stops the activity, which lets a
+        // pending delete go, and clears this view model a moment later, which cancels its
+        // scope: a delete still waiting for [saving] or for Room then would be dropped,
+        // perhaps after some of the photographs were already gone. Undispatched, so it
+        // takes its place in the queue now, in the order it was asked for.
+        lasting.launch(start = CoroutineStart.UNDISPATCHED) {
+            saving.withLock { deleteRow(observationId) }
+        }
     }
 
     /**
@@ -485,16 +493,17 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     /**
-     * Back from the journal finishes the activity and clears this view model with a delete
-     * perhaps still pending. Its own scope is already cancelled here, so the delete runs in
-     * one of its own, still behind any save in hand.
+     * A view model cleared with a delete still pending, which leaving the app normally
+     * commits first (see [commitTrash]). [delete] runs in [lasting], not in the scope
+     * cancelled here, still behind any save in hand.
      */
     override fun onCleared() {
-        val id = _trashed.value ?: return
-        _trashed.value = null
-        CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
-            saving.withLock { deleteRow(id) }
-        }
+        commitTrash()
+    }
+
+    private companion object {
+        /** Outlives the view model, for the deletes that must not be cut off halfway. */
+        val lasting = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     }
 
     private val measurementCharacters

@@ -1,6 +1,8 @@
 package com.wanderwildwood.kinokocho
 
 import android.app.Application
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
 import androidx.test.core.app.ApplicationProvider
 import com.wanderwildwood.kinokocho.data.JournalDatabase
 import kotlinx.coroutines.Dispatchers
@@ -178,6 +180,35 @@ class JournalViewModelTest {
         settled()
         assertEquals(1, dao.count())
         assertEquals("the right one", dao.findUnclaimed()!!.observation.note)
+    }
+
+    /**
+     * Back from the journal with Undo showing: the stop lets the delete go, and the view
+     * model is cleared straight after, which must not cut the delete off.
+     */
+    @Test
+    fun `a find deleted from the journal stays deleted when the view model is cleared at once`() = runBlocking {
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        val store = ViewModelStore()
+        val journal = ViewModelProvider(store, ViewModelProvider.AndroidViewModelFactory.getInstance(app))[JournalViewModel::class.java]
+        journal.startNewEntry()
+        val uuid = journal.draft.value!!.uuid
+        journal.setNote("under the beeches")
+        journal.keep()
+        journal.close()
+        withTimeout(30_000) {
+            while (dao.findByUuid(uuid)?.observation?.kept != true) delay(10)
+        }
+        val id = dao.findByUuid(uuid)!!.observation.id
+
+        journal.trash(id)
+        journal.commitTrash()
+        store.clear()
+
+        withTimeout(30_000) {
+            while (dao.findByUuid(uuid) != null) delay(10)
+        }
+        assertEquals(0, dao.count())
     }
 
     /** An install that once signed in to iNaturalist keeps no trace of it once this version starts. */
