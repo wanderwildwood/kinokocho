@@ -128,8 +128,9 @@ solid black — which is written down at the top of `tools/make-art.py`.
 The whole-mushroom plates are a different thing. Most are traced from public-domain
 plates — C. H. Peck's New York State reports, Sowerby, Bresadola, Bulliard, Cooke, Walty
 and others — by `tools/trace-plate.py`, and each one's work, year, license and file is
-in `tools/plate-sources.json`; the candidate page names whose drawing it is. The source
-images are not in the repository. A plate that shows a feature its mushroom lacks is
+in `tools/plate-sources.json`; the candidate page names whose drawing it is. The other
+twenty were made for this app rather than traced from an older work, so they have no entry
+there and no outside source to credit. The source images are not in the repository. A plate that shows a feature its mushroom lacks is
 worse than none, so where no honest drawing exists there is no plate.
 
 ## Building
