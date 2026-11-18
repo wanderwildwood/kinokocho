@@ -59,8 +59,11 @@ object JournalImport {
      */
     suspend fun read(context: Context, uri: Uri, dao: JournalDao): Result =
         withContext(Dispatchers.IO) {
-            val archive = copyToCache(context, uri)
-                ?: return@withContext Result(failed = context.getString(R.string.import_could_not_open))
+            val archive = when (val copied = copyToCache(context, uri)) {
+                is Copied.Here -> copied.file
+                Copied.NoRoom -> return@withContext Result(failed = context.getString(R.string.import_no_room))
+                Copied.Unreadable -> return@withContext Result(failed = context.getString(R.string.import_could_not_open))
+            }
             try {
                 restore(context, archive, dao)
             } finally {
@@ -68,16 +71,51 @@ object JournalImport {
             }
         }
 
-    /** The picked file, copied into the cache in pieces. Null when it cannot be read. */
-    private fun copyToCache(context: Context, uri: Uri): File? {
+    private sealed interface Copied {
+        class Here(val file: File) : Copied
+        object NoRoom : Copied
+        object Unreadable : Copied
+    }
+
+    /**
+     * The picked file, copied into the cache in pieces.
+     *
+     * Never past the room the phone has, less [ROOM_TO_LEAVE]: the picked file could be
+     * anything, of any size, and filling the phone's storage would stop the journal itself
+     * from saving. A file that will not fit is given up on and its part removed.
+     */
+    private fun copyToCache(context: Context, uri: Uri): Copied {
         val copy = runCatching { File.createTempFile("restore", ".zip", context.cacheDir) }
-            .getOrNull() ?: return null
+            .getOrNull() ?: return Copied.Unreadable
+        var fitted = true
         val ok = runCatching {
             val input = context.contentResolver.openInputStream(uri) ?: error("no stream")
-            input.use { i -> copy.outputStream().use { i.copyTo(it) } }
+            input.use { i ->
+                copy.outputStream().use { o -> fitted = copyAtMost(i, o, roomIn(context.cacheDir)) }
+            }
         }.isSuccess
-        if (!ok) copy.delete()
-        return copy.takeIf { ok }
+        if (ok && fitted) return Copied.Here(copy)
+        copy.delete()
+        return if (ok) Copied.NoRoom else Copied.Unreadable
+    }
+
+    /** Bytes that can be written into [dir] and still leave [ROOM_TO_LEAVE] free. */
+    private fun roomIn(dir: File): Long = (dir.usableSpace - ROOM_TO_LEAVE).coerceAtLeast(0L)
+
+    /**
+     * Copies [input] to [output] until it ends, or stops once more than [limit] bytes would
+     * be written. True when the whole of it fitted.
+     */
+    internal fun copyAtMost(input: InputStream, output: java.io.OutputStream, limit: Long): Boolean {
+        val buf = ByteArray(64 * 1024)
+        var total = 0L
+        while (true) {
+            val n = input.read(buf)
+            if (n < 0) return true
+            total += n
+            if (total > limit) return false
+            output.write(buf, 0, n)
+        }
     }
 
     private suspend fun restore(context: Context, archive: File, dao: JournalDao): Result {
@@ -280,6 +318,15 @@ object JournalImport {
 
     private const val MAX_JOURNAL_BYTES = 32 * 1024 * 1024
 
+    /**
+     * The largest photograph a restore will write. Far above anything a phone's camera
+     * makes, and far below what one small entry of a hand-made zip can inflate to.
+     */
+    internal const val MAX_PHOTO_BYTES = 128L * 1024 * 1024
+
+    /** Left free on the phone whatever a restore writes, so the journal can still save. */
+    private const val ROOM_TO_LEAVE = 64L * 1024 * 1024
+
     private fun readAtMost(input: InputStream, limit: Int): ByteArray {
         val out = java.io.ByteArrayOutputStream()
         val buf = ByteArray(64 * 1024)
@@ -291,11 +338,16 @@ object JournalImport {
         return out.toByteArray()
     }
 
+    /**
+     * One photograph, written beside itself and renamed into place. Refused, and its part
+     * removed, when it runs past [MAX_PHOTO_BYTES] or past the room the phone has: its find
+     * is then held back as for any photograph that could not be written.
+     */
     private fun writeOne(entry: InputStream, file: File): Boolean {
         val part = File(file.parentFile, ".${file.name}.part")
         val ok = runCatching {
-            part.outputStream().use { entry.copyTo(it) }
-            part.renameTo(file)
+            val limit = minOf(MAX_PHOTO_BYTES, roomIn(file.parentFile ?: return false))
+            part.outputStream().use { copyAtMost(entry, it, limit) } && part.renameTo(file)
         }.getOrDefault(false)
         if (!ok) part.delete()
         return ok

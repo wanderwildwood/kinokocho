@@ -375,6 +375,7 @@
     <string name="export_failed">The copy could not be saved.</string>
     <string name="import_could_not_read">That file could not be read.</string>
     <string name="import_could_not_open">That file could not be opened.</string>
+    <string name="import_no_room">There is not enough room on the phone to read that file.</string>
     <string name="import_not_a_backup">That does not look like a journal backup.</string>
     <string name="import_no_journal">No journal inside that file.</string>
     <string name="import_all_already_here">Everything in that copy was already here.</string>

@@ -259,6 +259,22 @@ class JournalImportTest {
         assertTrue(mine.readBytes().contentEquals(byteArrayOf(7, 7)))
     }
 
+    /**
+     * A hand-made zip can carry a small entry that inflates without end, and the picked file
+     * itself can be anything. Neither may be copied past its limit, or the phone fills up.
+     */
+    @Test
+    fun `a copy stops at its limit and says so`() {
+        val data = ByteArray(200_000) { it.toByte() }
+        val whole = java.io.ByteArrayOutputStream()
+        assertTrue(JournalImport.copyAtMost(data.inputStream(), whole, data.size.toLong()))
+        assertTrue(whole.toByteArray().contentEquals(data))
+
+        val cut = java.io.ByteArrayOutputStream()
+        assertEquals(false, JournalImport.copyAtMost(data.inputStream(), cut, 100_000L))
+        assertTrue("no more than the limit is written", cut.size() <= 100_000)
+    }
+
     @Test
     fun `only a bare file name is accepted`() {
         assertTrue(JournalImport.isPlainFileName("3f2b-9c.jpg"))
