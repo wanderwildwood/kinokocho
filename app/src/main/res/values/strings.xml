@@ -67,7 +67,10 @@
     <string name="place_take_again">Take it again</string>
     <!-- The held position. %1$s is latitude, %2$s longitude, two decimal places -->
     <string name="place_roughly">Roughly %1$s, %2$s</string>
-    <string name="place_no_recent_position">No recent position. Move outside, or type the place instead.</string>
+    <!-- Shown while the phone is asked for its position, up to about 20 seconds -->
+    <string name="place_finding">Finding where you are…</string>
+    <!-- Shown when no position came within about 20 seconds -->
+    <string name="place_no_recent_position">The phone couldn\'t find where it is. Try again, or type the place instead.</string>
     <!-- Shown when the location permission is refused -->
     <string name="place_permission_refused">Not allowed. Type the place instead — it works just as well.</string>
 

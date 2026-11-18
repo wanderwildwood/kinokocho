@@ -80,8 +80,10 @@ what the code does with a precise fix it is holding. What gets stored is rounded
 two decimal places, which is a bit over a kilometer. The journal wants to know which
 hillside, not which log.
 
-It reads the position the phone already has rather than requesting a fresh one: no radio is
-spun up, and if there is nothing cached it says so instead of waiting.
+It uses the position the phone already has when that is from the last fifteen minutes. If
+not, it asks the phone for one now, from the network or GPS, waits up to about twenty
+seconds, and says so if none comes. Either way the answer is only as precise as approximate
+location allows, and it is asked for only when you press the button.
 
 The position is kept as a position on the entry, and the place you type stays your own
 words. It used to be written into those words as well — which was the only place it was

@@ -3,7 +3,9 @@ package com.wanderwildwood.kinokocho.ui
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Location
 import android.location.LocationManager
+import android.os.CancellationSignal
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -26,7 +29,11 @@ import androidx.core.content.ContextCompat
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.kinokocho.R
+import kotlin.coroutines.resume
 import kotlin.math.roundToInt
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withTimeoutOrNull
 
 /**
  * Where the find was, typed or taken from the phone.
@@ -94,16 +101,33 @@ fun PlaceField(
      */
     var text by remember { mutableStateOf(place) }
     var message by remember { mutableStateOf<String?>(null) }
+    // Asking the phone for a position now, which can take a while outdoors.
+    var finding by remember { mutableStateOf(false) }
+    // Tied to this field: leaving the find cancels a request still in hand.
+    val scope = rememberCoroutineScope()
 
     val noPosition = stringResource(R.string.place_no_recent_position)
     val notAllowed = stringResource(R.string.place_permission_refused)
-    val take = {
-        val where = coarsePosition(context)
-        if (where == null) {
-            message = noPosition
-        } else {
-            onPositionTaken(where.latitude, where.longitude)
+    val findingWords = stringResource(R.string.place_finding)
+    val take: () -> Unit = {
+        val cached = coarsePosition(context)
+        if (cached != null) {
+            onPositionTaken(cached.latitude, cached.longitude)
             message = null
+        } else if (!finding) {
+            // Nothing recent on hand, which in a wood is the usual case: ask for one now.
+            finding = true
+            message = findingWords
+            scope.launch {
+                val where = currentCoarsePosition(context)
+                finding = false
+                if (where == null) {
+                    message = noPosition
+                } else {
+                    onPositionTaken(where.latitude, where.longitude)
+                    message = null
+                }
+            }
         }
     }
 
@@ -128,7 +152,8 @@ fun PlaceField(
         ) {
             OutlinedButtonMMD(
                 onClick = {
-                    if (hasCoarse(context)) take()
+                    if (finding) Unit
+                    else if (hasCoarse(context)) take()
                     else ask.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
                 },
                 modifier = Modifier.fillMaxWidth(),
@@ -157,19 +182,18 @@ private fun hasCoarse(context: Context): Boolean =
     ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) ==
         PackageManager.PERMISSION_GRANTED
 
-/**
- * The last position the phone already knew, rounded.
- *
- * Deliberately does not ask for a fresh fix: that spins the radio, takes time a person
- * standing in the rain does not want to give, and buys precision this app has decided
- * not to keep. If nothing is cached the honest answer is that there is no position.
- */
 /** Rounded to two decimal places before it is ever handed on. See [round2]. */
 data class Position(val latitude: Double, val longitude: Double)
 
 /** How old a cached position may be and still be taken as where the reader is: 15 minutes. */
 private const val MAX_POSITION_AGE_NANOS = 15L * 60 * 1_000_000_000
 
+/**
+ * The last position the phone already knew, rounded, when it is recent enough.
+ *
+ * Tried first because it costs nothing. Out on a walk nothing else has usually asked for
+ * a position lately, so a null here sends [PlaceField] on to [currentCoarsePosition].
+ */
 private fun coarsePosition(context: Context): Position? {
     if (!hasCoarse(context)) return null
     val manager = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
@@ -190,13 +214,50 @@ private fun coarsePosition(context: Context): Position? {
         null
     } ?: return null
     // A cached position from hours ago is likely somewhere else, home most of all: only a
-    // recent one is "roughly where I am". Otherwise the no-recent-position message says so.
+    // recent one is "roughly where I am". Otherwise a position is asked for now.
     val age = android.os.SystemClock.elapsedRealtimeNanos() - location.elapsedRealtimeNanos
     if (age > MAX_POSITION_AGE_NANOS) return null
 
     // Rounded here, once, before anything else in the app can see the finer number.
     // Rounding at the point of display would leave the precise value sitting in a field
     // somewhere, which is the arrangement this app has said it does not have.
+    return Position(round2(location.latitude), round2(location.longitude))
+}
+
+/** How long to wait for a position asked for now before saying there is none: 20 seconds. */
+private const val FRESH_POSITION_TIMEOUT_MS = 20_000L
+
+/**
+ * A position asked for now, rounded, or null when none came within the timeout.
+ *
+ * The network provider first, which answers quickly from nearby cell towers and Wi-Fi,
+ * then GPS when that is the only one on. With coarse permission alone the system blurs
+ * whatever GPS finds before the app sees it, so this asks for nothing more precise than
+ * the one permission allows.
+ */
+private suspend fun currentCoarsePosition(context: Context): Position? {
+    if (!hasCoarse(context)) return null
+    val manager = context.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
+        ?: return null
+    val provider = listOf(LocationManager.NETWORK_PROVIDER, LocationManager.GPS_PROVIDER)
+        .firstOrNull { runCatching { manager.isProviderEnabled(it) }.getOrDefault(false) }
+        ?: return null
+    val location = withTimeoutOrNull(FRESH_POSITION_TIMEOUT_MS) {
+        suspendCancellableCoroutine<Location?> { cont ->
+            val signal = CancellationSignal()
+            cont.invokeOnCancellation { signal.cancel() }
+            try {
+                @Suppress("MissingPermission")
+                manager.getCurrentLocation(provider, signal, context.mainExecutor) { found ->
+                    if (cont.isActive) cont.resume(found)
+                }
+            } catch (_: SecurityException) {
+                if (cont.isActive) cont.resume(null)
+            } catch (_: IllegalArgumentException) {
+                if (cont.isActive) cont.resume(null)
+            }
+        }
+    } ?: return null
     return Position(round2(location.latitude), round2(location.longitude))
 }
 
