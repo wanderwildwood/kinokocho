@@ -1,7 +1,7 @@
 name: Check
 
-# The release workflow already runs these two, but only when a tag is pushed — which is
-# after the mistake is written down permanently. This runs them on the way in instead.
+# Releases are built and signed locally, not here. This only checks pushes and pull
+# requests on the way in: the unit tests, and that the generated art matches its source.
 on:
   push:
     branches:
@@ -42,8 +42,7 @@ jobs:
       - name: Test
         run: ./gradlew :app:testDebugUnitTest
 
-      # Same check as the release build, and for the same reason: every drawing and the
-      # taxon pack are generated, and a generated file that has been hand-edited is a file
+      # Every drawing and the taxon pack are generated, and a generated file that has been hand-edited is a file
       # that will be overwritten one day without anyone noticing. Both outputs, not just
       # the drawables — CharacterArt.kt is generated too and went stale once already.
       - name: Check the generated art is what the generator produces
