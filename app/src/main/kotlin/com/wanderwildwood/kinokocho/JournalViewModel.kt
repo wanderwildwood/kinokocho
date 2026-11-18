@@ -29,7 +29,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -418,8 +420,9 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
      * The find just deleted from the journal, hidden but still whole until it is let go.
      *
      * Deleting from the journal hides the row and offers Undo; nothing is removed from disk
-     * until the person moves on (opens or starts a find, or deletes another). If the process
-     * dies first the find simply comes back, which is the safe way to fail.
+     * until the person moves on (opens or starts a find, deletes another, or leaves the
+     * app). Only if the process dies before any of those does the find come back. A backup
+     * made while Undo is showing already leaves it out.
      */
     private val _trashed = MutableStateFlow<Long?>(null)
     val trashed: StateFlow<Long?> = _trashed.asStateFlow()
@@ -438,6 +441,19 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         val id = _trashed.value ?: return
         _trashed.value = null
         delete(id)
+    }
+
+    /**
+     * Back from the journal finishes the activity and clears this view model with a delete
+     * perhaps still pending. Its own scope is already cancelled here, so the delete runs in
+     * one of its own, still behind any save in hand.
+     */
+    override fun onCleared() {
+        val id = _trashed.value ?: return
+        _trashed.value = null
+        CoroutineScope(SupervisorJob() + Dispatchers.IO).launch {
+            saving.withLock { deleteRow(id) }
+        }
     }
 
     private val measurementCharacters
@@ -459,7 +475,9 @@ class JournalViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             val ok = runCatching {
                 val app = getApplication<Application>()
-                val kept = dao.allKept()
+                // Not the find deleted a moment ago with its Undo still showing.
+                val trashed = _trashed.value
+                val kept = dao.allKept().filter { it.observation.id != trashed }
                 // Zipping every photograph takes seconds: off the main thread, which it was not.
                 withContext(Dispatchers.IO) {
                     val file = JournalExport.write(app, kept)

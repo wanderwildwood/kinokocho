@@ -27,6 +27,11 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.platform.LocalView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.mudita.mmd.ThemeMMD
 import com.mudita.mmd.components.buttons.ButtonMMD
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
@@ -132,6 +137,18 @@ private fun Journal(vm: JournalViewModel = viewModel()) {
     // being keyed out right now never appears here however the app is left.
     val trashed by vm.trashed.collectAsState()
     val kept = if (trashed == null) entries else entries.filter { it.observation.id != trashed }
+
+    // Leaving the app is moving on too: a find deleted from the journal goes when the app
+    // is put away, not only when another is opened, or Back or a swipe from Recents
+    // would bring it back, photographs and all.
+    val lifecycleOwner = LocalView.current.findViewTreeLifecycleOwner()
+    DisposableEffect(lifecycleOwner, vm) {
+        val watcher = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_STOP) vm.commitTrash()
+        }
+        lifecycleOwner?.lifecycle?.addObserver(watcher)
+        onDispose { lifecycleOwner?.lifecycle?.removeObserver(watcher) }
+    }
 
     when {
         // Reachable from the month page as well as from a shortlist, which is why the
