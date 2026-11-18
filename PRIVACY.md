@@ -120,9 +120,8 @@ and whoever you sent it to. No account, no network permission needed, nothing pu
 - The source is at this repository, and each release is tagged.
 - `grep -r uses-permission app/src/main/AndroidManifest.xml` shows exactly what is asked for.
 - Any APK can be checked with `aapt dump permissions` or by opening it as a zip.
-- Everything the app can send is built in `app/src/main/kotlin/.../net/`, and the only
-  file in this repository that opens a socket is `INatClient.kt`. `grep -rn "URL(" app/src`
-  finds it and finds nothing else.
+- There is no network code at all, and no internet permission in the manifest.
+  `grep -rnE "URL\(|Socket|HttpURLConnection" app/src` finds nothing.
 
 <!-- shared-about privacy section -->
 ## Who we are
