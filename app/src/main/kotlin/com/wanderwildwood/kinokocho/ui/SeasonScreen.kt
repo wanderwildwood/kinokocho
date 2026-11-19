@@ -235,7 +235,7 @@ private fun TaxonLine(
                         painter = painterResource(drawing),
                         contentDescription = null,
                         colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
-                        modifier = Modifier.fillMaxWidth().keepPlate(),
+                        modifier = Modifier.fillMaxWidth(),
                     )
                 }
             }

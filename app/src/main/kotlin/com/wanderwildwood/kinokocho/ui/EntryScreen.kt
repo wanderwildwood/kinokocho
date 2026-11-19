@@ -272,7 +272,7 @@ fun EntryScreen(
                             painter = painterResource(plate),
                             contentDescription = null,
                             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface),
-                            modifier = Modifier.size(52.dp).padding(end = 8.dp).keepPlate(),
+                            modifier = Modifier.size(52.dp).padding(end = 8.dp),
                         )
                     }
                     Column(Modifier.weight(1f)) {
