@@ -160,6 +160,8 @@ first install of any variant fixes the signer for good, so a debug build put on 
 not a throwaway — install one signed with the Android debug key and the real one will not
 go over the top of it.
 
+Questions, ideas, or just saying hello: the wander the dev Discord, <https://discord.gg/UMW8yJg7dQ>
+
 ## License
 
 GPL-3.0-only. See [LICENSE](LICENSE). In the app, About > Licenses shows the source address,
