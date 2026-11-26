@@ -13,12 +13,17 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import com.mudita.mmd.components.text.TextMMD
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -51,6 +56,8 @@ fun LazyListScope.choiceGrid(
      * Worked out by the caller, which needs the same number to pad the end of the list.
      */
     rowHeight: Dp?,
+    /** Lines of label every tile makes room for: [labelLines], measured by the caller. */
+    lines: Int,
     onPick: (String) -> Unit,
 ) {
     /*
@@ -64,11 +71,10 @@ fun LazyListScope.choiceGrid(
      * Two things together do it. The row takes its tallest tile's height and both fill
      * it, which settles each pair against each other by measurement rather than by
      * guesswork. And every label reserves the same number of lines, so one row is not
-     * shorter than the next either — [linesFor] works that number out from the longest
-     * label in this character, so a set of short labels still makes short tiles and
-     * nothing is padded for the sake of a value that is not there.
+     * shorter than the next either — [labelLines] measures that number from the labels in
+     * this character, so a set of short labels still makes short tiles and nothing is
+     * padded for the sake of a value that is not there.
      */
-    val lines = linesFor(values.map { it.label })
     val rows = values.chunked(2)
 
     /*
@@ -102,7 +108,11 @@ fun LazyListScope.choiceGrid(
         Row(
             Modifier
                 .fillMaxWidth()
-                .then(rowHeight?.let { Modifier.height(it) } ?: Modifier.height(IntrinsicSize.Max))
+                // The page-dividing height is a floor, never a ceiling: a label that wraps
+                // to more lines than reckoned grows its row instead of being cut off at the
+                // bottom ("(bolete)" was, on the Kompakt).
+                .then(rowHeight?.let { Modifier.heightIn(min = it) } ?: Modifier)
+                .height(IntrinsicSize.Max)
                 .padding(bottom = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
@@ -124,28 +134,30 @@ fun LazyListScope.choiceGrid(
 }
 
 /**
- * How many lines of label every tile in this grid should make room for.
- *
- * Estimated rather than measured, because the number has to be the same for every tile
- * before any of them is laid out — that is the whole point of it. A tile is about 151dp
- * of text on this panel once the screen padding, the gap between the pair and the tile's
- * own padding are taken off, which is around [PER_LINE] characters of the small style.
- *
- * Erring high costs a band of white under the shortest label. Erring low costs nothing
- * at all: a label that needs another line still gets one, and that row grows while the
- * rest stay put — which is the ragged patchwork this exists to avoid, but only for the
- * one row rather than all of them.
+ * How many lines the longest-wrapping label takes in a tile, measured with the tile's own
+ * type (bold, as when chosen, which is the wider) at the width a tile's words get in a list
+ * [listWidth] wide. Measured because counting characters cannot see where words break:
+ * "Tubes underneath, soft, with a stem (bolete)" was reckoned two lines and takes four.
  */
-internal fun linesFor(labels: List<String>): Int {
-    val longest = labels.maxOfOrNull { it.length } ?: 0
-    return ((longest + PER_LINE - 1) / PER_LINE).coerceIn(1, 4)
+@Composable
+internal fun labelLines(labels: List<String>, listWidth: Dp): Int {
+    val measurer = rememberTextMeasurer()
+    val density = LocalDensity.current
+    val style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold)
+    val text = (listWidth - BAR_ROOM - 8.dp) / 2 - TILE_PAD * 2 - 2.dp
+    val px = with(density) { text.roundToPx() }.coerceAtLeast(1)
+    return remember(labels, px, style, density) {
+        labels.maxOfOrNull {
+            measurer.measure(it, style, constraints = Constraints(maxWidth = px), density = density).lineCount
+        } ?: 1
+    }.coerceAtLeast(1)
 }
 
-/**
- * Characters of `bodySmall` that fit across one tile on a 480px, 210dpi panel. 23 since
- * bodySmall went from 15 to 16 sp (the house type floor); it was 25.
- */
-private const val PER_LINE = 23
+/** What the paged list keeps beside its rows for the scrollbar and its arrows. */
+private val BAR_ROOM = 40.dp
+
+/** A tile's padding either side of its words. */
+private val TILE_PAD = 6.dp
 
 /**
  * How tall to make each of [count] choices so that a whole number of them fills
@@ -227,7 +239,7 @@ private fun PictureChoice(
             )
             .semantics { this.selected = selected }
             .clickable(onClick = onClick)
-            .padding(vertical = 8.dp, horizontal = 6.dp),
+            .padding(vertical = 8.dp, horizontal = TILE_PAD),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         if (art != null) {

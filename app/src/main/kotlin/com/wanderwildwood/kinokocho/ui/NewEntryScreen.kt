@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -122,13 +123,14 @@ fun NewEntryScreen(
             BoxWithConstraints(Modifier.weight(1f).fillMaxWidth()) {
             val viewport = maxHeight - 8.dp
             val glossed = values.any { it.gloss != null }
+            val lines = if (drawn) labelLines(values.map { it.label }, maxWidth) else 1
 
             // What one choice occupies, worked out here rather than inside the list, because
             // the choices are sized to divide the list into whole rows.
             val unit = if (drawn) {
                 heightToFill(
                     viewport = viewport,
-                    natural = ROW_MIN + LINE * linesFor(values.map { it.label }),
+                    natural = ROW_MIN + LINE * lines,
                     count = (values.size + 1) / 2,
                     gap = GAP,
                 )
@@ -156,6 +158,7 @@ fun NewEntryScreen(
                         values = values,
                         picked = picked,
                         rowHeight = unit,
+                        lines = lines,
                         onPick = choose,
                     )
                 } else {
@@ -187,7 +190,7 @@ fun NewEntryScreen(
                             }
                         }
                         val shape = Modifier.fillMaxWidth()
-                            .then(unit?.let { Modifier.height(it) } ?: Modifier)
+                            .then(unit?.let { Modifier.heightIn(min = it) } ?: Modifier)
                         if (selected) {
                             ButtonMMD(onClick = { choose(value.id) }, modifier = shape) { face() }
                         } else {
