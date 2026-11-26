@@ -11,9 +11,7 @@ import com.wanderwildwood.kinokocho.key.KeyEngine
 import com.wanderwildwood.kinokocho.schema.Character
 import com.wanderwildwood.kinokocho.schema.CharacterSchema
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import android.text.format.DateFormat
 
 /**
  * Hands a find to a person.
@@ -48,7 +46,8 @@ object ShareFind {
             }
         }
 
-        val text = summary(context.resources, schema, engine, draft)
+        val twentyFourHour = DateFormat.is24HourFormat(context)
+        val text = summary(context.resources, schema, engine, draft, twentyFourHour)
 
         // SEND_MULTIPLE with no photos shows an empty chooser on some launchers, so a
         // find without pictures goes out as plain text instead.
@@ -66,7 +65,7 @@ object ShareFind {
                 else -> type = "text/plain"
             }
             putExtra(Intent.EXTRA_TEXT, text)
-            putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.share_subject, dateOf(draft.recordedAt)))
+            putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.share_subject, dateOf(context.resources, draft.recordedAt, twentyFourHour)))
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
     }
@@ -89,8 +88,9 @@ object ShareFind {
         schema: CharacterSchema,
         engine: KeyEngine,
         draft: JournalViewModel.Draft,
+        twentyFourHour: Boolean = false,
     ): String = buildString {
-        appendLine(resources.getString(R.string.share_first_line, dateOf(draft.recordedAt)))
+        appendLine(resources.getString(R.string.share_first_line, dateOf(resources, draft.recordedAt, twentyFourHour)))
         if (draft.placeNote.isNotBlank()) appendLine(draft.placeNote)
         // What the reader has already been told it is, if anything. Whoever is being
         // asked should know somebody has answered before them.
@@ -175,6 +175,6 @@ object ShareFind {
         appendLine(resources.getString(R.string.share_footer))
     }
 
-    private fun dateOf(millis: Long): String =
-        SimpleDateFormat("d MMMM yyyy, HH:mm", Locale.getDefault()).format(Date(millis))
+    private fun dateOf(resources: Resources, millis: Long, twentyFourHour: Boolean): String =
+        FindDate.format(millis, FindDate.locale(resources), twentyFourHour)
 }

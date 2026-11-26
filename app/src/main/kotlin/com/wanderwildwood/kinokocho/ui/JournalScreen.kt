@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.platform.LocalContext
+import android.text.format.DateFormat
 import com.mudita.mmd.components.buttons.OutlinedButtonMMD
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -38,8 +40,6 @@ import com.mudita.mmd.components.text_field.TextFieldMMD
 import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.data.FullObservation
 import com.wanderwildwood.kinokocho.data.MeasurementRow
-import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 /**
@@ -116,7 +116,12 @@ fun JournalScreen(
                     singleLine = true,
                 )
             }
-            val shown = remember(entries, query) { entries.matching(query) }
+            val context = LocalContext.current
+            val locale = FindDate.locale(context.resources)
+            val twentyFourHour = DateFormat.is24HourFormat(context)
+            val shown = remember(entries, query, locale, twentyFourHour) {
+                entries.matching(query, locale, twentyFourHour)
+            }
 
             when {
                 entries.isEmpty() -> Empty(Modifier.weight(1f))
@@ -267,12 +272,16 @@ private fun EntryRow(entry: FullObservation, onOpen: () -> Unit, onDelete: () ->
  * the words it is displayed as, so "September" and "2026" both work and neither needs a
  * date picker to express.
  */
-fun List<FullObservation>.matching(query: String): List<FullObservation> {
+fun List<FullObservation>.matching(
+    query: String,
+    locale: Locale = Locale.getDefault(),
+    twentyFourHour: Boolean = false,
+): List<FullObservation> {
     val q = query.trim()
     if (q.isBlank()) return this
     return filter { entry ->
         val o = entry.observation
-        listOf(o.identifiedAs, o.placeNote, o.note, dateOf(o.recordedAt))
+        listOf(o.identifiedAs, o.placeNote, o.note, FindDate.searchable(o.recordedAt, locale, twentyFourHour))
             .any { it.contains(q, ignoreCase = true) }
     }
 }
@@ -284,5 +293,5 @@ fun List<FullObservation>.matching(query: String): List<FullObservation> {
  */
 private const val ENOUGH_TO_LOSE_ONE_IN = 6
 
-private fun dateOf(millis: Long): String =
-    SimpleDateFormat("d MMMM yyyy, HH:mm", Locale.getDefault()).format(Date(millis))
+@Composable
+private fun dateOf(millis: Long): String = FindDate.shown(LocalContext.current, millis)

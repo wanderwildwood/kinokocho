@@ -53,9 +53,6 @@ import com.wanderwildwood.kinokocho.JournalViewModel
 import com.wanderwildwood.kinokocho.R
 import com.wanderwildwood.kinokocho.key.Hazard
 import com.wanderwildwood.kinokocho.schema.Character
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 import com.mudita.mmd.components.lazy.LazyRowMMD
 import androidx.compose.foundation.lazy.rememberLazyListState
 
@@ -785,5 +782,5 @@ private fun Section(title: String) {
     )
 }
 
-private fun dateOf(millis: Long): String =
-    SimpleDateFormat("d MMMM yyyy, HH:mm", Locale.getDefault()).format(Date(millis))
+@Composable
+private fun dateOf(millis: Long): String = FindDate.shown(LocalContext.current, millis)

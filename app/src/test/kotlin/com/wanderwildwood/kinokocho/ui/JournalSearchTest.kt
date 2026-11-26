@@ -5,7 +5,8 @@ import com.wanderwildwood.kinokocho.data.Observation
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import java.text.SimpleDateFormat
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 import java.util.Locale
 
 /**
@@ -15,6 +16,7 @@ import java.util.Locale
  * memory actually arrives in — "that white one from September, below the spring" — and
  * they are what this has to match.
  */
+@RunWith(RobolectricTestRunner::class)
 class JournalSearchTest {
 
     private fun find(
@@ -65,10 +67,13 @@ class JournalSearchTest {
     fun `a month or a year finds what was found then`() {
         // The date is matched as the words it is shown as, so a month and a year both
         // work and neither needs a picker to say.
-        val shown = SimpleDateFormat("d MMMM yyyy, HH:mm", Locale.getDefault())
-            .format(java.util.Date(1_756_000_000_000L))
-        val month = shown.split(" ")[1]
+        val shown = FindDate.format(1_756_000_000_000L, Locale.getDefault(), false)
+        val month = shown.split(" ")[0]
         assertEquals(3, journal.matching(month).size)
+        // The month spelled out finds it too, though the row shows it short.
+        val longMonth = java.text.SimpleDateFormat("LLLL", Locale.getDefault())
+            .format(java.util.Date(1_756_000_000_000L))
+        assertEquals(3, journal.matching(longMonth).size)
         assertTrue(journal.matching("2025").isNotEmpty() || journal.matching("2026").isNotEmpty())
     }
 
